@@ -5,10 +5,10 @@ import React from "react";
 import useTranslation from "next-translate/useTranslation";
 
 // Styles
+import classNames from "classnames";
 import styles from "./Socials.module.scss";
 
 // Other
-import classNames from "classnames";
 import socials from "./data/socials";
 
 
@@ -26,7 +26,7 @@ const Socials: React.FC<ISocialsProps> = ({
     const renderSocial = (item: ISocialsItem, index) => 
         <li key={index} className={styles["socials__item"]}>
             <a href={item.link}>{item.svg}</a>
-        </li>
+        </li>;
 
     return (
         <div className={classes}>
@@ -37,8 +37,8 @@ const Socials: React.FC<ISocialsProps> = ({
                 </ul>
             }
         </div>
-    )
-}
+    );
+};
 
 
 export default Socials;

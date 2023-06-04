@@ -1,8 +1,8 @@
 // Components
+import { Provider } from "react-redux";
 import { Layout } from "../components/general/index";
 
 // Redux
-import { Provider } from "react-redux";
 import store from "../scripts/redux/store";
 
 // Styles
@@ -18,6 +18,6 @@ const AptoolsApp = (props) => {
             </Layout>
         </Provider>
     );
-}
+};
   
 export default AptoolsApp;

@@ -2,10 +2,10 @@
 import React from "react";
 
 // Styles
+import classNames from "classnames";
 import styles from "./StatsValidator.module.scss";
 
 // Other
-import classNames from "classnames";
 
 
 const StatsValidator: React.FC<IPlateProps> = ({
@@ -43,7 +43,7 @@ const StatsValidator: React.FC<IPlateProps> = ({
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default StatsValidator;

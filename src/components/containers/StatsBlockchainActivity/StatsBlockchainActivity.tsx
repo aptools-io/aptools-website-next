@@ -2,10 +2,10 @@
 import React from "react";
 
 // Styles
+import classNames from "classnames";
 import styles from "./StatsBlockchainActivity.module.scss";
 
 // Other
-import classNames from "classnames";
 
 
 const StatsBlockchainActivity: React.FC<IPlateProps> = ({
@@ -34,7 +34,7 @@ const StatsBlockchainActivity: React.FC<IPlateProps> = ({
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default StatsBlockchainActivity;

@@ -22,7 +22,7 @@ const socials = (): ISocialsItem[] => {
             "link": "https://discord.com/invite/5kchxMmKFy",
             "svg": <SocialDiscord />
         },
-    ]
-}
+    ];
+};
 
 export default socials;

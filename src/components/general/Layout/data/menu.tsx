@@ -1,5 +1,5 @@
-import { Translate } from "next-translate"
-import { Compass, Block, Transactions, Accounts, Image, Sphere, Squares, Tag } from "src/components/svg";
+import { Translate } from "next-translate";
+import { Compass, Block, Transactions, Accounts, Picture, Sphere, Squares, Tag } from "src/components/svg";
 
 const menu = (t: Translate): INavBarMenuItem[] => {
     return [
@@ -26,7 +26,7 @@ const menu = (t: Translate): INavBarMenuItem[] => {
         {
             "title": t("nft"),
             "link": "/test-4",
-            "svg": <Image />
+            "svg": <Picture />
         },
         {
             "title": t("validators"),
@@ -43,7 +43,7 @@ const menu = (t: Translate): INavBarMenuItem[] => {
             "link": "/test-6",
             "svg": <Tag />
         }
-    ]
-}
+    ];
+};
 
 export default menu;

@@ -6,7 +6,7 @@ import Head from "next/head";
 import useTranslation from "next-translate/useTranslation";
 
 // Components
-import { NavBar } from "src/components/general/index";
+import NavBar from "../NavBar/NavBar";
 
 // Styles
 import styles from "./Layout.module.scss";
@@ -31,7 +31,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
             </div>
         </>
     );
-}
+};
 
 
 export default Layout;

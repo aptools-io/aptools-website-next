@@ -9,27 +9,26 @@ import { useRouter } from "next/router";
 import { MainBanner, StatsBlockchainActivity, StatsTransactions, StatsValidator } from "src/components/containers";
 import { Grid, GridWrapper } from "src/components/general";
 import { Plate } from "src/components/ui";
-import { WSocket } from "src/scripts/websocket/websocket";
-import stats from "src/scripts/websocket/connections/wsStats";
+/* import { WSocket } from "src/scripts/websocket/websocket";
+import stats from "src/scripts/websocket/connections/wsStats"; */
 
 // websocket
 
 const MainPage: React.FC<{data: any}> = ({ data }) => {
     const { t } = useTranslation("common");
     const router = useRouter();
+   /*  const [ws, setWs] = useState(null);
+    const [wsData, setWsData] = useState(null); */
 
-    const [ws, setWs] = useState(null);
-    const [wsData, setWsData] = useState(null);
-
-    const { general_stats } = data;
+    /* const { general_stats } = data; */
 
     useEffect(() => {
         /* if(ws) return;
         setWs(stats.openConnection(setWsData));
         console.log(ws) */
-        if(router.isReady) {
-            console.log("test")
-        }
+        /* if(router.isReady) {
+            console.log("test");
+        } */
     }, [router]);
 
 
@@ -62,7 +61,7 @@ const MainPage: React.FC<{data: any}> = ({ data }) => {
             </Grid>
         </>
     );
-}
+};
 
 
 export default MainPage;

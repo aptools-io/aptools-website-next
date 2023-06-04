@@ -45,6 +45,8 @@
         "arrow-body-style": "off",
         "spaced-comment": "warn",
         "consistent-return": "off",
-        "no-param-reassign": "off"
+        "no-param-reassign": "off",
+        "import/no-dynamic-require": "off",
+        "global-require": "off"
     }
 }

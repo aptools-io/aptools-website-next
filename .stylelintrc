@@ -30,9 +30,12 @@
     "no-descending-specificity": null,
     "selector-class-pattern": ".",
     "block-no-empty": null,
-    "scss/no-global-function-names": "never",
-    "scss/double-slash-comment-whitespace-inside": "never",
+    "scss/no-global-function-names": null,
+    "scss/double-slash-comment-whitespace-inside": "always",
+    "scss/at-import-partial-extension": null,
+    "no-empty-source": null,
     "scss/at-mixin-pattern": null,
-    "max-line-length": null
+    "max-line-length": null,
+    "scss/at-function-pattern": null
   }
 }

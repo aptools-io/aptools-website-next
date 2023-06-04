@@ -15,20 +15,25 @@
     &.expanded {
         #{$self}__icon {
             min-width: 0%;
+
             svg {
                 left: 0%;
                 transform: translate(0%, -50%);
             }
         }
-        
+
         #{$self}__inner {
             padding: 7px var(--nav-bar-v-padding);
         }
-        
     }
 
     &__icon {
         position: relative;
+        min-width: 100%;
+        display: flex;
+        height: 24px;
+        transition: min-width var(--nav-bar-transition-speed-1) ease;
+
         svg {
             top: 50%;
             left: 0%;
@@ -37,7 +42,7 @@
             transition: left var(--nav-bar-transition-speed-1) ease, transform var(--nav-bar-transition-speed-1) ease;
         }
     }
-    
+
     &__title {
         color: var(--aptools-color-grey-c1);
         font-weight: 400;
@@ -45,42 +50,39 @@
         line-height: 24px;
         white-space: nowrap;
         padding-left: calc(24px + 8px);
-        transition: 
-            color var(--nav-bar-transition-speed-2) ease;
+        transition: color var(--nav-bar-transition-speed-2) ease;
     }
 
-    &__icon {
-        min-width: 100%;
-        display: flex;
-        height: 24px;
-        transition: min-width var(--nav-bar-transition-speed-1) ease;
-    }
-    
     span#{$self}__inner {
-        background-color: rgba(var(--aptools-color-emphasis-c1--rgb), .1);
-        &::after { 
+        background-color: rgb(var(--aptools-color-emphasis-c1--rgb) .1);
+
+        &:after {
             width: 4px;
         }
     }
 
     &__inner {
         position: relative;
-        &::after {
-            content: "";
+
+        &:after {
+            content: '';
             position: absolute;
             right: 0;
             top: 0;
             height: 100%;
-            width: 0px;
+            width: 0;
             background-color: var(--aptools-color-emphasis-c1);
             transition: width var(--nav-bar-transition-speed-1) ease;
         }
+
         display: flex;
         padding: 7px 0 7px var(--nav-bar-v-padding);
         transition: padding var(--nav-bar-transition-speed-1) ease;
+
         svg {
             width: 24px;
             height: 24px;
+
             path {
                 transition: fill var(--nav-bar-transition-speed-2) ease;
             }

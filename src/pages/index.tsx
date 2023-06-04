@@ -8,7 +8,7 @@ import { contractAddresses, contractTransactions, dexesVolumes, generalStats, pr
 const Home = (data) => <MainPage data={data} />;
 export default Home;
 
-export async function getServerSideProps({locale}) {
+export async function getServerSideProps() {
     return { props: {
         "general_stats": await generalStats.getData(),
         "contract_addresses": await contractAddresses.getData(),

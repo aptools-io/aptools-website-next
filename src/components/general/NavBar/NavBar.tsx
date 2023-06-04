@@ -6,10 +6,10 @@ import { Logo, Magnifier } from "src/components/svg";
 import { NavBarItem, ActiveLink } from "src/components/ui";
 
 // Styles
+import classNames from "classnames";
 import styles from "./NavBar.module.scss";
 
 // Other
-import classNames from "classnames";
 
 
 const SideNavBar: React.FC<ISideNavBarProps> = ({ 
@@ -20,7 +20,7 @@ const SideNavBar: React.FC<ISideNavBarProps> = ({
     const classes = classNames([
         styles["nav-bar"],
         { [styles["expanded"]]: expanded }
-    ])
+    ]);
 
     return (
         <div 

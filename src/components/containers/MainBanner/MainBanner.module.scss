@@ -4,21 +4,26 @@
     align-items: flex-end;
     justify-content: space-between;
     position: relative;
+
     &__info {
         display: flex;
         flex-direction: column;
         max-width: 420px;
+
         &-wrapper {
             display: flex;
             flex-direction: column;
         }
     }
+
     &__socials {
         margin-top: 38px;
     }
+
     &__theme-switcher {
         align-self: flex-start;
     }
+
     &__logo {
         position: absolute;
         top: 50%;
@@ -28,6 +33,7 @@
         height: 100%;
         right: 10.74%;
         transform: translateY(-50%);
+
         &-inner {
             display: flex;
             justify-content: center;
@@ -35,17 +41,20 @@
             height: 100%;
         }
     }
+
     &__title {
         font-weight: 700;
         font-size: 40px;
         line-height: 110%;
     }
+
     &__description {
         color: var(--aptools-color-grey-c1);
         font-weight: 400;
         font-size: 14px;
         line-height: 130%;
     }
+
     &__title + &__description {
         margin-top: 5px;
     }

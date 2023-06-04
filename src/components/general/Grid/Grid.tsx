@@ -15,7 +15,7 @@ const Grid: React.FC<IGridProps> = ({ columns = COLUMNS_COUNT, children }) => {
             {children}
         </div>
     );
-}
+};
 
 
 export default Grid;

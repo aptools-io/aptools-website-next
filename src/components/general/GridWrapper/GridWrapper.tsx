@@ -18,7 +18,7 @@ const GridWrapper: React.FC<IGridWrapperProps> = ({ grid = {}, gridWidth = null,
             {children}
         </div>
     );
-}
+};
 
 
 export default GridWrapper;

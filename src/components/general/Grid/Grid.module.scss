@@ -1,9 +1,11 @@
 .grid {
     --column-gap: 16px;
     --innerColumns: repeat(var(--columns), calc((100% - var(--column-gap) * (var(--columns) - 1)) / var(--columns)));
+
     display: grid;
     grid-template-columns: var(--innerColumns);
     column-gap: var(--column-gap);
+
     & + .grid {
         margin-top: var(--layout-indent);
         z-index: 1;

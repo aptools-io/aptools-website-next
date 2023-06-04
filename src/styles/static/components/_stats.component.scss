@@ -4,9 +4,11 @@
             display: flex;
             justify-content: space-between;
             align-items: flex-end;
+
             &.right {
                 justify-content: flex-end;
             }
+
             .range {
                 max-width: 230px;
                 width: 100%;
@@ -15,6 +17,7 @@
                 border-radius: 2px;
                 overflow: hidden;
                 position: relative;
+
                 b {
                     display: block;
                     width: 0%;
@@ -25,24 +28,29 @@
                     top: 0;
                 }
             }
+
             .title {
                 font-weight: 400;
                 font-size: 10px;
                 line-height: 15px;
                 color: var(--aptools-color-grey-c1);
+
                 span {
                     color: var(--aptools-color-emphasis-c1);
                 }
             }
+
             .info {
                 font-weight: 400;
                 font-size: 14px;
                 line-height: 130%;
                 text-align: right;
+
                 span {
                     color: var(--aptools-color-emphasis-c1);
                 }
             }
+
             .description {
                 font-weight: 400;
                 font-size: 10px;
@@ -53,6 +61,7 @@
             }
         }
     }
+
     &__item + &__item {
         margin-top: 8px;
     }

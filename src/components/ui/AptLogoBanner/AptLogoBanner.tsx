@@ -1,15 +1,15 @@
 // React
-import React, { useState } from "react";
+import React from "react";
 
 // public
-import aptLogoDots from "public/static/images/svg/apt_logo_dots.svg"
-import aptLogoLines from "public/static/images/svg/apt_logo_lines.svg"
+import aptLogoDots from "public/static/images/svg/apt_logo_dots.svg";
+import aptLogoLines from "public/static/images/svg/apt_logo_lines.svg";
 
 // Styles
+import classNames from "classnames";
 import styles from "./AptLogoBanner.module.scss";
 
 // Other
-import classNames from "classnames";
 
 
 const AptLogoBanner: React.FC<IComponent> = ({ 
@@ -29,7 +29,7 @@ const AptLogoBanner: React.FC<IComponent> = ({
                 <img src={aptLogoLines.src} alt={"dots"}/>
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default AptLogoBanner;

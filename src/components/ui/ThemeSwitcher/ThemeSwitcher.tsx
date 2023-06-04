@@ -8,10 +8,10 @@ import useTranslation from "next-translate/useTranslation";
 import { Moon, Sun } from "src/components/svg";
 
 // Styles
+import classNames from "classnames";
 import styles from "./ThemeSwitcher.module.scss";
 
 // Other
-import classNames from "classnames";
 
 
 const ThemeSwitcher: React.FC<IComponent> = ({ 
@@ -25,7 +25,7 @@ const ThemeSwitcher: React.FC<IComponent> = ({
         className
     ]);
 
-    const handleClick = (e) => setChecked(e.currentTarget.checked)
+    const handleClick = (e) => setChecked(e.currentTarget.checked);
 
     return (
         <div className={classes}>
@@ -51,8 +51,8 @@ const ThemeSwitcher: React.FC<IComponent> = ({
                 </div>
             </label>
         </div>
-    )
-}
+    );
+};
 
 
 export default ThemeSwitcher;

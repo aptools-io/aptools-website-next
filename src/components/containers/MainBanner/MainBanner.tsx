@@ -1,14 +1,14 @@
 // React
-import React, { useState } from "react";
+import React from "react";
 
 // Components 
 import { AptLogoBanner, Socials, ThemeSwitcher } from "src/components/ui";
 
 // Styles
+import classNames from "classnames";
 import styles from "./MainBanner.module.scss";
 
 // Other
-import classNames from "classnames";
 
 
 const MainBanner: React.FC<IMainBannerProps> = ({ 

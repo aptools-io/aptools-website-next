@@ -2,13 +2,13 @@
 import React from "react";
 
 // Components
+import classNames from "classnames";
 import ActiveLink from "../ActiveLink/ActiveLink";
 
 // Styles
 import styles from "./NavBarItem.module.scss";
 
 // Other
-import classNames from "classnames";
 
 const NavBarItem: React.FC<INavBarMenuItemProps> = ({ 
     data, 
@@ -30,8 +30,8 @@ const NavBarItem: React.FC<INavBarMenuItemProps> = ({
                 </a>
             </ActiveLink>
         </li>
-    )
-}
+    );
+};
 
 
 export default NavBarItem;

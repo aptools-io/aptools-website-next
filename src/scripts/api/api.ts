@@ -3,7 +3,7 @@ export function Api(token = true) {
     this.token = process.env.BASE_TOKEN;
     this.tokenString = token ? `?API_KEY=${this.token}` : "";
 
-    this.fetch = async function(type: string, url: string, headers: HeadersInit, body: BodyInit) {
+    this.fetch = async (type: string, url: string, headers: HeadersInit, body: BodyInit) => {
         try {
             const init = {
                 method: type,
@@ -12,20 +12,20 @@ export function Api(token = true) {
                     ...headers
                 },
                 ...(body && { body })
-            }
+            };
             const result: Response = await fetch(`${this.base}${url}${this.tokenString}`, init);
             return result.json();
         }
         catch(error) {
-            console.log(error);
+            // console.log(error);
         }
-    }
+    };
 
-    this.post = async function(url: string, headers: HeadersInit, body: BodyInit): Promise<Response> { 
+    this.post = async (url: string, headers: HeadersInit, body: BodyInit): Promise<Response> => { 
         return this.fetch("POST", url, headers, body);
-    }
+    };
 
-    this.get = async function(url: string, headers: HeadersInit = {}): Promise<Response> { 
+    this.get = async (url: string, headers: HeadersInit = {}): Promise<Response> => { 
         return this.fetch("GET", url, headers);
-    }
+    };
 }

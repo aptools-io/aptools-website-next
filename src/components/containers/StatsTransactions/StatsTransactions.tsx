@@ -2,14 +2,14 @@
 import React from "react";
 
 // ECharts
-import ReactECharts from 'echarts-for-react';
+import ReactECharts from "echarts-for-react";
 import { graphic } from "echarts";
 
 // Styles
+import classNames from "classnames";
 import styles from "./StatsTransactions.module.scss";
 
 // Other
-import classNames from "classnames";
 
 const tps = [
     {
@@ -104,17 +104,17 @@ const tps = [
         "x": "14:00",
         "y": 7.4
     }
-]
+];
 
 const options = {
     grid: { top: 20, left: 20, right: 20, bottom: 20 },
     xAxis: {
-        type: 'category',
+        type: "category",
         boundaryGap: false,
         data: tps.map(item => item.x),
     },
     yAxis: {
-        type: 'value',
+        type: "value",
         min: Math.round(Math.min(...tps.map(item => item.y))) - 1,
         interval: 1,
         max: Math.round(Math.max(...tps.map(item => item.y))) + 1,
@@ -123,8 +123,8 @@ const options = {
     [
         {
             data: tps.map(item => item.y),
-            type: 'line',
-            symbol: 'circle',
+            type: "line",
+            symbol: "circle",
             symbolSize: 4,
             lineStyle: {
                 color: "rgb(59, 89, 152)",
@@ -138,18 +138,18 @@ const options = {
                 color: new graphic.LinearGradient(0, 0, 0, 1, [
                   {
                     offset: 0,
-                    color: 'rgba(59, 89, 152, 1)'
+                    color: "rgba(59, 89, 152, 1)"
                   },
                   {
                     offset: 1,
-                    color: 'rgba(59, 89, 152, 0)'
+                    color: "rgba(59, 89, 152, 0)"
                   }
                 ])
             },
         },
     ],
     tooltip: {
-        trigger: 'axis',
+        trigger: "axis",
     },
 };
 
@@ -165,9 +165,9 @@ const StatsTransactions: React.FC<IPlateProps> = ({
 
     return (
         <div className={classes}>
-            <ReactECharts style={{height: '78px', width: '100%'}} theme={""} option={options} />
+            <ReactECharts style={{height: "78px", width: "100%"}} theme={""} option={options} />
         </div>
-    )
-}
+    );
+};
 
 export default StatsTransactions;

@@ -10,8 +10,8 @@ const i18nConfig = {
             "menu"
         ]
     },
-    "loadLocaleFrom": async (lang, ns) => {
-        return await require(`./src/locales/${lang}/${ns}.json`);
+    "loadLocaleFrom": (lang, ns) => {
+        return require(`./src/locales/${lang}/${ns}.json`);
     }
-}
+};
 module.exports = i18nConfig;

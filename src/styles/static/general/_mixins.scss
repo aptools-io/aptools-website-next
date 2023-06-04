@@ -1,8 +1,7 @@
 @mixin font($fontname, $filename, $fontweight, $fontstyle) {
     @font-face {
         font-family: $fontname;
-        src: 
-            url("/static/fonts/#{$fontname}/#{$filename}.ttf") format("truetype");
+        src: url('/static/fonts/#{$fontname}/#{$filename}.ttf') format('truetype');
         font-weight: $fontweight;
         font-style: $fontstyle;
         font-display: swap;
@@ -14,7 +13,7 @@
         @each $type-item, $type in map-get($map: $themes-colors, $key: #{$theme}) {
             @each $value-item, $value in $type {
                 --#{$app}-color-#{$type-item}-#{$value-item}: #{$value};
-                --#{$app}-color-#{$type-item}-#{$value-item}--rgb: #{hexToRGB($value)};
+                --#{$app}-color-#{$type-item}-#{$value-item}--rgb: #{hex-to-rgb($value)};
             }
         }
     }
