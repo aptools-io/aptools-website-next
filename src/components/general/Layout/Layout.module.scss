@@ -1,0 +1,14 @@
+.layout {
+   background-color: var(--aptools-color-main-primary);
+   color: var(--aptools-color-main-secondary);
+   display: flex;
+   overflow: hidden;
+   &__page-wrapper { 
+      padding-top: var(--layout-indent);
+      padding-bottom: var(--layout-bottom-indent);
+      padding-left: calc(var(--nav-bar-width) + var(--layout-v-padding));
+      padding-right: var(--layout-v-padding);
+      flex: 1 0;
+      width: 100%;
+   }
+}

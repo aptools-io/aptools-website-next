@@ -1,0 +1,27 @@
+/*     const options = {
+        grid: { top: 100, left: 100, right: 100, bottom: 100 },
+        xAxis: {
+            type: 'category',
+            data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+        },
+        yAxis: {
+            type: 'value',
+            min: 0,
+            interval: 100,
+            max: 1400
+        },
+        series: 
+        [
+            {
+                data: [1220, 932, 901, 934, 1290, 1330, 1320],
+                type: 'line',
+                smooth: true,
+            },
+        ],
+        tooltip: {
+            trigger: 'axis',
+        },
+    };
+     {/* <ReactECharts style={{height: '500px', width: '100%'}} theme={""} option={options} />
+ */
+/* import ReactECharts from 'echarts-for-react'; */

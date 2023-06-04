@@ -1,0 +1,30 @@
+// normalize
+@import './normalize';
+
+// reset
+@import './reset';
+
+// variables
+@import './general/variables.static';
+
+// root variables
+@import './general/variables.dynamic';
+
+// functions
+@import './general/functions';
+
+// mixins
+@import './general/mixins';
+
+// fonts
+@import './general/fonts';
+
+// animations
+@import './general/animations';
+
+// general
+@import './general/global';
+
+
+// components
+@import './components/stats.component';

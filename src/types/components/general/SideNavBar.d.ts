@@ -1,0 +1,3 @@
+interface ISideNavBarProps {
+    data?: ISideNavBarMenuItem[];
+}

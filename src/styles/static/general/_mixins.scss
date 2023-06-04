@@ -1,0 +1,37 @@
+@mixin font($fontname, $filename, $fontweight, $fontstyle) {
+    @font-face {
+        font-family: $fontname;
+        src: 
+            url("/static/fonts/#{$fontname}/#{$filename}.ttf") format("truetype");
+        font-weight: $fontweight;
+        font-style: $fontstyle;
+        font-display: swap;
+    }
+}
+
+@mixin setTheme($theme) {
+    *[data-theme="#{$theme}"] {
+        @each $type-item, $type in map-get($map: $themes-colors, $key: #{$theme}) {
+            @each $value-item, $value in $type {
+                --#{$app}-color-#{$type-item}-#{$value-item}: #{$value};
+                --#{$app}-color-#{$type-item}-#{$value-item}--rgb: #{hexToRGB($value)};
+            }
+        }
+    }
+}
+
+@mixin setScrollbar($width, $radius, $trackColor, $thumbColor) {
+    &::-webkit-scrollbar {
+        width: $width;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: $trackColor;
+        border-radius: $radius;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        border-radius: $radius;
+        background: $thumbColor;
+    }
+}

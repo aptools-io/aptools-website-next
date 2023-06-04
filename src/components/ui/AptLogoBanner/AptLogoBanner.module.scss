@@ -1,0 +1,14 @@
+@import '../../../styles//static/general/animations';
+
+.apt-logo-banner {
+    position: relative;
+    &__logo, &__logo-lines, &__logo-dots {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    &__logo-dots {
+        mask-image: radial-gradient(circle, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 50%);  
+    }
+}

@@ -1,0 +1,25 @@
+.socials {
+    display: flex;
+    flex-direction: column;
+    &__title {
+        color: var(--aptools-color-grey-c1);
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 130%;
+    }
+    &__item + &__item {
+        margin-left: 13px;
+    }
+    &__item {
+        svg path {
+            transition: fill .3s ease;
+        }
+        &:hover svg path {
+            fill: var(--aptools-color-grey-c1);
+        }
+        &s {
+            margin-top: 10px;
+            display: flex;
+        }
+    }
+}

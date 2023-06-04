@@ -1,0 +1,46 @@
+$app: "aptools";
+//colors
+$themes-colors: (
+    light: (
+        main: (
+            primary: #FFFFFF,
+            secondary: #1D1F30,
+        ),
+        emphasis: (
+            c1: #3B5998,
+            c2: #60C6A8,
+            c3: #FDD97D,
+            c4: #EF8686,
+            c5: #8B9DC3,
+        ),
+        grey: (
+            c1: #9B9B9B,
+            c2: #D9D9D9,
+            c3: #DFE3EE,
+            c4: #F5F5F5,
+            c5: #F7F7F7,
+        ),
+        lights: (
+            primary:#DAD7FE,
+            danger:#FFE5D3,
+            warning:#FFF5CC,
+            success:#E2FBD7,
+            info:#CCF8FE,
+        )
+    )
+    /* dark: (
+        background: (
+            primary: #090909,
+        ),
+        font: (
+            primary: #fffffe,
+            hover: #ffd600
+        )
+    ), */
+);
+
+$transitions: (
+    'slow': .8s,
+    'normal': .5s,
+    'fast': .3s
+);
