@@ -10,32 +10,32 @@ const menu = (t: Translate): INavBarMenuItem[] => {
         },
         {
             "title": t("transactions"),
-            "link": "/test-1",
+            "link": "/transactions",
             "svg": <Transactions />
         },
         {
             "title": t("accounts"),
-            "link": "/test-2",
+            "link": "/accounts",
             "svg": <Accounts />
         },
         {
             "title": t("blocks"),
-            "link": "/test-3",
+            "link": "/blocks",
             "svg": <Block />
         },
         {
             "title": t("nft"),
-            "link": "/test-4",
+            "link": "/nft",
             "svg": <Picture />
         },
         {
             "title": t("validators"),
-            "link": "/test",
+            "link": "/validators",
             "svg": <Sphere />
         },
         {
             "title": t("ecosystem"),
-            "link": "/test-5",
+            "link": "/ecosystem",
             "svg": <Squares />
         },
         {
