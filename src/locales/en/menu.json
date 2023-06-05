@@ -1,8 +1,8 @@
 {
     "explorer": "Explorer",
     "transactions": "Transactions",
-    "account": "Account",
-    "block": "Block",
+    "accounts": "Accounts",
+    "blocks": "Blocks",
     "nft": "NFT",
     "validators": "Validators",
     "ecosystem": "Ecosystem",

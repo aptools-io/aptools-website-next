@@ -18,28 +18,7 @@ import menu from "./data/menu";
 
 
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-    const { t, lang } = useTranslation("menu");
-    const router = useRouter();
-
-    const [loading, setLoading] = useState({
-        start: false,
-        end: false
-    });
-    
-    React.useEffect(() => {
-        router.events.on("routeChangeStart", () => setLoading({
-            start: true,
-            end: false
-        }));
-        router.events.on("routeChangeComplete", () => setLoading({
-            start: false,
-            end: true
-        }));
-        return () => {
-            /* router.events.off("routeChangeStart");
-            router.events.off("routeChangeComplete"); */
-        };
-    }, [router.pathname, lang]);
+    const { t } = useTranslation("menu");
 
     return (
         <>
@@ -50,7 +29,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
             </Head>
 
             <div data-theme={"light"} id={"main"} className={styles["layout"]}>
-                <MainLoading loading={loading} />
+                <MainLoading />
                 <NavBar data={menu(t)} />
                 <div className={styles["layout__page-wrapper"]}>{children}</div>
             </div>

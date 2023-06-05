@@ -4,7 +4,10 @@
     align-items: flex-end;
     justify-content: space-between;
     position: relative;
-
+    &__info-wrapper, &__theme-switcher {
+        z-index: 2;
+        position: relative;
+    }
     &__info {
         display: flex;
         flex-direction: column;

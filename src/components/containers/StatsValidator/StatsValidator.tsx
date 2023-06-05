@@ -2,12 +2,15 @@
 import React from "react";
 
 // Styles
-import classNames from "classnames";
 import styles from "./StatsValidator.module.scss";
+import classNames from "classnames";
 
 // Other
 import moment from "moment";
+
+// Util
 import { parseTimestamp } from "src/scripts/util/timestamp";
+
 
 const StatsValidator: React.FC<IStatsProps> = ({
     data,
@@ -34,13 +37,13 @@ const StatsValidator: React.FC<IStatsProps> = ({
         return {
             "timeRemaining": (epochIntervalInMin - timePassedInMin).toFixed(0),
             "percentage": parseInt(((timePassedInMin * 100) / epochIntervalInMin).toFixed(0))
-        } 
-    }
+        }; 
+    };
 
     const calculated = calculate(epoch_started);
 
     return (
-        <div className={styles[classes]}>
+        <div className={classes}>
             <div className={"stats__item"}>
                 <div className={"stats__item-wrapper"}>
                     <span className={"title"}>Epoch</span>

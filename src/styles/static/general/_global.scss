@@ -13,8 +13,17 @@ body {
     line-height: 20px;
 
     @include setTheme('light');
+    @include setTheme('dark');
 }
 
 #main {
     min-height: 100vh;
+}
+
+.swiper {
+    display: none;
+    width: 100%;
+    &.swiper-initialized {
+        display: block;
+    }
 }

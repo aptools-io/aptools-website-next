@@ -23,7 +23,7 @@ const StatsBlockchainActivity: React.FC<IStatsProps> = ({
 
     const {
         tps
-    } = data || {}
+    } = data || {};
 
     const classes = classNames([
         styles["stats-blockchain-activity"],

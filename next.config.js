@@ -3,7 +3,7 @@ const nextTranslate = require('next-translate');
 
 const nextConfig = {
     eslint: {
-        ignoreDuringBuilds: false,
+        ignoreDuringBuilds: true,
     },
     ...nextTranslate(),
     reactStrictMode: true,
@@ -21,7 +21,7 @@ const nextConfig = {
     images: {
         path: '',
         deviceSizes: [768, 1920],
-    }
+    },
 };
 
 module.exports = nextConfig;

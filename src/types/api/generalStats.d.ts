@@ -1,3 +1,7 @@
+interface IApiGeneralStats {
+    "blockchain_info": IApiBlockchainInfo
+}
+
 interface IApiBlockchainInfo {
     "active_account_24h": number,
     "active_account_peak": number,

@@ -2,10 +2,10 @@
 import React from "react";
 
 // Styles
+import classNames from "classnames";
 import styles from "./CategoryTitle.module.scss";
 
 // Other
-import classNames from "classnames";
 
 const CategoryTitle: React.FC<ICategoryTitleProps> = ({ 
     title,

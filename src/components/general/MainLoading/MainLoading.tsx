@@ -1,26 +1,52 @@
 // React
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+
+// Next
+import { useRouter } from "next/router";
+
+// Redux
+import { useDispatch, useSelector } from "react-redux";
+import { IRootState } from "src/scripts/redux/store";
 
 // Styles
-import styles from "./MainLoading.module.scss";
 
 // Other
 import classNames from "classnames";
+import { setLoading } from "src/scripts/redux/slices/loadingSlice";
+import { LogoFull } from "src/components/svg";
+import styles from "./MainLoading.module.scss";
 
-const MainLoading: React.FC<IMainLoadingProps> = ({ 
-    loading,
+
+const MainLoading: React.FC<IComponent> = ({ 
     className
 }) => {
+    const router = useRouter();
+    const { start, end } = useSelector((state: IRootState) => state.loading.loading);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        router.events.on("routeChangeComplete", () => {
+            dispatch(setLoading({ start: true, end: true }));
+        });
+        return () => {
+            router.events.off("routeChangeComplete", () => dispatch(setLoading({ start: true, end: true })));
+        };
+    }, []);
+
+    useEffect(() => {
+        
+    }, [end]);
 
     const classes = classNames([
         styles["main-loading"],
-        { [styles["start"]]: loading.start },
-        { [styles["end"]]: loading.end },
+        { [styles["start"]]: start },
+        { [styles["end"]]: end },
         className
     ]);
     
     return (
-        <div  className={classes}>
+        <div className={classes}>
+            <LogoFull />
         </div>
     );
 };

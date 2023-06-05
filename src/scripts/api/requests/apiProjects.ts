@@ -1,8 +1,8 @@
 import { Api } from "../api";
 
-const getData = async () => {
+const getData = async (): Promise<IApiProject[]> => {
     const api = new Api(false);
-    return api.get("/projects1");
+    return api.get("/projects1") as unknown as IApiProject[];
 };
 
 const projects = {

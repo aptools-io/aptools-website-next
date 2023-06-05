@@ -7,6 +7,14 @@
     background-color: var(--aptools-color-main-primary);
     z-index: 50;
     transition: height .3s ease;
+    overflow: hidden;
+    svg {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.4));
+    }
     &.start {
         height: 100%;
     }

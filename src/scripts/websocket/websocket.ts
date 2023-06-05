@@ -10,7 +10,9 @@ export class WSocket {
     ws: WebSocket | null = null;
 
     close = () => {
+        
         if(this.ws) this.ws.close();
+        console.log(this.ws);
     };
     
     open = async (url: string, dispatchState: React.Dispatch<React.SetStateAction<unknown>>) => {

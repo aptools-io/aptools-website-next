@@ -1,8 +1,8 @@
 import { graphic } from "echarts";
 
 const chartOptions = (data: IPoint[]) => {
-    let xAxisArray = data.map(item => item.x);
-    let yAxisArray = data.map(item => item.y) as number[];
+    const xAxisArray = data.map(item => item.x);
+    const yAxisArray = data.map(item => item.y) as number[];
     
     const labels = {
         textStyle: {
@@ -10,7 +10,7 @@ const chartOptions = (data: IPoint[]) => {
             fontWeight: 400,
             color: "#8b9dc3"
         }
-    }
+    };
     
     return {
         grid: { top: 20, left: 20, right: 20, bottom: 20 },
@@ -59,7 +59,7 @@ const chartOptions = (data: IPoint[]) => {
         tooltip: {
             trigger: "axis",
         },
-    }
+    };
 };
 
 export default chartOptions;

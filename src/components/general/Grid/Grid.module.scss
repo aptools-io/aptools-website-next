@@ -1,10 +1,12 @@
 .grid {
     --column-gap: 16px;
+    --row-gap: 16px;
     --innerColumns: repeat(var(--columns), calc((100% - var(--column-gap) * (var(--columns) - 1)) / var(--columns)));
 
     display: grid;
     grid-template-columns: var(--innerColumns);
     column-gap: var(--column-gap);
+    row-gap: var(--row-gap);
 
     & + .grid {
         margin-top: var(--layout-indent);
