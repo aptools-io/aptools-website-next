@@ -2,11 +2,10 @@
 import React from "react";
 
 // Styles
-import classNames from "classnames";
 import styles from "./Plate.module.scss";
 
 // Other
-
+import classNames from "classnames";
 
 const Plate: React.FC<IPlateProps> = ({ 
     title,

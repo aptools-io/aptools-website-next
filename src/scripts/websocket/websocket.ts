@@ -13,7 +13,7 @@ export class WSocket {
         if(this.ws) this.ws.close();
     };
     
-    open = async (url: string, dispatchState: any) => {
+    open = async (url: string, dispatchState: React.Dispatch<React.SetStateAction<unknown>>) => {
         if ("WebSocket" in window) {
             if (!this.isWSfree) return;
             this.ws = new WebSocket(`${this.base}${url}`);

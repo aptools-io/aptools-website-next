@@ -8,29 +8,28 @@ import { useRouter } from "next/router";
 // Components
 import { MainBanner, StatsBlockchainActivity, StatsTransactions, StatsValidator } from "src/components/containers";
 import { Grid, GridWrapper } from "src/components/general";
-import { Plate } from "src/components/ui";
-/* import { WSocket } from "src/scripts/websocket/websocket";
-import stats from "src/scripts/websocket/connections/wsStats"; */
+import { CategoryTitle, Plate } from "src/components/ui";
 
 // websocket
+import { WSocket } from "src/scripts/websocket/websocket";
+import { stats } from "src/scripts/websocket/connections";
 
 const MainPage: React.FC<{data: any}> = ({ data }) => {
     const { t } = useTranslation("common");
     const router = useRouter();
-   /*  const [ws, setWs] = useState(null);
-    const [wsData, setWsData] = useState(null); */
+    const [webSocket, setWebSocket] = useState<WSocket>(null);
+    const [statsData, setStatsData] = useState<IWSocketStats>(null);
 
-    /* const { general_stats } = data; */
+    const { general_stats } = data || {}
 
     useEffect(() => {
-        /* if(ws) return;
-        setWs(stats.openConnection(setWsData));
-        console.log(ws) */
-        /* if(router.isReady) {
-            console.log("test");
-        } */
-    }, [router]);
+        if(!webSocket && !router.isReady) return;
+        setWebSocket(stats.openConnection(setStatsData));
 
+        return () => {
+            if(webSocket) stats.closeConnection(webSocket);
+        }
+    }, [router]);
 
     return (
         <>
@@ -42,23 +41,45 @@ const MainPage: React.FC<{data: any}> = ({ data }) => {
                     />
                 </GridWrapper>
             </Grid>
+
             <Grid columns={3}>
                 <GridWrapper gridWidth={1}>
                     <Plate title={t("validator stats")}>
-                        <StatsValidator />
+                        <StatsValidator 
+                            data={statsData} 
+                            blockchainInfo={general_stats.blockchain_info} 
+                        />
                     </Plate>
                 </GridWrapper>
                 <GridWrapper gridWidth={1}>
                     <Plate title={t("blockchain activity stats")}>
-                        <StatsBlockchainActivity />
+                        <StatsBlockchainActivity 
+                            data={statsData} 
+                            blockchainInfo={general_stats.blockchain_info} 
+                        />
                     </Plate>
                 </GridWrapper>
                 <GridWrapper gridWidth={1}>
                     <Plate title={t("transactions per second")}>
-                        <StatsTransactions />
+                        <StatsTransactions 
+                            blockchainInfo={general_stats.blockchain_info} 
+                        />
                     </Plate>
                 </GridWrapper>
             </Grid>
+
+            <Grid>
+                <GridWrapper>
+                    <CategoryTitle title={"PROJECTS ON THE APTOS BLOCKCHAIN"} />
+                    <Grid>
+                        <GridWrapper>
+                            еуіе
+                        </GridWrapper>
+                    </Grid>
+                </GridWrapper>
+            </Grid>
+
+            
         </>
     );
 };

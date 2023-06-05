@@ -1,0 +1,3 @@
+interface INavBarProps {
+    data?: INavBarMenuItem[];
+}

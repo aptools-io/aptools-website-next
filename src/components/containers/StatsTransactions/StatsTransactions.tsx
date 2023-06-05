@@ -8,6 +8,7 @@ import { graphic } from "echarts";
 // Styles
 import classNames from "classnames";
 import styles from "./StatsTransactions.module.scss";
+import chartOptions from "./data/chartOptions";
 
 // Other
 
@@ -154,9 +155,13 @@ const options = {
 };
 
 
-const StatsTransactions: React.FC<IPlateProps> = ({
+const StatsTransactions: React.FC<IStatsProps> = ({
+    blockchainInfo,
     className 
 }) => {
+    const {
+        tps_plot_24h
+    } = blockchainInfo || {}
 
     const classes = classNames([
         styles["stats-transactions"],
@@ -165,7 +170,7 @@ const StatsTransactions: React.FC<IPlateProps> = ({
 
     return (
         <div className={classes}>
-            <ReactECharts style={{height: "78px", width: "100%"}} theme={""} option={options} />
+            <ReactECharts style={{height: "78px", width: "100%"}} theme={""} option={chartOptions(tps_plot_24h)} />
         </div>
     );
 };

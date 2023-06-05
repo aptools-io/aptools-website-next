@@ -1,9 +1,12 @@
-export function Api(token = true) {
-    this.base = process.env.BASE_HTTPS_URL;
-    this.token = process.env.BASE_TOKEN;
-    this.tokenString = token ? `?API_KEY=${this.token}` : "";
+export class Api {
+    tokenString = "";
+    base = process.env.BASE_HTTPS_URL;
+    token = process.env.BASE_TOKEN;
+    constructor(isToken: boolean = true) {
+        if(isToken) this.tokenString = `?API_KEY=${this.token}`
+    }
 
-    this.fetch = async (type: string, url: string, headers: HeadersInit, body: BodyInit) => {
+    fetch = async (type: string, url: string, headers: HeadersInit, body: BodyInit = null) => {
         try {
             const init = {
                 method: type,
@@ -21,11 +24,11 @@ export function Api(token = true) {
         }
     };
 
-    this.post = async (url: string, headers: HeadersInit, body: BodyInit): Promise<Response> => { 
+    post = async (url: string, headers: HeadersInit, body: BodyInit): Promise<Response> => { 
         return this.fetch("POST", url, headers, body);
     };
 
-    this.get = async (url: string, headers: HeadersInit = {}): Promise<Response> => { 
+    get = async (url: string, headers: HeadersInit = {}): Promise<Response> => { 
         return this.fetch("GET", url, headers);
     };
 }

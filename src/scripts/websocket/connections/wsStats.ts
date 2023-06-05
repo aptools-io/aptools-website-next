@@ -1,6 +1,6 @@
 import { WSocket } from "../websocket";
 
-const openConnection = (dispatchState) => {
+const openConnection = (dispatchState: React.Dispatch<React.SetStateAction<IWSocketStats>>) => {
     const ws = new WSocket();
     ws.open("/get_stats", dispatchState);
     return ws;

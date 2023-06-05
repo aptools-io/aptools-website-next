@@ -12,7 +12,7 @@ import styles from "./NavBar.module.scss";
 // Other
 
 
-const SideNavBar: React.FC<ISideNavBarProps> = ({ 
+const NavBar: React.FC<INavBarProps> = ({ 
     data = [] 
 }) => {
     const [expanded, setExpanded] = useState(false);
@@ -51,4 +51,4 @@ const SideNavBar: React.FC<ISideNavBarProps> = ({
     );
 };
 
-export default SideNavBar;
+export default NavBar;

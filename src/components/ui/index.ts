@@ -4,3 +4,4 @@ export { default as Socials } from "./Socials/Socials";
 export { default as ThemeSwitcher } from "./ThemeSwitcher/ThemeSwitcher";
 export { default as AptLogoBanner } from "./AptLogoBanner/AptLogoBanner";
 export { default as Plate } from "./Plate/Plate";
+export { default as CategoryTitle } from "./CategoryTitle/CategoryTitle";
