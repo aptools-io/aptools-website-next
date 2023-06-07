@@ -20,9 +20,16 @@ const Grid: React.FC<IGridProps> = ({
         className
     ]);
 
+    const childrenWithProps = React.Children.map(children, child => {
+        if (React.isValidElement(child)) {
+          return React.cloneElement(child, { key: columns });
+        }
+        return child;
+    });
+
     return (
         <div style={style} className={classes}>
-            {children}
+            {childrenWithProps}
         </div>
     );
 };

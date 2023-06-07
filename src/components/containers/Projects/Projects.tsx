@@ -6,23 +6,38 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper";
 import { ArrowLeft } from "src/components/svg";
 
+// Redux
+import { useSelector } from "react-redux";
+import { IRootState } from "src/scripts/redux/store";
+
 // Styles
 import styles from "./Projects.module.scss";
 import classNames from "classnames";
 import { Grid, GridWrapper } from "src/components/general";
 import { ActiveLink, Plate } from "src/components/ui";
+
+// Data
 import categories from "src/scripts/consts/categories";
 import socials from "./data/socials";
 
+// Adaptive
+import useWindowSize from "src/scripts/hooks/useWindowSize";
+import media from "./data/adaptive";
 
-const Projects: React.FC<IProjectsProps> = ({
-    projects,
+
+
+const Projects: React.FC<IComponent> = ({
     className 
 }) => {
+    const { data: projects } = useSelector((state: IRootState) => state.statsProjects);
+
     const [tabId, setTabId] = useState(0);
     const navigationPrevRef = useRef(null);
     const navigationNextRef = useRef(null);
     const [swiper, setSwiper] = useState(null);
+
+    const { width } = useWindowSize();
+    const mediaData = media(width);
 
     const classes = classNames([
         styles["projects"],
@@ -30,9 +45,7 @@ const Projects: React.FC<IProjectsProps> = ({
     ]);
 
 
-    const handleTabClick = (index: number) => {
-        setTabId(index)
-    }
+    const handleTabClick = (index: number) => setTabId(index);
     
     const renderCategory = (item, index: number) => {
         return (
@@ -56,25 +69,42 @@ const Projects: React.FC<IProjectsProps> = ({
     )
 
     const renderItem = (item: IApiProject, index: number) => {
+        const lastItem = projects[categories[tabId]].length > mediaData.projectsCount ? mediaData.projectsCount : projects[categories[tabId]].length;
+        const key = item.name + categories[tabId] + index;
         return (
-            <GridWrapper key={item.name} gridWidth={2}>
-                <Plate 
-                    compressed 
-                    image={`${process.env.BASE_HTTPS_URL}/${item.image}`}
-                    title={item.name}
-                    className={styles["projects__item"]}
-                    style={{ animation: `fade-in .5s ${index / 10}s normal forwards ease` }}
-                >
-                    <span className={styles["projects__item-description"]}>
-                        {item.description}
-                    </span>
-                    <span className={styles["projects__item-socials"]}>
-                        {item.socials.map(renderSocial)}
-                    </span>
-                </Plate>
-            </GridWrapper>
+            <React.Fragment key={key}>
+                <GridWrapper gridWidth={mediaData.project}>
+                    <Plate 
+                        compressed 
+                        image={`${process.env.BASE_HTTPS_URL}/${item.image}`}
+                        title={item.name}
+                        className={styles["projects__item"]}
+                        style={{ animation: `fade-in .5s ${index / 10}s normal forwards ease` }}
+                        titleLink={`/projects/${item.name}`}
+                    >
+                        <ActiveLink href={`/projects/${item.name}`}>
+                            <a className={styles["projects__item-description"]}>{item.description}</a>
+                        </ActiveLink>
+                        <span className={styles["projects__item-socials"]}>
+                            {item.socials.map(renderSocial)}
+                        </span>
+                    </Plate>
+                </GridWrapper>
+                {index === lastItem - 1 && 
+                <GridWrapper gridWidth={mediaData.project}>
+                    <div style={{ animation: `fade-in .5s ${index / 10}s normal forwards ease` }} className={styles["projects__item-more"]}>
+                        <ActiveLink href={"/projects"}>
+                            <a>
+                                See more
+                            </a>
+                        </ActiveLink>
+                    </div>
+                </GridWrapper>}
+            </React.Fragment>
         )
     }
+
+    if(!projects) return <></>
 
     return (
         <div className={classes}>
@@ -113,8 +143,8 @@ const Projects: React.FC<IProjectsProps> = ({
                 </div>
             </div>
             {Object.keys(projects).length && 
-                <Grid className={styles["projects__items"]}>
-                    {projects[categories[tabId]]?.map(renderItem).slice(0, 14)}
+                <Grid columns={mediaData.projectWrapper} className={styles["projects__items"]}>
+                    {projects[categories[tabId]]?.map(renderItem).slice(0, mediaData.projectsCount)}
                 </Grid>
             }
         </div>

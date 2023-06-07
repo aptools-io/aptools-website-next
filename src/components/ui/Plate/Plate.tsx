@@ -4,12 +4,16 @@ import React from "react";
 // Styles
 import classNames from "classnames";
 import styles from "./Plate.module.scss";
+import ActiveLink from "../ActiveLink/ActiveLink";
+import PlateWrapper from "./PlateWrapper";
 
 // Other
 
 const Plate: React.FC<IPlateProps> = ({ 
     title,
+    titleLink,
     image,
+    dark = false,
     compressed = false,
     children,
     className,
@@ -19,15 +23,16 @@ const Plate: React.FC<IPlateProps> = ({
     const classes = classNames([
         styles["plate"],
         { [styles["compressed"]]: compressed },
+        { [styles["dark"]]: dark },
         className
     ]);
 
     return (
         <div style={style} className={classes}>
-            <div className={styles["plate__title-wrapper"]}>
+            {(image || title) && <PlateWrapper titleLink={titleLink}>
                 {image && <img className={styles["plate__image"]} src={image} />}
                 {title && <strong className={styles["plate__title"]}>{title}</strong>}
-            </div>
+            </PlateWrapper>}
             {children}
         </div>
     );

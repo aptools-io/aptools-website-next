@@ -1,8 +1,38 @@
 interface IApiGeneralStats {
-    "blockchain_info": IApiBlockchainInfo
+    "blockchain_info": IApiBlockchainData,
+    "token_statistics": IApiTokenStatistics,
+    "dex_tvl": IApiDex[],
+    "dex_volumes": IApiDex[],
+    "daily_unique_contract_addresses": IApiDex[],
+    "daily_contract_transactions": IApiDex[],
 }
 
-interface IApiBlockchainInfo {
+interface IApiDex {
+    "dex": string,
+    "chart": IPoint[]
+}
+
+interface IApiTokenStatistics {
+    "3d": IApiTokenStatisticsBy,
+    "7d": IApiTokenStatisticsBy,
+    "24h": IApiTokenStatisticsBy,
+}
+
+interface IApiTokenStatisticsBy {
+    "tokens_by_receivers": IApiTokenStatisticsInfo[],
+    "tokens_by_senders": IApiTokenStatisticsInfo[],
+    "tokens_by_total": IApiTokenStatisticsInfo[]
+}
+
+interface IApiTokenStatisticsInfo {
+    "rank": number,
+    "symbol": string,
+    "token_name": string,
+    "blockchain_name": string,
+    "number": number
+}
+
+interface IApiBlockchainData {
     "active_account_24h": number,
     "active_account_peak": number,
     "registered_account_24h": number,

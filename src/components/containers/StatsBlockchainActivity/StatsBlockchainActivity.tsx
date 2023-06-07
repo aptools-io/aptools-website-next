@@ -5,25 +5,28 @@ import React from "react";
 import classNames from "classnames";
 import styles from "./StatsBlockchainActivity.module.scss";
 
-// Other
+// Redux
+import { useSelector } from "react-redux";
+import { IRootState } from "src/scripts/redux/store";
 
-
-const StatsBlockchainActivity: React.FC<IStatsProps> = ({
-    data,
-    blockchainInfo,
+const StatsBlockchainActivity: React.FC<IComponent> = ({
     className 
 }) => {
+    const { data: aptosStats } = useSelector((state: IRootState) => state.statsAptos);
+    const { data: generalData } = useSelector((state: IRootState) => state.statsGeneral);
+    const { blockchain_info } = generalData || {};
+
     const { 
         contract_deployers_24h, 
         contract_deployers_peak,
         user_transactions_24h,
         user_transactions_peak,
         tps_peak_30d
-    } = blockchainInfo || {};
+    } = blockchain_info || {};
 
     const {
         tps
-    } = data || {};
+    } = aptosStats || {};
 
     const classes = classNames([
         styles["stats-blockchain-activity"],

@@ -1,0 +1,91 @@
+// React
+import React, { useEffect, useState } from "react";
+
+// Styles
+import styles from "./StatsAptos.module.scss";
+import classNames from "classnames";
+
+// Redux
+import { useSelector } from "react-redux";
+import { IRootState } from "src/scripts/redux/store";
+
+// Public
+import aptos from "../../../../public/static/images/svg/aptos.svg"
+import moment from "moment";
+import { timerFrom } from "src/scripts/util/timeConvert";
+
+const TopStats = () => {
+    const { data: aptosStats } = useSelector((state: IRootState) => state.statsAptos);
+    const { 
+        price_usd = 0, 
+        price_diff_usd = 0, 
+        price_btc = 0, 
+        price_diff_btc = 0 
+    } = aptosStats || {};
+    return (<>
+        <span className={"title"}>${price_usd} <span className={"additive"}>{price_diff_usd}</span></span>
+        <span className={"info"}>{price_btc} BTC <span className={"additive"}>{price_diff_btc}</span></span>
+    </>)
+}
+
+const StatsAptos: React.FC<IComponent> = ({
+    className 
+}) => {
+    const { data: generalData } = useSelector((state: IRootState) => state.statsGeneral);
+
+    const { blockchain_info, token_statistics } = generalData || {};
+    const { market_cap, vol_24h = 0, launched = 0 } = blockchain_info || {};
+    const [ currentTimestamp, setCurrentTimestamp ] = useState(new Date().getTime()); 
+
+    const totalHolders = token_statistics["24h"]?.tokens_by_total?.find(el => el.symbol === "APT").number || 0;
+
+    const classes = classNames([
+        styles["stats-aptos"],
+        className
+    ]);
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setCurrentTimestamp(new Date().getTime())
+        }, 1000);
+        return () => clearInterval(timer);
+    }, []);
+
+    return (
+        <>
+            <div className={"stats__top"}>
+                <div className={"stats__top-wrapper"}>
+                    <img className={"stats__top-image"} src={aptos.src} />
+                    <strong className={"stats__top-title"}>Aptos</strong>
+                </div>
+                <div className={"stats__top-stats"}>
+                    <TopStats />
+                </div>
+            </div>
+            <div className={classes}>
+                <div className={"stats__item"}>
+                    <div className={"stats__item-wrapper"}>
+                        <span className={"title"}>Market Cap</span>
+                        <span className={"info"}>{market_cap}</span>
+                    </div>
+                    <div className={"stats__item-wrapper"}>
+                        <span className={"title"}>Volume 24h</span>
+                        <span className={"info"}>{vol_24h}</span>
+                    </div>
+                    <div className={"stats__item-wrapper"}>
+                        <span className={"title"}>Total Holders</span>
+                        <span className={"info"}>{totalHolders}</span>
+                    </div>
+                </div>
+                <div className={"stats__item"}>
+                    <div className={"stats__item-wrapper emphasis"}>
+                        <span className={"title"}>Launched</span>
+                        <span className={"info"}>{timerFrom(launched, currentTimestamp)}</span>
+                    </div>
+                </div>
+            </div>
+        </>
+    );
+};
+
+export default StatsAptos;

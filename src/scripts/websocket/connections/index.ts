@@ -1,1 +1,1 @@
-export { default as stats } from "./wsStats";
+export { default as aptosStats } from "./wsAptosStats";

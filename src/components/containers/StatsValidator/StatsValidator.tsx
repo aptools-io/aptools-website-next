@@ -9,16 +9,22 @@ import classNames from "classnames";
 import moment from "moment";
 
 // Util
-import { parseTimestamp } from "src/scripts/util/timestamp";
+import { parseTimestamp } from "src/scripts/util/timeConvert";
+
+// Redux
+import { useSelector } from "react-redux";
+import { IRootState } from "src/scripts/redux/store";
 
 
-const StatsValidator: React.FC<IStatsProps> = ({
-    data,
-    blockchainInfo,
+const StatsValidator: React.FC<IComponent> = ({
     className 
 }) => {
-    const { epoch, epoch_started } = data || {};
-    const { total_staked, apt_reward }  = blockchainInfo || {};
+    const { data: realTimeData } = useSelector((state: IRootState) => state.statsAptos);
+    const { data: generalData } = useSelector((state: IRootState) => state.statsGeneral);
+    const { blockchain_info } = generalData || {};
+
+    const { epoch, epoch_started } = realTimeData || {};
+    const { total_staked, apt_reward }  = blockchain_info || {};
 
     const classes = classNames([
         styles["stats-validator"],
