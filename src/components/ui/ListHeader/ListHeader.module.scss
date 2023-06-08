@@ -1,0 +1,78 @@
+.list-header {
+    &__item {
+        text-align: left;
+        &:not(:first-of-type):not(:last-of-type) {
+            padding: 0 var(--list-padding);
+        }
+        &:first-of-type {
+            padding-right: var(--list-padding);
+        }
+        &:last-of-type {
+            padding-left: var(--list-padding);
+        }
+        transition: background-color .3s ease, border-color .3s ease;
+
+        border-top-color: transparent;
+        border-bottom-color: transparent;
+        border-left-color: transparent;
+        border-right-color: transparent;
+        border-width: 1px;
+        border-style: solid;
+
+        margin: -1px -1px 0px -1px;
+        &:hover {
+            background-color: var(--aptools-color-grey-c5);
+            border-color: var(--aptools-color-grey-c1);
+        }
+      
+        
+        &.right {
+            text-align: right;
+            justify-content: right;
+        }
+        font-weight: 400;
+        font-size: 10px;
+        line-height: 15px;
+        color: var(--aptools-color-grey-c1);
+        display: flex;
+        align-items: center;
+        justify-content: left;
+        svg {
+            margin-left: 4px;
+        }
+        .sort {
+            position: relative;
+            height: 12px;
+            width: 12px;
+            margin-bottom: 2px;
+            svg {
+                left: 0;
+                position: absolute;
+                &:first-child {
+                    top: 3px;
+                }
+                &:last-child {
+                    bottom: 0;
+                }
+            }
+        }
+        &.sorted {
+            &[data-sort="desc"] {
+                svg:first-child path {
+                    fill: var(--aptools-color-emphasis-c1);
+                }
+            }
+            &[data-sort="asc"] {
+                svg:last-child path {
+                    fill: var(--aptools-color-emphasis-c1);
+                }
+            }
+        }
+        &s {
+            display: grid;
+            grid-template-columns: var(--list-columns);
+            padding: 0px 8px;
+            margin-bottom: 8px;
+        }
+    }
+}

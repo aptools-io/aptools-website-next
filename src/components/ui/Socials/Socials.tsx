@@ -13,6 +13,7 @@ import socials from "./data/socials";
 
 
 const Socials: React.FC<ISocialsProps> = ({ 
+    title = true,
     data = socials(), 
     className 
 }) => {
@@ -30,7 +31,7 @@ const Socials: React.FC<ISocialsProps> = ({
 
     return (
         <div className={classes}>
-            <div className={styles["socials__title"]}>{t("our social links")}</div>
+            {title && <div className={styles["socials__title"]}>{t("our social links")}</div>}
             {!!data.length && 
                 <ul className={styles["socials__items"]}>
                     {data.map(renderSocial)}

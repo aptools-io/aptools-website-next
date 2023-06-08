@@ -12,7 +12,8 @@ import styles from "./AptLogoBanner.module.scss";
 // Other
 
 
-const AptLogoBanner: React.FC<IComponent> = ({ 
+const AptLogoBanner: React.FC<IAptLogoBannerProps> = ({ 
+    center = true,
     className 
 }) => {
     const classes = classNames([
@@ -25,9 +26,9 @@ const AptLogoBanner: React.FC<IComponent> = ({
             <div className={styles["apt-logo-banner__logo-dots"]}>
                 <img src={aptLogoDots.src} alt={"dots"}/>
             </div>
-            <div className={styles["apt-logo-banner__logo-lines"]}>
+            {center && <div className={styles["apt-logo-banner__logo-lines"]}>
                 <img src={aptLogoLines.src} alt={"dots"}/>
-            </div>
+            </div>}
         </div>
     );
 };

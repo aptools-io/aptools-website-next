@@ -32,10 +32,12 @@ const StatsTransactions: React.FC<IComponent> = ({
         className
     ]);
 
+    if(!blockchain_info) return <></>
+
     return (
         <div className={classes}>
             <div className={styles["stats-transactions__inner"]}>
-                <ReactECharts style={{height: "78px", width: "100%"}} theme={""} option={chartOptions(tps_plot_24h)} />
+                <ReactECharts style={{height: "120px", width: "100%"}} theme={""} option={chartOptions(tps_plot_24h)} />
             </div>
         </div>
     );

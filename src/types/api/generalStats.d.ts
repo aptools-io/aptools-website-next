@@ -5,8 +5,23 @@ interface IApiGeneralStats {
     "dex_volumes": IApiDex[],
     "daily_unique_contract_addresses": IApiDex[],
     "daily_contract_transactions": IApiDex[],
+    "markets": IApiMarket[]
 }
 
+interface IApiMarket {
+    "dex": string;
+    "pairs": IApiMarketPair[]
+}
+
+interface IApiMarketPair {
+    "pair": string;
+    "price": string;
+    "liquidity": string;
+    "24h_txns": number;
+    "24h_volume": number;
+    "24hours_change": number;
+    "1hour_change": number;
+}
 interface IApiDex {
     "dex": string,
     "chart": IPoint[]

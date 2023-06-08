@@ -9,7 +9,7 @@ import media from "../data/adaptive";
 // Components
 import { Grid, GridWrapper } from "src/components/general";
 import { Plate } from "src/components/ui";
-import { StatsBlockchainActivity, StatsValidator } from "src/components/containers";
+import { StatsAptos, StatsBlockchainActivity, StatsValidator } from "src/components/containers";
 import { StatsTransactions } from "src/components/charts";
 
 const MainPageBannerBottom: React.FC = () => {
@@ -21,8 +21,8 @@ const MainPageBannerBottom: React.FC = () => {
     return (
         <Grid columns={mediaData.stats}>
             <GridWrapper gridWidth={1}>
-                <Plate title={t("validator stats")}>
-                    <StatsValidator />
+                <Plate>
+                    <StatsAptos />
                 </Plate>
             </GridWrapper>
             <GridWrapper gridWidth={1}>

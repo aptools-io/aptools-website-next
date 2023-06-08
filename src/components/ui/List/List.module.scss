@@ -1,0 +1,53 @@
+.list {
+    display: flex;
+    flex-direction: column;
+    
+    &__row {
+        display: grid;
+        grid-template-columns: var(--list-columns);
+        padding: 6px 8px;
+        transition: background-color .3s ease, border-color .3s ease;
+        border-radius: 2px;
+        border-top-color: transparent;
+        border-bottom-color: var(--aptools-color-grey-c4);
+        border-left-color: transparent;
+        border-right-color: transparent;
+        border-width: 1px;
+        border-style: solid;
+
+        margin: -1px -1px 0px -1px;
+        &:hover {
+            background-color: var(--aptools-color-grey-c5);
+            border-color: var(--aptools-color-grey-c1);
+        }
+    }
+    &__column {
+        &.right {
+            text-align: right;
+            justify-content: right;
+        }
+        &.green {
+            color: var(--aptools-color-emphasis-c2);
+        }
+        &.red {
+            color: var(--aptools-color-emphasis-c4);
+        }
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 130%;
+        display: flex;
+        align-items: center;
+        justify-content: left;
+
+        &:not(:first-of-type):not(:last-of-type) {
+            padding: 0 var(--list-padding);
+        }
+        &:first-of-type {
+            padding-right: var(--list-padding);
+        }
+        &:last-of-type {
+            padding-left: var(--list-padding);
+        }
+    }
+    
+}

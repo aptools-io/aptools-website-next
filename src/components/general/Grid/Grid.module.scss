@@ -1,6 +1,7 @@
 .grid {
-    --column-gap: 16px;
-    --row-gap: 16px;
+    --gaps: 16px;
+    --column-gap: var(--gaps);
+    --row-gap: var(--gaps);
     --innerColumns: repeat(var(--columns), calc((100% - var(--column-gap) * (var(--columns) - 1)) / var(--columns)));
 
     display: grid;

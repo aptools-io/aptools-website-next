@@ -14,6 +14,7 @@ import { parseTimestamp } from "src/scripts/util/timeConvert";
 // Redux
 import { useSelector } from "react-redux";
 import { IRootState } from "src/scripts/redux/store";
+import { formatNumber } from "src/scripts/util/numbers";
 
 
 const StatsValidator: React.FC<IComponent> = ({
@@ -53,24 +54,24 @@ const StatsValidator: React.FC<IComponent> = ({
             <div className={"stats__item"}>
                 <div className={"stats__item-wrapper"}>
                     <span className={"title"}>Epoch</span>
-                    <span className={"info"}>{epoch}</span>
+                    <span className={"info"}>{formatNumber(epoch)}</span>
                 </div>
                 <div className={"stats__item-wrapper"}>
-                    <div className={"range"}>
+                    <div className={"range white"}>
                         <b style={{ width: `${calculated.percentage < 10 ? 10 : calculated.percentage}%` }}>{calculated.timeRemaining}m</b>
                     </div>
                     <span className={"description"}>
-                        <span>{calculated.percentage}% complete</span>
+                        <span>{formatNumber(calculated.percentage)}% complete</span>
                     </span>
                 </div>
             </div>
             <div className={"stats__item"}>
                 <div className={"stats__item-wrapper"}>
                     <span className={"title"}>Total Staked</span>
-                    <span className={"info"}>{total_staked}</span>
+                    <span className={"info"}>{formatNumber(total_staked)}</span>
                 </div>
                 <div className={"stats__item-wrapper right"}>
-                    <span className={"description"}>{apt_reward}% APT Reward</span>
+                    <span className={"description"}>{formatNumber(apt_reward)}% APT Reward</span>
                 </div>
             </div>
         </div>

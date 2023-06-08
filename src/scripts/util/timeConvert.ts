@@ -1,4 +1,5 @@
 import moment from "moment";
+import { formatNumber } from "./numbers";
 
 const ensureMillisecondTimestamp = (timestamp: string) => {
     if (timestamp.length > 13) {
@@ -28,7 +29,7 @@ const timerFrom = (timestamp: number, currentTimestamp: number) => {
 
     const secondsDifference = Math.floor(difference/1000);
     
-    return `${daysDifference}d ${hoursDifference}h ${minutesDifference}m ${secondsDifference}s`;
+    return `${formatNumber(daysDifference)}d ${hoursDifference}h ${minutesDifference}m ${secondsDifference}s`;
 };
 
 

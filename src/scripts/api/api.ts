@@ -23,7 +23,7 @@ export class Api {
             return result.json();
         }
         catch(error) {
-            // console.log(error);
+            return error;
         }
     };
 
@@ -35,3 +35,4 @@ export class Api {
         return this.fetch("GET", url, headers);
     };
 }
+

@@ -31,9 +31,10 @@ const DexUniqueWallets: React.FC<IComponent> = ({
     if(!daily_unique_contract_addresses) return <></>
 
     return (
-        <div className={classes}>test
-            <div className={styles["stats-transactions__inner"]}>
-                <ReactECharts style={{height: "312px", width: "100%"}} theme={""} option={chartOptions(daily_unique_contract_addresses)} />
+        <div className={classes}>
+            <strong className={"chart__title"}>DEX Unique Wallets</strong>
+            <div className={"chart__inner"}>
+                <ReactECharts style={{height: "352px", width: "100%"}} theme={""} option={chartOptions(daily_unique_contract_addresses)} />
             </div>
         </div>
     );

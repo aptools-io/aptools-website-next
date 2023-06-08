@@ -1,0 +1,53 @@
+.aptos-banner {
+    width: 100%;
+    background-color: var(--aptools-color-main-secondary);
+    padding: 27px 58px;
+    display: flex;
+    justify-content: space-between;
+    
+    &__description {
+        z-index: 1;
+        --padding-left: calc(88px + 23px);
+        color: var(--aptools-color-main-primary);
+        font-weight: 700;
+        font-size: 22px;
+        line-height: 26px;
+        position: relative;
+        padding-left: var(--padding-left);
+        max-width: calc(464px + var(--padding-left));
+        display: flex;
+        align-items: center;
+        img {
+            position: absolute;
+            height: 88px;
+            width: 88px;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+        }
+    }
+    position: relative;
+    overflow: hidden;
+    &__logo {
+        &-inner {
+            top: 150px;
+            right: calc(50% - 200px);
+            transform: translateX(-50%);
+            position: absolute;
+        }
+    }
+    &__socials {
+        z-index: 1;
+        align-self: flex-end;
+        &-inner {
+            svg path {
+                fill: var(--aptools-color-main-primary);
+            }
+            li:hover {
+                svg path {
+                    fill: var(--aptools-color-grey-c1);
+                }
+            }
+        }
+    }
+}

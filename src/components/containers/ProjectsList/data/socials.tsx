@@ -1,4 +1,4 @@
-import { ProjectSocialDiscord, ProjectSocialFacebook, ProjectSocialGithub, ProjectSocialLinkedin, ProjectSocialMedium, ProjectSocialTelegram, ProjectSocialTwitter, ProjectSocialWebsite, ProjectSocialYoutube } from "src/components/svg";
+import { ProjectSocialDiscord, ProjectSocialFacebook, ProjectSocialInstagram, ProjectSocialGithub, ProjectSocialLinkedin, ProjectSocialMedium, ProjectSocialTelegram, ProjectSocialTwitter, ProjectSocialWebsite, ProjectSocialYoutube } from "src/components/svg";
 
 const socials = {
     "discord": <ProjectSocialDiscord />,
@@ -9,7 +9,8 @@ const socials = {
     "telegram": <ProjectSocialTelegram />,
     "twitter": <ProjectSocialTwitter />,
     "website": <ProjectSocialWebsite />,
-    "youtube": <ProjectSocialYoutube />
+    "youtube": <ProjectSocialYoutube />,
+    "instagram": <ProjectSocialInstagram />
 };
 
 export default socials;

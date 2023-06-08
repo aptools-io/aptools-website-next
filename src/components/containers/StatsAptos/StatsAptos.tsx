@@ -11,8 +11,10 @@ import { IRootState } from "src/scripts/redux/store";
 
 // Public
 import aptos from "../../../../public/static/images/svg/aptos.svg"
-import moment from "moment";
+
+// Util
 import { timerFrom } from "src/scripts/util/timeConvert";
+import { formatNumber, setSign } from "src/scripts/util/numbers";
 
 const TopStats = () => {
     const { data: aptosStats } = useSelector((state: IRootState) => state.statsAptos);
@@ -23,8 +25,8 @@ const TopStats = () => {
         price_diff_btc = 0 
     } = aptosStats || {};
     return (<>
-        <span className={"title"}>${price_usd} <span className={"additive"}>{price_diff_usd}</span></span>
-        <span className={"info"}>{price_btc} BTC <span className={"additive"}>{price_diff_btc}</span></span>
+        <span className={"title"}>${formatNumber(price_usd)} <span className={"additive"}>{setSign(formatNumber(price_diff_usd))}%</span></span>
+        <span className={"info"}>{formatNumber(price_btc)} BTC <span className={"additive"}>{setSign(formatNumber(price_diff_btc))}%</span></span>
     </>)
 }
 
@@ -37,7 +39,9 @@ const StatsAptos: React.FC<IComponent> = ({
     const { market_cap, vol_24h = 0, launched = 0 } = blockchain_info || {};
     const [ currentTimestamp, setCurrentTimestamp ] = useState(new Date().getTime()); 
 
-    const totalHolders = token_statistics["24h"]?.tokens_by_total?.find(el => el.symbol === "APT").number || 0;
+    const totalHolders = token_statistics?.["24h"]
+        ?.tokens_by_total
+        ?.find(el => el.symbol === "APT").number || 0;
 
     const classes = classNames([
         styles["stats-aptos"],
@@ -66,15 +70,15 @@ const StatsAptos: React.FC<IComponent> = ({
                 <div className={"stats__item"}>
                     <div className={"stats__item-wrapper"}>
                         <span className={"title"}>Market Cap</span>
-                        <span className={"info"}>{market_cap}</span>
+                        <span className={"info"}>{formatNumber(market_cap)}</span>
                     </div>
                     <div className={"stats__item-wrapper"}>
                         <span className={"title"}>Volume 24h</span>
-                        <span className={"info"}>{vol_24h}</span>
+                        <span className={"info"}>{formatNumber(vol_24h)}</span>
                     </div>
                     <div className={"stats__item-wrapper"}>
                         <span className={"title"}>Total Holders</span>
-                        <span className={"info"}>{totalHolders}</span>
+                        <span className={"info"}>{formatNumber(totalHolders)}</span>
                     </div>
                 </div>
                 <div className={"stats__item"}>

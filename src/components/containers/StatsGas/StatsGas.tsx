@@ -8,6 +8,7 @@ import classNames from "classnames";
 // Redux
 import { useSelector } from "react-redux";
 import { IRootState } from "src/scripts/redux/store";
+import { formatNumber } from "src/scripts/util/numbers";
 
 const TopStats = () => {
     const { data: aptosStats } = useSelector((state: IRootState) => state.statsAptos);
@@ -42,6 +43,8 @@ const StatsGas: React.FC<IComponent> = ({
         className
     ]);
 
+    console.log(mint_1000_nfts_usd)
+
     return (
         <>
             <div className={"stats__top"}>
@@ -49,18 +52,18 @@ const StatsGas: React.FC<IComponent> = ({
                     <strong className={"stats__top-title"}>Gas price</strong>
                 </div>
                 <div className={"stats__top-stats"}>
-                    <span className={"title"}>${gas_price}</span>
+                    <span className={"title"}>{formatNumber(gas_price)} USD</span>
                 </div>
             </div>
             <div className={classes}>
                 <div className={"stats__item"}>
                     <div className={"stats__item-wrapper"}>
                         <span className={"title"}>Gas unit price <span>24h / peak</span></span>
-                        <span className={"info"}>{gas_unit_price_24h} / <span>{gas_unit_price_peak}</span></span>
+                        <span className={"info"}>{formatNumber(gas_unit_price_24h)} / <span>{formatNumber(gas_unit_price_peak)}</span></span>
                     </div>
                     <div className={"stats__item-wrapper"}>
                         <span className={"title"}>Mint 1000 NFTs price</span>
-                        <span className={"info"}>{mint_1000_nfts} APT <span className={"min"}>${mint_1000_nfts_usd}</span></span>
+                        <span className={"info"}>{formatNumber(mint_1000_nfts)} APT <span className={"min"}>${formatNumber(mint_1000_nfts_usd)}</span></span>
                     </div>
                 </div>
                 <div className={"stats__item"}>

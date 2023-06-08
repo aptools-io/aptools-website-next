@@ -100,13 +100,16 @@
             }
 
             .range {
-                max-width: 230px;
+                max-width: 250px;
                 width: 100%;
                 background-color: var(--aptools-color-grey-c3);
-                height: 12px;
+                height: 20px;
                 border-radius: 2px;
                 overflow: hidden;
                 position: relative;
+                &.white {
+                    background-color: var(--aptools-color-grey-c5);
+                }
 
                 b {
                     display: flex;

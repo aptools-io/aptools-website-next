@@ -1,0 +1,15 @@
+.list {
+    padding: 16px var(--blocks-v-padding) 16px var(--blocks-v-padding);
+    height: 100%;
+    &__title {
+        font-weight: 700;
+        font-size: 20px;
+        line-height: 26px;
+        width: 100%;
+        display: block;
+        margin-bottom: 8px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+}

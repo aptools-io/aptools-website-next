@@ -22,7 +22,7 @@ const DexTvl: React.FC<IComponent> = ({
 }) => {
     const { data: generalData } = useSelector((state: IRootState) => state.statsGeneral);
     const { dex_tvl } = generalData || {};
-    console.log(generalData)
+    
     const classes = classNames([
         styles["dex-tvl"],
         className
@@ -31,9 +31,10 @@ const DexTvl: React.FC<IComponent> = ({
     if(!dex_tvl) return <></>
 
     return (
-        <div className={classes}>test
-            <div className={styles["stats-transactions__inner"]}>
-                <ReactECharts style={{height: "312px", width: "100%"}} theme={""} option={chartOptions(dex_tvl)} />
+        <div className={classes}>
+            <strong className={"chart__title"}>DEX TVL</strong>
+            <div className={"chart__inner"}>
+                <ReactECharts style={{height: "352px", width: "100%"}} theme={""} option={chartOptions(dex_tvl)} />
             </div>
         </div>
     );

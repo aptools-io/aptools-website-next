@@ -8,6 +8,7 @@ import styles from "./StatsBlockchainActivity.module.scss";
 // Redux
 import { useSelector } from "react-redux";
 import { IRootState } from "src/scripts/redux/store";
+import { formatNumber } from "src/scripts/util/numbers";
 
 const StatsBlockchainActivity: React.FC<IComponent> = ({
     className 
@@ -38,15 +39,15 @@ const StatsBlockchainActivity: React.FC<IComponent> = ({
             <div className={"stats__item"}>
                 <div className={"stats__item-wrapper"}>
                     <span className={"title"}>Contracts deployers <span>24h / peak</span></span>
-                    <span className={"info"}>{contract_deployers_24h} / <span>{contract_deployers_peak}</span></span>
+                    <span className={"info"}>{formatNumber(contract_deployers_24h)} / <span>{formatNumber(contract_deployers_peak)}</span></span>
                 </div>
                 <div className={"stats__item-wrapper"}>
                     <span className={"title"}>User Transactions <span>24h / peak</span></span>
-                    <span className={"info"}>{user_transactions_24h} / <span>{user_transactions_peak}</span></span>
+                    <span className={"info"}>{formatNumber(user_transactions_24h)} / <span>{formatNumber(user_transactions_peak)}</span></span>
                 </div>
                 <div className={"stats__item-wrapper"}>
                     <span className={"title"}>Peak TPS  <span>real time / peak in 30 days</span></span>
-                    <span className={"info"}>{tps} / <span>{tps_peak_30d}</span></span>
+                    <span className={"info"}>{formatNumber(tps)} / <span>{formatNumber(tps_peak_30d)}</span></span>
                 </div>
             </div>
         </div>

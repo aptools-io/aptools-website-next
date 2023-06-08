@@ -1,5 +1,5 @@
 // React
-import React from "react";
+import React, { useState } from "react";
 
 // Redux
 import { useSelector } from "react-redux";
@@ -22,8 +22,7 @@ const DexVolume: React.FC<IComponent> = ({
 }) => {
     const { data: generalData } = useSelector((state: IRootState) => state.statsGeneral);
     const { dex_volumes } = generalData || {};
-    console.log(dex_volumes)
-   
+    const [volume, setVolume] = useState(false); 
 
     const classes = classNames([
         styles["dex-volume"],
@@ -33,9 +32,16 @@ const DexVolume: React.FC<IComponent> = ({
     if(!dex_volumes) return <></>
 
     return (
-        <div className={classes}>test
-            <div className={styles["stats-transactions__inner"]}>
-                <ReactECharts style={{height: "312px", width: "100%"}} theme={""} option={chartOptions(dex_volumes)} />
+        <div className={classes}>
+            <strong className={"chart__title"}>
+                <span>DEX Volume</span>
+                {/* <span className={"chart__switcher"}>
+                    <button className={classNames([ { ["active"]: volume } ])} onClick={() => setVolume(e => e = true)}>Volume</button>
+                    <button className={classNames([ { ["active"]: !volume } ])} onClick={() => setVolume(e => e = false)}>TVL</button>
+                </span> */}
+            </strong>
+            <div className={"chart__inner"}>
+                <ReactECharts style={{height: "352px", width: "100%"}} theme={""} notMerge={true} option={chartOptions(dex_volumes, volume)} />
             </div>
         </div>
     );

@@ -9,7 +9,7 @@ import { useRouter } from "next/router";
 // Components
 import NavBar from "../NavBar/NavBar";
 import MainLoading from "../MainLoading/MainLoading";
-
+import NextNProgress from "nextjs-progressbar"
 // Styles
 import styles from "./Layout.module.scss";
 
@@ -29,7 +29,8 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
             </Head>
 
             <div data-theme={"light"} id={"main"} className={styles["layout"]}>
-                <MainLoading />
+                {/* <MainLoading /> */}
+                <NextNProgress  options={{ showSpinner: false }} color="#3b5998" />
                 <NavBar data={menu(t)} />
                 <div className={styles["layout__page-wrapper"]}>{children}</div>
             </div>

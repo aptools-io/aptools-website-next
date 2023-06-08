@@ -25,6 +25,11 @@ const media = (width: number) => {
             [EBreakpoints.TABLET]: <MainPageAptosInfo />, 
             [EBreakpoints.MIN]: <></>}, 
         width, true) as React.ReactNode,
+        dexesWrapper: a({ 
+            [EBreakpoints.LARGE]: 3, 
+            [EBreakpoints.LAPTOP]: 2, 
+            [EBreakpoints.MIN]: 1}, 
+        width) as number,
     }
 }   
 
