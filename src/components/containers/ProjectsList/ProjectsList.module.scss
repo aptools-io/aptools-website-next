@@ -20,7 +20,18 @@
             &:hover {
                 color: var(--aptools-color-main-primary);
                 background-color: var(--aptools-color-emphasis-c1);
+                svg path {
+                    fill: var(--aptools-color-main-primary);
+                }
             }
+            svg {
+                transform: translateY(1px);
+            }
+            svg path {
+                fill: var(--aptools-color-emphasis-c1);
+                transition: fill .3s ease;
+            }
+           
             a {
                 display: flex;
                 justify-content: center;

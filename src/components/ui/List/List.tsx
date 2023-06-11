@@ -16,10 +16,12 @@ import { copyTextToClipboard } from "src/scripts/util/copyText"
 const List: React.FC<IListProps> = ({
     columnNames = [],
     data = [],
+    adoptMobile = false,
     className 
 }) => {
     const classes = classNames([
         styles["list"],
+        { [styles["adopt"]]: adoptMobile },
         className
     ]);
 
@@ -30,6 +32,8 @@ const List: React.FC<IListProps> = ({
 
     const renderListItemColumn = (row, column, columnIndex, rowIndex) => {
         const key = column?.["key"] || null;
+        const columnName = column?.["value"] || null;
+        
         const symbolRef = column?.["symbol"] || null;
         const descriptionRef = column?.["description"] || null;
         const copy = column?.["copy"];
@@ -44,16 +48,20 @@ const List: React.FC<IListProps> = ({
         return (
             <div 
                 key={columnIndex} 
+                data-column-name={columnName}
                 className={classNames([
                     styles["list__column"],
                     { [styles["right"]]: column["right"] },
+                    { [styles["main-mobile"]]: column["mainMobile"] },
+                    { [styles["hide-mobile"]]: column["hideMobile"] },
                     { [styles["center"]]: key === "_id" },
                     { [styles["red"]]: column["colorize"] && unformattedValue < 0 },
                     { [styles["green"]]: column["colorize"] && unformattedValue >= 0 }
                 ])}
             >
-                {column["colorize"] && <DifferenceArrow />}
                 <div className={styles["list__column-wrapper"]}>
+                    {column["colorize"] && <DifferenceArrow />}
+
                     {symbol && <img className={styles["list__column-icon"]} src={getDexImageFromApi(symbol)} alt={symbol}/>}
 
                     {column?.["formatterComponent"] ? 

@@ -2,25 +2,31 @@
 import React, { useState } from "react";
 
 // Components
-import { Logo, Magnifier } from "src/components/svg";
+import { Logo, LogoSmall, Magnifier } from "src/components/svg";
 import { NavBarItem, ActiveLink } from "src/components/ui";
 
 // Styles
 import classNames from "classnames";
 import styles from "./NavBar.module.scss";
 
-// Other
-
+// Public
+import aptools from "public/static/images/svg/aptools.svg";
 
 const NavBar: React.FC<INavBarProps> = ({ 
     data = [] 
 }) => {
     const [expanded, setExpanded] = useState(false);
+    const [opened, setOpened] = useState(false);
 
     const classes = classNames([
         styles["nav-bar"],
-        { [styles["expanded"]]: expanded }
+        { [styles["expanded"]]: expanded },
+        { [styles["opened"]]: opened }
     ]);
+
+    const handleMenu = () => {
+        setOpened(!opened);
+    }
 
     return (
         <div 
@@ -32,8 +38,22 @@ const NavBar: React.FC<INavBarProps> = ({
                 <ActiveLink href={"/"}>
                     <a className={styles["nav-bar__logo-inner"]}>
                         <Logo/>
+                        <img src={aptools.src} alt={"aptools"} />
                     </a>
                 </ActiveLink>
+                <ActiveLink href={"/"}>
+                    <a className={styles["nav-bar__logo-inner-small"]}>
+                        <LogoSmall/>
+                        <img src={aptools.src} alt={"aptools"} />
+                    </a>
+                </ActiveLink>
+                <button className={classNames([styles["nav-bar__button"], { [styles["active"]]: opened }])} onClick={handleMenu}>
+                    <div className={styles["nav-bar__button-inner"]}>
+                        <i></i>
+                        <i></i>
+                        <i></i>
+                    </div>
+                </button>
             </div>
 
             <div className={styles["nav-bar__search"]}>

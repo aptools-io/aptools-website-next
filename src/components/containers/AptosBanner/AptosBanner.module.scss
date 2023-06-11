@@ -1,11 +1,26 @@
+@import "/src/styles//static/general/variables.static";
+@import "/src/styles//static/general/mixins";
+
 .aptos-banner {
     width: 100%;
     background-color: var(--aptools-color-main-secondary);
     padding: 27px 58px;
     display: flex;
     justify-content: space-between;
+    @include mediaWMax("TABLET") {
+        flex-direction: column;
+        padding: 17px 11px;
+    }
     
     &__description {
+        @include mediaWMax("TABLET") {
+            order: 1;
+            margin-top: 15px;
+            padding-left: unset;
+            font-weight: 400;
+            font-size: 20px;
+            line-height: 110%;
+        }
         z-index: 1;
         --padding-left: calc(88px + 23px);
         color: var(--aptools-color-main-primary);
@@ -24,6 +39,9 @@
             top: 50%;
             left: 0;
             transform: translateY(-50%);
+            @include mediaWMax("TABLET") {
+                display: none;
+            }
         }
     }
     position: relative;
@@ -34,12 +52,36 @@
             right: calc(50% - 200px);
             transform: translateX(-50%);
             position: absolute;
+            @include mediaWMax("TABLET") {
+                top: 50px;
+                right: unset;
+                left: 20px;
+            }
         }
     }
     &__socials {
         z-index: 1;
         align-self: flex-end;
+        img {
+            display: none;
+            @include mediaWMax("TABLET") {
+                display: block;
+                min-width: 54px;
+                min-height: 54px;
+                max-width: 54px;
+                max-height: 54px;
+            }
+        }
+        @include mediaWMax("TABLET") {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
+        
         &-inner {
+            @include mediaWMax("TABLET") {
+                width: fit-content;
+            }
             svg path {
                 fill: var(--aptools-color-main-primary);
             }

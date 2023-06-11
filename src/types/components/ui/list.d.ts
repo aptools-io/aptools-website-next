@@ -5,7 +5,7 @@ interface IListHeaderProps extends IComponent {
 }
 
 interface IListProps extends IListHeaderProps {
-
+    adoptMobile?: boolean
 }
 
 interface IColumnName {
@@ -19,4 +19,5 @@ interface IColumnName {
     coinImage?: string;
     description?: string;
     copy?: boolean;
+    main?: boolean;
 }

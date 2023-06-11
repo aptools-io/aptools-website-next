@@ -39,7 +39,7 @@ const TopStats = () => {
                 {setSign(formatNumber(price_diff_usd))}%
             </span>
         </span>
-        <span className={"info"}>{formatNumber(price_btc)} BTC 
+        <span className={"info"}>{price_btc} BTC 
             <span className={priceClass(price_diff_btc)}>
                 {setSign(formatNumber(price_diff_btc))}%
             </span>

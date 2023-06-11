@@ -42,7 +42,7 @@ const MarketsList: React.FC<IComponent> = ({
                     columnNames={columnNames} 
                     columns={columns} 
                 >
-                    <List />
+                    <List adoptMobile />
                 </ListHeader>
             </Tabs>
             

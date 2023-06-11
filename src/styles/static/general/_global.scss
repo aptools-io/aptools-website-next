@@ -16,6 +16,10 @@ body {
     @include setTheme('dark');
 }
 
+html {
+    @include setScrollbar(7px, 10px, #f5f5f5, #3b5998);
+}
+
 #main {
     min-height: 100vh;
 }

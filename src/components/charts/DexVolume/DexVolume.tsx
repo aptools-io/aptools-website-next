@@ -15,8 +15,6 @@ import styles from "./DexVolume.module.scss";
 // Other
 import chartOptions from "./data/chartOptions";
 
-
-
 const DexVolume: React.FC<IComponent> = ({
     className 
 }) => {

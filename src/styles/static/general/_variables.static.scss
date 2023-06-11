@@ -58,16 +58,18 @@ $themes-colors: (
             info:#ccf8fe,
         )
     )
-    /* dark: (
-        background: (
-            primary: #090909,
-        ),
-        font: (
-            primary: #fffffe,
-            hover: #ffd600
-        )
-    ), */
 );
+
+$breakpoints: (
+    "LARGE": 1280px,
+	"LAPTOP": 1024px,
+	"TABLET": 768px,
+	"TABLET_MINI": 625px,
+	"MOBILE": 425px,
+	"SMALL_MOBILE": 375px,
+    "MIN": 0px,
+);
+
 $transitions: (
     'slow': .8s,
     'normal': .5s,

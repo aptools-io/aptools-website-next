@@ -31,6 +31,7 @@ const AptosBanner: React.FC<IComponent> = ({
                 {t("Join to our Social Media and get News and Insider’s information  from First Hands")}
             </div>
             <div className={styles["aptos-banner__socials"]}>
+                <img src={aptos.src} alt={"aptos"} />
                 <Socials className={styles["aptos-banner__socials-inner"]} title={false} />
             </div>
             <AptLogoBanner center={false} className={styles["aptos-banner__logo-inner"]} />

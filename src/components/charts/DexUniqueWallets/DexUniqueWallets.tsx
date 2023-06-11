@@ -16,7 +16,6 @@ import styles from "./DexUniqueWallets.module.scss";
 import chartOptions from "./data/chartOptions";
 
 
-
 const DexUniqueWallets: React.FC<IComponent> = ({
     className 
 }) => {

@@ -11,3 +11,4 @@ export { default as Tabs } from "./Tabs/Tabs";
 export { default as Title } from "./Title/Title";
 export { default as TitleSwitcher } from "./TitleSwitcher/TitleSwitcher";
 export { default as Paginator } from "./Paginator/Paginator";
+export { default as Skeleton } from "./Skeleton/Skeleton";

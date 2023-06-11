@@ -1,16 +1,25 @@
-.title-switcher {
+@import "/src/styles//static/general/variables.static";
+@import "/src/styles//static/general/mixins";
 
+
+.title-switcher {
+    
+    @include mediaWMax("TABLET") {
+        border: 1px solid var(--aptools-color-grey-c3);
+        padding: 10px 0;
+    }
     &__title {
         font-weight: 700;
         font-size: 20px;
         line-height: 26px;
         color: var(--aptools-color-emphasis-c1);
-        margin-bottom: 15px;
     }
     &__wrapper {
         padding: 0px var(--blocks-v-padding) 0px var(--blocks-v-padding);
         display: flex;
         justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
     }
     &__item + &__item {
         margin-left: 4px;

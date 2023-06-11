@@ -41,7 +41,7 @@ const TopDexesList: React.FC<IComponent> = ({
                 columns={columns} 
                 data={combinedData}
             >
-                <List />
+                <List adoptMobile />
             </ListHeader>
         </div>
     );

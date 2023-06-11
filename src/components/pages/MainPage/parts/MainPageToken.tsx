@@ -20,32 +20,32 @@ const MainPageToken: React.FC = () => {
     if(!width) return <></>;
 
     return (
-        <Grid columns={3}>
-            <GridWrapper gridWidth={1}>
+        <Grid columns={mediaData.tokenWrapper}>
+            <GridWrapper gridWidth={mediaData.tokenElements}>
                 <TokenPrice />
             </GridWrapper>
-            <GridWrapper gridWidth={1}>
+            <GridWrapper gridWidth={mediaData.tokenElements}>
                 <TransactionHistory />
             </GridWrapper>
-            <GridWrapper gridWidth={1}>
+            <GridWrapper gridWidth={mediaData.tokenElements}>
                 <TopTokensVolumeList />
             </GridWrapper>
-            <GridWrapper gridWidth={1}>
+            <GridWrapper gridWidth={mediaData.tokenElements}>
                 <InitalSupplyList />
             </GridWrapper>
-            <GridWrapper gridWidth={1}>
+            <GridWrapper gridWidth={mediaData.tokenElements}>
                 <TokenSupplySchedule />
             </GridWrapper>
-            <GridWrapper gridWidth={1}>
+            <GridWrapper gridWidth={mediaData.tokenElements}>
                 <Plate>
                     <ActiveUniqueAddresses />
                 </Plate>
             </GridWrapper>
-            <GridWrapper gridWidth={3}>
+            <GridWrapper gridWidth={mediaData.tokenTransactions}>
                 <TransactionsList />
             </GridWrapper>
         </Grid>
     );
 };
 
-export default MainPageToken;
+export default React.memo(MainPageToken);

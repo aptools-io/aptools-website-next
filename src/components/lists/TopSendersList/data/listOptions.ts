@@ -7,13 +7,15 @@ const columnNames = [
         "key": "rank",
         "value": "##",
         "defaultSort": true,
-        "defaultSortType": "asc"
+        "defaultSortType": "asc",
+        "hideMobile": true
     },
     {
         "key": "address",
         "value": "Address",
         "formatter": (v) => `${shortenHashString(v)}`,
         "link": "/accounts",
+        "mainMobile": true
     },
     {
         "key": "total_txn",

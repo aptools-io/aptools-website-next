@@ -7,16 +7,24 @@ import classNames from "classnames";
 
 // Components
 import { TitleSwitcher } from "src/components/ui";
+import { TopReceiversList, TopSendersList } from "src/components/lists";
+import { Grid, GridWrapper } from "src/components/general";
 
 // Other
 import { switcherOptions } from "./data/switcherOptions";
-import { TopReceiversList, TopSendersList, TopTotalHoldersList, TopWalletReceiversList, TopWalletSendersList } from "src/components/lists";
-import { Grid, GridWrapper } from "src/components/general";
+
+// Hooks
+import useWindowSize from "src/scripts/hooks/useWindowSize";
+
+// Adaptive
+import media from "./data/adaptive";
 
 const MoneyFlow: React.FC<IComponent> = ({
     className 
 }) => {
     const [value, setValue] = useState(switcherOptions[0]);
+    const { width } = useWindowSize();
+    const mediaData = media(width);
 
     const classes = classNames([
         styles["money-flow"],
@@ -30,16 +38,16 @@ const MoneyFlow: React.FC<IComponent> = ({
                 data={switcherOptions} 
                 setData={setValue} 
                 settedData={value} 
-            />
-            <Grid columns={2}>
-                <GridWrapper gridWidth={1}>
-                    <TopSendersList key={value.key} keyValue={value.key} />
-                </GridWrapper>
-                <GridWrapper gridWidth={1}>
-                    <TopReceiversList key={value.key} keyValue={value.key} />
-                </GridWrapper>
-            </Grid>
-            
+            >
+                <Grid columns={mediaData.moneyFlowWrapper} gap={mediaData.moneyFlowWrapperGap}>
+                    <GridWrapper gridWidth={1}>
+                        <TopSendersList key={value.key} keyValue={value.key} />
+                    </GridWrapper>
+                    <GridWrapper gridWidth={1}>
+                        <TopReceiversList key={value.key} keyValue={value.key} />
+                    </GridWrapper>
+                </Grid>
+            </TitleSwitcher>    
         </div>
     );
 };

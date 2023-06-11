@@ -38,6 +38,7 @@ const columnNames = [
         "value": "Transaction",
         "formatter": (v) => `${shortenHashString(v)}`,
         "link": "/transactions",
+        "mainMobile": true,
     },
     {  
         "key": "success",

@@ -7,14 +7,14 @@
 // variables
 @import './general/variables.static';
 
-// root variables
-@import './general/variables.dynamic';
-
 // functions
 @import './general/functions';
 
 // mixins
 @import './general/mixins';
+
+// root variables
+@import './general/variables.dynamic';
 
 // fonts
 @import './general/fonts';

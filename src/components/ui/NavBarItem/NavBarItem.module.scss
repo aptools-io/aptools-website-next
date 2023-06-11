@@ -1,7 +1,10 @@
+@import "/src/styles//static/general/variables.static"; 
+@import "/src/styles//static/general/mixins";
+
 .nav-bar-item {
     $self: &;
 
-    &:hover, &:has(span#{$self}__item-inner) {
+    &:hover, &.active {
         #{$self}__title {
             color: var(--aptools-color-main-primary);
         }
@@ -11,7 +14,31 @@
             }
         }
     }
+    @include mediaWMax("TABLET") {  
+        #{$self}__icon {
+            min-width: 0%;
 
+            svg {
+                left: 0%;
+                transform: translate(0%, -50%);
+            }
+        }
+        & > span {
+            width: 100%;
+        }
+        #{$self}__inner {
+            padding: 7px var(--nav-bar-v-padding);
+            justify-content: flex-end;
+            #{$self}__icon {
+                order: 1;
+                width: 24px;
+            }
+            #{$self}__title {
+                padding-left: unset;
+                padding-right: 12px;
+            }
+        }
+    }
     &.expanded {
         #{$self}__icon {
             min-width: 0%;

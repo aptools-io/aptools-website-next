@@ -26,7 +26,7 @@ const MainPageListSwitchers: React.FC = () => {
                 <MoneyFlow />
             </GridWrapper>
             <GridWrapper>
-                <Grid columns={3}>
+                <Grid columns={mediaData.listSwitchersWrapper}>
                     <GridWrapper gridWidth={1}>
                         <DailyActiveWallets />
                     </GridWrapper>
@@ -36,7 +36,6 @@ const MainPageListSwitchers: React.FC = () => {
                     <GridWrapper gridWidth={1}>
                         <DailyUsageWallets />
                     </GridWrapper>
-
                 </Grid>
             </GridWrapper>
             
@@ -44,4 +43,4 @@ const MainPageListSwitchers: React.FC = () => {
     );
 };
 
-export default MainPageListSwitchers;
+export default React.memo(MainPageListSwitchers);

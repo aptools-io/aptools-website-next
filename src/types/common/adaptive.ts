@@ -5,7 +5,7 @@ enum EBreakpoints {
 	"TABLET_MINI" = 625,
 	"MOBILE" = 425,
 	"SMALL_MOBILE" = 375,
-    "MIN" = 0,
+    "MIN" = 1,
 }
 
 type TAdaptive = {

@@ -9,26 +9,56 @@ import aptLogoLines from "public/static/images/svg/apt_logo_lines.svg";
 import classNames from "classnames";
 import styles from "./AptLogoBanner.module.scss";
 
-// Other
+// Lottie
+import { RendererType } from "lottie-web";
+import { useLottie } from "lottie-react";
+import dotsData from "./data/dots.json"
+import linesData from "./data/lines.json"
 
+// Hooks
+import useWindowSize from "src/scripts/hooks/useWindowSize";
+
+const options = {
+    renderer: 'html' as RendererType,
+    loop: true,
+    autoplay: true,
+};
+
+const LinesComponent: React.FC<{}> = () => {
+    return useLottie({...options, animationData: linesData}, { height: "100%" }).View;
+}
+
+const DotsComponent: React.FC<{}> = () => {
+    return useLottie({...options, animationData: dotsData}, { height: "100%" }).View;
+}
 
 const AptLogoBanner: React.FC<IAptLogoBannerProps> = ({ 
     center = true,
     className 
 }) => {
+    const { width } = useWindowSize();
     const classes = classNames([
         styles["apt-logo-banner"],
         className
     ]);
 
+    const options = {
+        renderer: 'html' as RendererType,
+        loop: true,
+        autoplay: true,
+    };
+
     return (
         <div className={classes}>
-            <div className={styles["apt-logo-banner__logo-dots"]}>
-                <img src={aptLogoDots.src} alt={"dots"}/>
+            <div key={width} className={styles["apt-logo-banner__logo-dots"]}>
+                <DotsComponent key={width} />
+                
+                {center && <div className={styles["apt-logo-banner__logo-lines"]}>
+                    <LinesComponent key={width} />
+                </div>}
             </div>
-            {center && <div className={styles["apt-logo-banner__logo-lines"]}>
-                <img src={aptLogoLines.src} alt={"dots"}/>
-            </div>}
+            
+            
         </div>
     );
 };

@@ -19,7 +19,6 @@ import chartOptions from "./data/chartOptions";
 import { dateDiffInDays } from "src/scripts/util/timeConvert";
 
 
-
 const DailyUsageWallets: React.FC<IComponent> = ({
     className 
 }) => {
@@ -35,7 +34,7 @@ const DailyUsageWallets: React.FC<IComponent> = ({
     const [volume, setVolume] = useState("14d"); 
     const [volumes, setVolumes] = useState({"7d": [], "14d": [],"30d": [], "all": dailyAddresses}); 
 
-    if(!dailyAddresses) return <></>;
+    if(!dailyAddresses) return <></>
    
     useMemo(() => {
         const dailyWalletsUsage = {"7d": [], "14d": [],"30d": [], "all": dailyAddresses} as IApiWalletsUsage;

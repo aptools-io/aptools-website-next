@@ -7,6 +7,7 @@ const columnNames = [
         "value": "Contract",
         "ignoreCombined": true,
         "link": "/projects",
+        "mainMobile": true
     },
     {
         "key": "24h",

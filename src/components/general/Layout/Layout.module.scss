@@ -1,12 +1,21 @@
+@import "/src/styles//static/general/variables.static"; 
+@import "/src/styles//static/general/mixins";
+
 .layout {
     background-color: var(--aptools-color-main-primary);
     color: var(--aptools-color-main-secondary);
     display: flex;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
 
     &__page-wrapper {
         padding: var(--layout-indent) var(--layout-v-padding) var(--layout-bottom-indent) calc(var(--nav-bar-width) + var(--layout-v-padding));
         flex: 1 0;
         width: 100%;
+        @include mediaWMax("TABLET") {
+            padding: calc(var(--layout-indent) + var(--nav-bar-height)) var(--layout-v-padding) var(--layout-bottom-indent) calc(var(--nav-bar-width) + var(--layout-v-padding));
+
+        }
     }
 }

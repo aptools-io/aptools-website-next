@@ -41,4 +41,4 @@ const Grid: React.FC<IGridProps> = ({
 };
 
 
-export default Grid;
+export default React.memo(Grid);

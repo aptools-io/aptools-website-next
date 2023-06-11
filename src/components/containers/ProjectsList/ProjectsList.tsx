@@ -5,18 +5,15 @@ import React, { } from "react";
 import styles from "./ProjectsList.module.scss";
 import { Grid, GridWrapper } from "src/components/general";
 import { ActiveLink, Plate, Tabs } from "src/components/ui";
+import { ArrowMore } from "src/components/svg";
+
 
 // Data
 import socials from "./data/socials";
 
-// Adaptive
-import useWindowSize from "src/scripts/hooks/useWindowSize";
-import media from "./data/adaptive";
 
+const ProjectsList: React.FC<{ data?: IApiProject[], mediaData: any }> = ({ data, mediaData }) => {
 
-const ProjectsList: React.FC<{ data?: IApiProject[] }> = ({ data }) => {
-    const { width } = useWindowSize();
-    const mediaData = media(width);
     
     const renderSocial = (item: IApiProjectSocials, index: number) => (
         <ActiveLink key={index} className={styles["projects-list__item-social-wrapper"]} href={item.link}>
@@ -52,7 +49,7 @@ const ProjectsList: React.FC<{ data?: IApiProject[] }> = ({ data }) => {
                     <div style={{ animation: `fade-in .5s ${index / 10}s normal forwards ease` }} className={styles["projects-list__item-more"]}>
                         <ActiveLink href={"/projects"}>
                             <a>
-                                See more
+                                See more <ArrowMore/>
                             </a>
                         </ActiveLink>
                     </div>
@@ -60,8 +57,6 @@ const ProjectsList: React.FC<{ data?: IApiProject[] }> = ({ data }) => {
             </React.Fragment>
         )
     }
-    
-
 
     return (
         <Grid columns={mediaData.projectWrapper} className={styles["projects-list__items"]}>

@@ -1,4 +1,6 @@
-@import '../../../styles//static/general/animations';
+@import 'src/styles/static/general/animations';
+@import "/src/styles//static/general/variables.static";
+@import "/src/styles//static/general/mixins";
 
 .apt-logo-banner {
     position: relative;
@@ -11,8 +13,22 @@
         left: 50%;
         transform: translate(-50%, -50%);
     }
-
+    &__logo-lines {
+        height: 400px;
+        width: 398px;
+        @include mediaWMax("TABLET") {
+            height: 250px;
+            width: 248px;
+        }
+    }
     &__logo-dots {
+        width: 1147px;
+        height: 683px;
+        @include mediaWMax("TABLET") {
+            width: 947px;
+            height: 483px;
+            mask-image: radial-gradient(circle, rgb(0 0 0 / 100%) 30%, rgb(0 0 0 / 0%) 40%);
+        }
         mask-image: radial-gradient(circle, rgb(0 0 0 / 100%) 40%, rgb(0 0 0 / 0%) 50%);
     }
 }

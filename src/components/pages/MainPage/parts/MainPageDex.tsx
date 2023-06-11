@@ -59,4 +59,4 @@ const MainPageDex: React.FC = () => {
     );
 };
 
-export default MainPageDex;
+export default React.memo(MainPageDex);

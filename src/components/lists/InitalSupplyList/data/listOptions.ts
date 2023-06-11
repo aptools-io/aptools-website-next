@@ -4,7 +4,8 @@ import { formatNumber, setSign } from "src/scripts/util/numbers";
 const columnNames = [
     {
         "key": "category",
-        "value": "Category"
+        "value": "Category",
+        "mainMobile": true,
     },
     {
         "key": "percent",

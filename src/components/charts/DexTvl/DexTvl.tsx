@@ -16,7 +16,6 @@ import styles from "./DexTvl.module.scss";
 import chartOptions from "./data/chartOptions";
 
 
-
 const DexTvl: React.FC<IComponent> = ({
     className 
 }) => {

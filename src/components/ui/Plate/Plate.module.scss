@@ -1,3 +1,6 @@
+@import "/src/styles//static/general/variables.static"; 
+@import "/src/styles//static/general/mixins";
+
 .plate {
     background-color: var(--aptools-color-grey-c5);
     padding: 17px 13px;
@@ -7,6 +10,9 @@
     flex-direction: column;
     justify-content: space-between;
     border-radius: 2px;
+    @include mediaWMax("TABLET") {
+        padding: 17px 10px;
+    }
     &.min {
         min-height: 93px;
     }
@@ -28,6 +34,9 @@
     &.dark {
         background-color: var(--aptools-color-grey-c3);
         padding: 10px 20px;
+        @include mediaWMax("TABLET") {
+            padding: 17px 10px;
+        }
     }
 
     &__title {

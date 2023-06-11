@@ -8,6 +8,10 @@ import classNames from "classnames";
 // Components
 import { SortArrowDown, SortArrowUp } from "src/components/svg";
 
+// Adaptive
+import useWindowSize from "src/scripts/hooks/useWindowSize";
+import { EBreakpoints } from "src/types/common/adaptive";
+
 const ListHeader: React.ForwardRefRenderFunction<any, IListHeaderProps> = ({
     columnNames = [],
     columns = ["100%"],
@@ -15,18 +19,21 @@ const ListHeader: React.ForwardRefRenderFunction<any, IListHeaderProps> = ({
     children,
     className 
 }, ref) => {
-    const child: React.ReactNode = Children.only(children);
+    const child: any = Children.only(children);
     const defaultSortIndex = columnNames?.findIndex(x => x.defaultSort);
     const defaultSortType = columnNames?.[defaultSortIndex]?.defaultSortType || "desc";
+    const { width } = useWindowSize();
+    
+    
 
     const [sorting, setSorting] = useState({
         "key": defaultSortIndex > -1 ? columnNames?.[defaultSortIndex]?.key : columnNames?.[0]?.key,
         "sort": defaultSortType
     })
-    const [sortedData, setSortedData] = useState(data.map((item, index) => { 
+    const [sortedData, setSortedData] = useState(data.length ? data.map((item, index) => { 
         if(typeof item === 'object' && !Array.isArray(item))  return { ...item, "_id": index };
         return item;
-    }));
+    }) : []);
     
     const classes = classNames([
         styles["list-header"],
@@ -66,21 +73,32 @@ const ListHeader: React.ForwardRefRenderFunction<any, IListHeaderProps> = ({
         setSortedData(sorted);
     }, [data, sorting]) 
 
-    const renderColumns = (item: IColumnName, index) => 
-        <button 
-            className={
-                classNames([
-                    styles["list-header__item"], 
-                    { [styles["right"]]: item.right },
-                    { [styles["sorted"]]: item.key === sorting.key }
-                ])}
-            key={index}
-            data-sort={defaultSortType}
-            onClick={(e) => handleSort(e, item.key)}
-        >
-            {item.value} <div className={styles["sort"]}><SortArrowUp /> <SortArrowDown /></div>
-        </button>
+    const renderColumns = (item: IColumnName, index) => {
+        return (
+            <button 
+                className={
+                    classNames([
+                        styles["list-header__item"], 
+                        { [styles["right"]]: item.right },
+                        { [styles["sorted"]]: item.key === sorting.key }
+                    ])}
+                key={index}
+                data-sort={defaultSortType}
+                onClick={(e) => handleSort(e, item.key)}
+            >
+                {item.value} <div className={styles["sort"]}><SortArrowUp /> <SortArrowDown /></div>
+            </button>
+        )
+    }
 
+
+    if(child.props.adoptMobile && width <= EBreakpoints.TABLET) {
+        return (<div ref={ref} style={style} className={classes}>
+            {React.cloneElement(child as React.ReactElement<IListProps>, {
+                data: sortedData, columnNames, columns
+            })}
+        </div>)
+    } 
     return (
         <div ref={ref} style={style} className={classes}>
             <ul className={styles["list-header__items"]}>

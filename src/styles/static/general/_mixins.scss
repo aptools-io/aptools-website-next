@@ -34,3 +34,15 @@
         background: $thumbColor;
     }
 }
+
+@mixin mediaWMax($type) {
+    @media screen and (max-width: map-get($map: $breakpoints, $key: $type)) {
+        @content;
+    }
+}
+
+@mixin mediaWMin($type) {
+    @media screen and (min-width: map-get($map: $breakpoints, $key: $type)) {
+        @content;
+    }
+}

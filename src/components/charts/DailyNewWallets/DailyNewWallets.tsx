@@ -14,6 +14,7 @@ import styles from "./DailyNewWallets.module.scss";
 
 // Other
 import chartOptions from "./data/chartOptions";
+import { Skeleton } from "src/components/ui";
 
 
 
@@ -30,7 +31,7 @@ const DailyActiveWallets: React.FC<IComponent> = ({
         className
     ]);
 
-    if(!daily_new_created_wallets) return <></>;
+    if(!daily_new_created_wallets) return <></>
     
     const data = [
         {

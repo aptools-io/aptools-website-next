@@ -37,7 +37,7 @@ const DexVolume: React.FC<IComponent> = ({
                 columns={columns} 
                 data={dexesVolumesData}
             >
-                <List />
+                <List adoptMobile />
             </ListHeader>
         </div>
     );

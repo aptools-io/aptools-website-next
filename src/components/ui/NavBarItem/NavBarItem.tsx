@@ -1,12 +1,16 @@
 // React
 import React from "react";
 
+// Next
+import { useRouter } from "next/router";
+
 // Components
 import classNames from "classnames";
 import ActiveLink from "../ActiveLink/ActiveLink";
 
 // Styles
 import styles from "./NavBarItem.module.scss";
+
 
 // Other
 
@@ -15,9 +19,11 @@ const NavBarItem: React.FC<INavBarMenuItemProps> = ({
     expanded, 
     className 
 }) => {
+    const router = useRouter();
     const classes = classNames([
         styles["nav-bar-item"],
         { [styles["expanded"]]: expanded },
+        { [styles["active"]]: router.asPath === data.link },
         className
     ]);
 

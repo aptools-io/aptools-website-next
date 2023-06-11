@@ -4,7 +4,8 @@ import { formatNumber, setSign } from "src/scripts/util/numbers";
 const columnNames = [
     {
         "key": "token",
-        "value": "AMM"
+        "value": "AMM",
+        "mainMobile": true
     },
     {
         "key": "volume_24h",

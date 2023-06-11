@@ -12,13 +12,16 @@ import { Tabs } from "src/components/ui";
 
 // Components
 import ProjectsList from "../ProjectsList/ProjectsList";
-
+import media from "../ProjectsList/data/adaptive";
+import useWindowSize from "src/scripts/hooks/useWindowSize";
 
 
 const Projects: React.FC<IComponent> = ({
     className 
 }) => {
     const { data: projects } = useSelector((state: IRootState) => state.statsProjects);
+    const { width } = useWindowSize();
+    const mediaData = media(width);
 
     const classes = classNames([
         styles["projects"],
@@ -30,7 +33,7 @@ const Projects: React.FC<IComponent> = ({
     return (
         <div className={classes}>
             <Tabs data={projects}>
-                <ProjectsList />
+                <ProjectsList mediaData={mediaData} />
             </Tabs>
         </div>
     );

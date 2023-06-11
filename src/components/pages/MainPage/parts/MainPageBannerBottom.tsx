@@ -8,7 +8,7 @@ import media from "../data/adaptive";
 
 // Components
 import { Grid, GridWrapper } from "src/components/general";
-import { Plate } from "src/components/ui";
+import { Plate, Skeleton } from "src/components/ui";
 import { StatsAptos, StatsBlockchainActivity, StatsValidator } from "src/components/containers";
 import { StatsTransactions } from "src/components/charts";
 
@@ -17,7 +17,13 @@ const MainPageBannerBottom: React.FC = () => {
     const { width } = useWindowSize();
     const mediaData = media(width);
 
-    if(!width) return <></>;
+    if(!width) return (
+        <Grid columns={1}>
+            <GridWrapper gridWidth={1}> 
+                <Skeleton />
+            </GridWrapper>
+        </Grid>
+    );
     return (
         <Grid columns={mediaData.stats}>
             <GridWrapper gridWidth={1}>
@@ -40,4 +46,4 @@ const MainPageBannerBottom: React.FC = () => {
     );
 };
 
-export default MainPageBannerBottom;
+export default React.memo(MainPageBannerBottom);

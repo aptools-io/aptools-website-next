@@ -19,15 +19,75 @@ import { setCoinTransactions } from "src/scripts/redux/slices/statsTransactionsS
 // API
 import { transactions } from "src/scripts/api/requests";
 
+const TransactionRealTime: React.FC<{ 
+    currentPage: number, 
+    setCurrentPage: React.Dispatch<React.SetStateAction<number>>
+}> = ({ currentPage, setCurrentPage }) => {
+    const { data: aptosStats } = useSelector((state: IRootState) => state.statsAptos);
+    const { transactions: trans } = aptosStats || {};
+
+    if(!trans) return <></>;
+    return (
+        <Paginator page={currentPage} perPage={10} total={trans[0]?.version} onChangePage={(page) => setCurrentPage(page)}>
+            <ListHeader 
+                key={trans[0]?.version}
+                columnNames={columnNames} 
+                columns={columns} 
+                data={trans}
+            >
+                <List adoptMobile />
+            </ListHeader>
+        </Paginator>
+    )
+}
+
+const Transaction: React.FC<{ 
+    currentPage: number, 
+    setCurrentPage: React.Dispatch<React.SetStateAction<number>>
+}> = ({ currentPage, setCurrentPage }) => {
+    const { data: transactionsData  } = useSelector((state: IRootState) => state.statsTransactions);
+    const [total, setTotal] = useState(transactionsData?.[0]?.version || 0);
+    const [currentInnerPage, setCurrentInnerPage] = useState(currentPage);
+    const dispatch = useDispatch();
+    if(!transactionsData) return <></>;
+
+    useEffect(() => {
+        if(currentPage !== 1) {
+            transactions.getData().then(response => {
+                const lastTransaction = response[0]?.version;
+                setTotal(lastTransaction);
+
+                transactions.getData(lastTransaction - (10 * (currentPage - 1))).then((response) => {
+                    const resp = response as unknown as IApiTransaction[];
+                    dispatch(setCoinTransactions(resp));
+                    setCurrentPage(currentInnerPage);
+                })
+            })
+            
+        }
+    }, [currentInnerPage]);
+
+    
+    return (
+        <Paginator page={currentPage} perPage={10} total={total} onChangePage={(page) => setCurrentInnerPage(page)}>
+            <ListHeader 
+                key={transactionsData[0]?.version}
+                columnNames={columnNames} 
+                columns={columns} 
+                data={transactionsData}
+            >
+                <List adoptMobile />
+            </ListHeader>
+        </Paginator>)
+}
+
 const TransactionsList: React.FC<IComponent> = ({
     className 
 }) => {
-    const { data: transactionsData } = useSelector((state: IRootState) => state.statsTransactions);
-    const { data: aptosStats } = useSelector((state: IRootState) => state.statsAptos);
-    const { transactions: trans = [] } = aptosStats || {};
+  
 
     const [currentPage, setCurrrentPage] = useState(1);
-    const dispatch = useDispatch();
+   
 
     const classes = classNames([
         styles["transactions"],
@@ -35,30 +95,15 @@ const TransactionsList: React.FC<IComponent> = ({
         className
     ]);
 
-    if(!transactionsData) return <></>;
-
-    useEffect(() => {
-        if(currentPage !== 1 && trans[0]) transactions.getData(trans[0].version - (10 * (currentPage - 1))).then((response) => {
-            const resp = response as unknown as IApiTransaction[];
-            dispatch(setCoinTransactions(resp))
-        })
-    }, [currentPage]);
-
     return (
         <div className={classes}>
             <strong className={"list__title"}>
                 <span>Last transactions</span>
             </strong>
-            <Paginator page={currentPage} perPage={10} total={trans[0]?.version} onChangePage={(page) => setCurrrentPage(page)}>
-                <ListHeader 
-                    key={trans[0]?.version || 0}
-                    columnNames={columnNames} 
-                    columns={columns} 
-                    data={currentPage === 1 ? trans : transactionsData}
-                >
-                    <List />
-                </ListHeader>
-            </Paginator>
+            {currentPage === 1 ? 
+                <TransactionRealTime currentPage={currentPage} setCurrentPage={setCurrrentPage} /> :
+                <Transaction currentPage={currentPage} setCurrentPage={setCurrrentPage} />
+            }
         </div>
     );
 };

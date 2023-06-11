@@ -4,7 +4,7 @@ interface IApiProject {
     "image": string;
     "name": string;
     "priority": number;
-    "socials": IApiProjectSocials[]
+    "socials": IApiProjectSocials[],
 }
 
 interface IApiProjectSocials {

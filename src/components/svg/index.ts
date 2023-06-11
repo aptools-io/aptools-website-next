@@ -1,6 +1,9 @@
 export { default as Accounts } from './Accounts';
 export { default as Aptos } from './Aptos';
 export { default as ArrowLeft } from './ArrowLeft';
+export { default as ArrowLeftDoublePagination } from './ArrowLeftDoublePagination';
+export { default as ArrowLeftPagination } from './ArrowLeftPagination';
+export { default as ArrowMore } from './ArrowMore';
 export { default as Block } from './Block';
 export { default as Compass } from './Compass';
 export { default as Copy } from './Copy';
@@ -9,6 +12,7 @@ export { default as DifferenceArrowDouble } from './DifferenceArrowDouble';
 export { default as Logo } from './Logo';
 export { default as LogoFull } from './LogoFull';
 export { default as LogoFullBig } from './LogoFullBig';
+export { default as LogoSmall } from './LogoSmall';
 export { default as Magnifier } from './Magnifier';
 export { default as Moon } from './Moon';
 export { default as Picture } from './Picture';

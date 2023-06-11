@@ -5,11 +5,13 @@ import { concatString } from "src/scripts/util/strings";
 const columnNames = [
     {
         "key": "_id",
-        "value": "##"
+        "value": "##",
+        "hideMobile": true
     },
     {
         "key": "pair",
         "value": "Pair",
+        "mainMobile": true,
     },
     {
         "key": "price",

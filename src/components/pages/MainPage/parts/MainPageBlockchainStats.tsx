@@ -25,7 +25,7 @@ const MainPageBlockchainStats: React.FC = () => {
                 <Grid columns={3}>
                     <GridWrapper gridWidth={3}>
                         <Plate dark min>
-                            <Grid fullHeight columns={3}>
+                            <Grid fullHeight columns={mediaData.totalInfo}>
                                 <GridWrapper gridWidth={1}>
                                     <Title>Total info</Title>
                                 </GridWrapper>
@@ -39,17 +39,17 @@ const MainPageBlockchainStats: React.FC = () => {
                             <span/>
                         </Plate>
                     </GridWrapper>
-                    <GridWrapper gridWidth={1}>
+                    <GridWrapper gridWidth={mediaData.totalInfoPrice}>
                         <Plate >
                             <Price />
                         </Plate>
                     </GridWrapper>
-                    <GridWrapper gridWidth={1}>
+                    <GridWrapper gridWidth={mediaData.totalInfoPriceUnder}>
                         <Plate title={"Active Users"}>
                             <StatsActiveUsers />
                         </Plate>
                     </GridWrapper>
-                    <GridWrapper gridWidth={1}>
+                    <GridWrapper gridWidth={mediaData.totalInfoPriceUnder}>
                         <Plate title={"Transactions"}>
                             <StatsTransactions />
                         </Plate>
@@ -60,4 +60,4 @@ const MainPageBlockchainStats: React.FC = () => {
     );
 };
 
-export default MainPageBlockchainStats;
+export default React.memo(MainPageBlockchainStats);

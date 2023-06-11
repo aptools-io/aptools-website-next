@@ -1,0 +1,10 @@
+.footer {
+    background-color: var(--aptools-color-grey-c5);
+    padding: 20px var(--layout-v-padding) 20px calc(var(--nav-bar-width) + var(--layout-v-padding));
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    &__socials {
+        width: fit-content;
+    }
+}

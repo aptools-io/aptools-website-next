@@ -6,6 +6,7 @@ const columnNames = [
         "key": "name",
         "value": "AMM",
         "link": "/projects",
+        "mainMobile": true
     },
     {
         "key": "liquidity",

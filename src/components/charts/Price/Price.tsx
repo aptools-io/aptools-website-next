@@ -21,7 +21,6 @@ import { formatNumber } from "src/scripts/util/numbers";
 import { concatString } from "src/scripts/util/strings";
 
 
-
 const Price: React.FC<IComponent> = ({
     className 
 }) => {

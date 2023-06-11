@@ -1,7 +1,57 @@
+@import "/src/styles//static/general/variables.static";
+@import "/src/styles//static/general/mixins";
+
 .list {
     display: flex;
     flex-direction: column;
     
+    $self: &;
+    &.adopt {
+        @include mediaWMax("TABLET") {
+            #{$self}__column + #{$self}__column { 
+                margin-top: 2px;
+            } 
+            #{$self}__column:not(.main) + #{$self}__column:not(.main) { 
+                margin-top: 0px;
+            } 
+            #{$self}__row {
+                grid-template-columns: 100%;
+            }
+            
+            #{$self}__column {
+                padding: unset !important;
+                justify-content: space-between;
+                &-wrapper {
+                    text-align: right;
+                }
+                &.hide-mobile {
+                    display: none;
+                }
+                &.main-mobile {
+                    font-weight: 500;
+                    order: -1;
+                    &::before {
+                        font-size: 14px;
+                        font-weight: 500;
+                        color: var(--aptools-color-main-secondary);
+                    }
+                }
+                &:not(.main-mobile) {
+                    font-size: 10px;
+                    line-height: 15px;
+                }
+                
+                &::before {
+                    content: attr(data-column-name);
+                    color: var(--aptools-color-grey-c1);
+                    font-size: 10px;
+                    line-height: 15px;
+                }
+            }
+        }
+        
+    }
+
     &__row {
         display: grid;
         grid-template-columns: var(--list-columns);

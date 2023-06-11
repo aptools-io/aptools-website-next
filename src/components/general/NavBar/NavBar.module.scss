@@ -1,3 +1,6 @@
+@import "/src/styles//static/general/variables.static"; 
+@import "/src/styles//static/general/mixins";
+
 .nav-bar {
     --nav-bar-transition-speed-1: .5s;
     --nav-bar-transition-speed-2: .2s;
@@ -10,10 +13,106 @@
     position: fixed;
     padding: var(--nav-bar-h-padding) 0;
     overflow: hidden;
-    transition: width var(--nav-bar-transition-speed-1) ease;
+    transition: width var(--nav-bar-transition-speed-1) ease, height var(--nav-bar-transition-speed-1) ease;
     z-index: 10;
 
     $self: &;
+
+    @include mediaWMax("TABLET") { 
+        --nav-bar-h-padding: 0px;
+        --nav-bar-v-padding: 13px;
+        height: var(--nav-bar-height);
+        width: 100%;
+        #{$self}__logo-inner, #{$self}__search {
+            svg {
+                left: auto;
+                transform: auto;
+            }
+        }
+        &.opened {
+            height: 100%;
+        }
+
+        #{$self}__logo {
+            height: var(--nav-bar-height);
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            align-items: center;
+            padding: 0 0 0 var(--nav-bar-v-padding);
+            &-inner {
+                display: none;
+                &-small {
+                    display: flex;
+                    align-items: center;
+                    img {
+                        margin-left: 10px;
+                        width: 80px;
+                    }
+                }
+            }
+        }
+
+        #{$self}__button {
+            display: flex;
+            background-color: transparent;
+            outline: none;
+            padding: unset;
+            border: unset;
+            width: calc((var(--nav-bar-v-padding) * 2) + 18px);
+            height: 100%;
+            justify-content: center;
+            cursor: pointer;
+            align-items: center;
+            &.active {
+                i {
+                    &:first-of-type {
+                        top: 50%;
+                        transform: translateY(-50%) rotate(-45deg);
+                    }
+                    &:nth-child(2) {
+                        width: 0%;  
+                    }
+                    &:last-of-type {
+                        top: 50%;
+                        transform: translateY(-50%) rotate(45deg);
+                    }
+                }
+            }
+            &-inner {
+                position: relative;
+                width: 18px;
+                height: 12px;
+            }
+            i {
+                &:first-of-type, &:nth-child(2), &:last-of-type {
+                    width: 100%;
+                    height: 2px;
+                    display: block;
+                    background-color: var(--aptools-color-grey-c1);
+                    position: absolute;
+                    left: 0;
+                    transition: transform 300ms ease, width 300ms ease, top 300ms ease;
+                }
+                &:first-of-type {
+                    top: 0;
+                }
+                &:nth-child(2) {
+                    position: absolute;
+                    top: 50%;
+                    transform: translateY(-50%);
+                }
+                    &:last-of-type {
+                    position: absolute;
+                    top: calc(100% - 2px);
+                }
+            }
+        }
+    }
+
+    &__button {
+        display: none;
+    }
 
     &.expanded/* , &:hover */ {
         --nav-bar-width: 170px;
@@ -27,6 +126,15 @@
     }
 
     &__logo-inner {
+        &-small {
+            display: none;
+        }
+        display: flex;
+        align-items: center;
+        img {
+            margin-left: 50px;
+            width: 80px;
+        }
         svg {
             left: calc(var(--nav-bar-v-padding) - 6px);
         }

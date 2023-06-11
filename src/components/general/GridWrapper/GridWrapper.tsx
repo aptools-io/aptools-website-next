@@ -18,6 +18,7 @@ const GridWrapper: React.FC<IGridWrapperProps> = ({ grid = {}, gridWidth = null,
         styles["grid-wrapper"],
         className
     ]);
+    
 
     return (
         <div style={style} className={classes}>
@@ -27,4 +28,4 @@ const GridWrapper: React.FC<IGridWrapperProps> = ({ grid = {}, gridWidth = null,
 };
 
 
-export default GridWrapper;
+export default React.memo(GridWrapper);

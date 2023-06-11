@@ -7,3 +7,12 @@
         opacity: 1;
     }
 }
+
+@keyframes shine {
+    from {
+        background-position-x: 200%;
+    }
+    to {
+        background-position-x: -200%;
+    }
+}

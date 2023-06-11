@@ -28,4 +28,4 @@ const MainPageProjects: React.FC = () => {
     );
 };
 
-export default MainPageProjects;
+export default React.memo(MainPageProjects);
