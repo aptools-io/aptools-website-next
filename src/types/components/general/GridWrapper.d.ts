@@ -1,4 +1,4 @@
-interface IGridWrapperProps {
+interface IGridWrapperProps extends IComponent {
     grid?: IGrid;
     gridWidth?: number;
     children: React.ReactNode;

@@ -2,19 +2,18 @@
 const formatDecimal = (decimal: string) => { 
     if(decimal.length > 2) return decimal.slice(0, 2);
     if(decimal.length == 2) return `${decimal}`;
-    if(decimal.length == 1) return `${decimal.slice(0, 1)}`;
+    if(decimal.length == 1) return `${decimal.slice(0, 1)}0`;
     return '00';
 }
 
 const formatNumber = (number: string | number) => {
-    if(Number.isNaN(Number(number))) return null;
+    if(Number.isNaN(Number(number))) return number;
 
     let num = number;
     if(typeof num === "string" && !Number.isNaN(Number(num))) num = Number(num);
     else num = Number(num);
 
-    if(num === 0) return `${num}.00`;
-    if(num < 1 && num > -1) return num;
+    if(num === 0) return `${num}`;
 
   
 

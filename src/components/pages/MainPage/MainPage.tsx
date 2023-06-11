@@ -2,7 +2,15 @@
 import React from "react";
 
 // Parts
-import { MainPageBanner, MainPageBannerBottom, MainPageDex, MainPageProjects } from "./parts";
+import { 
+    MainPageBanner, 
+    MainPageBannerBottom, 
+    MainPageDex, 
+    MainPageProjects, 
+    MainPageBlockchainStats, 
+    MainPageListSwitchers, 
+    MainPageToken
+} from "./parts";
 
 
 const MainPage: React.FC = () => {
@@ -13,6 +21,9 @@ const MainPage: React.FC = () => {
             <MainPageBannerBottom />
             <MainPageProjects />
             <MainPageDex />
+            <MainPageBlockchainStats />
+            <MainPageListSwitchers />
+            <MainPageToken />
         </>
     );
 };

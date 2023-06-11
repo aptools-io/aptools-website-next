@@ -19,14 +19,31 @@ import { formatNumber, setSign } from "src/scripts/util/numbers";
 const TopStats = () => {
     const { data: aptosStats } = useSelector((state: IRootState) => state.statsAptos);
     const { 
-        price_usd = 0, 
-        price_diff_usd = 0, 
-        price_btc = 0, 
-        price_diff_btc = 0 
+        price_usd = "0", 
+        price_diff_usd = "0", 
+        price_btc = "0", 
+        price_diff_btc = "0" 
     } = aptosStats || {};
+
+    const priceClass = (number: string) => {
+        const negative = Number(number) < 0 || Number.isNaN(number);
+        return classNames([
+            "additive",
+            ...negative ? ["negative"] : []
+        ]);
+    }
+    
     return (<>
-        <span className={"title"}>${formatNumber(price_usd)} <span className={"additive"}>{setSign(formatNumber(price_diff_usd))}%</span></span>
-        <span className={"info"}>{formatNumber(price_btc)} BTC <span className={"additive"}>{setSign(formatNumber(price_diff_btc))}%</span></span>
+        <span className={"title"}>${formatNumber(price_usd)} 
+            <span className={priceClass(price_diff_usd)}>
+                {setSign(formatNumber(price_diff_usd))}%
+            </span>
+        </span>
+        <span className={"info"}>{formatNumber(price_btc)} BTC 
+            <span className={priceClass(price_diff_btc)}>
+                {setSign(formatNumber(price_diff_btc))}%
+            </span>
+        </span>
     </>)
 }
 
@@ -70,11 +87,11 @@ const StatsAptos: React.FC<IComponent> = ({
                 <div className={"stats__item"}>
                     <div className={"stats__item-wrapper"}>
                         <span className={"title"}>Market Cap</span>
-                        <span className={"info"}>{formatNumber(market_cap)}</span>
+                        <span className={"info"}>${formatNumber(market_cap / 1000000000)}B</span>
                     </div>
                     <div className={"stats__item-wrapper"}>
                         <span className={"title"}>Volume 24h</span>
-                        <span className={"info"}>{formatNumber(vol_24h)}</span>
+                        <span className={"info"}>${formatNumber(vol_24h / 1000000)}M</span>
                     </div>
                     <div className={"stats__item-wrapper"}>
                         <span className={"title"}>Total Holders</span>

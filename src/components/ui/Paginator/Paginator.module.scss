@@ -1,0 +1,17 @@
+.paginator {
+    &__page + &__page {
+        margin-left: 3px;
+    }
+    &__page {
+        min-width: 11px;
+        display: block;
+        &.active {
+            color: var(--aptools-color-emphasis-c1);
+        }
+        &s {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+    }
+}

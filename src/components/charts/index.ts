@@ -1,5 +1,12 @@
-export { default as StatsTransactions } from "../charts/StatsTransactions/StatsTransactions";
-export { default as DexTvl } from "../charts/DexTvl/DexTvl";
-export { default as DexVolume } from "../charts/DexVolume/DexVolume";
-export { default as DexUniqueWallets } from "../charts/DexUniqueWallets/DexUniqueWallets";
-export { default as DexUniqueTransactions } from "../charts/DexUniqueTransactions/DexUniqueTransactions";
+export { default as StatsTransactions } from ".//StatsTransactions/StatsTransactions";
+export { default as DexTvl } from "./DexTvl/DexTvl";
+export { default as DexVolume } from ".//DexVolume/DexVolume";
+export { default as DexUniqueWallets } from ".//DexUniqueWallets/DexUniqueWallets";
+export { default as DexUniqueTransactions } from ".//DexUniqueTransactions/DexUniqueTransactions";
+export { default as Price } from "./Price/Price";
+export { default as DailyActiveWallets } from "./DailyActiveWallets/DailyActiveWallets";
+export { default as DailyNewWallets } from "./DailyNewWallets/DailyNewWallets";
+export { default as DailyUsageWallets } from "./DailyUsageWallets/DailyUsageWallets";
+export { default as TokenPrice } from "./TokenPrice/TokenPrice";
+export { default as TransactionHistory } from "./TransactionHistory/TransactionHistory";
+export { default as TokenSupplySchedule } from "./TokenSupplySchedule/TokenSupplySchedule";

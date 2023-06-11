@@ -32,5 +32,16 @@ const timerFrom = (timestamp: number, currentTimestamp: number) => {
     return `${formatNumber(daysDifference)}d ${hoursDifference}h ${minutesDifference}m ${secondsDifference}s`;
 };
 
+const timeFull = (timestamp: string) => {
+    const time = new Date(timestamp);
+    return `${time.getUTCDate() + 1}.${time.getMonth() + 1}.${time.getFullYear()}, ${time.getHours()}:${time.getMinutes()}:${time.getSeconds()}`;
+};
 
-export { ensureMillisecondTimestamp, parseTimestamp, timerFrom };
+const dateDiffInDays = (date1: Date, date2: Date) => {
+    const diffInMs = date2.getTime() - date1.getTime();
+    const diffInDays = Math.round(diffInMs / (1000 * 60 * 60 * 24));
+    return diffInDays;
+}
+
+
+export { ensureMillisecondTimestamp, parseTimestamp, timerFrom, dateDiffInDays, timeFull };

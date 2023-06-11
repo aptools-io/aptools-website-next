@@ -47,7 +47,7 @@ const dexOptions = (data: IApiDex[]) => {
     })
     
     return {
-        grid: { top: 80, left: 40, right: 40, bottom: 20 },
+        grid: { top: 50, left: 40, right: 40, bottom: 20 },
         xAxis: {
             type: "category",
             boundaryGap: false,

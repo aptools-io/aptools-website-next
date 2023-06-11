@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const statsAddressesTransactionsSlice = createSlice({
-    "name": "statsProjects",
+    "name": "statsAddressesTransactions",
     "initialState": {
         "addressesData": null as IApiAdressesTransactions[],
         "transactionsData": null as IApiAdressesTransactions[],

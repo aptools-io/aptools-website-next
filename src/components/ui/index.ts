@@ -8,3 +8,6 @@ export { default as CategoryTitle } from "./CategoryTitle/CategoryTitle";
 export { default as List } from "./List/List";
 export { default as ListHeader } from "./ListHeader/ListHeader";
 export { default as Tabs } from "./Tabs/Tabs";
+export { default as Title } from "./Title/Title";
+export { default as TitleSwitcher } from "./TitleSwitcher/TitleSwitcher";
+export { default as Paginator } from "./Paginator/Paginator";

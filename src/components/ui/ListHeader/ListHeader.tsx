@@ -17,12 +17,16 @@ const ListHeader: React.ForwardRefRenderFunction<any, IListHeaderProps> = ({
 }, ref) => {
     const child: React.ReactNode = Children.only(children);
     const defaultSortIndex = columnNames?.findIndex(x => x.defaultSort);
+    const defaultSortType = columnNames?.[defaultSortIndex]?.defaultSortType || "desc";
 
     const [sorting, setSorting] = useState({
         "key": defaultSortIndex > -1 ? columnNames?.[defaultSortIndex]?.key : columnNames?.[0]?.key,
-        "sort": "desc"
+        "sort": defaultSortType
     })
-    const [sortedData, setSortedData] = useState(data);
+    const [sortedData, setSortedData] = useState(data.map((item, index) => { 
+        if(typeof item === 'object' && !Array.isArray(item))  return { ...item, "_id": index };
+        return item;
+    }));
     
     const classes = classNames([
         styles["list-header"],
@@ -71,7 +75,7 @@ const ListHeader: React.ForwardRefRenderFunction<any, IListHeaderProps> = ({
                     { [styles["sorted"]]: item.key === sorting.key }
                 ])}
             key={index}
-            data-sort={"desc"}
+            data-sort={defaultSortType}
             onClick={(e) => handleSort(e, item.key)}
         >
             {item.value} <div className={styles["sort"]}><SortArrowUp /> <SortArrowDown /></div>

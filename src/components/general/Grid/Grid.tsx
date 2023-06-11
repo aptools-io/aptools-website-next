@@ -11,6 +11,7 @@ import classNames from "classnames";
 const Grid: React.FC<IGridProps> = ({ 
     columns = COLUMNS_COUNT, 
     gap = null,
+    fullHeight = false,
     children,
     className
 }) => {
@@ -21,6 +22,7 @@ const Grid: React.FC<IGridProps> = ({
     
     const classes = classNames([
         styles["grid"],
+        { [styles["full"]]: fullHeight },
         className
     ]);
 

@@ -19,7 +19,7 @@ const MarketsList: React.FC<IComponent> = ({
     className 
 }) => {
     const { data: generalData } = useSelector((state: IRootState) => state.statsGeneral);
-    const { markets } = generalData || null;
+    const { markets = [] } = generalData || {};
 
     const classes = classNames([
         styles["market"],
@@ -35,7 +35,7 @@ const MarketsList: React.FC<IComponent> = ({
                 <span>Markets</span>
             </strong>
             <Tabs 
-                data={Object.fromEntries(markets.map(e => [e.dex, e.pairs]))}
+                data={Object.fromEntries(markets?.map(e => [e.dex, e.pairs]))}
                 itemsCount={false}
             >
                 <ListHeader 

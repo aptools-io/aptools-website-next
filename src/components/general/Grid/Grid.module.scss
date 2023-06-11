@@ -8,6 +8,9 @@
     grid-template-columns: var(--innerColumns);
     column-gap: var(--column-gap);
     row-gap: var(--row-gap);
+    &.full {
+        height: 100%;
+    }
 
     & + .grid {
         margin-top: var(--layout-indent);

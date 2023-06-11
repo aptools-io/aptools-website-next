@@ -1,11 +1,15 @@
 import { formatNumber, setSign } from "src/scripts/util/numbers";
+import { concatString } from "src/scripts/util/strings";
 
 // Convert
 const columnNames = [
     {
+        "key": "_id",
+        "value": "##"
+    },
+    {
         "key": "pair",
         "value": "Pair",
-        "defaultSort": true
     },
     {
         "key": "price",
@@ -35,16 +39,17 @@ const columnNames = [
         "key": "24h_volume",
         "value": "24h Volume",
         "right": true,
-        "formatter": (v) => `$${formatNumber(v)}`
+        "formatter": (v) => `$${formatNumber(v)}`,
+        "defaultSort": true
     },
     {  
         "key": "liquidity",
         "value": "Liquidity",
         "right": true,
-        "formatter": (v) => `$${formatNumber(v)}`
+        "formatter": (v) => `${concatString(formatNumber(v), "$")}`
     }
 ]
 // Columns
-const columns = ['20%', '10%', '10%', '10%', '16%', '16%', '16%'];
+const columns = ['1fr', '20%', '10%', '10%', '10%', '16%', '16%', '16%'];
 
 export { columnNames, columns };

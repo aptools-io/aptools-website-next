@@ -1,11 +1,44 @@
 interface IApiGeneralStats {
     "blockchain_info": IApiBlockchainData,
     "token_statistics": IApiTokenStatistics,
+    "top_statistics": IApiTopStatistics,
+    "top_tokens_by_volume": IApiTokenVolume[],
     "dex_tvl": IApiDex[],
     "dex_volumes": IApiDex[],
     "daily_unique_contract_addresses": IApiDex[],
     "daily_contract_transactions": IApiDex[],
-    "markets": IApiMarket[]
+    "markets": IApiMarket[],
+    "transactions_plot": IApiAddressTransactionsPlot,
+    "addresses_plot": IApiAddressTransactionsPlot,
+    "daily_new_created_wallets": IPoint[],
+    "active_unique_addresses": IApitActiveUniqueAddresses
+}
+
+
+interface IApitActiveUniqueAddresses {
+    "day": number,
+    "week": number,
+    "month": number,
+}
+interface IApiTokenVolume {
+    "change": number;
+    "token": string;
+    "volume_24h": number;
+}
+interface IApiWalletsUsage {
+    "7d": IPoint[],
+    "14d": IPoint[],
+    "30d": IPoint[], 
+    "all": IPoint[]
+}
+interface IApiWallets {
+    "name": string,
+    "chart": IPoint[]
+}
+
+interface IApiAddressTransactionsPlot {
+    "daily": IPoint[];
+    "hourly": IPoint[];
 }
 
 interface IApiMarket {
@@ -22,10 +55,41 @@ interface IApiMarketPair {
     "24hours_change": number;
     "1hour_change": number;
 }
+
+interface IApiTokenSchelude {
+    "category": string,
+    "chart": IPoint[]
+}
+
 interface IApiDex {
     "dex": string,
     "chart": IPoint[]
 }
+
+interface IApiTopStatistics {
+    "3d": IApiTopStatisticsBy,
+    "7d": IApiTopStatisticsBy,
+    "24h": IApiTopStatisticsBy,
+}
+interface IApiTopStatisticsBy {
+    "top_apt_receivers": IApiTopStatisticsInfo[],
+    "top_apt_senders": IApiTopStatisticsInfo[]
+}
+
+interface IApiTopStatisticsInfo {
+    "rank": number,
+    "percentage": number,
+    "address": string,
+    "total_txn": string
+}
+
+
+interface IApiTokenStatistics {
+    "3d": IApiTokenStatisticsBy,
+    "7d": IApiTokenStatisticsBy,
+    "24h": IApiTokenStatisticsBy,
+}
+
 
 interface IApiTokenStatistics {
     "3d": IApiTokenStatisticsBy,

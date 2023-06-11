@@ -13,6 +13,10 @@ interface IColumnName {
     value: string;
     right?: boolean;
     defaultSort?: boolean;
+    defaultSortType?: string;
     ignoreCombined?: boolean;
     link?: string;
+    coinImage?: string;
+    description?: string;
+    copy?: boolean;
 }

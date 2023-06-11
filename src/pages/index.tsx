@@ -5,52 +5,58 @@ import React, { useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { setGeneralStatsData } from "src/scripts/redux/slices/statsGeneralSlice";
 import { setProjectStatsData } from "src/scripts/redux/slices/statsProjectsSlice";
+import { setDexesVolumesStatsData } from "src/scripts/redux/slices/statsDexesVolumesSlice";
+import { setAddressesData, setTransactionsData } from "src/scripts/redux/slices/statsAddressesTransactionsSlice";
+import { setCoinTransactions } from "src/scripts/redux/slices/statsTransactionsSlice";
+import { setHeaders } from "src/scripts/redux/slices/headersSlice";
 
 // Components
 import { MainPage } from "src/components/pages";
-import { contractAddresses, contractTransactions, dexesVolumes, generalStats, projects } from "src/scripts/api/requests";
+
+// API
+import { contractAddresses, contractTransactions, dexesVolumes, generalStats, projects, transactions } from "src/scripts/api/requests";
 
 // Scripts
 import categories from "src/scripts/consts/categories";
 import filtrateProjects from "src/scripts/util/filtrateProjects";
 
-// websocket
+// Websocket
 import { aptosStats } from "src/scripts/websocket/connections";
-import { setDexesVolumesStatsData } from "src/scripts/redux/slices/statsDexesVolumesSlice";
-import { setAddressesData, setTransactionsData } from "src/scripts/redux/slices/statsAddressesTransactionsSlice";
+
 
 const Home = (data: IApiProps) => {
     const ws = useRef<WebSocket>(null);
     const dispatch = useDispatch();
-    console.log(data);
-
     useEffect(() => {
         aptosStats.openConnection(ws, dispatch);
         return () => ws.current.close();
     }, []);
 
+
     useEffect(() => {
+        dispatch(setHeaders(data.headers) || null);
         dispatch(setGeneralStatsData(data.general_stats || null));
         dispatch(setProjectStatsData(data.projects || null));
         dispatch(setDexesVolumesStatsData(data.dexes_volumes || null));
         dispatch(setAddressesData(data.contract_addresses || null));
         dispatch(setTransactionsData(data.contract_transactions || null));
+        dispatch(setCoinTransactions(data.transactions) || null)
     }, [])
 
     return <MainPage />;
 } 
 export default Home;
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
     const projectsUnfiltered = await projects.getData();
-   
+    const { req } = context;
     return { props: {
+        "headers": req.headers,
         "general_stats": await generalStats.getData() || {},
         "contract_addresses": await contractAddresses.getData() || [],
         "contract_transactions": await contractTransactions.getData() || [],
         "dexes_volumes": await dexesVolumes.getData() || [],
         "projects": filtrateProjects(projectsUnfiltered, categories) || [],
-        /* "transactions": await transactions.getData(), */
-       
+        "transactions": await transactions.getData(),
     } };
 }

@@ -11,7 +11,8 @@
     "lint:style:fix": "stylelint **/*.scss --fix",
     "lint": "eslint \"./**/*.{ts,tsx,js,jsx}\" --quiet",
     "lint:fix": "eslint \"./**/*.{ts,tsx,js,jsx}\" --fix --color",
-    "svg": "npx @svgr/cli -d ./src/components/svg ./src/assets/images/svg/ --typescript"
+    "svg": "npx @svgr/cli -d ./src/components/svg ./src/assets/images/svg/ --typescript",
+    "svg:combine": "svg-sprite --symbol --css --css-render-css --css-example --dest=out src/assets/images/svgCoins/*.svg"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.3",
@@ -37,6 +38,8 @@
     "react-transition-group": "^4.4.2",
     "sass": "^1.52.1",
     "slick-carousel": "^1.8.1",
+    "svg-sprite": "^2.0.2",
+    "svgstore-cli": "^2.0.1",
     "swiper": "^8.3.0",
     "yup": "^0.32.11"
   },

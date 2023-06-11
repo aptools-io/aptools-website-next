@@ -4,10 +4,10 @@ import React from "react";
 // Styles
 import classNames from "classnames";
 import styles from "./Plate.module.scss";
-import ActiveLink from "../ActiveLink/ActiveLink";
+
+// Components
 import PlateWrapper from "./PlateWrapper";
 
-// Other
 
 const Plate: React.FC<IPlateProps> = ({ 
     title,
@@ -15,6 +15,7 @@ const Plate: React.FC<IPlateProps> = ({
     image,
     dark = false,
     compressed = false,
+    min = false,
     children,
     className,
     style
@@ -24,6 +25,7 @@ const Plate: React.FC<IPlateProps> = ({
         styles["plate"],
         { [styles["compressed"]]: compressed },
         { [styles["dark"]]: dark },
+        { [styles["min"]]: min },
         className
     ]);
 
