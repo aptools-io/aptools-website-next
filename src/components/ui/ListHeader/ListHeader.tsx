@@ -8,10 +8,6 @@ import classNames from "classnames";
 // Components
 import { SortArrowDown, SortArrowUp } from "src/components/svg";
 
-// Adaptive
-import useWindowSize from "src/scripts/hooks/useWindowSize";
-import { EBreakpoints } from "src/types/common/adaptive";
-
 const ListHeader: React.ForwardRefRenderFunction<any, IListHeaderProps> = ({
     columnNames = [],
     columns = ["100%"],
@@ -22,9 +18,6 @@ const ListHeader: React.ForwardRefRenderFunction<any, IListHeaderProps> = ({
     const child: any = Children.only(children);
     const defaultSortIndex = columnNames?.findIndex(x => x.defaultSort);
     const defaultSortType = columnNames?.[defaultSortIndex]?.defaultSortType || "desc";
-    const { width } = useWindowSize();
-    
-    
 
     const [sorting, setSorting] = useState({
         "key": defaultSortIndex > -1 ? columnNames?.[defaultSortIndex]?.key : columnNames?.[0]?.key,
@@ -37,6 +30,7 @@ const ListHeader: React.ForwardRefRenderFunction<any, IListHeaderProps> = ({
     
     const classes = classNames([
         styles["list-header"],
+        { [styles["hide-mobile"]]: child.props.adoptMobile },
         className
     ]);
 
@@ -90,15 +84,6 @@ const ListHeader: React.ForwardRefRenderFunction<any, IListHeaderProps> = ({
             </button>
         )
     }
-
-
-    if(child.props.adoptMobile && width <= EBreakpoints.TABLET) {
-        return (<div ref={ref} style={style} className={classes}>
-            {React.cloneElement(child as React.ReactElement<IListProps>, {
-                data: sortedData, columnNames, columns
-            })}
-        </div>)
-    } 
     return (
         <div ref={ref} style={style} className={classes}>
             <ul className={styles["list-header__items"]}>

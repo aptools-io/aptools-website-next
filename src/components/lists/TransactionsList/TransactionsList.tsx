@@ -25,7 +25,6 @@ const TransactionRealTime: React.FC<{
 }> = ({ currentPage, setCurrentPage }) => {
     const { data: aptosStats } = useSelector((state: IRootState) => state.statsAptos);
     const { transactions: trans } = aptosStats || {};
-
     if(!trans) return <></>;
     return (
         <Paginator page={currentPage} perPage={10} total={trans[0]?.version} onChangePage={(page) => setCurrentPage(page)}>
@@ -84,10 +83,7 @@ const Transaction: React.FC<{
 const TransactionsList: React.FC<IComponent> = ({
     className 
 }) => {
-  
-
     const [currentPage, setCurrrentPage] = useState(1);
-   
 
     const classes = classNames([
         styles["transactions"],

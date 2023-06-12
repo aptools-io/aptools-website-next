@@ -1,4 +1,14 @@
+@import "/src/styles//static/general/variables.static";
+@import "/src/styles//static/general/mixins";
+
 .list-header {
+    &.hide-mobile {
+        @include mediaWMax("TABLET") {
+            .list-header__items {
+                display: none;
+            }
+        }
+    }
     &__item {
         text-align: left;
         &:not(:first-of-type):not(:last-of-type) {
@@ -59,12 +69,12 @@
         &.sorted {
             &[data-sort="desc"] {
                 svg:first-child path {
-                    fill: var(--aptools-color-emphasis-c1);
+                    fill: var(--aptools-color-emphasis-c6);
                 }
             }
             &[data-sort="asc"] {
                 svg:last-child path {
-                    fill: var(--aptools-color-emphasis-c1);
+                    fill: var(--aptools-color-emphasis-c6);
                 }
             }
         }

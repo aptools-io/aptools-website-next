@@ -46,7 +46,7 @@ const StatsTransactions: React.FC<IComponent> = ({
                 </div>
                 <div className={"stats__item-wrapper"}>
                     <span className={"title"}>Per 24h</span>
-                    <span className={"info"}>{formatNumber(user_transactions_24h)}<span className={"min"}>{concatString(formatNumber(trans_24h.per_second), "", " TPS")}</span></span>
+                    <span className={"info"}>{formatNumber(user_transactions_24h)}<span className={"min"}>{concatString(formatNumber(trans_24h?.per_second), "", " TPS")}</span></span>
                 </div>
             </div>
         </div>

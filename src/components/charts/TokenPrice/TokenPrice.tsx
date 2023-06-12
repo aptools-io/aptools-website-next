@@ -24,7 +24,8 @@ const TokenPrice: React.FC<IComponent> = ({
     const { data: generalData } = useSelector((state: IRootState) => state.statsGeneral);
     const { blockchain_info } = generalData || {};
 
-    const { token_price_chart: { all_time: allTimePrices = [] } } = blockchain_info || {};
+    const { token_price_chart } = blockchain_info || {};
+    const { all_time: allTimePrices = [] } = token_price_chart || {};
     
     const classes = classNames([
         styles["token-price"],

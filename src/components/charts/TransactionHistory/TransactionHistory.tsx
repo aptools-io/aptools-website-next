@@ -24,7 +24,8 @@ const TransactionHistory: React.FC<IComponent> = ({
     const { data: generalData } = useSelector((state: IRootState) => state.statsGeneral);
     const { blockchain_info } = generalData || {};
 
-    const { trans_history: { all_time: allTimeTrans = [] } } = blockchain_info || {};
+    const { trans_history } = blockchain_info || {};
+    const { all_time: allTimeTrans = [] } = trans_history || {};
     
     const classes = classNames([
         styles["token-price"],

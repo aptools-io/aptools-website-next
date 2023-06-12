@@ -44,7 +44,10 @@ const walletsBarOptions = (data: IApiWallets) => {
                     color: '#60C6A8'
                 }
             }
-        ]
+        ],
+        tooltip: {
+            trigger: "axis",
+        },
     }
 }
 

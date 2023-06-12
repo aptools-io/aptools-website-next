@@ -24,14 +24,16 @@ const DailyUsageWallets: React.FC<IComponent> = ({
 }) => {
     const { data: generalData } = useSelector((state: IRootState) => state.statsGeneral);
     const { 
-        addresses_plot: { daily: dailyAddresses = [] } 
+        addresses_plot
     } = generalData || {};
+
+    const { daily: dailyAddresses } = addresses_plot || {};
     
     const classes = classNames([
         styles["daily-new-wallets"],
         className
     ]);
-    const [volume, setVolume] = useState("14d"); 
+    const [volume, setVolume] = useState("30d"); 
     const [volumes, setVolumes] = useState({"7d": [], "14d": [],"30d": [], "all": dailyAddresses}); 
 
     if(!dailyAddresses) return <></>

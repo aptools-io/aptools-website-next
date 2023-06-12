@@ -22,9 +22,12 @@ const DailyActiveWallets: React.FC<IComponent> = ({
 }) => {
     const { data: generalData } = useSelector((state: IRootState) => state.statsGeneral);
     const { 
-        transactions_plot: { daily: dailyTransactions = null }, 
-        addresses_plot: { daily: dailyAddresses = null } 
+        transactions_plot, 
+        addresses_plot
     } = generalData || {};
+
+    const { daily: dailyTransactions = null } = transactions_plot || {};
+    const { daily: dailyAddresses = null } = addresses_plot || {};
     
     const classes = classNames([
         styles["daily-active-wallets"],

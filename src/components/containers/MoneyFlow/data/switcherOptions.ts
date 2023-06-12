@@ -6,7 +6,7 @@ const switcherOptions = [
     },
     {
         "key": "3d",
-        "value": "7D",
+        "value": "3D",
     },
     {
         "key": "7d",

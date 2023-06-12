@@ -9,6 +9,11 @@
     display: flex;
     flex-direction: column;
 
+    *::selection {
+        color: var(--aptools-color-main-primary); /*Цвет текста*/
+        background: var(--aptools-color-emphasis-c5); /*Цвет фона*/
+    }
+
     &__page-wrapper {
         padding: var(--layout-indent) var(--layout-v-padding) var(--layout-bottom-indent) calc(var(--nav-bar-width) + var(--layout-v-padding));
         flex: 1 0;
