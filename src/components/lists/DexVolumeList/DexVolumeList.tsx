@@ -7,25 +7,31 @@ import { IRootState } from "src/scripts/redux/store";
 
 // Styles
 import classNames from "classnames";
+import { List, ListHeader } from "src/components/ui";
 import styles from "./DexVolumeList.module.scss";
 
 // Components
-import { List, ListHeader } from "src/components/ui";
 
+// Other
+import media from "./data/adaptive";
+import useWindowSize from "src/scripts/hooks/useWindowSize";
 // Options
-import { columnNames, columns } from "./data/listOptions";
+/* import { columnNames, columns } from "./data/listOptionsDesktop"; */
 
 const DexVolume: React.FC<IComponent> = ({
     className 
 }) => {
     const { data: dexesVolumesData } = useSelector((state: IRootState) => state.statsDexesVolumes);
+    const { width } = useWindowSize();
+    const { columnNames = null, columns = null } = media(width) || {};
+
     const classes = classNames([
         styles["dex-volume"],
         "list",
         className
     ]);
 
-    if(!dexesVolumesData) return <></>;
+    if(!dexesVolumesData || !columnNames || !columns || !width) return <></>;
 
     return (
         <div className={classes}>
@@ -37,7 +43,7 @@ const DexVolume: React.FC<IComponent> = ({
                 columns={columns} 
                 data={dexesVolumesData}
             >
-                <List adoptMobile />
+                <List />
             </ListHeader>
         </div>
     );

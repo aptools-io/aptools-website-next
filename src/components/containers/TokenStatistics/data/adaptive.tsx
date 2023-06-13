@@ -26,7 +26,7 @@ const media = (width: number) => {
             [EBreakpoints.TABLET]: 1, 
             [EBreakpoints.MIN]: 1}, 
         width) as number,
-    }
-}   
+    };
+};   
 
 export default media;

@@ -31,8 +31,8 @@ const TitleSwitcher: React.FC<ITitleSwitcherProps> = ({
             >
                     {item.value}
             </button>
-        )
-    }
+        );
+    };
 
     return (
         <div style={style} className={classes}>

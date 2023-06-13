@@ -5,12 +5,13 @@
     --layout-bottom-indent: 60px;
     --blocks-v-padding: 24px;
     --list-padding: 8px;
-    
-    @include mediaWMax("TABLET") {
+
+    @include mediaWMax('TABLET') {
         --nav-bar-width: 0px;
         --layout-indent: 24px;
         --layout-v-padding: 10px;
         --nav-bar-height: 50px;
         --blocks-v-padding: 10px;
+        --list-padding: 2px;
     }
 }

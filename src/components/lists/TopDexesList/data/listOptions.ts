@@ -7,18 +7,23 @@ const columnNames = [
         "value": "Contract",
         "ignoreCombined": true,
         "link": "/projects",
-        "mainMobile": true
+        "mainMobile": true,
+        "replacedKeyMobile": "all_time",
+        "replacedFormatter": (v) => `${formatNumber(v)}`,
+        "underline": true
     },
     {
         "key": "24h",
         "value": "1 day",
         "right": true,
+        "headHideMobile": true,
         "formatter": (v) => `${formatNumber(v)}`
     },
     {
         "key": "week",
         "value": "7 days",
         "right": true,
+        "headHideMobile": true,
         "formatter": (v) => `${formatNumber(v)}`
     },
     {  
@@ -26,11 +31,12 @@ const columnNames = [
         "value": "All time",
         "right": true,
         "defaultSort": true,
-        "formatter": (v) => `${formatNumber(v)}`
+        "formatter": (v) => `${formatNumber(v)}`,
+        "hideMobile": true
     }
-]
+];
 
 // Columns
-const columns = ['25%', '25%', '25%', '25%'];
+const columns = ["25%", "25%", "25%", "25%"];
 
 export { columnNames, columns };

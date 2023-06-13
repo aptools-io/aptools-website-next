@@ -12,7 +12,7 @@ const switcherOptions = [
         "key": "7d",
         "value": "7D",
     },
-]
+];
 
 
 export { switcherOptions };

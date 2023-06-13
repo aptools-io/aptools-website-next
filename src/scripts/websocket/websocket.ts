@@ -9,7 +9,7 @@ export class WSocket {
             wsRef.current.onopen = () => {
                 console.log("ws opened");
                 wsRef.current.send(this.token);
-            }
+            };
             wsRef.current.onclose = () => console.log("ws closed");
 
             const wsCurrent = wsRef.current;
@@ -21,7 +21,7 @@ export class WSocket {
                 const reader = new FileReader();
                 reader.onload = () => {
                     if(typeof reader.result !== "string") return;
-                    setData(JSON.parse(reader.result))
+                    setData(JSON.parse(reader.result));
                 };
                 reader.readAsText(e.data);
             };

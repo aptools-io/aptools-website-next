@@ -29,12 +29,10 @@ $themes-colors: (
             info:#ccf8fe,
         )
     ),
-
-
     dark: (
         main: (
-            primary: #1D1F30,
-            secondary: #2C406B,
+            primary: #1d1f30,
+            secondary: #2c406b,
         ),
         emphasis: (
             c1: #3b5998,
@@ -59,17 +57,15 @@ $themes-colors: (
         )
     )
 );
-
 $breakpoints: (
-    "LARGE": 1280px,
-	"LAPTOP": 1024px,
-	"TABLET": 768px,
-	"TABLET_MINI": 625px,
-	"MOBILE": 425px,
-	"SMALL_MOBILE": 375px,
-    "MIN": 0px,
+    'LARGE': 1280px,
+    'LAPTOP': 1024px,
+    'TABLET': 768px,
+    'TABLET_MINI': 625px,
+    'MOBILE': 425px,
+    'SMALL_MOBILE': 375px,
+    'MIN': 0,
 );
-
 $transitions: (
     'slow': .8s,
     'normal': .5s,

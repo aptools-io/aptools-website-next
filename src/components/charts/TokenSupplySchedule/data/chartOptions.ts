@@ -2,10 +2,10 @@ import { graphic } from "echarts";
 import { tokenScheludeOptions } from "src/scripts/charts/tokenSchelude";
 
 const chartOptions = (data: IApiTokenSchelude[], volume: boolean = true) => {
-    const options = tokenScheludeOptions(data)
+    const options = tokenScheludeOptions(data);
     const series = {
-        type: 'line',
-        stack: 'Total',
+        type: "line",
+        stack: "Total",
         smooth: true,
         lineStyle: {
           width: 0
@@ -15,13 +15,13 @@ const chartOptions = (data: IApiTokenSchelude[], volume: boolean = true) => {
           opacity: 1,
         },
         emphasis: {
-          focus: 'series'
+          focus: "series"
         },
-    }
+    };
     return {
         ...options,
-        ...(volume ? { series: options.series.map(x => { return { ...x, ...series }}) } : {})
-    }
+        ...(volume ? { series: options.series.map(x => { return { ...x, ...series };}) } : {})
+    };
 };
 
 export default chartOptions;

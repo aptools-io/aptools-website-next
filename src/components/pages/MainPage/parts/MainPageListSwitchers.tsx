@@ -3,12 +3,12 @@ import React from "react";
 
 // Adaptive
 import useWindowSize from "src/scripts/hooks/useWindowSize";
-import media from "../data/adaptive";
 
 // Components
 import { Grid, GridWrapper } from "src/components/general";
 import { TokenStatistics, MoneyFlow } from "src/components/containers";
 import { DailyActiveWallets, DailyNewWallets, DailyUsageWallets, DexTvl } from "src/components/charts";
+import media from "../data/adaptive";
 
 
 const MainPageListSwitchers: React.FC = () => {
@@ -33,7 +33,7 @@ const MainPageListSwitchers: React.FC = () => {
                     <GridWrapper gridWidth={1}>
                         <DailyNewWallets />
                     </GridWrapper>
-                    <GridWrapper gridWidth={1}>
+                    <GridWrapper gridWidth={mediaData.listSwitchersWalletsUsage}>
                         <DailyUsageWallets />
                     </GridWrapper>
                 </Grid>

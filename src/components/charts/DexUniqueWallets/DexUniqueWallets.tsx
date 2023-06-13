@@ -27,7 +27,7 @@ const DexUniqueWallets: React.FC<IComponent> = ({
         className
     ]);
 
-    if(!daily_unique_contract_addresses) return <></>
+    if(!daily_unique_contract_addresses) return <></>;
 
     return (
         <div className={classes}>

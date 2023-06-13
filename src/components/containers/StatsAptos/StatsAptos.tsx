@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from "react";
 
 // Styles
-import styles from "./StatsAptos.module.scss";
 import classNames from "classnames";
 
 // Redux
@@ -10,11 +9,12 @@ import { useSelector } from "react-redux";
 import { IRootState } from "src/scripts/redux/store";
 
 // Public
-import aptos from "../../../../public/static/images/svg/aptos.svg"
 
 // Util
 import { timerFrom } from "src/scripts/util/timeConvert";
 import { formatNumber, setSign } from "src/scripts/util/numbers";
+import aptos from "../../../../public/static/images/svg/aptos.svg";
+import styles from "./StatsAptos.module.scss";
 
 const TopStats = () => {
     const { data: aptosStats } = useSelector((state: IRootState) => state.statsAptos);
@@ -31,7 +31,7 @@ const TopStats = () => {
             "additive",
             ...negative ? ["negative"] : []
         ]);
-    }
+    };
     
     return (<>
         <span className={"title"}>${formatNumber(price_usd)} 
@@ -44,8 +44,8 @@ const TopStats = () => {
                 {setSign(formatNumber(price_diff_btc))}%
             </span>
         </span>
-    </>)
-}
+    </>);
+};
 
 const StatsAptos: React.FC<IComponent> = ({
     className 
@@ -67,7 +67,7 @@ const StatsAptos: React.FC<IComponent> = ({
 
     useEffect(() => {
         const timer = setInterval(() => {
-            setCurrentTimestamp(new Date().getTime())
+            setCurrentTimestamp(new Date().getTime());
         }, 1000);
         return () => clearInterval(timer);
     }, []);

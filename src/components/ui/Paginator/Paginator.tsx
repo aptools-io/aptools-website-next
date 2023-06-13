@@ -3,10 +3,10 @@ import React, { useMemo, useState } from "react";
 
 // Styles
 import classNames from "classnames";
+import { ArrowLeftDoublePagination, ArrowLeftPagination } from "src/components/svg";
 import styles from "./Paginator.module.scss";
 
 // Components
-import { ArrowLeftDoublePagination, ArrowLeftPagination } from "src/components/svg";
 
 const Paginator: React.FC<IPaginatorProps> = ({ 
     page = 1,
@@ -42,8 +42,8 @@ const Paginator: React.FC<IPaginatorProps> = ({
             >
                 <button onClick={() => onChangePage(item)}>{item}</button>
             </li>
-        )
-    }
+        );
+    };
     return (
         <div style={style} className={classes}>
             <div className={styles["paginator__inner"]}>{children}</div>

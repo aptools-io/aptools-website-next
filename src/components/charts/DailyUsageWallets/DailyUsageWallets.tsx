@@ -10,13 +10,13 @@ import ReactECharts from "echarts-for-react";
 
 // Styles
 import classNames from "classnames";
+import { dateDiffInDays } from "src/scripts/util/timeConvert";
 import styles from "./DailyUsageWallets.module.scss";
 
 // Other
 import chartOptions from "./data/chartOptions";
 
 // Utils
-import { dateDiffInDays } from "src/scripts/util/timeConvert";
 
 
 const DailyUsageWallets: React.FC<IComponent> = ({
@@ -36,7 +36,7 @@ const DailyUsageWallets: React.FC<IComponent> = ({
     const [volume, setVolume] = useState("30d"); 
     const [volumes, setVolumes] = useState({"7d": [], "14d": [],"30d": [], "all": dailyAddresses}); 
 
-    if(!dailyAddresses) return <></>
+    if(!dailyAddresses) return <></>;
    
     useMemo(() => {
         const dailyWalletsUsage = {"7d": [], "14d": [],"30d": [], "all": dailyAddresses} as IApiWalletsUsage;
@@ -46,22 +46,22 @@ const DailyUsageWallets: React.FC<IComponent> = ({
             if(dateDiffInDays(new Date(el.x), new Date()) <= 31) dailyWalletsUsage["30d"].push(el);
         });
         setVolumes(dailyWalletsUsage);
-    }, [volume])
+    }, [volume]);
 
     const data = {
         "name": "Daily Wallets Usage",
         "chart": volumes[volume],
-    }
+    };
 
     return (
         <div className={classes}>
             <strong className={"chart__title"}>
                 <span>Daily Wallets Usage</span>
                 <span className={"chart__switcher"}>
-                    <button className={classNames([ { ["active"]: volume === "7d" } ])} onClick={() => setVolume(e => e = "7d")}>7D</button>
-                    <button className={classNames([ { ["active"]: volume === "14d" } ])} onClick={() => setVolume(e => e = "14d")}>14D</button>
-                    <button className={classNames([ { ["active"]: volume === "30d" } ])} onClick={() => setVolume(e => e = "30d")}>30D</button>
-                    <button className={classNames([ { ["active"]: volume === "all" } ])} onClick={() => setVolume(e => e = "all")}>ALL</button>
+                    <button className={classNames([ { "active": volume === "7d" } ])} onClick={() => setVolume(e => e = "7d")}>7D</button>
+                    <button className={classNames([ { "active": volume === "14d" } ])} onClick={() => setVolume(e => e = "14d")}>14D</button>
+                    <button className={classNames([ { "active": volume === "30d" } ])} onClick={() => setVolume(e => e = "30d")}>30D</button>
+                    <button className={classNames([ { "active": volume === "all" } ])} onClick={() => setVolume(e => e = "all")}>ALL</button>
                 </span>
             </strong>
             

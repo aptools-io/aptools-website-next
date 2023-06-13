@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 
 // Styles
-import styles from "./TokenStatistics.module.scss";
 import classNames from "classnames";
 
 // Components
@@ -11,13 +10,14 @@ import { Grid, GridWrapper } from "src/components/general";
 import { TopTotalHoldersList, TopWalletReceiversList, TopWalletSendersList } from "src/components/lists";
 
 // Other
+import useWindowSize from "src/scripts/hooks/useWindowSize";
 import { switcherOptions } from "./data/switcherOptions";
 
 // Adaptive
 import media from "./data/adaptive";
 
 // Hooks
-import useWindowSize from "src/scripts/hooks/useWindowSize";
+import styles from "./TokenStatistics.module.scss";
 
 const TokenStatistics: React.FC<IComponent> = ({
     className 

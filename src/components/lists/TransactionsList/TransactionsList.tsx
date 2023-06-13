@@ -7,17 +7,17 @@ import { IRootState } from "src/scripts/redux/store";
 
 // Styles
 import classNames from "classnames";
-import styles from "./TransactionsList.module.scss";
 
 // Components
 import { List, ListHeader, Paginator } from "src/components/ui";
 
 // Options
-import { columnNames, columns } from "./data/listOptions";
 import { setCoinTransactions } from "src/scripts/redux/slices/statsTransactionsSlice";
 
 // API
 import { transactions } from "src/scripts/api/requests";
+import { columnNames, columns } from "./data/listOptions";
+import styles from "./TransactionsList.module.scss";
 
 const TransactionRealTime: React.FC<{ 
     currentPage: number, 
@@ -37,8 +37,8 @@ const TransactionRealTime: React.FC<{
                 <List adoptMobile />
             </ListHeader>
         </Paginator>
-    )
-}
+    );
+};
 
 const Transaction: React.FC<{ 
     currentPage: number, 
@@ -60,8 +60,8 @@ const Transaction: React.FC<{
                     const resp = response as unknown as IApiTransaction[];
                     dispatch(setCoinTransactions(resp));
                     setCurrentPage(currentInnerPage);
-                })
-            })
+                });
+            });
             
         }
     }, [currentInnerPage]);
@@ -77,8 +77,8 @@ const Transaction: React.FC<{
             >
                 <List adoptMobile />
             </ListHeader>
-        </Paginator>)
-}
+        </Paginator>);
+};
 
 const TransactionsList: React.FC<IComponent> = ({
     className 

@@ -7,12 +7,12 @@ const media = (width: number) => {
         projectWrapper: a({ 
             [EBreakpoints.LARGE]: COLUMNS_COUNT, 
             [EBreakpoints.TABLET]: 9, 
-            [EBreakpoints.MIN]: 10}, 
+            [EBreakpoints.MIN]: COLUMNS_COUNT}, 
         width) as number,
         project: a({ 
             [EBreakpoints.LARGE]: 2, 
             [EBreakpoints.TABLET]: 3, 
-            [EBreakpoints.MOBILE]: 5, 
+            [EBreakpoints.SMALL_MOBILE]: COLUMNS_COUNT / 2, 
             [EBreakpoints.MIN]: COLUMNS_COUNT}, 
         width) as number,
         projectsCount: a({ 
@@ -20,7 +20,7 @@ const media = (width: number) => {
             [EBreakpoints.TABLET]: 7, 
             [EBreakpoints.MIN]: 5}, 
         width) as number,
-    }
-}   
+    };
+};   
 
 export default media;

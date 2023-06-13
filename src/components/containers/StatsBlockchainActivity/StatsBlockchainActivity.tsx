@@ -3,12 +3,12 @@ import React from "react";
 
 // Styles
 import classNames from "classnames";
-import styles from "./StatsBlockchainActivity.module.scss";
 
 // Redux
 import { useSelector } from "react-redux";
 import { IRootState } from "src/scripts/redux/store";
 import { formatNumber } from "src/scripts/util/numbers";
+import styles from "./StatsBlockchainActivity.module.scss";
 
 const StatsBlockchainActivity: React.FC<IComponent> = ({
     className 

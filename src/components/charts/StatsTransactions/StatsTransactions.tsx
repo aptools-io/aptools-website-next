@@ -32,7 +32,7 @@ const StatsTransactions: React.FC<IComponent> = ({
         className
     ]);
 
-    if(!blockchain_info) return <></>
+    if(!blockchain_info) return <></>;
 
     return (
         <div className={classes}>

@@ -46,7 +46,7 @@ const DailyActiveWallets: React.FC<IComponent> = ({
             "name": "Daily Active Addresses",
             "chart": dailyAddresses,
         }
-    ]
+    ];
 
     return (
         <div className={classes}>

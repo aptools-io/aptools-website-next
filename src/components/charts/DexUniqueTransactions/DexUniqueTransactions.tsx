@@ -27,7 +27,7 @@ const DexUniqueTransactions: React.FC<IComponent> = ({
         className
     ]);
 
-    if(!daily_contract_transactions) return <></>
+    if(!daily_contract_transactions) return <></>;
 
     return (
         <div className={classes}>

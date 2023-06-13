@@ -20,9 +20,9 @@ const columnNames = [
         "right": true,
         "formatter": (v) => `${formatNumber(v)}`
     },
-]
+];
 
 // Columns
-const columns = ['10%', '70%', '20%'];
+const columns = ["10%", "70%", "20%"];
 
 export { columnNames, columns };

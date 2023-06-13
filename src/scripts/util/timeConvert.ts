@@ -19,13 +19,13 @@ const timerFrom = (timestamp: number, currentTimestamp: number) => {
     let difference = currentTimestamp - (timestamp * 1000);
 
     const daysDifference = Math.floor(difference/1000/60/60/24);
-    difference -= daysDifference*1000*60*60*24
+    difference -= daysDifference*1000*60*60*24;
 
     const hoursDifference = Math.floor(difference/1000/60/60);
-    difference -= hoursDifference*1000*60*60
+    difference -= hoursDifference*1000*60*60;
 
     const minutesDifference = Math.floor(difference/1000/60);
-    difference -= minutesDifference*1000*60
+    difference -= minutesDifference*1000*60;
 
     const secondsDifference = Math.floor(difference/1000);
     
@@ -41,7 +41,7 @@ const dateDiffInDays = (date1: Date, date2: Date) => {
     const diffInMs = date2.getTime() - date1.getTime();
     const diffInDays = Math.round(diffInMs / (1000 * 60 * 60 * 24));
     return diffInDays;
-}
+};
 
 
 export { ensureMillisecondTimestamp, parseTimestamp, timerFrom, dateDiffInDays, timeFull };

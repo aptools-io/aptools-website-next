@@ -3,7 +3,6 @@ import React from "react";
 
 // Adaptive
 import useWindowSize from "src/scripts/hooks/useWindowSize";
-import media from "../data/adaptive";
 
 // Components
 import { Grid, GridWrapper } from "src/components/general";
@@ -11,6 +10,7 @@ import { CategoryTitle } from "src/components/ui";
 import { DexTvl, DexUniqueTransactions, DexUniqueWallets, DexVolume } from "src/components/charts";
 import { DexVolumeList, MarketsList, TopDexesList } from "src/components/lists";
 import { AptosBanner } from "src/components/containers";
+import media from "../data/adaptive";
 
 
 const MainPageDex: React.FC = () => {

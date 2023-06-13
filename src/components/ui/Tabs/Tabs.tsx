@@ -1,27 +1,16 @@
 // React
-import React, { useEffect, useRef, useState, Children } from "react";
+import React, { useRef, useState, Children } from "react";
 
 // Swiper / Components
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper";
 import { ArrowLeft } from "src/components/svg";
 
-// Redux
-import { useSelector } from "react-redux";
-import { IRootState } from "src/scripts/redux/store";
-
 // Styles
-import styles from "./Tabs.module.scss";
 import classNames from "classnames";
-import { Grid, GridWrapper } from "src/components/general";
-import { ActiveLink, Plate } from "src/components/ui";
-
-// Data
-import categories from "src/scripts/consts/categories";
-
 
 // Adaptive
-import useWindowSize from "src/scripts/hooks/useWindowSize";
+import styles from "./Tabs.module.scss";
 
 
 
@@ -59,10 +48,10 @@ const Tabs: React.ForwardRefRenderFunction<any, ITabsProps> = ({
                     {item[0]}
                 </div>
             </SwiperSlide>
-        )
-    }
+        );
+    };
 
-    if(!data) return <></>
+    if(!data) return <></>;
     
     return (
         <div ref={ref} className={classes}>
@@ -74,18 +63,23 @@ const Tabs: React.ForwardRefRenderFunction<any, ITabsProps> = ({
                         <>
                         <Swiper
                                 modules={[Navigation]}
-                                navigation={true}
+                                navigation={{
+                                    prevEl: navigationPrevRef.current,
+                                    nextEl: navigationNextRef.current,
+                                }}
                                 slidesPerView={"auto"}
+                               
                                 onBeforeInit={(swiper) =>{
-                                    swiper.params.navigation["prevEl"] = navigationPrevRef.current;
-                                    swiper.params.navigation["nextEl"] = navigationNextRef.current;
+                                    /* swiper.params.navigation["prevEl"] = navigationPrevRef.current;
+                                    swiper.params.navigation["nextEl"] = navigationNextRef.current; */
+                                    console.log(swiper.params.navigation)
                                     swiper.params.navigation["disabledClass"] = styles["tabs__nav--disabled"];
                                     swiper.params.navigation["lockClass"] = styles["tabs__nav--lock"];
                                     
                                 }}
                                 onInit={(swiper) => {
                                     setSwiper(swiper);
-                                    swiper.el.style.display = "block"
+                                    swiper.el.style.display = "block";
                                     swiper.wrapperEl.classList.add(styles["tabs__wrapper"]);
                                 }}
                             >

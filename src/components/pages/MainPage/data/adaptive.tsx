@@ -22,12 +22,12 @@ const media = (width: number) => {
         statsAdditiveComponents: () => a({ 
             [EBreakpoints.TABLET]: <></>, 
             [EBreakpoints.MIN]: <MainPageAptosInfo gridWidth={1} />}, 
-        width, true) as React.ReactNode,
+        width) as React.ReactNode,
 
         projectsAdditiveComponents: () => a({ 
             [EBreakpoints.TABLET]: <MainPageAptosInfo />, 
             [EBreakpoints.MIN]: <></>}, 
-        width, true) as React.ReactNode,
+        width) as React.ReactNode,
 
         dexesWrapper: a({ 
             [EBreakpoints.LARGE]: 3, 
@@ -59,6 +59,13 @@ const media = (width: number) => {
             [EBreakpoints.MIN]: 1}, 
         width) as number,
 
+        listSwitchersWalletsUsage: a({ 
+            [EBreakpoints.LARGE]: 1, 
+            [EBreakpoints.LAPTOP]: 2, 
+            [EBreakpoints.TABLET]: 1, 
+            [EBreakpoints.MIN]: 1}, 
+        width) as number,
+
         tokenWrapper: a({ 
             [EBreakpoints.LARGE]: 3, 
             [EBreakpoints.LAPTOP]: 4, 
@@ -79,7 +86,7 @@ const media = (width: number) => {
             [EBreakpoints.TABLET]: 4, 
             [EBreakpoints.MIN]: 4}, 
         width) as number,
-    }
-}   
+    };
+};   
 
 export default media;

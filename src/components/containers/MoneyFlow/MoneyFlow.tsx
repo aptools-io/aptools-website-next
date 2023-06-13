@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 
 // Styles
-import styles from "./MoneyFlow.module.scss";
 import classNames from "classnames";
 
 // Components
@@ -11,10 +10,11 @@ import { TopReceiversList, TopSendersList } from "src/components/lists";
 import { Grid, GridWrapper } from "src/components/general";
 
 // Other
+import useWindowSize from "src/scripts/hooks/useWindowSize";
 import { switcherOptions } from "./data/switcherOptions";
 
 // Hooks
-import useWindowSize from "src/scripts/hooks/useWindowSize";
+import styles from "./MoneyFlow.module.scss";
 
 // Adaptive
 import media from "./data/adaptive";

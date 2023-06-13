@@ -27,7 +27,7 @@ const DexVolume: React.FC<IComponent> = ({
         className
     ]);
 
-    if(!dex_volumes) return <></>
+    if(!dex_volumes) return <></>;
 
     return (
         <div className={classes}>

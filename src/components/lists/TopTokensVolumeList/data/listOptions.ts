@@ -4,7 +4,7 @@ import { formatNumber, setSign } from "src/scripts/util/numbers";
 const columnNames = [
     {
         "key": "token",
-        "value": "AMM",
+        "value": "Token",
         "mainMobile": true
     },
     {
@@ -21,9 +21,9 @@ const columnNames = [
         "formatter": (v) => `${setSign(formatNumber(v))}%`,
         "colorize": true
     }
-]
+];
 
 // Columns
-const columns = ['50%', '25%', '25%'];
+const columns = ["50%", "25%", "25%"];
 
 export { columnNames, columns };

@@ -1,52 +1,64 @@
 .chart {
     position: relative;
+
     &__bottom {
         width: 100%;
+
         &.absolute {
             position: absolute;
             bottom: 0;
         }
+
         &.paddings {
-            padding: 0 5px 5px 5px;
+            padding: 0 5px 5px;
         }
-        
-        
+
         &-item {
             &-wrapper + &-wrapper {
                 margin-top: 5px;
             }
+
             &-wrapper {
                 display: flex;
                 justify-content: space-between;
+
                 .title {
                     font-weight: 400;
                     font-size: 10px;
                     line-height: 15px;
                     display: flex;
                     align-items: center;
+
                     svg {
                         margin-right: 2px;
                     }
+
                     &.high {
                         color: var(--aptools-color-emphasis-c2);
+
                         svg path {
                             fill: var(--aptools-color-emphasis-c2);
                         }
                     }
+
                     &.low {
                         color: var(--aptools-color-emphasis-c4);
-                        svg { 
+
+                        svg {
                             transform: scaleY(-1);
+
                             path {
                                 fill: var(--aptools-color-emphasis-c4);
                             }
                         }
                     }
                 }
+
                 .info {
                     font-weight: 400;
                     font-size: 14px;
                     line-height: 130%;
+
                     span {
                         font-weight: 400;
                         font-size: 10px;
@@ -57,29 +69,33 @@
                 }
             }
         }
-        
     }
+
     &__title {
         font-weight: 700;
         font-size: 20px;
         line-height: 26px;
-        padding: 16px var(--blocks-v-padding) 0px var(--blocks-v-padding);
+        padding: 16px var(--blocks-v-padding) 0 var(--blocks-v-padding);
         width: 100%;
         display: block;
         margin-bottom: 8px;
         display: flex;
         justify-content: space-between;
         align-items: center;
+
         &.normal {
             padding: unset;
             font-weight: 400;
         }
     }
+
     &__switcher {
         display: flex;
+
         button + button {
             margin-left: 4px;
         }
+
         button {
             color: var(--aptools-color-grey-c1);
             font-weight: 400;
@@ -89,6 +105,7 @@
             transition: color .3s ease, background-color .3s ease;
             border-radius: 1px;
             min-width: 25px;
+
             &.active {
                 font-weight: 500;
                 color: var(--aptools-color-emphasis-c1);
@@ -97,7 +114,8 @@
             }
         }
     }
+
     &__inner {
-        padding: 0px var(--blocks-v-padding) 16px var(--blocks-v-padding);
+        padding: 0 var(--blocks-v-padding) 16px var(--blocks-v-padding);
     }
 }

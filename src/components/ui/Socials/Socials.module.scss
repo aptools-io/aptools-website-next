@@ -1,10 +1,11 @@
-@import "/src/styles//static/general/variables.static"; 
-@import "/src/styles//static/general/mixins";
+@import '/src/styles//static/general/variables.static';
+@import '/src/styles//static/general/mixins';
 
 .socials {
     display: flex;
     flex-direction: column;
-    @include mediaWMax("TABLET") {
+
+    @include mediaWMax('TABLET') {
         flex-direction: row;
         width: 100%;
         justify-content: space-between;

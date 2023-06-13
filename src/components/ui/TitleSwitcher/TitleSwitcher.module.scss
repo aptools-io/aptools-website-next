@@ -1,29 +1,31 @@
-@import "/src/styles//static/general/variables.static";
-@import "/src/styles//static/general/mixins";
-
+@import '/src/styles//static/general/variables.static';
+@import '/src/styles//static/general/mixins';
 
 .title-switcher {
-    
-    @include mediaWMax("TABLET") {
+    @include mediaWMax('TABLET') {
         border: 1px solid var(--aptools-color-grey-c3);
         padding: 10px 0;
     }
+
     &__title {
         font-weight: 700;
         font-size: 20px;
         line-height: 26px;
         color: var(--aptools-color-emphasis-c1);
     }
+
     &__wrapper {
-        padding: 0px var(--blocks-v-padding) 0px var(--blocks-v-padding);
+        padding: 0 var(--blocks-v-padding) 0 var(--blocks-v-padding);
         display: flex;
         justify-content: space-between;
         align-items: center;
         margin-bottom: 15px;
     }
+
     &__item + &__item {
         margin-left: 4px;
     }
+
     &__item {
         color: var(--aptools-color-grey-c1);
         font-weight: 400;
@@ -34,12 +36,14 @@
         height: fit-content;
         border-radius: 1px;
         min-width: 25px;
+
         &.active {
             color: var(--aptools-color-emphasis-c1);
             background-color: var(--aptools-color-grey-c3);
             border-radius: 1px;
             font-weight: 500;
         }
+
         &s {
             display: flex;
         }

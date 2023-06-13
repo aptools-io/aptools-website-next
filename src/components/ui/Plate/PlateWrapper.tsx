@@ -14,7 +14,7 @@ const PlateWrapper: React.FC<IPlateProps> = ({
 
     const wrapperClassName = styles["plate__title-wrapper"];
     if(titleLink) return <ActiveLink href={titleLink}><a className={wrapperClassName}>{children}</a></ActiveLink>;
-    return <div className={wrapperClassName}>{children}</div>
+    return <div className={wrapperClassName}>{children}</div>;
 };
 
 export default PlateWrapper;

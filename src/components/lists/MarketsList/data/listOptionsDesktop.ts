@@ -2,22 +2,25 @@ import { formatNumber, setSign } from "src/scripts/util/numbers";
 import { concatString } from "src/scripts/util/strings";
 
 // Convert
-const columnNames = [
+const columnNamesDesktop = [
     {
         "key": "_id",
         "value": "##",
-        "hideMobile": true
+        "hideMobile": true,
     },
     {
         "key": "pair",
         "value": "Pair",
         "mainMobile": true,
+        "replacedKeyMobile": "price",
+        "replacedFormatter": (v) => `${concatString(formatNumber(v), "$", "")}`
     },
     {
         "key": "price",
         "value": "Price USD",
         "right": true,
-        "formatter": (v) => `$${formatNumber(v)}`
+        "formatter": (v) => `$${formatNumber(v)}`,
+        "hideMobile": true,
     },
     {
         "key": "1hour_change",
@@ -50,8 +53,8 @@ const columnNames = [
         "right": true,
         "formatter": (v) => `${concatString(formatNumber(v), "$")}`
     }
-]
+];
 // Columns
-const columns = ['1fr', '20%', '10%', '10%', '10%', '16%', '16%', '16%'];
+const columnsDesktop = ["2%", "20%", "10%", "10%", "10%", "16%", "16%", "16%"];
 
-export { columnNames, columns };
+export { columnNamesDesktop, columnsDesktop };

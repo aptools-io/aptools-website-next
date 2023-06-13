@@ -7,10 +7,10 @@ import { IRootState } from "src/scripts/redux/store";
 
 // Styles
 import classNames from "classnames";
+import { List, ListHeader } from "src/components/ui";
 import styles from "./TopReceiversList.module.scss";
 
 // Components
-import { List, ListHeader } from "src/components/ui";
 
 // Options
 import { columnNames, columns } from "./data/listOptions";

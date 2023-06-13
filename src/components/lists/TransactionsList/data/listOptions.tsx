@@ -6,7 +6,7 @@ import { getTransactionType } from "src/scripts/util/transactions";
 
 // Styles
 import classNames from "classnames";
-import styles from "../TransactionsList.module.scss"
+import styles from "../TransactionsList.module.scss";
 
 // Convert
 const columnNames = [
@@ -30,7 +30,7 @@ const columnNames = [
                     styles["transaction__type"],
                     styles[type.color]
                 ])}>{type.name}</span>
-            )
+            );
         }
     },
     {
@@ -39,6 +39,7 @@ const columnNames = [
         "formatter": (v) => `${shortenHashString(v)}`,
         "link": "/transactions",
         "mainMobile": true,
+        "underline": true
     },
     {  
         "key": "success",
@@ -49,7 +50,7 @@ const columnNames = [
                     styles["transaction__success"],
                     { [styles["error"]]: !v }
                 ])}>{v ? "Success" : "Cancel"}</span>
-            )
+            );
         }
     },
     {  
@@ -64,8 +65,8 @@ const columnNames = [
         "right": true,
         "formatter": (v) => `${concatString(formatNumber(v), "", " APT")}`
     },
-]
+];
 // Columns
-const columns = ['15%', '10%', '15%', '15%', '25%', '10%', '10%'];
+const columns = ["15%", "10%", "15%", "15%", "25%", "10%", "10%"];
 
 export { columnNames, columns };

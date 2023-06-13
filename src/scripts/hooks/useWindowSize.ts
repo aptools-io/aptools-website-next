@@ -16,7 +16,7 @@ const useWindowSize = () => {
             ...{ width: media },
             ...{ height: window.innerHeight },
         });
-    }, [media])
+    }, [media]);
 
     useEffect(() => {
         function handleResize() {
@@ -40,6 +40,6 @@ const useWindowSize = () => {
     }, []);
 
     return { ...windowSize };
-}
+};
 
 export default useWindowSize;

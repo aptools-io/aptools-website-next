@@ -3,7 +3,7 @@ const walletsOptions = (data: IApiWallets[]) => {
 
     const labels = {
         textStyle: {
-            fontSize: 8,
+            fontSize: 10,
             fontWeight: 400,
             color: "#9B9B9B"
         }
@@ -23,11 +23,11 @@ const walletsOptions = (data: IApiWallets[]) => {
             borderColor: "auto"
         },
         textStyle: {
-            fontSize: 8,
+            fontSize: 10,
             fontWeight: 400,
             color: "#9B9B9B"
         }
-    }
+    };
 
     const series = data.map(wallet => {
         const yAxisArray = wallet.chart.map(point => point.y) as number[];
@@ -43,8 +43,8 @@ const walletsOptions = (data: IApiWallets[]) => {
             areaStyle: {
                 opacity: 0,
             },
-        }
-    })
+        };
+    });
     
     return {
         grid: { top: 30, left: 40, right: 40, bottom: 20 },
@@ -54,7 +54,7 @@ const walletsOptions = (data: IApiWallets[]) => {
             data: xAxisArray,
             axisLabel: {
                 formatter: (v) => {
-                    const formatter = new Intl.DateTimeFormat('en', { month: 'short' });
+                    const formatter = new Intl.DateTimeFormat("en", { month: "short" });
                     return `${formatter.format(new Date(v))}'${new Date(v).getFullYear() % 100}`;
                 },
                 ...labels
@@ -65,9 +65,9 @@ const walletsOptions = (data: IApiWallets[]) => {
             axisLabel: {
                 formatter: (v) => {
                     if(v >= 1000000)
-                        return v/1000000 + "M";
+                        return `${v/1000000  }M`;
                     if(v >= 1000)
-                        return v/1000 + "k"; 
+                        return `${v/1000  }k`; 
                 },
                 ...labels
             },
@@ -82,7 +82,7 @@ const walletsOptions = (data: IApiWallets[]) => {
         tooltip: {
             trigger: "axis",
         },
-    }
-}
+    };
+};
 
 export { walletsOptions };

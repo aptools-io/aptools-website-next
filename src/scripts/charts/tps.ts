@@ -1,11 +1,12 @@
 import { graphic } from "echarts";
+
 const tpsOptions = (data: IPoint[]) => {
     const xAxisArray = data.map(item => item.x);
     const yAxisArray = data.map(item => item.y) as number[];
     
     const labels = {
         textStyle: {
-            fontSize: 8,
+            fontSize: 10,
             fontWeight: 400,
             color: "#8b9dc3"
         }
@@ -59,6 +60,6 @@ const tpsOptions = (data: IPoint[]) => {
             trigger: "axis",
         },
     };
-}
+};
 
 export { tpsOptions };

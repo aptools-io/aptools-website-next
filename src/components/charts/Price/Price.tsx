@@ -13,12 +13,12 @@ import { DifferenceArrowDouble } from "src/components/svg/index";
 
 // Styles
 import classNames from "classnames";
+import { formatNumber } from "src/scripts/util/numbers";
+import { concatString } from "src/scripts/util/strings";
 import styles from "./Price.module.scss";
 
 // Other
 import chartOptions from "./data/chartOptions";
-import { formatNumber } from "src/scripts/util/numbers";
-import { concatString } from "src/scripts/util/strings";
 
 
 const Price: React.FC<IComponent> = ({
@@ -38,7 +38,7 @@ const Price: React.FC<IComponent> = ({
         low = 0, 
         low_btc = 0, 
         prices = [] 
-    } = low_high_price?.[range] || {}
+    } = low_high_price?.[range] || {};
 
 
     const classes = classNames([
@@ -47,16 +47,16 @@ const Price: React.FC<IComponent> = ({
         className
     ]);
 
-    if(!blockchain_info || !low_high_price) return <></>
+    if(!blockchain_info || !low_high_price) return <></>;
 
     return (
         <div className={classes}>
             <strong className={"chart__title normal"}>
                 <span>Price</span>
                 <span className={"chart__switcher"}>
-                    <button className={classNames([ { ["active"]: range === "24h" } ])} onClick={() => setRange("24h")}>24H</button>
-                    <button className={classNames([ { ["active"]: range === "7d" } ])} onClick={() => setRange("7d")}>7D</button>
-                    <button className={classNames([ { ["active"]: range === "14d" } ])} onClick={() => setRange("14d")}>14D</button>
+                    <button className={classNames([ { "active": range === "24h" } ])} onClick={() => setRange("24h")}>24H</button>
+                    <button className={classNames([ { "active": range === "7d" } ])} onClick={() => setRange("7d")}>7D</button>
+                    <button className={classNames([ { "active": range === "14d" } ])} onClick={() => setRange("14d")}>14D</button>
                 </span>
             </strong>
             <div className={styles["price__inner"]}>

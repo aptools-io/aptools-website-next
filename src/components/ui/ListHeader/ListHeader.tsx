@@ -2,11 +2,11 @@
 import React, { Children, useState, useEffect }  from "react";
 
 // Styles
-import styles from "./ListHeader.module.scss";
 import classNames from "classnames";
 
 // Components
 import { SortArrowDown, SortArrowUp } from "src/components/svg";
+import styles from "./ListHeader.module.scss";
 
 const ListHeader: React.ForwardRefRenderFunction<any, IListHeaderProps> = ({
     columnNames = [],
@@ -22,20 +22,19 @@ const ListHeader: React.ForwardRefRenderFunction<any, IListHeaderProps> = ({
     const [sorting, setSorting] = useState({
         "key": defaultSortIndex > -1 ? columnNames?.[defaultSortIndex]?.key : columnNames?.[0]?.key,
         "sort": defaultSortType
-    })
+    });
     const [sortedData, setSortedData] = useState(data.length ? data.map((item, index) => { 
-        if(typeof item === 'object' && !Array.isArray(item))  return { ...item, "_id": index };
+        if(typeof item === "object" && !Array.isArray(item))  return { ...item, "_id": index };
         return item;
     }) : []);
     
     const classes = classNames([
         styles["list-header"],
-        { [styles["hide-mobile"]]: child.props.adoptMobile },
         className
     ]);
 
     const style = {
-        "--list-columns": columns.join(' ')
+        "--list-columns": columns.join(" ")
     } as React.CSSProperties;
 
     
@@ -47,8 +46,8 @@ const ListHeader: React.ForwardRefRenderFunction<any, IListHeaderProps> = ({
         setSorting({
             "key": key,
             "sort": sortType
-        })
-    }
+        });
+    };
 
     const sort = (a, b) => {
         const x = a?.[sorting.key];
@@ -57,7 +56,7 @@ const ListHeader: React.ForwardRefRenderFunction<any, IListHeaderProps> = ({
         if(!Number.isNaN(Number(x)) && !Number.isNaN(Number(y))) return Number(x) - Number(y);
         if(typeof x === "string" && typeof y === "string") return x.localeCompare(y);
         return x - y;
-    }
+    };
 
     useEffect(() => {
         const newArray = [...sortedData];
@@ -65,25 +64,34 @@ const ListHeader: React.ForwardRefRenderFunction<any, IListHeaderProps> = ({
         sorted = sorting.sort === "desc" ? sorted.reverse() : sorted;
 
         setSortedData(sorted);
-    }, [data, sorting]) 
+    }, [data, sorting]); 
 
     const renderColumns = (item: IColumnName, index) => {
+        if(item.headRemove) return <></>
         return (
-            <button 
-                className={
-                    classNames([
+            <>
+                {item.headHideMobile && 
+                    <div className={classNames([
                         styles["list-header__item"], 
-                        { [styles["right"]]: item.right },
-                        { [styles["sorted"]]: item.key === sorting.key }
-                    ])}
-                key={index}
-                data-sort={defaultSortType}
-                onClick={(e) => handleSort(e, item.key)}
-            >
-                {item.value} <div className={styles["sort"]}><SortArrowUp /> <SortArrowDown /></div>
-            </button>
-        )
-    }
+                        styles["hide-mobile"]
+                    ])}/>
+                }
+                <button 
+                    className={
+                        classNames([
+                            styles["list-header__item"], 
+                            { [styles["right"]]: item.right },
+                            { [styles["sorted"]]: item.key === sorting.key }
+                        ])}
+                    key={index}
+                    data-sort={defaultSortType}
+                    onClick={(e) => handleSort(e, item.key)}
+                >
+                    {item.value} <div className={styles["sort"]}><SortArrowUp /> <SortArrowDown /></div>
+                </button>
+            </>
+        );
+    };
     return (
         <div ref={ref} style={style} className={classes}>
             <ul className={styles["list-header__items"]}>

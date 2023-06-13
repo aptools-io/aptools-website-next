@@ -8,9 +8,9 @@ import useTranslation from "next-translate/useTranslation";
 import aptos from "src/assets/images/png/aptos.png";
 
 // Styles
-import styles from "./AptosBanner.module.scss";
 import classNames from "classnames";
 import { AptLogoBanner, Socials } from "src/components/ui";
+import styles from "./AptosBanner.module.scss";
 
 
 
@@ -18,7 +18,7 @@ import { AptLogoBanner, Socials } from "src/components/ui";
 const AptosBanner: React.FC<IComponent> = ({
     className 
 }) => {
-    const { t } = useTranslation("common")
+    const { t } = useTranslation("common");
     const classes = classNames([
         styles["aptos-banner"],
         className

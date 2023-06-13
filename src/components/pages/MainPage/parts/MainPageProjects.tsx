@@ -3,12 +3,12 @@ import React from "react";
 
 // Adaptive
 import useWindowSize from "src/scripts/hooks/useWindowSize";
-import media from "../data/adaptive";
 
 // Components
 import { Grid, GridWrapper } from "src/components/general";
 import { CategoryTitle } from "src/components/ui";
 import { Projects } from "src/components/containers";
+import media from "../data/adaptive";
 
 
 const MainPageProjects: React.FC = () => {

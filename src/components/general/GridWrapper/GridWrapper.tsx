@@ -5,8 +5,8 @@ import React from "react";
 import { COLUMNS_COUNT } from "src/scripts/consts/grid";
 
 // Styles
-import styles from "./GridWrapper.module.scss";
 import classNames from "classnames";
+import styles from "./GridWrapper.module.scss";
 
 const GridWrapper: React.FC<IGridWrapperProps> = ({ grid = {}, gridWidth = null, className, children }) => {
     const { start = 1, end = COLUMNS_COUNT } = grid;

@@ -3,8 +3,9 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        &::before {
-            content: "";
+
+        &:before {
+            content: '';
             position: relative;
             display: block;
             width: 14px;
@@ -14,30 +15,38 @@
             background-position: center;
             background-size: contain;
         }
+
         &.green {
             color: var(--aptools-color-emphasis-c2);
-            &::before {
-                background-image: url("/static/images/svg/transaction_checkout.svg");
+
+            &:before {
+                background-image: url('/static/images/svg/transaction_checkout.svg');
             }
         }
+
         &.red {
             color: var(--aptools-color-emphasis-c4);
-            &::before {
-                background-image: url("/static/images/svg/transaction_block.svg");
+
+            &:before {
+                background-image: url('/static/images/svg/transaction_block.svg');
             }
         }
+
         &.blue {
             color: var(--aptools-color-emphasis-c1);
-            &::before {
-                background-image: url("/static/images/svg/transaction_transaction.svg");
+
+            &:before {
+                background-image: url('/static/images/svg/transaction_transaction.svg');
             }
         }
     }
+
     &__success {
         padding: 2px 6px;
         background-color: var(--aptools-color-lights-success);
         color: var(--aptools-color-emphasis-c2);
         border-radius: 4px;
+
         &.error {
             background-color: var(--aptools-color-lights-danger);
             color: var(--aptools-color-emphasis-c4);

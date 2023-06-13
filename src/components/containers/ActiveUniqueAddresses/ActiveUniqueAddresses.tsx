@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from "react";
 
 // Styles
-import styles from "./ActiveUniqueAddresses.module.scss";
 import classNames from "classnames";
 
 // Redux
@@ -14,6 +13,7 @@ import { formatNumber } from "src/scripts/util/numbers";
 import { concatString } from "src/scripts/util/strings";
 
 import { Grid, GridWrapper } from "src/components/general";
+import styles from "./ActiveUniqueAddresses.module.scss";
 
 const Stats: React.FC<{ "time": string }> = ({ time = "0" }) => {
     const { data: aptosStats } = useSelector((state: IRootState) => state.statsAptos);
@@ -45,8 +45,8 @@ const Stats: React.FC<{ "time": string }> = ({ time = "0" }) => {
                 <span className={classNames([styles["info"], styles["bold"]])}>{slot_time_h}<span>1h average</span></span>
             </div>
         </div>
-    )
-}
+    );
+};
 
 const ActiveUniqueAddresses: React.FC<IComponent> = ({
     className 

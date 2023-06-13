@@ -7,10 +7,10 @@ import { IRootState } from "src/scripts/redux/store";
 
 // Styles
 import classNames from "classnames";
+import { List, ListHeader } from "src/components/ui";
 import styles from "./TopDexesList.module.scss";
 
 // Components
-import { List, ListHeader } from "src/components/ui";
 
 // Options
 import { columnNames, columns } from "./data/listOptions";
@@ -28,8 +28,8 @@ const TopDexesList: React.FC<IComponent> = ({
     if(!addressesData || !transactionsData) return <></>;
 
     const combinedData = transactionsData.map(x => {
-        return { ...x, combined: addressesData.find(y => y.contract === x.contract) }
-    })
+        return { ...x, combined: addressesData.find(y => y.contract === x.contract) };
+    });
 
     return (
         <div className={classes}>

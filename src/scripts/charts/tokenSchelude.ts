@@ -3,7 +3,7 @@ const tokenScheludeOptions = (data: IApiTokenSchelude[]) => {
 
     const labels = {
         textStyle: {
-            fontSize: 8,
+            fontSize: 10,
             fontWeight: 400,
             color: "#9B9B9B"
         }
@@ -23,11 +23,11 @@ const tokenScheludeOptions = (data: IApiTokenSchelude[]) => {
             borderColor: "auto"
         },
         textStyle: {
-            fontSize: 8,
+            fontSize: 10,
             fontWeight: 400,
             color: "#9B9B9B"
         }
-    }
+    };
 
     const series = data.map(dex => {
         const yAxisArray = dex.chart.map(point => point.y) as number[];
@@ -43,8 +43,8 @@ const tokenScheludeOptions = (data: IApiTokenSchelude[]) => {
             areaStyle: {
                 opacity: 0,
             },
-        }
-    })
+        };
+    });
     
     return {
         grid: { top: 50, left: 40, right: 40, bottom: 20 },
@@ -55,7 +55,7 @@ const tokenScheludeOptions = (data: IApiTokenSchelude[]) => {
             data: xAxisArray,
             axisLabel: {
                 formatter: (v) => {
-                    const formatter = new Intl.DateTimeFormat('en', { month: 'short' });
+                    const formatter = new Intl.DateTimeFormat("en", { month: "short" });
                     return `${formatter.format(new Date(v))}'${new Date(v).getFullYear() % 100}`;
                 },
                 ...labels
@@ -66,9 +66,9 @@ const tokenScheludeOptions = (data: IApiTokenSchelude[]) => {
             axisLabel: {
                 formatter: (v) => {
                     if(v >= 1000000)
-                        return v/1000000 + "M";
+                        return `${v/1000000  }M`;
                     if(v >= 1000)
-                        return v/1000 + "k"; 
+                        return `${v/1000  }k`; 
                 },
                 ...labels
             },
@@ -84,7 +84,7 @@ const tokenScheludeOptions = (data: IApiTokenSchelude[]) => {
         tooltip: {
             trigger: "axis",
         },
-    }
-}
+    };
+};
 
 export { tokenScheludeOptions };

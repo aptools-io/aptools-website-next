@@ -7,13 +7,12 @@ import { IRootState } from "src/scripts/redux/store";
 
 // Styles
 import classNames from "classnames";
+import { List, ListHeader, Tabs } from "src/components/ui";
 import styles from "./MarketsList.module.scss";
 
-// Components
-import { List, ListHeader, Tabs } from "src/components/ui";
-
-// Options
-import { columnNames, columns } from "./data/listOptions";
+// Adaptive
+import useWindowSize from "src/scripts/hooks/useWindowSize";
+import media from "./data/adaptive";
 
 const MarketsList: React.FC<IComponent> = ({
     className 
@@ -21,13 +20,16 @@ const MarketsList: React.FC<IComponent> = ({
     const { data: generalData } = useSelector((state: IRootState) => state.statsGeneral);
     const { markets = [] } = generalData || {};
 
+    const { width } = useWindowSize();
+    const { columnNames = null, columns = null } = media(width) || {};
+
     const classes = classNames([
         styles["market"],
         "list",
         className
     ]);
     
-    if(!markets) return <></>;
+    if(!markets || !width || !columns || !columnNames) return <></>;
 
     return (
         <div className={classes}>

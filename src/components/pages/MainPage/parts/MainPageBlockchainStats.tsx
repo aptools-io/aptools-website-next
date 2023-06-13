@@ -3,13 +3,13 @@ import React from "react";
 
 // Adaptive
 import useWindowSize from "src/scripts/hooks/useWindowSize";
-import media from "../data/adaptive";
 
 // Components
 import { Grid, GridWrapper } from "src/components/general";
 import { CategoryTitle, Plate, Title } from "src/components/ui";
 import { Price } from "src/components/charts";
 import { StatsActiveUsers, StatsTotalCenter, StatsTotalRight, StatsTransactions } from "src/components/containers";
+import media from "../data/adaptive";
 
 
 const MainPageBlockchainStats: React.FC = () => {

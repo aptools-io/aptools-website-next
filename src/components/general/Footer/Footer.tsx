@@ -2,11 +2,11 @@
 import React from "react";
 
 // Styles
-import styles from "./Footer.module.scss";
 import classNames from "classnames";
 
 // Components
 import { Socials } from "src/components/ui";
+import styles from "./Footer.module.scss";
 
 const Footer: React.FC<IComponent> = ({ 
     className

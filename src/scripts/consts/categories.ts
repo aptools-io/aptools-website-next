@@ -12,5 +12,5 @@ const categories = [
     "Explorers",
     "Security",
     "Stablecoins"
-]
+];
 export default categories;

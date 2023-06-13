@@ -1,10 +1,13 @@
-@import "/src/styles//static/general/variables.static"; 
-@import "/src/styles//static/general/mixins";
+@import '/src/styles//static/general/variables.static';
+@import '/src/styles//static/general/mixins';
 
 .nav-bar-item {
     $self: &;
 
-    &:hover, &.active {
+    &:hover,
+    &.active {
+        background-color: rgba(var(--aptools-color-emphasis-c1--rgb), .3);
+        transition: background-color var(--nav-bar-transition-speed-1) ease;
         #{$self}__title {
             color: var(--aptools-color-main-primary);
         }
@@ -14,7 +17,8 @@
             }
         }
     }
-    @include mediaWMax("TABLET") {  
+
+    @include mediaWMax('TABLET') {
         #{$self}__icon {
             min-width: 0%;
 
@@ -23,6 +27,7 @@
                 transform: translate(0%, -50%);
             }
         }
+
         & > span {
             width: 100%;
         }
@@ -39,6 +44,7 @@
             }
         }
     }
+
     &.expanded {
         #{$self}__icon {
             min-width: 0%;
@@ -104,6 +110,7 @@
 
         display: flex;
         padding: 7px 0 7px var(--nav-bar-v-padding);
+
         //transition: padding var(--nav-bar-transition-speed-1) ease;
 
         svg {

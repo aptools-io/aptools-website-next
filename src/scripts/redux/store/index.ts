@@ -17,7 +17,7 @@ const store = configureStore({
         statsAptos: statsAptosSlice,
         statsGeneral: statsGeneralSlice,
         statsProjects: statsProjectsSlice,
-        statsTransactions: statsTransactions,
+        statsTransactions,
         statsDexesVolumes: statsDexesVolumesSlice,
         statsAddressesTransactions: statsAddressesTransactionsSlice
     },

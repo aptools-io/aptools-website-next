@@ -2,18 +2,17 @@
 import React, { } from "react";
 
 // Styles
-import styles from "./ProjectsList.module.scss";
 import { Grid, GridWrapper } from "src/components/general";
 import { ActiveLink, Plate, Tabs } from "src/components/ui";
 import { ArrowMore } from "src/components/svg";
+import styles from "./ProjectsList.module.scss";
 
 
 // Data
-import socials from "./data/socials";
+import socials from "../Projects/data/socials";
 
 
 const ProjectsList: React.FC<{ data?: IApiProject[], mediaData: any }> = ({ data, mediaData }) => {
-
     
     const renderSocial = (item: IApiProjectSocials, index: number) => (
         <ActiveLink key={index} className={styles["projects-list__item-social-wrapper"]} href={item.link}>
@@ -21,7 +20,7 @@ const ProjectsList: React.FC<{ data?: IApiProject[], mediaData: any }> = ({ data
                 {socials[item.name] || <>x</>}
             </a>
         </ActiveLink>
-    )
+    );
 
     const renderItem = (item: IApiProject, index: number) => {
         const lastItem = data.length > mediaData.projectsCount ? mediaData.projectsCount : data.length;
@@ -55,14 +54,14 @@ const ProjectsList: React.FC<{ data?: IApiProject[], mediaData: any }> = ({ data
                     </div>
                 </GridWrapper>}
             </React.Fragment>
-        )
-    }
+        );
+    };
 
     return (
         <Grid columns={mediaData.projectWrapper} className={styles["projects-list__items"]}>
             {data?.map(renderItem).slice(0, mediaData.projectsCount)}
         </Grid>
-    )
-}
+    );
+};
 
 export default ProjectsList;

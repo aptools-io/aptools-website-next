@@ -1,7 +1,7 @@
 const walletsBarOptions = (data: IApiWallets) => {
     const labels = {
         textStyle: {
-            fontSize: 8,
+            fontSize: 10,
             fontWeight: 400,
             color: "#9B9B9B"
         }
@@ -9,11 +9,11 @@ const walletsBarOptions = (data: IApiWallets) => {
     return {
         grid: { top: 30, left: 40, right: 40, bottom: 20 },
         xAxis: {
-            type: 'category',
+            type: "category",
             data: data.chart.map(x => x.x),
             axisLabel: {
                 formatter: (v) => {
-                    const formatter = new Intl.DateTimeFormat('en', { month: 'short' });
+                    const formatter = new Intl.DateTimeFormat("en", { month: "short" });
                     return `${formatter.format(new Date(v))}'${new Date(v).getFullYear() % 100}`;
                 },
             },
@@ -24,9 +24,9 @@ const walletsBarOptions = (data: IApiWallets) => {
             axisLabel: {
                 formatter: (v) => {
                     if(v >= 1000000)
-                        return v/1000000 + "M";
+                        return `${v/1000000  }M`;
                     if(v >= 1000)
-                        return v/1000 + "k"; 
+                        return `${v/1000  }k`; 
                 },
             },
             splitLine: {
@@ -39,16 +39,16 @@ const walletsBarOptions = (data: IApiWallets) => {
         series: [
             {
                 data: data.chart.map(x => x.y),
-                type: 'bar',
+                type: "bar",
                 itemStyle: {
-                    color: '#60C6A8'
+                    color: "#60C6A8"
                 }
             }
         ],
         tooltip: {
             trigger: "axis",
         },
-    }
-}
+    };
+};
 
 export { walletsBarOptions };

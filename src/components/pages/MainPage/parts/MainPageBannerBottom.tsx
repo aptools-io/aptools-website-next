@@ -4,13 +4,13 @@ import React from "react";
 
 // Adaptive
 import useWindowSize from "src/scripts/hooks/useWindowSize";
-import media from "../data/adaptive";
 
 // Components
 import { Grid, GridWrapper } from "src/components/general";
 import { Plate, Skeleton } from "src/components/ui";
 import { StatsAptos, StatsBlockchainActivity, StatsValidator } from "src/components/containers";
 import { StatsTransactions } from "src/components/charts";
+import media from "../data/adaptive";
 
 const MainPageBannerBottom: React.FC = () => {
     const { t } = useTranslation("common");

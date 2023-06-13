@@ -5,8 +5,8 @@ import React from "react";
 import { COLUMNS_COUNT, COLUMNS_ROWS_GAP } from "src/scripts/consts/grid";
 
 // Styles
-import styles from "./Grid.module.scss";
 import classNames from "classnames";
+import styles from "./Grid.module.scss";
 
 const Grid: React.FC<IGridProps> = ({ 
     columns = COLUMNS_COUNT, 

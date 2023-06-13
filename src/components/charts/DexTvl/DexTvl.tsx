@@ -27,7 +27,7 @@ const DexTvl: React.FC<IComponent> = ({
         className
     ]);
 
-    if(!dex_tvl) return <></>
+    if(!dex_tvl) return <></>;
 
     return (
         <div className={classes}>

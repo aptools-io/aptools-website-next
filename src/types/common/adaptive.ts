@@ -9,7 +9,7 @@ enum EBreakpoints {
 }
 
 type TAdaptive = {
-    [key in EBreakpoints]?: number | string | React.ReactNode;
+    [key in EBreakpoints]?: any;
 };
 
 export { EBreakpoints, type TAdaptive };

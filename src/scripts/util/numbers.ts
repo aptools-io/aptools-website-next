@@ -3,8 +3,8 @@ const formatDecimal = (decimal: string) => {
     if(decimal.length > 2) return decimal.slice(0, 2);
     if(decimal.length == 2) return `${decimal}`;
     if(decimal.length == 1) return `${decimal.slice(0, 1)}0`;
-    return '00';
-}
+    return "00";
+};
 
 const formatNumber = (number: string | number) => {
     if(Number.isNaN(Number(number))) return number;
@@ -33,6 +33,6 @@ const setSign = (number: string | number) => {
     if(minus > -1) return number;
     if(Number(number) !== 0) return `+${number}`;
     return number;
-}
+};
 
 export { formatNumber, formatDecimal, setSign };

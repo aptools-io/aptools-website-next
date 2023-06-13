@@ -3,17 +3,20 @@
         display: flex;
         justify-content: space-between;
         margin-bottom: 9px;
+
         &-stats {
             display: flex;
             flex-direction: column;
             align-items: flex-end;
             text-align: right;
+
             .title {
                 font-weight: 700;
                 font-size: 22px;
                 line-height: 29px;
                 display: flex;
                 align-items: center;
+
                 .additive {
                     font-weight: 500;
                     font-size: 10px;
@@ -23,14 +26,17 @@
                     background-color: var(--aptools-color-emphasis-c2);
                     margin-left: 8px;
                     border-radius: 4px;
+
                     &.positive {
                         background-color: var(--aptools-color-emphasis-c2);
                     }
+
                     &.negative {
                         background-color: var(--aptools-color-emphasis-c4);
                     }
                 }
             }
+
             .info {
                 font-weight: 400;
                 font-size: 14px;
@@ -38,6 +44,7 @@
                 color: var(--aptools-color-grey-c1);
                 display: flex;
                 align-items: center;
+
                 .additive {
                     font-weight: 500;
                     font-size: 10px;
@@ -46,28 +53,34 @@
                     margin-left: 8px;
                     display: flex;
                     align-items: center;
+
                     &.positive {
                         color: var(--aptools-color-emphasis-c2);
                     }
+
                     &.negative {
                         color: var(--aptools-color-emphasis-c4);
                     }
                 }
             }
         }
+
         &-wrapper {
             display: flex;
             align-items: center;
         }
+
         &-image {
             max-width: 32px;
             min-width: 32px;
             min-height: 32px;
             max-height: 32px;
         }
+
         &-image + &-title {
             margin-left: 6px;
         }
+
         &-title {
             font-weight: 400;
             font-size: 20px;
@@ -80,15 +93,18 @@
             display: flex;
             justify-content: space-between;
             align-items: flex-end;
+
             &.emphasis {
                 padding: 8px 13px;
                 background-color: var(--aptools-color-emphasis-c1);
+
                 .title {
                     font-weight: 500;
                     font-size: 14px;
                     line-height: 130%;
                     color: var(--aptools-color-main-primary);
                 }
+
                 .info {
                     font-weight: 700;
                     font-size: 14px;
@@ -109,6 +125,7 @@
                 border-radius: 2px;
                 overflow: hidden;
                 position: relative;
+
                 &.white {
                     background-color: var(--aptools-color-grey-c5);
                 }
@@ -136,8 +153,9 @@
                 font-size: 10px;
                 line-height: 15px;
                 color: var(--aptools-color-grey-c1);
+
                 &.black {
-                    color:  var(--aptools-color-main-secondary);
+                    color: var(--aptools-color-main-secondary);
                 }
 
                 span {
@@ -153,6 +171,7 @@
 
                 span {
                     color: var(--aptools-color-emphasis-c1);
+
                     &.min {
                         margin-left: 4px;
                         font-weight: 400;

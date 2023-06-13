@@ -9,10 +9,10 @@ import { useDispatch } from "react-redux";
 import { setLoading } from "src/scripts/redux/slices/loadingSlice";
 
 // Styles
+import setRoute from "src/scripts/util/setRoute";
 import styles from "./ActiveLink.module.scss";
 
 // Util
-import setRoute from "src/scripts/util/setRoute";
 
 
 
@@ -36,7 +36,7 @@ const ActiveLink = ({ children, ...props }) => {
             props.href, 
             () => dispatch(setLoading({ start: true, end: false }))
         );
-    }
+    };
    
     return <span className={styles["active-link__link"]}>
         {React.cloneElement(child, 

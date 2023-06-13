@@ -87,7 +87,7 @@ const TokenSupplySchedule: React.FC<IComponent> = ({
                 {x: "2022-10-25", y: 46},
              ]
         },
-    ]
+    ];
 
     /* if(!dex_volumes) return <></> */
 

@@ -7,30 +7,30 @@ import aptLogoLines from "public/static/images/svg/apt_logo_lines.svg";
 
 // Styles
 import classNames from "classnames";
+import { RendererType } from "lottie-web";
+import { useLottie } from "lottie-react";
+import useWindowSize from "src/scripts/hooks/useWindowSize";
 import styles from "./AptLogoBanner.module.scss";
 
 // Lottie
-import { RendererType } from "lottie-web";
-import { useLottie } from "lottie-react";
-import dotsData from "./data/dots.json"
-import linesData from "./data/lines.json"
+import dotsData from "./data/dots.json";
+import linesData from "./data/lines.json";
 
 // Hooks
-import useWindowSize from "src/scripts/hooks/useWindowSize";
 
 const options = {
-    renderer: 'html' as RendererType,
+    renderer: "html" as RendererType,
     loop: true,
     autoplay: true,
 };
 
 const LinesComponent: React.FC<{}> = () => {
     return useLottie({...options, animationData: linesData}, { height: "100%" }).View;
-}
+};
 
 const DotsComponent: React.FC<{}> = () => {
     return useLottie({...options, animationData: dotsData}, { height: "100%" }).View;
-}
+};
 
 const AptLogoBanner: React.FC<IAptLogoBannerProps> = ({ 
     center = true,
@@ -43,7 +43,7 @@ const AptLogoBanner: React.FC<IAptLogoBannerProps> = ({
     ]);
 
     const options = {
-        renderer: 'html' as RendererType,
+        renderer: "html" as RendererType,
         loop: true,
         autoplay: true,
     };

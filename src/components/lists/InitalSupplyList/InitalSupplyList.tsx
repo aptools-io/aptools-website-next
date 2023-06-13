@@ -7,10 +7,10 @@ import { IRootState } from "src/scripts/redux/store";
 
 // Styles
 import classNames from "classnames";
+import { List, ListHeader } from "src/components/ui";
 import styles from "./InitalSupplyList.module.scss";
 
 // Components
-import { List, ListHeader } from "src/components/ui";
 
 // Options
 import { columnNames, columns } from "./data/listOptions";
@@ -48,7 +48,7 @@ const InitalSupplyList: React.FC<IComponent> = ({
             "percent": 13.48,
             "inital": 134782640.233
         },
-    ]
+    ];
 
     return (
         <div className={classes}>

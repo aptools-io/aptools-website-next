@@ -6,14 +6,14 @@ import { useSelector } from "react-redux";
 import { IRootState } from "src/scripts/redux/store";
 
 // Styles
-import styles from "./Projects.module.scss";
 import classNames from "classnames";
 import { Tabs } from "src/components/ui";
+import useWindowSize from "src/scripts/hooks/useWindowSize";
+import styles from "./Projects.module.scss";
 
 // Components
 import ProjectsList from "../ProjectsList/ProjectsList";
-import media from "../ProjectsList/data/adaptive";
-import useWindowSize from "src/scripts/hooks/useWindowSize";
+import media from "./data/adaptive";
 
 
 const Projects: React.FC<IComponent> = ({
@@ -28,7 +28,7 @@ const Projects: React.FC<IComponent> = ({
         className
     ]);
 
-    if(!projects) return <></>
+    if(!projects) return <></>;
 
     return (
         <div className={classes}>

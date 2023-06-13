@@ -21,9 +21,9 @@ const columnNames = [
         "formatter": (v) => `${formatNumber(v)}`,
         "defaultSort": true,
     }
-]
+];
 
 // Columns
-const columns = ['40%', '35%', '25%'];
+const columns = ["40%", "35%", "25%"];
 
 export { columnNames, columns };

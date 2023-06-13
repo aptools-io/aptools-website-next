@@ -15,7 +15,8 @@ const columnNames = [
         "value": "Address",
         "formatter": (v) => `${shortenHashString(v)}`,
         "link": "/accounts",
-        "mainMobile": true
+        "mainMobile": true,
+        "underline": true
     },
     {
         "key": "total_txn",
@@ -29,9 +30,9 @@ const columnNames = [
         "right": true,
         "formatter": (v) => `${formatNumber(v)}%`
     },
-]
+];
 
 // Columns
-const columns = ['5%', '55%', '20%', '20%'];
+const columns = ["5%", "55%", "20%", "20%"];
 
 export { columnNames, columns };

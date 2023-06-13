@@ -1,12 +1,13 @@
 import { formatNumber, setSign } from "src/scripts/util/numbers";
 
 // Convert
-const columnNames = [
+const columnNamesDesktop = [
     {
         "key": "name",
-        "value": "AMM",
+        "value": "Token",
         "link": "/projects",
-        "mainMobile": true
+        "mainMobile": true,
+        "underline": true
     },
     {
         "key": "liquidity",
@@ -28,9 +29,9 @@ const columnNames = [
         "formatter": (v) => `${setSign(formatNumber(v))}%`,
         "colorize": true
     }
-]
+];
 
 // Columns
-const columns = ['25%', '25%', '25%', '25%'];
+const columnsDesktop = ["25%", "25%", "25%", "25%"];
 
-export { columnNames, columns };
+export { columnNamesDesktop, columnsDesktop };

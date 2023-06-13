@@ -2,7 +2,6 @@
 import React from "react";
 
 // Styles
-import styles from "./StatsTotalCenter.module.scss";
 import classNames from "classnames";
 
 // Redux
@@ -12,6 +11,7 @@ import { IRootState } from "src/scripts/redux/store";
 // Util
 import { formatNumber } from "src/scripts/util/numbers";
 import { concatString } from "src/scripts/util/strings";
+import styles from "./StatsTotalCenter.module.scss";
 
 
 const StatsTotalCenter: React.FC<IComponent> = ({

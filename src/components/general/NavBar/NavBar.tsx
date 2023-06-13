@@ -7,10 +7,10 @@ import { NavBarItem, ActiveLink } from "src/components/ui";
 
 // Styles
 import classNames from "classnames";
+import aptools from "public/static/images/svg/aptools.svg";
 import styles from "./NavBar.module.scss";
 
 // Public
-import aptools from "public/static/images/svg/aptools.svg";
 
 const NavBar: React.FC<INavBarProps> = ({ 
     data = [] 
@@ -26,7 +26,7 @@ const NavBar: React.FC<INavBarProps> = ({
 
     const handleMenu = () => {
         setOpened(!opened);
-    }
+    };
 
     return (
         <div 

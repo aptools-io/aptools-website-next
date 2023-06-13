@@ -40,11 +40,11 @@ const Home = (data: IApiProps) => {
         dispatch(setDexesVolumesStatsData(data.dexes_volumes || null));
         dispatch(setAddressesData(data.contract_addresses || null));
         dispatch(setTransactionsData(data.contract_transactions || null));
-        dispatch(setCoinTransactions(data.transactions) || null)
-    }, [])
+        dispatch(setCoinTransactions(data.transactions) || null);
+    }, []);
 
     return <MainPage />;
-} 
+}; 
 export default Home;
 
 export async function getServerSideProps(context) {
