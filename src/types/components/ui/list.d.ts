@@ -36,7 +36,7 @@ interface IColumnName {
     link?: string;
     coinImage?: string;
     description?: string;
-    copy?: boolean;
+    copy?: string;
     main?: boolean;
     under?: IColumnName[];
     formatter?: (v: any) => string;

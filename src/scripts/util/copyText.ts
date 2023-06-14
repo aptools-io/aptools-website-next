@@ -22,7 +22,7 @@ export function fallbackCopyTextToClipboard(text: string) {
     document.body.removeChild(textArea);
 }
 
-export function copyTextToClipboard (text: string) {
+export function copyText(text: string) {
     if (!navigator.clipboard) {
         fallbackCopyTextToClipboard(text);
         return;

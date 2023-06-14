@@ -70,9 +70,6 @@ const Tabs: React.ForwardRefRenderFunction<any, ITabsProps> = ({
                                 slidesPerView={"auto"}
                                
                                 onBeforeInit={(swiper) =>{
-                                    /* swiper.params.navigation["prevEl"] = navigationPrevRef.current;
-                                    swiper.params.navigation["nextEl"] = navigationNextRef.current; */
-                                    console.log(swiper.params.navigation)
                                     swiper.params.navigation["disabledClass"] = styles["tabs__nav--disabled"];
                                     swiper.params.navigation["lockClass"] = styles["tabs__nav--lock"];
                                     

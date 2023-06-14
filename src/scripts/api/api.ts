@@ -20,7 +20,7 @@ export class Api {
                 ...(body && { body })
             };
             const result: Response = await fetch(`${this.base}${url}${this.tokenString}`, init);
-            return result.json();
+            return result;
         }
         catch(error) {
             return error;
@@ -32,7 +32,15 @@ export class Api {
     };
 
     get = async (url: string, headers: HeadersInit = {}): Promise<Response> => { 
-        return this.fetch("GET", url, headers);
+        return this.fetch("GET", url, headers).then(this.handleResponse);
     };
+
+    handleResponse = (response) => {
+        if(response.status !== 201 && response.status !== 200 && response.status !== 204)
+            return null;
+
+        return response.json();
+        
+    }
 }
 

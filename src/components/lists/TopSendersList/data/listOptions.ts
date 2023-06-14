@@ -11,12 +11,17 @@ const columnNames = [
         "hideMobile": true
     },
     {
+        "copy": "address",
+        "value": "",
+        "removeHead": true
+    },
+    {
         "key": "address",
         "value": "Address",
         "formatter": (v) => `${shortenHashString(v)}`,
         "link": "/accounts",
         "mainMobile": true,
-        "underline": true
+        "underline": true,
     },
     {
         "key": "total_txn",
@@ -33,6 +38,6 @@ const columnNames = [
 ];
 
 // Columns
-const columns = ["10%", "50%", "20%", "20%"];
+const columns = ["10%", "23px", "45%", "20%", "20%"];
 
 export { columnNames, columns };

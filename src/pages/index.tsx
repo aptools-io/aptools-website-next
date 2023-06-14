@@ -48,7 +48,7 @@ const Home = (data: IApiProps) => {
 export default Home;
 
 export async function getServerSideProps(context) {
-    const projectsUnfiltered = await projects.getData();
+    const projectsUnfiltered = await projects.getData() || []; 
     const { req } = context;
     return { props: {
         "headers": req.headers,
@@ -57,6 +57,6 @@ export async function getServerSideProps(context) {
         "contract_transactions": await contractTransactions.getData() || [],
         "dexes_volumes": await dexesVolumes.getData() || [],
         "projects": filtrateProjects(projectsUnfiltered, categories) || [],
-        "transactions": await transactions.getData(),
+        "transactions": await transactions.getData() || [],
     } };
 }

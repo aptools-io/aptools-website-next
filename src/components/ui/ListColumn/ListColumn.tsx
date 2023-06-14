@@ -10,6 +10,7 @@ import { DifferenceArrow, Copy, ArrowLeft } from "src/components/svg";
 
 // Util
 import { getDexImageFromApi } from "src/scripts/util/image";
+import { copyText } from "src/scripts/util/copyText";
 
 
 const ListColumn: React.FC<IListProps> = ({
@@ -53,7 +54,7 @@ const ListColumn: React.FC<IListProps> = ({
         "fontSize": fontSize || null,
         "gridColumn": span ? `${span} span` : null,
         "fontWeight": bold ? "500" : null,
-    }
+    } as React.CSSProperties;
 
     const combinedValues = row?.combined; 
 
@@ -120,11 +121,11 @@ const ListColumn: React.FC<IListProps> = ({
                         </div>
                     }
                     
-                    {/* {copy && 
-                        <button onClick={(e) => handleCopy(e, unformattedValue)} className={styles["list__column-copy"]}>
+                    {copy && 
+                        <button onClick={(e) => { copyText(row?.[copy]) }} className={styles["list-column__copy"]}>
                             <Copy/>
                         </button>
-                    } */}
+                    }
                 </div>
                 {under}
             </>

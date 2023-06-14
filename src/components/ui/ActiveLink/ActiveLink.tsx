@@ -30,6 +30,7 @@ const ActiveLink = ({ children, ...props }) => {
     
     const handleClick = (e: React.MouseEvent<HTMLElement>) => {
         e.preventDefault();
+        if((e.target  as HTMLElement).closest("button")) return;
         setRoute(
             router, 
             300, 

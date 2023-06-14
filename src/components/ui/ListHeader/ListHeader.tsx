@@ -68,6 +68,7 @@ const ListHeader: React.ForwardRefRenderFunction<any, IListHeaderProps> = ({
 
     const renderColumns = (item: IColumnName, index) => {
         if(item.headRemove) return <></>;
+        if(item.value === "") return <span></span>;
         return (
             <>
                 {item.headHideMobile && 
