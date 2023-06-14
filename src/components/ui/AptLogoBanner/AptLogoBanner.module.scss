@@ -31,9 +31,11 @@
         @include mediaWMax('TABLET') {
             width: 947px;
             height: 483px;
+            -webkit-mask-image: radial-gradient(circle, rgb(0 0 0 / 100%) 30%, rgb(0 0 0 / 0%) 40%);
             mask-image: radial-gradient(circle, rgb(0 0 0 / 100%) 30%, rgb(0 0 0 / 0%) 40%);
         }
 
+        -webkit-mask-image: radial-gradient(circle, rgb(0 0 0 / 100%) 40%, rgb(0 0 0 / 0%) 50%);
         mask-image: radial-gradient(circle, rgb(0 0 0 / 100%) 40%, rgb(0 0 0 / 0%) 50%);
     }
 }

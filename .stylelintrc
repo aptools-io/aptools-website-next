@@ -36,6 +36,8 @@
     "no-empty-source": null,
     "scss/at-mixin-pattern": null,
     "max-line-length": null,
-    "scss/at-function-pattern": null
+    "scss/at-function-pattern": null,
+    "length-zero-no-unit": null,
+    "property-no-vendor-prefix": null
   }
 }

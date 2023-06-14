@@ -19,10 +19,7 @@
         width: 100%;
 
         @include mediaWMax('TABLET') {
-            padding: calc(var(--layout-indent) + var(--nav-bar-height))
-                var(--layout-v-padding)
-                var(--layout-bottom-indent)
-                calc(var(--nav-bar-width) + var(--layout-v-padding));
+            padding: calc(var(--layout-indent) + var(--nav-bar-height)) var(--layout-v-padding) var(--layout-bottom-indent) calc(var(--nav-bar-width) + var(--layout-v-padding));
         }
     }
 }
