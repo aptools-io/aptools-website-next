@@ -11,9 +11,9 @@ const columnNames = [
         "hideMobile": true
     },
     {
+        "key": "",
         "copy": "address",
-        "value": "",
-        "removeHead": true
+        "value": ""
     },
     {
         "key": "address",
