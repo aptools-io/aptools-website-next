@@ -60,14 +60,14 @@ const ListHeader: React.ForwardRefRenderFunction<any, IListHeaderProps> = ({
 
     useEffect(() => {
         const newArray = [...sortedData];
-        let sorted = newArray.sort(sort);
+        let sorted = newArray.sort(sort)
         sorted = sorting.sort === "desc" ? sorted.reverse() : sorted;
 
-        setSortedData(sorted);
+        setSortedData([...sorted.map((x: any) => { return { ...x, "_sort": sorting.sort, "_count": sorted?.length || 0 } })]);
     }, [data, sorting]); 
 
     const renderColumns = (item: IColumnName, index) => {
-        if(item.headRemove) return <></>
+        if(item.headRemove) return <></>;
         return (
             <>
                 {item.headHideMobile && 

@@ -47,7 +47,7 @@ const tokenScheludeOptions = (data: IApiTokenSchelude[]) => {
     });
     
     return {
-        grid: { top: 50, left: 40, right: 40, bottom: 20 },
+        grid: { top: 50, left: 10, right: 10, bottom: 20 },
         
         xAxis: {
             type: "category",

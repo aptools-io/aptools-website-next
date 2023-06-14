@@ -5,10 +5,24 @@ interface IListHeaderProps extends IComponent {
 }
 
 interface IListProps extends IListHeaderProps {
-    adoptMobile?: boolean
+    adoptMobile?: boolean;
+    row?: combined;
+    rowIndex?: number;
+    column?: IColumnName;
+    columnIndex?: number;
+    under?: JSX.Element[]; 
+    valueGridReplace?: JSX.Element[];
+    inner?: boolean;
+    handleCollapse?: () => void;
+}
+
+interface IRowProps {
+    combined?: IRowProps[];
+    [key: string]: string & number & IRowProps;
 }
 
 interface IColumnName {
+    valueGridReplace?: IColumnName[];
     underline?: boolean;
     headRemove?: boolean;
     key: string;
@@ -25,9 +39,15 @@ interface IColumnName {
     copy?: boolean;
     main?: boolean;
     under?: IColumnName[];
-    valueGridReplace?: IColumnName[];
     formatter?: (v: any) => string;
     replacedFormatter?: (v: any) => string;
     hideMobile?: boolean;
     mainMobile?: boolean;
+    fontSize?: number;
+    span?: number;
+    bold?: boolean;
+    elementRemove?: boolean;
+    replacedKeyMobile?: string;
+    symbol?: string;
+    colorize?: boolean;
 }

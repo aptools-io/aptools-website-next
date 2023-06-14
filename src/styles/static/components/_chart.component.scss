@@ -1,6 +1,12 @@
 .chart {
     position: relative;
-
+    &__wrapper {
+        width: 100%;
+        height: 352px !important;
+        @include mediaWMax('MOBILE') {
+            height: 272px !important;
+        }
+    }
     &__bottom {
         width: 100%;
 

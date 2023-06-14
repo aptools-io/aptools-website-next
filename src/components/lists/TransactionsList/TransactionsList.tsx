@@ -18,6 +18,8 @@ import { setCoinTransactions } from "src/scripts/redux/slices/statsTransactionsS
 import { transactions } from "src/scripts/api/requests";
 import { columnNames, columns } from "./data/listOptions";
 import styles from "./TransactionsList.module.scss";
+import useWindowSize from "src/scripts/hooks/useWindowSize";
+import media from "./data/adaptive";
 
 const TransactionRealTime: React.FC<{ 
     currentPage: number, 
@@ -25,12 +27,16 @@ const TransactionRealTime: React.FC<{
 }> = ({ currentPage, setCurrentPage }) => {
     const { data: aptosStats } = useSelector((state: IRootState) => state.statsAptos);
     const { transactions: trans } = aptosStats || {};
-    if(!trans) return <></>;
+
+    const { width } = useWindowSize();
+    const { columnNames = null, columns = null } = media(width) || {};
+
+    if(!trans || !width || !columns || !columnNames) return <></>;
     return (
         <Paginator page={currentPage} perPage={10} total={trans[0]?.version} onChangePage={(page) => setCurrentPage(page)}>
             <ListHeader 
                 key={trans[0]?.version}
-                columnNames={columnNames} 
+                columnNames={columnNames as any} 
                 columns={columns} 
                 data={trans}
             >
@@ -48,7 +54,11 @@ const Transaction: React.FC<{
     const [total, setTotal] = useState(transactionsData?.[0]?.version || 0);
     const [currentInnerPage, setCurrentInnerPage] = useState(currentPage);
     const dispatch = useDispatch();
-    if(!transactionsData) return <></>;
+
+    const { width } = useWindowSize();
+    const { columnNames = null, columns = null } = media(width) || {};
+
+    if(!transactionsData || !width || !columns || !columnNames) return <></>;
 
     useEffect(() => {
         if(currentPage !== 1) {
@@ -71,7 +81,7 @@ const Transaction: React.FC<{
         <Paginator page={currentPage} perPage={10} total={total} onChangePage={(page) => setCurrentInnerPage(page)}>
             <ListHeader 
                 key={transactionsData[0]?.version}
-                columnNames={columnNames} 
+                columnNames={columnNames as any} 
                 columns={columns} 
                 data={transactionsData}
             >

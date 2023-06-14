@@ -33,7 +33,7 @@ const DexUniqueTransactions: React.FC<IComponent> = ({
         <div className={classes}>
             <strong className={"chart__title"}>DEX Unique Transactions</strong>
             <div className={"chart__inner"}>
-                <ReactECharts style={{height: "352px", width: "100%"}} theme={""} option={chartOptions(daily_contract_transactions)} />
+                <ReactECharts className={"chart__wrapper"} theme={""} option={chartOptions(daily_contract_transactions)} />
             </div>
         </div>
     );

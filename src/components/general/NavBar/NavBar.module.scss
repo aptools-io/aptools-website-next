@@ -42,6 +42,9 @@
             width: 100%;
             align-items: center;
             padding: 0 0 0 var(--nav-bar-v-padding);
+            span:first-child{
+                display: none;
+            }
 
             &-inner {
                 display: none;
@@ -188,6 +191,17 @@
     &__logo {
         width: 100%;
         height: 36px;
+        & > span {
+            height: 100%;
+            @include mediaWMax('TABLET') { 
+                &:nth-child(2) {
+                    display: flex;
+                    align-items: center;
+                    flex-direction: row;
+                }
+            }
+            
+        }
     }
 
     &__line {

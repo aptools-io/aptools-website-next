@@ -40,7 +40,7 @@ const TopReceiversList: React.FC<IListWrapperProps> = ({
                 columns={columns} 
                 data={top_apt_receivers}
             >
-                <List adoptMobile />
+                <List />
             </ListHeader>
         </div>
     );

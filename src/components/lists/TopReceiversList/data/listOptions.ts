@@ -5,7 +5,7 @@ import { shortenHashString } from "src/scripts/util/strings";
 const columnNames = [
     {
         "key": "rank",
-        "value": "##",
+        "value": "Rank",
         "defaultSort": true,
         "defaultSortType": "asc",
         "hideMobile": true
@@ -33,6 +33,6 @@ const columnNames = [
 ];
 
 // Columns
-const columns = ["5%", "55%", "20%", "20%"];
+const columns = ["10%", "50%", "20%", "20%"];
 
 export { columnNames, columns };

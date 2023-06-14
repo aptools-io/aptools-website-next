@@ -1,5 +1,8 @@
 // React
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+
+// Next
+import { useRouter } from "next/router";
 
 // Components
 import { Logo, LogoSmall, Magnifier } from "src/components/svg";
@@ -7,16 +10,28 @@ import { NavBarItem, ActiveLink } from "src/components/ui";
 
 // Styles
 import classNames from "classnames";
-import aptools from "public/static/images/svg/aptools.svg";
 import styles from "./NavBar.module.scss";
 
 // Public
+import aptools from "public/static/images/svg/aptools.svg";
 
 const NavBar: React.FC<INavBarProps> = ({ 
     data = [] 
 }) => {
     const [expanded, setExpanded] = useState(false);
     const [opened, setOpened] = useState(false);
+    const router = useRouter();
+
+    useEffect(() => {
+        if(document.body) document.body.classList.toggle("overflow", opened)
+    }, [opened]);
+
+    useEffect(() => {
+        if(router.isReady) {
+            setOpened(false);
+            setExpanded(false);
+        } 
+    }, [router])
 
     const classes = classNames([
         styles["nav-bar"],

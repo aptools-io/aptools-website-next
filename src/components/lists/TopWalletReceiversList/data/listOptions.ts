@@ -4,7 +4,7 @@ import { formatNumber } from "src/scripts/util/numbers";
 const columnNames = [
     {
         "key": "rank",
-        "value": "##",
+        "value": "Rank",
         "defaultSort": true,
         "defaultSortType": "asc"
     },

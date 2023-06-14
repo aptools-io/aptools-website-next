@@ -1,0 +1,195 @@
+@import '/src/styles//static/general/variables.static';
+@import '/src/styles//static/general/mixins';
+
+.list-column {
+    $self: &;
+    &.adopt {
+        @include mediaWMax('TABLET') {
+            align-items: flex-start;
+            & + #{$self} {
+                margin-top: 2px;
+            }
+            &:not(.main) + #{$self}:not(.main) {
+                margin-top: 0;
+            }
+            &:not(.inner) {
+                padding: unset !important;
+                justify-content: space-between;
+
+                #{$self}__wrapper {
+                    text-align: right;
+                }
+
+                &.hide-mobile {
+                    display: none;
+                }
+
+                &.main-mobile {
+                    font-weight: 500;
+                    order: -1;
+
+                    &:before {
+                        font-size: 14px;
+                        font-weight: 500;
+                        color: var(--aptools-color-main-secondary);
+                    }
+                }
+
+                &:not(.main-mobile) {
+                    font-size: 10px;
+                    line-height: 15px;
+                }
+
+                &:before {
+                    content: attr(data-column-name);
+                    color: var(--aptools-color-grey-c1);
+                    font-size: 10px;
+                    line-height: 15px;
+                }
+            }
+        }
+    }
+    
+
+    &.underline {
+        text-decoration: underline;
+    }
+    &__inner {
+        width: 100%;
+        display: grid;
+        grid-template-columns: var(--list-columns);
+    }
+    &__wrapper {
+        display: flex;
+        align-items: center;
+        .collapse-button {
+            width: 16px;
+            height: 16px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            &.active {
+                & > div {
+                    transform: rotateZ(90deg);
+                }   
+            }
+            & > div {
+                transform: rotateZ(-90deg);
+                transition: transform .3s ease;
+                width: 6px;
+                height: 10px;
+                position: relative;
+                svg {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                }
+            }
+        }
+    }
+
+    &__copy {
+        display: flex;
+        margin-left: 2px;
+    }
+
+    &__icon {
+        max-width: 16px;
+        max-height: 16px;
+        margin-right: 4px;
+    }
+
+    &__description {
+        font-weight: 400;
+        font-size: 10px;
+        line-height: 15px;
+        color: var(--aptools-color-grey-c1);
+    }
+
+    &__info {
+        display: flex;
+        flex-direction: column;
+        &.next-hide {
+            display: none;
+        }
+        @include mediaWMax('TABLET') { 
+            &.next-hide {
+                display: block;
+                & + #{$self}__info {
+                    display: none;
+                }
+            }
+        }
+        
+    }
+
+    &.right {
+        text-align: right;
+        justify-content: flex-end;
+    }
+    
+    &.under {
+        flex-direction: column;
+        &.right {
+            align-items: flex-end;
+        }
+    }
+
+    &.center {
+        text-align: center;
+        justify-content: center;
+    }
+
+    
+
+    &.green {
+        color: var(--aptools-color-emphasis-c2);
+
+        svg path {
+            fill: var(--aptools-color-emphasis-c2);
+        }
+    }
+
+    &.red {
+        color: var(--aptools-color-emphasis-c4);
+
+        svg {
+            transform: scaleY(-1);
+
+            path {
+                fill: var(--aptools-color-emphasis-c4);
+            }
+        }
+    }
+
+    svg {
+        margin-right: 2px;
+    }
+
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 130%;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+
+    &:not(:first-of-type):not(:last-of-type) {
+        padding: 0 var(--list-padding);
+    }
+
+    &:first-of-type {
+        padding-right: var(--list-padding);
+    }
+
+    &:last-of-type {
+        padding-left: var(--list-padding);
+    }
+}
+
+.list {
+    &__row {
+        &-inner {
+        }
+    }
+}

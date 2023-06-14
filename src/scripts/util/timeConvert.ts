@@ -32,9 +32,19 @@ const timerFrom = (timestamp: number, currentTimestamp: number) => {
     return `${formatNumber(daysDifference)}d ${hoursDifference}h ${minutesDifference}m ${secondsDifference}s`;
 };
 
+const addZero = (number: number) => {
+    if(number < 10 && number > -1) return `0${number}`;
+    return number;
+}
+
+const time = (timestamp: string) => {
+    const time = new Date(timestamp);
+    return `${addZero(time.getHours())}:${addZero(time.getMinutes())}:${addZero(time.getSeconds())}`;
+};
+
 const timeFull = (timestamp: string) => {
     const time = new Date(timestamp);
-    return `${time.getUTCDate() + 1}.${time.getMonth() + 1}.${time.getFullYear()}, ${time.getHours()}:${time.getMinutes()}:${time.getSeconds()}`;
+    return `${addZero(time.getUTCDate() + 1)}.${addZero(time.getMonth() + 1)}.${time.getFullYear()}, ${addZero(time.getHours())}:${addZero(time.getMinutes())}:${addZero(time.getSeconds())}`;
 };
 
 const dateDiffInDays = (date1: Date, date2: Date) => {
@@ -44,4 +54,4 @@ const dateDiffInDays = (date1: Date, date2: Date) => {
 };
 
 
-export { ensureMillisecondTimestamp, parseTimestamp, timerFrom, dateDiffInDays, timeFull };
+export { ensureMillisecondTimestamp, parseTimestamp, timerFrom, dateDiffInDays, timeFull, time };

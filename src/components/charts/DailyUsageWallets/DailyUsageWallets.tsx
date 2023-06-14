@@ -66,7 +66,7 @@ const DailyUsageWallets: React.FC<IComponent> = ({
             </strong>
             
             <div className={"chart__inner"}>
-                <ReactECharts style={{height: "352px", width: "100%"}} theme={""} option={chartOptions(data)} />
+                <ReactECharts className={"chart__wrapper"} theme={""} option={chartOptions(data)} />
             </div>
         </div>
     );

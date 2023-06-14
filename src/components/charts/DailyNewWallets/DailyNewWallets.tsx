@@ -44,7 +44,7 @@ const DailyActiveWallets: React.FC<IComponent> = ({
         <div className={classes}>
             <strong className={"chart__title"}>Daily New Created Wallets</strong>
             <div className={"chart__inner"}>
-                <ReactECharts style={{height: "352px", width: "100%"}} theme={""} option={chartOptions(data)} />
+                <ReactECharts className={"chart__wrapper"} theme={""} option={chartOptions(data)} />
             </div>
         </div>
     );

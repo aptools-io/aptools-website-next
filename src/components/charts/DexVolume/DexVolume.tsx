@@ -39,7 +39,7 @@ const DexVolume: React.FC<IComponent> = ({
                 </span> */}
             </strong>
             <div className={"chart__inner"}>
-                <ReactECharts style={{height: "352px", width: "100%"}} theme={""} notMerge={true} option={chartOptions(dex_volumes, volume)} />
+                <ReactECharts className={"chart__wrapper"} theme={""} notMerge={true} option={chartOptions(dex_volumes, volume)} />
             </div>
         </div>
     );

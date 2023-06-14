@@ -24,6 +24,6 @@ const columnNames = [
 ];
 
 // Columns
-const columns = ["40%", "35%", "25%"];
+const columns = ["35%", "30%", "35%"];
 
 export { columnNames, columns };

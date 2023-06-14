@@ -7,16 +7,6 @@ const chartOptions = (data: IApiWallets[]) => {
         ...options,
         "legend": { show: false },
         "grid": { ...options.grid, top: 10 },
-        "yAxis": {
-            ...options.yAxis,
-            axisLabel: {
-                ...options.yAxis.axisLabel,
-                formatter: (v) => v
-            },
-            min: Math.round(Math.min(...yAxisArray)) - 1,
-            interval: 1,
-            max: Math.round(Math.max(...yAxisArray)) + 1,
-        }
     };
 };
 

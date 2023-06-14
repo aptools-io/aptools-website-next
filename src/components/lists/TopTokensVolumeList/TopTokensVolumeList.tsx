@@ -38,7 +38,7 @@ const TopTokensVolumeList: React.FC<IComponent> = ({
                 columns={columns} 
                 data={top_tokens_by_volume}
             >
-                <List adoptMobile />
+                <List  />
             </ListHeader>
         </div>
     );

@@ -14,6 +14,9 @@ body {
 
     @include setTheme('light');
     @include setTheme('dark');
+    &.overflow {
+        overflow: hidden;
+    }
 }
 
 html {

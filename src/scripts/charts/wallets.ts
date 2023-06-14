@@ -47,7 +47,7 @@ const walletsOptions = (data: IApiWallets[]) => {
     });
     
     return {
-        grid: { top: 30, left: 40, right: 40, bottom: 20 },
+        grid: { top: 30, left: 35, right: 10, bottom: 20 },
         xAxis: {
             type: "category",
             boundaryGap: false,

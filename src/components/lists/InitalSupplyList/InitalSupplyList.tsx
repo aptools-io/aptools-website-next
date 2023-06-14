@@ -60,7 +60,7 @@ const InitalSupplyList: React.FC<IComponent> = ({
                 columns={columns} 
                 data={data}
             >
-                <List adoptMobile />
+                <List />
             </ListHeader>
         </div>
     );

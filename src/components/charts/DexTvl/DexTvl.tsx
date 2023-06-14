@@ -33,7 +33,7 @@ const DexTvl: React.FC<IComponent> = ({
         <div className={classes}>
             <strong className={"chart__title"}>DEX TVL</strong>
             <div className={"chart__inner"}>
-                <ReactECharts style={{height: "352px", width: "100%"}} theme={""} option={chartOptions(dex_tvl)} />
+                <ReactECharts className={"chart__wrapper"} theme={""} option={chartOptions(dex_tvl)} />
             </div>
         </div>
     );

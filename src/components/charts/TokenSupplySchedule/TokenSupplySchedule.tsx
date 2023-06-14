@@ -97,7 +97,7 @@ const TokenSupplySchedule: React.FC<IComponent> = ({
                 <span>Estimated Token Supply Schedule</span>
             </strong>
             <div className={"chart__inner"}>
-                <ReactECharts style={{height: "352px", width: "100%"}} theme={""} notMerge={true} option={chartOptions(data)} />
+                <ReactECharts className={"chart__wrapper"} theme={""} notMerge={true} option={chartOptions(data)} />
             </div>
         </div>
     );
