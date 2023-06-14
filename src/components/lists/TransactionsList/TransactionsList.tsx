@@ -23,12 +23,12 @@ import media from "./data/adaptive";
 
 const TransactionRealTime: React.FC<{ 
     currentPage: number, 
+    width: number,
     setCurrentPage: React.Dispatch<React.SetStateAction<number>>
-}> = ({ currentPage, setCurrentPage }) => {
+}> = ({ currentPage, setCurrentPage, width }) => {
     const { data: aptosStats } = useSelector((state: IRootState) => state.statsAptos);
     const { transactions: trans } = aptosStats || {};
 
-    const { width } = useWindowSize();
     const { columnNames = null, columns = null } = media(width) || {};
 
     if(!trans || !width || !columns || !columnNames) return <></>;
@@ -48,14 +48,14 @@ const TransactionRealTime: React.FC<{
 
 const Transaction: React.FC<{ 
     currentPage: number, 
+    width: number,
     setCurrentPage: React.Dispatch<React.SetStateAction<number>>
-}> = ({ currentPage, setCurrentPage }) => {
+}> = ({ currentPage, setCurrentPage, width }) => {
     const { data: transactionsData  } = useSelector((state: IRootState) => state.statsTransactions);
     const [total, setTotal] = useState(transactionsData?.[0]?.version || 0);
     const [currentInnerPage, setCurrentInnerPage] = useState(currentPage);
     const dispatch = useDispatch();
 
-    const { width } = useWindowSize();
     const { columnNames = null, columns = null } = media(width) || {};
 
     if(!transactionsData || !width || !columns || !columnNames) return <></>;
@@ -63,6 +63,7 @@ const Transaction: React.FC<{
     useEffect(() => {
         if(currentPage !== 1) {
             transactions.getData().then(response => {
+                if(!response) return;
                 const lastTransaction = response[0]?.version;
                 setTotal(lastTransaction);
 
@@ -94,6 +95,7 @@ const TransactionsList: React.FC<IComponent> = ({
     className 
 }) => {
     const [currentPage, setCurrrentPage] = useState(1);
+    const { width } = useWindowSize();
 
     const classes = classNames([
         styles["transactions"],
@@ -107,8 +109,8 @@ const TransactionsList: React.FC<IComponent> = ({
                 <span>Last transactions</span>
             </strong>
             {currentPage === 1 ? 
-                <TransactionRealTime currentPage={currentPage} setCurrentPage={setCurrrentPage} /> :
-                <Transaction currentPage={currentPage} setCurrentPage={setCurrrentPage} />
+                <TransactionRealTime currentPage={currentPage} width={width} setCurrentPage={setCurrrentPage} /> :
+                <Transaction currentPage={currentPage} width={width} setCurrentPage={setCurrrentPage} />
             }
         </div>
     );

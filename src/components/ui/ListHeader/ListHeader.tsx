@@ -66,11 +66,11 @@ const ListHeader: React.ForwardRefRenderFunction<any, IListHeaderProps> = ({
         setSortedData([...sorted.map((x: any) => { return { ...x, "_sort": sorting.sort, "_count": sorted?.length || 0 } })]);
     }, [data, sorting]); 
 
-    const renderColumns = (item: IColumnName, index) => {
-        if(item.headRemove) return <></>;
-        if(item.value === "") return <span></span>;
+    const renderColumns = (item: IColumnName, index: number) => {
+        if(item.headRemove) return <React.Fragment key={index}></React.Fragment>;
+        if(item.value === "") return <span key={index}></span>;
         return (
-            <>
+            <React.Fragment key={index}>
                 {item.headHideMobile && 
                     <div className={classNames([
                         styles["list-header__item"], 
@@ -90,7 +90,7 @@ const ListHeader: React.ForwardRefRenderFunction<any, IListHeaderProps> = ({
                 >
                     {item.value} <div className={styles["sort"]}><SortArrowUp /> <SortArrowDown /></div>
                 </button>
-            </>
+            </React.Fragment>
         );
     };
     return (

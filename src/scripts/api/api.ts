@@ -28,7 +28,7 @@ export class Api {
     };
 
     post = async (url: string, headers: HeadersInit, body: BodyInit): Promise<Response> => { 
-        return this.fetch("POST", url, headers, body);
+        return this.fetch("POST", url, headers, body).then(this.handleResponse);
     };
 
     get = async (url: string, headers: HeadersInit = {}): Promise<Response> => { 
