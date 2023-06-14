@@ -7,7 +7,7 @@
     --list-padding: 8px;
 
     @include mediaWMax('TABLET') {
-        --nav-bar-width: 0;
+        --nav-bar-width: 0px;
         --layout-indent: 24px;
         --layout-v-padding: 10px;
         --nav-bar-height: 50px;
