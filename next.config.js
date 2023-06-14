@@ -3,7 +3,7 @@ const nextTranslate = require('next-translate');
 
 const nextConfig = {
     eslint: {
-        ignoreDuringBuilds: true,
+        ignoreDuringBuilds: false,
     },
     ...nextTranslate(),
     reactStrictMode: true,
