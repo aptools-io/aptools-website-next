@@ -1,5 +1,4 @@
 import { a } from "src/scripts/common/adaptive";
-import { COLUMNS_COUNT } from "src/scripts/consts/grid";
 import { EBreakpoints } from "src/types/common/adaptive";
 
 import { columnNamesDesktop, columnsDesktop } from "./listOptionsDesktop";

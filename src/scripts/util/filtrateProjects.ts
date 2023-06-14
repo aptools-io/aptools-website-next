@@ -2,7 +2,7 @@
 const filtrateProjects = (projects: IApiProject[], categories: string[]) => {
     const sortedProjectsObject = {};
     if(categories.length) {
-        categories.map(category => {
+        categories.forEach(category => {
             if(projects.length) 
                 sortedProjectsObject[category] = projects
                     .filter(project => project.category.includes(category.toLowerCase()))

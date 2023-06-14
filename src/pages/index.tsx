@@ -29,9 +29,8 @@ const Home = (data: IApiProps) => {
     const dispatch = useDispatch();
     useEffect(() => {
         aptosStats.openConnection(ws, dispatch);
-        return () => ws.current.close();
-    }, []);
-
+        return () => { ws.current.close(); }; 
+    }, [dispatch]);
 
     useEffect(() => {
         dispatch(setHeaders(data.headers) || null);
@@ -41,7 +40,7 @@ const Home = (data: IApiProps) => {
         dispatch(setAddressesData(data.contract_addresses || null));
         dispatch(setTransactionsData(data.contract_transactions || null));
         dispatch(setCoinTransactions(data.transactions) || null);
-    }, []);
+    }, [data, dispatch]);
 
     return <MainPage />;
 }; 

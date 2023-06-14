@@ -1,9 +1,9 @@
 // React
-import React, { useState } from "react";
+import React from "react";
 
 // Styles
-import styles from "./List.module.scss";
 import classNames from "classnames";
+import styles from "./List.module.scss";
 
 // Components
 import ListRow from "../ListRow/ListRow";

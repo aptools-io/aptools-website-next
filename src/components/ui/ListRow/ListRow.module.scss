@@ -7,41 +7,48 @@
             grid-template-columns: 100%;
         }
     }
+
     display: grid;
     grid-template-columns: var(--list-columns);
     padding: 6px 8px;
     transition: background-color .3s ease, border-color .3s ease;
     border-radius: 2px;
-    border-top-color: transparent;
-    border-bottom-color: var(--aptools-color-grey-c4);
-    border-left-color: transparent;
-    border-right-color: transparent;
+    border-color: transparent transparent var(--aptools-color-grey-c4) transparent;
     border-width: 1px;
     border-style: solid;
     margin: -1px -1px 0;
+
     &.collapse {
         overflow: hidden;
+
         .hide {
-            &::before, & > div, & > div > div  {
+            &:before,
+            & > div,
+            & > div > div {
                 transition: .3s ease line-height;
             }
         }
+
         &:not(.uncollapsed) {
             .hide {
                 line-height: 0px;
                 overflow: hidden;
-                &::before, & > div, & > div > div  {
+
+                &:before,
+                & > div,
+                & > div > div {
                     line-height: 0px;
                     overflow: hidden;
                     position: relative;
                 }
+
                 & > div > svg {
                     position: absolute;
                 }
             }
         }
-        
     }
+
     &-inner {
         width: 100%;
         display: grid;

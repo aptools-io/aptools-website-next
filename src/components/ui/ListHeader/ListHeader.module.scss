@@ -13,14 +13,16 @@
     &__item {
         &.hide-mobile {
             display: none;
+
             @include mediaWMax('TABLET') {
                 display: block;
+
                 & + .list-header__item {
                     display: none;
                 }
             }
-            
         }
+
         text-align: left;
 
         &:not(:first-of-type):not(:last-of-type) {
@@ -36,10 +38,7 @@
         }
 
         transition: background-color .3s ease, border-color .3s ease;
-        border-top-color: transparent;
-        border-bottom-color: transparent;
-        border-left-color: transparent;
-        border-right-color: transparent;
+        border-color: transparent;
         border-width: 1px;
         border-style: solid;
         margin: -1px -1px 0;

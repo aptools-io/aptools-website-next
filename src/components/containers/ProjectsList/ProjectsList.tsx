@@ -1,19 +1,22 @@
 // React
-import React, { } from "react";
+import React from "react";
 
 // Styles
 import { Grid, GridWrapper } from "src/components/general";
-import { ActiveLink, Plate, Tabs } from "src/components/ui";
+import { ActiveLink, Plate } from "src/components/ui";
 import { ArrowMore } from "src/components/svg";
-import styles from "./ProjectsList.module.scss";
 
+// Components
+import LinesEllipsis from "react-lines-ellipsis";
+import responsiveHOC from "react-lines-ellipsis/lib/responsiveHOC";
+import styles from "./ProjectsList.module.scss";
 
 // Data
 import socials from "../Projects/data/socials";
 
-
 const ProjectsList: React.FC<{ data?: IApiProject[], mediaData: any }> = ({ data, mediaData }) => {
-    
+    const ResponsiveEllipsis = responsiveHOC()(LinesEllipsis);
+
     const renderSocial = (item: IApiProjectSocials, index: number) => (
         <ActiveLink key={index} className={styles["projects-list__item-social-wrapper"]} href={item.link}>
             <a className={styles["projects-list__item-social"]}>
@@ -36,7 +39,14 @@ const ProjectsList: React.FC<{ data?: IApiProject[], mediaData: any }> = ({ data
                         titleLink={`/projects/${item.name}`}
                     >
                         <ActiveLink href={`/projects/${item.name}`}>
-                            <a className={styles["projects-list__item-description"]}>{item.description}</a>
+                            <a className={styles["projects-list__item-description"]}>
+                                <ResponsiveEllipsis 
+                                    text={item?.description || ""}
+                                    maxLine='3'
+                                    ellipsis='...'
+                                    basedOn='letters'
+                                />
+                            </a>
                         </ActiveLink>
                         <span className={styles["projects-list__item-socials"]}>
                             {item.socials.map(renderSocial)}

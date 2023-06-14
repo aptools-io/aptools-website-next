@@ -80,6 +80,11 @@
 
         &:after {
             transition: color .3s ease;
+            content: '(' attr(data-count) ')';
+            color: var(--aptools-color-grey-c2);
+            font-size: 10px;
+            line-height: 14px;
+            margin-left: 5px;
         }
 
         &:not(.counter) {
@@ -100,14 +105,6 @@
             &:after {
                 color: var(--aptools-color-grey-c1);
             }
-        }
-
-        &:after {
-            content: '(' attr(data-count) ')';
-            color: var(--aptools-color-grey-c2);
-            font-size: 10px;
-            line-height: 14px;
-            margin-left: 5px;
         }
     }
 }

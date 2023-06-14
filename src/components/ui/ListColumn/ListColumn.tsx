@@ -3,7 +3,6 @@ import React, { useState } from "react";
 
 // Styles
 import classNames from "classnames";
-import styles from "./ListColumn.module.scss";
 
 // Components
 import { DifferenceArrow, Copy, ArrowLeft } from "src/components/svg";
@@ -11,6 +10,7 @@ import { DifferenceArrow, Copy, ArrowLeft } from "src/components/svg";
 // Util
 import { getDexImageFromApi } from "src/scripts/util/image";
 import { copyText } from "src/scripts/util/copyText";
+import styles from "./ListColumn.module.scss";
 
 
 const ListColumn: React.FC<IListProps> = ({
@@ -58,7 +58,7 @@ const ListColumn: React.FC<IListProps> = ({
 
     const combinedValues = row?.combined; 
 
-    const unformattedValue = key !== "_id" ? row?.[key] : (row?.["_sort"] === "asc" ? (rowIndex + 1) : (row?.["_count"] - rowIndex));
+    const unformattedValue = row?.[key];
     const value = !formatter ? unformattedValue : formatter(unformattedValue);
     const combinedValue = formatter && combinedValues ? formatter(combinedValues?.[key]) : undefined;
 
@@ -69,7 +69,7 @@ const ListColumn: React.FC<IListProps> = ({
     const symbol = row?.[symbolRef];
     const description = row?.[descriptionRef];
 
-    if(valueGridReplace?.length) return (<div key={columnIndex} className={styles["list-column__inner"]}>{valueGridReplace}</div>) 
+    if(valueGridReplace?.length) return (<div key={columnIndex} className={styles["list-column__inner"]}>{valueGridReplace}</div>); 
 
     const classes = classNames([
         styles["list-column"],
@@ -84,7 +84,7 @@ const ListColumn: React.FC<IListProps> = ({
         { [styles["red"]]: colorize && unformattedValue < 0 },
         { [styles["green"]]: colorize && unformattedValue >= 0 },
         className
-    ])
+    ]);
 
     return (
         <div 
@@ -122,7 +122,7 @@ const ListColumn: React.FC<IListProps> = ({
                     }
                     
                     {copy && 
-                        <button onClick={(e) => { copyText(row?.[copy]) }} className={styles["list-column__copy"]}>
+                        <button onClick={() => { copyText(row?.[copy]); }} className={styles["list-column__copy"]}>
                             <Copy/>
                         </button>
                     }

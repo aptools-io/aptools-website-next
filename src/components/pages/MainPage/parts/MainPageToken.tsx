@@ -8,8 +8,10 @@ import useWindowSize from "src/scripts/hooks/useWindowSize";
 import { Grid, GridWrapper } from "src/components/general";
 import { TokenPrice, TokenSupplySchedule, TransactionHistory } from "src/components/charts";
 import { InitalSupplyList, TopTokensVolumeList, TransactionsList } from "src/components/lists";
-import { Plate, Title } from "src/components/ui";
+import { Plate } from "src/components/ui";
 import { ActiveUniqueAddresses } from "src/components/containers";
+
+// Adaptive
 import media from "../data/adaptive";
 
 

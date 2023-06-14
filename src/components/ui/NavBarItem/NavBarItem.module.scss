@@ -6,7 +6,7 @@
 
     &:hover,
     &.active {
-        background-color: rgba(var(--aptools-color-emphasis-c1--rgb), .3);
+        background-color: rgb(var(--aptools-color-emphasis-c1--rgb) .3);
         transition: background-color var(--nav-bar-transition-speed-1) ease;
         #{$self}__title {
             color: var(--aptools-color-main-primary);
@@ -110,8 +110,6 @@
 
         display: flex;
         padding: 7px 0 7px var(--nav-bar-v-padding);
-
-        //transition: padding var(--nav-bar-transition-speed-1) ease;
 
         svg {
             width: 24px;

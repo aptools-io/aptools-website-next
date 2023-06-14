@@ -1,5 +1,5 @@
 // React
-import React, { useState } from "react";
+import React from "react";
 
 // ECharts
 import ReactECharts from "echarts-for-react";
@@ -16,9 +16,6 @@ import chartOptions from "./data/chartOptions";
 const TokenSupplySchedule: React.FC<IComponent> = ({
     className 
 }) => {
-   /*  const { data: generalData } = useSelector((state: IRootState) => state.statsGeneral);
-    const { dex_volumes } = generalData || {};
-    const [volume, setVolume] = useState(false);  */
 
     const classes = classNames([
         styles["dex-volume"],

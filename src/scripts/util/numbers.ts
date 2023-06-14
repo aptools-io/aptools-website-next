@@ -1,8 +1,8 @@
 
 const formatDecimal = (decimal: string) => { 
     if(decimal.length > 2) return decimal.slice(0, 2);
-    if(decimal.length == 2) return `${decimal}`;
-    if(decimal.length == 1) return `${decimal.slice(0, 1)}0`;
+    if(decimal.length === 2) return `${decimal}`;
+    if(decimal.length === 1) return `${decimal.slice(0, 1)}0`;
     return "00";
 };
 

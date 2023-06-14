@@ -5,10 +5,10 @@ const ensureMillisecondTimestamp = (timestamp: string) => {
     if (timestamp.length > 13) {
         timestamp = timestamp.slice(0, 13);
     }
-    if (timestamp.length == 10) {
+    if (timestamp.length === 10) {
         timestamp += "000";
     }
-    return parseInt(timestamp);
+    return parseInt(timestamp, 10);
 };
 
 const parseTimestamp = (timestamp: string) => {
@@ -35,7 +35,7 @@ const timerFrom = (timestamp: number, currentTimestamp: number) => {
 const addZero = (number: number) => {
     if(number < 10 && number > -1) return `0${number}`;
     return number;
-}
+};
 
 const time = (timestamp: string) => {
     const time = new Date(timestamp);

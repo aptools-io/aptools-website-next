@@ -7,7 +7,7 @@ import useWindowSize from "src/scripts/hooks/useWindowSize";
 // Components
 import { Grid, GridWrapper } from "src/components/general";
 import { TokenStatistics, MoneyFlow } from "src/components/containers";
-import { DailyActiveWallets, DailyNewWallets, DailyUsageWallets, DexTvl } from "src/components/charts";
+import { DailyActiveWallets, DailyNewWallets, DailyUsageWallets } from "src/components/charts";
 import media from "../data/adaptive";
 
 

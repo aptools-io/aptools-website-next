@@ -2,7 +2,7 @@
 import React from "react";
 
 // Scripts
-import { COLUMNS_COUNT, COLUMNS_ROWS_GAP } from "src/scripts/consts/grid";
+import { COLUMNS_COUNT } from "src/scripts/consts/grid";
 
 // Styles
 import classNames from "classnames";

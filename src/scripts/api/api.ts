@@ -27,20 +27,21 @@ export class Api {
         }
     };
 
-    post = async (url: string, headers: HeadersInit, body: BodyInit): Promise<Response> => { 
-        return this.fetch("POST", url, headers, body).then(this.handleResponse);
-    };
-
-    get = async (url: string, headers: HeadersInit = {}): Promise<Response> => { 
-        return this.fetch("GET", url, headers).then(this.handleResponse);
-    };
-
-    handleResponse = (response) => {
+    handleResponse = (response) => { // eslint-disable-line class-methods-use-this
         if(response.status !== 201 && response.status !== 200 && response.status !== 204)
             return null;
 
         return response.json();
-        
-    }
+    };
+
+    post = async (url: string, headers: HeadersInit, body: BodyInit): Promise<Response> => { 
+        return this.fetch("POST", url, headers, body).then(response => this.handleResponse(response));
+    };
+
+    get = async (url: string, headers: HeadersInit = {}): Promise<Response> => { 
+        return this.fetch("GET", url, headers).then(response => this.handleResponse(response));
+    };
+
+   
 }
 

@@ -1,5 +1,4 @@
 import { dexOptions } from "src/scripts/charts/dex";
-import { graphic } from "echarts";
 
 const chartOptions = (data: IApiDex[], volume: boolean = false) => {
     const options = dexOptions(data);

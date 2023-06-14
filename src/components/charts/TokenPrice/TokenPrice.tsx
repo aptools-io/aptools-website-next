@@ -1,5 +1,5 @@
 // React
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 // Redux
 import { useSelector } from "react-redux";
@@ -34,9 +34,7 @@ const TokenPrice: React.FC<IComponent> = ({
     const [volume, setVolume] = useState("all"); 
     const [volumes, setVolumes] = useState({"7d": [], "14d": [],"30d": [], "all": allTimePrices}); 
 
-    if(!allTimePrices) return <></>;
-
-    useMemo(() => {
+    useEffect(() => {
         const dailyWalletsUsage = {"7d": [], "14d": [],"30d": [], "all": allTimePrices} as IApiWalletsUsage;
         allTimePrices.forEach(el => {
             if(dateDiffInDays(new Date(el.x), new Date()) <= 8) dailyWalletsUsage["7d"].push(el);
@@ -44,7 +42,9 @@ const TokenPrice: React.FC<IComponent> = ({
             if(dateDiffInDays(new Date(el.x), new Date()) <= 31) dailyWalletsUsage["30d"].push(el);
         });
         setVolumes(dailyWalletsUsage);
-    }, [volume]);
+    }, [volume, allTimePrices]);
+
+    if(!allTimePrices) return <></>;
 
     const data = [
         {
@@ -59,10 +59,10 @@ const TokenPrice: React.FC<IComponent> = ({
             <strong className={"chart__title"}>
                 <span>Token Price</span>
                 <span className={"chart__switcher"}>
-                    <button className={classNames([ { "active": volume === "7d" } ])} onClick={() => setVolume(e => e = "7d")}>7D</button>
-                    <button className={classNames([ { "active": volume === "14d" } ])} onClick={() => setVolume(e => e = "14d")}>14D</button>
-                    <button className={classNames([ { "active": volume === "30d" } ])} onClick={() => setVolume(e => e = "30d")}>30D</button>
-                    <button className={classNames([ { "active": volume === "all" } ])} onClick={() => setVolume(e => e = "all")}>ALL</button>
+                    <button className={classNames([ { "active": volume === "7d" } ])} onClick={() => { setVolume("7d"); }}>7D</button>
+                    <button className={classNames([ { "active": volume === "14d" } ])} onClick={() => { setVolume("14d"); }}>14D</button>
+                    <button className={classNames([ { "active": volume === "30d" } ])} onClick={() => { setVolume("30d"); }}>30D</button>
+                    <button className={classNames([ { "active": volume === "all" } ])} onClick={() => { setVolume("all"); }}>ALL</button>
                 </span>
             </strong>
             <div className={"chart__inner"}>

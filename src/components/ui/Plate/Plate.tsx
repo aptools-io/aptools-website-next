@@ -8,7 +8,6 @@ import styles from "./Plate.module.scss";
 // Components
 import PlateWrapper from "./PlateWrapper";
 
-
 const Plate: React.FC<IPlateProps> = ({ 
     title,
     titleLink,
@@ -32,7 +31,7 @@ const Plate: React.FC<IPlateProps> = ({
     return (
         <div style={style} className={classes}>
             {(image || title) && <PlateWrapper titleLink={titleLink}>
-                {image && <img className={styles["plate__image"]} src={image} />}
+                {image && <img className={styles["plate__image"]} src={image} alt={title || "image"} />}
                 {title && <strong className={styles["plate__title"]}>{title}</strong>}
             </PlateWrapper>}
             {children}

@@ -10,7 +10,6 @@ import { IRootState } from "src/scripts/redux/store";
 
 // Util
 import { formatNumber } from "src/scripts/util/numbers";
-import { concatString } from "src/scripts/util/strings";
 
 import { Grid, GridWrapper } from "src/components/general";
 import styles from "./ActiveUniqueAddresses.module.scss";

@@ -1,6 +1,3 @@
-// Components
-import { MainPageAptosInfo } from "src/components/pages/MainPage/parts";
-
 // Other
 import { a } from "src/scripts/common/adaptive";
 import { EBreakpoints } from "src/types/common/adaptive";

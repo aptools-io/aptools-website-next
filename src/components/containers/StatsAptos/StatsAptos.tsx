@@ -76,7 +76,7 @@ const StatsAptos: React.FC<IComponent> = ({
         <>
             <div className={"stats__top"}>
                 <div className={"stats__top-wrapper"}>
-                    <img className={"stats__top-image"} src={aptos.src} />
+                    <img className={"stats__top-image"} src={aptos.src} alt={"aptos"} />
                     <strong className={"stats__top-title"}>Aptos</strong>
                 </div>
                 <div className={"stats__top-stats"}>

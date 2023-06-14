@@ -23,9 +23,8 @@ const ListHeader: React.ForwardRefRenderFunction<any, IListHeaderProps> = ({
         "key": defaultSortIndex > -1 ? columnNames?.[defaultSortIndex]?.key : columnNames?.[0]?.key,
         "sort": defaultSortType
     });
-    const [sortedData, setSortedData] = useState(data.length ? data.map((item, index) => { 
-        if(typeof item === "object" && !Array.isArray(item))  return { ...item, "_id": index };
-        return item;
+    const [sortedData, setSortedData] = useState(data.length ? data.map((item: any, index) => { 
+        return { ...item, "_id": index + 1 };
     }) : []);
     
     const classes = classNames([
@@ -60,11 +59,11 @@ const ListHeader: React.ForwardRefRenderFunction<any, IListHeaderProps> = ({
 
     useEffect(() => {
         const newArray = [...sortedData];
-        let sorted = newArray.sort(sort)
+        let sorted = newArray.sort(sort);
         sorted = sorting.sort === "desc" ? sorted.reverse() : sorted;
 
-        setSortedData([...sorted.map((x: any) => { return { ...x, "_sort": sorting.sort, "_count": sorted?.length || 0 } })]);
-    }, [data, sorting]); 
+        setSortedData([...sorted]);
+    }, [data, sorting]); // eslint-disable-line react-hooks/exhaustive-deps
 
     const renderColumns = (item: IColumnName, index: number) => {
         if(item.headRemove) return <React.Fragment key={index}></React.Fragment>;

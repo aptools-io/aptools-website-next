@@ -28,8 +28,8 @@ const ListRow: React.FC<IListProps> = ({
         className
     ]);
 
-    const renderUnder = (column: IColumnName, columnIndex: number, props): JSX.Element => <ListColumn key={columnIndex} {...{...props, column: column}}/>;
-    const renderReplace = (column: IColumnName, columnIndex, props): JSX.Element => <ListColumn key={columnIndex} {...{...props, inner: true, column: column}}/>;
+    const renderUnder = (column: IColumnName, columnIndex: number, props): JSX.Element => <ListColumn key={columnIndex} {...{...props, column}}/>;
+    const renderReplace = (column: IColumnName, columnIndex, props): JSX.Element => <ListColumn key={columnIndex} {...{...props, inner: true, column}}/>;
 
     const renderListItemColumn = (row, rowIndex, column: IColumnName, columnIndex: number, handleCollapse: () => void) => {
         const { under = [], valueGridReplace = [] } = column || {};
@@ -41,7 +41,7 @@ const ListRow: React.FC<IListProps> = ({
             columnIndex,
             adoptMobile,
             handleCollapse
-        }
+        };
         
         const underArray = under.map((column: IColumnName, columnIndex: number) => renderUnder(column, columnIndex, props));
         const valueGridReplaceArray = valueGridReplace.map((column: IColumnName, columnIndex: number) => renderReplace(column, columnIndex, props));
@@ -54,8 +54,8 @@ const ListRow: React.FC<IListProps> = ({
                 under: underArray, 
                 valueGridReplace: valueGridReplaceArray
             }}
-        />
-    }
+        />;
+    };
 
     if(linkIndex === -1) 
     {

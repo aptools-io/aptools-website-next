@@ -1,10 +1,6 @@
 // React
 import React from "react";
 
-// public
-import aptLogoDots from "public/static/images/svg/apt_logo_dots.svg";
-import aptLogoLines from "public/static/images/svg/apt_logo_lines.svg";
-
 // Styles
 import classNames from "classnames";
 import { RendererType } from "lottie-web";
@@ -24,11 +20,11 @@ const options = {
     autoplay: true,
 };
 
-const LinesComponent: React.FC<{}> = () => {
+const LinesComponent: React.FC = () => {
     return useLottie({...options, animationData: linesData}, { height: "100%" }).View;
 };
 
-const DotsComponent: React.FC<{}> = () => {
+const DotsComponent: React.FC = () => {
     return useLottie({...options, animationData: dotsData}, { height: "100%" }).View;
 };
 
@@ -41,12 +37,6 @@ const AptLogoBanner: React.FC<IAptLogoBannerProps> = ({
         styles["apt-logo-banner"],
         className
     ]);
-
-    const options = {
-        renderer: "html" as RendererType,
-        loop: true,
-        autoplay: true,
-    };
 
     return (
         <div className={classes}>

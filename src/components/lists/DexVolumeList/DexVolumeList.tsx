@@ -8,13 +8,13 @@ import { IRootState } from "src/scripts/redux/store";
 // Styles
 import classNames from "classnames";
 import { List, ListHeader } from "src/components/ui";
+import useWindowSize from "src/scripts/hooks/useWindowSize";
 import styles from "./DexVolumeList.module.scss";
 
 // Components
 
 // Other
 import media from "./data/adaptive";
-import useWindowSize from "src/scripts/hooks/useWindowSize";
 // Options
 /* import { columnNames, columns } from "./data/listOptionsDesktop"; */
 

@@ -10,7 +10,6 @@ import ReactECharts from "echarts-for-react";
 
 // Styles
 import classNames from "classnames";
-import { Skeleton } from "src/components/ui";
 import styles from "./DailyNewWallets.module.scss";
 
 // Other

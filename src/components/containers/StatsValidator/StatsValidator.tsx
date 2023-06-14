@@ -39,11 +39,11 @@ const StatsValidator: React.FC<IComponent> = ({
         const nowTimestamp = parseTimestamp(moment.now().toString());
         const timePassed = moment.duration(nowTimestamp.diff(startTimestamp));
         const timePassedInMin = timePassed.asMinutes();
-        const epochIntervalInMin = moment.duration(parseInt(epochInterval) / 1000, "milliseconds").asMinutes();
+        const epochIntervalInMin = moment.duration(parseInt(epochInterval, 10) / 1000, "milliseconds").asMinutes();
 
         return {
             "timeRemaining": (epochIntervalInMin - timePassedInMin).toFixed(0),
-            "percentage": parseInt(((timePassedInMin * 100) / epochIntervalInMin).toFixed(0))
+            "percentage": parseInt(((timePassedInMin * 100) / epochIntervalInMin).toFixed(0), 10)
         }; 
     };
 

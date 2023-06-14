@@ -10,10 +10,10 @@ import { NavBarItem, ActiveLink } from "src/components/ui";
 
 // Styles
 import classNames from "classnames";
+import aptools from "public/static/images/svg/aptools.svg";
 import styles from "./NavBar.module.scss";
 
 // Public
-import aptools from "public/static/images/svg/aptools.svg";
 
 const NavBar: React.FC<INavBarProps> = ({ 
     data = [] 
@@ -23,7 +23,7 @@ const NavBar: React.FC<INavBarProps> = ({
     const router = useRouter();
 
     useEffect(() => {
-        if(document.body) document.body.classList.toggle("overflow", opened)
+        if(document.body) document.body.classList.toggle("overflow", opened);
     }, [opened]);
 
     useEffect(() => {
@@ -31,7 +31,7 @@ const NavBar: React.FC<INavBarProps> = ({
             setOpened(false);
             setExpanded(false);
         } 
-    }, [router])
+    }, [router]);
 
     const classes = classNames([
         styles["nav-bar"],

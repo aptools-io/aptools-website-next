@@ -16,7 +16,7 @@ const useWindowSize = () => {
             ...{ width: media },
             ...{ height: window.innerHeight },
         });
-    }, [media]);
+    }, [media]); // eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
         function handleResize() {

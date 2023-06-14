@@ -90,13 +90,6 @@ interface IApiTokenStatistics {
     "24h": IApiTokenStatisticsBy,
 }
 
-
-interface IApiTokenStatistics {
-    "3d": IApiTokenStatisticsBy,
-    "7d": IApiTokenStatisticsBy,
-    "24h": IApiTokenStatisticsBy,
-}
-
 interface IApiTokenStatisticsBy {
     "tokens_by_receivers": IApiTokenStatisticsInfo[],
     "tokens_by_senders": IApiTokenStatisticsInfo[],

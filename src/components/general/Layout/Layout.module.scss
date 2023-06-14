@@ -6,7 +6,6 @@
     color: var(--aptools-color-main-secondary);
     display: flex;
     overflow: hidden;
-    display: flex;
     flex-direction: column;
 
     *::selection {
@@ -20,10 +19,9 @@
         width: 100%;
 
         @include mediaWMax('TABLET') {
-            padding: 
-                calc(var(--layout-indent) + var(--nav-bar-height)) 
-                var(--layout-v-padding) 
-                var(--layout-bottom-indent) 
+            padding: calc(var(--layout-indent) + var(--nav-bar-height))
+                var(--layout-v-padding)
+                var(--layout-bottom-indent)
                 calc(var(--nav-bar-width) + var(--layout-v-padding));
         }
     }

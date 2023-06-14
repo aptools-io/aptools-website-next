@@ -16,9 +16,10 @@ import { setCoinTransactions } from "src/scripts/redux/slices/statsTransactionsS
 
 // API
 import { transactions } from "src/scripts/api/requests";
-import { columnNames, columns } from "./data/listOptions";
-import styles from "./TransactionsList.module.scss";
+
+// Adaptive
 import useWindowSize from "src/scripts/hooks/useWindowSize";
+import styles from "./TransactionsList.module.scss";
 import media from "./data/adaptive";
 
 const TransactionRealTime: React.FC<{ 
@@ -58,8 +59,6 @@ const Transaction: React.FC<{
 
     const { columnNames = null, columns = null } = media(width) || {};
 
-    if(!transactionsData || !width || !columns || !columnNames) return <></>;
-
     useEffect(() => {
         if(currentPage !== 1) {
             transactions.getData().then(response => {
@@ -73,11 +72,11 @@ const Transaction: React.FC<{
                     setCurrentPage(currentInnerPage);
                 });
             });
-            
         }
-    }, [currentInnerPage]);
+    }, [currentInnerPage, dispatch, currentPage, setCurrentPage]);
 
-    
+    if(!transactionsData || !width || !columns || !columnNames) return <></>;
+
     return (
         <Paginator page={currentPage} perPage={10} total={total} onChangePage={(page) => setCurrentInnerPage(page)}>
             <ListHeader 

@@ -3,6 +3,7 @@
 
 .list-column {
     $self: &;
+
     &.adopt {
         @include mediaWMax('TABLET') {
             align-items: flex-start;
@@ -12,6 +13,7 @@
             &:not(.main) + #{$self}:not(.main) {
                 margin-top: 0;
             }
+
             &:not(.inner) {
                 padding: unset !important;
                 justify-content: space-between;
@@ -49,36 +51,41 @@
             }
         }
     }
-    
 
     &.underline {
         text-decoration: underline;
     }
+
     &__inner {
         width: 100%;
         display: grid;
         grid-template-columns: var(--list-columns);
     }
+
     &__wrapper {
         display: flex;
         align-items: center;
+
         .collapse-button {
             width: 16px;
             height: 16px;
             display: flex;
             justify-content: center;
             align-items: center;
+
             &.active {
                 & > div {
                     transform: rotateZ(90deg);
-                }   
+                }
             }
+
             & > div {
                 transform: rotateZ(-90deg);
                 transition: transform .3s ease;
                 width: 6px;
                 height: 10px;
                 position: relative;
+
                 svg {
                     position: absolute;
                     top: 50%;
@@ -110,10 +117,12 @@
     &__info {
         display: flex;
         flex-direction: column;
+
         &.next-hide {
             display: none;
         }
-        @include mediaWMax('TABLET') { 
+
+        @include mediaWMax('TABLET') {
             &.next-hide {
                 display: block;
                 & + #{$self}__info {
@@ -121,16 +130,16 @@
                 }
             }
         }
-        
     }
 
     &.right {
         text-align: right;
         justify-content: flex-end;
     }
-    
+
     &.under {
         flex-direction: column;
+
         &.right {
             align-items: flex-end;
         }
@@ -140,8 +149,6 @@
         text-align: center;
         justify-content: center;
     }
-
-    
 
     &.green {
         color: var(--aptools-color-emphasis-c2);

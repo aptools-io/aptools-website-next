@@ -1,5 +1,5 @@
 // Components
-import { MainPageAptosInfo } from "src/components/pages/MainPage/parts";
+import MainPageAptosInfo from "src/components/pages/MainPage/parts/MainPageAptosInfo";
 
 // Other
 import { a } from "src/scripts/common/adaptive";

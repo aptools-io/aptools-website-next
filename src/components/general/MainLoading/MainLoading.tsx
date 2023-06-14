@@ -1,5 +1,5 @@
 // React
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
 // Next
 import { useRouter } from "next/router";
@@ -25,17 +25,15 @@ const MainLoading: React.FC<IComponent> = ({
     const dispatch = useDispatch();
 
     useEffect(() => {
-        router.events.on("routeChangeComplete", () => {
+        const handleLoad = () => {
             dispatch(setLoading({ start: true, end: true }));
-        });
-        return () => {
-            router.events.off("routeChangeComplete", () => dispatch(setLoading({ start: true, end: true })));
         };
-    }, []);
 
-    useEffect(() => {
-        
-    }, [end]);
+        router.events.on("routeChangeComplete", handleLoad);
+        return () => {
+            router.events.off("routeChangeComplete", handleLoad);
+        };
+    }, [dispatch, router.events]);
 
     const classes = classNames([
         styles["main-loading"],

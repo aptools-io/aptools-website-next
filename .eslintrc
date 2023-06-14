@@ -47,6 +47,7 @@
         "consistent-return": "off",
         "no-param-reassign": "off",
         "import/no-dynamic-require": "off",
-        "global-require": "off"
+        "global-require": "off",
+        "camelcase": "off" // чисто из-за бэков, которые решили что нужно присылать мне данные на верблюжем.
     }
 }

@@ -1,4 +1,4 @@
-import { formatNumber, setSign } from "src/scripts/util/numbers";
+import { formatNumber } from "src/scripts/util/numbers";
 
 // Convert
 const columnNames = [

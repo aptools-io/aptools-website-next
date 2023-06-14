@@ -8,10 +8,10 @@ import { IRootState } from "src/scripts/redux/store";
 // Styles
 import classNames from "classnames";
 import { List, ListHeader, Tabs } from "src/components/ui";
+import useWindowSize from "src/scripts/hooks/useWindowSize";
 import styles from "./MarketsList.module.scss";
 
 // Adaptive
-import useWindowSize from "src/scripts/hooks/useWindowSize";
 import media from "./data/adaptive";
 
 const MarketsList: React.FC<IComponent> = ({

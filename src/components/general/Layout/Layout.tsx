@@ -1,10 +1,9 @@
 // React
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 // Next
 import Head from "next/head";
 import useTranslation from "next-translate/useTranslation";
-import { useRouter } from "next/router";
 
 // Components
 import NextNProgress from "nextjs-progressbar";

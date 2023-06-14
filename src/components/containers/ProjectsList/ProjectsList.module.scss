@@ -84,7 +84,7 @@
         &-description {
             overflow: hidden;
             text-overflow: ellipsis;
-            display: -webkit-box;
+            display: box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
         }
@@ -119,6 +119,9 @@
 
         &:after {
             transition: color .3s ease;
+            content: attr(data-count);
+            color: var(--aptools-color-grey-c2);
+            margin-left: 10px;
         }
 
         &.active {
@@ -133,12 +136,6 @@
             &:after {
                 color: var(--aptools-color-grey-c1);
             }
-        }
-
-        &:after {
-            content: attr(data-count);
-            color: var(--aptools-color-grey-c2);
-            margin-left: 10px;
         }
 
         &s {

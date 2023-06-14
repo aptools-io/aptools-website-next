@@ -1,10 +1,6 @@
 // React
 import React from "react";
 
-// Redux
-import { useSelector } from "react-redux";
-import { IRootState } from "src/scripts/redux/store";
-
 // Styles
 import classNames from "classnames";
 import { List, ListHeader } from "src/components/ui";
@@ -18,8 +14,6 @@ import { columnNames, columns } from "./data/listOptions";
 const InitalSupplyList: React.FC<IComponent> = ({
     className 
 }) => {
-    const { data: generalData } = useSelector((state: IRootState) => state.statsGeneral);
-    /* const { top_tokens_by_volume } = generalData || {}; */
     /* HARDCODE */
     const classes = classNames([
         styles["inital-supply"],

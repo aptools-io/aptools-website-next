@@ -1,5 +1,5 @@
 // React
-import React, { useState } from "react";
+import React from "react";
 
 // Styles
 import classNames from "classnames";

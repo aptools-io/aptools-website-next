@@ -1,4 +1,3 @@
-import { graphic } from "echarts";
 import { tokenScheludeOptions } from "src/scripts/charts/tokenSchelude";
 
 const chartOptions = (data: IApiTokenSchelude[], volume: boolean = true) => {

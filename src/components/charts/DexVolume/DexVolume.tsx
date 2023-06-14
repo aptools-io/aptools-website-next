@@ -20,7 +20,7 @@ const DexVolume: React.FC<IComponent> = ({
 }) => {
     const { data: generalData } = useSelector((state: IRootState) => state.statsGeneral);
     const { dex_volumes } = generalData || {};
-    const [volume, setVolume] = useState(false); 
+    const [volume] = useState(false); 
 
     const classes = classNames([
         styles["dex-volume"],
