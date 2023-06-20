@@ -27,6 +27,7 @@ import { aptosStats } from "src/scripts/websocket/connections";
 const Home = (data: IApiProps) => {
     const ws = useRef<WebSocket>(null);
     const dispatch = useDispatch();
+    
     useEffect(() => {
         aptosStats.openConnection(ws, dispatch);
         return () => { ws.current.close(); }; 
