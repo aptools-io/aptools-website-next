@@ -1,11 +1,13 @@
 .projects-list {
     &__item {
         opacity: 0;
-        transition: outline .3s ease, background-color .3s ease;
+        transition: outline .3s ease, background-color .3s ease, box-shadow .3s ease;
+
         outline: 1px solid transparent;
 
         &:hover {
             outline: 1px solid var(--aptools-color-grey-c1);
+            box-shadow: 0px 0px 10px 7px var(--aptools-color-grey-c3);
         }
 
         &-more {

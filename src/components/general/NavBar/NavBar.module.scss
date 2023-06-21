@@ -201,6 +201,9 @@
 
         & > span {
             height: 100%;
+            &:first-child {
+                display: flex;
+            }
 
             @include mediaWMax('TABLET') {
                 &:nth-child(2) {

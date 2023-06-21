@@ -2,10 +2,10 @@
 @import '/src/styles//static/general/mixins';
 
 .main-banner {
-    min-height: calc(350px - var(--layout-indent));
+    min-height: calc(320px - var(--layout-indent));
 
     @include mediaWMax('TABLET') {
-        min-height: calc(320px - var(--layout-indent));
+        min-height: calc(308px - var(--layout-indent));
     }
 
     display: flex;

@@ -67,6 +67,6 @@ const columnNamesDesktop = [
     },
 ];
 // Columns
-const columnsDesktop = ["15%", "10%", "15%", "15%", "25%", "10%", "10%"];
+const columnsDesktop = ["15%", "10%", "15%", "15%", "10%", "25%", "10%"];
 
 export { columnNamesDesktop, columnsDesktop };

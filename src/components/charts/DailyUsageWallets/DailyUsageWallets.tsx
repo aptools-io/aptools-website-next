@@ -36,7 +36,7 @@ const DailyUsageWallets: React.FC<IComponent> = ({
 
     useEffect(() => {
         const dailyWalletsUsage = {"7d": [], "14d": [],"30d": [], "all": dailyAddresses} as IApiWalletsUsage;
-        dailyAddresses.forEach(el => {
+        dailyAddresses?.forEach(el => {
             if(dateDiffInDays(new Date(el.x), new Date()) <= 8) dailyWalletsUsage["7d"].push(el);
             if(dateDiffInDays(new Date(el.x), new Date()) <= 15) dailyWalletsUsage["14d"].push(el);
             if(dateDiffInDays(new Date(el.x), new Date()) <= 31) dailyWalletsUsage["30d"].push(el);
