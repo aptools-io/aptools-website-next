@@ -6,7 +6,7 @@ import classNames from "classnames";
 import styles from "./Skeleton.module.scss";
 
 
-const Plate: React.FC<IPlateProps> = ({ 
+const Skeleton: React.FC<IComponent> = ({ 
     className,
     style
 }) => {
@@ -21,4 +21,4 @@ const Plate: React.FC<IPlateProps> = ({
     );
 };
 
-export default Plate;
+export default Skeleton;

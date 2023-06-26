@@ -9,7 +9,7 @@ import { IRootState } from "src/scripts/redux/store";
 import classNames from "classnames";
 
 // Components
-import { List, ListHeader, Paginator } from "src/components/ui";
+import { List, ListHeader, Loader, Paginator } from "src/components/ui";
 
 // Options
 import { setCoinTransactions } from "src/scripts/redux/slices/statsTransactionsSlice";
@@ -25,7 +25,9 @@ import media from "./data/adaptive";
 const TransactionRealTime: React.FC<{ 
     currentPage: number, 
     width: number,
-    setCurrentPage: React.Dispatch<React.SetStateAction<number>>
+    setCurrentPage: React.Dispatch<React.SetStateAction<number>>,
+    setLoading: React.Dispatch<React.SetStateAction<boolean>>,
+    loading: boolean
 }> = ({ currentPage, setCurrentPage, width }) => {
     const { data: aptosStats } = useSelector((state: IRootState) => state.statsAptos);
     const { transactions: trans } = aptosStats || {};
@@ -34,7 +36,9 @@ const TransactionRealTime: React.FC<{
 
     if(!trans || !width || !columns || !columnNames) return <></>;
     return (
-        <Paginator page={currentPage} perPage={10} total={trans[0]?.version} onChangePage={(page) => setCurrentPage(page)}>
+        <Paginator page={currentPage} perPage={10} total={trans[0]?.version} onChangePage={(page) => {
+            setCurrentPage(page);
+        }}>
             <ListHeader 
                 key={trans[0]?.version}
                 columnNames={columnNames as any} 
@@ -50,8 +54,10 @@ const TransactionRealTime: React.FC<{
 const Transaction: React.FC<{ 
     currentPage: number, 
     width: number,
-    setCurrentPage: React.Dispatch<React.SetStateAction<number>>
-}> = ({ currentPage, setCurrentPage, width }) => {
+    setCurrentPage: React.Dispatch<React.SetStateAction<number>>,
+    setLoading: React.Dispatch<React.SetStateAction<boolean>>,
+    loading: boolean
+}> = ({ currentPage, setCurrentPage, width, setLoading, loading }) => {
     const { data: transactionsData  } = useSelector((state: IRootState) => state.statsTransactions);
     const [total, setTotal] = useState(transactionsData?.[0]?.version || 0);
     const [currentInnerPage, setCurrentInnerPage] = useState(currentPage);
@@ -60,32 +66,53 @@ const Transaction: React.FC<{
     const { columnNames = null, columns = null } = media(width) || {};
 
     useEffect(() => {
+        setLoading(true);
+        if(currentInnerPage === -1)
+        {
+            transactions.getData(1).then((response) => {
+                const resp = response as unknown as IApiTransaction[];
+                dispatch(setCoinTransactions(resp));
+                setCurrentPage(-1);
+                setLoading(false);
+            });
+            return;
+        }
+        if(currentInnerPage === -2)
+        {
+            setCurrentPage(1);
+            setCurrentInnerPage(1);
+            return;
+        }
         if(currentPage !== 1) {
             transactions.getData().then(response => {
                 if(!response) return;
                 const lastTransaction = response[0]?.version;
                 setTotal(lastTransaction);
+                console.log(lastTransaction - (10 * (currentPage - 1)), lastTransaction, currentInnerPage, currentPage);
 
-                transactions.getData(lastTransaction - (10 * (currentPage - 1))).then((response) => {
+                transactions.getData(lastTransaction - (10 * (currentInnerPage - 1))).then((response) => {
                     const resp = response as unknown as IApiTransaction[];
                     dispatch(setCoinTransactions(resp));
                     setCurrentPage(currentInnerPage);
+                    setLoading(false);
                 });
             });
         }
-    }, [currentInnerPage, dispatch, currentPage, setCurrentPage]);
+    }, [currentInnerPage, dispatch, setCurrentPage]);
 
     if(!transactionsData || !width || !columns || !columnNames) return <></>;
 
     return (
-        <Paginator page={currentPage} perPage={10} total={total} onChangePage={(page) => setCurrentInnerPage(page)}>
+        <Paginator page={currentPage} perPage={10} total={total} onChangePage={(page) => {
+            setCurrentInnerPage(page);
+        }}>
             <ListHeader 
                 key={transactionsData[0]?.version}
                 columnNames={columnNames as any} 
                 columns={columns} 
                 data={transactionsData}
             >
-                <List adoptMobile />
+                <List adoptMobile loadingCount={loading && 10} />
             </ListHeader>
         </Paginator>);
 };
@@ -94,6 +121,7 @@ const TransactionsList: React.FC<IComponent> = ({
     className 
 }) => {
     const [currentPage, setCurrrentPage] = useState(1);
+    const [loading, setLoading] = useState(false);
     const { width } = useWindowSize();
 
     const classes = classNames([
@@ -108,8 +136,8 @@ const TransactionsList: React.FC<IComponent> = ({
                 <span>Last transactions</span>
             </strong>
             {currentPage === 1 ? 
-                <TransactionRealTime currentPage={currentPage} width={width} setCurrentPage={setCurrrentPage} /> :
-                <Transaction currentPage={currentPage} width={width} setCurrentPage={setCurrrentPage} />
+                <TransactionRealTime loading={loading} setLoading={setLoading} currentPage={currentPage} width={width} setCurrentPage={setCurrrentPage} /> :
+                <Transaction loading={loading} setLoading={setLoading} currentPage={currentPage} width={width} setCurrentPage={setCurrrentPage} />
             }
         </div>
     );

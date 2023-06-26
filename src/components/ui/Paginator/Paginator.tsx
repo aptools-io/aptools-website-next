@@ -52,7 +52,7 @@ const Paginator: React.FC<IPaginatorProps> = ({
                 {[...start, ...(page >= shift + 1 ? ["..."] : []), ...center,  ...(page <= pageCount - shift - 1 ? ["..."] : []), ...end].map(renderPagination)}
 
                 <button className={classNames([styles["paginator__arrow-right"], { [styles["disabled"]]: page === pageCount }])} onClick={() => onChangePage(page + 1)}><ArrowLeftPagination /></button>
-                <button className={classNames([styles["paginator__arrow-right"], { [styles["disabled"]]: page === pageCount }])} onClick={() => onChangePage(pageCount)}><ArrowLeftDoublePagination /></button>
+                <button className={classNames([styles["paginator__arrow-right"], { [styles["disabled"]]: page === pageCount }])} onClick={() => onChangePage(-1)}><ArrowLeftDoublePagination /></button>
             </ul>
         </div>
     );

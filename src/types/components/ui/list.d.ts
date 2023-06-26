@@ -9,6 +9,7 @@ interface IListProps extends IListHeaderProps {
     row?: combined;
     rowIndex?: number;
     column?: IColumnName;
+    loadingCount?: number;
     columnIndex?: number;
     under?: JSX.Element[]; 
     valueGridReplace?: JSX.Element[];

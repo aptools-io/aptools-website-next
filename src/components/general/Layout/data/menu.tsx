@@ -35,12 +35,12 @@ const menu = (t: Translate): INavBarMenuItem[] => {
         },
         {
             "title": t("ecosystem"),
-            "link": "/ecosystem",
+            "link": "/projects",
             "svg": <Squares />
         },
         {
             "title": t("termino wallet"),
-            "link": "/test-6",
+            "link": "https://termino.io/",
             "svg": <Tag />
         }
     ];

@@ -9,12 +9,13 @@ import { useSelector } from "react-redux";
 import { IRootState } from "src/scripts/redux/store";
 
 // Public
+import aptos from "public/static/images/svg/aptos.svg";
 
 // Util
-import { timerFrom } from "src/scripts/util/timeConvert";
 import { formatNumber, setSign } from "src/scripts/util/numbers";
-import aptos from "../../../../public/static/images/svg/aptos.svg";
+import moment from "moment";
 import styles from "./StatsAptos.module.scss";
+
 
 const TopStats = () => {
     const { data: aptosStats } = useSelector((state: IRootState) => state.statsAptos);
@@ -101,7 +102,7 @@ const StatsAptos: React.FC<IComponent> = ({
                 <div className={"stats__item"}>
                     <div className={"stats__item-wrapper emphasis"}>
                         <span className={"title"}>Launched</span>
-                        <span className={"info"}>{timerFrom(launched, currentTimestamp)}</span>
+                        <span className={"info"}>{moment(launched * 1000).fromNow()}</span>
                     </div>
                 </div>
             </div>

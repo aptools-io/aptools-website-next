@@ -1,0 +1,43 @@
+@import '/src/styles/static/general/animations';
+
+.loader {
+    &__wrapper {
+        background-color: #fff;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+    }
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    width: 100%;
+    max-width: 6rem;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+
+    &:after,
+    &:before {
+        content: '';
+        position: absolute;
+        border-radius: 50%;
+        animation: puls-out 1.8s ease-in-out infinite;
+        filter: drop-shadow(0 0 1rem rgb(var(--aptools-color-emphasis-c1--rgb) .75));
+    }
+
+    &:before {
+        width: 100%;
+        padding-bottom: 100%;
+        box-shadow: inset 0 0 0 1rem var(--aptools-color-emphasis-c1);
+        animation-name: puls-in;
+    }
+
+    &:after {
+        width: calc(100% - 2rem);
+        padding-bottom: calc(100% - 2rem);
+        box-shadow: 0 0 0 0  var(--aptools-color-emphasis-c1);
+    }
+}
