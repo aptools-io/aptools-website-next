@@ -25,7 +25,7 @@
         position: absolute;
         border-radius: 50%;
         animation: puls-out 1.8s ease-in-out infinite;
-        filter: drop-shadow(0 0 1rem rgb(var(--aptools-color-emphasis-c1--rgb) .75));
+        filter: drop-shadow(0 0 1rem rgb(var(--aptools-color-emphasis-c1--rgb) / .75));
     }
 
     &:before {
