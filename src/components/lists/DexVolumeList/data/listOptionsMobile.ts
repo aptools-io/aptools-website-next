@@ -5,20 +5,20 @@ const columnNamesMobile = [
     {
         "key": "name",
         "value": "Token",
-        "link": "/projects",
+        "link": "/dex",
         "mainMobile": true,
         "underline": true
     },
     {
         "key": "liquidity",
         "value": "Liquidity",
-        "defaultSort": true,
         "right": true,
         "formatter": (v) => `$${formatNumber(v)}`
     },
     {
         "key": "volume_24h",
         "value": "Volume 24H/%",
+        "defaultSort": true,
         "right": true,
         "formatter": (v) => `$${formatNumber(v)}`,
         "under": [

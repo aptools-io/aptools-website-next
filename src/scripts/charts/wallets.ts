@@ -1,5 +1,6 @@
 const walletsOptions = (data: IApiWallets[]) => {
     const xAxisArray = data[0].chart.map(item => item.x);
+    const yAxisArray = data[0].chart.map(item => item.y) as number[];
 
     const labels = {
         textStyle: {
@@ -62,6 +63,8 @@ const walletsOptions = (data: IApiWallets[]) => {
         },
         yAxis: {
             type: "value",
+            min: Math.round(Math.min(...yAxisArray)) - 1,
+            max: Math.round(Math.max(...yAxisArray)) + 1,
             axisLabel: {
                 formatter: (v) => {
                     if(v >= 1000000)
@@ -81,6 +84,7 @@ const walletsOptions = (data: IApiWallets[]) => {
         legend,
         tooltip: {
             trigger: "axis",
+            order: 'valueDesc'
         },
     };
 };

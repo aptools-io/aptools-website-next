@@ -9,3 +9,4 @@ export { default as TopReceiversList } from "./TopReceiversList/TopReceiversList
 export { default as TopTokensVolumeList } from "./TopTokensVolumeList/TopTokensVolumeList";
 export { default as InitalSupplyList } from "./InitalSupplyList/InitalSupplyList";
 export { default as TransactionsList } from "./TransactionsList/TransactionsList";
+export { default as DexPairsList } from "./DexPairsList/DexPairsList";

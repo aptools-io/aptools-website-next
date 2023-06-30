@@ -10,3 +10,4 @@ export { default as DailyUsageWallets } from "./DailyUsageWallets/DailyUsageWall
 export { default as TokenPrice } from "./TokenPrice/TokenPrice";
 export { default as TransactionHistory } from "./TransactionHistory/TransactionHistory";
 export { default as TokenSupplySchedule } from "./TokenSupplySchedule/TokenSupplySchedule";
+export { default as DexSingle } from "./DexSingle/DexSingle";

@@ -6,7 +6,7 @@ const columnNames = [
         "key": "contract",
         "value": "Contract",
         "ignoreCombined": true,
-        "link": "/projects",
+        "link": "/dex",
         "mainMobile": true,
         "replacedKeyMobile": "all_time",
         "replacedFormatter": (v) => `${formatNumber(v)}`,

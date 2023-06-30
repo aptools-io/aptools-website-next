@@ -66,7 +66,12 @@ const ListColumn: React.FC<IListProps> = ({
     const replacedValueMobile = !replacedFormatter ? unformattedReplacedValueMobile : replacedFormatter(unformattedReplacedValueMobile);
     const replacedCombinedValueMobile = replacedFormatter && combinedValues ? replacedFormatter(combinedValues?.[replacedKeyMobile]) : undefined;
 
-    const symbol = row?.[symbolRef];
+    let firstSymbol = row?.[symbolRef];
+    let secondSymbol = null;
+    if(typeof firstSymbol === "string" && firstSymbol && firstSymbol.indexOf("/") > -1) {
+        secondSymbol = firstSymbol.substring(firstSymbol.indexOf("/") + 1);
+        firstSymbol = firstSymbol.substring(0, firstSymbol.indexOf("/"));
+    }
     const description = row?.[descriptionRef];
 
     if(valueGridReplace?.length) return (<div key={columnIndex} className={styles["list-column__inner"]}>{valueGridReplace}</div>); 
@@ -105,7 +110,8 @@ const ListColumn: React.FC<IListProps> = ({
                         </button>}
                     {column["colorize"] && <DifferenceArrow />}
 
-                    {symbol && <img className={styles["list-column__icon"]} src={getDexImageFromApi(symbol)} alt={symbol}/>}
+                    {firstSymbol && <img className={styles["list-column__icon"]} src={getDexImageFromApi(firstSymbol)} alt={firstSymbol}/>}
+                    {secondSymbol && <img className={styles["list-column__icon"]} src={getDexImageFromApi(secondSymbol)} alt={secondSymbol}/>}
 
                     {replacedKeyMobile && <div className={classNames([styles["list-column__info"], styles["next-hide"]])}>
                         {(replacedCombinedValueMobile !== undefined) ? `${replacedCombinedValueMobile} / ` : ""}

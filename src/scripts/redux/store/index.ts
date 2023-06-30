@@ -8,6 +8,7 @@ import {
     statsProjectsSlice, 
     statsDexesVolumesSlice,
     statsAddressesTransactionsSlice,
+    singleDexSlice,
 } from "../slices/index";
 
 const store = configureStore({
@@ -19,7 +20,8 @@ const store = configureStore({
         statsProjects: statsProjectsSlice,
         statsTransactions,
         statsDexesVolumes: statsDexesVolumesSlice,
-        statsAddressesTransactions: statsAddressesTransactionsSlice
+        statsAddressesTransactions: statsAddressesTransactionsSlice,
+        singleDex: singleDexSlice
     },
 });
 export default store;

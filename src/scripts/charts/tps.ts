@@ -58,6 +58,7 @@ const tpsOptions = (data: IPoint[]) => {
         ],
         tooltip: {
             trigger: "axis",
+            order: 'valueDesc'
         },
     };
 };

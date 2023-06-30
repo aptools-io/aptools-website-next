@@ -81,6 +81,7 @@ const dexOptions = (data: IApiDex[]) => {
         legend,
         tooltip: {
             trigger: "axis",
+            order: 'valueDesc'
         },
     };
 };

@@ -47,6 +47,7 @@ const walletsBarOptions = (data: IApiWallets) => {
         ],
         tooltip: {
             trigger: "axis",
+            order: 'valueDesc'
         },
     };
 };

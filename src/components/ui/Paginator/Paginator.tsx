@@ -11,7 +11,7 @@ import styles from "./Paginator.module.scss";
 const Paginator: React.FC<IPaginatorProps> = ({ 
     page = 1,
     total = 1000,
-    shift = 3,
+    shift = 2,
     onChangePage = null, 
     children,
     className,
@@ -22,11 +22,17 @@ const Paginator: React.FC<IPaginatorProps> = ({
         className
     ]);
 
-    const pageCount = Math.ceil(total / 10); 
+    const pageCount = Math.ceil(90 / 10); 
 
-    const start = page < shift + 1 ? Array.from({length: shift + 1}, (_, i) => i + 1) : [1];
-    const center = page >= shift + 1 && page <= pageCount - shift + 1 ? [page - 2, page - 1, page, page + 1, page + 2] : [];
-    const end = Array.from({length: shift}, (_, i) => pageCount - i).reverse();
+
+    const pages = [...new Array(pageCount).fill(true).map((_, i) => {
+        const shift = 3;
+        if((i === page - shift || i === page + shift) && (i !== 0 && i !== pageCount - 1))  return "...";
+        if(i < page - shift && i !== 0) return undefined;
+        if(i > page + shift && i !== page - 1) return undefined;
+
+        return ++i;
+    }).filter(item => item)];
 ;
     const renderPagination = (item, index) => {
         return (
@@ -49,7 +55,7 @@ const Paginator: React.FC<IPaginatorProps> = ({
                 <button className={classNames([styles["paginator__arrow-left"], { [styles["disabled"]]: page === 1 }])} onClick={() => onChangePage(1)}><ArrowLeftDoublePagination /></button>
                 <button className={classNames([styles["paginator__arrow-left"], { [styles["disabled"]]: page === 1 }])} onClick={() => onChangePage(page - 1)}><ArrowLeftPagination /></button>
 
-                {[...start, ...(page >= shift + 1 ? ["..."] : []), ...center,  ...(page <= pageCount - shift - 1 ? ["..."] : []), ...end].map(renderPagination)}
+                {pages.map(renderPagination)}
 
                 <button className={classNames([styles["paginator__arrow-right"], { [styles["disabled"]]: page === pageCount }])} onClick={() => onChangePage(page + 1)}><ArrowLeftPagination /></button>
                 <button className={classNames([styles["paginator__arrow-right"], { [styles["disabled"]]: page === pageCount }])} onClick={() => onChangePage(-1)}><ArrowLeftDoublePagination /></button>

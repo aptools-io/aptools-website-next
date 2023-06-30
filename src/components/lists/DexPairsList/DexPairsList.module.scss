@@ -1,0 +1,19 @@
+.dex-pairs {
+    &__type {
+        padding: 2px 6px;
+        border-radius: 4px;
+        &.spot {
+            background-color: var(--aptools-color-lights-info);
+            color: var(--aptools-color-emphasis-c1);
+        }
+        &.margin-short {
+            background-color: var(--aptools-color-lights-success);
+            color: var(--aptools-color-emphasis-c1);
+        }
+        &.margin-long {
+            background-color: var(--aptools-color-lights-primary);
+            color: var(--aptools-color-emphasis-c1);
+        }
+        
+    }
+}

@@ -1,6 +1,7 @@
 interface IListHeaderProps extends IComponent {
     columnNames?: IColumnName[];
     columns?: string[];
+    hardSorting?: any;
     data?: unknown[];
 }
 
@@ -12,6 +13,7 @@ interface IListProps extends IListHeaderProps {
     loadingCount?: number;
     columnIndex?: number;
     under?: JSX.Element[]; 
+    slice?: [start: number, end: number]
     valueGridReplace?: JSX.Element[];
     inner?: boolean;
     handleCollapse?: () => void;

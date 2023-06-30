@@ -4,3 +4,4 @@ export { default as dexesVolumes } from "./apiDexesVolumes";
 export { default as generalStats } from "./apiGeneralStats";
 export { default as projects } from "./apiProjects";
 export { default as transactions } from "./apiTransactions";
+export { default as dexSingle } from "./apiDexSingle";
