@@ -18,6 +18,7 @@ import chartOptions from "./data/chartOptions";
 import { formatNumber, percentDifference, setSign } from "src/scripts/util/numbers";
 import { concatString } from "src/scripts/util/strings";
 import { DifferenceArrow } from "src/components/svg";
+import { Grid, GridWrapper } from "src/components/general";
 
 
 
@@ -26,10 +27,10 @@ const DexSingle: React.FC<IComponent> = ({
 }) => {
     const { data: singleDexData } = useSelector((state: IRootState) => state.singleDex);
     const { tvl = [], total_24h_volume = [], total_24h_transactions = [] } = singleDexData || {};
+
     const [currentDexData, setCurrentDexData] = useState("tvl"); 
     const [dexData, setDexData] = useState({});
 
-    console.log(tvl.slice(-1));
     const classes = classNames([
         styles["dex-single"],
         className
@@ -63,7 +64,7 @@ const DexSingle: React.FC<IComponent> = ({
                 data: total_24h_transactions
             }
         })
-    }, [tvl, total_24h_volume, total_24h_transactions])
+    }, [tvl, total_24h_volume, total_24h_transactions, ])
 
     useEffect(() => {
         if(!dexData[currentDexData]?.data?.length) return;
@@ -88,7 +89,6 @@ const DexSingle: React.FC<IComponent> = ({
 
     const renderTab = (item, index) => {
         const percent = item[1].percent;
-        console.log(percent)
         return (
             <li className={classNames([
                 styles["dex-single__tab"],
@@ -112,23 +112,29 @@ const DexSingle: React.FC<IComponent> = ({
 
     return (
         <div className={classes}>
-            <ul className={styles["dex-single__tabs"]}>
-                {Object.entries(dexData).map(renderTab)}
-            </ul>
-            <div className={styles["dex-single__inner"]}>
-                <strong className={"chart__title"}>
-                    <span>{dexData[currentDexData]?.name}</span>
-                    <span className={"chart__switcher"}>
-                        <button className={classNames([ { "active": volume === "7d" } ])} onClick={() => { setVolume("7d"); }}>7D</button>
-                        <button className={classNames([ { "active": volume === "14d" } ])} onClick={() => { setVolume("14d"); }}>14D</button>
-                        <button className={classNames([ { "active": volume === "30d" } ])} onClick={() => { setVolume("30d"); }}>30D</button>
-                        <button className={classNames([ { "active": volume === "all" } ])} onClick={() => { setVolume("all"); }}>ALL</button>
-                    </span>
-                </strong>
-                <div className={"chart__inner"}>
-                    <ReactECharts className={"chart__wrapper"} theme={""} option={chartOptions(data)} />
-                </div>
-            </div>
+            <Grid columns={4}>
+                <GridWrapper gridWidth={1}>
+                    <ul className={styles["dex-single__tabs"]}>
+                        {Object.entries(dexData).map(renderTab)}
+                    </ul>
+                </GridWrapper>
+                <GridWrapper gridWidth={3}>
+                    <div className={styles["dex-single__inner"]}>
+                        <strong className={"chart__title"}>
+                            <span>{dexData[currentDexData]?.name}</span>
+                            <span className={"chart__switcher"}>
+                                <button className={classNames([ { "active": volume === "7d" } ])} onClick={() => { setVolume("7d"); }}>7D</button>
+                                <button className={classNames([ { "active": volume === "14d" } ])} onClick={() => { setVolume("14d"); }}>14D</button>
+                                <button className={classNames([ { "active": volume === "30d" } ])} onClick={() => { setVolume("30d"); }}>30D</button>
+                                <button className={classNames([ { "active": volume === "all" } ])} onClick={() => { setVolume("all"); }}>ALL</button>
+                            </span>
+                        </strong>
+                        <div className={"chart__inner"}>
+                            <ReactECharts className={"chart__wrapper own-height"} style={{ height: "250px" }} theme={""} option={chartOptions(data)} />
+                        </div>
+                    </div>
+                </GridWrapper>
+            </Grid>
         </div>
     );
 };

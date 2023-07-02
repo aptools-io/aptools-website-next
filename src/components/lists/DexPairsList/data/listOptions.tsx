@@ -6,7 +6,7 @@ import classNames from "classnames";
 import styles from "../DexPairsList.module.scss";
 
 // Convert
-const columnNames = [
+const columnNamesType = [
     {
         "key": "pair",
         "value": "Pair",
@@ -67,8 +67,10 @@ const columnNames = [
         "right": true
     }
 ];
+const columnNames = columnNamesType.filter((_, index) => index !== 1);
 
 // Columns
-const columns = ["22.5%", "7.5%", "10%", "10%", "12.5%", "7.5%", "12.5%", "7.5%", "10%"];
+const columns = ["30%", "10%", "10%", "12.5%", "7.5%", "12.5%", "7.5%", "10%"];
+const columnsType = ["22.5%", "7.5%", "10%", "10%", "12.5%", "7.5%", "12.5%", "7.5%", "10%"];
 
-export { columnNames, columns };
+export { columnNames, columns, columnNamesType, columnsType };

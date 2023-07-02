@@ -7,7 +7,8 @@ const i18nConfig = {
     "pages": {
         "*": [
             "common",
-            "menu"
+            "menu",
+            "pages"
         ]
     },
     "loadLocaleFrom": (lang, ns) => {

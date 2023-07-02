@@ -1,6 +1,10 @@
 // React
 import React from "react";
 
+// Redux
+import { IRootState } from "src/scripts/redux/store";
+import { useSelector } from "react-redux";
+
 // Next
 import Head from "next/head";
 import useTranslation from "next-translate/useTranslation";
@@ -17,11 +21,14 @@ import styles from "./Layout.module.scss";
 import menu from "./data/menu";
 
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+    const { title } = useSelector((state: IRootState) => state.pageTitle);
+    
     const { t } = useTranslation("menu");
+
     return (
         <>
             <Head>
-                <title>Aptools - Making advanced on-chain analytics simple</title>
+                <title>{title ? `${title} | Aptools` : "Aptools – Making advanced on-chain analytics simple"}</title>
 
                 <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png"/>
                 <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png"/>

@@ -22,6 +22,7 @@ import filtrateProjects from "src/scripts/util/filtrateProjects";
 
 // Websocket
 import { aptosStats } from "src/scripts/websocket/connections";
+import { setPageTitle } from "src/scripts/redux/slices/pageTitleSlice";
 
 
 const Home = (data: IApiProps) => {
@@ -41,6 +42,7 @@ const Home = (data: IApiProps) => {
         dispatch(setAddressesData(data.contract_addresses || null));
         dispatch(setTransactionsData(data.contract_transactions || null));
         dispatch(setCoinTransactions(data.transactions) || null);
+        dispatch(setPageTitle(""));
     }, [data, dispatch]);
 
     return <MainPage />;

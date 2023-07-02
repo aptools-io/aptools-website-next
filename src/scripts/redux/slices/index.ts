@@ -7,3 +7,4 @@ export { default as statsTransactions } from "./statsTransactionsSlice";
 export { default as singleDexSlice } from "./singleDexSlice";
 export { default as statsDexesVolumesSlice } from "./statsDexesVolumesSlice";
 export { default as statsAddressesTransactionsSlice } from "./statsAddressesTransactionsSlice";
+export { default as pageTitleSlice } from "./pageTitleSlice";

@@ -13,3 +13,6 @@ export { default as TitleSwitcher } from "./TitleSwitcher/TitleSwitcher";
 export { default as Paginator } from "./Paginator/Paginator";
 export { default as Skeleton } from "./Skeleton/Skeleton";
 export { default as Loader } from "./Loader/Loader";
+export { default as Select } from "./Select/Select";
+export { default as Breadcrumbs } from "./Breadcrumbs/Breadcrumbs";
+export { default as Button } from "./Button/Button";

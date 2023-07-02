@@ -1,5 +1,8 @@
 // React
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+
+// Next
+import { useRouter } from "next/router";
 
 // Redux
 import { useSelector } from "react-redux";
@@ -12,16 +15,23 @@ import styles from "./DexPairsList.module.scss";
 
 
 // Options
-import { columnNames, columns } from "./data/listOptions";
+import { columnNames, columnNamesType, columns, columnsType } from "./data/listOptions";
+
+// Consts
+import { perPages, defaultPerPage } from "src/scripts/consts/perPages";
+
 
 const DexPairsList: React.FC<IComponent> = ({
     className 
 }) => {
     const { data: singleDexData } = useSelector((state: IRootState) => state.singleDex);
     const { coin_pairs = [] } = singleDexData || {};
+    const router = useRouter();
+    const { pairs = perPages[2], page = 1 } = router.query;
+
     const hardSorting = useState<{ key: string; sort: string }>({ key: "volume_24h", sort: "desc" });
-    const perPage = 10;
-    const [currentPage, setCurrentPage] = useState(1);
+    const [perPage, setPerPage] = useState(perPages.findIndex(x => x == pairs) !== -1 ? Number(pairs) : defaultPerPage);
+    const [currentPage, setCurrentPage] = useState(Number(page) || 1);
 
     const classes = classNames([
         styles["dex-pairs"],
@@ -36,14 +46,24 @@ const DexPairsList: React.FC<IComponent> = ({
             <strong className={"list__title"}>
                 <span>Pairs</span>
             </strong>
-            <Paginator page={currentPage} perPage={perPage} total={coin_pairs.length} onChangePage={(page) => {
-                setCurrentPage(page);
-            }}>
+            <Paginator 
+                changePerPage
+                perPageKey={"pairs"}
+                pageKey={"page"}
+                key={singleDexData?.name} 
+                page={currentPage} 
+                perPage={perPage} 
+                setPerPage={setPerPage} 
+                total={coin_pairs.length} 
+                onChangePage={(page) => {
+                    setCurrentPage(page);
+                }}
+            >
                 <ListHeader 
-                    columnNames={columnNames} 
-                    columns={columns} 
-                    hardSorting={hardSorting}
+                    columnNames={singleDexData?.name === "Tsunami" ? columnNamesType : columnNames} 
+                    columns={singleDexData?.name === "Tsunami" ? columnsType : columns} 
                     data={coin_pairs}
+                    hardSorting={hardSorting}
                 >
                     <List adoptMobile slice={[(currentPage - 1) * perPage, currentPage * perPage]} />
                 </ListHeader>

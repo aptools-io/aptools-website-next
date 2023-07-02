@@ -1,0 +1,10 @@
+{
+    "home": "Main",
+    "transactions": "Transactions",
+    "accounts": "Accounts",
+    "blocks": "Blocks",
+    "nft": "NFT",
+    "validators": "Validators",
+    "projects": "Projects",
+    "dex": "Dex"
+}

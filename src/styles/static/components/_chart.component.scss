@@ -3,10 +3,12 @@
 
     &__wrapper {
         width: 100%;
-        height: 352px !important;
+        &:not(.own-height) {
+            height: 352px !important;
 
-        @include mediaWMax('MOBILE') {
-            height: 272px !important;
+            @include mediaWMax('MOBILE') {
+                height: 272px !important;
+            }
         }
     }
 

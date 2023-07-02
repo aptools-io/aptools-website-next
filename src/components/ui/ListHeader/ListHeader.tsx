@@ -26,7 +26,6 @@ const ListHeader: React.ForwardRefRenderFunction<any, IListHeaderProps> = ({
     });
 
 
-
     const [sortedData, setSortedData] = useState(data.length ? data.map((item: any, index) => { 
         return { ...item, "_id": index + 1 };
     }) : []);

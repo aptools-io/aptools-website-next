@@ -1,7 +1,6 @@
 .dex-single {
     width: 100%;
     display: grid;
-    grid-template-columns: 388px 1fr;
     &__tab {
         padding: 10px 24px;
         display: flex;
@@ -70,10 +69,11 @@
             justify-content: space-between;
             
         }
+        flex-grow:1;
         &s {
             display: flex;
             flex-direction: column;
-            
+            height: 100%;
         }
     }
     &__inner {

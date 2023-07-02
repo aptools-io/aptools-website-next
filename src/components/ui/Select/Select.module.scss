@@ -1,0 +1,91 @@
+.select {
+    strong {
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 130%;
+        margin-left: 10px;
+        text-transform: uppercase;
+    }
+    display: flex;
+    flex-direction: column;
+    $self: &;
+    &.show {
+        #{$self}__options {
+            visibility: visible;
+            opacity: 1;
+            transform: translateY(0px) !important;
+        }
+        #{$self}__input {
+            background-color: var(--aptools-color-grey-c3);
+            svg {
+                transform: rotateZ(90deg);
+            }
+        }
+    }
+    &.from-bottom {
+        #{$self}__options { 
+            top: unset;
+            bottom: 100%;
+            transform: translateY(50px);
+        }
+    }
+    &__wrapper {
+        position: relative;
+        color: var(--aptools-color-emphasis-c1);
+        
+    }
+    &__input {
+        span {
+            font-weight: 500;
+        }
+        cursor: pointer;
+        padding: 10px 16px;
+        border-radius: 2px;
+        border: 1px solid var(--aptools-color-emphasis-c5);
+        background-color: var(--aptools-color-main-primary);
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 20px;
+        display: flex;
+        align-items: center;
+        transition: background-color .3s ease;
+        z-index: 2;
+        position: relative;
+        &:hover {
+            background-color: var(--aptools-color-grey-c3);
+        }
+        
+
+        svg {
+            margin-left: 5px;
+            transform: rotateZ(-90deg);
+            transition: transform .3s ease;
+        }
+    }
+    &__option {
+        padding: 10px 16px;
+        transition: background-color .3s ease;
+        background-color: var(--aptools-color-main-primary);
+        font-weight: 500;
+        &:hover {
+            background-color: var(--aptools-color-grey-c3);
+        }
+       
+        &s {
+            overflow-y: auto;
+            max-height: 210px;
+            width: 100%;
+            opacity: 0;
+            visibility: hidden;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 20px;
+            border: 1px solid var(--aptools-color-emphasis-c5);
+            transform: translateY(-50px);
+            transition: visibility .3s ease, opacity .3s ease, transform .3s ease;
+        }
+    }
+}
