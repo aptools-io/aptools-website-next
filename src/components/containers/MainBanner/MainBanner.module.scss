@@ -2,10 +2,10 @@
 @import '/src/styles//static/general/mixins';
 
 .main-banner {
-    min-height: calc(320px - var(--layout-indent));
+    min-height: calc(270px - var(--layout-indent));
 
     @include mediaWMax('TABLET') {
-        min-height: calc(308px - var(--layout-indent));
+        min-height: calc(300px - var(--layout-indent));
     }
 
     display: flex;
@@ -59,8 +59,11 @@
         right: 10.74%;
         transform: translateY(-50%);
 
+        @include mediaWMax('LARGE') {
+            right: -15%;
+        }
         @include mediaWMax('LAPTOP') {
-            right: -10%;
+            right: -25%;
         }
 
         @include mediaWMax('TABLET') {

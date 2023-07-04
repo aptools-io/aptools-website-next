@@ -8,18 +8,25 @@ import { IRootState } from "src/scripts/redux/store";
 // ECharts
 import ReactECharts from "echarts-for-react";
 
+// Hooks
+import useWindowSize from "src/scripts/hooks/useWindowSize";
+
 // Styles
 import classNames from "classnames";
-import { dateDiffInDays } from "src/scripts/util/timeConvert";
+import styles from "./DexSingle.module.scss";
+
+// Components
+import { DifferenceArrow } from "src/components/svg";
+import { Grid, GridWrapper } from "src/components/general";
 
 // Other
 import { formatNumber, percentDifference, setSign } from "src/scripts/util/numbers";
 import { concatString } from "src/scripts/util/strings";
-import { DifferenceArrow } from "src/components/svg";
-import { Grid, GridWrapper } from "src/components/general";
+import { dateDiffInDays } from "src/scripts/util/timeConvert";
 import chartOptions from "./data/chartOptions";
-import styles from "./DexSingle.module.scss";
 
+// Adaptive
+import media from "./data/adaptive";
 
 
 const DexSingle: React.FC<IComponent> = ({
@@ -30,6 +37,8 @@ const DexSingle: React.FC<IComponent> = ({
 
     const [currentDexData, setCurrentDexData] = useState("tvl"); 
     const [dexData, setDexData] = useState({});
+    const { width } = useWindowSize();
+    const mediaData = media(width);
 
     const classes = classNames([
         styles["dex-single"],
@@ -79,7 +88,7 @@ const DexSingle: React.FC<IComponent> = ({
         setVolumes(dailyWalletsUsage);
     }, [volume, dexData, currentDexData]);
 
-    if(!currentDexData || !tvl || !total_24h_volume || !total_24h_transactions) return <></>;
+    if(!currentDexData || !tvl || !total_24h_volume || !total_24h_transactions || !width) return <></>;
     const data = [
         {
             "name": dexData[currentDexData]?.name,
@@ -113,12 +122,12 @@ const DexSingle: React.FC<IComponent> = ({
     return (
         <div className={classes}>
             <Grid columns={4}>
-                <GridWrapper gridWidth={1}>
+                <GridWrapper gridWidth={mediaData.tabs}>
                     <ul className={styles["dex-single__tabs"]}>
                         {Object.entries(dexData).map(renderTab)}
                     </ul>
                 </GridWrapper>
-                <GridWrapper gridWidth={3}>
+                <GridWrapper gridWidth={mediaData.chart}>
                     <div className={styles["dex-single__inner"]}>
                         <strong className={"chart__title"}>
                             <span>{dexData[currentDexData]?.name}</span>
