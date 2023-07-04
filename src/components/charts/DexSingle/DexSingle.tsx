@@ -11,14 +11,14 @@ import ReactECharts from "echarts-for-react";
 // Styles
 import classNames from "classnames";
 import { dateDiffInDays } from "src/scripts/util/timeConvert";
-import styles from "./DexSingle.module.scss";
 
 // Other
-import chartOptions from "./data/chartOptions";
 import { formatNumber, percentDifference, setSign } from "src/scripts/util/numbers";
 import { concatString } from "src/scripts/util/strings";
 import { DifferenceArrow } from "src/components/svg";
 import { Grid, GridWrapper } from "src/components/general";
+import chartOptions from "./data/chartOptions";
+import styles from "./DexSingle.module.scss";
 
 
 
@@ -63,8 +63,8 @@ const DexSingle: React.FC<IComponent> = ({
                 percent: percentDifference(lastTotalTransactions?.[0]?.y as number, lastTotalTransactions?.[1]?.y as number),
                 data: total_24h_transactions
             }
-        })
-    }, [tvl, total_24h_volume, total_24h_transactions, ])
+        });
+    }, [tvl, total_24h_volume, total_24h_transactions, ]);
 
     useEffect(() => {
         if(!dexData[currentDexData]?.data?.length) return;
@@ -88,7 +88,7 @@ const DexSingle: React.FC<IComponent> = ({
     ];
 
     const renderTab = (item, index) => {
-        const percent = item[1].percent;
+        const {percent} = item[1];
         return (
             <li className={classNames([
                 styles["dex-single__tab"],
@@ -107,8 +107,8 @@ const DexSingle: React.FC<IComponent> = ({
                     ])}><DifferenceArrow />{concatString(setSign(formatNumber(percent)), "", "%")}</span>
                 </div>
             </li>
-        )
-    }
+        );
+    };
 
     return (
         <div className={classes}>

@@ -14,8 +14,10 @@ import styles from "./ProjectsList.module.scss";
 // Data
 import socials from "../Projects/data/socials";
 
-const ProjectsList: React.FC<{ data?: IApiProject[], mediaData: any }> = ({ data, mediaData }) => {
+const ProjectsList: React.FC<{ all?: boolean, data?: IApiProject[], mediaData: any }> = ({ all = false, data, mediaData }) => {
     const ResponsiveEllipsis = responsiveHOC()(LinesEllipsis);
+
+    if(!mediaData.projectWrapper) return <></>;
 
     const renderSocial = (item: IApiProjectSocials, index: number) => (
         <ActiveLink key={index} className={styles["projects-list__item-social-wrapper"]} href={item.link}>
@@ -24,7 +26,7 @@ const ProjectsList: React.FC<{ data?: IApiProject[], mediaData: any }> = ({ data
             </a>
         </ActiveLink>
     );
-
+    
     const renderItem = (item: IApiProject, index: number) => {
         const lastItem = data.length > mediaData.projectsCount ? mediaData.projectsCount : data.length;
         return (
@@ -53,7 +55,7 @@ const ProjectsList: React.FC<{ data?: IApiProject[], mediaData: any }> = ({ data
                         </span>
                     </Plate>
                 </GridWrapper>
-                {index === lastItem - 1 && 
+                {(index === lastItem - 1 && !all) &&
                 <GridWrapper gridWidth={mediaData.project}>
                     <div style={{ animation: `fade-in .5s ${index / 10}s normal forwards ease` }} className={styles["projects-list__item-more"]}>
                         <ActiveLink href={"/projects"}>
@@ -69,7 +71,7 @@ const ProjectsList: React.FC<{ data?: IApiProject[], mediaData: any }> = ({ data
 
     return (
         <Grid columns={mediaData.projectWrapper} className={styles["projects-list__items"]}>
-            {data?.map(renderItem).slice(0, mediaData.projectsCount)}
+            {data?.map(renderItem).slice(0, !all ? mediaData.projectsCount : data.length)}
         </Grid>
     );
 };

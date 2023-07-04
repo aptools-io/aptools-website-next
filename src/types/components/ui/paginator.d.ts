@@ -7,5 +7,5 @@ interface IPaginatorProps extends IComponent {
     total: number;
     shift?: number;
     onChangePage: (page: number) => any;
-    setPerPage: React.Dispatch<React.SetStateAction<number>>;
+    setPerPage?: React.Dispatch<React.SetStateAction<number>>;
 }

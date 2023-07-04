@@ -7,11 +7,11 @@ import { useSelector } from "react-redux";
 
 // Styles
 import classNames from "classnames";
-import styles from "./Topper.module.scss";
 
 // Components
 import { Breadcrumbs, Button } from "src/components/ui";
 import { useRouter } from "next/router";
+import styles from "./Topper.module.scss";
 
 
 const Topper: React.FC<{ backlink?: string } & IComponent> = ({ 

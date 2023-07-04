@@ -11,8 +11,8 @@ export default Dex;
 export async function getServerSideProps(context) {
     return {
         redirect: {
-          destination: '/',
+          destination: "/",
           permanent: false,
         },
-    }
+    };
 }

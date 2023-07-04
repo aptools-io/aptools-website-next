@@ -38,6 +38,6 @@ const setSign = (number: string | number) => {
 const percentDifference = (el1: number, el2: number) => {
     if(el1 === 0) return 100;
     return 100.0 * (el2 - el1) / el1;
-}
+};
 
 export { formatNumber, formatDecimal, setSign, percentDifference };

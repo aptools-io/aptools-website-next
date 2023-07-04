@@ -5,8 +5,9 @@ export class Api {
 
     token = process.env.BASE_TOKEN;
 
-    constructor(isToken: boolean = true) {
+    constructor(isToken: boolean = true, news: boolean = false) {
         if(isToken) this.tokenString = `?API_KEY=${this.token}`;
+        if(news) this.base = process.env.BASE_NEWS_URL;
     }
 
     fetch = async (type: string, url: string, headers: HeadersInit, body: BodyInit = null) => {

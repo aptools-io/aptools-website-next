@@ -83,7 +83,7 @@ const tokenScheludeOptions = (data: IApiTokenSchelude[]) => {
         legend,
         tooltip: {
             trigger: "axis",
-            order: 'valueDesc'
+            order: "valueDesc"
         },
     };
 };

@@ -12,6 +12,7 @@ const nextConfig = {
     },
     env: {
         BASE_HTTPS_URL: process.env.BASE_HTTPS_URL,
+        BASE_NEWS_URL: process.env.BASE_NEWS_URL,
         BASE_WSS_URL: process.env.BASE_WSS_URL,
         BASE_TOKEN: process.env.BASE_TOKEN
     },

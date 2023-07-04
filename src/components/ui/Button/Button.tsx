@@ -3,9 +3,9 @@ import React from "react";
 
 // Styles
 import classNames from "classnames";
+import { ArrowLeft } from "src/components/svg";
 import styles from "./Button.module.scss";
 import ActiveLink from "../ActiveLink/ActiveLink";
-import { ArrowLeft } from "src/components/svg";
 
 const Button: React.FC<IButtonProps> = ({ 
     href = null,
@@ -25,16 +25,16 @@ const Button: React.FC<IButtonProps> = ({
 
     const additive = {
         "back": <ArrowLeft />,
-    }
+    };
 
-    const ChildrenWrapper = <>{additive[before]}{children}{additive[after]}</>
+    const ChildrenWrapper = <>{additive[before]}{children}{additive[after]}</>;
 
     if(href) {
         return (
             <ActiveLink href={href}>
                 <a className={classes}>{ChildrenWrapper}</a>
             </ActiveLink>
-        )
+        );
     }
 
     return (

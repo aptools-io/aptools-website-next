@@ -20,11 +20,12 @@ const ListHeader: React.ForwardRefRenderFunction<any, IListHeaderProps> = ({
     const defaultSortIndex = columnNames?.findIndex(x => x.defaultSort);
     const defaultSortType = columnNames?.[defaultSortIndex]?.defaultSortType || "desc";
 
-    const [sorting, setSorting] = hardSorting || useState({
+    const softSorting = useState({
         "key": defaultSortIndex > -1 ? columnNames?.[defaultSortIndex]?.key : columnNames?.[0]?.key,
         "sort": defaultSortType
     });
 
+    const [sorting, setSorting] = hardSorting || softSorting;
 
     const [sortedData, setSortedData] = useState(data.length ? data.map((item: any, index) => { 
         return { ...item, "_id": index + 1 };

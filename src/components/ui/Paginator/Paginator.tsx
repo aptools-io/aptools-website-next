@@ -6,14 +6,14 @@ import { useRouter } from "next/router";
 
 // Styles
 import classNames from "classnames";
+import { ArrowLeftDoublePagination, ArrowLeftPagination } from "src/components/svg";
+import { defaultPerPage, perPages } from "src/scripts/consts/perPages";
 import styles from "./Paginator.module.scss";
 
 // Components
 import Select from "../Select/Select";
-import { ArrowLeftDoublePagination, ArrowLeftPagination } from "src/components/svg";
 
 // Consts
-import { defaultPerPage, perPages } from "src/scripts/consts/perPages";
 
 const getPagination = (pageCount, page, shift) => {
     const pagesTemp = [];
@@ -23,10 +23,10 @@ const getPagination = (pageCount, page, shift) => {
 
         if(i > page - shift && !(i > page + shift - 1)) pagesTemp.push(i + 1);
         else if(i === 0) pagesTemp.push(1);
-        else if(i > page + shift - 1) pagesTemp.push(pageCount)
+        else if(i > page + shift - 1) pagesTemp.push(pageCount);
     }
     return pagesTemp;
-} 
+}; 
 
 const Paginator: React.FC<IPaginatorProps> = ({ 
     page = 1,
@@ -42,7 +42,7 @@ const Paginator: React.FC<IPaginatorProps> = ({
     className,
     style
 }) => {
-    const [currentPerPageIndex, setCurrentPerPageIndex] = useState(perPages.findIndex(x => perPage == x));
+    const [currentPerPageIndex, setCurrentPerPageIndex] = useState(perPages.findIndex(x => Number(perPage) === x));
     const router = useRouter();
 
     const classes = classNames([
@@ -52,12 +52,12 @@ const Paginator: React.FC<IPaginatorProps> = ({
 
     const pageCount = Math.ceil(total / perPage); 
 
-    let pages = getPagination(pageCount, page, shift);
+    const pages = getPagination(pageCount, page, shift);
 
     const handleChangePage = (value) => {
         onChangePage(value);
         router.push({ pathname: router.pathname, query: { ...router.query, [pageKey]: value } }, null, { shallow: true });
-    }
+    };
 
     const handleChangePerPage = (value) => {
         setCurrentPerPageIndex(value);

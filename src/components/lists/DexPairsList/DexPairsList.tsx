@@ -11,6 +11,7 @@ import { IRootState } from "src/scripts/redux/store";
 // Styles
 import classNames from "classnames";
 import { List, ListHeader, Paginator } from "src/components/ui";
+import { perPages, defaultPerPage } from "src/scripts/consts/perPages";
 import styles from "./DexPairsList.module.scss";
 
 
@@ -18,7 +19,6 @@ import styles from "./DexPairsList.module.scss";
 import { columnNames, columnNamesType, columns, columnsType } from "./data/listOptions";
 
 // Consts
-import { perPages, defaultPerPage } from "src/scripts/consts/perPages";
 
 
 const DexPairsList: React.FC<IComponent> = ({
@@ -30,7 +30,7 @@ const DexPairsList: React.FC<IComponent> = ({
     const { pairs = perPages[2], page = 1 } = router.query;
 
     const hardSorting = useState<{ key: string; sort: string }>({ key: "volume_24h", sort: "desc" });
-    const [perPage, setPerPage] = useState(perPages.findIndex(x => x == pairs) !== -1 ? Number(pairs) : defaultPerPage);
+    const [perPage, setPerPage] = useState(perPages.findIndex(x => x === Number(pairs)) !== -1 ? Number(pairs) : defaultPerPage);
     const [currentPage, setCurrentPage] = useState(Number(page) || 1);
 
     const classes = classNames([

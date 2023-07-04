@@ -84,7 +84,7 @@ const walletsOptions = (data: IApiWallets[]) => {
         legend,
         tooltip: {
             trigger: "axis",
-            order: 'valueDesc'
+            order: "valueDesc"
         },
     };
 };

@@ -5,6 +5,7 @@ import React, { useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { setCoinTransactions } from "src/scripts/redux/slices/statsTransactionsSlice";
 import { setHeaders } from "src/scripts/redux/slices/headersSlice";
+import { setPageTitle } from "src/scripts/redux/slices/pageTitleSlice";
 
 // Components
 import { TransactionsPage } from "src/components/pages";
@@ -27,6 +28,7 @@ const Transactions = (data: IApiProps) => {
     useEffect(() => {
         dispatch(setHeaders(data.headers) || null);
         dispatch(setCoinTransactions(data.transactions) || null);
+        dispatch(setPageTitle("Transactions"));
     }, [data, dispatch]);
 
     return <TransactionsPage />;

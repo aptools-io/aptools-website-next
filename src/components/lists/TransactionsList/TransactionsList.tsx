@@ -36,7 +36,7 @@ const TransactionRealTime: React.FC<{
 
     if(!trans || !width || !columns || !columnNames) return <></>;
     return (
-        <Paginator page={currentPage} perPage={10} total={trans[0]?.version} onChangePage={(page) => {
+        <Paginator changePerPage page={currentPage} perPage={10} total={trans[0]?.version} onChangePage={(page) => {
             setCurrentPage(page);
         }}>
             <ListHeader 
@@ -117,7 +117,8 @@ const Transaction: React.FC<{
         </Paginator>);
 };
 
-const TransactionsList: React.FC<IComponent> = ({
+const TransactionsList: React.FC<{ title?: string } & IComponent> = ({
+    title = "Last transactions",
     className 
 }) => {
     const [currentPage, setCurrrentPage] = useState(1);
@@ -132,9 +133,9 @@ const TransactionsList: React.FC<IComponent> = ({
 
     return (
         <div className={classes}>
-            <strong className={"list__title"}>
+            {title && <strong className={"list__title"}>
                 <span>Last transactions</span>
-            </strong>
+            </strong>}
             {currentPage === 1 ? 
                 <TransactionRealTime loading={loading} setLoading={setLoading} currentPage={currentPage} width={width} setCurrentPage={setCurrrentPage} /> :
                 <Transaction loading={loading} setLoading={setLoading} currentPage={currentPage} width={width} setCurrentPage={setCurrrentPage} />

@@ -17,7 +17,7 @@ const media = (width: number) => {
         width) as number,
         projectsCount: a({ 
             [EBreakpoints.LARGE]: 14, 
-            [EBreakpoints.TABLET]: 7, 
+            [EBreakpoints.TABLET]: 8, 
             [EBreakpoints.MIN]: 5}, 
         width) as number,
     };

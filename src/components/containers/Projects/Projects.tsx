@@ -16,7 +16,8 @@ import ProjectsList from "../ProjectsList/ProjectsList";
 import media from "./data/adaptive";
 
 
-const Projects: React.FC<IComponent> = ({
+const Projects: React.FC<{ all?: boolean } & IComponent> = ({
+    all = false,
     className 
 }) => {
     const { data: projects } = useSelector((state: IRootState) => state.statsProjects);
@@ -33,7 +34,7 @@ const Projects: React.FC<IComponent> = ({
     return (
         <div className={classes}>
             <Tabs data={projects}>
-                <ProjectsList mediaData={mediaData} />
+                <ProjectsList all={all} mediaData={mediaData} />
             </Tabs>
         </div>
     );

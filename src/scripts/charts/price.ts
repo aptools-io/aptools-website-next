@@ -61,7 +61,7 @@ const priceOptions = (data: IPoint[]) => {
         ],
         tooltip: {
             trigger: "axis",
-            order: 'valueDesc'
+            order: "valueDesc"
         },
     };
 };

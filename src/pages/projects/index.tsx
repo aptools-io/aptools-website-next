@@ -5,6 +5,7 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { setProjectStatsData } from "src/scripts/redux/slices/statsProjectsSlice";
 import { setHeaders } from "src/scripts/redux/slices/headersSlice";
+import { setPageTitle } from "src/scripts/redux/slices/pageTitleSlice";
 
 // Components
 import { ProjectsPage } from "src/components/pages";
@@ -22,6 +23,7 @@ const Ecosystem = (data: IApiProps) => {
     useEffect(() => {
         dispatch(setHeaders(data.headers) || null);
         dispatch(setProjectStatsData(data.projects || null));
+        dispatch(setPageTitle("Projects on the Aptos Blockchain"));
     }, [data, dispatch]);
 
     return <ProjectsPage />;
