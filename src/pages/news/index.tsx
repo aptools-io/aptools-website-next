@@ -18,7 +18,7 @@ const News = (data: IApiProps) => {
     useEffect(() => {
         dispatch(setHeaders(data.headers) || null);
         dispatch(setPageTitle("News"));
-        console.log(data)
+        console.log(data);
     }, [data, dispatch]);
 
     return <NewsPage />;

@@ -11,10 +11,6 @@ import ReactECharts from "echarts-for-react";
 // Hooks
 import useWindowSize from "src/scripts/hooks/useWindowSize";
 
-// Styles
-import classNames from "classnames";
-import styles from "./DexSingle.module.scss";
-
 // Components
 import { DifferenceArrow } from "src/components/svg";
 import { Grid, GridWrapper } from "src/components/general";
@@ -23,11 +19,16 @@ import { Grid, GridWrapper } from "src/components/general";
 import { formatNumber, percentDifference, setSign } from "src/scripts/util/numbers";
 import { concatString } from "src/scripts/util/strings";
 import { dateDiffInDays } from "src/scripts/util/timeConvert";
+
+// Styles
+import classNames from "classnames";
+import styles from "./DexSingle.module.scss";
+
+// Other
 import chartOptions from "./data/chartOptions";
 
 // Adaptive
 import media from "./data/adaptive";
-
 
 const DexSingle: React.FC<IComponent> = ({
     className 
