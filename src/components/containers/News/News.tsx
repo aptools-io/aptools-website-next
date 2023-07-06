@@ -5,13 +5,13 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { IRootState } from "src/scripts/redux/store";
 
-// Styles
-import classNames from "classnames";
-import styles from "./News.module.scss";
-
 // Components
 import { Tabs } from "src/components/ui";
 import { news } from "src/scripts/api/requests";
+
+// Styles
+import classNames from "classnames";
+import styles from "./News.module.scss";
 
 
 const Test = (props) => {
