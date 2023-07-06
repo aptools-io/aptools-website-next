@@ -8,6 +8,10 @@ interface ITabsProps extends IComponent {
 interface ITab {
     title?: string;
     id?: number;
-    action?: (any, id: number) => void;
+    action?: (
+        dataDispatch: React.Dispatch<object>, 
+        loading: React.Dispatch<boolean>, 
+        id: number
+    ) => void, 
     data?: object;
 }

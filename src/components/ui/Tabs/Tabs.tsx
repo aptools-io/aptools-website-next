@@ -1,5 +1,5 @@
 // React
-import React, { useRef, useState, Children } from "react";
+import React, { useRef, useState, Children, useEffect } from "react";
 
 // Swiper / Components
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -11,6 +11,7 @@ import classNames from "classnames";
 
 // Adaptive
 import styles from "./Tabs.module.scss";
+import Skeleton from "../Skeleton/Skeleton";
 
 
 
@@ -32,6 +33,7 @@ const Tabs: React.ForwardRefRenderFunction<any, ITabsProps> = ({
     const [swiper, setSwiper] = useState(null);
 
     const [customEntry, setCustomEntry] = useState(null);
+    const [loading, setLoading] = useState(false);
 
     const entries = data ? Object.entries(data) : dataArray;
     const entry = entries?.[tabId]?.[1] || null;
@@ -41,9 +43,16 @@ const Tabs: React.ForwardRefRenderFunction<any, ITabsProps> = ({
         className
     ]);
 
-    const handleTabClick = (index: number, getData: { action: (any, id: number) => void, id: number }) => {
+    const handleTabClick = (
+        index: number, 
+        getData: ITab
+    ) => {
         setTabId(index);
-        if(getData.action) getData.action(setCustomEntry, getData.id);
+        
+        if(getData.action) {
+            setLoading(true);
+            getData.action(setCustomEntry, setLoading, getData.id);
+        } 
     }
     
     const renderCategory = (item: ITab | [ string, any ], index: number) => {
@@ -72,38 +81,37 @@ const Tabs: React.ForwardRefRenderFunction<any, ITabsProps> = ({
                     <ArrowLeft />  
                 </div>
                 <div className={styles["tabs__inner"]}>
-                        <>
+                    <>
                         <Swiper
-                                modules={[Navigation]}
-                                navigation={{
-                                    prevEl: navigationPrevRef.current,
-                                    nextEl: navigationNextRef.current,
-                                }}
-                                slidesPerView={"auto"}
-                               
-                                onBeforeInit={(swiper) =>{
-                                    swiper.params.navigation["disabledClass"] = styles["tabs__nav--disabled"];
-                                    swiper.params.navigation["lockClass"] = styles["tabs__nav--lock"];
-                                    
-                                }}
-                                onInit={(swiper) => {
-                                    setSwiper(swiper);
-                                    swiper.el.style.display = "block";
-                                    swiper.wrapperEl.classList.add(styles["tabs__wrapper"]);
-                                }}
-                            >
-                                {entries.map(renderCategory)}
-                            </Swiper>
-                        </>
+                            modules={[Navigation]}
+                            navigation={{
+                                prevEl: navigationPrevRef.current,
+                                nextEl: navigationNextRef.current,
+                            }}
+                            slidesPerView={"auto"}
+                            
+                            onBeforeInit={(swiper) =>{
+                                swiper.params.navigation["disabledClass"] = styles["tabs__nav--disabled"];
+                                swiper.params.navigation["lockClass"] = styles["tabs__nav--lock"];
+                                
+                            }}
+                            onInit={(swiper) => {
+                                setSwiper(swiper);
+                                swiper.el.style.display = "block";
+                                swiper.wrapperEl.classList.add(styles["tabs__wrapper"]);
+                            }}
+                        >
+                            {entries.map(renderCategory)}
+                        </Swiper>
+                    </>
                 </div>
                 <div className={styles["tabs__nav--button"]} onClick={() => swiper.slideNext()} ref={navigationNextRef}>
                     <ArrowLeft />
                 </div>
             </div>
-            {React.cloneElement(child as React.ReactElement<IListHeaderProps>, {
+            {!loading ? <>{React.cloneElement(child as React.ReactElement<IListHeaderProps>, {
                 data: entry || customEntry || defaultEntry || [],
-                key: tabId
-            }) }
+            }) }</> : new Array(10).fill(null).map((_, index) => <Skeleton key={index} style={{ height: "205px", minHeight: "205px" }} />) }
         </div>
     );
 };

@@ -12,6 +12,7 @@ const Button: React.FC<IButtonProps> = ({
     after = null,
     before = null,
     invert = false,
+    fill = false,
     children,
     className,
     style
@@ -20,6 +21,7 @@ const Button: React.FC<IButtonProps> = ({
     const classes = classNames([
         styles["button"],
         { [styles["invert"]]: invert },
+        { [styles["fill"]]: fill },
         className
     ]);
 

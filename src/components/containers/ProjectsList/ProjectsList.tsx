@@ -1,15 +1,18 @@
 // React
 import React from "react";
 
-// Styles
+// Components
 import { Grid, GridWrapper } from "src/components/general";
 import { ActiveLink, Plate } from "src/components/ui";
 import { ArrowMore } from "src/components/svg";
-
-// Components
 import LinesEllipsis from "react-lines-ellipsis";
 import responsiveHOC from "react-lines-ellipsis/lib/responsiveHOC";
+
+// Styles
 import styles from "./ProjectsList.module.scss";
+
+
+
 
 // Data
 import socials from "../Projects/data/socials";

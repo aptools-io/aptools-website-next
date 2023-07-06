@@ -16,11 +16,12 @@ import Footer from "../Footer/Footer";
 
 // Styles
 import styles from "./Layout.module.scss";
+import classNames from "classnames";
 
 // Other
 import menu from "./data/menu";
 
-const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+const Layout: React.FC<{ children: React.ReactNode, pageProps }> = ({ children, pageProps }) => {
     const { title } = useSelector((state: IRootState) => state.pageTitle);
     
     const { t } = useTranslation("menu");
@@ -47,7 +48,10 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                 <meta name="viewport" content={"width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"}/>
             </Head>
 
-            <div data-theme={"light"} id={"main"} className={styles["layout"]}>
+            <div data-theme={"light"} id={"main"} className={classNames([
+                styles["layout"],
+                { [styles["overflow"]]: pageProps?.overflow }
+            ])}>
                 {/* <MainLoading /> */}
                 <NextNProgress  options={{ showSpinner: false }} color="#3b5998" />
                 <NavBar data={menu(t)} />
