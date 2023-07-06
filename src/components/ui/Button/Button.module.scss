@@ -8,6 +8,17 @@
     display: flex;
     align-items: center;
     color: var(--aptools-color-emphasis-c1);
+    &.fill {
+        background-color: var(--aptools-color-main-primary); 
+    }
+    &.invert {
+        background-color: var(--aptools-color-emphasis-c1);
+        color: var(--aptools-color-main-primary);
+        &:hover {
+            color: var(--aptools-color-emphasis-c1);
+            background-color: var(--aptools-color-main-primary); 
+        }
+    }
     &:hover {
         background-color: var(--aptools-color-emphasis-c1);
         color: var(--aptools-color-main-primary);

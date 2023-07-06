@@ -14,3 +14,7 @@ export { default as TokenStatistics } from "./TokenStatistics/TokenStatistics";
 export { default as MoneyFlow } from "./MoneyFlow/MoneyFlow";
 export { default as ActiveUniqueAddresses } from "./ActiveUniqueAddresses/ActiveUniqueAddresses";
 export { default as News } from "./News/News";
+export { default as NewsList } from "./NewsList/NewsList";
+export { default as UpdatesSide } from "./UpdatesSide/UpdatesSide";
+export { default as TrendsList } from "./TrendsList/TrendsList";
+export { default as NewsBanner } from "./NewsBanner/NewsBanner";

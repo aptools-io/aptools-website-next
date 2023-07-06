@@ -54,4 +54,4 @@ const dateDiffInDays = (date1: Date, date2: Date) => {
 };
 
 
-export { ensureMillisecondTimestamp, parseTimestamp, timerFrom, dateDiffInDays, timeFull, time };
+export { ensureMillisecondTimestamp, parseTimestamp, timerFrom, dateDiffInDays, timeFull, time, addZero };

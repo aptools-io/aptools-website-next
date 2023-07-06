@@ -8,16 +8,15 @@ import { IRootState } from "src/scripts/redux/store";
 // Components
 import { Tabs } from "src/components/ui";
 import { news } from "src/scripts/api/requests";
+import { Grid, GridWrapper } from "src/components/general";
+import classNames from "classnames";
+import NewsList from "../NewsList/NewsList";
+import UpdatesSide from "../UpdatesSide/UpdatesSide";
+
 
 // Styles
-import classNames from "classnames";
 import styles from "./News.module.scss";
 
-
-const Test = (props) => {
-    
-    return <div></div>
-}
 
 const News: React.FC<IComponent> = ({
     className 
@@ -33,17 +32,29 @@ const News: React.FC<IComponent> = ({
     const handleCategories = newsCategoriesData?.map(x => { return {
         id: x.id,
         title: x.categoryTitle,
-        action: async (test, id) => {
-            const data = await news.getNewsData(10, id)
-            test(data)
+        action: async (setCustomEntry, setLoading, id) => {
+            const data = await news.getNewsData(10, id).then(e => {
+                setTimeout(() => {
+                    setLoading(false);
+                }, 200);
+                return e;
+            });
+            setCustomEntry(data);
         }
-    } }) || [];
+    }; }) || [];
     
     return (
         <div className={classes}>
-            <Tabs dataArray={handleCategories} defaultEntry={newsData} itemsCount={false}>
-                <Test></Test>
-            </Tabs>
+            <Grid columns={3}>
+                <GridWrapper gridWidth={2}>
+                    <Tabs dataArray={handleCategories} defaultEntry={newsData} itemsCount={false}>
+                        <NewsList />
+                    </Tabs>
+                </GridWrapper>
+                <GridWrapper gridWidth={1}>
+                    <UpdatesSide />
+                </GridWrapper>
+            </Grid>
         </div>
     );
 };

@@ -1,6 +1,7 @@
 export { default as Accounts } from "./Accounts";
 export { default as Aptos } from "./Aptos";
 export { default as ArrowLeft } from "./ArrowLeft";
+export { default as ArrowLeftBig } from "./ArrowLeftBig";
 export { default as ArrowLeftDoublePagination } from "./ArrowLeftDoublePagination";
 export { default as ArrowLeftPagination } from "./ArrowLeftPagination";
 export { default as ArrowMore } from "./ArrowMore";

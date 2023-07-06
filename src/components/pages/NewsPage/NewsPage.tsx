@@ -2,7 +2,7 @@
 import React from "react";
 
 // Components
-import { News } from "src/components/containers";
+import { News, NewsBanner, TrendsList } from "src/components/containers";
 import { Grid, GridWrapper, Topper } from "src/components/general";
 import { CategoryTitle } from "src/components/ui";
 
@@ -13,8 +13,9 @@ const NewsPage: React.FC = () => {
             <Topper backlink={"/"} />
             <Grid>
                 <GridWrapper>
+                    <NewsBanner />
                     <CategoryTitle title={"In trends"} />
-                    {/* <TrendsNews /> */}
+                    <TrendsList />
                     <CategoryTitle title={"Last News"} />
                     <News />
                 </GridWrapper>
