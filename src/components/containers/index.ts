@@ -13,3 +13,4 @@ export { default as StatsGas } from "./StatsGas/StatsGas";
 export { default as TokenStatistics } from "./TokenStatistics/TokenStatistics";
 export { default as MoneyFlow } from "./MoneyFlow/MoneyFlow";
 export { default as ActiveUniqueAddresses } from "./ActiveUniqueAddresses/ActiveUniqueAddresses";
+export { default as News } from "./News/News";

@@ -7,5 +7,7 @@ interface IApiProps {
     "contract_addresses"?: IApiAdressesTransactions[];
     "contract_transactions"?: IApiAdressesTransactions[];
     "transactions": IApiTransaction[],
-    "dex_single": IApiDexSingle
+    "dex_single": IApiDexSingle,
+    "news": IApiNews,
+    "news_categories": IApiNewsCategory[]
 }

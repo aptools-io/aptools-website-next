@@ -16,42 +16,54 @@ import styles from "./Tabs.module.scss";
 
 const Tabs: React.ForwardRefRenderFunction<any, ITabsProps> = ({
     data,
+    dataArray,
+    defaultEntry = null,
     itemsCount = true,
     children,
     className 
 }, ref) => {
+
     const child: React.ReactNode = Children.only(children);
  
     const [tabId, setTabId] = useState(0);
+
     const navigationPrevRef = useRef(null);
     const navigationNextRef = useRef(null);
     const [swiper, setSwiper] = useState(null);
 
-    const entries = Object.entries(data);
-    const entry = entries?.[tabId]?.[1] || [];
+    const [customEntry, setCustomEntry] = useState(null);
+
+    const entries = data ? Object.entries(data) : dataArray;
+    const entry = entries?.[tabId]?.[1] || null;
 
     const classes = classNames([
         styles["tabs"],
         className
     ]);
 
-    const handleTabClick = (index: number) => setTabId(index);
+    const handleTabClick = (index: number, getData: { action: (any, id: number) => void, id: number }) => {
+        setTabId(index);
+        if(getData.action) getData.action(setCustomEntry, getData.id);
+    }
     
-    const renderCategory = (item, index: number) => {
+    const renderCategory = (item: ITab | [ string, any ], index: number) => {
+        const checkItem = Array.isArray(item);
+        
         return (
             <SwiperSlide key={index}>
-                <div onClick={() => handleTabClick(index)} data-count={item[1].length} className={classNames([
+                <div onClick={() => handleTabClick(index, !checkItem && { action: item.action, id: item.id })} data-count={checkItem && item[1].length} className={classNames([
                     styles["tabs__item"],
                     {[styles["active"]]: index === tabId },
                     {[styles["counter"]]: itemsCount }
                 ])}>
-                    {item[0]}
+                    {checkItem ? item[0] : item.title}
                 </div>
             </SwiperSlide>
         );
     };
+   
 
-    if(!data) return <></>;
+    if(!(data || dataArray)) return <></>;
     
     return (
         <div ref={ref} className={classes}>
@@ -89,7 +101,7 @@ const Tabs: React.ForwardRefRenderFunction<any, ITabsProps> = ({
                 </div>
             </div>
             {React.cloneElement(child as React.ReactElement<IListHeaderProps>, {
-                data: entry,
+                data: entry || customEntry || defaultEntry || [],
                 key: tabId
             }) }
         </div>

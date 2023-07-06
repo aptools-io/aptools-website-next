@@ -3,11 +3,13 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 const newsSlice = createSlice({
     "name": "news",
     "initialState": {
-        "data": null as IApiProject[]
+        "newsData": null as IApiNews,
+        "newsCategoriesData": null as IApiNewsCategory[]
     },
     "reducers": {
-        "setNewsData": (state, action: PayloadAction<IApiProject[]>) => {
-            state.data = action.payload;
+        "setNewsData": (state, action: PayloadAction<{ news: IApiNews, categories: IApiNewsCategory[] }>) => {
+            state.newsData = action.payload?.news || null;
+            state.newsCategoriesData = action.payload?.categories || null;
         },
     }
 });

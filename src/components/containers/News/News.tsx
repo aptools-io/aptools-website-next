@@ -7,29 +7,42 @@ import { IRootState } from "src/scripts/redux/store";
 
 // Styles
 import classNames from "classnames";
-import { Tabs } from "src/components/ui";
-import styles from "./Projects.module.scss";
+import styles from "./News.module.scss";
 
 // Components
-import ProjectsList from "../ProjectsList/ProjectsList";
+import { Tabs } from "src/components/ui";
+import { news } from "src/scripts/api/requests";
 
+
+const Test = (props) => {
+    
+    return <div></div>
+}
 
 const News: React.FC<IComponent> = ({
     className 
 }) => {
-    const { data: projects } = useSelector((state: IRootState) => state.statsProjects);
+    const { newsData, newsCategoriesData } = useSelector((state: IRootState) => state.news);
 
+    
     const classes = classNames([
-        styles["projects"],
+        styles["news"],
         className
     ]);
 
-    if(!projects) return <></>;
-
+    const handleCategories = newsCategoriesData?.map(x => { return {
+        id: x.id,
+        title: x.categoryTitle,
+        action: async (test, id) => {
+            const data = await news.getNewsData(10, id)
+            test(data)
+        }
+    } }) || [];
+    
     return (
         <div className={classes}>
-            <Tabs data={projects}>
-                test
+            <Tabs dataArray={handleCategories} defaultEntry={newsData} itemsCount={false}>
+                <Test></Test>
             </Tabs>
         </div>
     );
