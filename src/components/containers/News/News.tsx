@@ -9,12 +9,12 @@ import { IRootState } from "src/scripts/redux/store";
 import { Tabs } from "src/components/ui";
 import { news } from "src/scripts/api/requests";
 import { Grid, GridWrapper } from "src/components/general";
+import classNames from "classnames";
 import NewsList from "../NewsList/NewsList";
 import UpdatesSide from "../UpdatesSide/UpdatesSide";
 
 
 // Styles
-import classNames from "classnames";
 import styles from "./News.module.scss";
 
 
@@ -38,10 +38,10 @@ const News: React.FC<IComponent> = ({
                     setLoading(false);
                 }, 200);
                 return e;
-            })
+            });
             setCustomEntry(data);
         }
-    } }) || [];
+    }; }) || [];
     
     return (
         <div className={classes}>

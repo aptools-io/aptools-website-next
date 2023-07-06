@@ -8,12 +8,12 @@ import { Button } from "src/components/ui";
 
 // Styles
 import classNames from "classnames";
-import styles from "./NewsBanner.module.scss";
 
 // Static
 import NewsBannerLogo from "public/static/images/svg/news_banner_logo.svg";
 import NewsImage1 from "public/static/images/png/news_1.png";
 import NewsImage2 from "public/static/images/png/news_2.png";
+import styles from "./NewsBanner.module.scss";
 
 const dummyData = [
     {
@@ -30,7 +30,7 @@ const dummyData = [
         color: "green",
         image: NewsImage2.src
     },
-]
+];
 
 const NewsBanner: React.FC<IComponent> = ({
     className 
@@ -58,14 +58,14 @@ const NewsBanner: React.FC<IComponent> = ({
                     <img className={styles["image"]} src={image} alt={"image"}/>
                 </div>
             </SwiperSlide>
-        )
-    }
+        );
+    };
 
     const pagination = {
         clickable: true,
         el: `.${styles["news-banner__dots"]}`,
         bulletActiveClass: styles["active"],
-        renderBullet: function (index, className) {
+        renderBullet (index, className) {
             return `<button class="${styles["news-banner__dot"]} ${className}"></button>`;
         },
     };
@@ -84,7 +84,7 @@ const NewsBanner: React.FC<IComponent> = ({
                         swiper.wrapperEl.classList.add(styles["news-banner__items"]);
                     }}
                     onSlideChange={(swiper) => {
-                        console.log(swiper)
+                        console.log(swiper);
                         setCurrentSlide(swiper.activeIndex);
                     }}
                 >

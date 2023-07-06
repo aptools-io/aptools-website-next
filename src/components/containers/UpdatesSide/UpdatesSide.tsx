@@ -3,8 +3,8 @@ import React from "react";
 
 // Styles
 import classNames from "classnames";
-import styles from "./UpdatesSide.module.scss";
 import { ActiveLink, Button } from "src/components/ui";
+import styles from "./UpdatesSide.module.scss";
 
 const dummyData = [
     {
@@ -37,7 +37,7 @@ const dummyData = [
         title: "Blockchain Scalability Enhancement",
         date: "03.03.2023"
     },
-]
+];
 
 const UpdatesSide: React.FC<IComponent> = ({
     className 
@@ -60,8 +60,8 @@ const UpdatesSide: React.FC<IComponent> = ({
                     </a>
                 </ActiveLink>
             </li>
-        )
-    }
+        );
+    };
 
     return (
         <div className={classes}>

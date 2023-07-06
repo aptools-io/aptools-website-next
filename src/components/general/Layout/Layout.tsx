@@ -11,12 +11,12 @@ import useTranslation from "next-translate/useTranslation";
 
 // Components
 import NextNProgress from "nextjs-progressbar";
+import classNames from "classnames";
 import NavBar from "../NavBar/NavBar";
 import Footer from "../Footer/Footer";
 
 // Styles
 import styles from "./Layout.module.scss";
-import classNames from "classnames";
 
 // Other
 import menu from "./data/menu";

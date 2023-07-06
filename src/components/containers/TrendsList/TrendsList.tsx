@@ -11,6 +11,7 @@ import { ActiveLink, Img } from "src/components/ui";
 // Styles
 import classNames from "classnames";
 import styles from "./TrendsList.module.scss";
+
 const dummyData = [
     {
         id: 1,
@@ -47,7 +48,7 @@ const dummyData = [
         category: "Security",
         imageLink: "/"
     },
-]
+];
 
 const TrendsList: React.FC<{ vertical?: boolean } & IComponent> = ({
     vertical = false,

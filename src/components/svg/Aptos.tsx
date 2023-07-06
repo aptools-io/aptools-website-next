@@ -1,5 +1,6 @@
-import * as React from 'react';
-import { SVGProps } from 'react';
+import * as React from "react";
+import { SVGProps } from "react";
+
 const SvgAptos = (props: SVGProps<SVGSVGElement>) => (
   <svg
     width={35}

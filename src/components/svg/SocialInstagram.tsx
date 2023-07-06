@@ -1,5 +1,6 @@
-import * as React from 'react';
-import { SVGProps } from 'react';
+import * as React from "react";
+import { SVGProps } from "react";
+
 const SvgSocialInstagram = (props: SVGProps<SVGSVGElement>) => (
   <svg
     width={24}
@@ -10,7 +11,7 @@ const SvgSocialInstagram = (props: SVGProps<SVGSVGElement>) => (
   >
     <path
       style={{
-        fill: '#3b5998',
+        fill: "#3b5998",
       }}
       fillRule='evenodd'
       clipRule='evenodd'

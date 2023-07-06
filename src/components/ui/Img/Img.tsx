@@ -11,8 +11,8 @@ const Img: React.FC<{ src: string, alt: string }> = ({
 }) => {
     const [error, setError] = useState(false);
 
-    if(error) return <img style={{ objectFit: "contain", transform: "scale(.25, .25)" }} src={NoImageLogo.src} alt={"image not found"} />
-    return <img src={src} alt={alt} onError={() => setError(true)} />
+    if(error) return <img style={{ objectFit: "contain", transform: "scale(.25, .25)" }} src={NoImageLogo.src} alt={"image not found"} />;
+    return <img src={src} alt={alt} onError={() => setError(true)} />;
 };
 
 export default Img;

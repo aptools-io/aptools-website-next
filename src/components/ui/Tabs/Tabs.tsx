@@ -53,7 +53,7 @@ const Tabs: React.ForwardRefRenderFunction<any, ITabsProps> = ({
             setLoading(true);
             getData.action(setCustomEntry, setLoading, getData.id);
         } 
-    }
+    };
     
     const renderCategory = (item: ITab | [ string, any ], index: number) => {
         const checkItem = Array.isArray(item);

@@ -3,11 +3,11 @@ import React from "react";
 
 // Styles
 import classNames from "classnames";
-import styles from "./NewsList.module.scss";
 
 // Components
 import { addZero } from "src/scripts/util/timeConvert";
 import { ActiveLink, Img } from "src/components/ui";
+import styles from "./NewsList.module.scss";
 
 const NewsList: React.FC<{ data?: IApiNews } & IComponent> = ({
     className,
@@ -19,7 +19,7 @@ const NewsList: React.FC<{ data?: IApiNews } & IComponent> = ({
         className
     ]);
 
-    if(!data) return <></>
+    if(!data) return <></>;
     
     const renderNewsElements = (item: IApiNewsContent, index: number) => {
         const { id, title, description, imageLink, insertedAt, category } = item;
@@ -55,8 +55,8 @@ const NewsList: React.FC<{ data?: IApiNews } & IComponent> = ({
                     </a>
                 </ActiveLink>
             </li>
-        )
-    }
+        );
+    };
 
     return (
         <div className={classes}>

@@ -22,7 +22,7 @@ const News = (data: IApiProps) => {
         dispatch(setNewsData({
             news: data.news,
             categories: data.news_categories
-        }))
+        }));
     }, [data, dispatch]);
 
     return <UpdatesPage />;
