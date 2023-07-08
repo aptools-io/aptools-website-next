@@ -4,3 +4,4 @@ export { default as ProjectsPage } from "./ProjectsPage/ProjectsPage";
 export { default as DexSinglePage } from "./DexSinglePage/DexSinglePage";
 export { default as NewsPage } from "./NewsPage/NewsPage";
 export { default as UpdatesPage } from "./UpdatesPage/UpdatesPage";
+export { default as Accounts } from "./Accounts/Accounts";
