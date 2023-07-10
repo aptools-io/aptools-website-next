@@ -34,7 +34,7 @@ const NewsList: React.FC<{ data?: IApiNews } & IComponent> = ({
                             {title && <strong className={styles["title"]}>{title}</strong>}
                             {/* {description && <span className={styles["description"]}>{description}</span>} */}
                             <span className={styles["description"]}>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed dui posuere, luctus ante id, mollis lorem. Sed ipsum erat, pulvinar sit amet aliquam sed, iaculis in risus. Sed ex odio, porttitor sed diam at, malesuada pretium sem. Sed ac nisi semper, ullamcorper metus id, posuere nulla. Pellentesque sed laoreet sem. Cras nisl lectus, blandit eu auctor non, imperdiet sed massa. Integer ac sapien feugiat, volutpat risus sit amet, maximus justo. Aliquam ut nisl euismod, congue quam id, lobortis mauris. Aenean sed venenatis erat. Sed egestas tempus est at semper. Praesent in rutrum dui
+                            {description}
                             </span>
                             <div className={styles["news-list__item-bottom"]}>
                                 {insertedAt && <span className={styles["date"]}>{date}</span>}

@@ -82,6 +82,11 @@
         &s {
             display: flex;
             flex-direction: column;
+            li {
+                span, a {
+                    width: 100%;
+                }
+            }
         }
     }
 }

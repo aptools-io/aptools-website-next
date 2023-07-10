@@ -1,16 +1,18 @@
 // React
 import React from "react";
 import { Projects } from "src/components/containers";
+import { Topper } from "src/components/general";
 import { TransactionsList } from "src/components/lists";
 
-const ProjectsPage: React.FC = () => {
+const AccountsPage: React.FC = () => {
 
     return (
         <>
-           <Projects />
+            <Topper backlink={"/"}/>
+            <Projects />
         </>
     );
 };
 
 
-export default ProjectsPage;
+export default AccountsPage;

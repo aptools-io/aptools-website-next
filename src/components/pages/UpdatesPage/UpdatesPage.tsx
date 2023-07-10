@@ -14,7 +14,7 @@ const UpdatesPage: React.FC = () => {
             <Grid>
                 <GridWrapper>
                     <NewsBanner />
-                    {/* <News /> */}
+                    <News />
                 </GridWrapper>
             </Grid> 
         </>
