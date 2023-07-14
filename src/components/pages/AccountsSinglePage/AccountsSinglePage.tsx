@@ -9,7 +9,7 @@ const AccountsSinglePage: React.FC = () => {
     return (
         <>
             <Topper backlink={"/"}/>
-            teretr
+            test single
         </>
     );
 };
