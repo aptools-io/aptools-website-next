@@ -58,7 +58,7 @@ const Accounts: React.FC<IComponent> = ({
 
     if(!accountsArray || !columnNames || !columns || !width) return <></>;
 
-
+    const { balance_rank: last_balance_rank = currentPage } = accountsData[accountsData.length - 1] || {};
     return (
         <div className={classes}>
             {/* <strong className={"list__title"}>
@@ -84,7 +84,7 @@ const Accounts: React.FC<IComponent> = ({
                     columnNames={columnNames} 
                     columns={columns} 
                     data={accountsData}
-                    key={accountsData[accountsData.length - 1].balance_rank}
+                    key={last_balance_rank}
                 >
                     <List loadingCount={perPage * loading} loadingComponent={<Skeleton style={{ height: "20px", minHeight: "20px" }} />} />
                 </ListHeader>
