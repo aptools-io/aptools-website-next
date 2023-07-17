@@ -36,8 +36,9 @@ const Accounts: React.FC<IComponent> = ({
     const [perPage, setPerPage] = useState(perPages.findIndex(x => x === Number(pairs)) !== -1 ? Number(pairs) : defaultPerPage);
     const [accountsData, setAccountsData] = useState(accountsArray);
 
-    const handleFetchData = async (page) => {
-        const data = await accounts.getAccountsData(perPage, perPage * (page - 1)).then(e => {
+    const handleFetchData = async (page, customPerPage = null) => {
+        const pPage = customPerPage || perPage
+        const data = await accounts.getAccountsData(pPage, pPage * (page - 1)).then(e => {
             setLoading(0);
             setCurrrentPage(page);
             return e;
@@ -71,7 +72,12 @@ const Accounts: React.FC<IComponent> = ({
                 setPerPage={setPerPage}
                 onChangePage={(page) => {
                     setLoading(1);
-                    handleFetchData(page)
+                    handleFetchData(page);
+                }}
+                onChangePerPage={(perPage) => {
+                    setLoading(1);
+                    console.log(perPage)
+                    handleFetchData(currentPage, perPage);
                 }}
             >
                 <ListHeader 

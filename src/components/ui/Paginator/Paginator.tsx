@@ -63,6 +63,7 @@ const Paginator: React.FC<IPaginatorProps> = ({
     const handleChangePerPage = (value) => {
         setCurrentPerPageIndex(value);
         setPerPage(perPages[value]);
+        onChangePerPage(perPages[value]);
         if(perPageKey) router.push({ pathname: router.pathname, query: { ...router.query, [perPageKey]: perPages[value] } }, null, { shallow: true });
     }
 ;
