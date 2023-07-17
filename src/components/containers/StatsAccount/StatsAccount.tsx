@@ -8,7 +8,7 @@ import classNames from "classnames";
 import { useSelector } from "react-redux";
 import { IRootState } from "src/scripts/redux/store";
 import { formatNumber } from "src/scripts/util/numbers";
-import styles from "./StatsGas.module.scss";
+import styles from "./StatsAccount.module.scss";
 
 
 const StatsAccount: React.FC<IComponent> = ({

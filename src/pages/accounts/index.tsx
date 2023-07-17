@@ -32,7 +32,7 @@ export async function getServerSideProps(context) {
 
     return { props: {
         "headers": req.headers,
-        "accounts": await accounts.getAccountsData() || [],
+        "accounts": await accounts.getAccountsData(25, 0) || [],
         "accounts_stats": await accounts.getAccountsStatsData() || [],
     } };
 }

@@ -1,8 +1,10 @@
 .stats {
+    &__top + div {
+        margin-bottom: 9px;
+    }
     &__top {
         display: flex;
         justify-content: space-between;
-        margin-bottom: 9px;
 
         &-stats {
             display: flex;

@@ -4,5 +4,7 @@ interface IPlateProps extends IComponent {
     dark?: boolean;
     compressed?: boolean;
     titleLink?: string;
-    min?: boolean
+    min?: boolean;
+    noMin?: boolean;
+    center?: boolean;
 }

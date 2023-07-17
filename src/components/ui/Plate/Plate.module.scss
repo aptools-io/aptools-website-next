@@ -15,8 +15,16 @@
         padding: 17px 10px;
     }
 
+    &.center {
+        justify-content: center;
+    }
+
     &.min {
         min-height: 93px;
+    }
+
+    &.no-min {
+        min-height: unset;
     }
 
     &__image {

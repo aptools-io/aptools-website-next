@@ -1,8 +1,8 @@
 // React
 import React from "react";
-import { Projects } from "src/components/containers";
+import { Projects, StatsAccounts } from "src/components/containers";
 import { Grid, GridWrapper, Topper } from "src/components/general";
-import { TransactionsList } from "src/components/lists";
+import { AccountsList, TransactionsList } from "src/components/lists";
 import { Plate } from "src/components/ui";
 
 const AccountsSinglePage: React.FC = () => {
@@ -10,15 +10,13 @@ const AccountsSinglePage: React.FC = () => {
     return (
         <>
             <Topper backlink={"/"}/>
+            <StatsAccounts />
             <Grid columns={3}>
-                <GridWrapper gridWidth={1}>
-                    <Plate dark>test</Plate>
-                </GridWrapper>
-                <GridWrapper gridWidth={1}>
-                    <Plate>test</Plate>
+                <GridWrapper gridWidth={3}>
+                    <AccountsList />
                 </GridWrapper>
             </Grid>
-            test listing
+            
         </>
     );
 };

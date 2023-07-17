@@ -1,19 +1,11 @@
-interface IApiDexSingle {
-    "name": string;
-    "coin_pairs": IApiDexCoinPair[];
-    "total_24h_transactions": IPoint[];
-    "total_24h_volume": IPoint[];
-    "tvl": IPoint[]
+interface IApiAccount {
+    address: string;
+    balance_rank: number;
+    percentage: number;
+    total_balance: string;
 }
 
-interface IApiDexCoinPair {
-    "24h_txns": number;
-    "last_trade": string;
-    "pair": string;
-    "price": string;
-    "tvl": number;
-    "tvl_change": number;
-    "type": string;
-    "volume_24h": number;
-    "volume_24h_change": number;
+interface IApiAccountsStats {
+    TotalSupply,
+    top100
 }
