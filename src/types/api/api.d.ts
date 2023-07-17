@@ -9,5 +9,7 @@ interface IApiProps {
     "transactions": IApiTransaction[],
     "dex_single": IApiDexSingle,
     "news": IApiNews,
-    "news_categories": IApiNewsCategory[]
+    "news_categories": IApiNewsCategory[],
+    "accounts_stats": IApiAccountsStats
+    "accounts": IApiAccount[]
 }

@@ -9,3 +9,4 @@ export { default as statsDexesVolumesSlice } from "./statsDexesVolumesSlice";
 export { default as statsAddressesTransactionsSlice } from "./statsAddressesTransactionsSlice";
 export { default as pageTitleSlice } from "./pageTitleSlice";
 export { default as newsSlice } from "./newsSlice";
+export { default as accountsSlice } from "./accountsSlice";

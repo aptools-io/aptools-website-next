@@ -10,7 +10,8 @@ import {
     statsAddressesTransactionsSlice,
     singleDexSlice,
     pageTitleSlice,
-    newsSlice
+    newsSlice,
+    accountsSlice
 } from "../slices/index";
 
 const store = configureStore({
@@ -25,7 +26,8 @@ const store = configureStore({
         statsAddressesTransactions: statsAddressesTransactionsSlice,
         singleDex: singleDexSlice,
         pageTitle: pageTitleSlice,
-        news: newsSlice
+        news: newsSlice,
+        accounts: accountsSlice
     },
 });
 export default store;
