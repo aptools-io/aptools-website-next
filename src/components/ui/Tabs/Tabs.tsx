@@ -33,6 +33,7 @@ const Tabs: React.ForwardRefRenderFunction<any, ITabsProps> = ({
     const [swiper, setSwiper] = useState(null);
 
     const [customEntry, setCustomEntry] = useState(null);
+    const [customComponent, setCustomComponent] = useState(null);
     const [loading, setLoading] = useState(false);
 
     const entries = data ? Object.entries(data) : dataArray;
@@ -60,7 +61,7 @@ const Tabs: React.ForwardRefRenderFunction<any, ITabsProps> = ({
         
         return (
             <SwiperSlide key={index}>
-                <div onClick={() => handleTabClick(index, !checkItem && { action: item.action, id: item.id })} data-count={checkItem && item[1].length} className={classNames([
+                <div onClick={() => handleTabClick(index, !checkItem && { action: item.action, id: item.id, component: item.component })} data-count={checkItem && item[1].length} className={classNames([
                     styles["tabs__item"],
                     {[styles["active"]]: index === tabId },
                     {[styles["counter"]]: itemsCount }
@@ -73,6 +74,14 @@ const Tabs: React.ForwardRefRenderFunction<any, ITabsProps> = ({
    
 
     if(!(data || dataArray)) return <></>;
+
+    const getComponent = () => {
+        if(loading) return new Array(10).fill(null).map((_, index) => <Skeleton key={index} style={{ height: "205px", minHeight: "205px" }} />);
+        if(dataArray?.[tabId].component) return dataArray?.[tabId].component();
+        return React.cloneElement(child as React.ReactElement<IListHeaderProps>, {
+            data: entry || customEntry || defaultEntry || [],
+        })
+    }
     
     return (
         <div ref={ref} className={classes}>
@@ -109,9 +118,7 @@ const Tabs: React.ForwardRefRenderFunction<any, ITabsProps> = ({
                     <ArrowLeft />
                 </div>
             </div>
-            {!loading ? <>{React.cloneElement(child as React.ReactElement<IListHeaderProps>, {
-                data: entry || customEntry || defaultEntry || [],
-            }) }</> : new Array(10).fill(null).map((_, index) => <Skeleton key={index} style={{ height: "205px", minHeight: "205px" }} />) }
+            {getComponent()}
         </div>
     );
 };

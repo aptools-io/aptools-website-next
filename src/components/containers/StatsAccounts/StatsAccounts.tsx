@@ -28,7 +28,7 @@ const StatsAccounts: React.FC<IComponent> = ({
     return (
         <Grid columns={3}>
             <GridWrapper gridWidth={1}>
-                <Plate dark noMin center>
+                <Plate dark noMin center>  
                     <div className={"stats__top"}>
                         <div className={"stats__top-wrapper"}>
                             <strong className={"stats__top-title"}>Total Top 100 Aptos Value</strong>

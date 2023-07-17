@@ -20,3 +20,4 @@ export { default as TrendsList } from "./TrendsList/TrendsList";
 export { default as NewsBanner } from "./NewsBanner/NewsBanner";
 export { default as StatsAccounts } from "./StatsAccounts/StatsAccounts";
 export { default as StatsAccount } from "./StatsAccount/StatsAccount";
+export { default as Accounts } from "./Accounts/Accounts";
