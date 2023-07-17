@@ -1,8 +1,8 @@
 // React
 import React from "react";
 
-const Home = () => <></>;
-export default Home;
+const Nft = () => <></>;
+export default Nft;
 
 export async function getServerSideProps() {
     return {  };

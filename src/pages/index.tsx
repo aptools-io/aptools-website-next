@@ -53,6 +53,7 @@ export async function getServerSideProps(context) {
     const projectsUnfiltered = await projects.getData() || []; 
     const { req } = context;
     return { props: {
+        "overflow": true,
         "headers": req.headers,
         "general_stats": await generalStats.getData() || {},
         "contract_addresses": await contractAddresses.getData() || [],

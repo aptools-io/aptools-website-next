@@ -10,3 +10,4 @@ export { default as TopTokensVolumeList } from "./TopTokensVolumeList/TopTokensV
 export { default as InitalSupplyList } from "./InitalSupplyList/InitalSupplyList";
 export { default as TransactionsList } from "./TransactionsList/TransactionsList";
 export { default as DexPairsList } from "./DexPairsList/DexPairsList";
+export { default as AccountsList } from "./AccountsList/AccountsList";

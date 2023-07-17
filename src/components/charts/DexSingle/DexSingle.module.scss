@@ -1,50 +1,61 @@
 .dex-single {
     width: 100%;
     display: grid;
+
     &__tab {
         padding: 10px 24px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         cursor: pointer;
+
         strong {
-            color:  var(--aptools-color-emphasis-c1);
+            color: var(--aptools-color-emphasis-c1);
             font-size: 14px;
             font-weight: 500;
             line-height: 20px;
         }
+
         span:not(.percent) {
-            color:  var(--aptools-color-emphasis-c1);
+            color: var(--aptools-color-emphasis-c1);
             font-size: 14px;
             font-weight: 400;
             line-height: 130%;
         }
+
         .percent {
-            padding: 4px 6px 2px 6px;
+            padding: 4px 6px 2px;
             border-radius: 4px;
             line-height: 100%;
             color: var(--aptools-color-main-primary);
             display: flex;
             align-items: center;
+
             svg {
                 margin-right: 2px;
             }
+
             svg path {
                 fill: var(--aptools-color-main-primary);
             }
+
             &.red {
                 background-color: var(--aptools-color-emphasis-c4);
+
                 svg {
                     transform: scaleY(-1);
                 }
             }
+
             &.green {
                 background-color: var(--aptools-color-emphasis-c2);
             }
         }
+
         position: relative;
-        &::after {
-            content: "";
+
+        &:after {
+            content: '';
             position: absolute;
             left: 0;
             height: 3px;
@@ -52,30 +63,36 @@
             width: 100%;
             background-color: var(--aptools-color-grey-c2);
         }
+
         &.active {
             cursor: default;
             background-color: var(--aptools-color-grey-c3);
-            &::after {
-                background-color:  var(--aptools-color-emphasis-c1);
+
+            &:after {
+                background-color: var(--aptools-color-emphasis-c1);
             }
         }
+
         &-item + &-item {
             margin-top: 2px;
         }
+
         &-item {
             align-items: center;
             width: 100%;
             display: flex;
             justify-content: space-between;
-            
         }
-        flex-grow:1;
+
+        flex-grow: 1;
+
         &s {
             display: flex;
             flex-direction: column;
             height: 100%;
         }
     }
+
     &__inner {
         width: 100%;
     }

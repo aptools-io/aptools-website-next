@@ -62,6 +62,7 @@
         @include mediaWMax('LARGE') {
             right: -15%;
         }
+
         @include mediaWMax('LAPTOP') {
             right: -25%;
         }

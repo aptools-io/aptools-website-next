@@ -3,8 +3,8 @@ import React from "react";
 
 // Components;
 
-const Home = () => <></>;
-export default Home;
+const Blocks = () => <></>;
+export default Blocks;
 
 export async function getServerSideProps() {
     return { props: { } };

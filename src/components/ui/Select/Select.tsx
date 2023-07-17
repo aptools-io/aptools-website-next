@@ -48,7 +48,7 @@ const Select: React.FC<ISelectProps> = ({ onChange, value = 0, title, className,
             }])
         };
 
-        return <div {...optionProps}>{cloneElement(child)}</div>;
+        return <div key={index} {...optionProps}>{cloneElement(child)}</div>;
     };
 
     return (

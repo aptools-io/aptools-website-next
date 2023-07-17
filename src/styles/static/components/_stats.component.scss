@@ -1,8 +1,25 @@
 .stats {
+    &__top + div {
+        margin-bottom: 9px;
+    }
+
     &__top {
         display: flex;
         justify-content: space-between;
-        margin-bottom: 9px;
+
+        $top: &;
+
+        &.adapt {
+            @include mediaWMax('MOBILE') {
+                justify-content: center;
+                flex-direction: column;
+            }
+            #{$top}-stats {
+                @include mediaWMax('MOBILE') {
+                    align-items: flex-start;
+                }
+            }
+        }
 
         &-stats {
             display: flex;
@@ -16,6 +33,10 @@
                 line-height: 29px;
                 display: flex;
                 align-items: center;
+
+                &.blue {
+                    color: var(--aptools-color-emphasis-c1);
+                }
 
                 .additive {
                     font-weight: 500;

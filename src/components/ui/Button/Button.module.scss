@@ -8,23 +8,43 @@
     display: flex;
     align-items: center;
     color: var(--aptools-color-emphasis-c1);
+
+    &.fill {
+        background-color: var(--aptools-color-main-primary);
+    }
+
+    &.invert {
+        background-color: var(--aptools-color-emphasis-c1);
+        color: var(--aptools-color-main-primary);
+
+        &:hover {
+            color: var(--aptools-color-emphasis-c1);
+            background-color: var(--aptools-color-main-primary);
+        }
+    }
+
     &:hover {
         background-color: var(--aptools-color-emphasis-c1);
         color: var(--aptools-color-main-primary);
+
         svg path {
             fill: var(--aptools-color-main-primary);
         }
     }
+
     transition: background-color .3s ease, color .3s ease;
+
     svg {
         path {
             transition: fill .3s ease;
             fill: var(--aptools-color-emphasis-c1);
         }
+
         &:nth-of-type(1) {
             margin-left: -8px;
             margin-right: 0px;
         }
+
         &:nth-of-type(2) {
             margin-left: 4px;
         }
