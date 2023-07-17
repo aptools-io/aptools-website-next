@@ -70,8 +70,8 @@ const Paginator: React.FC<IPaginatorProps> = ({
     const renderPagination = (item, index) => {
         const handleClick = () => {
             if(page === item) return;
-            handleChangePage(item)
-        }
+            handleChangePage(item);
+        };
         return (
             <li 
                 key={index} 

@@ -219,7 +219,7 @@
     &__line {
         width: calc(100% + ((var(--nav-bar-v-padding) - 7px) * 2));
         height: 1px;
-        background-color: rgb(var(--aptools-color-main-primary--rgb) / .2);
+        background-color: rgb(var(--aptools-color-main-primary--rgb) / 20%);
         display: block;
         margin-left: calc((var(--nav-bar-v-padding) - 7px) * -1);
     }

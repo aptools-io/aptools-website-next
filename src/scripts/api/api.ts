@@ -36,11 +36,11 @@ export class Api {
         return response.json();
     };
 
-    post = async (url: string, headers: HeadersInit, params: Record<string, any> = {}, body: BodyInit): Promise<Response> => { 
+    post = async (url: string, headers: HeadersInit, params: Record<string, any> = {}, body: BodyInit = null): Promise<Response> => { 
         return this.fetch("POST", url, headers, params, body).then(response => this.handleResponse(response));
     };
 
-    get = async (url: string, headers: HeadersInit = {}, params: Record<string, any> = {}): Promise<Response> => { 
+    get = async (url: string, headers: HeadersInit = {}, params: Record<string, any> = {}, body: BodyInit = null): Promise<Response> => { 
         return this.fetch("GET", url, headers, params).then(response => this.handleResponse(response));
     };
 

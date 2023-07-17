@@ -3,7 +3,6 @@ import React from "react";
 
 // Styles
 import classNames from "classnames";
-import styles from "./StatsAccount.module.scss";
 
 // Redux
 import { useSelector } from "react-redux";
@@ -12,6 +11,7 @@ import { IRootState } from "src/scripts/redux/store";
 // Components
 import { Grid, GridWrapper } from "src/components/general";
 import { Plate } from "src/components/ui";
+import styles from "./StatsAccount.module.scss";
 
 // Utils
 
@@ -19,7 +19,7 @@ import { Plate } from "src/components/ui";
 const StatsAccount: React.FC<IComponent> = ({
     className 
 }) => {
-    //const { data: generalData } = useSelector((state: IRootState) => state.statsGeneral);
+    // const { data: generalData } = useSelector((state: IRootState) => state.statsGeneral);
 
     const classes = classNames([
         styles["stats-accounts"],

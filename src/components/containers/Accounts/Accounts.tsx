@@ -9,11 +9,11 @@ import { IRootState } from "src/scripts/redux/store";
 import classNames from "classnames";
 import { Tabs } from "src/components/ui";
 import useWindowSize from "src/scripts/hooks/useWindowSize";
+import { AccountsList } from "src/components/lists";
 import styles from "./Accounts.module.scss";
 
 // Components
 import ProjectsList from "../ProjectsList/ProjectsList";
-import { AccountsList } from "src/components/lists";
 
 
 
@@ -63,7 +63,7 @@ const Accounts: React.FC<{ all?: boolean } & IComponent> = ({
                 setLoading(false);
             }
         }
-    ]
+    ];
 
     return (
         <div className={classes}>

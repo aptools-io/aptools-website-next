@@ -9,15 +9,15 @@ import { IRootState } from "src/scripts/redux/store";
 import classNames from "classnames";
 import { List, ListHeader, Paginator, Skeleton, Tabs } from "src/components/ui";
 import useWindowSize from "src/scripts/hooks/useWindowSize";
-import styles from "./AccountsList.module.scss";
 
 // Components
 
 // Other
-import media from "./data/adaptive";
 import { perPages, defaultPerPage } from "src/scripts/consts/perPages";
 import { useRouter } from "next/router";
 import { accounts } from "src/scripts/api/requests";
+import media from "./data/adaptive";
+import styles from "./AccountsList.module.scss";
 // Options
 /* import { columnNames, columns } from "./data/listOptionsDesktop"; */
 
@@ -37,14 +37,14 @@ const Accounts: React.FC<IComponent> = ({
     const [accountsData, setAccountsData] = useState(accountsArray);
 
     const handleFetchData = async (page, customPerPage = null) => {
-        const pPage = customPerPage || perPage
+        const pPage = customPerPage || perPage;
         const data = await accounts.getAccountsData(pPage, pPage * (page - 1)).then(e => {
             setLoading(0);
             setCurrrentPage(page);
             return e;
         }) as IApiAccount[];
-        setAccountsData([...data])
-    }
+        setAccountsData([...data]);
+    };
 
     /* useEffect(() => {
         handleFetchData(currentPage);
@@ -76,7 +76,7 @@ const Accounts: React.FC<IComponent> = ({
                 }}
                 onChangePerPage={(perPage) => {
                     setLoading(1);
-                    console.log(perPage)
+                    console.log(perPage);
                     handleFetchData(currentPage, perPage);
                 }}
             >

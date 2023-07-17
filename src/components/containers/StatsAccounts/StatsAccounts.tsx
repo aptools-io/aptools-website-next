@@ -3,7 +3,6 @@ import React from "react";
 
 // Styles
 import classNames from "classnames";
-import styles from "./StatsAccounts.module.scss";
 
 // Redux
 import { useSelector } from "react-redux";
@@ -18,6 +17,7 @@ import useWindowSize from "src/scripts/hooks/useWindowSize";
 
 // Util
 import { formatNumber, numberShorter } from "src/scripts/util/numbers";
+import styles from "./StatsAccounts.module.scss";
 
 // Adaptive
 import media from "./data/adaptive";

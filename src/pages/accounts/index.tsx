@@ -24,7 +24,7 @@ const Accounts = (data: IApiProps) => {
     }, [data, dispatch]);
     
     return <AccountsPage/>;
-}
+};
 export default Accounts;
 
 export async function getServerSideProps(context) {

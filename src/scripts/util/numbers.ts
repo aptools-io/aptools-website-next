@@ -5,10 +5,10 @@ const numberShorter = (
 ) => {
     if(value === 0) return value;
     if(value <= 999) return value.toFixed(fixed || 2);
-    let schema = symbols || ['', 'k', 'M', 'B', 'T', 'Q', 'P'];
-    let index = Math.floor(Math.log10(value) / 3);
-    return (value / Math.pow(10, 3 * index)).toFixed(fixed || 2) + (schema[index] === undefined ? ('e' + index * 3) : schema[index]);
-}
+    const schema = symbols || ["", "k", "M", "B", "T", "Q", "P"];
+    const index = Math.floor(Math.log10(value) / 3);
+    return (value / 10**(3 * index)).toFixed(fixed || 2) + (schema[index] === undefined ? (`e${  index * 3}`) : schema[index]);
+};
 
 const formatDecimal = (decimal: string) => { 
     if(decimal.length > 2) return decimal.slice(0, 2);

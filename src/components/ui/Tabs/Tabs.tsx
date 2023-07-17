@@ -80,8 +80,8 @@ const Tabs: React.ForwardRefRenderFunction<any, ITabsProps> = ({
         if(dataArray?.[tabId].component) return dataArray?.[tabId].component();
         return React.cloneElement(child as React.ReactElement<IListHeaderProps>, {
             data: entry || customEntry || defaultEntry || [],
-        })
-    }
+        });
+    };
     
     return (
         <div ref={ref} className={classes}>

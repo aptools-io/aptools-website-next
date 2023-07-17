@@ -6,7 +6,7 @@
 
     &:hover,
     &.active {
-        background-color: rgb(var(--aptools-color-emphasis-c1--rgb) / .3);
+        background-color: rgb(var(--aptools-color-emphasis-c1--rgb) / 30%);
         transition: background-color var(--nav-bar-transition-speed-1) ease;
         #{$self}__title {
             color: var(--aptools-color-main-primary);
@@ -89,7 +89,7 @@
     }
 
     span#{$self}__inner {
-        background-color: rgb(var(--aptools-color-emphasis-c1--rgb) / .1);
+        background-color: rgb(var(--aptools-color-emphasis-c1--rgb) / 10%);
 
         &:after {
             width: 4px;

@@ -2,9 +2,11 @@
     &__top + div {
         margin-bottom: 9px;
     }
+
     &__top {
         display: flex;
         justify-content: space-between;
+
         $top: &;
 
         &.adapt {
@@ -31,6 +33,7 @@
                 line-height: 29px;
                 display: flex;
                 align-items: center;
+
                 &.blue {
                     color: var(--aptools-color-emphasis-c1);
                 }
