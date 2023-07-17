@@ -17,6 +17,7 @@ const Plate: React.FC<IPlateProps> = ({
     min = false,
     noMin = false,
     center = false,
+    bordered = false,
     children,
     className,
     style
@@ -29,6 +30,7 @@ const Plate: React.FC<IPlateProps> = ({
         { [styles["min"]]: min },
         { [styles["no-min"]]: noMin },
         { [styles["center"]]: center },
+        { [styles["bordered"]]: bordered },
         className
     ]);
 

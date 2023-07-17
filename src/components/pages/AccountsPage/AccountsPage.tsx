@@ -16,7 +16,6 @@ const AccountsSinglePage: React.FC = () => {
                     <Accounts />
                 </GridWrapper>
             </Grid>
-            
         </>
     );
 };

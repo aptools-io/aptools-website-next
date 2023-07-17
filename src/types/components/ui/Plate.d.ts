@@ -7,4 +7,5 @@ interface IPlateProps extends IComponent {
     min?: boolean;
     noMin?: boolean;
     center?: boolean;
+    bordered?: boolean;
 }

@@ -3,12 +3,17 @@ import React from "react";
 
 // Styles
 import classNames from "classnames";
+import styles from "./StatsAccount.module.scss";
 
 // Redux
 import { useSelector } from "react-redux";
 import { IRootState } from "src/scripts/redux/store";
-import { formatNumber } from "src/scripts/util/numbers";
-import styles from "./StatsAccount.module.scss";
+
+// Components
+import { Grid, GridWrapper } from "src/components/general";
+import { Plate } from "src/components/ui";
+
+// Utils
 
 
 const StatsAccount: React.FC<IComponent> = ({
@@ -22,9 +27,34 @@ const StatsAccount: React.FC<IComponent> = ({
     ]);
 
     return (
-        <>
-            stats accounts
-        </>
+        <Grid columns={3}>
+            <GridWrapper gridWidth={1}>
+                <Plate noMin>Net Worth</Plate>
+            </GridWrapper>
+            <GridWrapper gridWidth={2}>
+                <Plate noMin bordered>Wallet</Plate>
+            </GridWrapper>
+
+            <GridWrapper gridWidth={1}>
+                <Plate noMin bordered>Current Token Balalance</Plate>
+            </GridWrapper>
+            <GridWrapper gridWidth={1}>
+                <Plate noMin bordered>Best Token Performer</Plate>
+            </GridWrapper>
+            <GridWrapper gridWidth={1}>
+                <Plate noMin bordered>Worst Token Performer</Plate>
+            </GridWrapper>
+
+            <GridWrapper gridWidth={1}>
+                <Plate noMin bordered>Current NFT Balance</Plate>
+            </GridWrapper>
+            <GridWrapper gridWidth={1}>
+                <Plate noMin bordered>Best NFT performer</Plate>
+            </GridWrapper>
+            <GridWrapper gridWidth={1}>
+                <Plate noMin bordered>Worst NFT performer</Plate>
+            </GridWrapper>
+        </Grid>
     );
 };
 

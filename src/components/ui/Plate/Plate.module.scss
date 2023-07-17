@@ -23,6 +23,11 @@
         min-height: 93px;
     }
 
+    &.bordered {
+        border: 1px solid var(--aptools-color-grey-c3);
+        background-color: unset;
+    }
+
     &.no-min {
         min-height: unset;
     }

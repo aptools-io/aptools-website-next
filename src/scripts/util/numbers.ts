@@ -1,7 +1,7 @@
 const numberShorter = (
     value, 
     fixed, 
-    symbols = ["", " Thousand", " Million", " Billion", " Trillion", " Quadrillion", " Quintillion"]
+    symbols = ["", " thousands", " millions", " billions", " trillions", " quadrillions", " quintillions"]
 ) => {
     if(value === 0) return value;
     if(value <= 999) return value.toFixed(fixed || 2);

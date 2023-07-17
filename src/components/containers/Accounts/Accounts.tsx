@@ -22,9 +22,6 @@ const Accounts: React.FC<{ all?: boolean } & IComponent> = ({
     className 
 }) => {
     const { accounts } = useSelector((state: IRootState) => state.accounts);
-   /*  const { data: projects } = useSelector((state: IRootState) => state.statsProjects);
-    const { width } = useWindowSize();
-    const mediaData = media(width); */
 
     const classes = classNames([
         styles["accounts"],
