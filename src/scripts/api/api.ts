@@ -1,16 +1,16 @@
 export class Api {
-    tokenString = "";
+    isToken = false;
 
     base = process.env.BASE_HTTPS_URL;
 
     token = process.env.BASE_TOKEN;
 
     constructor(isToken: boolean = true, news: boolean = false) {
-        if(isToken) this.tokenString = `?API_KEY=${this.token}`;
+        if(isToken) this.isToken = true;
         if(news) this.base = process.env.BASE_NEWS_URL;
     }
 
-    fetch = async (type: string, url: string, headers: HeadersInit, body: BodyInit = null) => {
+    fetch = async (type: string, url: string, headers: HeadersInit, params: Record<string, any> = {}, body: BodyInit = null) => {
         try {
             const init = {
                 method: type,
@@ -20,7 +20,8 @@ export class Api {
                 },
                 ...(body && { body })
             };
-            const result: Response = await fetch(`${this.base}${url}${this.tokenString}`, init);
+            const paramsString = new URLSearchParams({ ...params, ...this.isToken && { API_KEY: this.token } });
+            const result: Response = await fetch(`${this.base}${url}?${paramsString}`, init);
             return result;
         }
         catch(error) {
@@ -35,12 +36,12 @@ export class Api {
         return response.json();
     };
 
-    post = async (url: string, headers: HeadersInit, body: BodyInit): Promise<Response> => { 
-        return this.fetch("POST", url, headers, body).then(response => this.handleResponse(response));
+    post = async (url: string, headers: HeadersInit, params: Record<string, any> = {}, body: BodyInit = null): Promise<Response> => { 
+        return this.fetch("POST", url, headers, params, body).then(response => this.handleResponse(response));
     };
 
-    get = async (url: string, headers: HeadersInit = {}): Promise<Response> => { 
-        return this.fetch("GET", url, headers).then(response => this.handleResponse(response));
+    get = async (url: string, headers: HeadersInit = {}, params: Record<string, any> = {}, body: BodyInit = null): Promise<Response> => { 
+        return this.fetch("GET", url, headers, params).then(response => this.handleResponse(response));
     };
 
    

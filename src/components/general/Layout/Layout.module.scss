@@ -5,10 +5,12 @@
     background-color: var(--aptools-color-main-primary);
     color: var(--aptools-color-main-secondary);
     display: flex;
-    /* overflow: hidden; */
+
+    /*overflow: hidden;*/
     &.overflow {
         overflow: hidden;
     }
+
     flex-direction: column;
 
     *::selection {

@@ -38,6 +38,7 @@ const Paginator: React.FC<IPaginatorProps> = ({
     changePerPage = false,
     shift = 3,
     onChangePage = null, 
+    onChangePerPage = null, 
     children,
     className,
     style
@@ -56,16 +57,21 @@ const Paginator: React.FC<IPaginatorProps> = ({
 
     const handleChangePage = (value) => {
         onChangePage(value);
-        router.push({ pathname: router.pathname, query: { ...router.query, [pageKey]: value } }, null, { shallow: true });
+        if(pageKey) router.push({ pathname: router.pathname, query: { ...router.query, [pageKey]: value } }, null, { shallow: true });
     };
 
     const handleChangePerPage = (value) => {
         setCurrentPerPageIndex(value);
         setPerPage(perPages[value]);
-        router.push({ pathname: router.pathname, query: { ...router.query, [perPageKey]: perPages[value] } }, null, { shallow: true });
+        onChangePerPage(perPages[value]);
+        if(perPageKey) router.push({ pathname: router.pathname, query: { ...router.query, [perPageKey]: perPages[value] } }, null, { shallow: true });
     }
 ;
     const renderPagination = (item, index) => {
+        const handleClick = () => {
+            if(page === item) return;
+            handleChangePage(item);
+        };
         return (
             <li 
                 key={index} 
@@ -75,7 +81,7 @@ const Paginator: React.FC<IPaginatorProps> = ({
                     { [styles["dots"]]: item === "..." }
                 ])}
             >
-                <button onClick={() => handleChangePage(item)}>{item}</button>
+                <button onClick={handleClick}>{item}</button>
             </li>
         );
     };

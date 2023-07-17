@@ -15,6 +15,7 @@ interface IListProps extends IListHeaderProps {
     under?: JSX.Element[]; 
     slice?: [start: number, end: number]
     valueGridReplace?: JSX.Element[];
+    loadingComponent?: JSX.Element;
     inner?: boolean;
     handleCollapse?: () => void;
 }

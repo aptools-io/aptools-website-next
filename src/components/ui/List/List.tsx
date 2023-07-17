@@ -15,6 +15,7 @@ const List: React.FC<IListProps> = ({
     slice = null,
     adoptMobile = false,
     loadingCount = null,
+    loadingComponent = null,
     className 
 }) => {
     const classes = classNames([
@@ -23,7 +24,10 @@ const List: React.FC<IListProps> = ({
         className
     ]);
 
-    if(loadingCount) return <ul className={classes}>{new Array(loadingCount).fill(null).map((_, index) => <Skeleton key={index} style={{ height: "35px", minHeight: "35px" }} />)}</ul>;
+    if(loadingCount) return <ul className={classes}>{new Array(loadingCount).fill(null).map((_, index) => 
+        loadingComponent ? 
+        <React.Fragment key={index}>{loadingComponent}</React.Fragment> : 
+        <Skeleton key={index} style={{ height: "35px", minHeight: "35px" }} />)}</ul>;
     
     const processedData = slice ? data.slice(slice[0], slice[1]) : data;
 

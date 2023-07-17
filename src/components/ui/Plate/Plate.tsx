@@ -15,6 +15,9 @@ const Plate: React.FC<IPlateProps> = ({
     dark = false,
     compressed = false,
     min = false,
+    noMin = false,
+    center = false,
+    bordered = false,
     children,
     className,
     style
@@ -25,6 +28,9 @@ const Plate: React.FC<IPlateProps> = ({
         { [styles["compressed"]]: compressed },
         { [styles["dark"]]: dark },
         { [styles["min"]]: min },
+        { [styles["no-min"]]: noMin },
+        { [styles["center"]]: center },
+        { [styles["bordered"]]: bordered },
         className
     ]);
 

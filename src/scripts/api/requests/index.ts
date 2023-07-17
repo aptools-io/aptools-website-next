@@ -6,3 +6,4 @@ export { default as projects } from "./apiProjects";
 export { default as transactions } from "./apiTransactions";
 export { default as dexSingle } from "./apiDexSingle";
 export { default as news } from "./apiNews";
+export { default as accounts } from "./apiAccounts";

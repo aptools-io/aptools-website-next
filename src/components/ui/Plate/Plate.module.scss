@@ -15,8 +15,21 @@
         padding: 17px 10px;
     }
 
+    &.center {
+        justify-content: center;
+    }
+
     &.min {
         min-height: 93px;
+    }
+
+    &.bordered {
+        border: 1px solid var(--aptools-color-grey-c3);
+        background-color: unset;
+    }
+
+    &.no-min {
+        min-height: unset;
     }
 
     &__image {
