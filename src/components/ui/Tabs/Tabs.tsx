@@ -80,6 +80,7 @@ const Tabs: React.ForwardRefRenderFunction<any, ITabsProps> = ({
         if(dataArray?.[tabId].component) return dataArray?.[tabId].component();
         return React.cloneElement(child as React.ReactElement<IListHeaderProps>, {
             data: entry || customEntry || defaultEntry || [],
+            key: new Date().getTime()
         });
     };
     

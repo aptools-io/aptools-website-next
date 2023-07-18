@@ -8,7 +8,7 @@ import classNames from "classnames";
 import { DifferenceArrow, Copy, ArrowLeft } from "src/components/svg";
 
 // Util
-import { getDexImageFromApi } from "src/scripts/util/image";
+import { getImageFromApi } from "src/scripts/util/image";
 import { copyText } from "src/scripts/util/copyText";
 import styles from "./ListColumn.module.scss";
 
@@ -110,8 +110,8 @@ const ListColumn: React.FC<IListProps> = ({
                         </button>}
                     {column["colorize"] && <DifferenceArrow />}
 
-                    {firstSymbol && <img className={styles["list-column__icon"]} src={getDexImageFromApi(firstSymbol)} alt={firstSymbol}/>}
-                    {secondSymbol && <img className={styles["list-column__icon"]} src={getDexImageFromApi(secondSymbol)} alt={secondSymbol}/>}
+                    {firstSymbol && <img className={styles["list-column__icon"]} src={getImageFromApi(firstSymbol)} alt={firstSymbol}/>}
+                    {secondSymbol && <img className={styles["list-column__icon"]} src={getImageFromApi(secondSymbol)} alt={secondSymbol}/>}
 
                     {replacedKeyMobile && <div className={classNames([styles["list-column__info"], styles["next-hide"]])}>
                         {(replacedCombinedValueMobile !== undefined) ? `${replacedCombinedValueMobile} / ` : ""}

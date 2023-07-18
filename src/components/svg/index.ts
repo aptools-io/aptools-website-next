@@ -6,6 +6,7 @@ export { default as ArrowLeftDoublePagination } from "./ArrowLeftDoublePaginatio
 export { default as ArrowLeftPagination } from "./ArrowLeftPagination";
 export { default as ArrowMore } from "./ArrowMore";
 export { default as Block } from "./Block";
+export { default as Coins } from "./Coins";
 export { default as Compass } from "./Compass";
 export { default as Copy } from "./Copy";
 export { default as DifferenceArrow } from "./DifferenceArrow";
@@ -40,3 +41,4 @@ export { default as Squares } from "./Squares";
 export { default as Sun } from "./Sun";
 export { default as Tag } from "./Tag";
 export { default as Transactions } from "./Transactions";
+export { default as Wallet } from "./Wallet";

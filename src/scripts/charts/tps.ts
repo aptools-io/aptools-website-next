@@ -22,9 +22,6 @@ const tpsOptions = (data: IPoint[]) => {
         },
         yAxis: {
             type: "value",
-            min: Math.round(Math.min(...yAxisArray)) - 1,
-            interval: 2,
-            max: Math.round(Math.max(...yAxisArray)) + 1,
             axisLabel: labels
         },
         series: 
