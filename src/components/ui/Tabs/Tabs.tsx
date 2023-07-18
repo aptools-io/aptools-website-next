@@ -47,7 +47,7 @@ const Tabs: React.ForwardRefRenderFunction<any, ITabsProps> = ({
 
     useEffect(() => {
         if(swiper?.el) updateLine(tabId);
-    }, [swiper, lineElement])
+    }, [swiper, lineElement]);
 
     const updateLine = (index) => {
         if(!swiper.el || !lineElement) return;
@@ -56,11 +56,11 @@ const Tabs: React.ForwardRefRenderFunction<any, ITabsProps> = ({
         
         if(!items[index]) return;
 
-        console.log(items[index].innerWidth)
+        console.log(items[index].innerWidth);
 
-        lineElement.style.left = items[index].offsetLeft + "px";
-        lineElement.style.width = items[index].getBoundingClientRect().width + "px";
-    }
+        lineElement.style.left = `${items[index].offsetLeft  }px`;
+        lineElement.style.width = `${items[index].getBoundingClientRect().width  }px`;
+    };
 
     const handleTabClick = (
         index: number, 

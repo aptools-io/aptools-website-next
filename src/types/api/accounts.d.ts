@@ -1,14 +1,15 @@
 
-interface IApiAccount {
+
+interface IApiAccountsWallets {
+    total_supply: string;
+    total_value: string;
+    wallets: IApiWallet[]
+}
+interface IApiWallet {
     address: string;
     balance_rank: number;
     percentage: number;
     total_balance: string;
-}
-
-interface IApiAccountsStats {
-    TotalSupply,
-    top100
 }
 
 interface IApiAccountStats {

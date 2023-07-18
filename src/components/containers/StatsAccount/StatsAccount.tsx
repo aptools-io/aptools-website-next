@@ -18,14 +18,19 @@ import { Img, Plate } from "src/components/ui";
 // Utils
 import { concatString } from "src/scripts/util/strings";
 import { formatNumber, setSign } from "src/scripts/util/numbers";
-import { Coins, Copy, Wallet } from "src/components/svg";
-import styles from "./StatsAccount.module.scss";
+import { Coins, Copy, CopyBig, Wallet } from "src/components/svg";
 import { getImageFromApi } from "src/scripts/util/image";
 import { getBaseHttpsUrl } from "src/scripts/util/data";
+import useWindowSize from "src/scripts/hooks/useWindowSize";
+import styles from "./StatsAccount.module.scss";
+import media from "./data/adaptive";
 
 const StatsAccount: React.FC<IComponent> = ({
     className 
 }) => {
+    const { width } = useWindowSize();
+    const mediaData = media(width);
+
     const router = useRouter();
     const { query } = router;
     
@@ -84,6 +89,9 @@ const StatsAccount: React.FC<IComponent> = ({
 
     console.log(accountStats);
 
+    if(!accountStats) return <></>;
+    
+
     const priceClass = (number: string) => {
         const negative = Number(number) < 0 || Number.isNaN(number);
         return classNames([
@@ -92,7 +100,6 @@ const StatsAccount: React.FC<IComponent> = ({
         ]);
     };
     
-
     const classes = classNames([
         styles["stats-accounts"],
         className
@@ -122,10 +129,11 @@ const StatsAccount: React.FC<IComponent> = ({
                     </div>
                 </div>
             </>
-        )
-    }
+        );
+    };
 
     const renderPerformer = (title, volume, percent, name = "", symbol = "", image = "") => {
+        console.log(`${getBaseHttpsUrl()}${image}`)
         return (
             <>
                  <div className={"stats__top"}>
@@ -154,13 +162,13 @@ const StatsAccount: React.FC<IComponent> = ({
                     </div>
                 </div>
             </>
-        )
-    }
+        );
+    };
 
     return (
-        <Grid className={classes} columns={3}>
+        <Grid className={classes} columns={mediaData.accountStatsWrapper}>
             {/* ========= */}
-            <GridWrapper gridWidth={1}>
+            <GridWrapper gridWidth={mediaData.accountStatsNet}>
                 <Plate noMin>
                     <div className={"stats__top"}>
                         <div className={"stats__top-wrapper"}>
@@ -177,7 +185,7 @@ const StatsAccount: React.FC<IComponent> = ({
                     </div>
                 </Plate>
             </GridWrapper>
-            <GridWrapper gridWidth={2}>
+            <GridWrapper gridWidth={mediaData.accountStatsWallet}>
                 <Plate noMin transparent>
                     <div className={"stats__top"}>
                         <div className={"stats__top-wrapper"}>
@@ -186,11 +194,11 @@ const StatsAccount: React.FC<IComponent> = ({
                             </div>
                             <strong className={"stats__top-title blue bold"}>Wallet</strong>
                         </div>
-                        <div className={"stats__top-stats"}>
+                        <div className={"stats__top-stats row"}>
                             <span className={"title light"}>
                                 {query.id}
                             </span>
-                            <Copy />
+                            <CopyBig />
                         </div>
                     </div>
                 </Plate>

@@ -9,6 +9,7 @@ export { default as Block } from "./Block";
 export { default as Coins } from "./Coins";
 export { default as Compass } from "./Compass";
 export { default as Copy } from "./Copy";
+export { default as CopyBig } from "./CopyBig";
 export { default as DifferenceArrow } from "./DifferenceArrow";
 export { default as DifferenceArrowDouble } from "./DifferenceArrowDouble";
 export { default as Logo } from "./Logo";

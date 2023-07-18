@@ -29,6 +29,10 @@
             align-items: flex-end;
             text-align: right;
 
+            &.row {
+                flex-direction: row;
+            }
+
             .title {
                 font-weight: 700;
                 font-size: 22px;

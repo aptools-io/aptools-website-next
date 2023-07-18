@@ -1,5 +1,5 @@
 const getBaseHttpsUrl = () => {
-    return `${process.env.BASE_HTTPS_URL}`;
+    return `${process.env.BASE_URL}`;
 };
 
 export { getBaseHttpsUrl };
