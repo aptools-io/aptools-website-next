@@ -7,13 +7,14 @@ import { IRootState } from "src/scripts/redux/store";
 
 // Styles
 import classNames from "classnames";
-import { Tabs } from "src/components/ui";
-import useWindowSize from "src/scripts/hooks/useWindowSize";
-import { AccountsList } from "src/components/lists";
 import styles from "./Accounts.module.scss";
 
+// Hooks
+import useWindowSize from "src/scripts/hooks/useWindowSize";
+
 // Components
-import ProjectsList from "../ProjectsList/ProjectsList";
+import { AccountsList } from "src/components/lists";
+import { Tabs } from "src/components/ui";
 
 
 

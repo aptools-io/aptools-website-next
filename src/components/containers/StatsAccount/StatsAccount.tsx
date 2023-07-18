@@ -200,7 +200,7 @@ const StatsAccount: React.FC<IComponent> = ({
             {/* ========= */}
             <GridWrapper gridWidth={1}>
                 <Plate noMin bordered>
-                    {renderBalance("Current Token Balalance", current_balance, all_time_profit)}
+                    {renderBalance("Current Token Balance", current_balance, all_time_profit)}
                 </Plate>
             </GridWrapper>
             <GridWrapper gridWidth={1}>
@@ -223,12 +223,12 @@ const StatsAccount: React.FC<IComponent> = ({
             </GridWrapper>
             <GridWrapper gridWidth={1}>
                 <Plate noMin bordered>
-                    {renderPerformer("Best NFT performer", bestNftVolumeUsd, bestNftVolumePerc, bestNftName, bestNftCollection, bestNftUri)}
+                    {renderPerformer("Best NFT Performer", bestNftVolumeUsd, bestNftVolumePerc, bestNftName, bestNftCollection, bestNftUri)}
                 </Plate>
             </GridWrapper>
             <GridWrapper gridWidth={1}>
                 <Plate noMin bordered>
-                    {renderPerformer("Worst NFT performer", worstNftVolumeUsd, worstNftVolumePerc, worstNftName, worstNftCollection, worstNftUri)}
+                    {renderPerformer("Worst NFT Performer", worstNftVolumeUsd, worstNftVolumePerc, worstNftName, worstNftCollection, worstNftUri)}
                 </Plate>
             </GridWrapper>
         </Grid>

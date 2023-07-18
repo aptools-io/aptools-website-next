@@ -14,6 +14,7 @@
             @include mediaWMax('MOBILE') {
                 justify-content: center;
                 flex-direction: column;
+                align-items: flex-start;
             }
             #{$top}-stats {
                 @include mediaWMax('MOBILE') {
