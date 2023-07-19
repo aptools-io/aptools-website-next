@@ -16,7 +16,6 @@ export class Api {
             const init = {
                 method: type,
                 headers: {
-                    "Access-Control-Allow-Origin": "*",
                     ...headers
                 },
                 ...(body && { body })
