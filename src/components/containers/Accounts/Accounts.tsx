@@ -5,13 +5,13 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { IRootState } from "src/scripts/redux/store";
 
-// Styles
-import classNames from "classnames";
-import styles from "./Accounts.module.scss";
-
 // Components
 import { AccountsList } from "src/components/lists";
 import { Tabs } from "src/components/ui";
+
+// Styles
+import classNames from "classnames";
+import styles from "./Accounts.module.scss";
 
 // Data
 import categories from "./data/categories";
