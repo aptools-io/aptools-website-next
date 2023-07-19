@@ -30,6 +30,7 @@ const Tabs: React.ForwardRefRenderFunction<any, ITabsProps> = ({
 
     const navigationPrevRef = useRef(null);
     const navigationNextRef = useRef(null);
+    const [lineElement, setLineElement] = useState(null);
     const [swiper, setSwiper] = useState(null);
 
     const [customEntry, setCustomEntry] = useState(null);
@@ -44,12 +45,29 @@ const Tabs: React.ForwardRefRenderFunction<any, ITabsProps> = ({
         className
     ]);
 
+    useEffect(() => {
+        if(swiper?.el) updateLine(tabId);
+    }, [swiper, lineElement]);
+
+    const updateLine = (index) => {
+        if(!swiper.el || !lineElement) return;
+
+        const items = swiper.el.querySelectorAll(`.${styles["tabs__item"]}`);
+        
+        if(!items[index]) return;
+
+        console.log(items[index].innerWidth);
+
+        lineElement.style.left = `${items[index].offsetLeft  }px`;
+        lineElement.style.width = `${items[index].getBoundingClientRect().width  }px`;
+    };
+
     const handleTabClick = (
         index: number, 
         getData: ITab
     ) => {
         setTabId(index);
-        
+        updateLine(index);
         if(getData.action) {
             setLoading(true);
             getData.action(setCustomEntry, setLoading, getData.id);
@@ -61,11 +79,15 @@ const Tabs: React.ForwardRefRenderFunction<any, ITabsProps> = ({
         
         return (
             <SwiperSlide key={index}>
-                <div onClick={() => handleTabClick(index, !checkItem && { action: item.action, id: item.id, component: item.component })} data-count={checkItem && item[1].length} className={classNames([
-                    styles["tabs__item"],
-                    {[styles["active"]]: index === tabId },
-                    {[styles["counter"]]: itemsCount }
-                ])}>
+                <div 
+                    onClick={() => handleTabClick(index, !checkItem && { action: item.action, id: item.id, component: item.component })} 
+                    data-count={checkItem && item[1].length} 
+                    className={classNames([
+                        styles["tabs__item"],
+                        {[styles["active"]]: index === tabId },
+                        {[styles["counter"]]: itemsCount }
+                    ])}
+                >
                     {checkItem ? item[0] : item.title}
                 </div>
             </SwiperSlide>
@@ -77,9 +99,10 @@ const Tabs: React.ForwardRefRenderFunction<any, ITabsProps> = ({
 
     const getComponent = () => {
         if(loading) return new Array(10).fill(null).map((_, index) => <Skeleton key={index} style={{ height: "205px", minHeight: "205px" }} />);
-        if(dataArray?.[tabId].component) return dataArray?.[tabId].component();
+        if(dataArray?.[tabId]?.component) return dataArray?.[tabId].component();
         return React.cloneElement(child as React.ReactElement<IListHeaderProps>, {
             data: entry || customEntry || defaultEntry || [],
+            key: new Date().getTime()
         });
     };
     
@@ -108,8 +131,16 @@ const Tabs: React.ForwardRefRenderFunction<any, ITabsProps> = ({
                                 setSwiper(swiper);
                                 swiper.el.style.display = "block";
                                 swiper.wrapperEl.classList.add(styles["tabs__wrapper"]);
+
+                                if(lineElement || swiper.wrapperEl.querySelectorAll(`.${styles["tabs__line"]}`).length) return;
+                                const line = document.createElement("i");
+                                line.classList.add(styles["tabs__line"]);
+
+                                swiper.wrapperEl.append(line);
+                                setLineElement(line);
                             }}
                         >
+                            {/* <SwiperSlide style={{ position: "absolute", maxWidth: 0, maxHeight: 0 }}><i ref={lineRef} className={styles["tabs__line"]}/></SwiperSlide> */}
                             {entries.map(renderCategory)}
                         </Swiper>
                     </>

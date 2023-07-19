@@ -33,7 +33,7 @@ const formatNumber = (number: string | number) => {
     const integer = pointIndex === -1 ? numberString : numberString.substring(0, pointIndex);
     const decimal = numberString.substring(pointIndex + 1);
 
-    const formattedInteger = new Intl.NumberFormat("en").format(Number(integer)).replaceAll(".", ",");
+    const formattedInteger = new Intl.NumberFormat("en").format(Number(integer)).replaceAll(",", " ");
     if(pointIndex !== -1) return `${formattedInteger}.${formatDecimal(decimal)}`;
  
     return formattedInteger;

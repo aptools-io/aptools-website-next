@@ -32,12 +32,13 @@ const ProjectsList: React.FC<{ all?: boolean, data?: IApiProject[], mediaData: a
     
     const renderItem = (item: IApiProject, index: number) => {
         const lastItem = data.length > mediaData.projectsCount ? mediaData.projectsCount : data.length;
+        console.log(item)
         return (
             <React.Fragment key={index}>
                 <GridWrapper gridWidth={mediaData.project}>
                     <Plate 
                         compressed 
-                        image={`${process.env.BASE_HTTPS_URL}/${item.image}`}
+                        image={`${process.env.BASE_URL}/${item.image}`}
                         title={item.name}
                         className={styles["projects-list__item"]}
                         style={{ animation: `fade-in .5s ${index / 10}s normal forwards ease` }}

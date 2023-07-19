@@ -4,7 +4,7 @@ import { concatString, shortenHashString } from "src/scripts/util/strings";
 // Convert
 const columnNamesMobile = [
     {
-        "key": "balance_rank",
+        "key": "rank",
         "value": "Rank",
         "defaultSort": true,
         "defaultSortType": "asc",
@@ -17,7 +17,7 @@ const columnNamesMobile = [
     },
     
     {
-        "key": "total_balance",
+        "key": "balance",
         "value": "Balance/Percentage",
         "defaultSort": true,
         "right": true,

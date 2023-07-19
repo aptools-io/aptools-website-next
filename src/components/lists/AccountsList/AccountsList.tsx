@@ -24,7 +24,8 @@ import styles from "./AccountsList.module.scss";
 const Accounts: React.FC<IComponent> = ({
     className 
 }) => {
-    const { accounts: accountsArray } = useSelector((state: IRootState) => state.accounts);
+    const { accountsWallets } = useSelector((state: IRootState) => state.accounts);
+    const { wallets } = accountsWallets || {};
     const { width } = useWindowSize();
     const { columnNames = null, columns = null } = media(width) || {};
 
@@ -34,7 +35,7 @@ const Accounts: React.FC<IComponent> = ({
     const [loading, setLoading] = useState(0);
     const { pairs = perPages[2], page = 1 } = router.query;
     const [perPage, setPerPage] = useState(perPages.findIndex(x => x === Number(pairs)) !== -1 ? Number(pairs) : defaultPerPage);
-    const [accountsData, setAccountsData] = useState(accountsArray);
+    const [accountsData, setAccountsData] = useState(wallets);
 
     const handleFetchData = async (page, customPerPage = null) => {
         const pPage = customPerPage || perPage;
@@ -42,7 +43,7 @@ const Accounts: React.FC<IComponent> = ({
             setLoading(0);
             setCurrrentPage(page);
             return e;
-        }) as IApiAccount[];
+        }) as IApiWallet[];
         setAccountsData([...data]);
     };
 
@@ -56,7 +57,7 @@ const Accounts: React.FC<IComponent> = ({
         className
     ]);
 
-    if(!accountsArray || !columnNames || !columns || !width) return <></>;
+    if(!wallets || !columnNames || !columns || !width) return <></>;
 
     const { balance_rank: last_balance_rank = currentPage } = accountsData[accountsData.length - 1] || {};
     return (

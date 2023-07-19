@@ -35,6 +35,9 @@ html {
 .swiper {
     display: none;
     width: 100%;
+    .swiper-slide {
+        z-index: 1;
+    }
 
     &.swiper-initialized {
         display: block;

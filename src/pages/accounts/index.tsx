@@ -11,7 +11,7 @@ import { accounts } from "src/scripts/api/requests";
 
 // Components
 import { AccountsPage } from "src/components/pages";
-import { setAccountsData, setAccountsStatsData } from "src/scripts/redux/slices/accountsSlice";
+import { setAccountsWalletsData } from "src/scripts/redux/slices/accountsSlice";
 
 
 const Accounts = (data: IApiProps) => {
@@ -19,8 +19,8 @@ const Accounts = (data: IApiProps) => {
     useEffect(() => {
         dispatch(setHeaders(data.headers) || null);
         dispatch(setPageTitle("Accounts"));
-        dispatch(setAccountsData(data.accounts));
-        dispatch(setAccountsStatsData(data.accounts_stats));
+        dispatch(setAccountsWalletsData(data.accounts_wallets));
+        console.log(data)
     }, [data, dispatch]);
     
     return <AccountsPage/>;
@@ -32,7 +32,7 @@ export async function getServerSideProps(context) {
 
     return { props: {
         "headers": req.headers,
-        "accounts": await accounts.getAccountsData(25, 0) || [],
+        "accounts_wallets": await accounts.getAccountsData(25, 0) || [],
         "accounts_stats": await accounts.getAccountsStatsData() || [],
     } };
 }

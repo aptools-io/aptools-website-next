@@ -1,11 +1,13 @@
 export class WSocket {
-    base = process.env.BASE_WSS_URL;
+    base = process.env.BASE_WEBSOCKET_URL;
+    version = "/v1"
 
     token = process.env.BASE_TOKEN;
     
     open = (url: string, wsRef: React.MutableRefObject<WebSocket>, setData: (data: any) => any) => {
         if ("WebSocket" in window) {
-            wsRef.current = new WebSocket(`${this.base}${url}`);
+            const endpoint = `${this.base}${this.version}${url}`
+            wsRef.current = new WebSocket(endpoint);
             wsRef.current.onopen = () => {
                 console.log("ws opened");
                 wsRef.current.send(this.token);

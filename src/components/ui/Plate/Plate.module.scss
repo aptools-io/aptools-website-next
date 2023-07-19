@@ -23,8 +23,12 @@
         min-height: 93px;
     }
 
+    &.transparent {
+        background-color: unset;
+    }
+
     &.bordered {
-        border: 1px solid var(--aptools-color-grey-c3);
+        border: 1px solid var(--aptools-color-grey-c5);
         background-color: unset;
     }
 

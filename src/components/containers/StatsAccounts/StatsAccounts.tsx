@@ -27,8 +27,8 @@ import media from "./data/adaptive";
 const StatsAccounts: React.FC<IComponent> = ({
     className 
 }) => {
-    const { accountsStats } = useSelector((state: IRootState) => state.accounts);
-    const { top100, TotalSupply } = accountsStats || {};
+    const { accountsWallets } = useSelector((state: IRootState) => state.accounts);
+    const { total_supply, total_value } = accountsWallets || {};
 
     const { width } = useWindowSize();
     const mediaData = media(width);
@@ -47,7 +47,7 @@ const StatsAccounts: React.FC<IComponent> = ({
                             <strong className={"stats__top-title"}>Total Top 100 Aptos Value</strong>
                         </div>
                         <div className={"stats__top-stats"}>
-                            <span className={"title blue"}>{top100}</span>
+                            <span className={"title blue"}>{numberShorter(total_value, 2)}</span>
                         </div>
                     </div>
                 </Plate>
@@ -59,7 +59,7 @@ const StatsAccounts: React.FC<IComponent> = ({
                             <strong className={"stats__top-title"}>Total Apply Supply</strong>
                         </div>
                         <div className={"stats__top-stats"}>
-                            <span className={"title blue"}>{numberShorter(TotalSupply, 2)}</span>
+                            <span className={"title blue"}>{numberShorter(total_supply, 2)}</span>
                         </div>
                     </div>
                 </Plate>

@@ -4,7 +4,7 @@ import { concatString, shortenHashString } from "src/scripts/util/strings";
 // Convert
 const columnNamesDesktop = [
     {
-        "key": "balance_rank",
+        "key": "rank",
         "value": "Rank",
         "defaultSort": true,
         "defaultSortType": "asc",
@@ -16,7 +16,7 @@ const columnNamesDesktop = [
         "link": "/accounts"
     },
     {
-        "key": "total_balance",
+        "key": "balance",
         "value": "Balance",
         "right": true,
         "formatter": (v) => `${concatString(formatNumber(v), "", " APT")}`

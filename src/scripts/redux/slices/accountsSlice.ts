@@ -3,19 +3,15 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 const accountsSlice = createSlice({
     "name": "accounts",
     "initialState": {
-        "accounts": null as IApiAccount[],
-        "accountsStats": null as IApiAccountsStats,
+        "accountsWallets": null as IApiAccountsWallets,
         "accountStats": null as IApiAccountStats,
         "accountProfitabilities": null as IApiAccountProfitabilities,
         "accountTransactions": null as IApiAccountTransactions,
         "accountNfts": null as IApiAccountNfts,
     },
     "reducers": {
-        "setAccountsData": (state, action: PayloadAction<IApiAccount[]>) => {
-            state.accounts = action.payload;
-        },
-        "setAccountsStatsData": (state, action: PayloadAction<IApiAccountsStats>) => {
-            state.accountsStats = action.payload;
+        "setAccountsWalletsData": (state, action: PayloadAction<IApiAccountsWallets>) => {
+            state.accountsWallets = action.payload;
         },
         "setAccountStatsData": (state, action: PayloadAction<IApiAccountStats>) => {
             state.accountStats = action.payload;
@@ -33,8 +29,7 @@ const accountsSlice = createSlice({
 });
 
 export const { 
-    setAccountsData, 
-    setAccountsStatsData, 
+    setAccountsWalletsData, 
     setAccountStatsData,
     setAccountProfitabilitiesData,
     setAccountTransactionsData,
