@@ -23,7 +23,7 @@ const News: React.FC<IComponent> = ({
 }) => {
     const { newsData, newsCategoriesData } = useSelector((state: IRootState) => state.news);
     // console.log(newsData, newsCategoriesData)
-
+    console.log(newsData)
     
     const classes = classNames([
         styles["news"],

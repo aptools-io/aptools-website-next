@@ -24,6 +24,7 @@ export class Api {
 
             const paramsString = new URLSearchParams({ ...params, ...this.isToken && { API_KEY: this.token } });
             const endpoint = `${this.base}${this.version}${url}?${paramsString}`;
+            console.log(endpoint)
             const result: Response = await fetch(endpoint, init);
             return result;
         }
