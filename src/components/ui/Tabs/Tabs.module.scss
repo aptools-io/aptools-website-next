@@ -6,8 +6,9 @@
         background-color: var(--aptools-color-grey-c3);
         transition: top .3s ease, left .3s ease, width .3s ease;
         z-index: 0;
+
         &:after {
-            content: "";
+            content: '';
             height: 3px;
             background-color: var(--aptools-color-emphasis-c1);
             width: 100%;
@@ -114,11 +115,12 @@
         &.active {
             cursor: default;
             color: var(--aptools-color-emphasis-c1);
-            /* background-color: var(--aptools-color-grey-c3);
+
+            /*background-color: var(--aptools-color-grey-c3);
 
             &:before {
                 width: 100%;
-            } */
+            }*/
 
             &:after {
                 color: var(--aptools-color-grey-c1);

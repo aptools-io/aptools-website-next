@@ -29,6 +29,8 @@ const Accounts: React.FC<IComponent> = ({
     const { width } = useWindowSize();
     const { columnNames = null, columns = null } = media(width) || {};
 
+    const hardSorting = useState<{ key: string; sort: string }>({ key: "rank", sort: "Rank" });
+
     const router = useRouter();
 
     const [currentPage, setCurrrentPage] = useState(1);
@@ -59,7 +61,10 @@ const Accounts: React.FC<IComponent> = ({
 
     if(!wallets || !columnNames || !columns || !width) return <></>;
 
+    const slicedData = accountsData.slice(perPage * (currentPage - 1), perPage * currentPage);
     const { balance_rank: last_balance_rank = currentPage } = accountsData[accountsData.length - 1] || {};
+    
+
     return (
         <div className={classes}>
             {/* <strong className={"list__title"}>
@@ -72,22 +77,23 @@ const Accounts: React.FC<IComponent> = ({
                 total={100} 
                 setPerPage={setPerPage}
                 onChangePage={(page) => {
-                    setLoading(1);
-                    handleFetchData(page);
+                    setCurrrentPage(page);
                 }}
                 onChangePerPage={(perPage) => {
-                    setLoading(1);
-                    console.log(perPage);
-                    handleFetchData(currentPage, perPage);
+                    setPerPage(perPage);
                 }}
             >
                 <ListHeader 
                     columnNames={columnNames} 
                     columns={columns} 
+                    hardSorting={hardSorting}
                     data={accountsData}
-                    key={last_balance_rank}
                 >
-                    <List loadingCount={perPage * loading} loadingComponent={<Skeleton style={{ height: "20px", minHeight: "20px" }} />} />
+                    <List 
+                        loadingCount={perPage * loading} 
+                        loadingComponent={<Skeleton style={{ height: "20px", minHeight: "20px" }} />}
+                        slice={[(currentPage - 1) * perPage, currentPage * perPage]} 
+                    />
                 </ListHeader>
             </Paginator>
         </div>

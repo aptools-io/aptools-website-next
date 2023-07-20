@@ -14,6 +14,8 @@ import { IRootState } from "src/scripts/redux/store";
 // Components
 import { Grid, GridWrapper } from "src/components/general";
 import { Img, Plate } from "src/components/ui";
+import LinesEllipsis from "react-lines-ellipsis";
+import responsiveHOC from "react-lines-ellipsis/lib/responsiveHOC";
 
 // Utils
 import { concatString } from "src/scripts/util/strings";
@@ -22,6 +24,7 @@ import { Coins, Copy, CopyBig, Wallet } from "src/components/svg";
 import { getImageFromApi } from "src/scripts/util/image";
 import { getBaseHttpsUrl } from "src/scripts/util/data";
 import useWindowSize from "src/scripts/hooks/useWindowSize";
+import { copyText } from "src/scripts/util/copyText";
 import styles from "./StatsAccount.module.scss";
 import media from "./data/adaptive";
 
@@ -30,6 +33,8 @@ const StatsAccount: React.FC<IComponent> = ({
 }) => {
     const { width } = useWindowSize();
     const mediaData = media(width);
+
+    const ResponsiveEllipsis = responsiveHOC()(LinesEllipsis);
 
     const router = useRouter();
     const { query } = router;
@@ -81,14 +86,6 @@ const StatsAccount: React.FC<IComponent> = ({
         nft_uri: worstNftUri
     } = worst_nft_performer || {};
 
-    /* const {
-        volume_perc: worstVolumePerc,
-        volume_usd: worstVolumeUsd
-    } = worst_performer || {}; */
-
-
-    console.log(accountStats);
-
     if(!accountStats) return <></>;
     
 
@@ -133,7 +130,7 @@ const StatsAccount: React.FC<IComponent> = ({
     };
 
     const renderPerformer = (title, volume, percent, name = "", symbol = "", image = "") => {
-        console.log(`${getBaseHttpsUrl()}${image}`)
+        console.log(`${getBaseHttpsUrl()}${image}`);
         return (
             <>
                  <div className={"stats__top"}>
@@ -195,10 +192,12 @@ const StatsAccount: React.FC<IComponent> = ({
                             <strong className={"stats__top-title blue bold"}>Wallet</strong>
                         </div>
                         <div className={"stats__top-stats row"}>
-                            <span className={"title light"}>
+                            <span className={"title light m-left"}>
                                 {query.id}
                             </span>
-                            <CopyBig />
+                            <button onClick={() => { copyText(query.id as string); }} className={"stats__top-copy"}>
+                                <CopyBig />
+                            </button>
                         </div>
                     </div>
                 </Plate>

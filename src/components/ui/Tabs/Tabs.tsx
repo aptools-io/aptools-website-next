@@ -23,7 +23,6 @@ const Tabs: React.ForwardRefRenderFunction<any, ITabsProps> = ({
     children,
     className 
 }, ref) => {
-
     const child: React.ReactNode = Children.only(children);
  
     const [tabId, setTabId] = useState(0);
@@ -34,7 +33,6 @@ const Tabs: React.ForwardRefRenderFunction<any, ITabsProps> = ({
     const [swiper, setSwiper] = useState(null);
 
     const [customEntry, setCustomEntry] = useState(null);
-    const [customComponent, setCustomComponent] = useState(null);
     const [loading, setLoading] = useState(false);
 
     const entries = data ? Object.entries(data) : dataArray;
@@ -56,8 +54,6 @@ const Tabs: React.ForwardRefRenderFunction<any, ITabsProps> = ({
         
         if(!items[index]) return;
 
-        console.log(items[index].innerWidth);
-
         lineElement.style.left = `${items[index].offsetLeft  }px`;
         lineElement.style.width = `${items[index].getBoundingClientRect().width  }px`;
     };
@@ -66,6 +62,7 @@ const Tabs: React.ForwardRefRenderFunction<any, ITabsProps> = ({
         index: number, 
         getData: ITab
     ) => {
+        if(tabId === index) return;
         setTabId(index);
         updateLine(index);
         if(getData.action) {

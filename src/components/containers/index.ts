@@ -22,3 +22,4 @@ export { default as StatsAccounts } from "./StatsAccounts/StatsAccounts";
 export { default as StatsAccount } from "./StatsAccount/StatsAccount";
 export { default as Accounts } from "./Accounts/Accounts";
 export { default as Account } from "./Account/Account";
+export { default as AccountOverview } from "./AccountOverview/AccountOverview";

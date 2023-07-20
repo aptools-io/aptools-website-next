@@ -2,7 +2,8 @@ export class Api {
     isToken = false;
 
     base = process.env.BASE_API_URL;
-    version = "/v1"
+
+    version = "/v1";
 
     token = process.env.BASE_TOKEN;
 
@@ -16,7 +17,6 @@ export class Api {
             const init = {
                 method: type,
                 headers: {
-                    "Access-Control-Allow-Origin": "*",
                     ...headers
                 },
                 ...(body && { body })
@@ -24,7 +24,7 @@ export class Api {
 
             const paramsString = new URLSearchParams({ ...params, ...this.isToken && { API_KEY: this.token } });
             const endpoint = `${this.base}${this.version}${url}?${paramsString}`;
-            console.log(endpoint)
+            console.log(endpoint);
             const result: Response = await fetch(endpoint, init);
             return result;
         }

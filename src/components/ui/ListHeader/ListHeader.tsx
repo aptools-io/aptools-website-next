@@ -16,6 +16,7 @@ const ListHeader: React.ForwardRefRenderFunction<any, IListHeaderProps> = ({
     children,
     className 
 }, ref) => {
+    
     const child: any = Children.only(children);
     const defaultSortIndex = columnNames?.findIndex(x => x.defaultSort);
     const defaultSortType = columnNames?.[defaultSortIndex]?.defaultSortType || "desc";
@@ -30,6 +31,7 @@ const ListHeader: React.ForwardRefRenderFunction<any, IListHeaderProps> = ({
     const [sortedData, setSortedData] = useState(data.length ? data.map((item: any, index) => { 
         return { ...item, "_id": index + 1 };
     }) : []);
+    
     
     const classes = classNames([
         styles["list-header"],

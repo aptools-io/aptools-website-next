@@ -22,7 +22,7 @@ const Select: React.FC<ISelectProps> = ({ onChange, value = 0, title, className,
             if (selectRef.current && !selectRef.current.contains(event.target)) {
                 setShow(false);   
             }
-        }
+        };
         const handleFromBottom = () => {
             if(!selectRef.current || !optionsRef.current) return;
             const selectRect = selectRef.current.getBoundingClientRect();
@@ -40,7 +40,7 @@ const Select: React.FC<ISelectProps> = ({ onChange, value = 0, title, className,
             window.removeEventListener("resize", handleFromBottom);
             window.removeEventListener("scroll", handleFromBottom);
             window.removeEventListener("click", handleClickOutside);
-        } 
+        }; 
     }, []);
 
     const classes = classNames([

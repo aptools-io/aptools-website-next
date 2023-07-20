@@ -32,7 +32,7 @@ const ProjectsList: React.FC<{ all?: boolean, data?: IApiProject[], mediaData: a
     
     const renderItem = (item: IApiProject, index: number) => {
         const lastItem = data.length > mediaData.projectsCount ? mediaData.projectsCount : data.length;
-        console.log(item)
+        
         return (
             <React.Fragment key={index}>
                 <GridWrapper gridWidth={mediaData.project}>
