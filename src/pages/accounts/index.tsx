@@ -20,7 +20,7 @@ const Accounts = (data: IApiProps) => {
         dispatch(setHeaders(data.headers) || null);
         dispatch(setPageTitle("Accounts"));
         dispatch(setAccountsWalletsData(data.accounts_wallets));
-        console.log(data)
+        console.log(data);
     }, [data, dispatch]);
     
     return <AccountsPage/>;

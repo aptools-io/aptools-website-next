@@ -1,6 +1,6 @@
 .stats {
     &__top + div {
-       /*  margin-bottom: 9px; */
+        /*margin-bottom: 9px;*/
     }
 
     &__top {
@@ -116,7 +116,6 @@
             min-width: 32px;
             min-height: 32px;
             max-height: 32px;
-            
         }
 
         &-icon {
@@ -229,6 +228,7 @@
                     display: flex;
                     align-items: center;
                     margin-top: 23px;
+
                     img {
                         max-width: 16px;
                         max-height: 16px;
@@ -237,17 +237,19 @@
                         object-fit: contain;
                         margin-right: 4px;
                     }
+
                     &__info {
                         display: flex;
                         flex-direction: column;
-                        
+
                         strong {
                             font-size: 14px;
                             font-style: normal;
                             font-weight: 500;
-                            line-height: 130%; 
+                            line-height: 130%;
                             color: var(--aptools-color-main-secondary);
                         }
+
                         div {
 
                         }
@@ -290,7 +292,6 @@
                         background-color: var(--aptools-color-emphasis-c4);
                     }
                 }
-
             }
 
             .description {

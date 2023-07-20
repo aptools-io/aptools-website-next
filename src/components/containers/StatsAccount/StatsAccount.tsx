@@ -24,9 +24,9 @@ import { Coins, Copy, CopyBig, Wallet } from "src/components/svg";
 import { getImageFromApi } from "src/scripts/util/image";
 import { getBaseHttpsUrl } from "src/scripts/util/data";
 import useWindowSize from "src/scripts/hooks/useWindowSize";
+import { copyText } from "src/scripts/util/copyText";
 import styles from "./StatsAccount.module.scss";
 import media from "./data/adaptive";
-import { copyText } from "src/scripts/util/copyText";
 
 const StatsAccount: React.FC<IComponent> = ({
     className 
@@ -130,7 +130,7 @@ const StatsAccount: React.FC<IComponent> = ({
     };
 
     const renderPerformer = (title, volume, percent, name = "", symbol = "", image = "") => {
-        console.log(`${getBaseHttpsUrl()}${image}`)
+        console.log(`${getBaseHttpsUrl()}${image}`);
         return (
             <>
                  <div className={"stats__top"}>

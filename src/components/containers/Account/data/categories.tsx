@@ -1,7 +1,13 @@
-import { useDispatch } from "react-redux";
-import { AccountTransactionsList } from "src/components/lists";
+// Slices
 import { setAccountTransactionsData } from "src/scripts/redux/slices/accountsSlice";
+
+// Components
+import { AccountTransactionsList } from "src/components/lists";
+import { Plug } from "src/components/ui";
 import AccountOverview from "../../AccountOverview/AccountOverview";
+
+// Styles
+import styles from "../Account.module.scss";
 
 const categories = (dispatch) => {
     return [
@@ -18,15 +24,15 @@ const categories = (dispatch) => {
             title: "Transactions",
             component: () => <AccountTransactionsList />,
             action: (setCustomEntry, setLoading, id) => {
-                console.log("testasdas")
-                dispatch(setAccountTransactionsData(null))
+                console.log("testasdas");
+                dispatch(setAccountTransactionsData(null));
                 setLoading(false);
             }
         },
         {
             id: 3,
             title: "Tokens",
-            component: () => <div>Tokens</div>,
+            component: () => <div className={styles["account__inner"]}><Plug /></div>,
             action: (setCustomEntry, setLoading, id) => {
                 setLoading(false);
             }
@@ -34,7 +40,7 @@ const categories = (dispatch) => {
         {
             id: 4,
             title: "NFTs",
-            component: () => <div>NFTs</div>,
+            component: () => <div className={styles["account__inner"]}><Plug /></div>,
             action: (setCustomEntry, setLoading, id) => {
                 setLoading(false);
             }
@@ -42,7 +48,7 @@ const categories = (dispatch) => {
         {
             id: 5,
             title: "Resources",
-            component: () => <div>Resources</div>,
+            component: () => <div className={styles["account__inner"]}><Plug /></div>,
             action: (setCustomEntry, setLoading, id) => {
                 setLoading(false);
             }
@@ -50,7 +56,7 @@ const categories = (dispatch) => {
         {
             id: 6,
             title: "Modules",
-            component: () => <div>Modules</div>,
+            component: () => <div className={styles["account__inner"]}><Plug /></div>,
             action: (setCustomEntry, setLoading, id) => {
                 setLoading(false);
             }
@@ -58,7 +64,7 @@ const categories = (dispatch) => {
         {
             id: 6,
             title: "Info",
-            component: () => <div>Info</div>,
+            component: () => <div className={styles["account__inner"]}><Plug /></div>,
             action: (setCustomEntry, setLoading, id) => {
                 setLoading(false);
             }
@@ -66,12 +72,12 @@ const categories = (dispatch) => {
         {
             id: 7,
             title: "Notifications",
-            component: () => <div>Notifications</div>,
+            component: () => <div className={styles["account__inner"]}><Plug /></div>,
             action: (setCustomEntry, setLoading, id) => {
                 setLoading(false);
             }
         }
-    ]
-}
+    ];
+};
 
 export default categories;

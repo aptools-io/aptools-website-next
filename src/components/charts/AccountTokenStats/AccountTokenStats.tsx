@@ -12,25 +12,25 @@ import ReactECharts from "echarts-for-react";
 
 // Styles
 import classNames from "classnames";
-import styles from "./AccountTokenStats.module.scss";
 
 // Other
-import chartOptions from "./data/chartOptions";
 import { Img } from "src/components/ui";
 import { getImageFromApi } from "src/scripts/util/image";
 import { formatNumber } from "src/scripts/util/numbers";
 import { concatString } from "src/scripts/util/strings";
+import chartOptions from "./data/chartOptions";
+import styles from "./AccountTokenStats.module.scss";
 
 
 const AccountTokenStats: React.FC<IComponent> = ({
     className 
 }) => {
     const { accountStats } = useSelector((state: IRootState) => state.accounts);
-    const { token_stats = [] } = accountStats || {}
+    const { token_stats = [] } = accountStats || {};
 
     if(!accountStats || !token_stats) return <></>;
 
-    const colors = ['#EF8686', '#60C6A8', '#3B5998', '#8B9DC3', '#FDD97D']
+    const colors = ["#EF8686", "#60C6A8", "#3B5998", "#8B9DC3", "#FDD97D"];
     const data = token_stats.map((item, index) => {
         const int = Math.floor((index) / (colors.length));
 
@@ -39,8 +39,8 @@ const AccountTokenStats: React.FC<IComponent> = ({
             symbol: item.coin_symbol,
             value: item.percentage,
             color: colors[index - (colors.length * int)]
-        }
-    })
+        };
+    });
 
     const classes = classNames([
         styles["account-token-stats"],
@@ -63,8 +63,8 @@ const AccountTokenStats: React.FC<IComponent> = ({
                 </div>
                 <span>{concatString(formatNumber(item.value), "", "%")}</span>
             </li>
-        )
-    } 
+        );
+    }; 
 
     return (
         <div className={classes}>

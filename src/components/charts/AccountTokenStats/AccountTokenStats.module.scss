@@ -8,7 +8,6 @@
     }
 
     &__list {
-      
         &-item {
             border-bottom: 1px solid var(--aptools-color-grey-c4);
             display: flex;
@@ -16,6 +15,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 4px 8px;
+
             .info {
                 display: flex;
                 align-items: center;
@@ -43,6 +43,7 @@
                     font-style: normal;
                     font-weight: 400;
                 }
+
                 .description {
                     font-size: 10px;
                     font-style: normal;

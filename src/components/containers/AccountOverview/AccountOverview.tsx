@@ -11,8 +11,8 @@ import { Grid, GridWrapper } from "src/components/general";
 
 // Styles
 import classNames from "classnames";
-import styles from "./AccountOverview.module.scss";
 import { AccountTokenPerformanceList } from "src/components/lists";
+import styles from "./AccountOverview.module.scss";
 
 const AccountOverview: React.FC<IComponent> = ({
     className 

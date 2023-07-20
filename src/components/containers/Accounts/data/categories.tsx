@@ -1,4 +1,7 @@
+
 import { AccountsList } from "src/components/lists";
+import { Plug } from "src/components/ui";
+import styles from "../Accounts.module.scss";
 
 const categories = [
     {
@@ -12,7 +15,7 @@ const categories = [
     {
         id: 2,
         title: "Holders",
-        component: () => <div>1</div>,
+        component: () => <div className={styles["accounts__inner"]}><Plug /></div>,
         action: (setCustomEntry, setLoading, id) => {
             setLoading(false);
         }
@@ -20,7 +23,7 @@ const categories = [
     {
         id: 3,
         title: "Pending Claims",
-        component: () => <div>2</div>,
+        component: () => <div className={styles["accounts__inner"]}><Plug /></div>,
         action: (setCustomEntry, setLoading, id) => {
             setLoading(false);
         }
@@ -28,7 +31,7 @@ const categories = [
     {
         id: 4,
         title: "Inventory",
-        component: () => <div>3</div>,
+        component: () => <div className={styles["accounts__inner"]}><Plug /></div>,
         action: (setCustomEntry, setLoading, id) => {
             setLoading(false);
         }

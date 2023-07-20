@@ -47,7 +47,7 @@ const dummyData = [
         "x": "2023-07-19",
         "y": 2250
     }
-]
+];
 
 const AccountPerformance: React.FC<IComponent> = ({
     className 

@@ -29,6 +29,8 @@ const Accounts: React.FC<IComponent> = ({
     const { width } = useWindowSize();
     const { columnNames = null, columns = null } = media(width) || {};
 
+    const hardSorting = useState<{ key: string; sort: string }>({ key: "rank", sort: "Rank" });
+
     const router = useRouter();
 
     const [currentPage, setCurrrentPage] = useState(1);
@@ -59,9 +61,9 @@ const Accounts: React.FC<IComponent> = ({
 
     if(!wallets || !columnNames || !columns || !width) return <></>;
 
-    const slisedData = accountsData.slice(perPage * (currentPage - 1), perPage * currentPage);
+    const slicedData = accountsData.slice(perPage * (currentPage - 1), perPage * currentPage);
     const { balance_rank: last_balance_rank = currentPage } = accountsData[accountsData.length - 1] || {};
-
+    
 
     return (
         <div className={classes}>
@@ -75,19 +77,23 @@ const Accounts: React.FC<IComponent> = ({
                 total={100} 
                 setPerPage={setPerPage}
                 onChangePage={(page) => {
-                    setCurrrentPage(page)
+                    setCurrrentPage(page);
                 }}
                 onChangePerPage={(perPage) => {
-                    setPerPage(perPage)
+                    setPerPage(perPage);
                 }}
             >
                 <ListHeader 
                     columnNames={columnNames} 
                     columns={columns} 
-                    data={accountsData.slice(perPage * (currentPage - 1), perPage * currentPage)}
-                    key={last_balance_rank * slisedData?.length}
+                    hardSorting={hardSorting}
+                    data={accountsData}
                 >
-                    <List loadingCount={perPage * loading} loadingComponent={<Skeleton style={{ height: "20px", minHeight: "20px" }} />} />
+                    <List 
+                        loadingCount={perPage * loading} 
+                        loadingComponent={<Skeleton style={{ height: "20px", minHeight: "20px" }} />}
+                        slice={[(currentPage - 1) * perPage, currentPage * perPage]} 
+                    />
                 </ListHeader>
             </Paginator>
         </div>

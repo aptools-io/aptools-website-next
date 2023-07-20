@@ -6,16 +6,16 @@ const chartOptions = (data: IBar[]) => {
     const colors = data.map(item => item.color).reverse();
     return {
         polar: {
-            radius: [40, '100%']
+            radius: [40, "100%"]
         },
         angleAxis: {
             max: 100,
             startAngle: 90,
-            boundaryGap: ['0%', '70%'],
+            boundaryGap: ["0%", "70%"],
             show: false, 
         },
         radiusAxis: {
-            type: 'category',
+            type: "category",
             data: titles,
             show: false, 
             interval: 20,
@@ -26,37 +26,37 @@ const chartOptions = (data: IBar[]) => {
             tooltip: {
                 show: true
             },
-            type: 'bar',
+            type: "bar",
             data: values.map((item, index) => {
                 return {
                     value: item,
                     itemStyle: {
                         color: colors[index]
                     }
-                }
+                };
             }),
-            coordinateSystem: 'polar',
+            coordinateSystem: "polar",
             barWidth: 5,
-            stack: 'a',
+            stack: "a",
             label: {
                 show: false,
-                position: 'middle',
-                formatter: '{b}: {c}'
+                position: "middle",
+                formatter: "{b}: {c}"
             }
         }, {
-            type: 'bar',
+            type: "bar",
             data: values.map(item => 100 - item),
-            coordinateSystem: 'polar',
-            stack: 'a',
-            color: '#F7F7F7',
+            coordinateSystem: "polar",
+            stack: "a",
+            color: "#F7F7F7",
             barWidth: 5,
             tooltip: {
                 show: false
             },
             label: {
                 show: false,
-                position: 'middle',
-                formatter: '{b}: {c}'
+                position: "middle",
+                formatter: "{b}: {c}"
             }
         }]
     };
