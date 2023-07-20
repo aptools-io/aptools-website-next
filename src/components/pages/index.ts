@@ -6,3 +6,5 @@ export { default as NewsPage } from "./NewsPage/NewsPage";
 export { default as UpdatesPage } from "./UpdatesPage/UpdatesPage";
 export { default as AccountsPage } from "./AccountsPage/AccountsPage";
 export { default as AccountsSinglePage } from "./AccountsSinglePage/AccountsSinglePage";
+export { default as NotFoundPage } from "./NotFoundPage/NotFoundPage";
+export { default as ServerErrorPage } from "./ServerErrorPage/ServerErrorPage";
