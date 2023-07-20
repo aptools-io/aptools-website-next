@@ -59,7 +59,10 @@ const Accounts: React.FC<IComponent> = ({
 
     if(!wallets || !columnNames || !columns || !width) return <></>;
 
+    const slisedData = accountsData.slice(perPage * (currentPage - 1), perPage * currentPage);
     const { balance_rank: last_balance_rank = currentPage } = accountsData[accountsData.length - 1] || {};
+
+
     return (
         <div className={classes}>
             {/* <strong className={"list__title"}>
@@ -72,20 +75,17 @@ const Accounts: React.FC<IComponent> = ({
                 total={100} 
                 setPerPage={setPerPage}
                 onChangePage={(page) => {
-                    setLoading(1);
-                    handleFetchData(page);
+                    setCurrrentPage(page)
                 }}
                 onChangePerPage={(perPage) => {
-                    setLoading(1);
-                    console.log(perPage);
-                    handleFetchData(currentPage, perPage);
+                    setPerPage(perPage)
                 }}
             >
                 <ListHeader 
                     columnNames={columnNames} 
                     columns={columns} 
-                    data={accountsData}
-                    key={last_balance_rank}
+                    data={accountsData.slice(perPage * (currentPage - 1), perPage * currentPage)}
+                    key={last_balance_rank * slisedData?.length}
                 >
                     <List loadingCount={perPage * loading} loadingComponent={<Skeleton style={{ height: "20px", minHeight: "20px" }} />} />
                 </ListHeader>

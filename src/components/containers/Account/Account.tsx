@@ -2,7 +2,7 @@
 import React from "react";
 
 // Redux
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { IRootState } from "src/scripts/redux/store";
 
 // Components
@@ -26,20 +26,17 @@ const Account: React.FC<{ all?: boolean } & IComponent> = ({
     all = false,
     className 
 }) => {
-    /* const { accounts } = useSelector((state: IRootState) => state.accounts); */
+    const dispatch = useDispatch();
 
     const classes = classNames([
-        styles["accounts"],
+        styles["account"],
         className
     ]);
 
-    /* if(!accounts) return <></>; */
-
-    
 
     return (
         <div className={classes}>
-            <Tabs dataArray={categories} itemsCount={false}>
+            <Tabs dataArray={categories(dispatch)} itemsCount={false}>
                 <div></div>
             </Tabs>
         </div>
