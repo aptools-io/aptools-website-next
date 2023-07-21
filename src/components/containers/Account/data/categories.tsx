@@ -24,7 +24,6 @@ const categories = (dispatch) => {
             title: "Transactions",
             component: () => <AccountTransactionsList />,
             action: (setCustomEntry, setLoading, id) => {
-                console.log("testasdas");
                 dispatch(setAccountTransactionsData(null));
                 setLoading(false);
             }

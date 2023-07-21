@@ -31,9 +31,16 @@ export async function getServerSideProps(context) {
     const { req, query } = context;
     const { id } = query || {};
 
+    const stats = await accounts.getAccountStatsData(id);
+    const profitabilities = await accounts.getAccountProfitabilitiesData(id);
+
+    if(!stats || !profitabilities) return {
+        notFound: true
+    };
+
     return { props: {
         "headers": req.headers,
-        "account_stats": await accounts.getAccountStatsData(id) || {},
-        "account_profitabilities": await accounts.getAccountProfitabilitiesData(id) || {},
+        "account_stats": await accounts.getAccountStatsData(id),
+        "account_profitabilities": await accounts.getAccountProfitabilitiesData(id),
     } };
 }

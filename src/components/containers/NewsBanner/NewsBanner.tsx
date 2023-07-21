@@ -84,7 +84,6 @@ const NewsBanner: React.FC<IComponent> = ({
                         swiper.wrapperEl.classList.add(styles["news-banner__items"]);
                     }}
                     onSlideChange={(swiper) => {
-                        console.log(swiper);
                         setCurrentSlide(swiper.activeIndex);
                     }}
                 >

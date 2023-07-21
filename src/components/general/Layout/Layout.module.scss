@@ -22,6 +22,8 @@
         padding: var(--layout-indent) var(--layout-v-padding) var(--layout-bottom-indent) calc(var(--nav-bar-width) + var(--layout-v-padding));
         flex: 1 0;
         width: 100%;
+        display: flex;
+        flex-direction: column;
 
         @include mediaWMax('TABLET') {
             padding: calc(var(--layout-indent) + var(--nav-bar-height)) var(--layout-v-padding) var(--layout-bottom-indent) calc(var(--nav-bar-width) + var(--layout-v-padding));

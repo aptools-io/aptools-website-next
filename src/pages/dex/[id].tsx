@@ -28,8 +28,15 @@ export default DexId;
 
 export async function getServerSideProps(context) {
     const { req, query } = context;
+
+    const dex = await dexSingle.getData(query.id);
+
+    if(!dex) return {
+        notFound: true
+    };
+
     return { props: {
         "headers": req.headers,
-        "dex_single": await dexSingle.getData(query.id) || [],
+        "dex_single": dex,
     } };
 }
