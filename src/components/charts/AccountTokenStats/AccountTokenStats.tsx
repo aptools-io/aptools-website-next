@@ -61,7 +61,7 @@ const AccountTokenStats: React.FC<IComponent> = ({
                         {!isOther && <span className={styles["description"]}>{item.symbol}</span>}
                     </div>
                 </div>
-                <span>{concatString(formatNumber(item.value), "", "%")}</span>
+                <span>{concatString(formatNumber(item.value, 5), "", "%")}</span>
             </li>
         );
     }; 

@@ -16,6 +16,8 @@ const List: React.FC<IListProps> = ({
     adoptMobile = false,
     loadingCount = null,
     loadingComponent = null,
+    hardPageId = null,
+    hardPerPage = null,
     className 
 }) => {
     const classes = classNames([
@@ -40,6 +42,8 @@ const List: React.FC<IListProps> = ({
                 rowIndex={index} 
                 columnNames={columnNames} 
                 adoptMobile={adoptMobile} 
+                hardPageId={hardPageId}
+                hardPerPage={hardPerPage}
             />)}
         </ul>
     );

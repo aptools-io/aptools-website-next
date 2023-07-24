@@ -130,7 +130,6 @@ const StatsAccount: React.FC<IComponent> = ({
     };
 
     const renderPerformer = (title, volume, percent, name = "", symbol = "", image = "") => {
-        console.log(`${getBaseHttpsUrl()}${image}`);
         return (
             <>
                  <div className={"stats__top"}>

@@ -10,11 +10,11 @@ import "../styles/pages/index.scss";
 
 const AptoolsApp = (props) => {
     const { Component, pageProps } = props;
-    console.log()
+   
 
     return (
         <Provider store={store}>
-            <Layout pageProps={{...pageProps, "hideNavBar": props.router.state?.route === "/404"}}>
+            <Layout pageProps={{...pageProps/* , "hideNavBar": props.router.state?.route === "/404" */}}>
                 <Component {...pageProps} />
             </Layout>
         </Provider>

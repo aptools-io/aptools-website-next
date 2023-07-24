@@ -1,6 +1,9 @@
 // React
 import React, { useRef, useState, Children, useEffect } from "react";
 
+// Next
+import { useRouter } from "next/router";
+
 // Swiper / Components
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper";
@@ -26,6 +29,8 @@ const Tabs: React.ForwardRefRenderFunction<any, ITabsProps> = ({
     const child: React.ReactNode = Children.only(children);
  
     const [tabId, setTabId] = useState(0);
+
+    const router = useRouter();
 
     const navigationPrevRef = useRef(null);
     const navigationNextRef = useRef(null);
@@ -63,11 +68,14 @@ const Tabs: React.ForwardRefRenderFunction<any, ITabsProps> = ({
         getData: ITab
     ) => {
         if(tabId === index) return;
+
         setTabId(index);
         updateLine(index);
+        
         if(getData.action) {
             setLoading(true);
-            getData.action(setCustomEntry, setLoading, getData.id);
+            const query = typeof router.query?.id === "string" ? router.query?.id : "";
+            getData.action(setCustomEntry, setLoading, getData.id, query);
         } 
     };
     

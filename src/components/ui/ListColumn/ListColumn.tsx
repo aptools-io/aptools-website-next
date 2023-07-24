@@ -14,6 +14,8 @@ import styles from "./ListColumn.module.scss";
 
 
 const ListColumn: React.FC<IListProps> = ({
+    hardPageId = null,
+    hardPerPage = null,
     row,
     rowIndex, 
     column, 
@@ -59,7 +61,8 @@ const ListColumn: React.FC<IListProps> = ({
     const combinedValues = row?.combined; 
 
     const unformattedValue = row?.[key];
-    const value = !formatter ? unformattedValue : formatter(unformattedValue);
+    let value = !formatter ? unformattedValue : formatter(unformattedValue);
+    if(key === "_id" && hardPageId && hardPerPage) value = (rowIndex + 1) + (hardPageId * hardPerPage);
     const combinedValue = formatter && combinedValues ? formatter(combinedValues?.[key]) : undefined;
 
     const unformattedReplacedValueMobile = row?.[replacedKeyMobile];

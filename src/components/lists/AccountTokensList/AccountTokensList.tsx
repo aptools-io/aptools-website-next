@@ -14,7 +14,7 @@ import { List, ListHeader, Paginator } from "src/components/ui";
 import { perPages, defaultPerPage } from "src/scripts/consts/perPages";
 import { accounts } from "src/scripts/api/requests";
 import { setAccountTransactionsData } from "src/scripts/redux/slices/accountsSlice";
-import styles from "./AccountTransactionsList.module.scss";
+import styles from "./AccountTokensList.module.scss";
 
 
 // Options
@@ -23,7 +23,7 @@ import { columnNames, columns } from "./data/listOptions";
 // Consts
 
 
-const AccountTokensList: React.FC<IComponent> = ({
+const AccountTransactionsList: React.FC<IComponent> = ({
     className 
 }) => {
     const { accountTransactions } = useSelector((state: IRootState) => state.accounts);
@@ -92,4 +92,4 @@ const AccountTokensList: React.FC<IComponent> = ({
     );
 };
 
-export default AccountTokensList;
+export default AccountTransactionsList;

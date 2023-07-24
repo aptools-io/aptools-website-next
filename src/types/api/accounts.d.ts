@@ -48,6 +48,7 @@ interface IApiAccountPerformer {
 
 interface IApiAccountProfitabilities {
     total_pages: number;
+    currentPage: number;
     profitability: IApiAccountProfitability[]
 }
 
