@@ -5,13 +5,15 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
 // Redux
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { IRootState } from "src/scripts/redux/store";
 
 // Styles
 import classNames from "classnames";
 import { List, ListHeader, Paginator } from "src/components/ui";
 import { perPages, defaultPerPage } from "src/scripts/consts/perPages";
+import { accounts } from "src/scripts/api/requests";
+import { setAccountProfitabilitiesData } from "src/scripts/redux/slices/accountsSlice";
 import styles from "./AccountTokenPerformanceList.module.scss";
 
 
@@ -25,9 +27,17 @@ const AccountTokenPerformanceList: React.FC<IComponent> = ({
     className 
 }) => {
     const { accountProfitabilities } = useSelector((state: IRootState) => state.accounts);
-    const { profitability = [] } = accountProfitabilities || {};
-    const [perPage, setPerPage] = useState(25);
-    const [currentPage, setCurrentPage] = useState(1);
+    const { profitability = [], total_pages, currentPage: dataCurrentPage = 1 } = accountProfitabilities || {};
+    const [perPage, setPerPage] = useState(10);
+    const [currentPage, setCurrentPage] = useState(dataCurrentPage);
+    const [loading, setLoading] = useState(0);
+
+    const hardSorting = useState<{ key: string; sort: string }>({ key: "profit_percentage", sort: "desc" });
+
+
+    const dispatch = useDispatch();
+    const router = useRouter();
+    const { id = null } = router?.query || {};
    /*  const { coin_pairs = [] } = singleDexData || {};
     const router = useRouter();
     const { pairs = perPages[2], page = 1 } = router.query;
@@ -50,16 +60,21 @@ const AccountTokenPerformanceList: React.FC<IComponent> = ({
                 <span>Tokens Trades PnL (Profit And Loss)</span>
             </strong>
             <Paginator 
-                changePerPage
-                perPageKey={"pairs"}
-                pageKey={"page"}
                 key={profitability?.length} 
                 page={currentPage} 
                 perPage={perPage} 
-                setPerPage={setPerPage} 
-                total={profitability?.length} 
+                total={perPage * total_pages} 
                 onChangePage={(page) => {
-                    setCurrentPage(page);
+                    setLoading(1);
+                    accounts.getAccountProfitabilitiesData(id, page, undefined, undefined).then((e: unknown) => {
+                        setCurrentPage(page);
+                        const result = e as IApiAccountProfitabilities;
+                        dispatch(setAccountProfitabilitiesData({
+                            ...result,
+                            currentPage: page
+                        }));
+                        setLoading(0);
+                    });
                 }}
             >
                 <ListHeader 
@@ -67,8 +82,23 @@ const AccountTokenPerformanceList: React.FC<IComponent> = ({
                     columns={columns} 
                     data={profitability}
                     key={profitability?.length}
+                    hardSorting={hardSorting}
+                    onSortingChange={(sorting) => {
+                        setLoading(1);
+                        accounts.getAccountProfitabilitiesData(id, currentPage, sorting.key, sorting.sort).then((e: unknown) => {
+                            const result = e as IApiAccountProfitabilities;
+                            dispatch(setAccountProfitabilitiesData({
+                                ...result,
+                                currentPage
+                            }));
+                            
+                            const [_, setHardSort] = hardSorting;
+                            setHardSort(sorting);
+                            setLoading(0);
+                        });
+                    }}
                 >
-                    <List adoptMobile />
+                    <List adoptMobile hardPageId={currentPage - 1} hardPerPage={10} loadingCount={loading * 10} />
                 </ListHeader>
             </Paginator>
         </div>

@@ -29,7 +29,7 @@ const Accounts: React.FC<IComponent> = ({
     const { width } = useWindowSize();
     const { columnNames = null, columns = null } = media(width) || {};
 
-    const hardSorting = useState<{ key: string; sort: string }>({ key: "rank", sort: "Rank" });
+    const hardSorting = useState<{ key: string; sort: string }>({ key: "rank", sort: "asc" });
 
     const router = useRouter();
 

@@ -13,6 +13,7 @@ const ListHeader: React.ForwardRefRenderFunction<any, IListHeaderProps> = ({
     columns = ["100%"],
     data = [],
     hardSorting = null,
+    onSortingChange = null,
     children,
     className 
 }, ref) => {
@@ -47,6 +48,14 @@ const ListHeader: React.ForwardRefRenderFunction<any, IListHeaderProps> = ({
         const button = e.currentTarget;
         const sortType = button.dataset.sort === "desc" ? "asc" : "desc";
         button.dataset.sort = sortType;
+
+        if(onSortingChange) {
+            onSortingChange({
+                "key": key,
+                "sort": sortType
+            });
+            return;
+        } 
 
         setSorting({
             "key": key,
@@ -87,6 +96,7 @@ const ListHeader: React.ForwardRefRenderFunction<any, IListHeaderProps> = ({
                         classNames([
                             styles["list-header__item"], 
                             { [styles["right"]]: item.right },
+                            { [styles["cant-sort"]]: item.cantSort },
                             { [styles["sorted"]]: item.key === sorting.key }
                         ])}
                     key={index}

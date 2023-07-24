@@ -12,6 +12,7 @@ import ReactECharts from "echarts-for-react";
 
 // Styles
 import classNames from "classnames";
+import { Plug } from "src/components/ui";
 import styles from "./AccountPerformance.module.scss";
 
 // Other
@@ -74,6 +75,7 @@ const AccountPerformance: React.FC<IComponent> = ({
                 </span>
             </strong>
             <div className={styles["account-performance__inner"]}>
+                <Plug />
                 <ReactECharts style={{height: "200px", width: "100%"}} theme={""} option={chartOptions(dummyData)} />
             </div>
         </div>

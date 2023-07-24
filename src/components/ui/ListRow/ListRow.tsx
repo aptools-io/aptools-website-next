@@ -11,6 +11,8 @@ import ListColumn from "../ListColumn/ListColumn";
 
 const ListRow: React.FC<IListProps> = ({
     columnNames = [],
+    hardPerPage = null,
+    hardPageId = null,
     row,
     rowIndex,
     className,
@@ -28,8 +30,8 @@ const ListRow: React.FC<IListProps> = ({
         className
     ]);
 
-    const renderUnder = (column: IColumnName, columnIndex: number, props): JSX.Element => <ListColumn key={columnIndex} {...{...props, column}}/>;
-    const renderReplace = (column: IColumnName, columnIndex, props): JSX.Element => <ListColumn key={columnIndex} {...{...props, inner: true, column}}/>;
+    const renderUnder = (column: IColumnName, columnIndex: number, props): JSX.Element => <ListColumn key={columnIndex} {...{...props, column}} hardPageId={hardPageId} hardPerPage={hardPerPage}/>;
+    const renderReplace = (column: IColumnName, columnIndex, props): JSX.Element => <ListColumn key={columnIndex} {...{...props, inner: true, column}} hardPageId={hardPageId} hardPerPage={hardPerPage}/>;
 
     const renderListItemColumn = (row, rowIndex, column: IColumnName, columnIndex: number, handleCollapse: () => void) => {
         const { under = [], valueGridReplace = [] } = column || {};
@@ -49,6 +51,8 @@ const ListRow: React.FC<IListProps> = ({
         return <ListColumn 
             key={columnIndex} 
             className={styles["hide"]}
+            hardPageId={hardPageId}
+            hardPerPage={hardPerPage}
             {...{
                 ...props, 
                 under: underArray, 

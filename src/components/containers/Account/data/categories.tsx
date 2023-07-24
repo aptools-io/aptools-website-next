@@ -1,10 +1,13 @@
 // Slices
-import { setAccountTransactionsData } from "src/scripts/redux/slices/accountsSlice";
+import { setAccountNftsData, setAccountTransactionsData } from "src/scripts/redux/slices/accountsSlice";
 
 // Components
 import { AccountTransactionsList } from "src/components/lists";
 import { Plug } from "src/components/ui";
+import { accounts } from "src/scripts/api/requests";
+import AccountTokensList from "src/components/lists/AccountTransactionsList/AccountTransactionsList";
 import AccountOverview from "../../AccountOverview/AccountOverview";
+import AccountNtfList from "../../AccountNtfList/AccountNtfList";
 
 // Styles
 import styles from "../Account.module.scss";
@@ -23,25 +26,36 @@ const categories = (dispatch) => {
             id: 2,
             title: "Transactions",
             component: () => <AccountTransactionsList />,
-            action: (setCustomEntry, setLoading, id) => {
-                dispatch(setAccountTransactionsData(null));
-                setLoading(false);
+            action: async (setCustomEntry, setLoading, id, queryId) => {
+                await accounts.getAccountTransactionsData(queryId, 25, 0).then((e: unknown) => {
+                    const result = e as IApiAccountTransactions;
+                    dispatch(setAccountTransactionsData(result));
+                    setLoading(false);
+                });
             }
         },
         {
             id: 3,
             title: "Tokens",
-            component: () => <div className={styles["account__inner"]}><Plug /></div>,
-            action: (setCustomEntry, setLoading, id) => {
-                setLoading(false);
+            component: () => <div className={styles["account__inner"]}><Plug /></div>,/* <AccountTokensList /> */
+            action: async (setCustomEntry, setLoading, id, queryId) => {
+                await accounts.getAccountTokensData(queryId, 25, 0).then((e: unknown) => {
+                    /* const result = e as IApiAccountTransactions;
+                    console.log(result) */
+                    setLoading(false);
+                });
             }
         },
         {
             id: 4,
             title: "NFTs",
-            component: () => <div className={styles["account__inner"]}><Plug /></div>,
-            action: (setCustomEntry, setLoading, id) => {
-                setLoading(false);
+            component: () => <AccountNtfList />,
+            action: async (setCustomEntry, setLoading, id, queryId) => {
+                await accounts.getAccountNftData(queryId).then((e: unknown) => {
+                    const result = e as IApiAccountNfts[];
+                    dispatch(setAccountNftsData(result));
+                    setLoading(false);
+                });
             }
         },
         {

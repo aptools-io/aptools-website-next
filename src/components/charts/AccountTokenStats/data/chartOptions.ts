@@ -1,8 +1,9 @@
 import { performanceOptions } from "src/scripts/charts/performance";
+import { concatString } from "src/scripts/util/strings";
 
 const chartOptions = (data: IBar[]) => {
     const titles = data.map(item => item.title).reverse();
-    const values = data.map(item => item.value).reverse();
+    const values = data.map(item => item.value.toFixed(2)).reverse();
     const colors = data.map(item => item.color).reverse();
     return {
         polar: {
@@ -24,7 +25,8 @@ const chartOptions = (data: IBar[]) => {
         tooltip: {},
         series: [{
             tooltip: {
-                show: true
+                show: true,
+                valueFormatter: (value) => concatString(value, "", "%") 
             },
             type: "bar",
             data: values.map((item, index) => {
@@ -45,13 +47,13 @@ const chartOptions = (data: IBar[]) => {
             }
         }, {
             type: "bar",
-            data: values.map(item => 100 - item),
+            data: values.map(item => 100 - Number(item)),
             coordinateSystem: "polar",
             stack: "a",
             color: "#F7F7F7",
             barWidth: 5,
             tooltip: {
-                show: false
+                show: false,
             },
             label: {
                 show: false,

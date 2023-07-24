@@ -54,7 +54,7 @@ const Layout: React.FC<{ children: React.ReactNode, pageProps }> = ({ children, 
             ])}>
                 {/* <MainLoading /> */}
                 <NextNProgress  options={{ showSpinner: false }} color="#3b5998" />
-                <NavBar data={menu(t)} />
+                {!pageProps?.hideNavBar && <NavBar data={menu(t)} />}
                 <div className={styles["layout__page-wrapper"]}>
                     {children}
                 </div>

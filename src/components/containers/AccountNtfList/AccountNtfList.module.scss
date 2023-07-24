@@ -1,0 +1,22 @@
+.account-nft-list {
+    &__folder + &__folder {
+        margin-top: 10px;
+    }
+    &__folder {
+        border: 1px solid var(--aptools-color-grey-c5);
+        padding: 16px 10px;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+
+        .main-info {
+            display: flex;
+            align-items: center;
+        }
+
+        &s {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+}

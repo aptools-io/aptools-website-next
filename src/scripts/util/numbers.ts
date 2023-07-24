@@ -10,14 +10,14 @@ const numberShorter = (
     return (value / 10**(3 * index)).toFixed(fixed || 2) + (schema[index] === undefined ? (`e${  index * 3}`) : schema[index]);
 };
 
-const formatDecimal = (decimal: string) => { 
-    if(decimal.length > 2) return decimal.slice(0, 2);
+const formatDecimal = (decimal: string, toFixed: number = 2) => { 
+    if(decimal.length > toFixed) return decimal.slice(0, toFixed);
     if(decimal.length === 2) return `${decimal}`;
     if(decimal.length === 1) return `${decimal.slice(0, 1)}0`;
     return "00";
 };
 
-const formatNumber = (number: string | number) => {
+const formatNumber = (number: string | number, toFixed = 2) => {
     if(Number.isNaN(Number(number))) return number;
 
     let num = number;
@@ -34,7 +34,7 @@ const formatNumber = (number: string | number) => {
     const decimal = numberString.substring(pointIndex + 1);
 
     const formattedInteger = new Intl.NumberFormat("en").format(Number(integer)).replaceAll(",", " ");
-    if(pointIndex !== -1) return `${formattedInteger}.${formatDecimal(decimal)}`;
+    if(pointIndex !== -1) return `${formattedInteger}.${formatDecimal(decimal, toFixed)}`;
  
     return formattedInteger;
 };

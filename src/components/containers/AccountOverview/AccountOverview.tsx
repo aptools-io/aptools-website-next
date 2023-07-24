@@ -1,10 +1,6 @@
 // React
 import React from "react";
 
-// Redux
-import { useSelector } from "react-redux";
-import { IRootState } from "src/scripts/redux/store";
-
 // Components
 import { AccountPerformance, AccountTokenStats } from "src/components/charts";
 import { Grid, GridWrapper } from "src/components/general";
