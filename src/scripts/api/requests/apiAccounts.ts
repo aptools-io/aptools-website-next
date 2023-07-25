@@ -24,14 +24,24 @@ const getAccountTransactionsData = async (address = null, limit = 25, offset = 0
     return api.get("/account_transactions", {}, { address, limit, offset });
 };
 
-const getAccountTokensData = async (address = null, limit = 25, offset = 0) => {
-    const api = new Api(true);
-    return api.get("/account_coins", {}, { address });
+const getAccountTokensData = async (address = null) => {
+    const api = new Api(false);
+    return api.post("/account_coins", {}, {}, { account: address, pageSize: 10, currentPage: 1, order: null, orderBy: null });
 };
 
-const getAccountNftData = async (address = null, limit = 25, offset = 0) => {
+const getAccountNftData = async (address = null) => {
     const api = new Api(true);
     return api.get("/account_nfts", {}, { address });
+};
+
+const getAccountResourcesData = async (address = null) => {
+    const api = new Api(true);
+    return api.get("/account_resources", {}, { address });
+};
+
+const getAccountInfoData = async (address = null) => {
+    const api = new Api(true);
+    return api.get("/account_info", {}, { address });
 };
 
 const accounts = {
@@ -41,7 +51,9 @@ const accounts = {
     getAccountProfitabilitiesData,
     getAccountTransactionsData,
     getAccountTokensData,
-    getAccountNftData
+    getAccountNftData,
+    getAccountResourcesData,
+    getAccountInfoData
 };
 
 export default accounts;

@@ -24,4 +24,6 @@ export { default as Accounts } from "./Accounts/Accounts";
 export { default as Account } from "./Account/Account";
 export { default as AccountOverview } from "./AccountOverview/AccountOverview";
 export { default as AccountNtfList } from "./AccountNtfList/AccountNtfList";
+export { default as AccountResourcesList } from "./AccountResourcesList/AccountResourcesList";
+export { default as AccountInfo } from "./AccountInfo/AccountInfo";
 export { default as ErrorPlug } from "./ErrorPlug/ErrorPlug";

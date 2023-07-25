@@ -1,0 +1,113 @@
+.account-resources-list {
+    &__title {
+        font-size: 10px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 15px;
+        color: var(--aptools-color-grey-c1);
+    }
+
+    &__item {
+        &-title {
+            padding: 9px 8px;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 130%;
+            cursor: pointer;
+            transition: background-color .3s ease;
+            display: flex;
+            justify-content: space-between;
+
+            svg {
+                transition: transform .3s ease;
+                transform: rotateZ(90deg);
+            }
+
+            &:hover {
+                background-color: var(--aptools-color-grey-c5);
+            }
+        }
+
+        border-bottom: 1px solid var(--aptools-color-grey-c4);
+        transition: background-color .3s ease;
+
+        &.open {
+            background-color: var(--aptools-color-grey-c5);
+
+            .account-resources-list__item-code {
+                grid-template-rows: 1fr;
+            }
+
+            .account-resources-list__item-title {
+                color: var(--aptools-color-emphasis-c1);
+                font-weight: 700;
+                line-height: 20px;
+
+                svg {
+                    transform: rotateZ(-90deg);
+                }
+            }
+        }
+
+        &-code {
+            overflow: hidden;
+            display: grid;
+            grid-template-rows: 0fr;
+            transition: grid-template-rows .3s ease;
+
+            &-inner {
+                min-height: 0;
+
+                .code {
+                    border: 1px solid var(--aptools-color-grey-c2);
+                    border-radius: 2px;
+                    background-color: var(--aptools-color-main-primary);
+                    display: grid;
+                    grid-template-rows: 0fr;
+                    grid-template-columns: calc(100% - 44px) 44px;
+                    transition: grid-template-rows .3s ease;
+                    overflow: hidden;
+
+                    &.open {
+                        grid-template-rows: 1fr;
+
+                        button {
+                            svg {
+                                transition: transform .3s ease;
+                                transform: rotateZ(-90deg);
+                            }
+                        }
+                    }
+
+                    &-area {
+                        padding: 20px 32px;
+                    }
+
+                    &-formatted {
+                        padding: 10px;
+                        width: calc(100% - 44px);
+                        min-height: 100px;
+                    }
+
+                    button {
+                        width: 44px;
+                        min-height: 100%;
+                        display: flex;
+                        align-items: flex-end;
+                        justify-content: center;
+
+                        svg {
+                            margin-bottom: 10px;
+                            transform: rotateZ(90deg);
+                        }
+                    }
+                }
+            }
+        }
+
+        &s {
+            margin-top: 10px;
+        }
+    }
+}

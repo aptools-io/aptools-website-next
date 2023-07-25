@@ -25,6 +25,7 @@ import { getImageFromApi } from "src/scripts/util/image";
 import { getBaseHttpsUrl } from "src/scripts/util/data";
 import useWindowSize from "src/scripts/hooks/useWindowSize";
 import { copyText } from "src/scripts/util/copyText";
+import { percentClass } from "src/scripts/util/classes";
 import styles from "./StatsAccount.module.scss";
 import media from "./data/adaptive";
 
@@ -88,15 +89,6 @@ const StatsAccount: React.FC<IComponent> = ({
 
     if(!accountStats) return <></>;
     
-
-    const priceClass = (number: string) => {
-        const negative = Number(number) < 0 || Number.isNaN(number);
-        return classNames([
-            "additive",
-            ...negative ? ["negative"] : []
-        ]);
-    };
-    
     const classes = classNames([
         styles["stats-accounts"],
         className
@@ -119,7 +111,7 @@ const StatsAccount: React.FC<IComponent> = ({
                         <span className={"title"}>All-time profit</span>
                         <span className={"info percent"}>
                             {concatString(formatNumber(profit), "", "$")}
-                            <span className={priceClass(profit)}>
+                            <span className={percentClass(profit)}>
                                 {setSign(formatNumber(profit))}%
                             </span>
                         </span>
@@ -141,7 +133,7 @@ const StatsAccount: React.FC<IComponent> = ({
                     <div className={"stats__item-wrapper"}>
                         <span className={"title"}>
                             <div className={"item-data"}>
-                                <Img src={image ? `${getBaseHttpsUrl()}${image}` : getImageFromApi(symbol)} alt={name} />
+                                <Img src={image ? `${process.env.BASE_IMAGES_URL}${image}` : getImageFromApi(symbol)} alt={name} />
                                 <div className={"item-data__info"}>
                                     <strong>{name}</strong>
                                     <div>{symbol}</div>
@@ -151,7 +143,7 @@ const StatsAccount: React.FC<IComponent> = ({
                         </span>
                         <span className={"info percent"}>
                             {concatString(formatNumber(volume), "", "$")}
-                            <span className={priceClass(percent)}>
+                            <span className={percentClass(percent)}>
                                 {concatString(setSign(formatNumber(percent)), "", "%")}
                             </span>
                         </span>

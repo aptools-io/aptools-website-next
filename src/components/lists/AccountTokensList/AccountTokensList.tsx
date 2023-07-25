@@ -28,7 +28,6 @@ const AccountTransactionsList: React.FC<IComponent> = ({
 }) => {
     const { accountTransactions } = useSelector((state: IRootState) => state.accounts);
     const { transactions = [], total } = accountTransactions || {};
-    console.log(transactions);
     const [perPage, setPerPage] = useState(25);
     const [currentPage, setCurrentPage] = useState(1);
     const [loading, setLoading] = useState(0);
