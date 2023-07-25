@@ -88,7 +88,7 @@ interface IApiAccountTransaction {
 
 interface IApiAccountNfts {
     name: string;
-    net_forth: number;
+    net_worth: number;
     nfts: IApiAccountNft[];
     supply: number;
     volume_apt: number;
@@ -103,4 +103,15 @@ interface IApiAccountNft {
     rank: number;
     rarity: string;
     uri: string;
+}
+
+
+interface IApiAccountResource {
+    data: string;
+    type: string;
+}
+
+interface IApiAccountInfo {
+    auth_key: string;
+    sequence_number: number;
 }

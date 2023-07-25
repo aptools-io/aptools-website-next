@@ -9,6 +9,8 @@ const accountsSlice = createSlice({
         "accountTransactions": null as IApiAccountTransactions,
         "accountTokens": null as any,
         "accountNfts": null as IApiAccountNfts[],
+        "accountResources": null as IApiAccountResource[],
+        "accountInfo": null as IApiAccountInfo
     },
     "reducers": {
         "setAccountsWalletsData": (state, action: PayloadAction<IApiAccountsWallets>) => {
@@ -29,6 +31,12 @@ const accountsSlice = createSlice({
         "setAccountNftsData": (state, action: PayloadAction<IApiAccountNfts[]>) => {
             state.accountNfts = action.payload;
         },
+        "setAccountResourcesData": (state, action: PayloadAction<IApiAccountResource[]>) => {
+            state.accountResources = action.payload;
+        },
+        "setAccountInfoData": (state, action: PayloadAction<IApiAccountInfo>) => {
+            state.accountInfo = action.payload;
+        },
     }
 });
 
@@ -38,6 +46,8 @@ export const {
     setAccountProfitabilitiesData,
     setAccountTransactionsData,
     setAccountTokensData,
-    setAccountNftsData
+    setAccountNftsData,
+    setAccountResourcesData,
+    setAccountInfoData
 } = accountsSlice.actions;
 export default accountsSlice.reducer;
