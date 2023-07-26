@@ -5,3 +5,4 @@ export { default as NavBar } from "./NavBar/NavBar";
 export { default as MainLoading } from "./MainLoading/MainLoading";
 export { default as Footer } from "./Footer/Footer";
 export { default as Topper } from "./Topper/Topper";
+export { default as Notifications } from "./Notifications/Notifications";

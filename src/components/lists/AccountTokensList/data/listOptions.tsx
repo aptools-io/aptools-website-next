@@ -4,71 +4,44 @@ import { formatNumber, setSign } from "src/scripts/util/numbers";
 // Styles
 import classNames from "classnames";
 import { concatString, shortenHashString } from "src/scripts/util/strings";
+import { timeAgo } from "src/scripts/util/timeConvert";
 import styles from "../AccountTokenPerformance.module.scss";
 
 // Convert
 const columnNames = [
     {
-        "key": "version",
-        "value": "Version",
-        "cantSort": true,
-    },
-    {
-        "key": "block",
-        "value": "Block",
-        "cantSort": true,
-    },
-    {
-        "key": "type",
-        "value": "Type",
-        "cantSort": true,
-    },
-    {
+        "value": "Token",
         "key": "coin_name",
-        "value": "Coin",
-        "symbol": "coin_symbol",
-        "description": "coin_symbol",
-        "cantSort": true,
+        "symbol": "coin",
+        "description": "coin"
     },
     {
-        "key": "hash",
-        "value": "Hash",
-        "formatter": (v) => `${shortenHashString(v)}`,
-        "cantSort": true,
+        "key": "balance",
+        "value": "Balance",
+        "description": "balanceUSD",
+        "formatter": (v) => `${concatString(formatNumber(v), "", " APT") }`,
+        "descriptionFormatter": (v) => `${concatString(formatNumber(v), "$", "") }`
     },
     {
-        "key": "account",
-        "value": "Account",
-        "formatter": (v) => `${shortenHashString(v)}`,
-        "cantSort": true,
+        "key": "wallet_percentage",
+        "value": "Wallet Percentage",
+        "formatter": (v) => `${concatString(formatNumber(v), "", "%") }`,
     },
     {
-        "key": "value",
-        "value": "Value",
-        "description": "value_usd",
-        "formatter": (v) => `${formatNumber(v, 5)}`,
-        "cantSort": true,
-    },
-    {
-        "key": "fee",
-        "value": "Txn fee",
-        "formatter": (v) => `${formatNumber(v, 5)}`,
-        "cantSort": true,
-    },
-    {
-        "key": "profit_usd",
+        "key": "profitUSD",
         "value": "Profit",
-        "cantSort": true,
-        "formatter": (v) => `${concatString(formatNumber(v, 5), "", "$") }`,
+        "description": "profit_percentage",
+        "formatter": (v) => `${concatString(formatNumber(v), "", "$") }`,
+        "descriptionFormatter": (v) => `${concatString(setSign(formatNumber(v, 5)) , "", "%") }`,
     },
     {
         "key": "timestamp",
-        "value": "Timestamp",
-        "cantSort": true,
+        "value": "Last transaction",
+        "formatter": (v) => `${timeAgo(v)}`,
     }
 ];
 
 // Columns
-const columns = ["7.25%", "7.25%", "5%", "10%", "15%", "15%", "10%", "10%", "10%", "10%"];
+const columns = ["15%", "15%", "27.5%", "27.5%", "15%"];
 
 export { columnNames, columns };

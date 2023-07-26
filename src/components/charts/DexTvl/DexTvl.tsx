@@ -10,6 +10,7 @@ import ReactECharts from "echarts-for-react";
 
 // Styles
 import classNames from "classnames";
+import { Plug } from "src/components/ui";
 import styles from "./DexTvl.module.scss";
 
 // Other
@@ -27,14 +28,12 @@ const DexTvl: React.FC<IComponent> = ({
         className
     ]);
 
-    if(!dex_tvl) return <></>;
-
     return (
         <div className={classes}>
             <strong className={"chart__title"}>DEX TVL</strong>
-            <div className={"chart__inner"}>
+            {dex_tvl ? <div className={"chart__inner"}>
                 <ReactECharts className={"chart__wrapper"} theme={""} option={chartOptions(dex_tvl)} />
-            </div>
+            </div> : <Plug noData />}
         </div>
     );
 };

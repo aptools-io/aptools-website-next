@@ -7,7 +7,7 @@ import { IRootState } from "src/scripts/redux/store";
 
 // Styles
 import classNames from "classnames";
-import { List, ListHeader, Tabs } from "src/components/ui";
+import { List, ListHeader, Plug, Tabs } from "src/components/ui";
 import useWindowSize from "src/scripts/hooks/useWindowSize";
 import styles from "./MarketsList.module.scss";
 
@@ -36,7 +36,7 @@ const MarketsList: React.FC<IComponent> = ({
             <strong className={"list__title"}>
                 <span>Markets</span>
             </strong>
-            <Tabs 
+            {markets?.length ? <Tabs 
                 data={Object.fromEntries(markets?.map(e => [e.dex, e.pairs]))}
                 itemsCount={false}
             >
@@ -46,8 +46,7 @@ const MarketsList: React.FC<IComponent> = ({
                 >
                     <List adoptMobile />
                 </ListHeader>
-            </Tabs>
-            
+            </Tabs> : <Plug noData />}
         </div>
     );
 };

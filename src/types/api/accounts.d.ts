@@ -86,6 +86,23 @@ interface IApiAccountTransaction {
     timestamp: number;
 }
 
+interface IApiAccountTokens {
+    total_coins: number;
+    balance: IApiAccountToken[]
+}
+
+
+interface IApiAccountToken {
+    balance: string;
+    balanceUSD: string;
+    coin: string;
+    coin_name: string;
+    profitUSD: string;
+    profit_precentage: string;
+    timestamp: number;
+    wallet_percentage: number;
+}
+
 interface IApiAccountNfts {
     name: string;
     net_worth: number;

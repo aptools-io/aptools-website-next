@@ -13,7 +13,7 @@ import { IRootState } from "src/scripts/redux/store";
 
 // Components
 import { Grid, GridWrapper } from "src/components/general";
-import { Img, Plate } from "src/components/ui";
+import { CopyText, Img, Plate } from "src/components/ui";
 import LinesEllipsis from "react-lines-ellipsis";
 import responsiveHOC from "react-lines-ellipsis/lib/responsiveHOC";
 
@@ -121,16 +121,17 @@ const StatsAccount: React.FC<IComponent> = ({
         );
     };
 
-    const renderPerformer = (title, volume, percent, name = "", symbol = "", image = "") => {
+    const renderPerformer = (title, volume, percent, name = "", symbol = "", image = "", hideIfNegative = false) => {
+        const hidePercent = hideIfNegative && (Number(volume) < 0 || Number(percent) < 0);
         return (
-            <>
-                 <div className={"stats__top"}>
+            <div className={"stats__wrapper"}>
+                <div className={"stats__top"}>
                     <div className={"stats__top-wrapper"}>
                         <strong className={"stats__top-title"}>{title}</strong>
                     </div>
                 </div>
                 <div className={"stats__item"}>
-                    <div className={"stats__item-wrapper"}>
+                    {!hidePercent && <div className={"stats__item-wrapper"}>
                         <span className={"title"}>
                             <div className={"item-data"}>
                                 <Img src={image ? `${process.env.BASE_IMAGES_URL}${image}` : getImageFromApi(symbol)} alt={name} />
@@ -147,9 +148,9 @@ const StatsAccount: React.FC<IComponent> = ({
                                 {concatString(setSign(formatNumber(percent)), "", "%")}
                             </span>
                         </span>
-                    </div>
+                    </div>}
                 </div>
-            </>
+            </div>
         );
     };
 
@@ -186,9 +187,7 @@ const StatsAccount: React.FC<IComponent> = ({
                             <span className={"title light m-left"}>
                                 {query.id}
                             </span>
-                            <button onClick={() => { copyText(query.id as string); }} className={"stats__top-copy"}>
-                                <CopyBig />
-                            </button>
+                            <CopyText big text={query.id as string} />
                         </div>
                     </div>
                 </Plate>
@@ -203,12 +202,12 @@ const StatsAccount: React.FC<IComponent> = ({
             </GridWrapper>
             <GridWrapper gridWidth={1}>
                 <Plate noMin bordered>
-                    {renderPerformer("Best Token Performer", bestVolumeUsd, bestVolumePerc, bestCoinName, bestCoinSymbol)}
+                    {renderPerformer("Best Token Performer", bestVolumeUsd, bestVolumePerc, bestCoinName, bestCoinSymbol, null, true)}
                 </Plate>
             </GridWrapper>
             <GridWrapper gridWidth={1}>
                 <Plate noMin bordered>
-                    {renderPerformer("Worst Token Performer", worstVolumeUsd, worstVolumePerc, worstCoinName, worstCoinSymbol)}
+                    {renderPerformer("Worst Token Performer", worstVolumeUsd, worstVolumePerc, worstCoinName, worstCoinSymbol, null, false)}
                 </Plate>
             </GridWrapper>
 

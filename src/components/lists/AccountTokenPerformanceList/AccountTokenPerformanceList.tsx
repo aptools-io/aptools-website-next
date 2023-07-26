@@ -10,7 +10,7 @@ import { IRootState } from "src/scripts/redux/store";
 
 // Styles
 import classNames from "classnames";
-import { List, ListHeader, Paginator } from "src/components/ui";
+import { List, ListHeader, Paginator, Skeleton } from "src/components/ui";
 import { perPages, defaultPerPage } from "src/scripts/consts/perPages";
 import { accounts } from "src/scripts/api/requests";
 import { setAccountProfitabilitiesData } from "src/scripts/redux/slices/accountsSlice";
@@ -26,7 +26,7 @@ import { columnNames, columns } from "./data/listOptions";
 const AccountTokenPerformanceList: React.FC<IComponent> = ({
     className 
 }) => {
-    const { accountProfitabilities } = useSelector((state: IRootState) => state.accounts);
+    const { accountProfitabilities, accountsLoading = false  } = useSelector((state: IRootState) => state.accounts);
     const { profitability = [], total_pages, currentPage: dataCurrentPage = 1 } = accountProfitabilities || {};
     const [perPage, setPerPage] = useState(10);
     const [currentPage, setCurrentPage] = useState(dataCurrentPage);
@@ -51,6 +51,8 @@ const AccountTokenPerformanceList: React.FC<IComponent> = ({
         "list",
         className
     ]);
+
+    if(accountsLoading) return <Skeleton style={{ height: 460 }} />;
 
     if(!accountProfitabilities || !profitability) return <></>;
 

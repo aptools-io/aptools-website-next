@@ -8,6 +8,7 @@ import classNames from "classnames";
 import { useSelector } from "react-redux";
 import { IRootState } from "src/scripts/redux/store";
 import { formatNumber } from "src/scripts/util/numbers";
+import { Plug } from "src/components/ui";
 import styles from "./StatsActiveUsers.module.scss";
 
 const StatsActiveUsers: React.FC<IComponent> = ({
@@ -27,6 +28,8 @@ const StatsActiveUsers: React.FC<IComponent> = ({
         styles["stats-active-users"],
         className
     ]);
+
+    if(!blockchain_info) return <Plug noData />;
 
     return (
         <div className={classes}>

@@ -3,6 +3,13 @@
         /*margin-bottom: 9px;*/
     }
 
+    &__wrapper {
+        min-height: 90px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
     &__top {
         display: flex;
         justify-content: space-between;
@@ -36,6 +43,10 @@
             &.row {
                 flex-direction: row;
                 overflow: hidden;
+            }
+
+            button {
+                margin-left: 8px;
             }
 
             .title {
@@ -227,7 +238,6 @@
                 .item-data {
                     display: flex;
                     align-items: center;
-                    margin-top: 23px;
 
                     img {
                         max-width: 16px;

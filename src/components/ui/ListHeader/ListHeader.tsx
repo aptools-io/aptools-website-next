@@ -7,6 +7,7 @@ import classNames from "classnames";
 // Components
 import { SortArrowDown, SortArrowUp } from "src/components/svg";
 import styles from "./ListHeader.module.scss";
+import Plug from "../Plug/Plug";
 
 const ListHeader: React.ForwardRefRenderFunction<any, IListHeaderProps> = ({
     columnNames = [],
@@ -80,6 +81,8 @@ const ListHeader: React.ForwardRefRenderFunction<any, IListHeaderProps> = ({
         setSortedData([...sorted]);
     }, [data, sorting]); // eslint-disable-line react-hooks/exhaustive-deps
 
+    if(!data?.length) return <Plug noData />;
+
     const renderColumns = (item: IColumnName, index: number) => {
         if(item.headRemove) return <React.Fragment key={index}></React.Fragment>;
         if(item.value === "") return <span key={index}></span>;
@@ -103,7 +106,8 @@ const ListHeader: React.ForwardRefRenderFunction<any, IListHeaderProps> = ({
                     data-sort={defaultSortType}
                     onClick={(e) => handleSort(e, item.key)}
                 >
-                    {item.value} <div className={styles["sort"]}><SortArrowUp /> <SortArrowDown /></div>
+                    {item.value} 
+                    {(!item.cantSort && defaultSortIndex !== undefined) && <div className={styles["sort"]}><SortArrowUp /> <SortArrowDown /></div>}
                 </button>
             </React.Fragment>
         );

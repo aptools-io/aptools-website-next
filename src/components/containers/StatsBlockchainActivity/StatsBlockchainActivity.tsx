@@ -8,6 +8,7 @@ import classNames from "classnames";
 import { useSelector } from "react-redux";
 import { IRootState } from "src/scripts/redux/store";
 import { formatNumber } from "src/scripts/util/numbers";
+import { Plug } from "src/components/ui";
 import styles from "./StatsBlockchainActivity.module.scss";
 
 const StatsBlockchainActivity: React.FC<IComponent> = ({
@@ -33,6 +34,8 @@ const StatsBlockchainActivity: React.FC<IComponent> = ({
         styles["stats-blockchain-activity"],
         className
     ]);
+
+    if(!blockchain_info) return <Plug noData />;
 
     return (
         <div className={classes}>

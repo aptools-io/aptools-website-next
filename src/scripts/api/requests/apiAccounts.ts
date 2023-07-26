@@ -24,9 +24,9 @@ const getAccountTransactionsData = async (address = null, limit = 25, offset = 0
     return api.get("/account_transactions", {}, { address, limit, offset });
 };
 
-const getAccountTokensData = async (address = null) => {
+const getAccountTokensData = async (address = null, limit = 10, page = 1, key = null, sort = null) => {
     const api = new Api(false);
-    return api.post("/account_coins", {}, {}, { account: address, pageSize: 10, currentPage: 1, order: null, orderBy: null });
+    return api.post("/account_coins", {}, {}, { account: address, pageSize: limit, currentPage: page, order: sort, orderBy: key });
 };
 
 const getAccountNftData = async (address = null) => {

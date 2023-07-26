@@ -1,0 +1,59 @@
+@import '/src/styles//static/general/animations';
+
+.notifications {
+    position: fixed;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+
+    &__plate + &__plate {
+        margin-top: 8px;
+    }
+
+    &__plate {
+        border-radius: 8px;
+        color: var(--aptools-color-main-primary);
+        font-size: 16px;
+        font-weight: 500;
+        pointer-events: all;
+        cursor: help;
+        line-height: 20px;
+        transition: opacity .3s ease, grid-template-rows .3s ease;
+        overflow: hidden;
+        display: grid;
+
+        &:hover {
+            opacity: .2;
+        }
+
+        grid-template-rows: 1fr;
+        opacity: 1;
+
+        & > div {
+            transition: padding .3s ease;
+            padding: 16px;
+            min-height: 0;
+            animation: .3s fade-in 0s normal forwards ease;
+            background-color: var(--aptools-color-emphasis-c1);
+        }
+
+        &.hide {
+            grid-template-rows: 0fr;
+
+            & > div {
+                padding: 0px 16px;
+            }
+
+            opacity: 0;
+        }
+
+        &s {
+            position: absolute;
+            right: var(--layout-indent);
+            top: var(--layout-indent);
+            display: flex;
+            flex-direction: column;
+        }
+    }
+}

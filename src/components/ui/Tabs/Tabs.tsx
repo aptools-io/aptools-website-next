@@ -103,7 +103,7 @@ const Tabs: React.ForwardRefRenderFunction<any, ITabsProps> = ({
     if(!(data || dataArray)) return <></>;
 
     const getComponent = () => {
-        if(loading) return new Array(10).fill(null).map((_, index) => <Skeleton key={index} style={{ height: "205px", minHeight: "205px" }} />);
+        if(loading) return new Array(10).fill(null).map((_, index) => <Skeleton key={index} style={{ height: "60px", minHeight: "60px" }} />);
         if(dataArray?.[tabId]?.component) return dataArray?.[tabId].component();
         return React.cloneElement(child as React.ReactElement<IListHeaderProps>, {
             data: entry || customEntry || defaultEntry || [],

@@ -3,16 +3,20 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 const accountsSlice = createSlice({
     "name": "accounts",
     "initialState": {
+        "accountsLoading": false,
         "accountsWallets": null as IApiAccountsWallets,
         "accountStats": null as IApiAccountStats,
         "accountProfitabilities": null as IApiAccountProfitabilities,
         "accountTransactions": null as IApiAccountTransactions,
-        "accountTokens": null as any,
+        "accountTokens": null as IApiAccountTokens,
         "accountNfts": null as IApiAccountNfts[],
         "accountResources": null as IApiAccountResource[],
         "accountInfo": null as IApiAccountInfo
     },
     "reducers": {
+        "setAccountsLoading": (state, action: PayloadAction<boolean>) => {
+            state.accountsLoading = action.payload;
+        },
         "setAccountsWalletsData": (state, action: PayloadAction<IApiAccountsWallets>) => {
             state.accountsWallets = action.payload;
         },
@@ -25,7 +29,7 @@ const accountsSlice = createSlice({
         "setAccountTransactionsData": (state, action: PayloadAction<IApiAccountTransactions>) => {
             state.accountTransactions = action.payload;
         },
-        "setAccountTokensData": (state, action: PayloadAction<any>) => {
+        "setAccountTokensData": (state, action: PayloadAction<IApiAccountTokens>) => {
             state.accountTokens = action.payload;
         },
         "setAccountNftsData": (state, action: PayloadAction<IApiAccountNfts[]>) => {
@@ -41,6 +45,7 @@ const accountsSlice = createSlice({
 });
 
 export const { 
+    setAccountsLoading,
     setAccountsWalletsData, 
     setAccountStatsData,
     setAccountProfitabilitiesData,

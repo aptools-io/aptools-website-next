@@ -1,0 +1,18 @@
+.account-transactions-list {
+    &__type {
+        padding: 2px 6px;
+        background-color: var(--aptools-color-lights-success);
+        color: var(--aptools-color-emphasis-c2);
+        border-radius: 4px;
+
+        &.error {
+            background-color: var(--aptools-color-lights-danger);
+            color: var(--aptools-color-emphasis-c4);
+        }
+
+        &.success {
+            background-color: var(--aptools-color-lights-success);
+            color: var(--aptools-color-emphasis-c2);
+        }
+    }
+}

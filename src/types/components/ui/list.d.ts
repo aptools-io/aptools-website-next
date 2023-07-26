@@ -49,6 +49,8 @@ interface IColumnName {
     under?: IColumnName[];
     formatter?: (v: any) => string;
     replacedFormatter?: (v: any) => string;
+    descriptionFormatter?: (v: any) => string;
+    ownLink?: string;
     hideMobile?: boolean;
     mainMobile?: boolean;
     fontSize?: number;

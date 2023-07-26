@@ -10,6 +10,7 @@ import ReactECharts from "echarts-for-react";
 
 // Styles
 import classNames from "classnames";
+import { Plug } from "src/components/ui";
 import styles from "./DailyActiveWallets.module.scss";
 
 // Other
@@ -34,9 +35,6 @@ const DailyActiveWallets: React.FC<IComponent> = ({
         className
     ]);
 
-
-    if(!dailyTransactions || !dailyAddresses) return <></>;
-    
     const data = [
         {
             "name": "Daily Active Transactions",
@@ -52,7 +50,7 @@ const DailyActiveWallets: React.FC<IComponent> = ({
         <div className={classes}>
             <strong className={"chart__title"}>Daily Active Wallets</strong>
             <div className={"chart__inner"}>
-                <ReactECharts className={"chart__wrapper"} theme={""} option={chartOptions(data)} />
+                {!(!dailyTransactions || !dailyAddresses) ? <ReactECharts className={"chart__wrapper"} theme={""} option={chartOptions(data)} /> : <Plug noData/>}
             </div>
         </div>
     );

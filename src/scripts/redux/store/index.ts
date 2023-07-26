@@ -11,13 +11,15 @@ import {
     singleDexSlice,
     pageTitleSlice,
     newsSlice,
-    accountsSlice
+    accountsSlice,
+    notificationSlice
 } from "../slices/index";
 
 const store = configureStore({
     reducer: {
         headers: headersSlice,
         loading: loadingSlice,
+        notification: notificationSlice,
         statsAptos: statsAptosSlice,
         statsGeneral: statsGeneralSlice,
         statsProjects: statsProjectsSlice,
