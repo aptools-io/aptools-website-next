@@ -7,7 +7,7 @@ import { IRootState } from "src/scripts/redux/store";
 
 // Styles
 import classNames from "classnames";
-import { List, ListHeader } from "src/components/ui";
+import { List, ListHeader, Plug } from "src/components/ui";
 import styles from "./TopSendersList.module.scss";
 
 // Components
@@ -29,19 +29,18 @@ const TopSendersList: React.FC<IListWrapperProps> = ({
         className
     ]);
 
-    if(!top_statistics || !top_apt_senders) return <></>;
     return (
         <div className={classes}>
             <strong className={"list__title"}>
                 <span>Top Senders</span>
             </strong>
-            <ListHeader 
+            {!(!top_statistics || !top_apt_senders) ? <ListHeader 
                 columnNames={columnNames} 
                 columns={columns} 
                 data={top_apt_senders}
             >
                 <List />
-            </ListHeader>
+            </ListHeader> : <Plug noData />}
         </div>
     );
 };

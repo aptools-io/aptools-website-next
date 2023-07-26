@@ -14,7 +14,7 @@ import ReactECharts from "echarts-for-react";
 import classNames from "classnames";
 
 // Other
-import { Img } from "src/components/ui";
+import { Img, Plug, Skeleton } from "src/components/ui";
 import { getImageFromApi } from "src/scripts/util/image";
 import { formatNumber } from "src/scripts/util/numbers";
 import { concatString } from "src/scripts/util/strings";
@@ -25,10 +25,17 @@ import styles from "./AccountTokenStats.module.scss";
 const AccountTokenStats: React.FC<IComponent> = ({
     className 
 }) => {
-    const { accountStats } = useSelector((state: IRootState) => state.accounts);
+    const { accountStats, accountsLoading: loading = false } = useSelector((state: IRootState) => state.accounts);
     const { token_stats = [] } = accountStats || {};
+    
 
-    if(!accountStats || !token_stats) return <></>;
+    if(loading) return <Skeleton />;
+    if(!accountStats || !token_stats || !token_stats?.length) return <>
+        <strong className={"chart__title normal"}>
+            <span>Tokens Stats</span>
+        </strong>
+        <Plug noData />
+    </>;
 
     const colors = ["#EF8686", "#60C6A8", "#3B5998", "#8B9DC3", "#FDD97D"];
     const data = token_stats.map((item, index) => {
@@ -47,7 +54,6 @@ const AccountTokenStats: React.FC<IComponent> = ({
         "chart",
         className
     ]);
-
 
     const renderList = (item: IBar, index: number) => {
         const isOther = item.title === "Other";

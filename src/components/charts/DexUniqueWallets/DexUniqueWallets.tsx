@@ -10,6 +10,7 @@ import ReactECharts from "echarts-for-react";
 
 // Styles
 import classNames from "classnames";
+import { Plug } from "src/components/ui";
 import styles from "./DexUniqueWallets.module.scss";
 
 // Other
@@ -27,13 +28,11 @@ const DexUniqueWallets: React.FC<IComponent> = ({
         className
     ]);
 
-    if(!daily_unique_contract_addresses) return <></>;
-
     return (
         <div className={classes}>
             <strong className={"chart__title"}>DEX Unique Wallets</strong>
             <div className={"chart__inner"}>
-                <ReactECharts className={"chart__wrapper"} theme={""} option={chartOptions(daily_unique_contract_addresses)} />
+                {daily_unique_contract_addresses ? <ReactECharts className={"chart__wrapper"} theme={""} option={chartOptions(daily_unique_contract_addresses)} /> : <Plug noData />}
             </div>
         </div>
     );

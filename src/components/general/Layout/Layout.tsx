@@ -20,6 +20,7 @@ import styles from "./Layout.module.scss";
 
 // Other
 import menu from "./data/menu";
+import Notifications from "../Notifications/Notifications";
 
 const Layout: React.FC<{ children: React.ReactNode, pageProps }> = ({ children, pageProps }) => {
     const { title } = useSelector((state: IRootState) => state.pageTitle);
@@ -59,7 +60,7 @@ const Layout: React.FC<{ children: React.ReactNode, pageProps }> = ({ children, 
                     {children}
                 </div>
                 <Footer/>
-                
+                <Notifications />
             </div>
         </>
     );

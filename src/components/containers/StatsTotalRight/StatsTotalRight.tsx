@@ -10,6 +10,7 @@ import { IRootState } from "src/scripts/redux/store";
 
 // Util
 import { formatNumber } from "src/scripts/util/numbers";
+import { Plug } from "src/components/ui";
 import styles from "./StatsTotalRight.module.scss";
 
 
@@ -29,6 +30,8 @@ const StatsTotalRight: React.FC<IComponent> = ({
         styles["stats-total-right"],
         className
     ]);
+
+    if(!blockchain_info) return <Plug noData />;
 
     return (
         <>

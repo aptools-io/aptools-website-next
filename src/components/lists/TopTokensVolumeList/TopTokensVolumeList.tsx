@@ -7,7 +7,7 @@ import { IRootState } from "src/scripts/redux/store";
 
 // Styles
 import classNames from "classnames";
-import { List, ListHeader } from "src/components/ui";
+import { List, ListHeader, Plug } from "src/components/ui";
 import styles from "./TopTokensVolumeList.module.scss";
 
 // Components
@@ -26,20 +26,18 @@ const TopTokensVolumeList: React.FC<IComponent> = ({
         className
     ]);
 
-    if(!top_tokens_by_volume) return <></>;
-
     return (
         <div className={classes}>
             <strong className={"list__title"}>
                 <span>Top Tokens by Volume</span>
             </strong>
-            <ListHeader 
+            {top_tokens_by_volume ? <ListHeader 
                 columnNames={columnNames} 
                 columns={columns} 
                 data={top_tokens_by_volume}
             >
                 <List  />
-            </ListHeader>
+            </ListHeader> : <Plug noData />}
         </div>
     );
 };

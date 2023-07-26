@@ -8,11 +8,17 @@ import { Grid, GridWrapper } from "src/components/general";
 // Styles
 import classNames from "classnames";
 import { AccountTokenPerformanceList } from "src/components/lists";
+import useWindowSize from "src/scripts/hooks/useWindowSize";
 import styles from "./AccountOverview.module.scss";
+import media from "./data/adaptive";
 
 const AccountOverview: React.FC<IComponent> = ({
-    className 
+    className,
 }) => {
+    const { width } = useWindowSize();
+    const mediaData = media(width);
+
+    if(!width) return <></>;
 
     const classes = classNames([
         styles["account-overview"],
@@ -23,10 +29,10 @@ const AccountOverview: React.FC<IComponent> = ({
     return (
         <div className={classes}>
             <Grid gap={46}>
-                <GridWrapper gridWidth={4}>
+                <GridWrapper gridWidth={mediaData.accountPerformance}>
                     <AccountPerformance />
                 </GridWrapper>
-                <GridWrapper gridWidth={6}>
+                <GridWrapper gridWidth={mediaData.accountTokensStats}>
                     <AccountTokenStats />
                 </GridWrapper>
                 <GridWrapper>

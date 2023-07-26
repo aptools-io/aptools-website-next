@@ -10,10 +10,10 @@ import { IRootState } from "src/scripts/redux/store";
 
 // Styles
 import classNames from "classnames";
-import { List, ListHeader, Paginator } from "src/components/ui";
+import { List, ListHeader, Paginator, Plug, Skeleton } from "src/components/ui";
 import { perPages, defaultPerPage } from "src/scripts/consts/perPages";
 import { accounts } from "src/scripts/api/requests";
-import { setAccountTransactionsData } from "src/scripts/redux/slices/accountsSlice";
+import { setAccountTokensData, setAccountTransactionsData } from "src/scripts/redux/slices/accountsSlice";
 import styles from "./AccountTokensList.module.scss";
 
 
@@ -23,14 +23,16 @@ import { columnNames, columns } from "./data/listOptions";
 // Consts
 
 
-const AccountTransactionsList: React.FC<IComponent> = ({
+const AccountTokensList: React.FC<IComponent> = ({
     className 
 }) => {
-    const { accountTransactions } = useSelector((state: IRootState) => state.accounts);
-    const { transactions = [], total } = accountTransactions || {};
-    const [perPage, setPerPage] = useState(25);
+    const { accountTokens, accountsLoading = false } = useSelector((state: IRootState) => state.accounts);
+    const { balance = [], total_coins } = accountTokens || {};
+    const [perPage, setPerPage] = useState(10);
     const [currentPage, setCurrentPage] = useState(1);
     const [loading, setLoading] = useState(0);
+
+    const hardSorting = useState<{ key: string; sort: string }>({ key: "timestamp", sort: "desc" });
 
     const dispatch = useDispatch();
     const router = useRouter();
@@ -39,41 +41,39 @@ const AccountTransactionsList: React.FC<IComponent> = ({
 
 
     const classes = classNames([
-        styles["account-transactions"],
+        styles["account-tokens-list"],
         "list",
         className
     ]);
 
-    if(!transactions || !accountTransactions) return <></>;
+    if(accountsLoading) return <Skeleton style={{ height: 460 }} />;
+
+    if(!accountTokens || !balance || !balance?.length) return <Plug noData />;
 
     return (
         <div className={classes}>
             <Paginator 
                 changePerPage
-                key={transactions?.[0].version} 
+                key={`${balance?.[0]?.coin}${balance?.length}`} 
                 page={currentPage} 
                 perPage={perPage} 
                 setPerPage={setPerPage} 
-                total={total} 
+                total={total_coins} 
                 onChangePage={(page) => {
                     setLoading(1);
-                    accounts.getAccountTransactionsData(id, perPage, (page - 1) * perPage).then((e: unknown) => {
+                    accounts.getAccountTokensData(id, perPage, page).then((e: unknown) => {
                         setCurrentPage(page);
-                        const result = e as IApiAccountTransactions;
-                        dispatch(setAccountTransactionsData({
-                            ...result
-                        }));
+                        const result = e as IApiAccountTokens;
+                        dispatch(setAccountTokensData(result));
                         setLoading(0);
                     });
                 }}
                 onChangePerPage={(perPage) => {
                     setPerPage(perPage);
                     setLoading(1);
-                    accounts.getAccountTransactionsData(id, perPage, (currentPage - 1) * perPage).then((e: unknown) => {
-                        const result = e as IApiAccountTransactions;
-                        dispatch(setAccountTransactionsData({
-                            ...result
-                        }));
+                    accounts.getAccountTokensData(id, perPage, currentPage).then((e: unknown) => {
+                        const result = e as IApiAccountTokens;
+                        dispatch(setAccountTokensData(result));
                         setLoading(0);
                     });
                 }}
@@ -81,14 +81,26 @@ const AccountTransactionsList: React.FC<IComponent> = ({
                 <ListHeader 
                     columnNames={columnNames} 
                     columns={columns} 
-                    data={transactions}
-                    key={transactions?.[0].version}
+                    data={balance}
+                    key={`${balance?.[0]?.coin}${balance?.length}`}
+                    hardSorting={hardSorting}
+                    onSortingChange={(sorting) => {
+                        setLoading(1);
+                        accounts.getAccountTokensData(id, perPage, currentPage, sorting.key, sorting.sort).then((e: unknown) => {
+                            const result = e as IApiAccountTokens;
+                            dispatch(setAccountTokensData(result));
+                            
+                            const [_, setHardSort] = hardSorting;
+                            setHardSort(sorting);
+                            setLoading(0);
+                        });
+                    }}
                 >
-                    <List adoptMobile loadingCount={loading * 10} />
+                    <List adoptMobile loadingCount={loading * perPage} />
                 </ListHeader>
             </Paginator>
         </div>
     );
 };
 
-export default AccountTransactionsList;
+export default AccountTokensList;

@@ -11,7 +11,7 @@ import { Grid, GridWrapper } from "src/components/general";
 
 // Styles
 import classNames from "classnames";
-import { Button, Img } from "src/components/ui";
+import { Button, Img, Plug, Skeleton } from "src/components/ui";
 import { percentClass } from "src/scripts/util/classes";
 import { formatNumber } from "src/scripts/util/numbers";
 import { concatString } from "src/scripts/util/strings";
@@ -21,7 +21,7 @@ import styles from "./AccountNtfList.module.scss";
 const AccountNtfList: React.FC<IComponent> = ({
     className 
 }) => {
-    const { accountNfts = [] } = useSelector((state: IRootState) => state.accounts);
+    const { accountNfts = [], accountsLoading: loading = false } = useSelector((state: IRootState) => state.accounts);
     const [openedFolder, setOpenedFolder] = useState({ id: 0, opened: false });
     const [filteredNfts, setFilteredNtfs] = useState(accountNfts);
     const [searchQuery, setSearchQuery] = useState("");
@@ -30,15 +30,17 @@ const AccountNtfList: React.FC<IComponent> = ({
         styles["account-nft-list"],
         className
     ]);
-
+    
     useEffect(() => {
-        setFilteredNtfs(accountNfts.filter(x => {
+        if(accountNfts?.length) setFilteredNtfs(accountNfts.filter(x => {
             if(searchQuery === "") return accountNfts;
             return x.name.toLowerCase().indexOf(searchQuery.toLowerCase()) !== -1;
         }));
-    }, [searchQuery]);
+    }, [searchQuery, accountNfts]);
 
-    if(!accountNfts) return <></>;
+    if(loading) return <Skeleton style={{ height: 360 }} />;
+
+    if(!accountNfts?.length) return <Plug noData />;
 
     const handleOpenFolder = (id) => {
         if(openedFolder.id === id) {

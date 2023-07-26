@@ -10,7 +10,7 @@ import { IRootState } from "src/scripts/redux/store";
 
 // Styles
 import classNames from "classnames";
-import { List, ListHeader, Paginator } from "src/components/ui";
+import { List, ListHeader, Paginator, Plug, Skeleton } from "src/components/ui";
 import { perPages, defaultPerPage } from "src/scripts/consts/perPages";
 import { accounts } from "src/scripts/api/requests";
 import { setAccountTransactionsData } from "src/scripts/redux/slices/accountsSlice";
@@ -23,13 +23,12 @@ import { columnNames, columns } from "./data/listOptions";
 // Consts
 
 
-const AccountTokensList: React.FC<IComponent> = ({
+const AccountTransactionsList: React.FC<IComponent> = ({
     className 
 }) => {
-    const { accountTransactions } = useSelector((state: IRootState) => state.accounts);
+    const { accountTransactions, accountsLoading = false } = useSelector((state: IRootState) => state.accounts);
     const { transactions = [], total } = accountTransactions || {};
-    console.log(transactions);
-    const [perPage, setPerPage] = useState(25);
+    const [perPage, setPerPage] = useState(10);
     const [currentPage, setCurrentPage] = useState(1);
     const [loading, setLoading] = useState(0);
 
@@ -40,18 +39,20 @@ const AccountTokensList: React.FC<IComponent> = ({
 
 
     const classes = classNames([
-        styles["account-transactions"],
+        styles["account-transactions-list"],
         "list",
         className
     ]);
 
-    if(!transactions || !accountTransactions) return <></>;
+    if(accountsLoading) return <Skeleton style={{ height: 460 }} />;
+
+    if(!transactions || !accountTransactions) return <Plug noData />;
 
     return (
         <div className={classes}>
             <Paginator 
                 changePerPage
-                key={transactions?.[0].version} 
+                key={transactions?.[0]?.version} 
                 page={currentPage} 
                 perPage={perPage} 
                 setPerPage={setPerPage} 
@@ -83,7 +84,7 @@ const AccountTokensList: React.FC<IComponent> = ({
                     columnNames={columnNames} 
                     columns={columns} 
                     data={transactions}
-                    key={transactions?.[0].version}
+                    key={transactions?.[0]?.version}
                 >
                     <List adoptMobile loadingCount={loading * 10} />
                 </ListHeader>
@@ -92,4 +93,4 @@ const AccountTokensList: React.FC<IComponent> = ({
     );
 };
 
-export default AccountTokensList;
+export default AccountTransactionsList;

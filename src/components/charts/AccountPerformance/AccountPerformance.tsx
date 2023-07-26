@@ -12,7 +12,7 @@ import ReactECharts from "echarts-for-react";
 
 // Styles
 import classNames from "classnames";
-import { Plug } from "src/components/ui";
+import { Plug, Skeleton } from "src/components/ui";
 import styles from "./AccountPerformance.module.scss";
 
 // Other
@@ -53,7 +53,10 @@ const dummyData = [
 const AccountPerformance: React.FC<IComponent> = ({
     className 
 }) => {
+    const { accountsLoading: loading = false } = useSelector((state: IRootState) => state.accounts);
     const [range, setRange] = useState("7d"); 
+
+    if(loading) return <Skeleton style={{ height: 260 }} />;
 
     const classes = classNames([
         styles["account-performance"],

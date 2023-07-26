@@ -14,12 +14,13 @@ import JsonFormatter from "react-json-formatter";
 
 // Styles
 import classNames from "classnames";
+import { Plug, Skeleton } from "src/components/ui";
 import styles from "./AccountInfo.module.scss";
 
 const AccountInfo: React.FC<IComponent> = ({
     className 
 }) => {
-    const { accountInfo } = useSelector((state: IRootState) => state.accounts);
+    const { accountInfo, accountsLoading: loading = false } = useSelector((state: IRootState) => state.accounts);
     const { sequence_number = 0, auth_key = "" } = accountInfo || {};
 
     const classes = classNames([
@@ -27,7 +28,9 @@ const AccountInfo: React.FC<IComponent> = ({
         className
     ]);
 
-    if(!accountInfo) return <></>;
+    if(loading) return <Skeleton style={{ height: 200 }} />;
+
+    if(!accountInfo) return <Plug noData />;
 
     return (
         <div className={classes}>

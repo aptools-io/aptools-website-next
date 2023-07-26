@@ -15,12 +15,13 @@ import JsonFormatter from "react-json-formatter";
 // Styles
 import classNames from "classnames";
 import { ArrowMore } from "src/components/svg";
+import { CopyText, Plug, Skeleton } from "src/components/ui";
 import styles from "./AccountResourcesList.module.scss";
 
 const AccountResourcesList: React.FC<IComponent> = ({
     className 
 }) => {
-    const { accountResources = [] } = useSelector((state: IRootState) => state.accounts);
+    const { accountResources = [], accountsLoading: loading = false } = useSelector((state: IRootState) => state.accounts);
     const [openCode, setOpenCode] = useState({ id: 0, opened: false, innerOpened: false });
 
     const classes = classNames([
@@ -28,7 +29,9 @@ const AccountResourcesList: React.FC<IComponent> = ({
         className
     ]);
 
-    if(!accountResources) return <></>;
+    if(loading) return <Skeleton style={{ height: 560 }} />;
+
+    if(!accountResources?.length) return <Plug noData />;
 
     const handleOpenCode = (id) => {
         if(openCode.id === id) {
@@ -39,7 +42,6 @@ const AccountResourcesList: React.FC<IComponent> = ({
     };
 
     const handleInnerOpenCode = () => {
-        console.log(openCode);
         setOpenCode({ ...openCode, innerOpened: !openCode.innerOpened });
     };
 
@@ -71,6 +73,7 @@ const AccountResourcesList: React.FC<IComponent> = ({
                                     <ArrowMore />
                                 </button>
                             </div>
+                            <CopyText text={data} />
                         </div>
                     </div>
                 </div>

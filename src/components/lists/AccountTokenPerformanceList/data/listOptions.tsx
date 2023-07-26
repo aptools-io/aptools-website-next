@@ -12,7 +12,7 @@ const columnNames = [
         "key": "_id",
         "value": "##",
         "hideMobile": true,
-        "cantSort": true
+        "cantSort": true,
     },
     {
         "key": "coin_name",
@@ -24,6 +24,7 @@ const columnNames = [
         "key": "remainder",
         "value": "Balance",
         "description": "coin",
+        "formatter": (v) => `${formatNumber(v, 2)}`
     },
     {
         "key": "remainder_usd",

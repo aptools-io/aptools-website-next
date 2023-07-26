@@ -15,6 +15,20 @@ const parseTimestamp = (timestamp: string) => {
     return moment(ensureMillisecondTimestamp(timestamp));
 };
 
+const timeAgo = (time) => {
+    const timestamp = time;
+    const currentTime = moment();
+    const pastTime = moment(timestamp);
+    const duration = moment.duration(currentTime.diff(pastTime));
+
+    const hours = duration.hours();
+    const minutes = duration.minutes();
+    const seconds = duration.seconds();
+
+    const formattedDuration = `${hours}h ${minutes}m ${seconds}sec ago`;
+    return formattedDuration;
+};
+
 const timerFrom = (timestamp: number, currentTimestamp: number) => {
     let difference = currentTimestamp - (timestamp * 1000);
 
@@ -54,4 +68,4 @@ const dateDiffInDays = (date1: Date, date2: Date) => {
 };
 
 
-export { ensureMillisecondTimestamp, parseTimestamp, timerFrom, dateDiffInDays, timeFull, time, addZero };
+export { ensureMillisecondTimestamp, parseTimestamp, timerFrom, dateDiffInDays, timeFull, time, addZero, timeAgo };

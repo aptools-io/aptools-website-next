@@ -14,6 +14,7 @@ import { parseTimestamp } from "src/scripts/util/timeConvert";
 import { useSelector } from "react-redux";
 import { IRootState } from "src/scripts/redux/store";
 import { formatNumber } from "src/scripts/util/numbers";
+import { Plug } from "src/components/ui";
 import styles from "./StatsValidator.module.scss";
 
 
@@ -48,6 +49,8 @@ const StatsValidator: React.FC<IComponent> = ({
     };
 
     const calculated = calculate(epoch_started);
+
+    if(!realTimeData || !blockchain_info) return <Plug noData />;
 
     return (
         <div className={classes}>

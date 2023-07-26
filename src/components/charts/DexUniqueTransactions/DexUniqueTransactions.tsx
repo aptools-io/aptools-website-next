@@ -10,6 +10,7 @@ import ReactECharts from "echarts-for-react";
 
 // Styles
 import classNames from "classnames";
+import { Plug } from "src/components/ui";
 import styles from "./DexUniqueTransactions.module.scss";
 
 // Other
@@ -27,13 +28,14 @@ const DexUniqueTransactions: React.FC<IComponent> = ({
         className
     ]);
 
-    if(!daily_contract_transactions) return <></>;
-
     return (
         <div className={classes}>
             <strong className={"chart__title"}>DEX Unique Transactions</strong>
             <div className={"chart__inner"}>
-                <ReactECharts className={"chart__wrapper"} theme={""} option={chartOptions(daily_contract_transactions)} />
+                {daily_contract_transactions ?
+                    <ReactECharts className={"chart__wrapper"} theme={""} option={chartOptions(daily_contract_transactions)} /> :
+                    <Plug noData />
+                }
             </div>
         </div>
     );

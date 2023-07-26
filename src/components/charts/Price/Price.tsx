@@ -15,6 +15,7 @@ import { DifferenceArrowDouble } from "src/components/svg/index";
 import classNames from "classnames";
 import { formatNumber } from "src/scripts/util/numbers";
 import { concatString } from "src/scripts/util/strings";
+import { Plug } from "src/components/ui";
 import styles from "./Price.module.scss";
 
 // Other
@@ -47,19 +48,18 @@ const Price: React.FC<IComponent> = ({
         className
     ]);
 
-    if(!blockchain_info || !low_high_price) return <></>;
 
     return (
         <div className={classes}>
             <strong className={"chart__title normal"}>
                 <span>Price</span>
-                <span className={"chart__switcher"}>
+                {!(!blockchain_info || !low_high_price) && <span className={"chart__switcher"}>
                     <button className={classNames([ { "active": range === "24h" } ])} onClick={() => setRange("24h")}>24H</button>
                     <button className={classNames([ { "active": range === "7d" } ])} onClick={() => setRange("7d")}>7D</button>
                     <button className={classNames([ { "active": range === "14d" } ])} onClick={() => setRange("14d")}>14D</button>
-                </span>
+                </span>}
             </strong>
-            <div className={styles["price__inner"]}>
+            {!(!blockchain_info || !low_high_price) ? <><div className={styles["price__inner"]}>
                 <ReactECharts style={{height: "90px", width: "100%"}} theme={""} option={chartOptions(prices)} />
             </div>
             <div className={"chart__bottom absolute paddings"}>
@@ -77,7 +77,7 @@ const Price: React.FC<IComponent> = ({
                         <span>{concatString(low_btc, "", " BTC")}</span>
                     </span>
                 </div>
-            </div>
+            </div></> : <Plug noData />}
         </div>
     );
 };

@@ -1,12 +1,11 @@
 // Slices
-import { setAccountInfoData, setAccountNftsData, setAccountResourcesData, setAccountTransactionsData } from "src/scripts/redux/slices/accountsSlice";
+import { setAccountInfoData, setAccountNftsData, setAccountProfitabilitiesData, setAccountResourcesData, setAccountsLoading, setAccountTokensData, setAccountTransactionsData } from "src/scripts/redux/slices/accountsSlice";
 
 // Components
-import { AccountTransactionsList } from "src/components/lists";
+import { AccountTransactionsList, AccountTokensList } from "src/components/lists";
 import { Plug } from "src/components/ui";
 import { accounts } from "src/scripts/api/requests";
 
-import AccountTokensList from "src/components/lists/AccountTransactionsList/AccountTransactionsList";
 import AccountOverview from "../../AccountOverview/AccountOverview";
 import AccountNtfList from "../../AccountNtfList/AccountNtfList";
 
@@ -21,8 +20,14 @@ const categories = (dispatch) => {
             id: 1,
             title: "Overview",
             component: () => <AccountOverview />,
-            action: (setCustomEntry, setLoading, id) => {
+            action: async (setCustomEntry, setLoading, id, queryId) => {
                 setLoading(false);
+                dispatch(setAccountsLoading(true));
+                await accounts.getAccountProfitabilitiesData(queryId, 1, null, null).then((e: unknown) => {
+                    const result = e as IApiAccountProfitabilities;
+                    dispatch(setAccountProfitabilitiesData({ ...result, currentPage: 1 }));
+                    dispatch(setAccountsLoading(false));
+                });
             }
         },
         {
@@ -30,20 +35,27 @@ const categories = (dispatch) => {
             title: "Transactions",
             component: () => <AccountTransactionsList />,
             action: async (setCustomEntry, setLoading, id, queryId) => {
-                await accounts.getAccountTransactionsData(queryId, 25, 0).then((e: unknown) => {
+                setLoading(false);
+                dispatch(setAccountsLoading(true));
+                await accounts.getAccountTransactionsData(queryId, 10, 0).then((e: unknown) => {
                     const result = e as IApiAccountTransactions;
                     dispatch(setAccountTransactionsData(result));
-                    setLoading(false);
+                    dispatch(setAccountsLoading(false));
                 });
+               
             }
         },
         {
             id: 3,
             title: "Tokens",
-            component: () => <div className={styles["account__inner"]}><Plug /></div>,/* <AccountTokensList /> */
+            component: () => <AccountTokensList />,
             action: async (setCustomEntry, setLoading, id, queryId) => {
-                await accounts.getAccountTokensData(queryId).then((e: unknown) => {
-                    setLoading(false);
+                setLoading(false);
+                dispatch(setAccountsLoading(true));
+                await accounts.getAccountTokensData(queryId, 10, 1).then((e: unknown) => {
+                    const result = e as IApiAccountTokens;
+                    dispatch(setAccountTokensData(result));
+                    dispatch(setAccountsLoading(false));
                 });
             }
         },
@@ -52,10 +64,12 @@ const categories = (dispatch) => {
             title: "NFTs",
             component: () => <AccountNtfList />,
             action: async (setCustomEntry, setLoading, id, queryId) => {
+                setLoading(false);
+                dispatch(setAccountsLoading(true));
                 await accounts.getAccountNftData(queryId).then((e: unknown) => {
                     const result = e as IApiAccountNfts[];
                     dispatch(setAccountNftsData(result));
-                    setLoading(false);
+                    dispatch(setAccountsLoading(false));
                 });
             }
         },
@@ -64,11 +78,14 @@ const categories = (dispatch) => {
             title: "Resources",
             component: () => <AccountResourcesList />,
             action: async (setCustomEntry, setLoading, id, queryId) => {
+                setLoading(false);
+                dispatch(setAccountsLoading(true));
                 await accounts.getAccountResourcesData(queryId).then((e: unknown) => {
                     const result = e as IApiAccountResource[];
                     dispatch(setAccountResourcesData(result));
-                    setLoading(false);
+                    dispatch(setAccountsLoading(false));
                 });
+                
             }
         },
         {
@@ -84,11 +101,14 @@ const categories = (dispatch) => {
             title: "Info",
             component: () => <AccountInfo />,
             action: async (setCustomEntry, setLoading, id, queryId) => {
+                setLoading(false);
+                dispatch(setAccountsLoading(true));
                 await accounts.getAccountInfoData(queryId).then((e: unknown) => {
                     const result = e as IApiAccountInfo;
                     dispatch(setAccountInfoData(result));
-                    setLoading(false);
+                    dispatch(setAccountsLoading(false));
                 });
+                
             }
         },
         {

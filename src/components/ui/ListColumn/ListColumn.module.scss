@@ -56,6 +56,10 @@
         text-decoration: underline;
     }
 
+    &.own-link {
+        color: var(--aptools-color-emphasis-c1);
+    }
+
     &__inner {
         width: 100%;
         display: grid;
