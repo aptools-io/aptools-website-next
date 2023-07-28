@@ -5,15 +5,18 @@ import React, { useState } from "react";
 import classNames from "classnames";
 
 // Components
-import { DifferenceArrow, Copy, ArrowLeft } from "src/components/svg";
+import { DifferenceArrow, ArrowLeft, ArrowRotated } from "src/components/svg";
 
 // Util
-import { getDexImageFromApi } from "src/scripts/util/image";
+import { getImageFromApi } from "src/scripts/util/image";
 import { copyText } from "src/scripts/util/copyText";
 import styles from "./ListColumn.module.scss";
+import CopyText from "../CopyText/CopyText";
 
 
 const ListColumn: React.FC<IListProps> = ({
+    hardPageId = null,
+    hardPerPage = null,
     row,
     rowIndex, 
     column, 
@@ -35,6 +38,7 @@ const ListColumn: React.FC<IListProps> = ({
         description: descriptionRef = null, 
         formatter = null,
         replacedFormatter = null,
+        descriptionFormatter = null,
         replacedKeyMobile = null,
         under: underRef = null,
         right = false,
@@ -42,11 +46,12 @@ const ListColumn: React.FC<IListProps> = ({
         mainMobile = false,
         hideMobile = false,
         colorize = false,
-
         fontSize = null,
         span = null,
         elementRemove = false,
-        bold = false
+        bold = false,
+        ownLink = null,
+        approxKey = null
     } = column;
     if(elementRemove) return <></>;
 
@@ -59,12 +64,19 @@ const ListColumn: React.FC<IListProps> = ({
     const combinedValues = row?.combined; 
 
     const unformattedValue = row?.[key];
-    const value = !formatter ? unformattedValue : formatter(unformattedValue);
+    const approxed = row?.[approxKey];
+    let value = !formatter ? unformattedValue : formatter(unformattedValue);
+    
+    if(approxed) value = `~ ${value}`;
+
+    if(key === "_id" && hardPageId !== null && hardPerPage !== null) value = (rowIndex + 1) + (hardPageId * hardPerPage);
     const combinedValue = formatter && combinedValues ? formatter(combinedValues?.[key]) : undefined;
 
     const unformattedReplacedValueMobile = row?.[replacedKeyMobile];
     const replacedValueMobile = !replacedFormatter ? unformattedReplacedValueMobile : replacedFormatter(unformattedReplacedValueMobile);
     const replacedCombinedValueMobile = replacedFormatter && combinedValues ? replacedFormatter(combinedValues?.[replacedKeyMobile]) : undefined;
+
+
 
     let firstSymbol = row?.[symbolRef];
     let secondSymbol = null;
@@ -72,7 +84,7 @@ const ListColumn: React.FC<IListProps> = ({
         secondSymbol = firstSymbol.substring(firstSymbol.indexOf("/") + 1);
         firstSymbol = firstSymbol.substring(0, firstSymbol.indexOf("/"));
     }
-    const description = row?.[descriptionRef];
+    const description = !descriptionFormatter ? row?.[descriptionRef] : descriptionFormatter(row?.[descriptionRef]);
 
     if(valueGridReplace?.length) return (<div key={columnIndex} className={styles["list-column__inner"]}>{valueGridReplace}</div>); 
 
@@ -83,7 +95,8 @@ const ListColumn: React.FC<IListProps> = ({
         { [styles["inner"]]: inner },
         { [styles["adopt"]]: adoptMobile },
         { [styles["underline"]]: underline },
-        { [styles["center"]]: key === "_id" },
+        { [styles["own-link"]]: ownLink },
+        /* { [styles["center"]]: key === "_id" }, */
         { [styles["main-mobile"]]: mainMobile },
         { [styles["hide-mobile"]]: hideMobile },
         { [styles["red"]]: colorize && unformattedValue < 0 },
@@ -91,12 +104,15 @@ const ListColumn: React.FC<IListProps> = ({
         className
     ]);
 
+    const ComponentWrapper = ownLink ? "a" : "div";
+
     return (
-        <div 
+        <ComponentWrapper 
             key={columnIndex} 
             data-column-name={!column?.["replacedKeyMobile"] ? valueRef : value}
             style={style}
             className={classes}
+            { ...ownLink ? { "href": `${ownLink}/${unformattedValue}` } : {} }
         >
             <>
                 <div className={styles["list-column__wrapper"]}>
@@ -110,8 +126,8 @@ const ListColumn: React.FC<IListProps> = ({
                         </button>}
                     {column["colorize"] && <DifferenceArrow />}
 
-                    {firstSymbol && <img className={styles["list-column__icon"]} src={getDexImageFromApi(firstSymbol)} alt={firstSymbol}/>}
-                    {secondSymbol && <img className={styles["list-column__icon"]} src={getDexImageFromApi(secondSymbol)} alt={secondSymbol}/>}
+                    {firstSymbol && <img className={styles["list-column__icon"]} src={getImageFromApi(firstSymbol)} alt={firstSymbol}/>}
+                    {secondSymbol && <img className={styles["list-column__icon"]} src={getImageFromApi(secondSymbol)} alt={secondSymbol}/>}
 
                     {replacedKeyMobile && <div className={classNames([styles["list-column__info"], styles["next-hide"]])}>
                         {(replacedCombinedValueMobile !== undefined) ? `${replacedCombinedValueMobile} / ` : ""}
@@ -127,15 +143,13 @@ const ListColumn: React.FC<IListProps> = ({
                         </div>
                     }
                     
-                    {copy && 
-                        <button onClick={() => { copyText(row?.[copy]); }} className={styles["list-column__copy"]}>
-                            <Copy/>
-                        </button>
-                    }
+                    {copy && <CopyText text={row?.[copy]} />}
+
+                    {ownLink && <ArrowRotated />}
                 </div>
                 {under}
             </>
-        </div>
+        </ComponentWrapper>
     );
 };
 

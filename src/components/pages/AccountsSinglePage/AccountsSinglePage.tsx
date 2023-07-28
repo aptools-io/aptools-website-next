@@ -5,8 +5,8 @@ import React from "react";
 import { useRouter } from "next/router";
 
 // Components
-import { StatsAccount } from "src/components/containers";
-import { Topper } from "src/components/general";
+import { Account, StatsAccount } from "src/components/containers";
+import { Grid, GridWrapper, Topper } from "src/components/general";
 import { TransactionsList } from "src/components/lists";
 
 const AccountsSinglePage: React.FC = () => {
@@ -16,6 +16,11 @@ const AccountsSinglePage: React.FC = () => {
         <>
             <Topper backlink={"/accounts"} customTitle={title} />
             <StatsAccount />
+            <Grid>
+                <GridWrapper>
+                    <Account />
+                </GridWrapper>
+            </Grid>
         </>
     );
 };

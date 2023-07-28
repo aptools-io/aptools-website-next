@@ -14,6 +14,7 @@ import aptos from "public/static/images/svg/aptos.svg";
 // Util
 import { formatNumber, setSign } from "src/scripts/util/numbers";
 import moment from "moment";
+import { percentClass } from "src/scripts/util/classes";
 import styles from "./StatsAptos.module.scss";
 
 
@@ -25,23 +26,15 @@ const TopStats = () => {
         price_btc = "0", 
         price_diff_btc = "0" 
     } = aptosStats || {};
-
-    const priceClass = (number: string) => {
-        const negative = Number(number) < 0 || Number.isNaN(number);
-        return classNames([
-            "additive",
-            ...negative ? ["negative"] : []
-        ]);
-    };
     
     return (<>
         <span className={"title"}>${formatNumber(price_usd)} 
-            <span className={priceClass(price_diff_usd)}>
+            <span className={percentClass(price_diff_usd)}>
                 {setSign(formatNumber(price_diff_usd))}%
             </span>
         </span>
         <span className={"info"}>{price_btc} BTC 
-            <span className={priceClass(price_diff_btc)}>
+            <span className={percentClass(price_diff_btc)}>
                 {setSign(formatNumber(price_diff_btc))}%
             </span>
         </span>

@@ -7,7 +7,7 @@ import { IRootState } from "src/scripts/redux/store";
 
 // Styles
 import classNames from "classnames";
-import { Tabs } from "src/components/ui";
+import { Plug, Tabs } from "src/components/ui";
 import useWindowSize from "src/scripts/hooks/useWindowSize";
 import styles from "./Projects.module.scss";
 
@@ -20,7 +20,7 @@ const Projects: React.FC<{ all?: boolean } & IComponent> = ({
     all = false,
     className 
 }) => {
-    const { data: projects } = useSelector((state: IRootState) => state.statsProjects);
+    const { data: projects = null } = useSelector((state: IRootState) => state.statsProjects);
     const { width } = useWindowSize();
     const mediaData = media(width);
 
@@ -29,7 +29,7 @@ const Projects: React.FC<{ all?: boolean } & IComponent> = ({
         className
     ]);
 
-    if(!projects) return <></>;
+    if(!projects || !Object.keys(projects)?.length) return <div className={classes}><Plug noData /></div>;
 
     return (
         <div className={classes}>

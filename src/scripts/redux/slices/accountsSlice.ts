@@ -3,19 +3,22 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 const accountsSlice = createSlice({
     "name": "accounts",
     "initialState": {
-        "accounts": null as IApiAccount[],
-        "accountsStats": null as IApiAccountsStats,
+        "accountsLoading": false,
+        "accountsWallets": null as IApiAccountsWallets,
         "accountStats": null as IApiAccountStats,
         "accountProfitabilities": null as IApiAccountProfitabilities,
         "accountTransactions": null as IApiAccountTransactions,
-        "accountNfts": null as IApiAccountNfts,
+        "accountTokens": null as IApiAccountTokens,
+        "accountNftsCollections": null as IApiAccountNftCollections,
+        "accountResources": null as IApiAccountResource[],
+        "accountInfo": null as IApiAccountInfo
     },
     "reducers": {
-        "setAccountsData": (state, action: PayloadAction<IApiAccount[]>) => {
-            state.accounts = action.payload;
+        "setAccountsLoading": (state, action: PayloadAction<boolean>) => {
+            state.accountsLoading = action.payload;
         },
-        "setAccountsStatsData": (state, action: PayloadAction<IApiAccountsStats>) => {
-            state.accountsStats = action.payload;
+        "setAccountsWalletsData": (state, action: PayloadAction<IApiAccountsWallets>) => {
+            state.accountsWallets = action.payload;
         },
         "setAccountStatsData": (state, action: PayloadAction<IApiAccountStats>) => {
             state.accountStats = action.payload;
@@ -26,18 +29,30 @@ const accountsSlice = createSlice({
         "setAccountTransactionsData": (state, action: PayloadAction<IApiAccountTransactions>) => {
             state.accountTransactions = action.payload;
         },
-        "setAccountNftsData": (state, action: PayloadAction<IApiAccountNfts>) => {
-            state.accountNfts = action.payload;
+        "setAccountTokensData": (state, action: PayloadAction<IApiAccountTokens>) => {
+            state.accountTokens = action.payload;
+        },
+        "setAccountNftsCollectionsData": (state, action: PayloadAction<IApiAccountNftCollections>) => {
+            state.accountNftsCollections = action.payload;
+        },
+        "setAccountResourcesData": (state, action: PayloadAction<IApiAccountResource[]>) => {
+            state.accountResources = action.payload;
+        },
+        "setAccountInfoData": (state, action: PayloadAction<IApiAccountInfo>) => {
+            state.accountInfo = action.payload;
         },
     }
 });
 
 export const { 
-    setAccountsData, 
-    setAccountsStatsData, 
+    setAccountsLoading,
+    setAccountsWalletsData, 
     setAccountStatsData,
     setAccountProfitabilitiesData,
     setAccountTransactionsData,
-    setAccountNftsData
+    setAccountTokensData,
+    setAccountNftsCollectionsData,
+    setAccountResourcesData,
+    setAccountInfoData
 } = accountsSlice.actions;
 export default accountsSlice.reducer;

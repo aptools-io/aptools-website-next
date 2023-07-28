@@ -32,6 +32,7 @@ const Paginator: React.FC<IPaginatorProps> = ({
     page = 1,
     total = 1000,
     perPage = defaultPerPage,
+    customPaginatorWrapper = null,
     perPageKey = null,
     pageKey = null,
     setPerPage = null,
@@ -90,7 +91,7 @@ const Paginator: React.FC<IPaginatorProps> = ({
         <div style={style} className={classes}>
             <div className={styles["paginator__inner"]}>{children}</div>
             <div  className={styles["paginator__wrapper"]}>
-                <ul className={styles["paginator__pages"]}>
+                {pageCount > 1 ? <ul className={styles["paginator__pages"]}>
                     <button className={classNames([styles["paginator__arrow-left"], { [styles["disabled"]]: page === 1 }])} onClick={() => handleChangePage(1)}><ArrowLeftDoublePagination /></button>
                     <button className={classNames([styles["paginator__arrow-left"], { [styles["disabled"]]: page === 1 }])} onClick={() => handleChangePage(page - 1)}><ArrowLeftPagination /></button>
 
@@ -98,12 +99,13 @@ const Paginator: React.FC<IPaginatorProps> = ({
 
                     <button className={classNames([styles["paginator__arrow-right"], { [styles["disabled"]]: page === pageCount }])} onClick={() => handleChangePage(page + 1)}><ArrowLeftPagination /></button>
                     <button className={classNames([styles["paginator__arrow-right"], { [styles["disabled"]]: page === pageCount }])} onClick={() => handleChangePage(pageCount)}><ArrowLeftDoublePagination /></button>
-                </ul>
+                </ul> : <div></div>}
                 {changePerPage && 
                     <div className={styles["paginator__perpage"]}>
                         <Select
                             onChange={handleChangePerPage}
                             value={currentPerPageIndex}
+                            customSelectWrapper={customPaginatorWrapper}
                         >
                             {perPages.map((item, index) => <span key={index}>{item}</span>)}
                         </Select>

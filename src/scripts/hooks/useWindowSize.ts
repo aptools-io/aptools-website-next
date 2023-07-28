@@ -21,6 +21,8 @@ const useWindowSize = () => {
     useEffect(() => {
         function handleResize() {
             const adapt = a({ 
+                [EBreakpoints.WIDE]: EBreakpoints.WIDE, 
+                [EBreakpoints.FULL]: EBreakpoints.FULL, 
                 [EBreakpoints.LARGE]: EBreakpoints.LARGE, 
                 [EBreakpoints.LAPTOP]: EBreakpoints.LAPTOP, 
                 [EBreakpoints.TABLET]: EBreakpoints.TABLET, 

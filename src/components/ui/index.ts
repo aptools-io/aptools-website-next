@@ -17,3 +17,5 @@ export { default as Select } from "./Select/Select";
 export { default as Breadcrumbs } from "./Breadcrumbs/Breadcrumbs";
 export { default as Button } from "./Button/Button";
 export { default as Img } from "./Img/Img";
+export { default as Plug } from "./Plug/Plug";
+export { default as CopyText } from "./CopyText/CopyText";

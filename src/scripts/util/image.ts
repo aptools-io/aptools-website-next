@@ -1,5 +1,5 @@
-const getDexImageFromApi = (string: string) => {
-    return `${process.env.BASE_HTTPS_URL}/images/${string.toLowerCase().replace(/ /g, "-")}.png`;
+const getImageFromApi = (string: string) => {
+    return `${process.env.BASE_IMAGES_URL}/${string.toLowerCase().replace(/ /g, "-")}.png`;
 };
 
-export { getDexImageFromApi };
+export { getImageFromApi };

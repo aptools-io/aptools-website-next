@@ -10,6 +10,7 @@ import ReactECharts from "echarts-for-react";
 
 // Styles
 import classNames from "classnames";
+import { Plug } from "src/components/ui";
 import styles from "./DexVolume.module.scss";
 
 // Other
@@ -27,8 +28,6 @@ const DexVolume: React.FC<IComponent> = ({
         className
     ]);
 
-    if(!dex_volumes) return <></>;
-
     return (
         <div className={classes}>
             <strong className={"chart__title"}>
@@ -39,7 +38,10 @@ const DexVolume: React.FC<IComponent> = ({
                 </span> */}
             </strong>
             <div className={"chart__inner"}>
-                <ReactECharts className={"chart__wrapper"} theme={""} notMerge={true} option={chartOptions(dex_volumes, volume)} />
+                {dex_volumes ? 
+                    <ReactECharts className={"chart__wrapper"} theme={""} notMerge={true} option={chartOptions(dex_volumes, volume)} /> :
+                    <Plug noData />
+                }
             </div>
         </div>
     );

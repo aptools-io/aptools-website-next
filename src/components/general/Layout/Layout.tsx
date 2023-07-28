@@ -1,9 +1,9 @@
 // React
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 // Redux
 import { IRootState } from "src/scripts/redux/store";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 // Next
 import Head from "next/head";
@@ -12,6 +12,7 @@ import useTranslation from "next-translate/useTranslation";
 // Components
 import NextNProgress from "nextjs-progressbar";
 import classNames from "classnames";
+import { notify } from "src/scripts/common/notification";
 import NavBar from "../NavBar/NavBar";
 import Footer from "../Footer/Footer";
 
@@ -20,11 +21,27 @@ import styles from "./Layout.module.scss";
 
 // Other
 import menu from "./data/menu";
+import Notifications from "../Notifications/Notifications";
+
+
 
 const Layout: React.FC<{ children: React.ReactNode, pageProps }> = ({ children, pageProps }) => {
     const { title } = useSelector((state: IRootState) => state.pageTitle);
-    
+    const [time, setTime] = useState(null);
     const { t } = useTranslation("menu");
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        const start = null;
+        const getMetrics = (e) => {
+            if(e.detail.name === "TTFB") {
+                notify(dispatch, `loading time: ${(e.detail.value / 1000).toFixed(3)}s`, "Test");
+            }
+        };
+        window.addEventListener("metrics", getMetrics);
+        return () => window.removeEventListener("metrics", getMetrics);
+    }, []);
 
     return (
         <>
@@ -54,16 +71,15 @@ const Layout: React.FC<{ children: React.ReactNode, pageProps }> = ({ children, 
             ])}>
                 {/* <MainLoading /> */}
                 <NextNProgress  options={{ showSpinner: false }} color="#3b5998" />
-                <NavBar data={menu(t)} />
+                {!pageProps?.hideNavBar && <NavBar data={menu(t)} />}
                 <div className={styles["layout__page-wrapper"]}>
                     {children}
                 </div>
                 <Footer/>
-                
+                <Notifications />
             </div>
         </>
     );
 };
-
 
 export default Layout;

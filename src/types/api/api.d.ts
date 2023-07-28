@@ -11,7 +11,7 @@ interface IApiProps {
     "news": IApiNews;
     "news_categories": IApiNewsCategory[];
     "accounts_stats": IApiAccountsStats;
-    "accounts": IApiAccount[];
+    "accounts_wallets": IApiAccountsWallets;
     "account_stats": IApiAccountStats;
     "account_profitabilities": IApiAccountProfitabilities;
 }

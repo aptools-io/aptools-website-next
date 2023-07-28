@@ -10,6 +10,7 @@ import ReactECharts from "echarts-for-react";
 
 // Styles
 import classNames from "classnames";
+import { Plug } from "src/components/ui";
 import styles from "./StatsTransactions.module.scss";
 
 // Other
@@ -32,7 +33,7 @@ const StatsTransactions: React.FC<IComponent> = ({
         className
     ]);
 
-    if(!blockchain_info) return <></>;
+    if(!blockchain_info) return <Plug noData />;
 
     return (
         <div className={classes}>

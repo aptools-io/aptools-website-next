@@ -10,14 +10,25 @@ const numberShorter = (
     return (value / 10**(3 * index)).toFixed(fixed || 2) + (schema[index] === undefined ? (`e${  index * 3}`) : schema[index]);
 };
 
-const formatDecimal = (decimal: string) => { 
-    if(decimal.length > 2) return decimal.slice(0, 2);
-    if(decimal.length === 2) return `${decimal}`;
-    if(decimal.length === 1) return `${decimal.slice(0, 1)}0`;
-    return "00";
+const formatDecimal = (decimal: string, toFixed: number = 2) => { 
+    if(decimal.length > toFixed) return decimal.slice(0, toFixed);
+    if(decimal.length < toFixed) {
+        let dec = decimal;
+        for(let i = 0; i < toFixed - decimal.length; i ++) {
+            dec += "0";
+        }
+        return dec;
+    }
+    return decimal;
 };
 
-const formatNumber = (number: string | number) => {
+const checkMinimum = (floating: string) => {
+    const getZeroInteger = floating.indexOf("0.");
+    if(getZeroInteger > -1 && floating.slice(-1) === "0") return `< ${floating.slice(0, -1)}1`;
+    return floating;
+};
+
+const formatNumber = (number: string | number, toFixed = 2) => {
     if(Number.isNaN(Number(number))) return number;
 
     let num = number;
@@ -33,9 +44,12 @@ const formatNumber = (number: string | number) => {
     const integer = pointIndex === -1 ? numberString : numberString.substring(0, pointIndex);
     const decimal = numberString.substring(pointIndex + 1);
 
-    const formattedInteger = new Intl.NumberFormat("en").format(Number(integer)).replaceAll(".", ",");
-    if(pointIndex !== -1) return `${formattedInteger}.${formatDecimal(decimal)}`;
- 
+    const formattedInteger = new Intl.NumberFormat("en").format(Number(integer)).replaceAll(",", " ");
+
+    const floating = `${formattedInteger}.${formatDecimal(decimal, toFixed)}`;
+    if(pointIndex !== -1) return checkMinimum(floating);
+    
+   
     return formattedInteger;
 };
 

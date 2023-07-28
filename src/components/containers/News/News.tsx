@@ -22,8 +22,6 @@ const News: React.FC<IComponent> = ({
     className 
 }) => {
     const { newsData, newsCategoriesData } = useSelector((state: IRootState) => state.news);
-    // console.log(newsData, newsCategoriesData)
-
     
     const classes = classNames([
         styles["news"],

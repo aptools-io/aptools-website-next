@@ -14,6 +14,7 @@ const NewsList: React.FC<{ data?: IApiNews } & IComponent> = ({
     data = null
 }) => {
     /* const ResponsiveEllipsis = responsiveHOC()(LinesEllipsis); */
+
     const classes = classNames([
         styles["news-list"],
         className

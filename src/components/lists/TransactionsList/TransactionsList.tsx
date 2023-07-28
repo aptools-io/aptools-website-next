@@ -88,7 +88,6 @@ const Transaction: React.FC<{
                 if(!response) return;
                 const lastTransaction = response[0]?.version;
                 setTotal(lastTransaction);
-                console.log(lastTransaction - (10 * (currentPage - 1)), lastTransaction, currentInnerPage, currentPage);
 
                 transactions.getData(lastTransaction - (10 * (currentInnerPage - 1))).then((response) => {
                     const resp = response as unknown as IApiTransaction[];

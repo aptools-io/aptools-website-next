@@ -11,6 +11,7 @@ import ReactECharts from "echarts-for-react";
 // Styles
 import classNames from "classnames";
 import { dateDiffInDays } from "src/scripts/util/timeConvert";
+import { Plug } from "src/components/ui";
 import styles from "./TransactionHistory.module.scss";
 
 // Other
@@ -44,8 +45,6 @@ const TransactionHistory: React.FC<IComponent> = ({
         setVolumes(dailyWalletsUsage);
     }, [volume, allTimeTrans]);
 
-    if(!allTimeTrans) return <></>;
-
     const data = [
         {
             "name": "Aptos Transaction History",
@@ -64,7 +63,7 @@ const TransactionHistory: React.FC<IComponent> = ({
                 </span>
             </strong>
             <div className={"chart__inner"}>
-                <ReactECharts className={"chart__wrapper"} theme={""} option={chartOptions(data)} />
+                {allTimeTrans.length ? <ReactECharts className={"chart__wrapper"} theme={""} option={chartOptions(data)} /> : <Plug noData />}
             </div>
         </div>
     );

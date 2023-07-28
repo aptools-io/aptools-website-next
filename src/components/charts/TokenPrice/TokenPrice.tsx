@@ -11,6 +11,7 @@ import ReactECharts from "echarts-for-react";
 // Styles
 import classNames from "classnames";
 import { dateDiffInDays } from "src/scripts/util/timeConvert";
+import { Plug } from "src/components/ui";
 import styles from "./TokenPrice.module.scss";
 
 // Other
@@ -44,8 +45,6 @@ const TokenPrice: React.FC<IComponent> = ({
         setVolumes(dailyWalletsUsage);
     }, [volume, allTimePrices]);
 
-    if(!allTimePrices) return <></>;
-
     const data = [
         {
             "name": "Token Price",
@@ -66,7 +65,7 @@ const TokenPrice: React.FC<IComponent> = ({
                 </span>
             </strong>
             <div className={"chart__inner"}>
-                <ReactECharts className={"chart__wrapper"} theme={""} option={chartOptions(data)} />
+                {allTimePrices.length ? <ReactECharts className={"chart__wrapper"} theme={""} option={chartOptions(data)} /> : <Plug noData />}
             </div>
         </div>
     );

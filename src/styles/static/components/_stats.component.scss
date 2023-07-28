@@ -1,11 +1,19 @@
 .stats {
     &__top + div {
-        margin-bottom: 9px;
+        /*margin-bottom: 9px;*/
+    }
+
+    &__wrapper {
+        min-height: 90px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
     }
 
     &__top {
         display: flex;
         justify-content: space-between;
+        align-items: center;
 
         $top: &;
 
@@ -13,6 +21,7 @@
             @include mediaWMax('MOBILE') {
                 justify-content: center;
                 flex-direction: column;
+                align-items: flex-start;
             }
             #{$top}-stats {
                 @include mediaWMax('MOBILE') {
@@ -21,11 +30,24 @@
             }
         }
 
+        &-copy {
+            margin-left: 16px;
+        }
+
         &-stats {
             display: flex;
             flex-direction: column;
             align-items: flex-end;
             text-align: right;
+
+            &.row {
+                flex-direction: row;
+                overflow: hidden;
+            }
+
+            button {
+                margin-left: 8px;
+            }
 
             .title {
                 font-weight: 700;
@@ -33,9 +55,18 @@
                 line-height: 29px;
                 display: flex;
                 align-items: center;
+                overflow: hidden;
+
+                &.m-left {
+                    margin-left: 16px;
+                }
 
                 &.blue {
                     color: var(--aptools-color-emphasis-c1);
+                }
+
+                &.light {
+                    font-weight: 400;
                 }
 
                 .additive {
@@ -98,6 +129,19 @@
             max-height: 32px;
         }
 
+        &-icon {
+            max-width: 44px;
+            min-width: 44px;
+            min-height: 44px;
+            max-height: 44px;
+            border-radius: 2px;
+            background-color: var(--aptools-color-emphasis-c1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 9px;
+        }
+
         &-image + &-title {
             margin-left: 6px;
         }
@@ -106,6 +150,14 @@
             font-weight: 400;
             font-size: 20px;
             line-height: 26px;
+
+            &.blue {
+                color: var(--aptools-color-emphasis-c1);
+            }
+
+            &.bold {
+                font-weight: 500;
+            }
         }
     }
 
@@ -182,6 +234,37 @@
                 span {
                     color: var(--aptools-color-emphasis-c1);
                 }
+
+                .item-data {
+                    display: flex;
+                    align-items: center;
+
+                    img {
+                        max-width: 16px;
+                        max-height: 16px;
+                        min-height: 16px;
+                        min-width: 16px;
+                        object-fit: contain;
+                        margin-right: 4px;
+                    }
+
+                    &__info {
+                        display: flex;
+                        flex-direction: column;
+
+                        strong {
+                            font-size: 14px;
+                            font-style: normal;
+                            font-weight: 500;
+                            line-height: 130%;
+                            color: var(--aptools-color-main-secondary);
+                        }
+
+                        div {
+
+                        }
+                    }
+                }
             }
 
             .info {
@@ -198,6 +281,25 @@
                         font-weight: 400;
                         font-size: 10px;
                         line-height: 15px;
+                    }
+                }
+
+                .additive {
+                    font-weight: 500;
+                    font-size: 10px;
+                    line-height: 15px;
+                    color: var(--aptools-color-main-primary);
+                    padding: 2px 6px;
+                    background-color: var(--aptools-color-emphasis-c2);
+                    margin-left: 8px;
+                    border-radius: 4px;
+
+                    &.positive {
+                        background-color: var(--aptools-color-emphasis-c2);
+                    }
+
+                    &.negative {
+                        background-color: var(--aptools-color-emphasis-c4);
                     }
                 }
             }

@@ -11,6 +11,7 @@ import ReactECharts from "echarts-for-react";
 // Styles
 import classNames from "classnames";
 import { dateDiffInDays } from "src/scripts/util/timeConvert";
+import { Plug } from "src/components/ui";
 import styles from "./DailyUsageWallets.module.scss";
 
 // Other
@@ -25,7 +26,7 @@ const DailyUsageWallets: React.FC<IComponent> = ({
         addresses_plot
     } = generalData || {};
 
-    const { daily: dailyAddresses } = addresses_plot || {};
+    const { daily: dailyAddresses = [] } = addresses_plot || {};
     
     const classes = classNames([
         styles["daily-new-wallets"],
@@ -64,7 +65,7 @@ const DailyUsageWallets: React.FC<IComponent> = ({
             </strong>
             
             <div className={"chart__inner"}>
-                <ReactECharts className={"chart__wrapper"} option={chartOptions(data)} />
+                {dailyAddresses.length ?<ReactECharts className={"chart__wrapper"} option={chartOptions(data)} /> : <Plug noData />}
             </div>
         </div>
     );

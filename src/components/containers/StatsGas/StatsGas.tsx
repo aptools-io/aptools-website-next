@@ -8,6 +8,7 @@ import classNames from "classnames";
 import { useSelector } from "react-redux";
 import { IRootState } from "src/scripts/redux/store";
 import { formatNumber } from "src/scripts/util/numbers";
+import { Plug } from "src/components/ui";
 import styles from "./StatsGas.module.scss";
 
 
@@ -40,7 +41,8 @@ const StatsGas: React.FC<IComponent> = ({
                     <span className={"title"}>{gas_price} USD</span>
                 </div>
             </div>
-            <div className={classes}>
+            
+            {blockchain_info ? <div className={classes}>
                 <div className={"stats__item"}>
                     <div className={"stats__item-wrapper"}>
                         <span className={"title"}>Gas unit price <span>24h / peak</span></span>
@@ -53,7 +55,7 @@ const StatsGas: React.FC<IComponent> = ({
                 </div>
                 <div className={"stats__item"}>
                 </div>
-            </div>
+            </div> : <Plug noData />}
             <div />
         </>
     );

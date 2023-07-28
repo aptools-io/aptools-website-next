@@ -1,14 +1,15 @@
 
-interface IApiAccount {
+
+interface IApiAccountsWallets {
+    total_supply: string;
+    total_value: string;
+    wallets: IApiWallet[]
+}
+interface IApiWallet {
     address: string;
     balance_rank: number;
     percentage: number;
     total_balance: string;
-}
-
-interface IApiAccountsStats {
-    TotalSupply,
-    top100
 }
 
 interface IApiAccountStats {
@@ -20,6 +21,7 @@ interface IApiAccountStats {
     worst_performer: IApiAccountPerformer;
     current_balance: string;
     current_nft_balance: string;
+    portfolio_chart: IPoint[]
     net_worth: string;
     token_stats: IApiAccountTokenStat[]
 }
@@ -47,6 +49,7 @@ interface IApiAccountPerformer {
 
 interface IApiAccountProfitabilities {
     total_pages: number;
+    currentPage: number;
     profitability: IApiAccountProfitability[]
 }
 
@@ -84,13 +87,42 @@ interface IApiAccountTransaction {
     timestamp: number;
 }
 
-interface IApiAccountNfts {
+interface IApiAccountTokens {
+    total_coins: number;
+    balance: IApiAccountToken[]
+}
+
+
+interface IApiAccountToken {
+    balance: string;
+    balanceUSD: string;
+    coin: string;
+    coin_name: string;
+    profitUSD: string;
+    profit_precentage: string;
+    timestamp: number;
+    wallet_percentage: number;
+}
+
+interface IApiAccountNftCollections {
+    total: number;
+    collections: IApiAccountNftCollection[]
+}
+
+interface IApiAccountNftCollection {
+    id: number;
     name: string;
-    net_forth: number;
-    nfts: IApiAccountNft[];
+    net_worth: number;
     supply: number;
     volume_apt: number;
     volume_usd: number;
+    uri: string;
+}
+
+
+interface IApiAccountNfts {
+    total: number;
+    nfts: IApiAccountNft[]
 }
 
 interface IApiAccountNft {
@@ -101,4 +133,15 @@ interface IApiAccountNft {
     rank: number;
     rarity: string;
     uri: string;
+}
+
+
+interface IApiAccountResource {
+    data: string;
+    type: string;
+}
+
+interface IApiAccountInfo {
+    auth_key: string;
+    sequence_number: number;
 }

@@ -7,15 +7,18 @@ import classNames from "classnames";
 // Components
 import { SortArrowDown, SortArrowUp } from "src/components/svg";
 import styles from "./ListHeader.module.scss";
+import Plug from "../Plug/Plug";
 
 const ListHeader: React.ForwardRefRenderFunction<any, IListHeaderProps> = ({
     columnNames = [],
     columns = ["100%"],
     data = [],
     hardSorting = null,
+    onSortingChange = null,
     children,
     className 
 }, ref) => {
+    
     const child: any = Children.only(children);
     const defaultSortIndex = columnNames?.findIndex(x => x.defaultSort);
     const defaultSortType = columnNames?.[defaultSortIndex]?.defaultSortType || "desc";
@@ -31,6 +34,7 @@ const ListHeader: React.ForwardRefRenderFunction<any, IListHeaderProps> = ({
         return { ...item, "_id": index + 1 };
     }) : []);
     
+    
     const classes = classNames([
         styles["list-header"],
         className
@@ -45,6 +49,14 @@ const ListHeader: React.ForwardRefRenderFunction<any, IListHeaderProps> = ({
         const button = e.currentTarget;
         const sortType = button.dataset.sort === "desc" ? "asc" : "desc";
         button.dataset.sort = sortType;
+
+        if(onSortingChange) {
+            onSortingChange({
+                "key": key,
+                "sort": sortType
+            });
+            return;
+        } 
 
         setSorting({
             "key": key,
@@ -69,6 +81,8 @@ const ListHeader: React.ForwardRefRenderFunction<any, IListHeaderProps> = ({
         setSortedData([...sorted]);
     }, [data, sorting]); // eslint-disable-line react-hooks/exhaustive-deps
 
+    if(!data?.length) return <Plug noData />;
+
     const renderColumns = (item: IColumnName, index: number) => {
         if(item.headRemove) return <React.Fragment key={index}></React.Fragment>;
         if(item.value === "") return <span key={index}></span>;
@@ -85,13 +99,15 @@ const ListHeader: React.ForwardRefRenderFunction<any, IListHeaderProps> = ({
                         classNames([
                             styles["list-header__item"], 
                             { [styles["right"]]: item.right },
+                            { [styles["cant-sort"]]: item.cantSort },
                             { [styles["sorted"]]: item.key === sorting.key }
                         ])}
                     key={index}
                     data-sort={defaultSortType}
                     onClick={(e) => handleSort(e, item.key)}
                 >
-                    {item.value} <div className={styles["sort"]}><SortArrowUp /> <SortArrowDown /></div>
+                    {item.value} 
+                    {(!item.cantSort && defaultSortIndex !== undefined) && <div className={styles["sort"]}><SortArrowUp /> <SortArrowDown /></div>}
                 </button>
             </React.Fragment>
         );

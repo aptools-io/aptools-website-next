@@ -1,5 +1,6 @@
 export { default as headersSlice } from "./headersSlice";
 export { default as loadingSlice } from "./loadingSlice";
+export { default as notificationSlice } from "./notificationSlice";
 export { default as statsAptosSlice } from "./statsAptosSlice";
 export { default as statsGeneralSlice } from "./statsGeneralSlice";
 export { default as statsProjectsSlice } from "./statsProjectsSlice";

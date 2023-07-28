@@ -12,6 +12,7 @@ import { IRootState } from "src/scripts/redux/store";
 import { formatNumber } from "src/scripts/util/numbers";
 
 import { Grid, GridWrapper } from "src/components/general";
+import { Plug } from "src/components/ui";
 import styles from "./ActiveUniqueAddresses.module.scss";
 
 const Stats: React.FC<{ "time": string }> = ({ time = "0" }) => {
@@ -26,24 +27,26 @@ const Stats: React.FC<{ "time": string }> = ({ time = "0" }) => {
     } = aptosStats || {};
 
     return (
-        <div className={styles["active-unique-addresses__stats"]}>
-            <div className={styles["active-unique-addresses__stat"]}>
-                <span className={styles["title"]}>Slot</span>
-                <span className={styles["info"]}>{formatNumber(slot)}</span>
-            </div>
-            <div className={styles["active-unique-addresses__stat"]}>
-                <span className={styles["title"]}>Cluster time</span>
-                <span className={styles["info"]}>{time}</span>
-            </div>
-            <div className={styles["active-unique-addresses__stat"]}>
-                <span className={styles["title"]}>Slot time</span>
-                <span className={classNames([styles["info"], styles["bold"]])}>{slot_time_m}<span>1min average</span></span>
-            </div>
-            <div className={styles["active-unique-addresses__stat"]}>
-                <span className={styles["title"]}>Slot time</span>
-                <span className={classNames([styles["info"], styles["bold"]])}>{slot_time_h}<span>1h average</span></span>
-            </div>
-        </div>
+        <>
+            {blockchain_info ? <div className={styles["active-unique-addresses__stats"]}>
+                <div className={styles["active-unique-addresses__stat"]}>
+                    <span className={styles["title"]}>Slot</span>
+                    <span className={styles["info"]}>{formatNumber(slot)}</span>
+                </div>
+                <div className={styles["active-unique-addresses__stat"]}>
+                    <span className={styles["title"]}>Cluster time</span>
+                    <span className={styles["info"]}>{time}</span>
+                </div>
+                <div className={styles["active-unique-addresses__stat"]}>
+                    <span className={styles["title"]}>Slot time</span>
+                    <span className={classNames([styles["info"], styles["bold"]])}>{slot_time_m}<span>1min average</span></span>
+                </div>
+                <div className={styles["active-unique-addresses__stat"]}>
+                    <span className={styles["title"]}>Slot time</span>
+                    <span className={classNames([styles["info"], styles["bold"]])}>{slot_time_h}<span>1h average</span></span>
+                </div>
+            </div> : <Plug noData />}
+        </>
     );
 };
 
@@ -74,7 +77,7 @@ const ActiveUniqueAddresses: React.FC<IComponent> = ({
             <div className={classes}>
                 <div className={styles["active-unique-addresses__title-wrapper"]}>
                     <strong className={styles["active-unique-addresses__title"]}>Active Unique Addresses</strong>
-                    <Grid gap={6} className={styles["active-unique-addresses__days"]} columns={3}>
+                    {active_unique_addresses ? <Grid gap={6} className={styles["active-unique-addresses__days"]} columns={3}>
                         <GridWrapper gridWidth={1} className={styles["active-unique-addresses__day"]}>
                             <div className={styles["title"]}>1 day</div>
                             <div className={styles["info"]}>{formatNumber(day)}</div>
@@ -87,7 +90,7 @@ const ActiveUniqueAddresses: React.FC<IComponent> = ({
                             <div className={styles["title"]}>30 days</div>
                             <div className={classNames([styles["info"], styles["blue"]])}>{formatNumber(month)}</div>
                         </GridWrapper>
-                    </Grid>
+                    </Grid> : <Plug noData />}
                 </div>
                 <div className={styles["active-unique-addresses__title-wrapper"]}>
                     <strong className={styles["active-unique-addresses__title"]}>Live Cluster Stats</strong>
