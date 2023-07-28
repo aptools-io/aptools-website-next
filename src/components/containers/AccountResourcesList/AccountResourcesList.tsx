@@ -65,7 +65,9 @@ const AccountResourcesList: React.FC<IComponent> = ({
                             <div className={classNames([
                                 styles["code"],
                                 { [styles["open"]]: openCode.id === index && openCode.innerOpened }
-                            ])}>
+                            ])}
+                                onClick={() => handleInnerOpenCode()}
+                            >
                                 <div className={styles["code-formatted"]}>
                                     <JsonFormatter json={data} tabWith={4} jsonStyle={jsonStyle}  />
                                 </div>
