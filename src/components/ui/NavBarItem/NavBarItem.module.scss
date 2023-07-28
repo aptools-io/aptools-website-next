@@ -47,7 +47,7 @@
 
     &.expanded {
         #{$self}__icon {
-            min-width: 0%;
+            min-width: 24px;
 
             svg {
                 left: 0%;
@@ -57,6 +57,10 @@
 
         #{$self}__inner {
             padding: 7px var(--nav-bar-v-padding);
+        }
+
+        #{$self}__title {
+            opacity: 1;
         }
     }
 
@@ -84,8 +88,12 @@
         display: flex;
         align-items: center;
         white-space: nowrap;
-        padding-left: calc(24px + 8px);
-        transition: color var(--nav-bar-transition-speed-2) ease;
+        padding-left: 8px;
+        transition: color var(--nav-bar-transition-speed-2) ease, opacity var(--nav-bar-transition-speed-2) ease;
+        opacity: 0;
+        @include mediaWMax('TABLET') {
+            opacity: 1;
+        }
     }
 
     span#{$self}__inner {

@@ -66,5 +66,4 @@ const Layout: React.FC<{ children: React.ReactNode, pageProps }> = ({ children, 
     );
 };
 
-
 export default Layout;
