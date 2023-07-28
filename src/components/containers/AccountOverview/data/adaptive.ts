@@ -4,6 +4,11 @@ import { EBreakpoints } from "src/types/common/adaptive";
 
 const media = (width: number) => {
     return {
+        accountGaps: a({ 
+            [EBreakpoints.LARGE]: 46, 
+            [EBreakpoints.TABLET]: 0, 
+            [EBreakpoints.MIN]: 0}, 
+        width) as number,
         accountPerformance: a({ 
             [EBreakpoints.LARGE]: 4, 
             [EBreakpoints.TABLET]: 10, 

@@ -1,8 +1,9 @@
 import { graphic } from "echarts";
 
-const performanceOptions = (data: IPoint[]) => {
-    const xAxisArray = data.map(item => item.x);
-    const yAxisArray = data.map(item => item.y) as number[];
+const performanceOptions = (data: { name?: string, chart?: IPoint[] }[]) => {
+    
+    const xAxisArray = data[0].chart?.map(item => item.x);
+    const yAxisArray = data[0].chart?.map(item => item.y) as number[];
     
     const labels = {
         textStyle: {

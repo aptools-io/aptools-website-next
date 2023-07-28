@@ -87,7 +87,7 @@ const StatsAccount: React.FC<IComponent> = ({
         nft_uri: worstNftUri
     } = worst_nft_performer || {};
 
-    if(!accountStats) return <></>;
+    if(!accountStats || !width) return <></>;
     
     const classes = classNames([
         styles["stats-accounts"],
@@ -96,6 +96,7 @@ const StatsAccount: React.FC<IComponent> = ({
 
 
     const renderBalance = (title, balance, profit) => {
+        console.log(balance);
         return (
             <>
                 <div className={"stats__top"}>
@@ -103,16 +104,16 @@ const StatsAccount: React.FC<IComponent> = ({
                         <strong className={"stats__top-title"}>{title}</strong>
                     </div>
                     <div className={"stats__top-stats"}>
-                        <span className={"title"}>{concatString(formatNumber(balance), "", "$")}</span>
+                        <span className={"title"}>{balance === "0.00" ? "-" : concatString(formatNumber(balance), "", "$")}</span>
                     </div>
                 </div>
                 <div className={"stats__item"}>
                     <div className={"stats__item-wrapper"}>
                         <span className={"title"}>All-time profit</span>
                         <span className={"info percent"}>
-                            {concatString(formatNumber(profit), "", "$")}
+                            {profit === "0.00" ? "-" : concatString(formatNumber(profit), "", "$")}
                             <span className={percentClass(profit)}>
-                                {setSign(formatNumber(profit))}%
+                                {profit === "0.00" ? "-" : `${setSign(formatNumber(profit))}%`}
                             </span>
                         </span>
                     </div>
@@ -143,9 +144,9 @@ const StatsAccount: React.FC<IComponent> = ({
                             
                         </span>
                         <span className={"info percent"}>
-                            {concatString(formatNumber(volume), "", "$")}
+                            {volume === "" ? "-" : concatString(formatNumber(volume), "", "$")}
                             <span className={percentClass(percent)}>
-                                {concatString(setSign(formatNumber(percent)), "", "%")}
+                                {percent === "" ? "-" : concatString(setSign(formatNumber(percent)), "", "%")}
                             </span>
                         </span>
                     </div>}
@@ -185,7 +186,7 @@ const StatsAccount: React.FC<IComponent> = ({
                         </div>
                         <div className={"stats__top-stats row"}>
                             <span className={"title light m-left"}>
-                                {query.id}
+                                {mediaData.accountHash(query.id as string)}
                             </span>
                             <CopyText big text={query.id as string} />
                         </div>
@@ -220,7 +221,7 @@ const StatsAccount: React.FC<IComponent> = ({
             </GridWrapper>
             <GridWrapper gridWidth={1}>
                 <Plate noMin bordered>
-                    {renderPerformer("Best NFT Performer", bestNftVolumeUsd, bestNftVolumePerc, bestNftName, bestNftCollection, bestNftUri)}
+                    {renderPerformer("Best NFT Performer", bestNftVolumeUsd, bestNftVolumePerc, bestNftName, bestNftCollection, bestNftUri, true)}
                 </Plate>
             </GridWrapper>
             <GridWrapper gridWidth={1}>

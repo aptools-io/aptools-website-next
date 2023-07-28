@@ -13,7 +13,7 @@ const notificationSlice = createSlice({
         },
         "hideNotification": (state, action: PayloadAction) => {
             if(state.notifications.length > 0)
-                state.notifications[state.notifications.length - 1].hide = true;
+                state.notifications[0].hide = true;
         },
         "clearLastNotification": (state, action: PayloadAction) => {
             if(state.notifications.length > 0)

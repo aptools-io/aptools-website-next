@@ -28,7 +28,7 @@ const AccountOverview: React.FC<IComponent> = ({
 
     return (
         <div className={classes}>
-            <Grid gap={46}>
+            <Grid gap={mediaData.accountGaps}>
                 <GridWrapper gridWidth={mediaData.accountPerformance}>
                     <AccountPerformance />
                 </GridWrapper>

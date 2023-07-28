@@ -1,5 +1,5 @@
 // Slices
-import { setAccountInfoData, setAccountNftsData, setAccountProfitabilitiesData, setAccountResourcesData, setAccountsLoading, setAccountTokensData, setAccountTransactionsData } from "src/scripts/redux/slices/accountsSlice";
+import { setAccountInfoData, setAccountNftsCollectionsData, setAccountProfitabilitiesData, setAccountResourcesData, setAccountsLoading, setAccountTokensData, setAccountTransactionsData } from "src/scripts/redux/slices/accountsSlice";
 
 // Components
 import { AccountTransactionsList, AccountTokensList } from "src/components/lists";
@@ -66,9 +66,9 @@ const categories = (dispatch) => {
             action: async (setCustomEntry, setLoading, id, queryId) => {
                 setLoading(false);
                 dispatch(setAccountsLoading(true));
-                await accounts.getAccountNftData(queryId).then((e: unknown) => {
-                    const result = e as IApiAccountNfts[];
-                    dispatch(setAccountNftsData(result));
+                await accounts.getAccountNftCollectionsData(queryId).then((e: unknown) => {
+                    const result = e as IApiAccountNftCollections;
+                    dispatch(setAccountNftsCollectionsData(result));
                     dispatch(setAccountsLoading(false));
                 });
             }

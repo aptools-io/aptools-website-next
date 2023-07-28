@@ -35,7 +35,7 @@ const StatsBlockchainActivity: React.FC<IComponent> = ({
         className
     ]);
 
-    if(!blockchain_info) return <Plug noData />;
+    if(!blockchain_info || !contract_deployers_24h || !contract_deployers_peak || !user_transactions_24h || !user_transactions_peak || !tps_peak_30d) return <Plug noData />;
 
     return (
         <div className={classes}>

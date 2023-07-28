@@ -3,4 +3,5 @@ interface IButtonProps extends IComponent {
     after?, before?: "back" | "up" | "down";
     invert?: boolean;
     fill?: boolean;
+    disabled?: boolean;
 }

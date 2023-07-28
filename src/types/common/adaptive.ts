@@ -1,4 +1,5 @@
 enum EBreakpoints {
+	"WIDE" = 1920,
 	"FULL" = 1440,
     "LARGE" = 1280,
 	"LAPTOP" = 1024,

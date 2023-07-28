@@ -8,3 +8,4 @@ export { default as AccountsPage } from "./AccountsPage/AccountsPage";
 export { default as AccountsSinglePage } from "./AccountsSinglePage/AccountsSinglePage";
 export { default as NotFoundPage } from "./NotFoundPage/NotFoundPage";
 export { default as ServerErrorPage } from "./ServerErrorPage/ServerErrorPage";
+export { default as ClientSideErrorPage } from "./ClientSideErrorPage/ClientSideErrorPage";

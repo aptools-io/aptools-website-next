@@ -33,7 +33,7 @@ const StatsTransactions: React.FC<IComponent> = ({
         className
     ]);
 
-    if(!blockchain_info) return <Plug noData />;
+    if(!blockchain_info || !tps_plot_24h) return <Plug noData />;
 
     return (
         <div className={classes}>

@@ -13,6 +13,7 @@ const Button: React.FC<IButtonProps> = ({
     before = null,
     invert = false,
     fill = false,
+    disabled = false,
     children,
     className,
     style
@@ -22,6 +23,7 @@ const Button: React.FC<IButtonProps> = ({
         styles["button"],
         { [styles["invert"]]: invert },
         { [styles["fill"]]: fill },
+        { [styles["disabled"]]: disabled },
         className
     ]);
 
@@ -31,7 +33,7 @@ const Button: React.FC<IButtonProps> = ({
 
     const ChildrenWrapper = <>{additive[before]}{children}{additive[after]}</>;
 
-    if(href) {
+    if(href && !disabled) {
         return (
             <ActiveLink href={href}>
                 <a className={classes}>{ChildrenWrapper}</a>
