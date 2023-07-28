@@ -29,9 +29,14 @@ const getAccountTokensData = async (address = null, limit = 10, page = 1, key = 
     return api.post("/account_coins", {}, {}, { account: address, pageSize: limit, currentPage: page, order: sort, orderBy: key });
 };
 
-const getAccountNftData = async (address = null) => {
+const getAccountNftCollectionsData = async (address = null, pageSize = 5, currentPage = 1) => {
     const api = new Api(true);
-    return api.get("/account_nfts", {}, { address });
+    return api.post("/account_nft_collections", {}, { }, { account: address, pageSize, currentPage });
+};
+
+const getAccountNftData = async (address = null, collectionID = null, pageSize = 10, currentPage = 1) => {
+    const api = new Api(true);
+    return api.post("/account_nfts", {}, { }, { account: address, collectionID, pageSize, currentPage });
 };
 
 const getAccountResourcesData = async (address = null) => {
@@ -51,6 +56,7 @@ const accounts = {
     getAccountProfitabilitiesData,
     getAccountTransactionsData,
     getAccountTokensData,
+    getAccountNftCollectionsData,
     getAccountNftData,
     getAccountResourcesData,
     getAccountInfoData

@@ -28,7 +28,6 @@ const Projects: React.FC<{ all?: boolean } & IComponent> = ({
         styles["projects"],
         className
     ]);
-    console.log(projects);
 
     if(!projects || !Object.keys(projects)?.length) return <div className={classes}><Plug noData /></div>;
 

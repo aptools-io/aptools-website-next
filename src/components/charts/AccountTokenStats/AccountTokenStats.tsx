@@ -18,8 +18,10 @@ import { Img, Plug, Skeleton } from "src/components/ui";
 import { getImageFromApi } from "src/scripts/util/image";
 import { formatNumber } from "src/scripts/util/numbers";
 import { concatString } from "src/scripts/util/strings";
+import useWindowSize from "src/scripts/hooks/useWindowSize";
 import chartOptions from "./data/chartOptions";
 import styles from "./AccountTokenStats.module.scss";
+import media from "./data/adaptive";
 
 
 const AccountTokenStats: React.FC<IComponent> = ({
@@ -27,10 +29,13 @@ const AccountTokenStats: React.FC<IComponent> = ({
 }) => {
     const { accountStats, accountsLoading: loading = false } = useSelector((state: IRootState) => state.accounts);
     const { token_stats = [] } = accountStats || {};
+
+    const { width } = useWindowSize();
+    const m = media(width) || {};
     
 
     if(loading) return <Skeleton />;
-    if(!accountStats || !token_stats || !token_stats?.length) return <>
+    if(!accountStats || !token_stats || !token_stats?.length || !width) return <>
         <strong className={"chart__title normal"}>
             <span>Tokens Stats</span>
         </strong>
@@ -78,7 +83,7 @@ const AccountTokenStats: React.FC<IComponent> = ({
                 <span>Tokens Stats</span>
             </strong>
             <div className={styles["account-performance__inner"]}>
-                <ReactECharts style={{height: "215px", width: "215px"}} theme={""} option={chartOptions(data)} />
+                <ReactECharts style={{height: m, width: m}} theme={""} option={chartOptions(data)} />
                 <ul className={styles["account-performance__list-items"]}>
                     {data.map(renderList)}
                 </ul>

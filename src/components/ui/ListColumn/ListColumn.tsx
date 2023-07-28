@@ -50,7 +50,8 @@ const ListColumn: React.FC<IListProps> = ({
         span = null,
         elementRemove = false,
         bold = false,
-        ownLink = null
+        ownLink = null,
+        approxKey = null
     } = column;
     if(elementRemove) return <></>;
 
@@ -63,13 +64,18 @@ const ListColumn: React.FC<IListProps> = ({
     const combinedValues = row?.combined; 
 
     const unformattedValue = row?.[key];
+    const approxed = row?.[approxKey];
     let value = !formatter ? unformattedValue : formatter(unformattedValue);
+    
+    if(approxed) value = `~ ${value}`;
+
     if(key === "_id" && hardPageId !== null && hardPerPage !== null) value = (rowIndex + 1) + (hardPageId * hardPerPage);
     const combinedValue = formatter && combinedValues ? formatter(combinedValues?.[key]) : undefined;
 
     const unformattedReplacedValueMobile = row?.[replacedKeyMobile];
     const replacedValueMobile = !replacedFormatter ? unformattedReplacedValueMobile : replacedFormatter(unformattedReplacedValueMobile);
     const replacedCombinedValueMobile = replacedFormatter && combinedValues ? replacedFormatter(combinedValues?.[replacedKeyMobile]) : undefined;
+
 
 
     let firstSymbol = row?.[symbolRef];
