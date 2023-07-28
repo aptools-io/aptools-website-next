@@ -10,7 +10,7 @@ import styles from "./Select.module.scss";
 
 
 
-const Select: React.FC<ISelectProps> = ({ onChange, value = 0, title, className, children }) => {
+const Select: React.FC<ISelectProps> = ({ customSelectWrapper, onChange, value = 0, title, className, children }) => {
     const selectRef = useRef(null);
     const optionsRef = useRef(null);
     const childs = Children.toArray(children) as React.ReactElement<any, string | React.JSXElementConstructor<any>>[];
@@ -18,6 +18,11 @@ const Select: React.FC<ISelectProps> = ({ onChange, value = 0, title, className,
     const [fromBottom, setFromBottom] = useState(false);
 
     useEffect(() => {
+        const selectWrapperElement = customSelectWrapper?.current || window;
+        const customParams = customSelectWrapper?.current?.getBoundingClientRect();
+        const customPlus = !Number.isNaN(customParams?.height) && Number.isNaN(customParams?.top) ? customParams.height + customParams.top : null;
+        const wrapperHeight = customPlus || window?.innerHeight;
+        
         const handleClickOutside = (event) => {
             if (selectRef.current && !selectRef.current.contains(event.target)) {
                 setShow(false);   
@@ -27,21 +32,21 @@ const Select: React.FC<ISelectProps> = ({ onChange, value = 0, title, className,
             if(!selectRef.current || !optionsRef.current) return;
             const selectRect = selectRef.current.getBoundingClientRect();
             const optionsRect = optionsRef.current.getBoundingClientRect();
-            setFromBottom(optionsRect.height + selectRect.height + selectRect.y >= window.innerHeight);
+            setFromBottom(optionsRect.height + selectRect.height + selectRect.y >= wrapperHeight);
         };
         
 
         handleFromBottom();
 
-        window.addEventListener("resize", handleFromBottom);
-        window.addEventListener("scroll", handleFromBottom);
+        selectWrapperElement.addEventListener("resize", handleFromBottom);
+        selectWrapperElement.addEventListener("scroll", handleFromBottom);
         window.addEventListener("click", handleClickOutside);
         return () => {
             window.removeEventListener("resize", handleFromBottom);
             window.removeEventListener("scroll", handleFromBottom);
             window.removeEventListener("click", handleClickOutside);
         }; 
-    }, []);
+    }, [show]);
 
     const classes = classNames([
         styles["select"], 

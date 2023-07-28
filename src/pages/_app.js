@@ -8,9 +8,13 @@ import store from "../scripts/redux/store";
 // Styles
 import "../styles/pages/index.scss";
 
+export function reportWebVitals(metric) {
+    const metrics = new CustomEvent("metrics", { detail: metric });
+    window.dispatchEvent(metrics);
+}
+
 const AptoolsApp = (props) => {
     const { Component, pageProps } = props;
-   
 
     return (
         <Provider store={store}>
@@ -20,5 +24,9 @@ const AptoolsApp = (props) => {
         </Provider>
     );
 };
+
+
   
+
+
 export default AptoolsApp;

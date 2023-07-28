@@ -60,4 +60,5 @@ interface IColumnName {
     replacedKeyMobile?: string;
     symbol?: string;
     colorize?: boolean;
+    approxKey?: string;
 }

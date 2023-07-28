@@ -21,6 +21,7 @@ interface IApiAccountStats {
     worst_performer: IApiAccountPerformer;
     current_balance: string;
     current_nft_balance: string;
+    portfolio_chart: IPoint[]
     net_worth: string;
     token_stats: IApiAccountTokenStat[]
 }
@@ -103,13 +104,25 @@ interface IApiAccountToken {
     wallet_percentage: number;
 }
 
-interface IApiAccountNfts {
+interface IApiAccountNftCollections {
+    total: number;
+    collections: IApiAccountNftCollection[]
+}
+
+interface IApiAccountNftCollection {
+    id: number;
     name: string;
     net_worth: number;
-    nfts: IApiAccountNft[];
     supply: number;
     volume_apt: number;
     volume_usd: number;
+    uri: string;
+}
+
+
+interface IApiAccountNfts {
+    total: number;
+    nfts: IApiAccountNft[]
 }
 
 interface IApiAccountNft {

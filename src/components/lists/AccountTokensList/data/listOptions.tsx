@@ -13,31 +13,36 @@ const columnNames = [
         "value": "Token",
         "key": "coin_name",
         "symbol": "coin",
-        "description": "coin"
+        "description": "coin",
+        "headHideMobile": true
     },
     {
         "key": "balance",
         "value": "Balance",
         "description": "balanceUSD",
-        "formatter": (v) => `${concatString(formatNumber(v), "", " APT") }`,
-        "descriptionFormatter": (v) => `${concatString(formatNumber(v), "$", "") }`
+        "formatter": (v) => `${concatString(formatNumber(v, 4), "", " APT") }`,
+        "descriptionFormatter": (v) => `${concatString(formatNumber(v), "$", "") }`,
+        "headHideMobile": true
     },
     {
         "key": "wallet_percentage",
         "value": "Wallet Percentage",
         "formatter": (v) => `${concatString(formatNumber(v), "", "%") }`,
+        "headHideMobile": true
     },
     {
         "key": "profitUSD",
         "value": "Profit",
         "description": "profit_percentage",
         "formatter": (v) => `${concatString(formatNumber(v), "", "$") }`,
-        "descriptionFormatter": (v) => `${concatString(setSign(formatNumber(v, 5)) , "", "%") }`,
+        "descriptionFormatter": (v) => `${concatString(setSign(formatNumber(v)) , "", "%") }`,
+        "headHideMobile": true
     },
     {
         "key": "timestamp",
         "value": "Last transaction",
         "formatter": (v) => `${timeAgo(v)}`,
+        "headHideMobile": true
     }
 ];
 

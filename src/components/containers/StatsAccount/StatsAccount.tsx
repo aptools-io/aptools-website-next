@@ -87,7 +87,7 @@ const StatsAccount: React.FC<IComponent> = ({
         nft_uri: worstNftUri
     } = worst_nft_performer || {};
 
-    if(!accountStats) return <></>;
+    if(!accountStats || !width) return <></>;
     
     const classes = classNames([
         styles["stats-accounts"],
@@ -185,7 +185,7 @@ const StatsAccount: React.FC<IComponent> = ({
                         </div>
                         <div className={"stats__top-stats row"}>
                             <span className={"title light m-left"}>
-                                {query.id}
+                                {mediaData.accountHash(query.id as string)}
                             </span>
                             <CopyText big text={query.id as string} />
                         </div>
@@ -220,7 +220,7 @@ const StatsAccount: React.FC<IComponent> = ({
             </GridWrapper>
             <GridWrapper gridWidth={1}>
                 <Plate noMin bordered>
-                    {renderPerformer("Best NFT Performer", bestNftVolumeUsd, bestNftVolumePerc, bestNftName, bestNftCollection, bestNftUri)}
+                    {renderPerformer("Best NFT Performer", bestNftVolumeUsd, bestNftVolumePerc, bestNftName, bestNftCollection, bestNftUri, true)}
                 </Plate>
             </GridWrapper>
             <GridWrapper gridWidth={1}>

@@ -7,8 +7,9 @@ import { ComingSoon, File } from "src/components/svg";
 // Styles
 import styles from "./Plug.module.scss";
 
-const Plug: React.FC<{ noData?: boolean } & IComponent> = ({
-    noData = false
+const Plug: React.FC<{ noData?: boolean, noDataAbsolute?: boolean } & IComponent> = ({
+    noData = false,
+    noDataAbsolute = false,
 }) => {
     const classes = classNames([
         styles["plug"], 
@@ -16,7 +17,9 @@ const Plug: React.FC<{ noData?: boolean } & IComponent> = ({
 
     if(noData) return <div className={styles["plug__no-data"]}><File /> No Data Found</div>;
 
-    return <div className={classes}><ComingSoon/></div>;
+    
+
+    return <div className={classes}>{!noDataAbsolute ? <ComingSoon/> : <><File /> No Data Found</>}</div>;
 };
 
 export default Plug;

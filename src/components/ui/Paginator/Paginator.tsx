@@ -32,6 +32,7 @@ const Paginator: React.FC<IPaginatorProps> = ({
     page = 1,
     total = 1000,
     perPage = defaultPerPage,
+    customPaginatorWrapper = null,
     perPageKey = null,
     pageKey = null,
     setPerPage = null,
@@ -104,6 +105,7 @@ const Paginator: React.FC<IPaginatorProps> = ({
                         <Select
                             onChange={handleChangePerPage}
                             value={currentPerPageIndex}
+                            customSelectWrapper={customPaginatorWrapper}
                         >
                             {perPages.map((item, index) => <span key={index}>{item}</span>)}
                         </Select>

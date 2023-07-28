@@ -68,8 +68,8 @@ const columnNames = [
         "key": "value",
         "value": "Value",
         "description": "value_usd",
-        "formatter": (v) => `${concatString(formatNumber(v, 5), "", "$") }`,
-        "descriptionFormatter": (v) => `${concatString(formatNumber(v, 5), "", "$") }`,
+        "formatter": (v) => `${concatString(formatNumber(v, 2), "", "$") }`,
+        "descriptionFormatter": (v) => `${concatString(formatNumber(v, 2), "", "$") }`,
         "cantSort": true,
         "headHideMobile": true
     },
@@ -77,8 +77,7 @@ const columnNames = [
         "key": "fee",
         "value": "Txn fee",
         "formatter": (v) => {
-            if(v < 0.0001) return `${concatString("0.0001", "< ", "")}`;
-            return `${formatNumber(v, 4)}`;
+            return `${concatString(formatNumber(v, 4), "", " APT")}`;
         },
         "cantSort": true,
         "headHideMobile": true
@@ -87,7 +86,7 @@ const columnNames = [
         "key": "profit_usd",
         "value": "Profit",
         "cantSort": true,
-        "formatter": (v) => `${concatString(formatNumber(v, 5), "", "$") }`,
+        "formatter": (v) => `${concatString(formatNumber(v, 2), "", "$") }`,
         "headHideMobile": true
     },
     {

@@ -31,6 +31,13 @@ interface IApiWalletsUsage {
     "30d": IPoint[], 
     "all": IPoint[]
 }
+
+interface IApiAccountsPortfolioUsage {
+    "7d": IPoint[],
+    "30d": IPoint[],
+    "90d": IPoint[], 
+    "all": IPoint[]
+}
 interface IApiWallets {
     "name": string,
     "chart": IPoint[]

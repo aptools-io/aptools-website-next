@@ -12,9 +12,20 @@ const numberShorter = (
 
 const formatDecimal = (decimal: string, toFixed: number = 2) => { 
     if(decimal.length > toFixed) return decimal.slice(0, toFixed);
-    if(decimal.length === 2) return `${decimal}`;
-    if(decimal.length === 1) return `${decimal.slice(0, 1)}0`;
-    return "00";
+    if(decimal.length < toFixed) {
+        let dec = decimal;
+        for(let i = 0; i < toFixed - decimal.length; i ++) {
+            dec += "0";
+        }
+        return dec;
+    }
+    return decimal;
+};
+
+const checkMinimum = (floating: string) => {
+    const getZeroInteger = floating.indexOf("0.");
+    if(getZeroInteger > -1 && floating.slice(-1) === "0") return `< ${floating.slice(0, -1)}1`;
+    return floating;
 };
 
 const formatNumber = (number: string | number, toFixed = 2) => {
@@ -34,8 +45,11 @@ const formatNumber = (number: string | number, toFixed = 2) => {
     const decimal = numberString.substring(pointIndex + 1);
 
     const formattedInteger = new Intl.NumberFormat("en").format(Number(integer)).replaceAll(",", " ");
-    if(pointIndex !== -1) return `${formattedInteger}.${formatDecimal(decimal, toFixed)}`;
- 
+
+    const floating = `${formattedInteger}.${formatDecimal(decimal, toFixed)}`;
+    if(pointIndex !== -1) return checkMinimum(floating);
+    
+   
     return formattedInteger;
 };
 

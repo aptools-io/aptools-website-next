@@ -1,3 +1,6 @@
+@import '/src/styles/static/general/variables.static';
+@import '/src/styles/static/general/mixins';
+
 .account-performance {
     width: 100%;
 
@@ -55,6 +58,11 @@
             &s {
                 width: calc(100% - 215px);
                 margin-left: 50px;
+
+                @include mediaWMax('TABLET') {
+                    width: calc(100% - 125px);
+                    margin-left: 25px;
+                }
             }
         }
     }
