@@ -32,7 +32,7 @@ const StatsTotalCenter: React.FC<IComponent> = ({
         className
     ]);
 
-    if(!blockchain_info) return <Plug noData />;
+    if(!blockchain_info || !total_earned_by_validators || !dex_trading_volume || !total_value_locked) return <Plug noData />;
 
     return (
         <>

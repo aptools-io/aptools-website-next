@@ -51,7 +51,7 @@ const AccountPerformance: React.FC<IComponent> = ({
     const data = [
         {
             "name": "Aptos Transaction History",
-            "chart": [...volumes[volume]].slice(0, volumes[volume].length - 1)
+            "chart": volumes?.[volume]?.length ? [...volumes[volume]].slice(0, volumes[volume].length - 1) : []
         },
     ];
 

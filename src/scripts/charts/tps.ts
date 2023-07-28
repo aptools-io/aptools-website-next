@@ -1,8 +1,8 @@
 import { graphic } from "echarts";
 
 const tpsOptions = (data: IPoint[]) => {
-    const xAxisArray = data.map(item => item.x);
-    const yAxisArray = data.map(item => item.y) as number[];
+    const xAxisArray = data?.map(item => item.x) || [];
+    const yAxisArray = data?.map(item => item.y) as number[] || [];
     
     const labels = {
         textStyle: {

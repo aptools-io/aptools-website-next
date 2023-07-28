@@ -29,7 +29,7 @@ const StatsActiveUsers: React.FC<IComponent> = ({
         className
     ]);
 
-    if(!blockchain_info) return <Plug noData />;
+    if(!blockchain_info || !active_account_24h || !active_account_peak || !registered_account_24h || !registered_account_peak) return <Plug noData />;
 
     return (
         <div className={classes}>
