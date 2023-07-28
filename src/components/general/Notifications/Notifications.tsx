@@ -26,9 +26,7 @@ const Notifications: React.FC<IComponent> = ({
                     className
                 ])}
             >
-                <div>
-                    {item?.text}
-                </div>
+                <div dangerouslySetInnerHTML={{ __html: item?.text }} />
             </div>
         );
     };
