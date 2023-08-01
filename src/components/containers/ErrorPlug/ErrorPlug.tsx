@@ -33,6 +33,12 @@ const ErrorPlug: React.FC<IErrorPlugProps> = ({
             title: "Internal Server Error",
             description: "The server encountered an internal error or misconfiguration and was unable to complete your request",
             image: <ServerErrorDude />
+        },
+        [EStatusCode.ClientSide]: {
+            status: ":(",
+            title: "Application error",
+            description: "A client-side exception has occurred (see the browser console for more information)",
+            image: <ServerErrorDude />
         }
     };
 
@@ -45,7 +51,7 @@ const ErrorPlug: React.FC<IErrorPlugProps> = ({
                 <strong className={styles["error-plug__title"]}>{currentData.title}</strong>
                 <span className={styles["error-plug__description"]}>{currentData.description}</span>
                 <div className={styles["error-plug__buttons"]}>
-                    <Button invert href={"/"}>Go back</Button>
+                    <Button disabled={errorType === EStatusCode.ClientSide} invert href={"/"}>Go back</Button>
                 </div>
             </div>
             <div className={styles["error-plug__image"]}>

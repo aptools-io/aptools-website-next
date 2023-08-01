@@ -9,11 +9,18 @@
     align-items: center;
     color: var(--aptools-color-emphasis-c1);
 
-    &.fill {
+    &.fill:not(.disabled) {
         background-color: var(--aptools-color-main-primary);
     }
 
-    &.invert {
+    &.disabled {
+        background-color: var(--aptools-color-grey-c4);
+        color: var(--aptools-color-grey-c1);
+        border: 1px solid var(--aptools-color-grey-c4);
+        cursor: not-allowed;
+    }
+
+    &.invert:not(.disabled) {
         background-color: var(--aptools-color-emphasis-c1);
         color: var(--aptools-color-main-primary);
 
@@ -23,7 +30,7 @@
         }
     }
 
-    &:hover {
+    &:hover:not(.disabled) {
         background-color: var(--aptools-color-emphasis-c1);
         color: var(--aptools-color-main-primary);
 

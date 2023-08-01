@@ -37,7 +37,7 @@ const TokenPrice: React.FC<IComponent> = ({
 
     useEffect(() => {
         const dailyWalletsUsage = {"7d": [], "14d": [],"30d": [], "all": allTimePrices} as IApiWalletsUsage;
-        allTimePrices.forEach(el => {
+        allTimePrices?.forEach(el => {
             if(dateDiffInDays(new Date(el.x), new Date()) <= 8) dailyWalletsUsage["7d"].push(el);
             if(dateDiffInDays(new Date(el.x), new Date()) <= 15) dailyWalletsUsage["14d"].push(el);
             if(dateDiffInDays(new Date(el.x), new Date()) <= 31) dailyWalletsUsage["30d"].push(el);
@@ -65,7 +65,7 @@ const TokenPrice: React.FC<IComponent> = ({
                 </span>
             </strong>
             <div className={"chart__inner"}>
-                {allTimePrices.length ? <ReactECharts className={"chart__wrapper"} theme={""} option={chartOptions(data)} /> : <Plug noData />}
+                {allTimePrices?.length ? <ReactECharts className={"chart__wrapper"} theme={""} option={chartOptions(data)} /> : <Plug noData />}
             </div>
         </div>
     );

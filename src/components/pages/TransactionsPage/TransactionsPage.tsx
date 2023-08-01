@@ -8,7 +8,7 @@ const TransactionsPage: React.FC = () => {
     return (
         <>
             <Topper backlink={"/"} />
-            <TransactionsList title="" />
+            <TransactionsList full title="" />
         </>
     );
 };

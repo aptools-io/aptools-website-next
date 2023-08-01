@@ -31,7 +31,7 @@ const AccountPerformance: React.FC<IComponent> = ({
 
     useEffect(() => {
         const performance = {"7d": [], "30d": [], "90d": [], "all": portfolio_chart} as IApiAccountsPortfolioUsage;
-        portfolio_chart.forEach(el => {
+        portfolio_chart?.forEach(el => {
             if(dateDiffInDays(new Date(el.x), new Date()) <= 8) performance["7d"].push(el);
             if(dateDiffInDays(new Date(el.x), new Date()) <= 31) performance["30d"].push(el);
             if(dateDiffInDays(new Date(el.x), new Date()) <= 93) performance["90d"].push(el);
@@ -51,7 +51,7 @@ const AccountPerformance: React.FC<IComponent> = ({
     const data = [
         {
             "name": "Aptos Transaction History",
-            "chart": [...volumes[volume]].slice(0, volumes[volume].length - 1)
+            "chart": volumes?.[volume]?.length ? [...volumes[volume]].slice(0, volumes[volume].length - 1) : []
         },
     ];
 

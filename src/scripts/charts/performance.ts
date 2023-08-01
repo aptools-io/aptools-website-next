@@ -1,4 +1,6 @@
 import { graphic } from "echarts";
+import { chartNumbers } from "../util/numbers";
+import { chartDate } from "../util/timeConvert";
 
 const performanceOptions = (data: { name?: string, chart?: IPoint[] }[]) => {
     
@@ -20,16 +22,16 @@ const performanceOptions = (data: { name?: string, chart?: IPoint[] }[]) => {
             boundaryGap: false,
             data: xAxisArray,
             axisLabel: {
-                formatter: (v) => {
-                    const formatter = new Intl.DateTimeFormat("en", { month: "short" });
-                    return `${formatter.format(new Date(v))}'${new Date(v).getFullYear() % 100}`;
-                },
+                formatter: chartDate,
                 ...labels
             },
         },
         yAxis: {
             type: "value",
-            axisLabel: labels
+            axisLabel: {
+                formatter: chartNumbers,
+                ...labels
+            },
         },
         series: 
         [

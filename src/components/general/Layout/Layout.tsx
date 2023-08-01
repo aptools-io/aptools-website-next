@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 // Next
 import Head from "next/head";
 import useTranslation from "next-translate/useTranslation";
+import { useRouter } from "next/router";
 
 // Components
 import NextNProgress from "nextjs-progressbar";
@@ -15,28 +16,27 @@ import classNames from "classnames";
 import { notify } from "src/scripts/common/notification";
 import NavBar from "../NavBar/NavBar";
 import Footer from "../Footer/Footer";
+import Notifications from "../Notifications/Notifications";
 
 // Styles
 import styles from "./Layout.module.scss";
 
 // Other
 import menu from "./data/menu";
-import Notifications from "../Notifications/Notifications";
 
 
 
 const Layout: React.FC<{ children: React.ReactNode, pageProps }> = ({ children, pageProps }) => {
     const { title } = useSelector((state: IRootState) => state.pageTitle);
-    const [time, setTime] = useState(null);
     const { t } = useTranslation("menu");
 
     const dispatch = useDispatch();
+    const router = useRouter();
 
     useEffect(() => {
-        const start = null;
         const getMetrics = (e) => {
-            if(e.detail.name === "TTFB") {
-                notify(dispatch, `loading time: ${(e.detail.value / 1000).toFixed(3)}s`, "Test");
+            if(e.detail.name === "TTFB" || e.detail.name === "Next.js-route-change-to-render") {
+                notify(dispatch, `type: ${e.detail.name} <br/> loading time: ${(e.detail.value / 1000).toFixed(3)}s`, "Test");
             }
         };
         window.addEventListener("metrics", getMetrics);

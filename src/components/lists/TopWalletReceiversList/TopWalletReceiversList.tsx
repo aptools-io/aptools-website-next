@@ -29,6 +29,8 @@ const TopWalletReceiversList: React.FC<IListWrapperProps> = ({
         className
     ]);
 
+    console.log(token_statistics, token_statistics);
+
     if(!token_statistics || !tokens_by_receivers) return <></>;
 
     return (
