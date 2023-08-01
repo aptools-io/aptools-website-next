@@ -67,5 +67,8 @@ const dateDiffInDays = (date1: Date, date2: Date) => {
     return diffInDays;
 };
 
-
-export { ensureMillisecondTimestamp, parseTimestamp, timerFrom, dateDiffInDays, timeFull, time, addZero, timeAgo };
+const chartDate = (v: string) => {
+    const formatter = new Intl.DateTimeFormat("en", { month: "short" });
+    return `${new Date(v).getDate()} ${formatter.format(new Date(v))}'${new Date(v).getFullYear() % 100}`;
+};
+export { ensureMillisecondTimestamp, parseTimestamp, timerFrom, dateDiffInDays, timeFull, time, addZero, timeAgo, chartDate };

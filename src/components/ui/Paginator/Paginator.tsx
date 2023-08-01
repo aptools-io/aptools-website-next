@@ -92,22 +92,23 @@ const Paginator: React.FC<IPaginatorProps> = ({
             <div className={styles["paginator__inner"]}>{children}</div>
             <div  className={styles["paginator__wrapper"]}>
                 {pageCount > 1 ? <ul className={styles["paginator__pages"]}>
-                    <button className={classNames([styles["paginator__arrow-left"], { [styles["disabled"]]: page === 1 }])} onClick={() => handleChangePage(1)}><ArrowLeftDoublePagination /></button>
-                    <button className={classNames([styles["paginator__arrow-left"], { [styles["disabled"]]: page === 1 }])} onClick={() => handleChangePage(page - 1)}><ArrowLeftPagination /></button>
+                    <button className={classNames([styles["paginator__arrow-left"], { [styles["disabled"]]: page === 1 }])} onClick={() => handleChangePage(1)}><ArrowLeftPagination /></button>
+                    <button className={classNames([styles["paginator__arrow-left-text"], { [styles["disabled"]]: page === 1 }])} onClick={() => handleChangePage(page - 1)}>previous page</button>
 
                     {pages.map(renderPagination)}
 
-                    <button className={classNames([styles["paginator__arrow-right"], { [styles["disabled"]]: page === pageCount }])} onClick={() => handleChangePage(page + 1)}><ArrowLeftPagination /></button>
-                    <button className={classNames([styles["paginator__arrow-right"], { [styles["disabled"]]: page === pageCount }])} onClick={() => handleChangePage(pageCount)}><ArrowLeftDoublePagination /></button>
+                    <button className={classNames([styles["paginator__arrow-right-text"], { [styles["disabled"]]: page === pageCount }])} onClick={() => handleChangePage(page + 1)}>next page</button>
+                    <button className={classNames([styles["paginator__arrow-right"], { [styles["disabled"]]: page === pageCount }])} onClick={() => handleChangePage(pageCount)}><ArrowLeftPagination /></button>
                 </ul> : <div></div>}
                 {changePerPage && 
                     <div className={styles["paginator__perpage"]}>
+                        <span>View on page</span>
                         <Select
                             onChange={handleChangePerPage}
                             value={currentPerPageIndex}
                             customSelectWrapper={customPaginatorWrapper}
                         >
-                            {perPages.map((item, index) => <span key={index}>{item}</span>)}
+                            {perPages.map((item, index) => <span key={index}>{item} results</span>)}
                         </Select>
                     </div>
                 }

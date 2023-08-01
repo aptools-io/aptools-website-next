@@ -4,7 +4,7 @@ const numberShorter = (
     symbols = ["", " thousands", " millions", " billions", " trillions", " quadrillions", " quintillions"]
 ) => {
     if(value === 0) return value;
-    if(value <= 999) return value.toFixed(fixed || 2);
+    if(value <= 999 && value.toFixed) return value.toFixed(fixed || 2);
     const schema = symbols || ["", "k", "M", "B", "T", "Q", "P"];
     const index = Math.floor(Math.log10(value) / 3);
     return (value / 10**(3 * index)).toFixed(fixed || 2) + (schema[index] === undefined ? (`e${  index * 3}`) : schema[index]);
@@ -65,4 +65,11 @@ const percentDifference = (el1: number, el2: number) => {
     return 100.0 * (el2 - el1) / el1;
 };
 
-export { formatNumber, formatDecimal, setSign, percentDifference, numberShorter };
+const chartNumbers = (v: number) => {
+    if(v >= 1000000)
+        return `${v/1000000}M`;
+    if(v >= 1000)
+        return `${v/1000}k`; 
+};
+
+export { formatNumber, formatDecimal, setSign, percentDifference, numberShorter, chartNumbers };

@@ -1,3 +1,6 @@
+import { chartNumbers } from "../util/numbers";
+import { chartDate } from "../util/timeConvert";
+
 const walletsBarOptions = (data: IApiWallets) => {
     const labels = {
         textStyle: {
@@ -12,22 +15,14 @@ const walletsBarOptions = (data: IApiWallets) => {
             type: "category",
             data: data.chart.map(x => x.x),
             axisLabel: {
-                formatter: (v) => {
-                    const formatter = new Intl.DateTimeFormat("en", { month: "short" });
-                    return `${formatter.format(new Date(v))}'${new Date(v).getFullYear() % 100}`;
-                },
+                formatter: chartDate,
             },
             ...labels
         },
         yAxis: {
             type: "value",
             axisLabel: {
-                formatter: (v) => {
-                    if(v >= 1000000)
-                        return `${v/1000000  }M`;
-                    if(v >= 1000)
-                        return `${v/1000  }k`; 
-                },
+                formatter: chartNumbers,
             },
             splitLine: {
                 lineStyle: {

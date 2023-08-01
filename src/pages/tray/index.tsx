@@ -41,11 +41,11 @@ const Home = (data: IApiProps) => {
         generalStats.getData().then((e: unknown) => {
             const data = e as IApiGeneralStats;
             dispatch(setGeneralStatsData(data || null));
-        })
+        });
         projects.getData().then((e: unknown) => {
             const data = filtrateProjects(e as IApiProject[], categories) as IApiProject[];
             dispatch(setProjectStatsData(data || null));
-        })
+        });
        
         
         dispatch(setDexesVolumesStatsData(data.dexes_volumes || null));

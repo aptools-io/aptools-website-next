@@ -5,13 +5,14 @@ export class WSocket {
 
     token = process.env.BASE_TOKEN;
     
-    open = (url: string, wsRef: React.MutableRefObject<WebSocket>, setData: (data: any) => any) => {
+    open = (url: string, wsRef: React.MutableRefObject<WebSocket>, setData: (data: any) => any, limit: number = null) => {
         if ("WebSocket" in window) {
             const endpoint = `${this.base}${this.version}${url}`;
             wsRef.current = new WebSocket(endpoint);
             wsRef.current.onopen = () => {
                 console.log("ws opened");
                 wsRef.current.send(this.token);
+                if(limit) wsRef.current.send(`${limit}`);
             };
             wsRef.current.onclose = () => console.log("ws closed");
 
@@ -32,5 +33,9 @@ export class WSocket {
             console.log("WebSocket NOT supported by your Browser!");
             return null;
         }
+    };
+
+    send = (wsRef: WebSocket, data: any) => {
+        if(wsRef.readyState === WebSocket.OPEN)  wsRef.send(data);
     };
 }

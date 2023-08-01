@@ -91,6 +91,7 @@
         padding-left: 8px;
         transition: color var(--nav-bar-transition-speed-2) ease, opacity var(--nav-bar-transition-speed-2) ease;
         opacity: 0;
+
         @include mediaWMax('TABLET') {
             opacity: 1;
         }

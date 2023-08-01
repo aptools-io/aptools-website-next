@@ -46,7 +46,7 @@
         }
 
         cursor: pointer;
-        padding: 10px 16px;
+        padding: 6px 8px;
         border-radius: 2px;
         border: 1px solid var(--aptools-color-emphasis-c5);
         background-color: var(--aptools-color-main-primary);
@@ -71,7 +71,7 @@
     }
 
     &__option {
-        padding: 10px 16px;
+        padding: 6px 8px;
         transition: background-color .3s ease;
         background-color: var(--aptools-color-main-primary);
         font-weight: 500;
