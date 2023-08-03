@@ -20,13 +20,11 @@ const Select: React.FC<ISelectProps> = ({ customSelectWrapper, onChange, value =
     useEffect(() => {
         const selectWrapperElement = customSelectWrapper?.current || window;
         const customParams = customSelectWrapper?.current?.getBoundingClientRect();
-        const customPlus = !Number.isNaN(customParams?.height) && Number.isNaN(customParams?.top) ? customParams.height + customParams.top : null;
+
+        const customPlus = (!Number.isNaN(customParams?.height) && !Number.isNaN(customParams?.top)) ? (customParams?.height || 0) + (customParams?.top || 0) : null;
         const wrapperHeight = customPlus || window?.innerHeight;
-        
         const handleClickOutside = (event) => {
-            if (selectRef.current && !selectRef.current.contains(event.target)) {
-                setShow(false);   
-            }
+            if (selectRef.current && !selectRef.current.contains(event.target)) setShow(false);   
         };
         const handleFromBottom = () => {
             if(!selectRef.current || !optionsRef.current) return;

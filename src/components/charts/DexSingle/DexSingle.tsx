@@ -106,7 +106,7 @@ const DexSingle: React.FC<IComponent> = ({
             ])} key={index} onClick={() => setCurrentDexData(item[0])}>
                 <div className={styles["dex-single__tab-item"]}>
                     <strong>{item[1].name}</strong>
-                    <span>{concatString(formatNumber(item[1].value), "", "")}</span>
+                    <span>{concatString(formatNumber(item[1].value), `${index !== 2 ? "$" : ""}`, "")}</span>
                 </div>
                 <div className={styles["dex-single__tab-item"]}>
                     <span></span>

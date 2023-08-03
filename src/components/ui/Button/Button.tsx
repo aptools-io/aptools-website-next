@@ -14,9 +14,10 @@ const Button: React.FC<IButtonProps> = ({
     invert = false,
     fill = false,
     disabled = false,
+    onClick = null,
     children,
     className,
-    style
+    style,
 }) => {
 
     const classes = classNames([
@@ -45,6 +46,7 @@ const Button: React.FC<IButtonProps> = ({
         <button 
             style={style} 
             className={classes}
+            onClick={onClick}
         >
             {ChildrenWrapper}
         </button>

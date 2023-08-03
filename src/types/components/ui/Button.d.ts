@@ -4,4 +4,5 @@ interface IButtonProps extends IComponent {
     invert?: boolean;
     fill?: boolean;
     disabled?: boolean;
+    onClick?: () => void;
 }

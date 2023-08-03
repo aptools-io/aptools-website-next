@@ -32,6 +32,8 @@ const nextConfig = nextTranslate({
         BASE_API2_URL: process.env.BASE_API2_URL,
         BASE_WEBSOCKET_URL: process.env.BASE_WEBSOCKET_URL,
         BASE_IMAGES_URL: process.env.BASE_IMAGES_URL,
+
+        OUTSIDE_URL: process.env.OUTSIDE_URL,
     },
     async redirects() {
         return [ ]
@@ -74,7 +76,6 @@ const nextConfig = nextTranslate({
             ]
         },
         "loadLocaleFrom": (lang, ns) => {
-            console.log(lang)
             return require(`./src/locales/${lang}/${ns}.json`);
         }
     },

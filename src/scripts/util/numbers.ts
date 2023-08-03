@@ -28,7 +28,7 @@ const checkMinimum = (floating: string) => {
     return floating;
 };
 
-const formatNumber = (number: string | number, toFixed = 2) => {
+const formatNumber = (number: string | number, toFixed = 2, checkMin = true) => {
     if(Number.isNaN(Number(number))) return number;
 
     let num = number;
@@ -47,10 +47,11 @@ const formatNumber = (number: string | number, toFixed = 2) => {
     const formattedInteger = new Intl.NumberFormat("en").format(Number(integer)).replaceAll(",", " ");
 
     const floating = `${formattedInteger}.${formatDecimal(decimal, toFixed)}`;
-    if(pointIndex !== -1) return checkMinimum(floating);
+    if(pointIndex !== -1 && checkMin) return checkMinimum(floating);
+    return `${formattedInteger}.${decimal}`;
     
    
-    return formattedInteger;
+    /* return formattedInteger; */
 };
 
 const setSign = (number: string | number) => {
@@ -71,5 +72,6 @@ const chartNumbers = (v: number) => {
     if(v >= 1000)
         return `${v/1000}k`; 
 };
+
 
 export { formatNumber, formatDecimal, setSign, percentDifference, numberShorter, chartNumbers };

@@ -38,12 +38,6 @@ const TransactionRealTime: React.FC<{
 
     const { transactions: trans } = aptosStats || {};
     const fullTransactions = !full ? trans : transactions;
-  
-    useEffect(() => {
-        console.log(websocket?.wsRef);
-        
-    }, [websocket]);
-
 
     const { columnNames = null, columns = null } = media(width) || {};
 

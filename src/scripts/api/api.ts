@@ -7,9 +7,9 @@ export class Api {
 
     token = process.env.BASE_TOKEN;
 
-    constructor(isToken: boolean = true, news: boolean = false) {
+    constructor(isToken: boolean = true, custom: string = "") {
         if(isToken) this.isToken = true;
-        if(news) this.base = process.env.BASE_API2_URL;
+        if(custom) this.base = custom;
     }
 
     fetch = async (type: string, url: string, headers: HeadersInit, params: Record<string, any> = {}, body: Record<string, any> = null) => {
@@ -25,7 +25,7 @@ export class Api {
             const paramsString = new URLSearchParams({ ...params, ...this.isToken && { API_KEY: this.token } });
             const endpoint = `${this.base}${this.version}${url}?${paramsString}`;
             const result: Response = await fetch(endpoint, init);
-            console.log(result);
+            console.log(endpoint);
             return result;
         }
         catch(error) {

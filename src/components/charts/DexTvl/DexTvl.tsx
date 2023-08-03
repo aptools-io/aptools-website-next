@@ -22,7 +22,7 @@ const DexTvl: React.FC<IComponent> = ({
 }) => {
     const { data: generalData } = useSelector((state: IRootState) => state.statsGeneral);
     const { dex_tvl } = generalData || {};
-    
+
     const classes = classNames([
         styles["dex-tvl"],
         className

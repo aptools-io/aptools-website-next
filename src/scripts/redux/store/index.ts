@@ -15,7 +15,10 @@ import {
     notificationSlice
 } from "../slices/index";
 
+
+
 const store = configureStore({
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: false }),
     reducer: {
         headers: headersSlice,
         loading: loadingSlice,
