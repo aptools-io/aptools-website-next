@@ -63,3 +63,23 @@ html {
         background-color: var(--aptools-color-emphasis-c4);
     }
 }
+
+.types {
+    &.success {
+        background-color: var(--aptools-color-lights-success);
+        border-color: var(--aptools-color-lights-success);
+        color: var(--aptools-color-emphasis-c2);
+    }
+
+    &.transaction {
+        background-color: var(--aptools-color-lights-primary);
+        border-color: var(--aptools-color-lights-primary);
+        color: var(--aptools-color-emphasis-c1);
+    }
+
+    &.block {
+        background-color: var(--aptools-color-lights-danger);
+        border-color: var(--aptools-color-lights-danger);
+        color: var(--aptools-color-emphasis-c4);
+    }
+}

@@ -46,5 +46,8 @@ export { default as Sphere } from "./Sphere";
 export { default as Squares } from "./Squares";
 export { default as Sun } from "./Sun";
 export { default as Tag } from "./Tag";
+export { default as TransactionBlock } from "./TransactionBlock";
+export { default as TransactionCheckpoint } from "./TransactionCheckpoint";
+export { default as TransactionProcess } from "./TransactionProcess";
 export { default as Transactions } from "./Transactions";
 export { default as Wallet } from "./Wallet";

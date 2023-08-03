@@ -58,6 +58,14 @@ const AccountNtfList: React.FC<IComponent> = ({
         setSearchQuery(e.currentTarget.value);
     };
 
+    const handleLoadMore = async () => {
+        setCurrrentPage((page) => page + 1);
+        await accounts.getAccountNftCollectionsData(id, perPage, currentPage + 1).then((e: unknown) => {
+            const result = e as IApiAccountNftCollections;
+            dispatch(setAccountNftsCollectionsData({ ...result, collections: [...collections || [], ...result?.collections || []] }));
+        });
+    };
+
     return (
         <div className={classes}>
             <div  className={styles["account-nft-list__search"]}>
@@ -67,7 +75,7 @@ const AccountNtfList: React.FC<IComponent> = ({
             </div>
             {filteredNfts && 
                 <div className={styles["account-nft-list__inner"]}>
-                    <Paginator
+                    {/* <Paginator
                         page={currentPage} 
                         perPage={perPage} 
                         changePerPage
@@ -87,11 +95,19 @@ const AccountNtfList: React.FC<IComponent> = ({
                                 dispatch(setAccountNftsCollectionsData(result));
                             });
                         }}
-                    >
+                    > */}
                         <ul className={styles["account-nft-list__folders"]}>
                             {filteredNfts.map((item, index) => <AccountNtfFolder index={index} key={index} item={item} />)}
                         </ul>
-                    </Paginator>
+                    {/* </Paginator> */}
+                    <Button
+                        disabled={!(filteredNfts?.length < total) || !!searchQuery} 
+                        invert 
+                        className={styles["account-nft-list__load-more"]} 
+                        onClick={handleLoadMore}
+                    >
+                        Load more
+                    </Button>
                 </div>
             }
         </div>

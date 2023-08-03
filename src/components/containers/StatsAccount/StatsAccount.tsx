@@ -96,7 +96,6 @@ const StatsAccount: React.FC<IComponent> = ({
 
 
     const renderBalance = (title, balance, profit) => {
-        console.log(balance);
         return (
             <>
                 <div className={"stats__top"}>

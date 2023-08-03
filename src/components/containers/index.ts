@@ -7,6 +7,7 @@ export { default as StatsTotalRight } from "./StatsTotalRight/StatsTotalRight";
 export { default as StatsTotalCenter } from "./StatsTotalCenter/StatsTotalCenter";
 export { default as StatsActiveUsers } from "./StatsActiveUsers/StatsActiveUsers";
 export { default as StatsTransactions } from "./StatsTransactions/StatsTransactions";
+export { default as StatsTransaction } from "./StatsTransaction/StatsTransaction";
 export { default as StatsBlockchainActivity } from "./StatsBlockchainActivity/StatsBlockchainActivity";
 export { default as StatsAptos } from "./StatsAptos/StatsAptos";
 export { default as StatsGas } from "./StatsGas/StatsGas";
@@ -28,3 +29,5 @@ export { default as AccountNtfFolder } from "./AccountNtfFolder/AccountNtfFolder
 export { default as AccountResourcesList } from "./AccountResourcesList/AccountResourcesList";
 export { default as AccountInfo } from "./AccountInfo/AccountInfo";
 export { default as ErrorPlug } from "./ErrorPlug/ErrorPlug";
+export { default as Transaction } from "./Transaction/Transaction";
+export { default as TransactionOverview } from "./TransactionOverview/TransactionOverview";
