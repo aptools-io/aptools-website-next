@@ -23,6 +23,7 @@ const Tabs: React.ForwardRefRenderFunction<any, ITabsProps> = ({
     dataArray,
     defaultEntry = null,
     itemsCount = true,
+    hideSingle = false,
     children,
     className 
 }, ref) => {
@@ -110,6 +111,8 @@ const Tabs: React.ForwardRefRenderFunction<any, ITabsProps> = ({
             key: new Date().getTime()
         });
     };
+
+    if(hideSingle && dataArray?.length === 1) return getComponent();
     
     return (
         <div ref={ref} className={classes}>

@@ -14,19 +14,12 @@ import { IRootState } from "src/scripts/redux/store";
 // Components
 import { Grid, GridWrapper } from "src/components/general";
 import { CopyText, Img, Plate } from "src/components/ui";
-import LinesEllipsis from "react-lines-ellipsis";
-import responsiveHOC from "react-lines-ellipsis/lib/responsiveHOC";
 
 // Utils
-import { concatString } from "src/scripts/util/strings";
-import { formatNumber, setSign } from "src/scripts/util/numbers";
 import { Coins, Copy, CopyBig, TransactionBlock, TransactionProcess, Wallet , TransactionCheckpoint } from "src/components/svg";
-import { getImageFromApi } from "src/scripts/util/image";
-import { getBaseHttpsUrl } from "src/scripts/util/data";
+
 import useWindowSize from "src/scripts/hooks/useWindowSize";
-import { copyText } from "src/scripts/util/copyText";
 import { percentClass, transactionTypes } from "src/scripts/util/classes";
-import styles from "./StatsAccount.module.scss";
 import media from "./data/adaptive";
 
 
@@ -34,12 +27,9 @@ const StatsTransaction: React.FC<IComponent> = ({
     className 
 }) => {
     const { transaction } = useSelector((state: IRootState) => state.statsTransactions);
-    const { type } = transaction || {};
+    const { type, hash } = transaction || {};
     const { width } = useWindowSize();
     const mediaData = media(width);
-
-    const router = useRouter();
-    const { query } = router;
 
     if(!width) return <></>;
 
@@ -72,9 +62,9 @@ const StatsTransaction: React.FC<IComponent> = ({
                         </div>
                         <div className={"stats__top-stats row"}>
                             <span className={"title light m-left"}>
-                                {mediaData.transactionHash(query.id as string)}
+                                {mediaData.transactionHash(hash as string)}
                             </span>
-                            <CopyText big text={query.id as string} />
+                            <CopyText big text={hash as string} />
                         </div>
                     </div>
                 </Plate>
