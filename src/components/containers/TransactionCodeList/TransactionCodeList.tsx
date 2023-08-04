@@ -79,8 +79,8 @@ const TransactionCodeList: React.FC<{ getElements?: (transaction: IApiTransactio
             <GridWrapper gridWidth={9}>
                 <div className={classes}>
                     <div className={styles["transaction-code-list__buttons"]}>
-                        <Button invert disabled={setDisabled(true)} onClick={() => handleSetOpens(false)}>Collapse All</Button>
-                        <Button invert disabled={setDisabled(false)} onClick={() => handleSetOpens(true)}>Expand All</Button>  
+                        <Button invert disabled={setDisabled(true)} onClick={() => handleSetOpens(false)}>Expand All</Button>
+                        <Button invert disabled={setDisabled(false)} onClick={() => handleSetOpens(true)}>Collapse All</Button>
                     </div>
                     <ul className={styles["transaction-code-list__items"]}>
                         {elements.map(renderCodeWrapper)}
