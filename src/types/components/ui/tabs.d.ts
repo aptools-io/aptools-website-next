@@ -3,6 +3,7 @@ interface ITabsProps extends IComponent {
     dataArray?: ITab[];
     itemsCount?: boolean;
     defaultEntry?: object;
+    hideSingle?: boolean;
 }
 
 interface ITab {

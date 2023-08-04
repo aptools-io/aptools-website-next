@@ -37,7 +37,7 @@ const Transaction: React.FC<IComponent> = ({
 
     return (
         <div className={classes}>
-            <Tabs dataArray={categories(type)} itemsCount={false}>
+            <Tabs dataArray={categories(type)} itemsCount={false} hideSingle>
                 <div></div>
             </Tabs>
         </div>

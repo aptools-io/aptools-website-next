@@ -23,6 +23,7 @@ const Tabs: React.ForwardRefRenderFunction<any, ITabsProps> = ({
     dataArray,
     defaultEntry = null,
     itemsCount = true,
+    hideSingle = false,
     children,
     className 
 }, ref) => {
@@ -102,6 +103,7 @@ const Tabs: React.ForwardRefRenderFunction<any, ITabsProps> = ({
 
     if(!(data || dataArray)) return <></>;
 
+
     const getComponent = () => {
         if(loading) return new Array(10).fill(null).map((_, index) => <Skeleton key={index} style={{ height: "60px", minHeight: "60px" }} />);
         if(dataArray?.[tabId]?.component) return dataArray?.[tabId].component();
@@ -110,6 +112,8 @@ const Tabs: React.ForwardRefRenderFunction<any, ITabsProps> = ({
             key: new Date().getTime()
         });
     };
+
+    if(hideSingle && dataArray?.length) return <>{getComponent()}</>;
     
     return (
         <div ref={ref} className={classes}>

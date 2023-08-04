@@ -39,8 +39,11 @@ export async function getServerSideProps(context) {
         notFound: true
     };
  */
+    const isVersion = !(id.indexOf("0x") > -1);
 
-    const transaction = await transactions.getSingleTransactionData(id);
+    const transaction = isVersion ? 
+        await transactions.getSingleTransactionDataByVersion(id) : 
+        await transactions.getSingleTransactionData(id);
 
     if(!transaction) return {
         notFound: true

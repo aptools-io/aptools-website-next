@@ -18,12 +18,8 @@ interface IApiTransactionInfo {
     "gas_used": string;
     "hash": string;
     "max_gas_amount": string;
-    "payload": {
-        "arguments": string[];
-        "function": string;
-        "type": string;
-        "type_arguments": string[]
-    };
+    "sequence_number": string;
+    "payload": IApiTransactionInfoPayload;
     "signature": {
         "public_key": string;
         "signature": string;
@@ -37,6 +33,10 @@ interface IApiTransactionInfo {
     "type": string;
     "version": string;
     "vm_status": string;
+    "id": string;
+    "proposer": string;
+    "epoch": string;
+    "round": string;
 }
 
 interface IApiTransactionInfoChange {
@@ -75,4 +75,11 @@ interface IApiTransactionInfoEvent {
     };
     "sequence_number": string;
     "type": string;
+}
+
+interface IApiTransactionInfoPayload {
+    "arguments": string[];
+    "function": string;
+    "type": string;
+    "type_arguments": string[]
 }

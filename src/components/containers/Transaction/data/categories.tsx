@@ -1,5 +1,6 @@
 // Components
 import { Plug } from "src/components/ui";
+import TransactionCodeList from "../../TransactionCodeList/TransactionCodeList";
 import TransactionOverview from "../../TransactionOverview/TransactionOverview";
 
 // Styles
@@ -26,7 +27,32 @@ const categories = (type) => {
         {
             id: 3,
             title: "Events",
-            component: () => <Plug noData />,
+            component: () => <TransactionCodeList key={3} getElements={(transaction: IApiTransactionInfo): ITransactionCodeElement[][] => {
+                const { events } = transaction || {};
+                if(!events?.length) return [];
+                if(events?.length > 0) return events.map((item: IApiTransactionInfoEvent, index: number) => {
+                    return [{
+                        title: "Index",
+                        value: index
+                    }, {
+                        title: "Account Address",
+                        value: item?.guid?.account_address || ""
+                    }, {
+                        title: "Creation Number",
+                        value: item?.guid?.creation_number || ""
+                    }, {
+                        title: "Sequence Number",
+                        value: item?.sequence_number || ""
+                    }, {
+                        title: "Type",
+                        value: item?.type || ""
+                    }, {
+                        title: "Signature",
+                        code: item?.data || {}
+                    }] as ITransactionCodeElement[];
+                });
+                return [];
+            }} />,
             action: async (setCustomEntry, setLoading, id, queryId) => {
                 setLoading(false);
             }
@@ -34,7 +60,26 @@ const categories = (type) => {
         {
             id: 4,
             title: "Payload",
-            component: () => <Plug noData />,
+            component: () => <TransactionCodeList key={4} getElements={(transaction: IApiTransactionInfo): ITransactionCodeElement[][] => {
+                const { payload } = transaction || {};
+                if(!payload) return [];
+                if([payload]?.length > 0) return [payload].map((item: IApiTransactionInfoPayload, index: number) => {
+                    return [{
+                        title: "Index",
+                        value: index
+                    }, {
+                        title: "Type",
+                        value: item?.type || ""
+                    }, {
+                        title: "Creation Number",
+                        value: item?.function || ""
+                    }, {
+                        title: "",
+                        code: item || {}
+                    }] as ITransactionCodeElement[];
+                });
+                return [];
+            }} />,
             action: async (setCustomEntry, setLoading, id, queryId) => {
                 setLoading(false);
             }
@@ -42,7 +87,29 @@ const categories = (type) => {
         {
             id: 5,
             title: "Changes",
-            component: () => <Plug noData />,
+            component: () => <TransactionCodeList key={5} getElements={(transaction: IApiTransactionInfo): ITransactionCodeElement[][] => {
+                const { changes } = transaction || {};
+                if(!changes?.length) return [];
+                if(changes?.length > 0) return changes.map((item: IApiTransactionInfoChange, index: number) => {
+                    return [{
+                        title: "Index",
+                        value: index
+                    }, {
+                        title: "Type",
+                        value: item?.type || ""
+                    }, {
+                        title: "Account Address",
+                        value: item?.address || ""
+                    }, {
+                        title: "State Key Hash",
+                        value: item?.state_key_hash || ""
+                    }, {
+                        title: "Data",
+                        code: item?.data || {}
+                    }] as ITransactionCodeElement[];
+                });
+                return [];
+            }} />,
             action: async (setCustomEntry, setLoading, id, queryId) => {
                 setLoading(false);
             }
@@ -50,7 +117,6 @@ const categories = (type) => {
     ];
 
     const getItems = (type) => {
-
         switch(type) {
             case "state_checkpoint_transaction": return [items[0]];
             case "user_transaction": return items;
@@ -63,5 +129,6 @@ const categories = (type) => {
 
     return approvedItems || [items[0]];
 };
+
 
 export default categories;

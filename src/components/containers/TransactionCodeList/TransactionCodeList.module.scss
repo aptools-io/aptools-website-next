@@ -1,0 +1,97 @@
+.transaction-code-list {
+    &__buttons {
+        display: flex;
+        justify-content: flex-end;
+
+        button + button {
+            margin-left: 8px;
+        }
+
+        margin-bottom: 8px;
+    }
+
+    &__item {
+        border-bottom: 1px solid var(--aptools-color-grey-c4);
+
+        &:not(.open):hover {
+            background-color: var(--aptools-color-grey-c5);
+        }
+
+        transition: border-bottom .3s ease, background-color .3s ease;
+        padding: 16px 24px;
+        display: flex;
+        flex-direction: column;
+        cursor: pointer;
+
+        &.open {
+            border-bottom: 2px solid var(--aptools-color-emphasis-c1);
+            background-color: var(--aptools-color-grey-c5);
+
+            .transaction-code-list__item-top {
+                svg {
+                    transform: rotateZ(-90deg);
+                }
+            }
+
+            .transaction-code-list__item-infos-wrapper {
+                grid-template-rows: 1fr;
+            }
+        }
+
+        &-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            svg {
+                transition: transform .3s ease;
+                transform: rotateZ(90deg);
+            }
+        }
+
+        &-info + &-info {
+            margin-top: 2px;
+        }
+
+        &-info {
+            display: grid;
+            grid-template-columns: 165px calc(100% - 165px);
+
+            &.column {
+                grid-template-columns: 100%;
+                margin-top: 17px;
+            }
+
+            .title {
+                font-size: 10px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 15px;
+            }
+
+            .value {
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 130%;
+            }
+
+            &s {
+                min-height: 0;
+                overflow: hidden;
+
+                &-wrapper {
+                    display: grid;
+                    grid-template-rows: 0fr;
+                    transition: grid-template-rows .3s ease;
+                    cursor: auto;
+                }
+            }
+        }
+
+        &s {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+}
