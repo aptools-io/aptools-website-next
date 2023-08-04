@@ -97,7 +97,7 @@
                 display: flex;
                 align-items: center;
 
-                
+
 
                 .additive {
                     font-weight: 500;
@@ -167,6 +167,7 @@
         &-wrapper + &-wrapper {
             margin-top: 2px;
         }
+
         &-wrapper {
             display: flex;
             justify-content: space-between;
@@ -196,7 +197,6 @@
                     font-size: 14px;
                     line-height: 130%;
                     color: var(--aptools-color-emphasis-c3);
-                    
                 }
             }
 
@@ -312,7 +312,8 @@
                     color: var(--aptools-color-emphasis-c2);
                 }
 
-                &.success-type, &.cancel-type {
+                &.success-type,
+                &.cancel-type {
                     padding: 2px 6px;
                     background-color: var(--aptools-color-lights-success);
                     color: var(--aptools-color-emphasis-c2);
@@ -340,7 +341,7 @@
                         font-size: 10px;
                         line-height: 15px;
                     }
-                    
+
                     &.little {
                         color: var(--aptools-color-grey-c1);
                     }

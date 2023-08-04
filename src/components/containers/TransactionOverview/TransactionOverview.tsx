@@ -19,9 +19,9 @@ import classNames from "classnames";
 import { Grid, GridWrapper } from "src/components/general";
 import { getGasFeeValue, getTransactionAmount, getTransactionCounterparty, getTransactionFunction } from "src/scripts/util/transaction";
 import { formatNumber, noExponents } from "src/scripts/util/numbers";
-import styles from "./TransactionOverview.module.scss";
 import { timeAgo, transactionDate } from "src/scripts/util/timeConvert";
 import { concatString, shortenHashString } from "src/scripts/util/strings";
+import styles from "./TransactionOverview.module.scss";
 
 
 
@@ -64,7 +64,7 @@ const TransactionOverview: React.FC<IComponent> = ({
         className
     ]);
 
-    if(!transaction) return <></>
+    if(!transaction) return <></>;
 
     const counterparty = getTransactionCounterparty(transaction);
     const funcName = getTransactionFunction(transaction);
@@ -150,7 +150,7 @@ const TransactionOverview: React.FC<IComponent> = ({
                     {!(!amount && !(gas_used && gas_unit_price) && !gas_unit_price && !max_gas_amount) && <GridWrapper>
                         <Plate compressed min noMin>
                             <div className={"stats__item"}>
-                                {amount && <div className={"stats__item-wrapper"}>
+                                {amount !== null && <div className={"stats__item-wrapper"}>
                                     <span className={"title"}>Amount</span>
                                     <span className={"info"}>{concatString(noExponents(amount), "", " APT")}</span>
                                 </div>}

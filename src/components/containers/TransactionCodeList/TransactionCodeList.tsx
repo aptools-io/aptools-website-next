@@ -7,15 +7,14 @@ import { IRootState } from "src/scripts/redux/store";
 
 // Styles
 import classNames from "classnames";
-import styles from "./TransactionCodeList.module.scss";
-import { TransactionCodeElement } from "../Transaction/data/categories";
 import { Button, CodeArea } from "src/components/ui";
 import { ArrowMore } from "src/components/svg";
 import { Grid, GridWrapper } from "src/components/general";
+import styles from "./TransactionCodeList.module.scss";
 
 
 
-const TransactionCodeList: React.FC<{ getElements?: (transaction: IApiTransactionInfo) => TransactionCodeElement[][] | [] } & IComponent> = ({
+const TransactionCodeList: React.FC<{ getElements?: (transaction: IApiTransactionInfo) => ITransactionCodeElement[][] | [] } & IComponent> = ({
     getElements = null,
     className 
 }) => {
@@ -29,7 +28,7 @@ const TransactionCodeList: React.FC<{ getElements?: (transaction: IApiTransactio
         className
     ]);
 
-    const renderItem = (item: TransactionCodeElement, index: number) => {
+    const renderItem = (item: ITransactionCodeElement, index: number) => {
         return (
             <li key={index} className={classNames([
                 styles["transaction-code-list__item-info"],
@@ -39,18 +38,18 @@ const TransactionCodeList: React.FC<{ getElements?: (transaction: IApiTransactio
                 {item?.value && <span className={styles["value"]}>{item?.value}</span>}
                 {item?.code && <div className={styles["code"]}><CodeArea noPaddings data={item?.code} /></div>}
             </li>
-        )
-    }
+        );
+    };
     
     const handleOpenCodeWrapper = (index: number) => {
         const temp = [...opens];
         temp[index] = !temp[index];
         setOpens(temp);
-    }
+    };
 
-    const handleInnerClick = (e) => { e.stopPropagation(); }
+    const handleInnerClick = (e) => { e.stopPropagation(); };
 
-    const renderCodeWrapper = (item: TransactionCodeElement[], index: number) => {
+    const renderCodeWrapper = (item: ITransactionCodeElement[], index: number) => {
         return (
             <li key={index} onClick={() => handleOpenCodeWrapper(index)} className={
                 classNames([
@@ -68,8 +67,8 @@ const TransactionCodeList: React.FC<{ getElements?: (transaction: IApiTransactio
                     <ul className={styles["transaction-code-list__item-infos"]}>{item.map(renderItem).slice(1)}</ul>
                 </div>
             </li>
-        )
-    }
+        );
+    };
 
     const handleSetOpens = (expand: boolean) => setOpens(e => e.map(e => !expand));
 

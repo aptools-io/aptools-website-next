@@ -29,7 +29,7 @@ const timeAgo = (time) => {
     return formattedDuration;
 };
 
-const transactionDate = (timestamp, secs = false) => moment(!secs ? timestamp / 1000 : timestamp * 1000).format("DD MMM YYYY HH:mm:ss")
+const transactionDate = (timestamp, secs = false) => moment(!secs ? timestamp / 1000 : timestamp * 1000).format("DD MMM YYYY HH:mm:ss");
 
 const timerFrom = (timestamp: number, currentTimestamp: number) => {
     let difference = currentTimestamp - (timestamp * 1000);

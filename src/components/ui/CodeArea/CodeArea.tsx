@@ -3,11 +3,11 @@
 import React, { useEffect, useState } from "react";
 
 // styles
-import styles from "./CodeArea.module.scss";
 import classNames from "classnames";
-import CopyText from "../CopyText/CopyText";
 import { ArrowMore } from "src/components/svg";
 import JsonFormatter from "react-json-formatter";
+import CopyText from "../CopyText/CopyText";
+import styles from "./CodeArea.module.scss";
 
 const CodeArea: React.FC<{ 
     data: string | { [key: string]: string; },
@@ -50,7 +50,7 @@ const CodeArea: React.FC<{
             </div>
             <CopyText text={typeof data === "string" ? data : JSON.stringify(data)} />
         </div>
-    )
+    );
 };
 
 export default CodeArea;

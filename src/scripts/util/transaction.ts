@@ -24,8 +24,7 @@ export function getTransactionCounterparty(
     //    payload function is "0x1::aptos_account::transfer" or "0x1::aptos_account::transfer_coins"
     // In both scenarios, the first item in arguments is the receiver's address, and the second item is the amount.
 
-    const payload =
-        transaction.payload;
+    const {payload} = transaction;
     const typeArgument =
         payload.type_arguments.length > 0 ? payload.type_arguments[0] : undefined;
     const isAptCoinTransfer =
@@ -44,13 +43,13 @@ export function getTransactionCounterparty(
         address: payload.arguments[0],
         role: "receiver",
         };
-    } else {
+    } 
         const smartContractAddr = payload.function.split("::")[0];
         return {
         address: smartContractAddr,
         role: "smartContract",
         };
-    }
+    
 }
 
 type ChangeData = {
@@ -140,9 +139,9 @@ function getAptChangeData(
         "data" in change.data
     ) {
         return JSON.parse(JSON.stringify(change.data.data)) as ChangeData;
-    } else {
+    } 
         return undefined;
-    }
+    
 }
 
 function isAptEvent(event, transaction) {
@@ -151,20 +150,23 @@ function isAptEvent(event, transaction) {
 
     const aptEventChange = changes.filter((change) => {
         if ("address" in change && change.address === event.guid.account_address) {
-        const data = getAptChangeData(change);
-        if (data !== undefined) {
-            const eventCreationNum = event.guid.creation_number;
-            let changeCreationNum;
-            if (event.type === "0x1::coin::DepositEvent") {
-            changeCreationNum = data.deposit_events.guid.id.creation_num;
-            } else if (event.type === "0x1::coin::WithdrawEvent") {
-            changeCreationNum = data.withdraw_events.guid.id.creation_num;
+            const data = getAptChangeData(change);
+            if (data !== undefined) {
+                const eventCreationNum = event.guid.creation_number;
+                let changeCreationNum;
+                if (event.type === "0x1::coin::DepositEvent") {
+                    changeCreationNum = data.deposit_events.guid.id.creation_num;
+                } else if (event.type === "0x1::coin::WithdrawEvent") {
+                    changeCreationNum = data.withdraw_events.guid.id.creation_num;
+                }
+                if (eventCreationNum === changeCreationNum) {
+                    return change;
+                }
+                return false;
             }
-            if (eventCreationNum === changeCreationNum) {
-            return change;
-            }
+            return false;
         }
-        }
+        return false;
     });
 
     return aptEventChange.length > 0;
@@ -180,13 +182,15 @@ export function getCoinBalanceChanges(
 
     Object.entries(accountToBalance).forEach(([key]) => {
         changes.filter((change) => {
-        if ("address" in change && change.address === key) {
-            const data = getAptChangeData(change);
-            if (data !== undefined) {
-            accountToBalance[key].amountAfter = data.coin.value;
-            return change;
+            if ("address" in change && change.address === key) {
+                const data = getAptChangeData(change);
+                if (data !== undefined) {
+                    accountToBalance[key].amountAfter = data.coin.value;
+                    return change;
+                }
+                return false;
             }
-        }
+            return false;
         });
     });
 
@@ -208,7 +212,7 @@ export function getCoinBalanceChangeForAccount(
 ): bigint {
     const accountToBalance = getBalanceMap(transaction);
 
-    if (!accountToBalance.hasOwnProperty(address)) {
+    if (!Object.prototype.hasOwnProperty.call(accountToBalance, address)) {
         return BigInt(0);
     }
 

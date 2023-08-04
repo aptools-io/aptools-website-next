@@ -27,7 +27,7 @@ const categories = (type) => {
         {
             id: 3,
             title: "Events",
-            component: () => <TransactionCodeList key={3} getElements={(transaction: IApiTransactionInfo): TransactionCodeElement[][] => {
+            component: () => <TransactionCodeList key={3} getElements={(transaction: IApiTransactionInfo): ITransactionCodeElement[][] => {
                 const { events } = transaction || {};
                 if(!events?.length) return [];
                 if(events?.length > 0) return events.map((item: IApiTransactionInfoEvent, index: number) => {
@@ -49,7 +49,7 @@ const categories = (type) => {
                     }, {
                         title: "Signature",
                         code: item?.data || {}
-                    }] as TransactionCodeElement[];
+                    }] as ITransactionCodeElement[];
                 });
                 return [];
             }} />,
@@ -60,7 +60,7 @@ const categories = (type) => {
         {
             id: 4,
             title: "Payload",
-            component: () => <TransactionCodeList key={4} getElements={(transaction: IApiTransactionInfo): TransactionCodeElement[][] => {
+            component: () => <TransactionCodeList key={4} getElements={(transaction: IApiTransactionInfo): ITransactionCodeElement[][] => {
                 const { payload } = transaction || {};
                 if(!payload) return [];
                 if([payload]?.length > 0) return [payload].map((item: IApiTransactionInfoPayload, index: number) => {
@@ -76,7 +76,7 @@ const categories = (type) => {
                     }, {
                         title: "",
                         code: item || {}
-                    }] as TransactionCodeElement[];
+                    }] as ITransactionCodeElement[];
                 });
                 return [];
             }} />,
@@ -87,7 +87,7 @@ const categories = (type) => {
         {
             id: 5,
             title: "Changes",
-            component: () => <TransactionCodeList key={5} getElements={(transaction: IApiTransactionInfo): TransactionCodeElement[][] => {
+            component: () => <TransactionCodeList key={5} getElements={(transaction: IApiTransactionInfo): ITransactionCodeElement[][] => {
                 const { changes } = transaction || {};
                 if(!changes?.length) return [];
                 if(changes?.length > 0) return changes.map((item: IApiTransactionInfoChange, index: number) => {
@@ -106,7 +106,7 @@ const categories = (type) => {
                     }, {
                         title: "Data",
                         code: item?.data || {}
-                    }] as TransactionCodeElement[];
+                    }] as ITransactionCodeElement[];
                 });
                 return [];
             }} />,
@@ -130,12 +130,5 @@ const categories = (type) => {
     return approvedItems || [items[0]];
 };
 
-interface TransactionCodeElement {
-    title: string;
-    value?: string;
-    code?: any;
-}
 
 export default categories;
-
-export type { TransactionCodeElement };
