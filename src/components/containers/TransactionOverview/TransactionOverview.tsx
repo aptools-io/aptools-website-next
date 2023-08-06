@@ -7,7 +7,7 @@ import { IRootState } from "src/scripts/redux/store";
 
 // Components
 import { AccountsList } from "src/components/lists";
-import { ActiveLink, CodeArea, CopyText, Plate, Tabs } from "src/components/ui";
+import { ActiveLink, CodeArea, CopyText, Plate, Plug, Tabs } from "src/components/ui";
 
 // Hooks
 import useWindowSize from "src/scripts/hooks/useWindowSize";
@@ -22,6 +22,7 @@ import { formatNumber, noExponents } from "src/scripts/util/numbers";
 import { timeAgo, transactionDate } from "src/scripts/util/timeConvert";
 import { concatString, shortenHashString } from "src/scripts/util/strings";
 import styles from "./TransactionOverview.module.scss";
+import media from "./data/adaptive";
 
 
 
@@ -31,6 +32,8 @@ const TransactionOverview: React.FC<IComponent> = ({
 }) => {
     /* const dispatch = useDispatch(); */
     const { transaction } = useSelector((state: IRootState) => state.statsTransactions);
+    const { width } = useWindowSize();
+    const mediaData = media(width);
     const { 
         version, 
         success, 
@@ -64,7 +67,8 @@ const TransactionOverview: React.FC<IComponent> = ({
         className
     ]);
 
-    if(!transaction) return <></>;
+    if(!transaction || !width) return <Plug noData />;
+
 
     const counterparty = getTransactionCounterparty(transaction);
     const funcName = getTransactionFunction(transaction);
@@ -73,7 +77,7 @@ const TransactionOverview: React.FC<IComponent> = ({
 
     return (
         <Grid>
-            <GridWrapper gridWidth={3}>
+            <GridWrapper gridWidth={mediaData.transactionLeft}>
                 <Grid>
                     <GridWrapper>
                         <Plate compressed min noMin>
@@ -197,26 +201,26 @@ const TransactionOverview: React.FC<IComponent> = ({
                     </GridWrapper>}
                 </Grid>
             </GridWrapper>
-            <GridWrapper gridWidth={6}>
+            <GridWrapper gridWidth={mediaData.transactionRight}>
                 <Grid>
                     <GridWrapper>
                         <Plate compressed min noMin>
                             {state_change_hash && <div className={"stats__item-wrapper"}>
                                 <span className={"title"}>State Change Hash</span>
-                                <span className={"info row"}>{shortenHashString(state_change_hash, [0, 0])}<CopyText text={state_change_hash} /></span>
+                                <span className={"info row"}>{mediaData.transactionHash(state_change_hash)}<CopyText text={state_change_hash} /></span>
                             </div>}
                             {event_root_hash && <div className={"stats__item-wrapper"}>
                                 <span className={"title"}>Event Root Hash</span>
-                                <span className={"info row"}>{shortenHashString(event_root_hash, [0, 0])}<CopyText text={event_root_hash} /></span>
+                                <span className={"info row"}>{mediaData.transactionHash(event_root_hash)}<CopyText text={event_root_hash} /></span>
                             </div>}
                             {accumulator_root_hash && <div className={"stats__item-wrapper"}>
                                 <span className={"title"}>Accumulator Root Hash</span>
-                                <span className={"info row"}>{shortenHashString(accumulator_root_hash, [0, 0])}<CopyText text={accumulator_root_hash} /></span>
+                                <span className={"info row"}>{mediaData.transactionHash(accumulator_root_hash)}<CopyText text={accumulator_root_hash} /></span>
                             </div>}
                             {signature && <><div className={"stats__item-wrapper indent"}>
                                 <span className={"title"}>Signature</span>
                             </div>
-                            <CodeArea noPaddings data={signature} /></>}
+                            <CodeArea noPaddings opened data={signature} /></>}
                         </Plate>
                     </GridWrapper>
                 </Grid>

@@ -7,12 +7,19 @@ export class Api {
 
     token = process.env.BASE_TOKEN;
 
-    constructor(isToken: boolean = true, custom: string = "") {
+    constructor(isToken: boolean = true, custom: string = null, customVersion: string = null) {
         if(isToken) this.isToken = true;
-        if(custom) this.base = custom;
+        if(custom !== null) this.base = custom;
+        if(customVersion !== null) this.version = customVersion;
     }
 
-    fetch = async (type: string, url: string, headers: HeadersInit, params: Record<string, any> = {}, body: Record<string, any> = null) => {
+    fetch = async (
+        type: string, 
+        url: string, 
+        headers: HeadersInit, 
+        params: Record<string, any> = {}, 
+        body: Record<string, any> = null
+    ) => {
         try {
             const init = {
                 method: type,

@@ -139,6 +139,34 @@ interface IApiAccountNft {
 interface IApiAccountResource {
     data: string;
     type: string;
+    name?: string;
+    structs?: string;
+    functions?: string;
+}
+
+interface IApiAccountResourceDetails {
+    data: {
+        epoch: string;
+        epoch_interval?: string;
+        events: {
+            counter: string;
+            guid: {
+                id: {
+                    addr: string;
+                    creation_num: string;
+                }
+            }
+        }
+        last_reconfiguration_time: string;
+        allow_validator_set_change?: boolean;
+        maximum_stake?: string;
+        minimum_stake?: string;
+        recurring_lockup_duration_secs?: string;
+        rewards_rate?: string;
+        rewards_rate_denominator?: string;
+        voting_power_increase_limit?: string;
+    }
+    type: string;
 }
 
 interface IApiAccountInfo {

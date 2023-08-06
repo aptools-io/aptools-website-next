@@ -12,6 +12,7 @@ import {
     pageTitleSlice,
     newsSlice,
     accountsSlice,
+    validatorsSlice,
     notificationSlice
 } from "../slices/index";
 
@@ -32,7 +33,8 @@ const store = configureStore({
         singleDex: singleDexSlice,
         pageTitle: pageTitleSlice,
         news: newsSlice,
-        accounts: accountsSlice
+        accounts: accountsSlice,
+        validators: validatorsSlice,
     },
 });
 export default store;

@@ -113,7 +113,7 @@ const Tabs: React.ForwardRefRenderFunction<any, ITabsProps> = ({
         });
     };
 
-    if(hideSingle && dataArray?.length) return <>{getComponent()}</>;
+    if(hideSingle && dataArray?.length === 1) return <>{getComponent()}</>;
     
     return (
         <div ref={ref} className={classes}>

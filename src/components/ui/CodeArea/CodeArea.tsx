@@ -10,14 +10,20 @@ import CopyText from "../CopyText/CopyText";
 import styles from "./CodeArea.module.scss";
 
 const CodeArea: React.FC<{ 
+    title?: string,
     data: string | { [key: string]: string; },
-    noPaddings?: boolean
+    noPaddings?: boolean,
+    opened?: boolean,
+    noTopPadding?: boolean
 } & IComponent> = ({ 
+    title = "",
     data = "",
     noPaddings = false,
+    opened = false,
+    noTopPadding = false,
     className
 }) => {
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(opened);
 
     const jsonStyle = {
         propertyStyle: { color: "#171826" },
@@ -28,6 +34,7 @@ const CodeArea: React.FC<{
     const classes = classNames([
         styles["code-area"],
         { [styles["no-paddings"]]: noPaddings },
+        { [styles["no-top-padding"]]: noTopPadding },
         className
     ]);
 
@@ -35,20 +42,24 @@ const CodeArea: React.FC<{
 
     return (
         <div className={classes}>
-            <div className={classNames([
-                styles["code"],
-                { [styles["open"]]: open }
-            ])}
-                onClick={handleOpen}
-            >
-                <div className={styles["code-formatted"]}>
-                    <JsonFormatter json={data} tabWith={4} jsonStyle={jsonStyle}  />
+            {title && <span className={styles["title"]}>{title}</span>}
+            <div className={styles["code-area__inner"]}>
+                <div className={classNames([
+                    styles["code"],
+                    { [styles["open"]]: open }
+                ])}
+                    onClick={handleOpen}
+                >
+                    
+                    <div className={styles["code-formatted"]}>
+                        <JsonFormatter json={data} tabWith={4} jsonStyle={jsonStyle}  />
+                    </div>
+                    <button>
+                        <ArrowMore />
+                    </button>
                 </div>
-                <button>
-                    <ArrowMore />
-                </button>
+                <CopyText text={typeof data === "string" ? data : JSON.stringify(data)} />
             </div>
-            <CopyText text={typeof data === "string" ? data : JSON.stringify(data)} />
         </div>
     );
 };
