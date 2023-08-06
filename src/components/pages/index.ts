@@ -10,3 +10,5 @@ export { default as AccountsSinglePage } from "./AccountsSinglePage/AccountsSing
 export { default as NotFoundPage } from "./NotFoundPage/NotFoundPage";
 export { default as ServerErrorPage } from "./ServerErrorPage/ServerErrorPage";
 export { default as ClientSideErrorPage } from "./ClientSideErrorPage/ClientSideErrorPage";
+export { default as ValidatorsPage } from "./ValidatorsPage/ValidatorsPage";
+export { default as ValidatorsSinglePage } from "./ValidatorsSinglePage/ValidatorsSinglePage";

@@ -345,6 +345,9 @@
                     &.little {
                         color: var(--aptools-color-grey-c1);
                     }
+                    &.success {
+                        color: var(--aptools-color-emphasis-c2);
+                    }
                 }
 
                 &.column {

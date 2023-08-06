@@ -19,7 +19,7 @@ const categories = (type) => {
         {
             id: 2,
             title: "Balance changes",
-            component: () => <Plug noData />,
+            component: () => <div style={{ position: "relative", height: 200 }}><Plug /></div>,
             action: async (setCustomEntry, setLoading, id, queryId) => {
                 setLoading(false);
             }
@@ -36,7 +36,8 @@ const categories = (type) => {
                         value: index
                     }, {
                         title: "Account Address",
-                        value: item?.guid?.account_address || ""
+                        value: item?.guid?.account_address || "",
+                        hash: true
                     }, {
                         title: "Creation Number",
                         value: item?.guid?.creation_number || ""
@@ -72,7 +73,8 @@ const categories = (type) => {
                         value: item?.type || ""
                     }, {
                         title: "Creation Number",
-                        value: item?.function || ""
+                        value: item?.function || "",
+                        hash: true
                     }, {
                         title: "",
                         code: item || {}
@@ -99,10 +101,12 @@ const categories = (type) => {
                         value: item?.type || ""
                     }, {
                         title: "Account Address",
-                        value: item?.address || ""
+                        value: item?.address || "",
+                        hash: true
                     }, {
                         title: "State Key Hash",
-                        value: item?.state_key_hash || ""
+                        value: item?.state_key_hash || "",
+                        hash: true
                     }, {
                         title: "Data",
                         code: item?.data || {}

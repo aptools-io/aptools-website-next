@@ -7,3 +7,4 @@ export { default as transactions } from "./apiTransactions";
 export { default as dexSingle } from "./apiDexSingle";
 export { default as news } from "./apiNews";
 export { default as accounts } from "./apiAccounts";
+export { default as validators } from "./apiValidators";

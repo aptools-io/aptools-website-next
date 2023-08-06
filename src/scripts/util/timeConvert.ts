@@ -2,10 +2,10 @@ import moment from "moment";
 import { formatNumber } from "./numbers";
 
 const ensureMillisecondTimestamp = (timestamp: string) => {
-    if (timestamp.length > 13) {
+    if (timestamp?.length > 13) {
         timestamp = timestamp.slice(0, 13);
     }
-    if (timestamp.length === 10) {
+    if (timestamp?.length === 10) {
         timestamp += "000";
     }
     return parseInt(timestamp, 10);
@@ -48,6 +48,28 @@ const timerFrom = (timestamp: number, currentTimestamp: number) => {
     return `${formatNumber(daysDifference)}d ${hoursDifference}h ${minutesDifference}m ${secondsDifference}s`;
 };
 
+const calculateValidatorsEpoch = (lastReconfigurationTime: string, epochInterval: string, rewardsRate: string, rewardsRateDenominator: string) => {
+    const startTimestamp = parseTimestamp(lastReconfigurationTime);
+    const nowTimestamp = parseTimestamp(moment.now().toString());
+    const timePassed = moment.duration(nowTimestamp.diff(startTimestamp));
+    const timePassedInMin = timePassed.asMinutes();
+    const epochIntervalInMin = moment.duration(parseInt(epochInterval) / 1000, "milliseconds").asMinutes();
+
+    const timeRemaining = (epochIntervalInMin - timePassedInMin).toFixed(0);
+    const percentage = parseInt(((timePassedInMin * 100) / epochIntervalInMin).toFixed(0));
+
+    const ratePerEpoch = parseInt(rewardsRate);
+    const denominator = parseInt(rewardsRateDenominator);
+
+    const epochInSec = parseInt(epochInterval) / 1000 / 1000;
+    const yearInSec = 60 * 60 * 24 * 365;
+    const epochsPerYear = yearInSec / epochInSec;
+
+    const rate = (((ratePerEpoch * epochsPerYear) / denominator) * 100).toFixed(0);
+    
+    return { timeRemaining, percentage, rate }
+}
+
 const addZero = (number: number) => {
     if(number < 10 && number > -1) return `0${number}`;
     return number;
@@ -73,4 +95,16 @@ const chartDate = (v: string) => {
     const formatter = new Intl.DateTimeFormat("en", { month: "short" });
     return `${new Date(v).getDate()} ${formatter.format(new Date(v))}'${new Date(v).getFullYear() % 100}`;
 };
-export { ensureMillisecondTimestamp, parseTimestamp, timerFrom, dateDiffInDays, timeFull, time, addZero, timeAgo, chartDate, transactionDate };
+export { 
+    ensureMillisecondTimestamp, 
+    parseTimestamp, 
+    timerFrom, 
+    dateDiffInDays, 
+    timeFull, 
+    time, 
+    addZero, 
+    timeAgo, 
+    chartDate, 
+    transactionDate,
+    calculateValidatorsEpoch
+};

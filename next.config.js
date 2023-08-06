@@ -34,6 +34,7 @@ const nextConfig = nextTranslate({
         BASE_IMAGES_URL: process.env.BASE_IMAGES_URL,
 
         OUTSIDE_URL: process.env.OUTSIDE_URL,
+        OUTSIDE_MAP_URL: process.env.OUTSIDE_MAP_URL,
     },
     async redirects() {
         return [ ]

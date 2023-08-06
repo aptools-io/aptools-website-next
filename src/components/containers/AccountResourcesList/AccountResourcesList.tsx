@@ -18,7 +18,8 @@ import { ArrowMore } from "src/components/svg";
 import { CodeArea, CopyText, Plug, Skeleton } from "src/components/ui";
 import styles from "./AccountResourcesList.module.scss";
 
-const AccountResourcesList: React.FC<IComponent> = ({
+const AccountResourcesList: React.FC<{ modules?: boolean } & IComponent> = ({
+    modules = false,
     className 
 }) => {
     const { accountResources = [], accountsLoading: loading = false } = useSelector((state: IRootState) => state.accounts);
@@ -42,19 +43,30 @@ const AccountResourcesList: React.FC<IComponent> = ({
     };
 
     const renderResource = (item: IApiAccountResource, index: number) => {
-        const { type = "", data = "" } = item;
+        const { type = "", data = "", name = "", structs = "", functions = "" } = item;
         
         return (
             <li key={index} className={classNames([
                 styles["account-resources-list__item"],
                 { [styles["open"]]: openCode.id === index && openCode.opened }
             ])}>
-                <div onClick={() => handleOpenCode(index)} className={styles["account-resources-list__item-title"]}>{type} <ArrowMore /></div>
-                <div className={styles["account-resources-list__item-code"]}>
+                {type && <div onClick={() => handleOpenCode(index)} className={styles["account-resources-list__item-title"]}>{type} <ArrowMore /></div>}
+                {name && <div onClick={() => handleOpenCode(index)} className={styles["account-resources-list__item-title"]}>{name} <ArrowMore /></div>}
+                {data && <div className={styles["account-resources-list__item-code"]}>
                     <div className={styles["account-resources-list__item-code-inner"]}>
                         <CodeArea data={data} />
                     </div>
-                </div>
+                </div>}
+                {structs && <div className={styles["account-resources-list__item-code"]}>
+                    <div className={styles["account-resources-list__item-code-inner"]}>
+                        <CodeArea noTopPadding title={"Structs"} data={structs} />
+                    </div>
+                </div>}
+                {functions && <div className={styles["account-resources-list__item-code"]}>
+                    <div className={styles["account-resources-list__item-code-inner"]}>
+                        <CodeArea noTopPadding title={"Functions"} data={functions} />
+                    </div>
+                </div>}
             </li>
         );
     };
