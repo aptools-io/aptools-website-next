@@ -8,14 +8,14 @@ import { IRootState } from "src/scripts/redux/store";
 // Styles
 import classNames from "classnames";
 import { List, ListHeader, Paginator } from "src/components/ui";
+import { defaultPerPage, perPages } from "src/scripts/consts/perPages";
+import { useRouter } from "next/router";
 import styles from "./ValidatorsList.module.scss";
 
 // Components
 
 // Options
 import { columnNames, columns } from "./data/listOptions";
-import { defaultPerPage, perPages } from "src/scripts/consts/perPages";
-import { useRouter } from "next/router";
 
 const ValidatorsList: React.FC<IComponent> = ({
     className 

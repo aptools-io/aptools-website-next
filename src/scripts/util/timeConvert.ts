@@ -53,22 +53,22 @@ const calculateValidatorsEpoch = (lastReconfigurationTime: string, epochInterval
     const nowTimestamp = parseTimestamp(moment.now().toString());
     const timePassed = moment.duration(nowTimestamp.diff(startTimestamp));
     const timePassedInMin = timePassed.asMinutes();
-    const epochIntervalInMin = moment.duration(parseInt(epochInterval) / 1000, "milliseconds").asMinutes();
+    const epochIntervalInMin = moment.duration(parseInt(epochInterval, 10) / 1000, "milliseconds").asMinutes();
 
     const timeRemaining = (epochIntervalInMin - timePassedInMin).toFixed(0);
-    const percentage = parseInt(((timePassedInMin * 100) / epochIntervalInMin).toFixed(0));
+    const percentage = parseInt(((timePassedInMin * 100) / epochIntervalInMin).toFixed(0), 10);
 
-    const ratePerEpoch = parseInt(rewardsRate);
-    const denominator = parseInt(rewardsRateDenominator);
+    const ratePerEpoch = parseInt(rewardsRate, 10);
+    const denominator = parseInt(rewardsRateDenominator, 10);
 
-    const epochInSec = parseInt(epochInterval) / 1000 / 1000;
+    const epochInSec = parseInt(epochInterval, 10) / 1000 / 1000;
     const yearInSec = 60 * 60 * 24 * 365;
     const epochsPerYear = yearInSec / epochInSec;
 
     const rate = (((ratePerEpoch * epochsPerYear) / denominator) * 100).toFixed(0);
     
-    return { timeRemaining, percentage, rate }
-}
+    return { timeRemaining, percentage, rate };
+};
 
 const addZero = (number: number) => {
     if(number < 10 && number > -1) return `0${number}`;

@@ -11,12 +11,12 @@ import ReactECharts from "echarts-for-react";
 // Styles
 import classNames from "classnames";
 import { Plug, Skeleton } from "src/components/ui";
+import { registerMap } from "echarts";
+import { validators } from "src/scripts/api/requests";
 import styles from "./ValidatorsMap.module.scss";
 
 // Other
 import chartOptions from "./data/chartOptions";
-import { registerMap } from "echarts";
-import { validators } from "src/scripts/api/requests";
 
 
 

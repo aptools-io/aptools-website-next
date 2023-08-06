@@ -10,8 +10,8 @@ import classNames from "classnames";
 import { ActiveLink, Button, CodeArea, CopyText } from "src/components/ui";
 import { ArrowMore } from "src/components/svg";
 import { Grid, GridWrapper } from "src/components/general";
-import styles from "./TransactionCodeList.module.scss";
 import useWindowSize from "src/scripts/hooks/useWindowSize";
+import styles from "./TransactionCodeList.module.scss";
 import media from "./data/adaptive";
 
 

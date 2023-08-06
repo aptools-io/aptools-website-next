@@ -15,8 +15,8 @@ import JsonFormatter from "react-json-formatter";
 // Styles
 import classNames from "classnames";
 import { CopyText, Plug, Skeleton } from "src/components/ui";
-import styles from "./AccountInfo.module.scss";
 import useWindowSize from "src/scripts/hooks/useWindowSize";
+import styles from "./AccountInfo.module.scss";
 import media from "./data/adaptive";
 
 const AccountInfo: React.FC<IComponent> = ({

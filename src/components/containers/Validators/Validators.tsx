@@ -11,13 +11,13 @@ import { Plate, Skeleton, Tabs } from "src/components/ui";
 
 // Styles
 import classNames from "classnames";
-import styles from "./Validators.module.scss";
 import { Grid, GridWrapper, Topper } from "src/components/general";
 import { ValidatorsMap } from "src/components/charts";
 import { accounts } from "src/scripts/api/requests";
 import { calculateValidatorsEpoch } from "src/scripts/util/timeConvert";
 import { concatString } from "src/scripts/util/strings";
 import { formatNumber } from "src/scripts/util/numbers";
+import styles from "./Validators.module.scss";
 
 
 
@@ -41,7 +41,7 @@ const Validators: React.FC<IComponent> = ({
         timeRemaining: null,
         percentage: null,
         rate: null
-    })
+    });
 
     const classes = classNames([
         styles["validators"],
@@ -82,7 +82,7 @@ const Validators: React.FC<IComponent> = ({
                 setRewardsRate(rewards_rate);
                 setRewardsRateDenominator(rewards_rate_denominator);
             });
-    }, [])
+    }, []);
 
     useEffect(() => {
         if(lastReconfigurationTime === null || epochInterval === null || rewardsRate === null || rewardsRateDenominator === null) return;
@@ -93,8 +93,8 @@ const Validators: React.FC<IComponent> = ({
             rewardsRateDenominator)
         );
         calculate();
-        setInterval(calculate, 60000)
-    }, [lastReconfigurationTime, epochInterval])
+        setInterval(calculate, 60000);
+    }, [lastReconfigurationTime, epochInterval]);
 
     if(!validatorsLocations) return <></>;
 

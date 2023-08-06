@@ -23,7 +23,7 @@ const Validators = (data: IApiProps) => {
     }, [data, dispatch]);
 
     return <ValidatorsPage />;
-}
+};
 
 export default Validators;
 
