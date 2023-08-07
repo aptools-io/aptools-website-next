@@ -31,3 +31,6 @@ export { default as AccountInfo } from "./AccountInfo/AccountInfo";
 export { default as ErrorPlug } from "./ErrorPlug/ErrorPlug";
 export { default as Transaction } from "./Transaction/Transaction";
 export { default as TransactionOverview } from "./TransactionOverview/TransactionOverview";
+export { default as TransactionCodeList } from "./TransactionCodeList/TransactionCodeList";
+export { default as Validators } from "./Validators/Validators";
+export { default as StatsSingleValidator } from "./StatsSingleValidator/StatsSingleValidator";

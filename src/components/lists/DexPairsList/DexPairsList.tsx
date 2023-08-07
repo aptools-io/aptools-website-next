@@ -58,6 +58,9 @@ const DexPairsList: React.FC<IComponent> = ({
                 onChangePage={(page) => {
                     setCurrentPage(page);
                 }}
+                onChangePerPage={(perPage) => {
+                    setPerPage(perPage);
+                }}
             >
                 <ListHeader 
                     columnNames={singleDexData?.name === "Tsunami" ? columnNamesType : columnNames} 

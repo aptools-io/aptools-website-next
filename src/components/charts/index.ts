@@ -13,3 +13,4 @@ export { default as TokenSupplySchedule } from "./TokenSupplySchedule/TokenSuppl
 export { default as DexSingle } from "./DexSingle/DexSingle";
 export { default as AccountPerformance } from "./AccountPerformance/AccountPerformance";
 export { default as AccountTokenStats } from "./AccountTokenStats/AccountTokenStats";
+export { default as ValidatorsMap } from "./ValidatorsMap/ValidatorsMap";

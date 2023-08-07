@@ -11,3 +11,5 @@ export { default as NotFoundPage } from './NotFoundPage/NotFoundPage';
 export { default as ServerErrorPage } from './ServerErrorPage/ServerErrorPage';
 export { default as ClientSideErrorPage } from './ClientSideErrorPage/ClientSideErrorPage';
 export { default as NftPage } from './NftPage/NftPage';
+export { default as ValidatorsPage } from "./ValidatorsPage/ValidatorsPage";
+export { default as ValidatorsSinglePage } from "./ValidatorsSinglePage/ValidatorsSinglePage";

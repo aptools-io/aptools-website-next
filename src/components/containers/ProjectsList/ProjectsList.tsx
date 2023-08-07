@@ -54,9 +54,9 @@ const ProjectsList: React.FC<{ all?: boolean, data?: IApiProject[], mediaData: a
                                 />
                             </a>
                         </ActiveLink>
-                        <span className={styles["projects-list__item-socials"]}>
-                            {item.socials.map(renderSocial)}
-                        </span>
+                        {item?.socials && <span className={styles["projects-list__item-socials"]}>
+                            {item?.socials?.map(renderSocial)}
+                        </span>}
                     </Plate>
                 </GridWrapper>
                 {(index === lastItem - 1 && !all) &&

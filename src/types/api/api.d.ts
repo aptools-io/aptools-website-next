@@ -15,5 +15,7 @@ interface IApiProps {
     "accounts_wallets": IApiAccountsWallets;
     "account_stats": IApiAccountStats;
     "account_profitabilities": IApiAccountProfitabilities;
-    
+    "validators_locations": IApiValidatorLocation[],
+    "validators_blocks": IApiValidatorsBlocks,
+    "validators": IApiValidators
 }

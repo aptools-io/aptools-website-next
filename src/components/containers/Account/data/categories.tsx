@@ -76,7 +76,7 @@ const categories = (dispatch) => {
         {
             id: 5,
             title: "Resources",
-            component: () => <AccountResourcesList />,
+            component: () => <AccountResourcesList key={5}/>,
             action: async (setCustomEntry, setLoading, id, queryId) => {
                 setLoading(false);
                 dispatch(setAccountsLoading(true));
@@ -85,15 +85,20 @@ const categories = (dispatch) => {
                     dispatch(setAccountResourcesData(result));
                     dispatch(setAccountsLoading(false));
                 });
-                
             }
         },
         {
             id: 6,
             title: "Modules",
-            component: () => <div className={styles["account__inner"]}><Plug /></div>,
-            action: (setCustomEntry, setLoading, id) => {
+            component: () => <AccountResourcesList modules key={6} />,
+            action: async (setCustomEntry, setLoading, id, queryId) => {
                 setLoading(false);
+                dispatch(setAccountsLoading(true));
+                await accounts.getAccountModulesData(queryId).then((e: unknown) => {
+                    const result = e as IApiAccountResource[];
+                    dispatch(setAccountResourcesData(result));
+                    dispatch(setAccountsLoading(false));
+                });
             }
         },
         {
