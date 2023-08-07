@@ -1,0 +1,44 @@
+.nft {
+  padding: 10px;
+  border-radius: 2px;
+  border: 1px solid var(--aptools-color-grey-c5);
+  background: var(--aptools-color-grey-c5);
+  &__image {
+    width: 100%;
+    position: relative;
+    img {
+      width: 100%;
+      height: 100%;
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: cover;
+    }
+  }
+  &__name {
+    margin-top: 4px;
+    color: #000;
+    font-size: 14px;
+    line-height: 130%;
+  }
+  &__row {
+    display: flex;
+  }
+  &__label {
+    color: var(--aptools-color-grey-c1);
+    font-size: 10px;
+    line-height: 15px;
+    margin-right: 8px;
+  }
+  &__value {
+    color: var(--aptools-color-main-secondary);
+    font-size: 10px;
+    line-height: 15px;
+  }
+  &__address {
+    overflow: hidden;
+    color: var(--aptools-color-emphasis-c1);
+    text-overflow: ellipsis;
+    font-size: 10px;
+    line-height: 15px;
+  }
+}
