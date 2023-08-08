@@ -71,17 +71,17 @@ const TrendsList: React.FC<{ vertical?: boolean } & IComponent> = ({
                 <ActiveLink href={`/updates/${id}`}>
                     <a className={styles["trends-list__item"]}>
                         <div  className={styles["trends-list__item-info"]}>
-                            {title && <strong className={styles["title"]}>{title}</strong>}
+                            {title && <strong className={styles.title}>{title}</strong>}
                             <div className={styles["trends-list__item-bottom"]}>
-                                {date && <span className={styles["date"]}>{date}</span>}
+                                {date && <span className={styles.date}>{date}</span>}
                                 <i/>
                                 {category && <span className={classNames([
-                                    styles["category"],
-                                    { [styles["market"]]: category === "Market" },
-                                    { [styles["technology"]]: category === "Technology" },
-                                    { [styles["update"]]: category === "Update" },
-                                    { [styles["regulation"]]: category === "Regulation" },
-                                    { [styles["security"]]: category === "Security" },
+                                    styles.category,
+                                    { [styles.market]: category === "Market" },
+                                    { [styles.technology]: category === "Technology" },
+                                    { [styles.update]: category === "Update" },
+                                    { [styles.regulation]: category === "Regulation" },
+                                    { [styles.security]: category === "Security" },
                                 ])}>{category}</span>}
                             </div>
                         </div>
@@ -110,8 +110,8 @@ const TrendsList: React.FC<{ vertical?: boolean } & IComponent> = ({
                         slidesPerView={3}
                         
                         onBeforeInit={(swiper) =>{
-                            swiper.params.navigation["disabledClass"] = styles["trends-list__nav--disabled"];
-                            swiper.params.navigation["lockClass"] = styles["trends-list__nav--lock"];
+                            swiper.params.navigation.disabledClass = styles["trends-list__nav--disabled"];
+                            swiper.params.navigation.lockClass = styles["trends-list__nav--lock"];
                         }}
                         onInit={(swiper) => {
                             setSwiper(swiper);

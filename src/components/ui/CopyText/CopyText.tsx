@@ -38,11 +38,11 @@ const CopyText: React.FC<{ big?: boolean, text: string }> = ({
 
     return (
         <button className={classes} onClick={handleClick}>
-            <div className={classNames([{ [styles["hide"]]: loading } ])}>{big ? <CopyBig /> : <Copy />}</div>
+            <div className={classNames([{ [styles.hide]: loading } ])}>{big ? <CopyBig /> : <Copy />}</div>
             <div className={classNames([
                 styles["copy-text__loading"], 
-                { [styles["hide"]]: !loading },
-                { [styles["small"]]: !big } 
+                { [styles.hide]: !loading },
+                { [styles.small]: !big } 
             ])}></div>
         </button>
     );

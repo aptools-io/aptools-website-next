@@ -90,24 +90,24 @@ const ListHeader: React.ForwardRefRenderFunction<any, IListHeaderProps> = ({
             <React.Fragment key={index}>
                 {item.headHideMobile && 
                     <div className={classNames([
-                        styles["list-header__item"], 
-                        styles["hide-mobile"]
+                    	styles["list-header__item"], 
+                    	styles["hide-mobile"]
                     ])}/>
                 }
                 <button 
                     className={
                         classNames([
                             styles["list-header__item"], 
-                            { [styles["right"]]: item.right },
+                            { [styles.right]: item.right },
                             { [styles["cant-sort"]]: item.cantSort },
-                            { [styles["sorted"]]: item.key === sorting.key }
+                            { [styles.sorted]: item.key === sorting.key }
                         ])}
                     key={index}
                     data-sort={defaultSortType}
                     onClick={(e) => handleSort(e, item.key)}
                 >
                     {item.value} 
-                    {(!item.cantSort && defaultSortIndex !== undefined) && <div className={styles["sort"]}><SortArrowUp /> <SortArrowDown /></div>}
+                    {(!item.cantSort && defaultSortIndex !== undefined) && <div className={styles.sort}><SortArrowUp /> <SortArrowDown /></div>}
                 </button>
             </React.Fragment>
         );

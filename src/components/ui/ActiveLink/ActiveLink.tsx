@@ -10,8 +10,8 @@ import { setLoading } from "src/scripts/redux/slices/loadingSlice";
 
 // Styles
 import setRoute from "src/scripts/util/setRoute";
-import styles from "./ActiveLink.module.scss";
 import classNames from "classnames";
+import styles from "./ActiveLink.module.scss";
 
 // Util
 
@@ -32,7 +32,7 @@ const ActiveLink = ({ children, additiveClassName = "", ...props }) => {
     const handleClick = (e: React.MouseEvent<HTMLElement>) => {
         e.preventDefault();
         if((e.target  as HTMLElement).closest("button")) return;
-        if(child.props.target === "_blank") { window.open(props.href, '_blank').focus(); return; }
+        if(child.props.target === "_blank") { window.open(props.href, "_blank").focus(); return; }
         setRoute(
             router, 
             300, 

@@ -54,9 +54,9 @@ const UpdatesSide: React.FC<IComponent> = ({
             <li key={index}>
                 <ActiveLink href={`/updates/${id}`}>
                     <a  className={styles["updates-side__item"]}>
-                        {version && <span className={styles["ver"]}>{version}</span>}
-                        {title && <strong className={styles["title"]}>{title}</strong>}
-                        {date && <span className={styles["date"]}>{date}</span>}
+                        {version && <span className={styles.ver}>{version}</span>}
+                        {title && <strong className={styles.title}>{title}</strong>}
+                        {date && <span className={styles.date}>{date}</span>}
                     </a>
                 </ActiveLink>
             </li>
@@ -71,7 +71,7 @@ const UpdatesSide: React.FC<IComponent> = ({
             </div>
             {dummyData && 
                 <ul className={styles["updates-side__items"]}>
-                    {dummyData.map(renderUpdateItem)}
+                	{dummyData.map(renderUpdateItem)}
                 </ul>
             }
         </div>

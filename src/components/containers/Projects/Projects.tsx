@@ -25,7 +25,7 @@ const Projects: React.FC<{ all?: boolean } & IComponent> = ({
     const mediaData = media(width);
 
     const classes = classNames([
-        styles["projects"],
+        styles.projects,
         className
     ]);
 

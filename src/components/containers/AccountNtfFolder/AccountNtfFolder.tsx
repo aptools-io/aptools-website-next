@@ -64,28 +64,28 @@ const AccountNtfFolder: React.FC<{item: IApiAccountNftCollection, index: number}
 
         return (
             <li key={index} className={styles["account-nft-list__folder-content-item"]}>
-                <div className={styles["image"]}>
+                <div className={styles.image}>
                     <Img key={index} src={imageLink} alt={name} />
                 </div>
-                <div className={styles["info"]}>
-                    <strong className={styles["name"]}>{name}</strong>
+                <div className={styles.info}>
+                    <strong className={styles.name}>{name}</strong>
                     <div className={styles["info-item"]}>
-                        <span className={styles["title"]}>Last price</span>
-                        <div className={styles["values"]}>
-                            <span className={styles["value"]}>{concatString(formatNumber(last_price_apt, null, false), "", " APT")}</span>
-                            <span className={styles["value"]}>{concatString(formatNumber(last_price_usd, null, false), "$", "")}</span>
+                        <span className={styles.title}>Last price</span>
+                        <div className={styles.values}>
+                            <span className={styles.value}>{concatString(formatNumber(last_price_apt, null, false), "", " APT")}</span>
+                            <span className={styles.value}>{concatString(formatNumber(last_price_usd, null, false), "$", "")}</span>
                         </div>
                     </div>
                     <div className={styles["info-item"]}>
-                        <span className={styles["title"]}>Floor price</span>
-                        <div className={styles["values"]}>
-                            <span className={styles["value"]}>{concatString(formatNumber(floor_price, null, false), "$", "")}</span>
+                        <span className={styles.title}>Floor price</span>
+                        <div className={styles.values}>
+                            <span className={styles.value}>{concatString(formatNumber(floor_price, null, false), "$", "")}</span>
                         </div>
                     </div>
                     <div className={styles["info-item"]}>
-                        <span className={styles["title"]}>Rarity</span>
-                        <div className={styles["values"]}>
-                            <span className={styles["value"]}>{rarity}</span>
+                        <span className={styles.title}>Rarity</span>
+                        <div className={styles.values}>
+                            <span className={styles.value}>{rarity}</span>
                         </div>
                     </div>
                 </div>
@@ -98,23 +98,23 @@ const AccountNtfFolder: React.FC<{item: IApiAccountNftCollection, index: number}
             <div onClick={() => handleOpenFolder(id)} className={styles["account-nft-list__folder-inner"]}>
                 <div className={styles["main-info"]}>
                     <Img src={imageLink} alt={item.name} />
-                    <strong className={styles["title"]}>{item.name}</strong>
+                    <strong className={styles.title}>{item.name}</strong>
                 </div>
                 <div className={styles["additional-info"]}>
                     <div className={styles["additional-info__wrapper"]}>
                         <div className={styles["additional-info__wrapper-item"]}>
-                            <span className={styles["title"]}>Supply</span>
+                            <span className={styles.title}>Supply</span>
                             <div>
-                                <span className={styles["value"]}>{concatString(formatNumber(supply), "$", "")}</span>
+                                <span className={styles.value}>{concatString(formatNumber(supply), "$", "")}</span>
                                 <span className={"percent"}><div className={percentClass("0")}>0</div></span>
                             </div>
                         </div>
                         
                         <div className={styles["additional-info__wrapper-item"]}>
-                            <span className={styles["title"]}>Volume</span>
+                            <span className={styles.title}>Volume</span>
                             <div>
-                                <span className={styles["value"]}>{concatString(formatNumber(volume_apt), "", " APT")}</span>
-                                <span className={styles["descr"]}>{concatString(formatNumber(volume_usd), "$", "")}</span>
+                                <span className={styles.value}>{concatString(formatNumber(volume_apt), "", " APT")}</span>
+                                <span className={styles.descr}>{concatString(formatNumber(volume_usd), "$", "")}</span>
                                 <span className={"percent"}><div className={percentClass("0")}>0</div></span>
                             </div>
                         </div>
@@ -122,16 +122,16 @@ const AccountNtfFolder: React.FC<{item: IApiAccountNftCollection, index: number}
 
                     <div className={styles["additional-info__wrapper"]}>
                         <div className={styles["additional-info__wrapper-item"]}>
-                            <span className={styles["title"]}>Net Worth</span>
+                            <span className={styles.title}>Net Worth</span>
                             <div>
-                                <span className={styles["value"]}>{concatString(formatNumber(net_worth), "", " APT")}</span>
+                                <span className={styles.value}>{concatString(formatNumber(net_worth), "", " APT")}</span>
                             </div>
                         </div>
                         
                         <div className={styles["additional-info__wrapper-item"]}>
-                            <span className={styles["title"]}>Potential profit</span>
+                            <span className={styles.title}>Potential profit</span>
                             <div>
-                                <span className={styles["value"]}>{concatString(formatNumber(0), "", " APT")}</span>
+                                <span className={styles.value}>{concatString(formatNumber(0), "", " APT")}</span>
                             </div>
                         </div>
                     </div>
@@ -139,7 +139,7 @@ const AccountNtfFolder: React.FC<{item: IApiAccountNftCollection, index: number}
             </div>
             <div className={classNames([
                 styles["account-nft-list__folder-content"],
-                { [styles["open"]]: openedFolder }
+                { [styles.open]: openedFolder }
             ])}>
                 <div className={styles["account-nft-list__folder-content-items"]}>
                     <Paginator
@@ -148,7 +148,7 @@ const AccountNtfFolder: React.FC<{item: IApiAccountNftCollection, index: number}
                         changePerPage
                         customPaginatorWrapper={folderRef}
                         total={nfts?.total} 
-                        className={styles["pagination"]}
+                        className={styles.pagination}
                         setPerPage={setPerPage}
                         onChangePage={async (page) => {
                             setCurrrentPage(page);
@@ -173,13 +173,13 @@ const AccountNtfFolder: React.FC<{item: IApiAccountNftCollection, index: number}
                             {!loading ? 
                                 nfts.nfts?.map(renderItem) : 
                                 new Array(perPage).fill(null).map((_, index) => 
-                                <li key={index} className={classNames([styles["account-nft-list__folder-content-item"], styles["plug"]])}>
-                                    <div className={styles["image"]}>
-                                        <Img src={imageLink} alt={""} />
-                                    </div>
-                                    <div className={styles["info"]}></div>
-                                    <Skeleton style={{ minHeight: 200 }} />
-                                </li>)
+                                    <li key={index} className={classNames([styles["account-nft-list__folder-content-item"], styles.plug])}>
+                                        <div className={styles.image}>
+                                            <Img src={imageLink} alt={""} />
+                                        </div>
+                                        <div className={styles.info}></div>
+                                        <Skeleton style={{ minHeight: 200 }} />
+                                    </li>)
                             }
                         </ul>
                     </Paginator>

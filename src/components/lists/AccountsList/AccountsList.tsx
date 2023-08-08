@@ -54,7 +54,7 @@ const Accounts: React.FC<IComponent> = ({
     }, [perPage]) */
 
     const classes = classNames([
-        styles["accounts"],
+        styles.accounts,
         "list",
         className
     ]);

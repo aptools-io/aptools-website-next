@@ -15,7 +15,7 @@ const ValidatorsSinglePage: React.FC = () => {
     const router = useRouter();
     const title = router?.query?.id;
     const { validator } = useSelector((state: IRootState) => state.validators);
-    const { validator_index } = validator?.[2]?.data || {}
+    const { validator_index } = validator?.[2]?.data || {};
 
     
     return (

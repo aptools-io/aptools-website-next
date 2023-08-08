@@ -45,7 +45,7 @@ const Tabs: React.ForwardRefRenderFunction<any, ITabsProps> = ({
     const entry = entries?.[tabId]?.[1] || null;
 
     const classes = classNames([
-        styles["tabs"],
+        styles.tabs,
         className
     ]);
 
@@ -56,7 +56,7 @@ const Tabs: React.ForwardRefRenderFunction<any, ITabsProps> = ({
     const updateLine = (index) => {
         if(!swiper.el || !lineElement) return;
 
-        const items = swiper.el.querySelectorAll(`.${styles["tabs__item"]}`);
+        const items = swiper.el.querySelectorAll(`.${styles.tabs__item}`);
         
         if(!items[index]) return;
 
@@ -89,9 +89,9 @@ const Tabs: React.ForwardRefRenderFunction<any, ITabsProps> = ({
                     onClick={() => handleTabClick(index, !checkItem && { action: item.action, id: item.id, component: item.component })} 
                     data-count={checkItem && item[1].length} 
                     className={classNames([
-                        styles["tabs__item"],
-                        {[styles["active"]]: index === tabId },
-                        {[styles["counter"]]: itemsCount }
+                        styles.tabs__item,
+                        {[styles.active]: index === tabId },
+                        {[styles.counter]: itemsCount }
                     ])}
                 >
                     {checkItem ? item[0] : item.title}
@@ -117,11 +117,11 @@ const Tabs: React.ForwardRefRenderFunction<any, ITabsProps> = ({
     
     return (
         <div ref={ref} className={classes}>
-            <div className={styles["tabs__outer"]}>
+            <div className={styles.tabs__outer}>
                 <div className={styles["tabs__nav--button"]} onClick={() => swiper.slidePrev()} ref={navigationPrevRef}>
                     <ArrowLeft />  
                 </div>
-                <div className={styles["tabs__inner"]}>
+                <div className={styles.tabs__inner}>
                     <>
                         <Swiper
                             modules={[Navigation]}
@@ -132,18 +132,18 @@ const Tabs: React.ForwardRefRenderFunction<any, ITabsProps> = ({
                             slidesPerView={"auto"}
                             
                             onBeforeInit={(swiper) =>{
-                                swiper.params.navigation["disabledClass"] = styles["tabs__nav--disabled"];
-                                swiper.params.navigation["lockClass"] = styles["tabs__nav--lock"];
+                                swiper.params.navigation.disabledClass = styles["tabs__nav--disabled"];
+                                swiper.params.navigation.lockClass = styles["tabs__nav--lock"];
                                 
                             }}
                             onInit={(swiper) => {
                                 setSwiper(swiper);
                                 swiper.el.style.display = "block";
-                                swiper.wrapperEl.classList.add(styles["tabs__wrapper"]);
+                                swiper.wrapperEl.classList.add(styles.tabs__wrapper);
 
-                                if(lineElement || swiper.wrapperEl.querySelectorAll(`.${styles["tabs__line"]}`).length) return;
+                                if(lineElement || swiper.wrapperEl.querySelectorAll(`.${styles.tabs__line}`).length) return;
                                 const line = document.createElement("i");
-                                line.classList.add(styles["tabs__line"]);
+                                line.classList.add(styles.tabs__line);
 
                                 swiper.wrapperEl.append(line);
                                 setLineElement(line);

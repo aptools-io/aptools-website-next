@@ -40,15 +40,15 @@ export function getTransactionCounterparty(
         payload.arguments.length === 2
     ) {
         return {
-        address: payload.arguments[0],
-        role: "receiver",
+            address: payload.arguments[0],
+            role: "receiver",
         };
     } 
-        const smartContractAddr = payload.function.split("::")[0];
-        return {
+    const smartContractAddr = payload.function.split("::")[0];
+    return {
         address: smartContractAddr,
         role: "smartContract",
-        };
+    };
     
 }
 
@@ -85,32 +85,32 @@ function getBalanceMap(transaction) {
                 amount: bigint;
             };
         },
-        event,
+            event,
         ) => {
-        const addr = event.guid.account_address;
+            const addr = event.guid.account_address;
 
-        if (
-            event.type === "0x1::coin::DepositEvent" ||
+            if (
+                event.type === "0x1::coin::DepositEvent" ||
             event.type === "0x1::coin::WithdrawEvent"
-        ) {
-            // deposit and withdraw events could be other coins
-            // here we only care about APT events
-            if (isAptEvent(event, transaction)) {
-            if (!balanceMap[addr]) {
-                balanceMap[addr] = {amount: BigInt(0), amountAfter: ""};
+            ) {
+                // deposit and withdraw events could be other coins
+                // here we only care about APT events
+                if (isAptEvent(event, transaction)) {
+                    if (!balanceMap[addr]) {
+                        balanceMap[addr] = {amount: BigInt(0), amountAfter: ""};
+                    }
+
+                    const amount = BigInt(event.data.amount);
+
+                    if (event.type === "0x1::coin::DepositEvent") {
+                        balanceMap[addr].amount += amount;
+                    } else {
+                        balanceMap[addr].amount -= amount;
+                    }
+                }
             }
 
-            const amount = BigInt(event.data.amount);
-
-            if (event.type === "0x1::coin::DepositEvent") {
-                balanceMap[addr].amount += amount;
-            } else {
-                balanceMap[addr].amount -= amount;
-            }
-            }
-        }
-
-        return balanceMap;
+            return balanceMap;
         },
         {},
     );
@@ -130,7 +130,7 @@ function getAptChangeData(
     ) {
         return JSON.parse(JSON.stringify(change.data.data)) as ChangeData;
     } 
-        return undefined;
+    return undefined;
     
 }
 
@@ -187,9 +187,9 @@ export function getCoinBalanceChanges(
     const balanceList = [];
     Object.entries(accountToBalance).forEach(([key, value]: any) => {
         balanceList.push({
-        address: key,
-        amount: value.amount ,
-        amountAfter: value.amountAfter,
+            address: key,
+            amount: value.amount ,
+            amountAfter: value.amountAfter,
         });
     });
 
@@ -223,13 +223,13 @@ export function getTransactionAmount(
         accountToBalance,
     ).reduce(
         ([totalDepositAmount, totalWithdrawAmount]: bigint[], value: any) => {
-        if (value.amount > 0) {
-            totalDepositAmount += value.amount;
-        }
-        if (value.amount < 0) {
-            totalWithdrawAmount -= value.amount;
-        }
-        return [totalDepositAmount, totalWithdrawAmount];
+            if (value.amount > 0) {
+                totalDepositAmount += value.amount;
+            }
+            if (value.amount < 0) {
+                totalWithdrawAmount -= value.amount;
+            }
+            return [totalDepositAmount, totalWithdrawAmount];
         },
         [BigInt(0), BigInt(0)],
     );

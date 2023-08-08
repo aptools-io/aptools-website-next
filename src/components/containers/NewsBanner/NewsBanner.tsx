@@ -47,15 +47,15 @@ const NewsBanner: React.FC<IComponent> = ({
             <SwiperSlide key={index}>
                 <div className={classNames([
                     styles["news-banner__item"],
-                    { [styles["active"]]: currentSlide === index }
+                    { [styles.active]: currentSlide === index }
                 ])}>
                     <div className={styles["news-banner__item-inner"]}>
-                        <strong className={styles["title"]}>{title}</strong>
-                        <span className={styles["description"]}>{description}</span>
+                        <strong className={styles.title}>{title}</strong>
+                        <span className={styles.description}>{description}</span>
                         <Button fill>Read more</Button>
                     </div>
-                    <img className={styles["logo"]} src={NewsBannerLogo.src} alt={"news banner logo"}/>
-                    <img className={styles["image"]} src={image} alt={"image"}/>
+                    <img className={styles.logo} src={NewsBannerLogo.src} alt={"news banner logo"}/>
+                    <img className={styles.image} src={image} alt={"image"}/>
                 </div>
             </SwiperSlide>
         );
@@ -64,7 +64,7 @@ const NewsBanner: React.FC<IComponent> = ({
     const pagination = {
         clickable: true,
         el: `.${styles["news-banner__dots"]}`,
-        bulletActiveClass: styles["active"],
+        bulletActiveClass: styles.active,
         renderBullet (index, className) {
             return `<button class="${styles["news-banner__dot"]} ${className}"></button>`;
         },

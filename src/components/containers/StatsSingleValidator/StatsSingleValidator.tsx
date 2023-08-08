@@ -27,7 +27,7 @@ const StatsSingleValidator: React.FC<IComponent> = ({
     className 
 }) => {
     const router = useRouter();
-    const { id } = router?.query;
+    const { id } = router.query || {};
 
     const { width } = useWindowSize();
     const mediaData = media(width);

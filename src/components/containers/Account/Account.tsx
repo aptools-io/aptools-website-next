@@ -29,7 +29,7 @@ const Account: React.FC<{ all?: boolean } & IComponent> = ({
     const dispatch = useDispatch();
 
     const classes = classNames([
-        styles["account"],
+        styles.account,
         className
     ]);
 

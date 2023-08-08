@@ -14,12 +14,12 @@ import { Button, List, ListHeader, Paginator, Plug, Skeleton } from "src/compone
 import { perPages, defaultPerPage } from "src/scripts/consts/perPages";
 import { accounts, transactions, validators } from "src/scripts/api/requests";
 import { setAccountTransactionsData } from "src/scripts/redux/slices/accountsSlice";
+import { setValidatorTransactions } from "src/scripts/redux/slices/validatorsSlice";
 import styles from "./ValidatorTransactionsList.module.scss";
 
 
 // Options
 import { columnNames, columns } from "./data/listOptions";
-import { setValidatorTransactions } from "src/scripts/redux/slices/validatorsSlice";
 
 // Consts
 
@@ -60,7 +60,7 @@ const ValidatorTransactionsList: React.FC<IComponent> = ({
                     setLoading(0);
                 });
             });
-    }
+    };
 
     if(validatorTransactionsLoading) return <Skeleton style={{ height: 460 }} />;
 

@@ -14,9 +14,9 @@ const Skeleton: React.FC<{ show?: boolean, full?: boolean } & IComponent> = ({
 }) => {
 
     const classes = classNames([
-        styles["skeleton"],
-        { [styles["show"]]: show },
-        { [styles["full"]]: full },
+        styles.skeleton,
+        { [styles.show]: show },
+        { [styles.full]: full },
         className
     ]);
 

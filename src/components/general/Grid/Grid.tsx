@@ -21,14 +21,14 @@ const Grid: React.FC<IGridProps> = ({
     } as React.CSSProperties;
     
     const classes = classNames([
-        styles["grid"],
-        { [styles["full"]]: fullHeight },
+        styles.grid,
+        { [styles.full]: fullHeight },
         className
     ]);
 
     const childrenWithProps = React.Children.map(children, child => {
         if (React.isValidElement(child)) {
-          return React.cloneElement(child, { key: columns });
+            return React.cloneElement(child, { key: columns });
         }
         return child;
     });

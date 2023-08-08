@@ -1,67 +1,76 @@
 .nft {
-  padding: 10px 20px;
-  display: flex;
-  align-items: flex-start;
-  border-bottom: 1px solid var(--aptools-color-grey-c3);
-  &__number {
-    width: 20px;
-  }
-  &__image {
-    width: 100px;
-    min-width: 100px;
-    height: 100px;
-    border-radius: 2px;
-    overflow: hidden;
-    margin: 0 10px;
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-  }
-  &__title {
-    margin-bottom: 10px;
-    color: var(--aptools-color-main-secondary);
-    font-size: 20px;
-    letter-spacing: -1px;
-  }
-  &__wrapper {
+    padding: 10px 20px;
     display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-  &__label {
-    padding: 2px 6px;
-    display: flex;
-    align-items: center;
-    border-radius: 4px;
-    background: var(--aptools-color-grey-c5);
-    &_title {
-      color: var(--aptools-color-main-secondary);
-      font-size: 10px;
-      font-weight: 400;
-      line-height: 15px;
-      margin-right: 8px;
+    align-items: flex-start;
+    border-bottom: 1px solid var(--aptools-color-grey-c3);
+
+    &__number {
+        width: 20px;
     }
-    &_value {
-      color: var(--aptools-color-main-secondary);
-      font-size: 10px;
-      font-weight: 700;
-      line-height: 15px;
+
+    &__image {
+        width: 100px;
+        min-width: 100px;
+        height: 100px;
+        border-radius: 2px;
+        overflow: hidden;
+        margin: 0 10px;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
     }
-  }
+
+    &__title {
+        margin-bottom: 10px;
+        color: var(--aptools-color-main-secondary);
+        font-size: 20px;
+        letter-spacing: -1px;
+    }
+
+    &__wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    &__label {
+        padding: 2px 6px;
+        display: flex;
+        align-items: center;
+        border-radius: 4px;
+        background: var(--aptools-color-grey-c5);
+
+        &_title {
+            color: var(--aptools-color-main-secondary);
+            font-size: 10px;
+            font-weight: 400;
+            line-height: 15px;
+            margin-right: 8px;
+        }
+
+        &_value {
+            color: var(--aptools-color-main-secondary);
+            font-size: 10px;
+            font-weight: 700;
+            line-height: 15px;
+        }
+    }
 }
 
 @media screen and (max-width: 576px) {
-  .nft {
-    &__wrapper {
-      flex-direction: column;
-      gap: 4px 0;
-      align-items: flex-start;
+    .nft {
+        &__wrapper {
+            flex-direction: column;
+            gap: 4px 0;
+            align-items: flex-start;
+        }
+
+        &__title {
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
     }
-    &__title {
-      font-size: 14px;
-      margin-bottom: 8px;
-    }
-  }
 }

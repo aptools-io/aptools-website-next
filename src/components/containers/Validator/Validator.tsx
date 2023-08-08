@@ -29,7 +29,7 @@ const Validator: React.FC<IComponent> = ({
     const { validator } = useSelector((state: IRootState) => state.validators);
 
     const classes = classNames([
-        styles["validator"],
+        styles.validator,
         className
     ]);
 

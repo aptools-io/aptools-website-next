@@ -26,14 +26,14 @@ const Plate: React.FC<IPlateProps> = ({
 }) => {
 
     const classes = classNames([
-        styles["plate"],
-        { [styles["compressed"]]: compressed },
-        { [styles["dark"]]: dark },
-        { [styles["min"]]: min },
+        styles.plate,
+        { [styles.compressed]: compressed },
+        { [styles.dark]: dark },
+        { [styles.min]: min },
         { [styles["no-min"]]: noMin },
-        { [styles["center"]]: center },
-        { [styles["bordered"]]: bordered },
-        { [styles["transparent"]]: transparent },
+        { [styles.center]: center },
+        { [styles.bordered]: bordered },
+        { [styles.transparent]: transparent },
         className
     ]);
 
@@ -41,11 +41,11 @@ const Plate: React.FC<IPlateProps> = ({
         <div style={style} className={classes}>
             
             {(image || title) && <PlateWrapper titleLink={titleLink}>
-                {image && <img className={styles["plate__image"]} src={image} alt={title || "image"} />}
-                {title && <strong className={styles["plate__title"]}>{title}</strong>}
+                {image && <img className={styles.plate__image} src={image} alt={title || "image"} />}
+                {title && <strong className={styles.plate__title}>{title}</strong>}
             </PlateWrapper>}
             {children}
-            {titleLink && <ActiveLink additiveClassName={styles["plate__link"]} href={titleLink}><a></a></ActiveLink>}
+            {titleLink && <ActiveLink additiveClassName={styles.plate__link} href={titleLink}><a></a></ActiveLink>}
         </div>
     );
 };

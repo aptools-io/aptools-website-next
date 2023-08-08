@@ -12,7 +12,7 @@ const Plug: React.FC<{ noData?: boolean, noDataAbsolute?: boolean } & IComponent
     noDataAbsolute = false,
 }) => {
     const classes = classNames([
-        styles["plug"], 
+        styles.plug, 
     ]);
 
     if(noData) return <div className={styles["plug__no-data"]}><File /> No Data Found</div>;

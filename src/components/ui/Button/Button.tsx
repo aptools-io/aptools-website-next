@@ -21,10 +21,10 @@ const Button: React.FC<IButtonProps> = ({
 }) => {
 
     const classes = classNames([
-        styles["button"],
-        { [styles["invert"]]: invert },
-        { [styles["fill"]]: fill },
-        { [styles["disabled"]]: disabled },
+        styles.button,
+        { [styles.invert]: invert },
+        { [styles.fill]: fill },
+        { [styles.disabled]: disabled },
         className
     ]);
 

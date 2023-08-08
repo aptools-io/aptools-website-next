@@ -9,23 +9,23 @@ import { Grid, GridWrapper } from "src/components/general";
 import classNames from "classnames";
 import { AccountTokenPerformanceList } from "src/components/lists";
 import useWindowSize from "src/scripts/hooks/useWindowSize";
-import styles from "./ValidatorOverview.module.scss";
-import media from "./data/adaptive";
 import { IRootState } from "src/scripts/redux/store";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import { CopyText, Plate } from "src/components/ui";
 import { formatNumber } from "src/scripts/util/numbers";
 import { concatString, shortenHashString } from "src/scripts/util/strings";
+import media from "./data/adaptive";
+import styles from "./ValidatorOverview.module.scss";
 
 const ValidatorOverview: React.FC<IComponent> = ({
     className,
 }) => {
     const router = useRouter();
-    const { id } = router?.query;
+    const { id } = router.query || {};
     const { validator, validators } = useSelector((state: IRootState) => state.validators);
-    const { operator_address, delegated_voter } = validator?.[0]?.data || {}
-    const { validator_index, consensus_pubkey, fullnode_addresses, network_addresses } = validator?.[2]?.data || {}
+    const { operator_address, delegated_voter } = validator?.[0]?.data || {};
+    const { validator_index, consensus_pubkey, fullnode_addresses, network_addresses } = validator?.[2]?.data || {};
     
     const { width } = useWindowSize();
     const mediaData = media(width);

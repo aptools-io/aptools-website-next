@@ -90,17 +90,17 @@ const ListColumn: React.FC<IListProps> = ({
 
     const classes = classNames([
         styles["list-column"],
-        { [styles["right"]]: right },
-        { [styles["under"]]: underRef },
-        { [styles["inner"]]: inner },
-        { [styles["adopt"]]: adoptMobile },
-        { [styles["underline"]]: underline },
+        { [styles.right]: right },
+        { [styles.under]: underRef },
+        { [styles.inner]: inner },
+        { [styles.adopt]: adoptMobile },
+        { [styles.underline]: underline },
         { [styles["own-link"]]: ownLink },
         /* { [styles["center"]]: key === "_id" }, */
         { [styles["main-mobile"]]: mainMobile },
         { [styles["hide-mobile"]]: hideMobile },
-        { [styles["red"]]: colorize && unformattedValue < 0 },
-        { [styles["green"]]: colorize && unformattedValue >= 0 },
+        { [styles.red]: colorize && unformattedValue < 0 },
+        { [styles.green]: colorize && unformattedValue >= 0 },
         className
     ]);
 
@@ -109,7 +109,7 @@ const ListColumn: React.FC<IListProps> = ({
     return (
         <ComponentWrapper 
             key={columnIndex} 
-            data-column-name={!column?.["replacedKeyMobile"] ? valueRef : value}
+            data-column-name={!column?.replacedKeyMobile ? valueRef : value}
             style={style}
             className={classes}
             { ...ownLink ? { "href": `${ownLink}/${unformattedValue}` } : {} }
@@ -118,13 +118,13 @@ const ListColumn: React.FC<IListProps> = ({
                 <div className={styles["list-column__wrapper"]}>
                     {collapser && 
                         <button 
-                            className={classNames([
-                                styles["collapse-button"], 
-                                {[styles["active"]]: collapseActive}])} 
-                            onClick={() => {handleCollapse(); setCollapseActive(!collapseActive);} }>
-                                <div><ArrowLeft /></div>
+                        	className={classNames([
+                        		styles["collapse-button"], 
+                        		{[styles.active]: collapseActive}])} 
+                        	onClick={() => {handleCollapse(); setCollapseActive(!collapseActive);} }>
+                        	<div><ArrowLeft /></div>
                         </button>}
-                    {column["colorize"] && <DifferenceArrow />}
+                    {column.colorize && <DifferenceArrow />}
 
                     {firstSymbol && <img className={styles["list-column__icon"]} src={getImageFromApi(firstSymbol)} alt={firstSymbol}/>}
                     {secondSymbol && <img className={styles["list-column__icon"]} src={getImageFromApi(secondSymbol)} alt={secondSymbol}/>}
@@ -134,10 +134,10 @@ const ListColumn: React.FC<IListProps> = ({
                         {replacedValueMobile}
                     </div>}
 
-                    {column?.["formatterComponent"] ? 
-                        <div className={styles["list-column__info"]}>{column?.["formatterComponent"](unformattedValue)}</div> : 
+                    {column?.formatterComponent ? 
+                        <div className={styles["list-column__info"]}>{column?.formatterComponent(unformattedValue)}</div> : 
                         <div className={styles["list-column__info"]}>
-                            {(combinedValue !== undefined && !column?.["ignoreCombined"]) ? `${combinedValue} / ` : ""}
+                            {(combinedValue !== undefined && !column?.ignoreCombined) ? `${combinedValue} / ` : ""}
                             {value}
                             {description && <div className={styles["list-column__description"]}>{description}</div>}
                         </div>

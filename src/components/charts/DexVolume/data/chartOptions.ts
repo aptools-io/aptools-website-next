@@ -4,18 +4,18 @@ const chartOptions = (data: IApiDex[], volume: boolean = false) => {
     const options = dexOptions(data);
     const series = {
         type: "line",
-      stack: "Total",
-      smooth: true,
-      lineStyle: {
-        width: 0
-      },
-      showSymbol: false,
-      areaStyle: {
-        opacity: 1,
-      },
-      emphasis: {
-        focus: "series"
-      },
+        stack: "Total",
+        smooth: true,
+        lineStyle: {
+            width: 0
+        },
+        showSymbol: false,
+        areaStyle: {
+            opacity: 1,
+        },
+        emphasis: {
+            focus: "series"
+        },
     };
     return {
         ...options,

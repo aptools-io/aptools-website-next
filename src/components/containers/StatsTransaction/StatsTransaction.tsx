@@ -57,7 +57,7 @@ const StatsTransaction: React.FC<IComponent> = ({
                                     ...transactionTypes(type).class
                                 ])}>
                                 {transactionTypeIcons[type]}
-                               {/*  <Wallet /> */}
+                                {/*  <Wallet /> */}
                             </div>
                         </div>
                         <div className={"stats__top-stats row"}>

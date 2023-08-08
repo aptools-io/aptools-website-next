@@ -21,7 +21,7 @@ const columnNames = (validatorIndex) => [
         "value": "Block",
         "formatter": (changes) => {
             const height = changes?.[0]?.data?.data?.height;
-            return `${height ? height : "-"}`
+            return `${height || "-"}`;
         },
         "headHideMobile": true
     },
@@ -35,7 +35,7 @@ const columnNames = (validatorIndex) => [
         "value": "Sequence number",
         "formatter": (events) => {
             const index = Number(validatorIndex) + 1;
-            return events?.[index]?.sequence_number || "-"
+            return events?.[index]?.sequence_number || "-";
         },
     },
     {
@@ -44,7 +44,7 @@ const columnNames = (validatorIndex) => [
         "formatter": (events) => {
             const index = Number(validatorIndex) + 1;
             const address =  events?.[index]?.data?.pool_address;
-            return address ? shortenHashString(address, [15, 15]) : "-"
+            return address ? shortenHashString(address, [15, 15]) : "-";
         },
         "underline": true
     },
@@ -54,7 +54,7 @@ const columnNames = (validatorIndex) => [
         "formatter": (events) => {
             const index = Number(validatorIndex) + 1;
             const amount =  events?.[index]?.data?.rewards_amount;
-            return amount ? concatString(formatNumber(amount / 100000000, 2), "", " APT") : "-"
+            return amount ? concatString(formatNumber(amount / 100000000, 2), "", " APT") : "-";
         },
     },
 ];

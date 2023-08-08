@@ -35,32 +35,32 @@ const performanceOptions = (data: { name?: string, chart?: IPoint[] }[]) => {
         },
         series: 
         [
-            {
-                data: yAxisArray,
-                type: "line",
-                symbol: "circle",
-                symbolSize: 4,
-                lineStyle: {
-                    color: "rgb(59, 89, 152)",
-                },
-                itemStyle: {
-                    color: "rgb(59, 89, 152)",
-                    borderWidth: 0,
-                },
-                areaStyle: {
-                    opacity: 0.8,
-                    color: new graphic.LinearGradient(0, 0, 0, 1, [
-                      {
-                        offset: 0,
-                        color: "rgba(67, 57, 242, 0.1)"
-                      },
-                      {
-                        offset: 1,
-                        color: "rgba(67, 57, 242, 0)"
-                      }
-                    ])
-                },
-            },
+        	{
+        		data: yAxisArray,
+        		type: "line",
+        		symbol: "circle",
+        		symbolSize: 4,
+        		lineStyle: {
+        			color: "rgb(59, 89, 152)",
+        		},
+        		itemStyle: {
+        			color: "rgb(59, 89, 152)",
+        			borderWidth: 0,
+        		},
+        		areaStyle: {
+        			opacity: 0.8,
+        			color: new graphic.LinearGradient(0, 0, 0, 1, [
+        				{
+        					offset: 0,
+        					color: "rgba(67, 57, 242, 0.1)"
+        				},
+        				{
+        					offset: 1,
+        					color: "rgba(67, 57, 242, 0)"
+        				}
+        			])
+        		},
+        	},
         ],
         tooltip: {
             trigger: "axis",

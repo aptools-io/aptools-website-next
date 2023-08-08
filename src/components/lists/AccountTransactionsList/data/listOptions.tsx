@@ -29,8 +29,8 @@ const columnNames = [
             return (
                 <span className={classNames([
                     styles["account-transactions-list__type"],
-                    { [styles["success"]]: v === "Deposit" },
-                    { [styles["error"]]: v === "Withdraw" },
+                    { [styles.success]: v === "Deposit" },
+                    { [styles.error]: v === "Withdraw" },
                 ])}>{v}</span>
             );
         },

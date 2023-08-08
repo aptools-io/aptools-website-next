@@ -43,7 +43,7 @@ const Price: React.FC<IComponent> = ({
 
 
     const classes = classNames([
-        styles["price"],
+        styles.price,
         "chart",
         className
     ]);
@@ -59,7 +59,7 @@ const Price: React.FC<IComponent> = ({
                     <button className={classNames([ { "active": range === "14d" } ])} onClick={() => setRange("14d")}>14D</button>
                 </span>}
             </strong>
-            {!(!blockchain_info || !low_high_price || !high || !high_btc || !low || !low_btc || !prices?.length) ? <><div className={styles["price__inner"]}>
+            {!(!blockchain_info || !low_high_price || !high || !high_btc || !low || !low_btc || !prices?.length) ? <><div className={styles.price__inner}>
                 <ReactECharts style={{height: "90px", width: "100%"}} theme={""} option={chartOptions(prices)} />
             </div>
             <div className={"chart__bottom absolute paddings"}>

@@ -35,8 +35,8 @@ const NavBar: React.FC<INavBarProps> = ({
 
     const classes = classNames([
         styles["nav-bar"],
-        { [styles["expanded"]]: expanded },
-        { [styles["opened"]]: opened }
+        { [styles.expanded]: expanded },
+        { [styles.opened]: opened }
     ]);
 
     const handleMenu = () => {
@@ -62,7 +62,7 @@ const NavBar: React.FC<INavBarProps> = ({
                         <img src={aptools.src} alt={"aptools"} />
                     </a>
                 </ActiveLink>
-                <button className={classNames([styles["nav-bar__button"], { [styles["active"]]: opened }])} onClick={handleMenu}>
+                <button className={classNames([styles["nav-bar__button"], { [styles.active]: opened }])} onClick={handleMenu}>
                     <div className={styles["nav-bar__button-inner"]}>
                         <i></i>
                         <i></i>
@@ -79,7 +79,7 @@ const NavBar: React.FC<INavBarProps> = ({
 
             {!!data.length && 
                 <ul className={styles["nav-bar__items"]}>
-                    {data.map((item, index) => <NavBarItem expanded={expanded} data={item} key={index}/>)}
+                	{data.map((item, index) => <NavBarItem expanded={expanded} data={item} key={index}/>)}
                 </ul>
             }
         </div>

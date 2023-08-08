@@ -41,16 +41,16 @@ const TransactionCodeList: React.FC<{ getElements?: (transaction: IApiTransactio
         return (
             <li key={index} className={classNames([
                 styles["transaction-code-list__item-info"],
-                { [styles["column"]]: item?.code }
+                { [styles.column]: item?.code }
             ])}>
-                {item?.title && <span className={styles["title"]}>{item?.title}</span>}
-                {item?.value && <span className={styles["value"]}>
+                {item?.title && <span className={styles.title}>{item?.title}</span>}
+                {item?.value && <span className={styles.value}>
                     {item?.hash ?
                         <><ActiveLink href={item?.value}><a>{value}</a></ActiveLink> <CopyText text={item?.value} /></> :
                         value
                     }
                 </span>}
-                {item?.code && <div className={styles["code"]}><CodeArea noPaddings data={item?.code} /></div>}
+                {item?.code && <div className={styles.code}><CodeArea noPaddings data={item?.code} /></div>}
             </li>
         );
     };
@@ -68,7 +68,7 @@ const TransactionCodeList: React.FC<{ getElements?: (transaction: IApiTransactio
             <li key={index} onClick={() => handleOpenCodeWrapper(index)} className={
                 classNames([
                     styles["transaction-code-list__item"],
-                    { [styles["open"]]: opens[index] }
+                    { [styles.open]: opens[index] }
                 ])}>
                 <div className={styles["transaction-code-list__item-top"]}>
                     {renderItem(item[0], 0)}

@@ -17,8 +17,8 @@ const parseTimestamp = (timestamp: string) => {
 
 const setTimeAgoValue = (number: number, concat: string) => {
     if(number === 0 || !number) return "";
-    return `${number}${concat}`
-}
+    return `${number}${concat}`;
+};
 
 const timeAgo = (time) => {
     const timestamp = time;

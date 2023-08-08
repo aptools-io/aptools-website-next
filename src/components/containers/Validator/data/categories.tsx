@@ -5,12 +5,12 @@ import { setAccountInfoData, setAccountNftsCollectionsData, setAccountProfitabil
 import { Plug } from "src/components/ui";
 
 // Styles
-import ValidatorOverview from "../../ValidatorOverview/ValidatorOverview";
-import TransactionCodeList from "../../TransactionCodeList/TransactionCodeList";
 import { AnyAction, Dispatch } from "@reduxjs/toolkit";
 import { transactions, validators } from "src/scripts/api/requests";
 import { setValidatorTransactions, setValidatorTransactionsLoading } from "src/scripts/redux/slices/validatorsSlice";
 import { ValidatorTransactionsList } from "src/components/lists";
+import TransactionCodeList from "../../TransactionCodeList/TransactionCodeList";
+import ValidatorOverview from "../../ValidatorOverview/ValidatorOverview";
 
 const categories = (dispatch: Dispatch<AnyAction>, validator: [IApiValidators, IApiValidators, IApiValidators]) => {
     return [
@@ -57,7 +57,7 @@ const categories = (dispatch: Dispatch<AnyAction>, validator: [IApiValidators, I
                     }, {
                         title: "Data",
                         code: item.data
-                    }]
+                    }];
                 });
             }} />,
             action: async (setCustomEntry, setLoading, id, queryId) => {

@@ -28,7 +28,7 @@ const ValidatorsList: React.FC<IComponent> = ({
     const hardSorting = useState<{ key: string; sort: string }>({ key: "votingPower", sort: "desc" });
 
     const classes = classNames([
-        styles["validators"],
+        styles.validators,
         "list",
         className
     ]);
@@ -50,7 +50,7 @@ const ValidatorsList: React.FC<IComponent> = ({
 
     return (
         <div className={classes}>
-           {/*  <strong className={"list__title"}>
+            {/*  <strong className={"list__title"}>
                 <span>Top DEXes by Users/Transactions</span>
             </strong> */}
             <Paginator 

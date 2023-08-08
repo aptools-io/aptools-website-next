@@ -42,13 +42,13 @@ const CodeArea: React.FC<{
 
     return (
         <div className={classes}>
-            {title && <span className={styles["title"]}>{title}</span>}
+            {title && <span className={styles.title}>{title}</span>}
             <div className={styles["code-area__inner"]}>
                 <div className={classNames([
-                    styles["code"],
-                    { [styles["open"]]: open }
+                    styles.code,
+                    { [styles.open]: open }
                 ])}
-                    onClick={handleOpen}
+                onClick={handleOpen}
                 >
                     
                     <div className={styles["code-formatted"]}>

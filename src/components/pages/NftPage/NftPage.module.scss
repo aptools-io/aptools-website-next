@@ -1,18 +1,21 @@
 .nft {
-  &__block {
-    width: 100%;
-    cursor: pointer;
-    > a {
-      width: 100%;
-      display: block;
-    }
-    > span {
-      width: 100%;
-      display: block;
-      > a {
+    &__block {
         width: 100%;
-        display: block;
-      }
+        cursor: pointer;
+
+        > a {
+            width: 100%;
+            display: block;
+        }
+
+        > span {
+            width: 100%;
+            display: block;
+
+            > a {
+                width: 100%;
+                display: block;
+            }
+        }
     }
-  }
 }

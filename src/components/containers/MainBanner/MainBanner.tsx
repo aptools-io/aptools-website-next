@@ -26,8 +26,8 @@ const MainBanner: React.FC<IMainBannerProps> = ({
             <div className={styles["main-banner__info-wrapper"]}>
                 {(title || description) && 
                     <div className={styles["main-banner__info"]}>
-                        {title && <strong className={styles["main-banner__title"]}>{title}</strong>}
-                        {description && <span className={styles["main-banner__description"]}>{description}</span>}
+                    	{title && <strong className={styles["main-banner__title"]}>{title}</strong>}
+                    	{description && <span className={styles["main-banner__description"]}>{description}</span>}
                     </div>
                 }
                 <div className={styles["main-banner__socials"]}>
