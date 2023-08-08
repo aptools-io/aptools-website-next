@@ -17,5 +17,14 @@ interface IApiProps {
     "account_profitabilities": IApiAccountProfitabilities;
     "validators_locations": IApiValidatorLocation[],
     "validators_blocks": IApiValidatorsBlocks,
-    "validators": IApiValidators
+    "validators": IApiValidators,
+    "validator": [IApiValidators, IApiValidators, IApiValidators]
+}
+
+interface IApiGuid {
+    id: {
+        addr: string;
+        creation_num: string;
+    }
+    guid_creation_num?: string;
 }

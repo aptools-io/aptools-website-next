@@ -47,9 +47,9 @@ interface IColumnName {
     copy?: string;
     main?: boolean;
     under?: IColumnName[];
-    formatter?: (v: any) => string;
-    replacedFormatter?: (v: any) => string;
-    descriptionFormatter?: (v: any) => string;
+    formatter?: (v: any, row?: any) => string;
+    replacedFormatter?: (v: any, row?: any) => string;
+    descriptionFormatter?: (v: any, row?: any) => string;
     ownLink?: string;
     hideMobile?: boolean;
     mainMobile?: boolean;

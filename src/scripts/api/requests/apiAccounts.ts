@@ -59,6 +59,11 @@ const getAccountResourceData = async (address = null, resource = null) => {
     return api.get(`/accounts/${address}/resource/${resource}`, { }, { });
 };
 
+const getAccountConfigPoolData = async (address = null) => {
+    const api = new Api(false, process.env.OUTSIDE_URL);
+    return api.get(`/accounts/${address}/resources`, { }, { });
+};
+
 const accounts = {
     getAccountsData,
     getAccountsStatsData,
@@ -71,7 +76,8 @@ const accounts = {
     getAccountResourcesData,
     getAccountModulesData,
     getAccountInfoData,
-    getAccountResourceData
+    getAccountResourceData,
+    getAccountConfigPoolData
 };
 
 export default accounts;

@@ -15,17 +15,34 @@ const parseTimestamp = (timestamp: string) => {
     return moment(ensureMillisecondTimestamp(timestamp));
 };
 
+const setTimeAgoValue = (number: number, concat: string) => {
+    if(number === 0 || !number) return "";
+    return `${number}${concat}`
+}
+
 const timeAgo = (time) => {
     const timestamp = time;
     const currentTime = moment();
     const pastTime = moment(timestamp);
     const duration = moment.duration(currentTime.diff(pastTime));
 
+    const asYears = Math.floor(duration.asYears());
+    const asMonths = Math.floor(duration.asMonths());
+    const asDays = Math.floor(duration.asDays());
+
+    const years = duration.years();
+    const months = duration.months();
+    const days = duration.days();
+
     const hours = duration.hours();
     const minutes = duration.minutes();
     const seconds = duration.seconds();
 
-    const formattedDuration = `${hours}h ${minutes}m ${seconds}sec ago`;
+    if(asDays < 32) {
+        const formattedDuration = `${setTimeAgoValue(asDays, "d")} ${setTimeAgoValue(hours, "h")} ${setTimeAgoValue(minutes, "m")} ${setTimeAgoValue(seconds, "sec")} ago`;
+        return formattedDuration;
+    }
+    const formattedDuration = `${setTimeAgoValue(years, "y")} ${setTimeAgoValue(months, "mth")} ${setTimeAgoValue(days, "d")} ago`;
     return formattedDuration;
 };
 
@@ -82,7 +99,7 @@ const time = (timestamp: string) => {
 
 const timeFull = (timestamp: string) => {
     const time = new Date(timestamp);
-    return `${addZero(time.getUTCDate() + 1)}.${addZero(time.getMonth() + 1)}.${time.getFullYear()}, ${addZero(time.getHours())}:${addZero(time.getMinutes())}:${addZero(time.getSeconds())}`;
+    return `${addZero(time.getUTCDate())}.${addZero(time.getMonth() + 1)}.${time.getFullYear()}, ${addZero(time.getHours())}:${addZero(time.getMinutes())}:${addZero(time.getSeconds())}`;
 };
 
 const dateDiffInDays = (date1: Date, date2: Date) => {

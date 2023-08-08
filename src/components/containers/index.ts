@@ -34,3 +34,5 @@ export { default as TransactionOverview } from "./TransactionOverview/Transactio
 export { default as TransactionCodeList } from "./TransactionCodeList/TransactionCodeList";
 export { default as Validators } from "./Validators/Validators";
 export { default as StatsSingleValidator } from "./StatsSingleValidator/StatsSingleValidator";
+export { default as Validator } from "./Validator/Validator";
+export { default as ValidatorOverview } from "./ValidatorOverview/ValidatorOverview";

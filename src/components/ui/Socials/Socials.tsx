@@ -26,7 +26,7 @@ const Socials: React.FC<ISocialsProps> = ({
 
     const renderSocial = (item: ISocialsItem, index) => 
         <li key={index} className={styles["socials__item"]}>
-            <a href={item.link}>{item.svg}</a>
+            <a href={item.link} target={"_blank"}>{item.svg}</a>
         </li>;
 
     return (

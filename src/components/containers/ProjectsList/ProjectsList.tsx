@@ -24,7 +24,7 @@ const ProjectsList: React.FC<{ all?: boolean, data?: IApiProject[], mediaData: a
 
     const renderSocial = (item: IApiProjectSocials, index: number) => (
         <ActiveLink key={index} className={styles["projects-list__item-social-wrapper"]} href={item.link}>
-            <a className={styles["projects-list__item-social"]}>
+            <a className={styles["projects-list__item-social"]} target={"_blank"}>
                 {socials[item.name] || <>x</>}
             </a>
         </ActiveLink>

@@ -55,20 +55,10 @@ export function getTransactionCounterparty(
 type ChangeData = {
     coin: {value: string};
     deposit_events: {
-        guid: {
-        id: {
-            addr: string;
-            creation_num: string;
-        };
-        };
+        guid: IApiGuid;
     };
     withdraw_events: {
-        guid: {
-        id: {
-            addr: string;
-            creation_num: string;
-        };
-        };
+        guid: IApiGuid;
     };
 };
 

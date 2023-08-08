@@ -5,13 +5,17 @@ import React from "react";
 import { useRouter } from "next/router";
 
 // Components
-import { Topper } from "src/components/general";
-import { StatsSingleValidator } from "src/components/containers";
+import { Grid, GridWrapper, Topper } from "src/components/general";
+import { StatsSingleValidator, Validator } from "src/components/containers";
+import { useSelector } from "react-redux";
+import { IRootState } from "src/scripts/redux/store";
 
 
 const ValidatorsSinglePage: React.FC = () => {
     const router = useRouter();
-    const title = router.query.id;
+    const title = router?.query?.id;
+    const { validator } = useSelector((state: IRootState) => state.validators);
+    const { validator_index } = validator?.[2]?.data || {}
 
     
     return (
@@ -19,14 +23,15 @@ const ValidatorsSinglePage: React.FC = () => {
             <Topper 
                 backlink={"/validators"} 
                 customTitle={title} 
-                additiveTitle={` #${0}`}
+                additiveTitle={` #${validator_index}`}
             />
             <StatsSingleValidator />
-            {/* <Grid>
+            
+            <Grid>
                 <GridWrapper>
-                    <Transaction />
+                    <Validator />
                 </GridWrapper>
-            </Grid> */}
+            </Grid>
             {/* <TransactionsList full title="" /> */}
         </>
     );

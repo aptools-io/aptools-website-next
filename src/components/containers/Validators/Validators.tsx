@@ -18,6 +18,8 @@ import { calculateValidatorsEpoch } from "src/scripts/util/timeConvert";
 import { concatString } from "src/scripts/util/strings";
 import { formatNumber } from "src/scripts/util/numbers";
 import styles from "./Validators.module.scss";
+import useWindowSize from "src/scripts/hooks/useWindowSize";
+import media from "./data/adaptive";
 
 
 
@@ -42,6 +44,9 @@ const Validators: React.FC<IComponent> = ({
         percentage: null,
         rate: null
     });
+
+    const { width } = useWindowSize();
+    const mediaData = media(width);
 
     const classes = classNames([
         styles["validators"],
@@ -96,12 +101,12 @@ const Validators: React.FC<IComponent> = ({
         setInterval(calculate, 60000);
     }, [lastReconfigurationTime, epochInterval]);
 
-    if(!validatorsLocations) return <></>;
+    if(!validatorsLocations || !width) return <></>;
 
     return (
         <div className={classes}>
             <Grid>
-                <GridWrapper gridWidth={3}>
+                <GridWrapper gridWidth={mediaData.validatorsLeft}>
                     <Topper backlink={"/"} />
                     <Grid>
                         <GridWrapper>
@@ -143,9 +148,9 @@ const Validators: React.FC<IComponent> = ({
                         </GridWrapper>
                     </Grid>
                 </GridWrapper>
-                <GridWrapper gridWidth={7}>
+                {mediaData.validatorsRightVisible && <GridWrapper gridWidth={7}>
                     <ValidatorsMap />
-                </GridWrapper>
+                </GridWrapper>}
             </Grid>
         </div>
     );

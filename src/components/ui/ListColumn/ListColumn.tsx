@@ -65,16 +65,16 @@ const ListColumn: React.FC<IListProps> = ({
 
     const unformattedValue = row?.[key];
     const approxed = row?.[approxKey];
-    let value = !formatter ? unformattedValue : formatter(unformattedValue);
+    let value = !formatter ? unformattedValue : formatter(unformattedValue, row);
     
     if(approxed) value = `~ ${value}`;
 
     if(key === "_id" && hardPageId !== null && hardPerPage !== null) value = (rowIndex + 1) + (hardPageId * hardPerPage);
-    const combinedValue = formatter && combinedValues ? formatter(combinedValues?.[key]) : undefined;
+    const combinedValue = formatter && combinedValues ? formatter(combinedValues?.[key], row) : undefined;
 
     const unformattedReplacedValueMobile = row?.[replacedKeyMobile];
-    const replacedValueMobile = !replacedFormatter ? unformattedReplacedValueMobile : replacedFormatter(unformattedReplacedValueMobile);
-    const replacedCombinedValueMobile = replacedFormatter && combinedValues ? replacedFormatter(combinedValues?.[replacedKeyMobile]) : undefined;
+    const replacedValueMobile = !replacedFormatter ? unformattedReplacedValueMobile : replacedFormatter(unformattedReplacedValueMobile, row);
+    const replacedCombinedValueMobile = replacedFormatter && combinedValues ? replacedFormatter(combinedValues?.[replacedKeyMobile], row) : undefined;
 
 
 
@@ -84,7 +84,7 @@ const ListColumn: React.FC<IListProps> = ({
         secondSymbol = firstSymbol.substring(firstSymbol.indexOf("/") + 1);
         firstSymbol = firstSymbol.substring(0, firstSymbol.indexOf("/"));
     }
-    const description = !descriptionFormatter ? row?.[descriptionRef] : descriptionFormatter(row?.[descriptionRef]);
+    const description = !descriptionFormatter ? row?.[descriptionRef] : descriptionFormatter(row?.[descriptionRef], row);
 
     if(valueGridReplace?.length) return (<div key={columnIndex} className={styles["list-column__inner"]}>{valueGridReplace}</div>); 
 
