@@ -1,5 +1,5 @@
 
-import { formatNumber, setSign } from "src/scripts/util/numbers";
+import { formatNumber, noExponents, setSign } from "src/scripts/util/numbers";
 
 // Styles
 import classNames from "classnames";
@@ -29,8 +29,8 @@ const columnNames = [
             return (
                 <span className={classNames([
                     styles["account-transactions-list__type"],
-                    { [styles["success"]]: v === "Deposit" },
-                    { [styles["error"]]: v === "Withdraw" },
+                    { [styles.success]: v === "Deposit" },
+                    { [styles.error]: v === "Withdraw" },
                 ])}>{v}</span>
             );
         },
@@ -77,6 +77,7 @@ const columnNames = [
         "key": "fee",
         "value": "Txn fee",
         "formatter": (v) => {
+            if(v.toString().indexOf("e") !== -1) return `${concatString(formatNumber(0.00001, 4, true), "", " APT")}`;
             return `${concatString(formatNumber(v, 4), "", " APT")}`;
         },
         "cantSort": true,

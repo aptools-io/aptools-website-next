@@ -30,7 +30,7 @@ const Transaction: React.FC<IComponent> = ({
     const { type } = transaction || {};
 
     const classes = classNames([
-        styles["transaction"],
+        styles.transaction,
         className
     ]);
 

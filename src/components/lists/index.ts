@@ -15,3 +15,4 @@ export { default as AccountTokenPerformanceList } from "./AccountTokenPerformanc
 export { default as AccountTransactionsList } from "./AccountTransactionsList/AccountTransactionsList";
 export { default as AccountTokensList } from "./AccountTokensList/AccountTokensList";
 export { default as ValidatorsList } from "./ValidatorsList/ValidatorsList";
+export { default as ValidatorTransactionsList } from "./ValidatorTransactionsList/ValidatorTransactionsList";

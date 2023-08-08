@@ -122,10 +122,10 @@ const categories = (type) => {
 
     const getItems = (type) => {
         switch(type) {
-            case "state_checkpoint_transaction": return [items[0]];
-            case "user_transaction": return items;
-            case "block_metadata_transaction": return [items[0], items[4]];
-            default: return items;
+        case "state_checkpoint_transaction": return [items[0]];
+        case "user_transaction": return items;
+        case "block_metadata_transaction": return [items[0], items[4]];
+        default: return items;
         }
     };
 

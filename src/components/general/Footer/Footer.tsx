@@ -13,15 +13,15 @@ const Footer: React.FC<IComponent> = ({
 }) => {
 
     const classes = classNames([
-        styles["footer"],
+        styles.footer,
         className
     ]);
 
  
     return (
         <div className={classes}>
-           <span>©2023 EX2team</span>
-           <Socials className={styles["footer__socials"]} title={false} />
+            <span>©2023 EX2team</span>
+            <Socials className={styles.footer__socials} title={false} />
         </div>
     );
 };

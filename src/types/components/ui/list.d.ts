@@ -47,9 +47,10 @@ interface IColumnName {
     copy?: string;
     main?: boolean;
     under?: IColumnName[];
-    formatter?: (v: any) => string;
-    replacedFormatter?: (v: any) => string;
-    descriptionFormatter?: (v: any) => string;
+    formatter?: (v: any, row?: any) => string;
+    replacedFormatter?: (v: any, row?: any) => string;
+    descriptionFormatter?: (v: any, row?: any) => string;
+    formatterComponent?: (v: any, row?: any) => any;
     ownLink?: string;
     hideMobile?: boolean;
     mainMobile?: boolean;

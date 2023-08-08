@@ -75,7 +75,7 @@ const AccountNtfList: React.FC<IComponent> = ({
             </div>
             {filteredNfts && 
                 <div className={styles["account-nft-list__inner"]}>
-                    {/* <Paginator
+                	{/* <Paginator
                         page={currentPage} 
                         perPage={perPage} 
                         changePerPage
@@ -96,18 +96,18 @@ const AccountNtfList: React.FC<IComponent> = ({
                             });
                         }}
                     > */}
-                        <ul className={styles["account-nft-list__folders"]}>
-                            {filteredNfts.map((item, index) => <AccountNtfFolder index={index} key={index} item={item} />)}
-                        </ul>
-                    {/* </Paginator> */}
-                    <Button
-                        disabled={!(filteredNfts?.length < total) || !!searchQuery} 
-                        invert 
-                        className={styles["account-nft-list__load-more"]} 
-                        onClick={handleLoadMore}
-                    >
+                	<ul className={styles["account-nft-list__folders"]}>
+                		{filteredNfts.map((item, index) => <AccountNtfFolder index={index} key={index} item={item} />)}
+                	</ul>
+                	{/* </Paginator> */}
+                	<Button
+                		disabled={!(filteredNfts?.length < total) || !!searchQuery} 
+                		invert 
+                		className={styles["account-nft-list__load-more"]} 
+                		onClick={handleLoadMore}
+                	>
                         Load more
-                    </Button>
+                	</Button>
                 </div>
             }
         </div>

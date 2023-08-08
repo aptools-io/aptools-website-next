@@ -21,7 +21,7 @@ const StatsBlockchainActivity: React.FC<IComponent> = ({
     const { 
         contract_deployers_24h, 
         contract_deployers_peak,
-        user_transactions_24h,
+        user_transactions_24h = null,
         user_transactions_peak,
         tps_peak_30d
     } = blockchain_info || {};
@@ -35,7 +35,14 @@ const StatsBlockchainActivity: React.FC<IComponent> = ({
         className
     ]);
 
-    if(!blockchain_info || !contract_deployers_24h || !contract_deployers_peak || !user_transactions_24h || !user_transactions_peak || !tps_peak_30d) return <Plug noData />;
+    if(
+        blockchain_info == null ||
+        contract_deployers_24h == null ||
+        contract_deployers_peak == null ||
+        user_transactions_24h == null ||
+        user_transactions_peak == null ||
+        tps_peak_30d == null
+    ) return <Plug noData />;
 
     return (
         <div className={classes}>

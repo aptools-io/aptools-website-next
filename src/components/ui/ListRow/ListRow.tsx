@@ -24,9 +24,9 @@ const ListRow: React.FC<IListProps> = ({
 
     const classes = classNames([
         styles["list-row"],
-        { [styles["adopt"]]: adoptMobile },
-        { [styles["uncollapsed"]]: collapse },
-        { [styles["collapse"]]: columnNames?.find(x => x?.valueGridReplace?.find(y => y.collapser) || x.collapser) },
+        { [styles.adopt]: adoptMobile },
+        { [styles.uncollapsed]: collapse },
+        { [styles.collapse]: columnNames?.find(x => x?.valueGridReplace?.find(y => y.collapser) || x.collapser) },
         className
     ]);
 
@@ -50,7 +50,7 @@ const ListRow: React.FC<IListProps> = ({
        
         return <ListColumn 
             key={columnIndex} 
-            className={styles["hide"]}
+            className={styles.hide}
             hardPageId={hardPageId}
             hardPerPage={hardPerPage}
             {...{

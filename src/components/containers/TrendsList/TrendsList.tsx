@@ -3,6 +3,7 @@ import React, { useRef, useState } from "react";
 
 // Swiper / Components
 import { Swiper, SwiperSlide } from "swiper/react";
+import { NavigationOptions } from "swiper/types";
 import { Navigation } from "swiper";
 import { ArrowLeftBig } from "src/components/svg";
 import { ActiveLink, Img } from "src/components/ui";
@@ -71,17 +72,17 @@ const TrendsList: React.FC<{ vertical?: boolean } & IComponent> = ({
                 <ActiveLink href={`/updates/${id}`}>
                     <a className={styles["trends-list__item"]}>
                         <div  className={styles["trends-list__item-info"]}>
-                            {title && <strong className={styles["title"]}>{title}</strong>}
+                            {title && <strong className={styles.title}>{title}</strong>}
                             <div className={styles["trends-list__item-bottom"]}>
-                                {date && <span className={styles["date"]}>{date}</span>}
+                                {date && <span className={styles.date}>{date}</span>}
                                 <i/>
                                 {category && <span className={classNames([
-                                    styles["category"],
-                                    { [styles["market"]]: category === "Market" },
-                                    { [styles["technology"]]: category === "Technology" },
-                                    { [styles["update"]]: category === "Update" },
-                                    { [styles["regulation"]]: category === "Regulation" },
-                                    { [styles["security"]]: category === "Security" },
+                                    styles.category,
+                                    { [styles.market]: category === "Market" },
+                                    { [styles.technology]: category === "Technology" },
+                                    { [styles.update]: category === "Update" },
+                                    { [styles.regulation]: category === "Regulation" },
+                                    { [styles.security]: category === "Security" },
                                 ])}>{category}</span>}
                             </div>
                         </div>
@@ -110,8 +111,9 @@ const TrendsList: React.FC<{ vertical?: boolean } & IComponent> = ({
                         slidesPerView={3}
                         
                         onBeforeInit={(swiper) =>{
-                            swiper.params.navigation["disabledClass"] = styles["trends-list__nav--disabled"];
-                            swiper.params.navigation["lockClass"] = styles["trends-list__nav--lock"];
+                            const nav = swiper.params.navigation as NavigationOptions;
+                            nav.disabledClass = styles["trends-list__nav--disabled"];
+                            nav.lockClass = styles["trends-list__nav--lock"];
                         }}
                         onInit={(swiper) => {
                             setSwiper(swiper);

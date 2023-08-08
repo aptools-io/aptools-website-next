@@ -25,7 +25,7 @@ const Accounts: React.FC<{ all?: boolean } & IComponent> = ({
     const { accountsWallets } = useSelector((state: IRootState) => state.accounts);
 
     const classes = classNames([
-        styles["accounts"],
+        styles.accounts,
         className
     ]);
 

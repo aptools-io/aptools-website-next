@@ -48,7 +48,7 @@ const AccountResourcesList: React.FC<{ modules?: boolean } & IComponent> = ({
         return (
             <li key={index} className={classNames([
                 styles["account-resources-list__item"],
-                { [styles["open"]]: openCode.id === index && openCode.opened }
+                { [styles.open]: openCode.id === index && openCode.opened }
             ])}>
                 {type && <div onClick={() => handleOpenCode(index)} className={styles["account-resources-list__item-title"]}>{type} <ArrowMore /></div>}
                 {name && <div onClick={() => handleOpenCode(index)} className={styles["account-resources-list__item-title"]}>{name} <ArrowMore /></div>}

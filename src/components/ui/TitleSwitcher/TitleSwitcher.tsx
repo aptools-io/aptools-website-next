@@ -25,11 +25,11 @@ const TitleSwitcher: React.FC<ITitleSwitcherProps> = ({
                 key={index} 
                 className={classNames([
                     styles["title-switcher__item"],
-                    { [styles["active"]]: settedData.key === item.key }
+                    { [styles.active]: settedData.key === item.key }
                 ])} 
                 onClick={() => setData(item)}
             >
-                    {item.value}
+                {item.value}
             </button>
         );
     };

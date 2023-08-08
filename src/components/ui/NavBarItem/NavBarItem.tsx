@@ -22,8 +22,8 @@ const NavBarItem: React.FC<INavBarMenuItemProps> = ({
     const router = useRouter();
     const classes = classNames([
         styles["nav-bar-item"],
-        { [styles["expanded"]]: expanded },
-        { [styles["active"]]: router.asPath === data.link },
+        { [styles.expanded]: expanded },
+        { [styles.active]: router.asPath === data.link },
         className
     ]);
 

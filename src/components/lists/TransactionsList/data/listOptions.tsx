@@ -27,7 +27,7 @@ const columnNames = [
             const type = getTransactionType(v);
             return (
                 <span className={classNames([
-                    styles["transaction__type"],
+                    styles.transaction__type,
                     styles[type.color]
                 ])}>{type.name}</span>
             );
@@ -47,8 +47,8 @@ const columnNames = [
         "formatterComponent": (v) => {
             return (
                 <span className={classNames([
-                    styles["transaction__success"],
-                    { [styles["error"]]: !v }
+                    styles.transaction__success,
+                    { [styles.error]: !v }
                 ])}>{v ? "Success" : "Cancel"}</span>
             );
         }

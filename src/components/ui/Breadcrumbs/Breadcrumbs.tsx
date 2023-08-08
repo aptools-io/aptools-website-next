@@ -37,20 +37,20 @@ const Breadcrumbs: React.FC<IBreadcrumbsProps> = ({customTitle, customLink}) => 
 
     const renderBreadcrumb = (item, index) => {
         if (index !== getPathsArray.length - 1) {
-        return (
-            <React.Fragment key={index}>
-                <Link href={item.url}>
-                    <a>{t(item.title)}</a>
-                </Link>
-                <i> / </i>
-            </React.Fragment>
-        );
+            return (
+                <React.Fragment key={index}>
+                    <Link href={item.url}>
+                        <a>{t(item.title)}</a>
+                    </Link>
+                    <i> / </i>
+                </React.Fragment>
+            );
         }
         return <span key={index}>{t(item.title)}</span>;
     };
 
     return (
-        <div className={styles["breadcrumbs"]}>
+        <div className={styles.breadcrumbs}>
             {Array.isArray(getPathsArray) && getPathsArray?.map(renderBreadcrumb)}
         </div>
     );

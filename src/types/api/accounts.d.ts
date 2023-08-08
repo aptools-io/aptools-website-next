@@ -150,12 +150,7 @@ interface IApiAccountResourceDetails {
         epoch_interval?: string;
         events: {
             counter: string;
-            guid: {
-                id: {
-                    addr: string;
-                    creation_num: string;
-                }
-            }
+            guid: IApiGuid
         }
         last_reconfiguration_time: string;
         allow_validator_set_change?: boolean;

@@ -159,7 +159,7 @@ const TransactionsList: React.FC<{ title?: string, full?: boolean } & IComponent
     };
 
     const classes = classNames([
-        styles["transactions"],
+        styles.transactions,
         "list",
         className
     ]);

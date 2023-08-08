@@ -38,7 +38,7 @@ const AccountTokenPerformanceList: React.FC<IComponent> = ({
     const dispatch = useDispatch();
     const router = useRouter();
     const { id = null } = router?.query || {};
-   /*  const { coin_pairs = [] } = singleDexData || {};
+    /*  const { coin_pairs = [] } = singleDexData || {};
     const router = useRouter();
     const { pairs = perPages[2], page = 1 } = router.query;
 

@@ -119,7 +119,7 @@ const categories = (dispatch) => {
         {
             id: 7,
             title: "Notifications",
-            component: () => <div className={styles["account__inner"]}><Plug /></div>,
+            component: () => <div className={styles.account__inner}><Plug /></div>,
             action: (setCustomEntry, setLoading, id) => {
                 setLoading(false);
             }

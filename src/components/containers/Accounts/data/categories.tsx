@@ -15,7 +15,7 @@ const categories = [
     {
         id: 2,
         title: "Holders",
-        component: () => <div className={styles["accounts__inner"]}><Plug /></div>,
+        component: () => <div className={styles.accounts__inner}><Plug /></div>,
         action: (setCustomEntry, setLoading, id) => {
             setLoading(false);
         }
@@ -23,7 +23,7 @@ const categories = [
     {
         id: 3,
         title: "Pending Claims",
-        component: () => <div className={styles["accounts__inner"]}><Plug /></div>,
+        component: () => <div className={styles.accounts__inner}><Plug /></div>,
         action: (setCustomEntry, setLoading, id) => {
             setLoading(false);
         }
@@ -31,7 +31,7 @@ const categories = [
     {
         id: 4,
         title: "Inventory",
-        component: () => <div className={styles["accounts__inner"]}><Plug /></div>,
+        component: () => <div className={styles.accounts__inner}><Plug /></div>,
         action: (setCustomEntry, setLoading, id) => {
             setLoading(false);
         }

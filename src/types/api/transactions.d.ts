@@ -67,7 +67,9 @@ interface IApiTransactionInfoData {
 
 interface IApiTransactionInfoEvent {
     "data": {
-        "amount": string
+        "amount": string;
+        "pool_address": string;
+        "rewards_amount": string;
     };
     "guid": {
         "account_address": string;

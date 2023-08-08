@@ -64,12 +64,12 @@ const AccountTokenStats: React.FC<IComponent> = ({
         const isOther = item.title === "Other";
         return (
             <li key={index} className={styles["account-performance__list-item"]}>
-                <div className={styles["info"]}>
-                    <div className={styles["color"]} style={{ backgroundColor: item.color }} />
+                <div className={styles.info}>
+                    <div className={styles.color} style={{ backgroundColor: item.color }} />
                     {!isOther && <Img src={getImageFromApi(item.symbol)} alt={item.title} />}
-                    <div className={styles["inner"]}>
-                        <strong className={styles["title"]}>{item.title}</strong>
-                        {!isOther && <span className={styles["description"]}>{item.symbol}</span>}
+                    <div className={styles.inner}>
+                        <strong className={styles.title}>{item.title}</strong>
+                        {!isOther && <span className={styles.description}>{item.symbol}</span>}
                     </div>
                 </div>
                 <span>{concatString(formatNumber(item.value, 5), "", "%")}</span>

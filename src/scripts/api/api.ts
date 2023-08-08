@@ -18,7 +18,7 @@ export class Api {
         url: string, 
         headers: HeadersInit, 
         params: Record<string, any> = {}, 
-        body: Record<string, any> = null
+        body: Record<string, any> | string = null
     ) => {
         try {
             const init = {
@@ -30,9 +30,8 @@ export class Api {
             };
 
             const paramsString = new URLSearchParams({ ...params, ...this.isToken && { API_KEY: this.token } });
-            const endpoint = `${this.base}${this.version}${url}?${paramsString}`;
+            const endpoint = `${this.base}${this.version}${url}${Object.keys(params)?.length > 0 ? `?${paramsString}` : ""}`;
             const result: Response = await fetch(endpoint, init);
-            console.log(endpoint);
             return result;
         }
         catch(error) {
@@ -47,11 +46,11 @@ export class Api {
         return response.json();
     };
 
-    post = async (url: string, headers: HeadersInit, params: Record<string, any> = {}, body: Record<string, any> = null): Promise<Response> => { 
+    post = async (url: string, headers: HeadersInit, params: Record<string, any> = {}, body: Record<string, any> | string = null): Promise<Response> => { 
         return this.fetch("POST", url, headers, params, body).then(response => this.handleResponse(response));
     };
 
-    get = async (url: string, headers: HeadersInit = {}, params: Record<string, any> = {}, body: Record<string, any> = null): Promise<Response> => { 
+    get = async (url: string, headers: HeadersInit = {}, params: Record<string, any> = {}, body: Record<string, any> | string = null): Promise<Response> => { 
         return this.fetch("GET", url, headers, params).then(response => this.handleResponse(response));
     };
 

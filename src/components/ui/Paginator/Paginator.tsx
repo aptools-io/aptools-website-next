@@ -48,7 +48,7 @@ const Paginator: React.FC<IPaginatorProps> = ({
     const router = useRouter();
 
     const classes = classNames([
-        styles["paginator"],
+        styles.paginator,
         className
     ]);
 
@@ -77,9 +77,9 @@ const Paginator: React.FC<IPaginatorProps> = ({
             <li 
                 key={index} 
                 className={classNames([
-                    styles["paginator__page"],
-                    { [styles["active"]]: page === item },
-                    { [styles["dots"]]: item === "..." }
+                    styles.paginator__page,
+                    { [styles.active]: page === item },
+                    { [styles.dots]: item === "..." }
                 ])}
             >
                 <button onClick={handleClick}>{item}</button>
@@ -89,27 +89,27 @@ const Paginator: React.FC<IPaginatorProps> = ({
 
     return (
         <div style={style} className={classes}>
-            <div className={styles["paginator__inner"]}>{children}</div>
-            <div  className={styles["paginator__wrapper"]}>
-                {pageCount > 1 ? <ul className={styles["paginator__pages"]}>
-                    <button className={classNames([styles["paginator__arrow-left"], { [styles["disabled"]]: page === 1 }])} onClick={() => handleChangePage(1)}><ArrowLeftPagination /></button>
-                    <button className={classNames([styles["paginator__arrow-left-text"], { [styles["disabled"]]: page === 1 }])} onClick={() => handleChangePage(page - 1)}>previous page</button>
+            <div className={styles.paginator__inner}>{children}</div>
+            <div  className={styles.paginator__wrapper}>
+                {pageCount > 1 ? <ul className={styles.paginator__pages}>
+                    <button className={classNames([styles["paginator__arrow-left"], { [styles.disabled]: page === 1 }])} onClick={() => handleChangePage(1)}><ArrowLeftPagination /></button>
+                    <button className={classNames([styles["paginator__arrow-left-text"], { [styles.disabled]: page === 1 }])} onClick={() => handleChangePage(page - 1)}>previous page</button>
 
                     {pages.map(renderPagination)}
 
-                    <button className={classNames([styles["paginator__arrow-right-text"], { [styles["disabled"]]: page === pageCount }])} onClick={() => handleChangePage(page + 1)}>next page</button>
-                    <button className={classNames([styles["paginator__arrow-right"], { [styles["disabled"]]: page === pageCount }])} onClick={() => handleChangePage(pageCount)}><ArrowLeftPagination /></button>
+                    <button className={classNames([styles["paginator__arrow-right-text"], { [styles.disabled]: page === pageCount }])} onClick={() => handleChangePage(page + 1)}>next page</button>
+                    <button className={classNames([styles["paginator__arrow-right"], { [styles.disabled]: page === pageCount }])} onClick={() => handleChangePage(pageCount)}><ArrowLeftPagination /></button>
                 </ul> : <div></div>}
                 {changePerPage && 
-                    <div className={styles["paginator__perpage"]}>
-                        <span>View on page</span>
-                        <Select
-                            onChange={handleChangePerPage}
-                            value={currentPerPageIndex}
-                            customSelectWrapper={customPaginatorWrapper}
-                        >
-                            {perPages.map((item, index) => <span key={index}>{item} results</span>)}
-                        </Select>
+                    <div className={styles.paginator__perpage}>
+                    	<span>View on page</span>
+                    	<Select
+                    		onChange={handleChangePerPage}
+                    		value={currentPerPageIndex}
+                    		customSelectWrapper={customPaginatorWrapper}
+                    	>
+                    		{perPages.map((item, index) => <span key={index}>{item} results</span>)}
+                    	</Select>
                     </div>
                 }
             </div>

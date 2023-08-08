@@ -32,21 +32,21 @@ const NewsList: React.FC<{ data?: IApiNews } & IComponent> = ({
                 <ActiveLink href={`/news/${id}`}>
                     <a className={styles["news-list__item"]}>
                         <div className={styles["news-list__item-info"]}>
-                            {title && <strong className={styles["title"]}>{title}</strong>}
+                            {title && <strong className={styles.title}>{title}</strong>}
                             {/* {description && <span className={styles["description"]}>{description}</span>} */}
-                            <span className={styles["description"]}>
-                            {description}
+                            <span className={styles.description}>
+                                {description}
                             </span>
                             <div className={styles["news-list__item-bottom"]}>
-                                {insertedAt && <span className={styles["date"]}>{date}</span>}
+                                {insertedAt && <span className={styles.date}>{date}</span>}
                                 <i/>
                                 {categoryTitle && <span className={classNames([
-                                    styles["category"],
-                                    { [styles["market"]]: categoryTitle === "Market" },
-                                    { [styles["technology"]]: categoryTitle === "Technology" },
-                                    { [styles["update"]]: categoryTitle === "Update" },
-                                    { [styles["regulation"]]: categoryTitle === "Regulation" },
-                                    { [styles["security"]]: categoryTitle === "Security" },
+                                    styles.category,
+                                    { [styles.market]: categoryTitle === "Market" },
+                                    { [styles.technology]: categoryTitle === "Technology" },
+                                    { [styles.update]: categoryTitle === "Update" },
+                                    { [styles.regulation]: categoryTitle === "Regulation" },
+                                    { [styles.security]: categoryTitle === "Security" },
                                 ])}>{categoryTitle}</span>}
                             </div>
                         </div>

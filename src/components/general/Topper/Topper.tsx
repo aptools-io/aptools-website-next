@@ -27,13 +27,13 @@ const Topper: React.FC<{
     const { title } = useSelector((state: IRootState) => state.pageTitle);
 
     const classes = classNames([
-        styles["topper"],
+        styles.topper,
         className
     ]);
  
     return (
         <div className={classes}>
-            <strong className={styles["topper__title"]} dangerouslySetInnerHTML={{ __html: `${title}${additiveTitle}` }}></strong>
+            <strong className={styles.topper__title} dangerouslySetInnerHTML={{ __html: `${title}${additiveTitle}` }}></strong>
             <Breadcrumbs key={title} customTitle={customTitle || title} />
             <Button { ...backlink ? { href: backlink } : {} } before={"back"}>Back</Button>
         </div>

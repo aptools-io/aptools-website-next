@@ -24,7 +24,7 @@ const ProjectsList: React.FC<{ all?: boolean, data?: IApiProject[], mediaData: a
 
     const renderSocial = (item: IApiProjectSocials, index: number) => (
         <ActiveLink key={index} className={styles["projects-list__item-social-wrapper"]} href={item.link}>
-            <a className={styles["projects-list__item-social"]}>
+            <a className={styles["projects-list__item-social"]} target={"_blank"}>
                 {socials[item.name] || <>x</>}
             </a>
         </ActiveLink>
@@ -61,13 +61,13 @@ const ProjectsList: React.FC<{ all?: boolean, data?: IApiProject[], mediaData: a
                 </GridWrapper>
                 {(index === lastItem - 1 && !all) &&
                 <GridWrapper gridWidth={mediaData.project}>
-                    <div style={{ animation: `fade-in .5s ${index / 10}s normal forwards ease` }} className={styles["projects-list__item-more"]}>
-                        <ActiveLink href={"/projects"}>
-                            <a>
+                	<div style={{ animation: `fade-in .5s ${index / 10}s normal forwards ease` }} className={styles["projects-list__item-more"]}>
+                		<ActiveLink href={"/projects"}>
+                			<a>
                                 See more <ArrowMore/>
-                            </a>
-                        </ActiveLink>
-                    </div>
+                			</a>
+                		</ActiveLink>
+                	</div>
                 </GridWrapper>}
             </React.Fragment>
         );

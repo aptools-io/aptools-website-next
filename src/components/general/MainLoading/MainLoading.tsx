@@ -37,8 +37,8 @@ const MainLoading: React.FC<IComponent> = ({
 
     const classes = classNames([
         styles["main-loading"],
-        { [styles["start"]]: start },
-        { [styles["end"]]: end },
+        { [styles.start]: start },
+        { [styles.end]: end },
         className
     ]);
     

@@ -7,14 +7,14 @@ const chartOptions = (data: IApiTokenSchelude[], volume: boolean = true) => {
         stack: "Total",
         smooth: true,
         lineStyle: {
-          width: 0
+            width: 0
         },
         showSymbol: false,
         areaStyle: {
-          opacity: 1,
+            opacity: 1,
         },
         emphasis: {
-          focus: "series"
+            focus: "series"
         },
     };
     return {

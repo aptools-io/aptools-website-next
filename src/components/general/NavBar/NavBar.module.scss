@@ -14,7 +14,7 @@
     padding: var(--nav-bar-h-padding) 0;
     overflow: hidden;
     transition: width var(--nav-bar-transition-speed-1) ease, height var(--nav-bar-transition-speed-1) ease;
-    z-index: 10;
+    z-index: 20;
 
     $self: &;
 

@@ -66,8 +66,8 @@ const Layout: React.FC<{ children: React.ReactNode, pageProps }> = ({ children, 
             </Head>
 
             <div data-theme={"light"} id={"main"} className={classNames([
-                styles["layout"],
-                { [styles["overflow"]]: pageProps?.overflow }
+                styles.layout,
+                { [styles.overflow]: pageProps?.overflow }
             ])}>
                 {/* <MainLoading /> */}
                 <NextNProgress  options={{ showSpinner: false }} color="#3b5998" />
