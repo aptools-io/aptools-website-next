@@ -135,7 +135,7 @@ const ListColumn: React.FC<IListProps> = ({
                     </div>}
 
                     {column?.formatterComponent ? 
-                        <div className={styles["list-column__info"]}>{column?.formatterComponent(unformattedValue)}</div> : 
+                        <div className={styles["list-column__info"]}>{column?.formatterComponent(unformattedValue, row)}</div> : 
                         <div className={styles["list-column__info"]}>
                             {(combinedValue !== undefined && !column?.ignoreCombined) ? `${combinedValue} / ` : ""}
                             {value}

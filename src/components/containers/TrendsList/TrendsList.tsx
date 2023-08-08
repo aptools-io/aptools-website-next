@@ -3,6 +3,7 @@ import React, { useRef, useState } from "react";
 
 // Swiper / Components
 import { Swiper, SwiperSlide } from "swiper/react";
+import { NavigationOptions } from "swiper/types";
 import { Navigation } from "swiper";
 import { ArrowLeftBig } from "src/components/svg";
 import { ActiveLink, Img } from "src/components/ui";
@@ -110,8 +111,9 @@ const TrendsList: React.FC<{ vertical?: boolean } & IComponent> = ({
                         slidesPerView={3}
                         
                         onBeforeInit={(swiper) =>{
-                            swiper.params.navigation.disabledClass = styles["trends-list__nav--disabled"];
-                            swiper.params.navigation.lockClass = styles["trends-list__nav--lock"];
+                            const nav = swiper.params.navigation as NavigationOptions;
+                            nav.disabledClass = styles["trends-list__nav--disabled"];
+                            nav.lockClass = styles["trends-list__nav--lock"];
                         }}
                         onInit={(swiper) => {
                             setSwiper(swiper);

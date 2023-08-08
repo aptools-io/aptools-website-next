@@ -30,8 +30,6 @@
             "double",
             "avoid-escape"
         ],
-        "indent": ["error", 4],
-        "no-tabs": 0,
         "import/no-unresolved": "off",
         "dot-notation": "off",
         "import/extensions": "off",

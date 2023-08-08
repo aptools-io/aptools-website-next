@@ -5,8 +5,9 @@ import React, { useRef, useState, Children, useEffect } from "react";
 import { useRouter } from "next/router";
 
 // Swiper / Components
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper";
+import { Swiper, SwiperSlide, } from "swiper/react";
+import { NavigationOptions } from "swiper/types";
+import { Navigation, } from "swiper";
 import { ArrowLeft } from "src/components/svg";
 
 // Styles
@@ -132,8 +133,9 @@ const Tabs: React.ForwardRefRenderFunction<any, ITabsProps> = ({
                             slidesPerView={"auto"}
                             
                             onBeforeInit={(swiper) =>{
-                                swiper.params.navigation.disabledClass = styles["tabs__nav--disabled"];
-                                swiper.params.navigation.lockClass = styles["tabs__nav--lock"];
+                                const nav = swiper.params.navigation as NavigationOptions;
+                                nav.disabledClass = styles["tabs__nav--disabled"];
+                                nav.lockClass = styles["tabs__nav--lock"];
                                 
                             }}
                             onInit={(swiper) => {

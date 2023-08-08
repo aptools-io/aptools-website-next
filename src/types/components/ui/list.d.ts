@@ -50,6 +50,7 @@ interface IColumnName {
     formatter?: (v: any, row?: any) => string;
     replacedFormatter?: (v: any, row?: any) => string;
     descriptionFormatter?: (v: any, row?: any) => string;
+    formatterComponent?: (v: any, row?: any) => any;
     ownLink?: string;
     hideMobile?: boolean;
     mainMobile?: boolean;
