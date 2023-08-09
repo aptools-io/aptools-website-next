@@ -46,9 +46,9 @@ const ValidatorTransactionsList: React.FC<IComponent> = ({
     ]);
 
     const handleLoadMore = async () => {
+        setLoading(1);
         await validators.getValidatorsMoveResourcesData(id as string, start, limit)
             .then((e: unknown) => {
-                setLoading(1);
                 const result = e as any;
                 const promises = result?.data?.move_resources
                     ?.map(element => transactions.getSingleTransactionDataByVersion(element.transaction_version)) || [];

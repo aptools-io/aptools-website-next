@@ -26,7 +26,6 @@ const ValidatorsSinglePage: React.FC = () => {
                 additiveTitle={` #${validator_index}`}
             />
             <StatsSingleValidator />
-            
             <Grid>
                 <GridWrapper>
                     <Validator />

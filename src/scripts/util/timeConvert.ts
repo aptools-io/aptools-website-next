@@ -16,11 +16,12 @@ const parseTimestamp = (timestamp: string) => {
 };
 
 const setTimeAgoValue = (number: number, concat: string) => {
-    if(number === 0 || !number) return "";
+    if((number === 0 && concat !== "sec") || !number === undefined) return "";
     return `${number}${concat}`;
 };
 
 const timeAgo = (time) => {
+    if(time === "0" || !time || time === undefined) return "-";
     const timestamp = time;
     const currentTime = moment();
     const pastTime = moment(timestamp);

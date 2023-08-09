@@ -18,7 +18,10 @@ interface IApiProps {
     "validators_locations": IApiValidatorLocation[],
     "validators_blocks": IApiValidatorsBlocks,
     "validators": IApiValidators,
-    "validator": [IApiValidators, IApiValidators, IApiValidators]
+    "validator": [IApiValidators, IApiValidators, IApiValidators],
+    "blockchain": IApiBlockchainMainData;
+    "blocks": IApiBlock[],
+    "block": IApiBlock
 }
 
 interface IApiGuid {

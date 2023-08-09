@@ -16,3 +16,4 @@ export { default as AccountTransactionsList } from "./AccountTransactionsList/Ac
 export { default as AccountTokensList } from "./AccountTokensList/AccountTokensList";
 export { default as ValidatorsList } from "./ValidatorsList/ValidatorsList";
 export { default as ValidatorTransactionsList } from "./ValidatorTransactionsList/ValidatorTransactionsList";
+export { default as BlocksList } from "./BlocksList/BlocksList";

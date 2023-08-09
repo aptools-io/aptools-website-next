@@ -13,9 +13,10 @@ const media = (width: number) => {
             [EBreakpoints.TABLET]: (v: string) => shortenHashString(v, [5, 5]), 
             [EBreakpoints.MIN]: (v: string) => shortenHashString(v)}, 
         width) as (v: string) => string,
-        validatorStats: a({ 
-            [EBreakpoints.LARGE]: 7, 
-            [EBreakpoints.TABLET]: 7, 
+        blockStats: a({ 
+            [EBreakpoints.LARGE]: 3, 
+            [EBreakpoints.LAPTOP]: 3, 
+            [EBreakpoints.TABLET]: 10, 
             [EBreakpoints.MIN]: 10}, 
         width) as number,
     };
