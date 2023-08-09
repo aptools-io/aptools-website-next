@@ -21,6 +21,7 @@ import { Coins } from "src/components/svg";
 import useWindowSize from "src/scripts/hooks/useWindowSize";
 import { percentClass, transactionTypes } from "src/scripts/util/classes";
 import media from "./data/adaptive";
+import { timeFull } from "src/scripts/util/timeConvert";
 
 
 const StatsSingleBlock: React.FC<IComponent> = ({
@@ -58,7 +59,7 @@ const StatsSingleBlock: React.FC<IComponent> = ({
                             <div className={"stats__item"}>
                                 {<div className={"stats__item-wrapper"}>
                                     <span className={"title"}>Version</span>
-                                    <span className={"info break"}>{first_version} – {last_version}</span>
+                                    <span className={"info break"}><span>{first_version} – {last_version}</span></span>
                                 </div>}
                             </div>
                         </Plate>
@@ -66,17 +67,17 @@ const StatsSingleBlock: React.FC<IComponent> = ({
                     <GridWrapper>
                         <Plate noMin min compressed>
                             <div className={"stats__item"}>
-                                {<div className={"stats__item-wrapper"}>
+                                {block_timestamp && <div className={"stats__item-wrapper"}>
                                     <span className={"title"}>Timestamp</span>
-                                    <span className={"info break"}>{block_timestamp}</span>
+                                    <span className={"info break"}>{timeFull(Number(block_timestamp) / 1000)}</span>
                                 </div>}
-                                {<div className={"stats__item-wrapper"}>
+                                {block_height && <div className={"stats__item-wrapper"}>
                                     <span className={"title"}>Block Height</span>
                                     <span className={"info break"}>{block_height}</span>
                                 </div>}
-                                {<div className={"stats__item-wrapper"}>
+                                {expiration_timestamp_secs && <div className={"stats__item-wrapper"}>
                                     <span className={"title"}>Expiration Timestamp</span>
-                                    <span className={"info break"}>{expiration_timestamp_secs}</span>
+                                    <span className={"info break"}>{timeFull(Number(expiration_timestamp_secs) / 1000)}</span>
                                 </div>}
                             </div>
                         </Plate>
@@ -88,15 +89,15 @@ const StatsSingleBlock: React.FC<IComponent> = ({
                     <GridWrapper>
                         <Plate noMin min compressed>
                             <div className={"stats__item"}>
-                                {<div className={"stats__item-wrapper"}>
+                                {proposer && <div className={"stats__item-wrapper"}>
                                     <span className={"title"}>Proposer</span>
-                                    <span className={"info break"}>{proposer}</span>
+                                    <span className={"info break row"}>{mediaData.validatorHash(proposer)}<CopyText text={proposer} /></span>
                                 </div>}
-                                {<div className={"stats__item-wrapper"}>
+                                {epoch && <div className={"stats__item-wrapper"}>
                                     <span className={"title"}>Epoch</span>
                                     <span className={"info break"}>{epoch}</span>
                                 </div>}
-                                {<div className={"stats__item-wrapper"}>
+                                {round && <div className={"stats__item-wrapper"}>
                                     <span className={"title"}>Round</span>
                                     <span className={"info break"}>{round}</span>
                                 </div>}

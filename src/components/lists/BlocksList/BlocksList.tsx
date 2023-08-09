@@ -10,15 +10,15 @@ import classNames from "classnames";
 import { List, ListHeader, Paginator, Plug } from "src/components/ui";
 import { defaultPerPage, perPages } from "src/scripts/consts/perPages";
 import { useRouter } from "next/router";
-import styles from "./BlocksList.module.scss";
 
 // Components
 
 // Options
-import { columnNames, columns } from "./data/listOptions";
 import { blockchain, blocks } from "src/scripts/api/requests";
 import { setBlocks } from "src/scripts/redux/slices/blocksSlice";
 import { setBlockchain } from "src/scripts/redux/slices/blockchainSlice";
+import { columnNames, columns } from "./data/listOptions";
+import styles from "./BlocksList.module.scss";
 
 const BlocksList: React.FC<IComponent> = ({
     className 
@@ -44,7 +44,7 @@ const BlocksList: React.FC<IComponent> = ({
    
     const handleData = (page: number, perPage: number) => {
         blockchain.getMainData().then((blockchain: unknown) => {
-            const blockchainData = blockchain as IApiBlockchainMainData
+            const blockchainData = blockchain as IApiBlockchainMainData;
             dispatch(setBlockchain(blockchainData));
             const { block_height } = blockchainData || {};
 
@@ -56,8 +56,8 @@ const BlocksList: React.FC<IComponent> = ({
                 dispatch(setBlocks(blocks as IApiBlock[]));
                 setLoading(0);
             }) ;
-        })
-    }
+        });
+    };
 
     return (
         <div className={classes}>

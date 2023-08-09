@@ -6,11 +6,11 @@ import { EBreakpoints } from "src/types/common/adaptive";
 const media = (width: number) => {
     return {
         validatorHash: a({ 
-            [EBreakpoints.WIDE]: (v: string) => v, 
-            [EBreakpoints.FULL]: (v: string) =>  shortenHashString(v, [20, 20]), 
+            [EBreakpoints.WIDE]: (v: string) => shortenHashString(v, [20, 20]), 
+            [EBreakpoints.FULL]: (v: string) =>  shortenHashString(v, [15, 15]), 
             [EBreakpoints.LARGE]: (v: string) => shortenHashString(v, [10, 10]), 
             [EBreakpoints.LAPTOP]: (v: string) => shortenHashString(v, [10, 10]), 
-            [EBreakpoints.TABLET]: (v: string) => shortenHashString(v, [5, 5]), 
+            [EBreakpoints.TABLET]: (v: string) => shortenHashString(v, [10, 10]), 
             [EBreakpoints.MIN]: (v: string) => shortenHashString(v)}, 
         width) as (v: string) => string,
         blockStats: a({ 

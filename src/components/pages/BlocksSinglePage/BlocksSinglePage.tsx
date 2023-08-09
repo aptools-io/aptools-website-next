@@ -4,7 +4,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { StatsSingleBlock } from "src/components/containers";
 import { Grid, GridWrapper, Topper } from "src/components/general";
-import { BlocksList } from "src/components/lists";
+import { BlocksList, BlockTransactionsList } from "src/components/lists";
 import { IRootState } from "src/scripts/redux/store";
 
 const BlocksSinglePage: React.FC = () => {
@@ -23,7 +23,7 @@ const BlocksSinglePage: React.FC = () => {
             <StatsSingleBlock />
             <Grid>
                 <GridWrapper>
-                    test
+                    <BlockTransactionsList />
                 </GridWrapper>
             </Grid>
         </>

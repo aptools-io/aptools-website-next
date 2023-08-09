@@ -7,22 +7,23 @@ import { setHeaders } from "src/scripts/redux/slices/headersSlice";
 import { setPageTitle } from "src/scripts/redux/slices/pageTitleSlice";
 
 // API
-import { accounts } from "src/scripts/api/requests";
+import { accounts, nfts } from "src/scripts/api/requests";
 
 // Components
 import { NftPage } from "src/components/pages";
 import { setAccountsWalletsData } from "src/scripts/redux/slices/accountsSlice";
 
-const NFT = (data: IApiProps) => {
+const Nft = (data: IApiProps) => {
     const dispatch = useDispatch();
     useEffect(() => {
+        console.log(data);
         dispatch(setHeaders(data.headers) || null);
         dispatch(setPageTitle("NFT"));
     }, [data, dispatch]);
 
     return <NftPage />;
 };
-export default NFT;
+export default Nft;
 
 export async function getServerSideProps(context) {
     const { req } = context;
@@ -30,6 +31,7 @@ export async function getServerSideProps(context) {
     return {
         props: {
             headers: req.headers,
+            nfts: await nfts.getNftsData() || {},
         },
     };
 }

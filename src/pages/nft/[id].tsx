@@ -9,7 +9,7 @@ import { setPageTitle } from "src/scripts/redux/slices/pageTitleSlice";
 // Components
 import NftCurrent from "src/components/pages/NftCurrent/NftCurrent";
 
-const NFTSP = (data: IApiProps) => {
+const NftId = (data: IApiProps) => {
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(setHeaders(data.headers) || null);
@@ -18,7 +18,7 @@ const NFTSP = (data: IApiProps) => {
 
     return <NftCurrent />;
 };
-export default NFTSP;
+export default NftId;
 
 export async function getServerSideProps(context) {
     const { req } = context;
