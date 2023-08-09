@@ -23,7 +23,14 @@ interface IApiAccountStats {
     current_nft_balance: string;
     portfolio_chart: IPoint[]
     net_worth: string;
-    token_stats: IApiAccountTokenStat[]
+    balance_diff: string;
+    net_worth_diff: string;
+    nft_balance_diff: string;
+    token_stats: IApiAccountTokenStat[],
+    token_first_trx_timestamp: string;
+    token_last_trx_timestamp: string;
+    nft_first_trx_timestamp: string;
+    nft_last_trx_timestamp: string;
 }
 
 interface IApiAccountTokenStat {

@@ -41,6 +41,7 @@ const menu = (t: Translate): INavBarMenuItem[] => {
         {
             "title": t("termino wallet"),
             "link": "https://termino.io/",
+            "target": "_blank",
             "svg": <Tag />
         }
     ];

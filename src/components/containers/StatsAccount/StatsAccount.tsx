@@ -28,6 +28,7 @@ import { copyText } from "src/scripts/util/copyText";
 import { percentClass } from "src/scripts/util/classes";
 import styles from "./StatsAccount.module.scss";
 import media from "./data/adaptive";
+import { timeFull } from "src/scripts/util/timeConvert";
 
 const StatsAccount: React.FC<IComponent> = ({
     className 
@@ -35,26 +36,32 @@ const StatsAccount: React.FC<IComponent> = ({
     const { width } = useWindowSize();
     const mediaData = media(width);
 
-    const ResponsiveEllipsis = responsiveHOC()(LinesEllipsis);
-
     const router = useRouter();
     const { query } = router;
     
     const { accountStats } = useSelector((state: IRootState) => state.accounts);
     const { 
         net_worth, 
+        net_worth_diff,
         
         current_balance, 
+        balance_diff,
         all_time_profit,
         
         best_performer,
         worst_performer,
 
         current_nft_balance,
+        nft_balance_diff,
         all_time_nft_profit,
 
         best_nft_performer,
-        worst_nft_performer
+        worst_nft_performer,
+
+        token_first_trx_timestamp,
+        token_last_trx_timestamp,
+        nft_first_trx_timestamp,
+        nft_last_trx_timestamp
     } = accountStats || {};
 
     const {
@@ -94,8 +101,10 @@ const StatsAccount: React.FC<IComponent> = ({
         className
     ]);
 
+    console.log(nft_first_trx_timestamp)
 
-    const renderBalance = (title, balance, profit) => {
+
+    const renderBalance = (title, balance, profit, balanceDiff, firstTrans, lastTrans) => {
         return (
             <>
                 <div className={"stats__top"}>
@@ -104,6 +113,14 @@ const StatsAccount: React.FC<IComponent> = ({
                     </div>
                     <div className={"stats__top-stats"}>
                         <span className={"title"}>{balance === "0.00" ? "-" : concatString(formatNumber(balance), "", "$")}</span>
+                        {(balanceDiff && balanceDiff !== "0.0") && <span 
+                            className={classNames([
+                                "info", 
+                                percentClass(balanceDiff, true)
+                            ])}
+                        >
+                            {setSign(balanceDiff)}
+                        </span>}
                     </div>
                 </div>
                 <div className={"stats__item"}>
@@ -115,6 +132,22 @@ const StatsAccount: React.FC<IComponent> = ({
                                 {profit === "0.00" ? "-" : `${setSign(formatNumber(profit))}%`}
                             </span>
                         </span>
+                    </div>
+                </div>
+                <div className={"stats__item"}>
+                    <div className={"stats__item-wrapper wrap"}>
+                        {(firstTrans !== 0 && firstTrans) && <div><span className={"title"}>First transaction</span>
+                        <span className={"info additive"}>
+                            <span className={"blue small"}>
+                                {timeFull(firstTrans)}
+                            </span>
+                        </span></div>}
+                        {(lastTrans !== 0 && lastTrans) && <div><span className={"title"}>Last transaction</span>
+                        <span className={"info"}>
+                            <span className={"blue small"}>
+                                {timeFull(lastTrans)}
+                            </span>
+                        </span></div>}
                     </div>
                 </div>
             </>
@@ -170,6 +203,14 @@ const StatsAccount: React.FC<IComponent> = ({
                             <span className={"title"}>
                                 {concatString(formatNumber(net_worth), "", "$")}
                             </span>
+                            <span 
+                                className={classNames([
+                                    "info", 
+                                    percentClass(net_worth_diff, true)
+                                ])}
+                            >
+                                {setSign(net_worth_diff)}
+                            </span>
                         </div>
                     </div>
                 </Plate>
@@ -197,7 +238,7 @@ const StatsAccount: React.FC<IComponent> = ({
             {/* ========= */}
             <GridWrapper gridWidth={1}>
                 <Plate noMin bordered>
-                    {renderBalance("Current Token Balance", current_balance, all_time_profit)}
+                    {renderBalance("Current Token Balance", current_balance, all_time_profit, balance_diff, token_first_trx_timestamp, token_last_trx_timestamp)}
                 </Plate>
             </GridWrapper>
             <GridWrapper gridWidth={1}>
@@ -215,7 +256,7 @@ const StatsAccount: React.FC<IComponent> = ({
             {/* ========= */}
             <GridWrapper gridWidth={1}>
                 <Plate noMin bordered>
-                    {renderBalance("Current NFT Balance", current_nft_balance, all_time_nft_profit)}
+                    {renderBalance("Current NFT Balance", current_nft_balance, all_time_nft_profit, nft_balance_diff, nft_first_trx_timestamp, nft_last_trx_timestamp)}
                 </Plate>
             </GridWrapper>
             <GridWrapper gridWidth={1}>

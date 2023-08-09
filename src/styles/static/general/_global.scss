@@ -55,6 +55,19 @@ html {
     margin-left: 8px;
     border-radius: 4px;
 
+    &.no-wrap {
+        padding: unset;
+        &.positive {
+            background-color: transparent;
+            color: var(--aptools-color-emphasis-c2) !important;
+        }
+    
+        &.negative {
+            background-color: transparent;
+            color: var(--aptools-color-emphasis-c4) !important;
+        }
+    }
+
     &.positive {
         background-color: var(--aptools-color-emphasis-c2);
     }

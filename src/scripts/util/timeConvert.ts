@@ -16,11 +16,12 @@ const parseTimestamp = (timestamp: string) => {
 };
 
 const setTimeAgoValue = (number: number, concat: string) => {
-    if(number === 0 || !number) return "";
+    if((number === 0 && concat !== "sec") || !number === undefined) return "";
     return `${number}${concat}`;
 };
 
 const timeAgo = (time) => {
+    if(time === "0" || !time || time === undefined) return "-";
     const timestamp = time;
     const currentTime = moment();
     const pastTime = moment(timestamp);
@@ -97,9 +98,9 @@ const time = (timestamp: string) => {
     return `${addZero(time.getHours())}:${addZero(time.getMinutes())}:${addZero(time.getSeconds())}`;
 };
 
-const timeFull = (timestamp: string) => {
+const timeFull = (timestamp: string | number) => {
     const time = new Date(timestamp);
-    return `${addZero(time.getUTCDate())}.${addZero(time.getMonth() + 1)}.${time.getFullYear()}, ${addZero(time.getHours())}:${addZero(time.getMinutes())}:${addZero(time.getSeconds())}`;
+    return `${addZero(time.getUTCDate() + 1)}.${addZero(time.getMonth() + 1)}.${time.getFullYear()}, ${addZero(time.getHours())}:${addZero(time.getMinutes())}:${addZero(time.getSeconds())}`;
 };
 
 const dateDiffInDays = (date1: Date, date2: Date) => {

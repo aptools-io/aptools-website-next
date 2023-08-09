@@ -29,7 +29,7 @@ const List: React.FC<IListProps> = ({
     if(loadingCount) return <ul className={classes}>{new Array(loadingCount).fill(null).map((_, index) => 
         loadingComponent ? 
             <React.Fragment key={index}>{loadingComponent}</React.Fragment> : 
-            <Skeleton key={index} style={{ height: "35px", minHeight: "35px" }} />)}</ul>;
+            <Skeleton key={index} style={{ height: "24px", minHeight: "24px" }} />)}</ul>;
     
     const processedData = slice ? data.slice(slice[0], slice[1]) : data;
 

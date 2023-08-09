@@ -30,7 +30,7 @@ const NavBarItem: React.FC<INavBarMenuItemProps> = ({
     return (
         <li className={classes}>
             <ActiveLink href={data.link}>
-                <a className={styles["nav-bar-item__inner"]}>
+                <a target={data.target} className={styles["nav-bar-item__inner"]}>
                     <span className={styles["nav-bar-item__icon"]}>{data.svg}</span>
                     <span className={styles["nav-bar-item__title"]}>{data.title}</span>
                 </a>

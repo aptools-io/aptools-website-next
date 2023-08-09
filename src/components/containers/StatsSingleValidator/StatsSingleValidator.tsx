@@ -36,7 +36,7 @@ const StatsSingleValidator: React.FC<IComponent> = ({
   
     return (
         <Grid>
-            <GridWrapper gridWidth={mediaData.transactionStats}>
+            <GridWrapper gridWidth={mediaData.validatorStats}>
                 <Plate 
                     noMin 
                     transparent 

@@ -36,3 +36,4 @@ export { default as Validators } from "./Validators/Validators";
 export { default as StatsSingleValidator } from "./StatsSingleValidator/StatsSingleValidator";
 export { default as Validator } from "./Validator/Validator";
 export { default as ValidatorOverview } from "./ValidatorOverview/ValidatorOverview";
+export { default as StatsSingleBlock } from "./StatsSingleBlock/StatsSingleBlock";
