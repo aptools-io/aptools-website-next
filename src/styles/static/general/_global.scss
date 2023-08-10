@@ -57,11 +57,12 @@ html {
 
     &.no-wrap {
         padding: unset;
+
         &.positive {
             background-color: transparent;
             color: var(--aptools-color-emphasis-c2) !important;
         }
-    
+
         &.negative {
             background-color: transparent;
             color: var(--aptools-color-emphasis-c4) !important;

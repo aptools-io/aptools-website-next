@@ -26,9 +26,9 @@ import { getBaseHttpsUrl } from "src/scripts/util/data";
 import useWindowSize from "src/scripts/hooks/useWindowSize";
 import { copyText } from "src/scripts/util/copyText";
 import { percentClass } from "src/scripts/util/classes";
+import { timeFull } from "src/scripts/util/timeConvert";
 import styles from "./StatsAccount.module.scss";
 import media from "./data/adaptive";
-import { timeFull } from "src/scripts/util/timeConvert";
 
 const StatsAccount: React.FC<IComponent> = ({
     className 
@@ -101,7 +101,7 @@ const StatsAccount: React.FC<IComponent> = ({
         className
     ]);
 
-    console.log(nft_first_trx_timestamp)
+    console.log(nft_first_trx_timestamp);
 
 
     const renderBalance = (title, balance, profit, balanceDiff, firstTrans, lastTrans) => {
