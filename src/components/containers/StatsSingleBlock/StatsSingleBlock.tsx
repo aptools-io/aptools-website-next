@@ -20,8 +20,8 @@ import { Coins } from "src/components/svg";
 
 import useWindowSize from "src/scripts/hooks/useWindowSize";
 import { percentClass, transactionTypes } from "src/scripts/util/classes";
-import media from "./data/adaptive";
 import { timeFull } from "src/scripts/util/timeConvert";
+import media from "./data/adaptive";
 
 
 const StatsSingleBlock: React.FC<IComponent> = ({

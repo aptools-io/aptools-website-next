@@ -6,8 +6,8 @@ import classNames from "classnames";
 import { concatString, shortenHashString } from "src/scripts/util/strings";
 import { timeAgo } from "src/scripts/util/timeConvert";
 import { getTransactionType } from "src/scripts/util/transactions";
-import styles from "../BlockTransactionsList.module.scss";
 import { getTransactionAmount, getTransactionCounterparty, getTransactionFunction } from "src/scripts/util/transaction";
+import styles from "../BlockTransactionsList.module.scss";
 
 // Convert
 const columnNames = [

@@ -27,13 +27,13 @@ const BlockTransactionsList: React.FC<IComponent> = ({
     className 
 }) => {
     const { block } = useSelector((state: IRootState) => state.blocks);
-    const { transactions } = block || {}
+    const { transactions } = block || {};
     const classes = classNames([
         styles["block-transactions-list"],
         "list",
         className
     ]);
-    console.log(transactions)
+    console.log(transactions);
    
     return (
         <div className={classes}>
