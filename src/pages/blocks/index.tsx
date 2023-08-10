@@ -37,7 +37,7 @@ export async function getServerSideProps(context) {
 
     const { block_height } = blockchainData as IApiBlockchainMainData;
 
-    const promises = Array.from({length: 10}, (_, i) => Number(block_height) - i)?.map(element => blocks.getBlockByHeightData(element)) || [];
+    const promises = Array.from({length: 25}, (_, i) => Number(block_height) - i)?.map(element => blocks.getBlockByHeightData(element)) || [];
     const blocksData = await Promise.all(promises);
 
     return { props: { 

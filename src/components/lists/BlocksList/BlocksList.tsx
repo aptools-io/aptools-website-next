@@ -26,7 +26,7 @@ const BlocksList: React.FC<IComponent> = ({
     const { blockchain: blockchainData } = useSelector((state: IRootState) => state.blockchain);
     const { blocks: blocksData } = useSelector((state: IRootState) => state.blocks);
     const [currentPage, setCurrentPage] = useState(1);
-    const [perPage, setPerPage] = useState(10); 
+    const [perPage, setPerPage] = useState(25); 
     const [loading, setLoading] = useState(0);
 
     const dispatch = useDispatch();
@@ -59,6 +59,19 @@ const BlocksList: React.FC<IComponent> = ({
         });
     };
 
+    const handleChangePage = (page) => {
+        setCurrentPage(page);
+        setLoading(1);
+        handleData(page, perPage);
+    };
+
+    const handleChangePerPage = (perPage) => {
+        setPerPage(perPage);
+        setLoading(1);
+        setCurrentPage(1)
+        handleData(1, perPage);
+    };
+
     return (
         <div className={classes}>
             <Paginator 
@@ -67,16 +80,8 @@ const BlocksList: React.FC<IComponent> = ({
                 perPage={perPage} 
                 setPerPage={setPerPage} 
                 total={Number(block_height)} 
-                onChangePage={async (page) => {
-                    setCurrentPage(page);
-                    setLoading(1);
-                    handleData(page, perPage);
-                }}
-                onChangePerPage={(perPage) => {
-                    setPerPage(perPage);
-                    setLoading(1);
-                    handleData(currentPage, perPage);
-                }}
+                onChangePage={handleChangePage}
+                onChangePerPage={handleChangePerPage}
             >
                 <ListHeader 
                     columnNames={columnNames} 

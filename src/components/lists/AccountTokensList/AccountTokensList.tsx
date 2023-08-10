@@ -50,6 +50,27 @@ const AccountTokensList: React.FC<IComponent> = ({
 
     if(!accountTokens || !balance || !balance?.length) return <Plug noData />;
 
+    const handleChangePage = (page) => {
+        setLoading(1);
+        accounts.getAccountTokensData(id, perPage, page).then((e: unknown) => {
+            setCurrentPage(page);
+            const result = e as IApiAccountTokens;
+            dispatch(setAccountTokensData(result));
+            setLoading(0);
+        });
+    };
+
+    const handleChangePerPage = (perPage) => {
+        setPerPage(perPage);
+        setCurrentPage(1);
+        setLoading(1);
+        accounts.getAccountTokensData(id, perPage, 1).then((e: unknown) => {
+            const result = e as IApiAccountTokens;
+            dispatch(setAccountTokensData(result));
+            setLoading(0);
+        });
+    };
+
     return (
         <div className={classes}>
             <Paginator 
@@ -59,24 +80,8 @@ const AccountTokensList: React.FC<IComponent> = ({
                 perPage={perPage} 
                 setPerPage={setPerPage} 
                 total={total_coins} 
-                onChangePage={(page) => {
-                    setLoading(1);
-                    accounts.getAccountTokensData(id, perPage, page).then((e: unknown) => {
-                        setCurrentPage(page);
-                        const result = e as IApiAccountTokens;
-                        dispatch(setAccountTokensData(result));
-                        setLoading(0);
-                    });
-                }}
-                onChangePerPage={(perPage) => {
-                    setPerPage(perPage);
-                    setLoading(1);
-                    accounts.getAccountTokensData(id, perPage, currentPage).then((e: unknown) => {
-                        const result = e as IApiAccountTokens;
-                        dispatch(setAccountTokensData(result));
-                        setLoading(0);
-                    });
-                }}
+                onChangePage={handleChangePage}
+                onChangePerPage={handleChangePerPage}
             >
                 <ListHeader 
                     columnNames={columnNames} 

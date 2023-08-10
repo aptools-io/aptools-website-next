@@ -42,6 +42,9 @@ const TransactionRealTime: React.FC<{
     const { columnNames = null, columns = null } = media(width) || {};
 
     if(!fullTransactions || !width || !columns || !columnNames) return <></>;
+
+    const handleChangePage = (page) => setCurrentPage(page);
+
     return (
         <Paginator 
             changePerPage={full} 
@@ -49,9 +52,7 @@ const TransactionRealTime: React.FC<{
             perPage={perPage} 
             setPerPage={setPerPage}
             total={fullTransactions[0]?.version} 
-            onChangePage={(page) => {
-                setCurrentPage(page);
-            }}
+            onChangePage={handleChangePage}
             onChangePerPage={handlePerPage}
         >
             <ListHeader 

@@ -100,7 +100,7 @@ const time = (timestamp: string) => {
 
 const timeFull = (timestamp: string | number) => {
     const time = new Date(timestamp);
-    return `${addZero(time.getUTCDate() + 1)}.${addZero(time.getMonth() + 1)}.${time.getFullYear()}, ${addZero(time.getHours())}:${addZero(time.getMinutes())}:${addZero(time.getSeconds())}`;
+    return `${addZero(time.getUTCDate())}.${addZero(time.getMonth() + 1)}.${time.getFullYear()}, ${addZero(time.getHours())}:${addZero(time.getMinutes())}:${addZero(time.getSeconds())}`;
 };
 
 const dateDiffInDays = (date1: Date, date2: Date) => {

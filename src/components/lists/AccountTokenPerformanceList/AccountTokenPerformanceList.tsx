@@ -38,13 +38,6 @@ const AccountTokenPerformanceList: React.FC<IComponent> = ({
     const dispatch = useDispatch();
     const router = useRouter();
     const { id = null } = router?.query || {};
-    /*  const { coin_pairs = [] } = singleDexData || {};
-    const router = useRouter();
-    const { pairs = perPages[2], page = 1 } = router.query;
-
-    const hardSorting = useState<{ key: string; sort: string }>({ key: "volume_24h", sort: "desc" });
-    const [perPage, setPerPage] = useState(perPages.findIndex(x => x === Number(pairs)) !== -1 ? Number(pairs) : defaultPerPage);
-    const [currentPage, setCurrentPage] = useState(Number(page) || 1); */
 
     const classes = classNames([
         styles["account-token-performance"],
@@ -56,6 +49,34 @@ const AccountTokenPerformanceList: React.FC<IComponent> = ({
 
     if(!accountProfitabilities || !profitability) return <></>;
 
+    const handleChangePage = (page) => {
+        setLoading(1);
+        accounts.getAccountProfitabilitiesData(id, page, undefined, undefined).then((e: unknown) => {
+            setCurrentPage(page);
+            const result = e as IApiAccountProfitabilities;
+            dispatch(setAccountProfitabilitiesData({
+                ...result,
+                currentPage: page
+            }));
+            setLoading(0);
+        });
+    }
+
+    const handleSortingChange = (sorting) => {
+        setLoading(1);
+        accounts.getAccountProfitabilitiesData(id, currentPage, sorting.key, sorting.sort).then((e: unknown) => {
+            const result = e as IApiAccountProfitabilities;
+            dispatch(setAccountProfitabilitiesData({
+                ...result,
+                currentPage
+            }));
+            
+            const [_, setHardSort] = hardSorting;
+            setHardSort(sorting);
+            setLoading(0);
+        });
+    }
+
     return (
         <div className={classes}>
             <strong className={"list__title"}>
@@ -66,18 +87,7 @@ const AccountTokenPerformanceList: React.FC<IComponent> = ({
                 page={currentPage} 
                 perPage={perPage} 
                 total={perPage * total_pages} 
-                onChangePage={(page) => {
-                    setLoading(1);
-                    accounts.getAccountProfitabilitiesData(id, page, undefined, undefined).then((e: unknown) => {
-                        setCurrentPage(page);
-                        const result = e as IApiAccountProfitabilities;
-                        dispatch(setAccountProfitabilitiesData({
-                            ...result,
-                            currentPage: page
-                        }));
-                        setLoading(0);
-                    });
-                }}
+                onChangePage={handleChangePage}
             >
                 <ListHeader 
                     columnNames={columnNames} 
@@ -85,20 +95,7 @@ const AccountTokenPerformanceList: React.FC<IComponent> = ({
                     data={profitability}
                     key={profitability?.length}
                     hardSorting={hardSorting}
-                    onSortingChange={(sorting) => {
-                        setLoading(1);
-                        accounts.getAccountProfitabilitiesData(id, currentPage, sorting.key, sorting.sort).then((e: unknown) => {
-                            const result = e as IApiAccountProfitabilities;
-                            dispatch(setAccountProfitabilitiesData({
-                                ...result,
-                                currentPage
-                            }));
-                            
-                            const [_, setHardSort] = hardSorting;
-                            setHardSort(sorting);
-                            setLoading(0);
-                        });
-                    }}
+                    onSortingChange={handleSortingChange}
                 >
                     <List adoptMobile hardPageId={currentPage - 1} hardPerPage={10} loadingCount={loading * 10} />
                 </ListHeader>

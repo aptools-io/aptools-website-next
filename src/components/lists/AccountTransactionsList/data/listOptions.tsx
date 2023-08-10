@@ -68,8 +68,8 @@ const columnNames = [
         "key": "value",
         "value": "Value",
         "description": "value_usd",
-        "formatter": (v) => `${concatString(formatNumber(v, 2), "", "$") }`,
-        "descriptionFormatter": (v) => `${concatString(formatNumber(v, 2), "", "$") }`,
+        "formatter": (v) => `${concatString(formatNumber(v, 2), "", " APT") }`,
+        "descriptionFormatter": (v) => `${concatString(formatNumber(v, 2), "", " APT") }`,
         "cantSort": true,
         "headHideMobile": true
     },
