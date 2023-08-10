@@ -65,17 +65,26 @@ const ListHeader: React.ForwardRefRenderFunction<any, IListHeaderProps> = ({
     };
 
     const sort = (a, b) => {
-        const x = a?.[sorting.key];
-        const y = b?.[sorting.key];
+        const sortByFormatter = columnNames?.find(x => (x.key === sorting.key && x.sortByFormatter));
+       
+        let x = a?.[sorting.key];
+        let y = b?.[sorting.key];
+
+        if(sortByFormatter) {
+            x = sortByFormatter.formatter(a?.[sorting.key], a);
+            y = sortByFormatter.formatter(b?.[sorting.key], b);
+        }
 
         if(!Number.isNaN(Number(x)) && !Number.isNaN(Number(y))) return Number(x) - Number(y);
         if(typeof x === "string" && typeof y === "string") return x.localeCompare(y);
+       
         return x - y;
     };
 
     useEffect(() => {
         const newArray = [...sortedData];
         let sorted = newArray.sort(sort);
+       
         sorted = sorting.sort === "desc" ? sorted.reverse() : sorted;
 
         setSortedData([...sorted]);

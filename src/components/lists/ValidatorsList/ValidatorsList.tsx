@@ -48,11 +48,12 @@ const ValidatorsList: React.FC<IComponent> = ({
         };
     }) || [];
 
+    const handleChangePage = (page) => setCurrentPage(page);
+
+    const handleChangePerPage = (perPage) => setPerPage(perPage);
+
     return (
         <div className={classes}>
-            {/*  <strong className={"list__title"}>
-                <span>Top DEXes by Users/Transactions</span>
-            </strong> */}
             <Paginator 
                 changePerPage
                 perPageKey={"limit"}
@@ -61,12 +62,8 @@ const ValidatorsList: React.FC<IComponent> = ({
                 perPage={perPage} 
                 setPerPage={setPerPage} 
                 total={data?.length} 
-                onChangePage={(page) => {
-                    setCurrentPage(page);
-                }}
-                onChangePerPage={(perPage) => {
-                    setPerPage(perPage);
-                }}
+                onChangePage={handleChangePage}
+                onChangePerPage={handleChangePerPage}
             >
                 <ListHeader 
                     columnNames={columnNames} 

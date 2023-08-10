@@ -48,6 +48,31 @@ const AccountTransactionsList: React.FC<IComponent> = ({
 
     if(!transactions || !accountTransactions) return <Plug noData />;
 
+    const handleChangePage = (page) => {
+        setLoading(1);
+        accounts.getAccountTransactionsData(id, perPage, (page - 1) * perPage).then((e: unknown) => {
+            setCurrentPage(page);
+            const result = e as IApiAccountTransactions;
+            dispatch(setAccountTransactionsData({
+                ...result
+            }));
+            setLoading(0);
+        });
+    }
+
+    const handleChangePerPage = (perPage) => {
+        setPerPage(perPage);
+        setCurrentPage(1);
+        setLoading(1);
+        accounts.getAccountTransactionsData(id, perPage, (1 - 1) * perPage).then((e: unknown) => {
+            const result = e as IApiAccountTransactions;
+            dispatch(setAccountTransactionsData({
+                ...result
+            }));
+            setLoading(0);
+        });
+    }
+
     return (
         <div className={classes}>
             <Paginator 
@@ -57,28 +82,8 @@ const AccountTransactionsList: React.FC<IComponent> = ({
                 perPage={perPage} 
                 setPerPage={setPerPage} 
                 total={total} 
-                onChangePage={(page) => {
-                    setLoading(1);
-                    accounts.getAccountTransactionsData(id, perPage, (page - 1) * perPage).then((e: unknown) => {
-                        setCurrentPage(page);
-                        const result = e as IApiAccountTransactions;
-                        dispatch(setAccountTransactionsData({
-                            ...result
-                        }));
-                        setLoading(0);
-                    });
-                }}
-                onChangePerPage={(perPage) => {
-                    setPerPage(perPage);
-                    setLoading(1);
-                    accounts.getAccountTransactionsData(id, perPage, (currentPage - 1) * perPage).then((e: unknown) => {
-                        const result = e as IApiAccountTransactions;
-                        dispatch(setAccountTransactionsData({
-                            ...result
-                        }));
-                        setLoading(0);
-                    });
-                }}
+                onChangePage={handleChangePage}
+                onChangePerPage={handleChangePerPage}
             >
                 <ListHeader 
                     columnNames={columnNames} 

@@ -31,12 +31,16 @@ const ActiveLink = ({ children, additiveClassName = "", ...props }) => {
     
     const handleClick = (e: React.MouseEvent<HTMLElement>) => {
         e.preventDefault();
-        if((e.target  as HTMLElement).closest("button")) return;
+        let link = null;
+        const closestLink = (e.target as HTMLElement).closest("a");
+        if((e.target as HTMLElement).closest("button")) return;
         if(child.props.target === "_blank") { window.open(props.href, "_blank").focus(); return; }
+        if(closestLink.classList.contains("prior-link")) link = closestLink.href;
+
         setRoute(
             router, 
             300, 
-            props.href, 
+            link || props.href, 
             () => dispatch(setLoading({ start: true, end: false }))
         );
     };

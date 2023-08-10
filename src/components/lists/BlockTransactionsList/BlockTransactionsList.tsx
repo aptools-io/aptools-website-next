@@ -33,7 +33,6 @@ const BlockTransactionsList: React.FC<IComponent> = ({
         "list",
         className
     ]);
-    console.log(transactions);
    
     return (
         <div className={classes}>

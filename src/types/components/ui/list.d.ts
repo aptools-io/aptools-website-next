@@ -39,6 +39,7 @@ interface IColumnName {
     defaultSort?: boolean;
     defaultSortType?: string;
     cantSort?: boolean;
+    sortByFormatter?: boolean;
     ignoreCombined?: boolean;
     headHideMobile?: boolean;
     link?: string;
@@ -51,6 +52,7 @@ interface IColumnName {
     replacedFormatter?: (v: any, row?: any) => string;
     descriptionFormatter?: (v: any, row?: any) => string;
     formatterComponent?: (v: any, row?: any) => any;
+    ownLinkValueFormatter?: (v: any, row?: any) => string;
     ownLink?: string;
     hideMobile?: boolean;
     mainMobile?: boolean;

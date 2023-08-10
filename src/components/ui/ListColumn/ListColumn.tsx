@@ -51,6 +51,7 @@ const ListColumn: React.FC<IListProps> = ({
         elementRemove = false,
         bold = false,
         ownLink = null,
+        ownLinkValueFormatter = null,
         approxKey = null
     } = column;
     if(elementRemove) return <></>;
@@ -88,6 +89,7 @@ const ListColumn: React.FC<IListProps> = ({
 
     if(valueGridReplace?.length) return (<div key={columnIndex} className={styles["list-column__inner"]}>{valueGridReplace}</div>); 
 
+    const ownLinkVisible = ((ownLink && ownLinkValueFormatter?.(unformattedValue, row)) || (ownLink && !ownLinkValueFormatter))
     const classes = classNames([
         styles["list-column"],
         { [styles.right]: right },
@@ -95,7 +97,8 @@ const ListColumn: React.FC<IListProps> = ({
         { [styles.inner]: inner },
         { [styles.adopt]: adoptMobile },
         { [styles.underline]: underline },
-        { [styles["own-link"]]: ownLink },
+        { [styles["own-link"]]: ownLinkVisible },
+        { ["prior-link"]: ownLinkVisible },
         /* { [styles["center"]]: key === "_id" }, */
         { [styles["main-mobile"]]: mainMobile },
         { [styles["hide-mobile"]]: hideMobile },
@@ -112,7 +115,8 @@ const ListColumn: React.FC<IListProps> = ({
             data-column-name={!column?.replacedKeyMobile ? valueRef : value}
             style={style}
             className={classes}
-            { ...ownLink ? { "href": `${ownLink}/${unformattedValue}` } : {} }
+            { ...(ownLink && ownLinkValueFormatter?.(unformattedValue, row)) ? { "href": `${ownLink}/${ownLinkValueFormatter?.(unformattedValue, row)}` } : {} }
+            { ...(ownLink && !ownLinkValueFormatter) ? { "href": `${unformattedValue}` } : {} }
         >
             <>
                 <div className={styles["list-column__wrapper"]}>
@@ -145,7 +149,7 @@ const ListColumn: React.FC<IListProps> = ({
                     
                     {copy && <CopyText text={row?.[copy]} />}
 
-                    {ownLink && <ArrowRotated />}
+                    {ownLinkVisible && <ArrowRotated />}
                 </div>
                 {under}
             </>
