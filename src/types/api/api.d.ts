@@ -21,7 +21,9 @@ interface IApiProps {
     "validator": [IApiValidators, IApiValidators, IApiValidators],
     "blockchain": IApiBlockchainMainData;
     "blocks": IApiBlock[],
-    "block": IApiBlock
+    "block": IApiBlock,
+    "nfts_collection_list": IApiNftCollectionList,
+    "nfts_collection_inventories": IApiNftCollectionInventories[]
 }
 
 interface IApiGuid {

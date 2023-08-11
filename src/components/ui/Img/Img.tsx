@@ -16,7 +16,7 @@ const Img: React.FC<{ src: string, alt: string, off?: boolean }> = ({
         setError(false);
     }, [src]);
 
-    if(error && !off) return <img style={{ objectFit: "contain", transform: "scale(.25, .25)" }} src={NoImageLogo.src} alt={"image not found"} />;
+    if((error || !src) && !off) return <img style={{ objectFit: "contain", transform: "scale(.25, .25)" }} src={NoImageLogo.src} alt={"image not found"} />;
     return <img src={src} alt={alt} onError={() => setError(true)} />;
 };
 

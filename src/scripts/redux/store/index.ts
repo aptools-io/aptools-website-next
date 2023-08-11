@@ -15,7 +15,8 @@ import {
     validatorsSlice,
     notificationSlice,
     blocksSlice,
-    blockchainSlice
+    blockchainSlice,
+    nftsSlice
 } from "../slices/index";
 
 
@@ -38,7 +39,8 @@ const store = configureStore({
         accounts: accountsSlice,
         validators: validatorsSlice,
         blocks: blocksSlice,
-        blockchain: blockchainSlice
+        blockchain: blockchainSlice,
+        nfts: nftsSlice
     },
 });
 export default store;
