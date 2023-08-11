@@ -35,6 +35,7 @@ const nextConfig = nextTranslate({
 
         OUTSIDE_URL: process.env.OUTSIDE_URL,
         OUTSIDE_URL_2: process.env.OUTSIDE_URL_2,
+        OUTSIDE_URL_3: process.env.OUTSIDE_URL_3,
         OUTSIDE_MAP_URL: process.env.OUTSIDE_MAP_URL,
     },
     async redirects() {
