@@ -60,7 +60,7 @@ const AccountTokenPerformanceList: React.FC<IComponent> = ({
             }));
             setLoading(0);
         });
-    }
+    };
 
     const handleSortingChange = (sorting) => {
         setLoading(1);
@@ -75,7 +75,7 @@ const AccountTokenPerformanceList: React.FC<IComponent> = ({
             setHardSort(sorting);
             setLoading(0);
         });
-    }
+    };
 
     return (
         <div className={classes}>

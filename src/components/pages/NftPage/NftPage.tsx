@@ -3,14 +3,14 @@ import React, { useState } from "react";
 import { Grid, GridWrapper, Topper } from "src/components/general";
 import { Paginator, Plug, Skeleton } from "src/components/ui";
 import useWindowSize from "src/scripts/hooks/useWindowSize";
-import styles from "./NftPage.module.scss";
-import NftElement from "../../ui/NftElement/NftElement";
-import media from "./data/adaptive";
 import { useDispatch, useSelector } from "react-redux";
 import { IRootState } from "src/scripts/redux/store";
 import { nfts } from "src/scripts/api/requests";
 import { setNftsCollectionList, setNftsCollectionListInventories } from "src/scripts/redux/slices/nftsSlice";
 import classNames from "classnames";
+import media from "./data/adaptive";
+import NftElement from "../../ui/NftElement/NftElement";
+import styles from "./NftPage.module.scss";
 
 const NftPage: React.FC = () => {
     const { width } = useWindowSize();
@@ -43,47 +43,47 @@ const NftPage: React.FC = () => {
                 />
             </div>
         );
-    }
+    };
 
     const handleChangePage = async (page) => {
         setCurrrentPage(page);
         setLoading(1);
         nfts.getNftsCollectionListData(page - 1, perPage).then((e: unknown) => {
-            const result = e as IApiNftCollectionList
+            const result = e as IApiNftCollectionList;
             dispatch(setNftsCollectionList(result));
 
             const { list } = result || {};
             const promises = list?.map(element => nfts.getNftsCollectionInventoryData(0, 1, element?.creator_address, element?.name)) || [];
             Promise.all(promises).then((e: unknown) => {
-                const result = e as IApiNftCollectionInventories[]
+                const result = e as IApiNftCollectionInventories[];
                 dispatch(setNftsCollectionListInventories(result));
                 setLoading(0);
-            })
+            });
         });
-    }
+    };
 
     const handleChangePerPage = (perPage) => {
         setPerPage(perPage);
         setLoading(1);
         nfts.getNftsCollectionListData(0, perPage).then((e: unknown) => {
-            const result = e as IApiNftCollectionList
+            const result = e as IApiNftCollectionList;
             dispatch(setNftsCollectionList(result));
 
             const { list } = result || {};
             const promises = list?.map(element => nfts.getNftsCollectionInventoryData(0, 1, element?.creator_address, element?.name)) || [];
             Promise.all(promises).then((e: unknown) => {
-                const result = e as IApiNftCollectionInventories[]
+                const result = e as IApiNftCollectionInventories[];
                 dispatch(setNftsCollectionListInventories(result));
                 setLoading(0);
-            })
+            });
         });
-    }
+    };
 
     const renderSkeleton = (item, index) => (
         <div key={index} className={classNames([styles["nft__block"], styles["paddings"]])}>
             <Skeleton style={{ minHeight: 100, height: 100 }} />
         </div>
-    )
+    );
 
     return (
         <>

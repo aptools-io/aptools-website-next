@@ -89,7 +89,7 @@ const ListColumn: React.FC<IListProps> = ({
 
     if(valueGridReplace?.length) return (<div key={columnIndex} className={styles["list-column__inner"]}>{valueGridReplace}</div>); 
 
-    const ownLinkVisible = ((ownLink && ownLinkValueFormatter?.(unformattedValue, row)) || (ownLink && !ownLinkValueFormatter))
+    const ownLinkVisible = ((ownLink && ownLinkValueFormatter?.(unformattedValue, row)) || (ownLink && !ownLinkValueFormatter));
     const classes = classNames([
         styles["list-column"],
         { [styles.right]: right },
@@ -98,7 +98,7 @@ const ListColumn: React.FC<IListProps> = ({
         { [styles.adopt]: adoptMobile },
         { [styles.underline]: underline },
         { [styles["own-link"]]: ownLinkVisible },
-        { ["prior-link"]: ownLinkVisible },
+        { "prior-link": ownLinkVisible },
         /* { [styles["center"]]: key === "_id" }, */
         { [styles["main-mobile"]]: mainMobile },
         { [styles["hide-mobile"]]: hideMobile },

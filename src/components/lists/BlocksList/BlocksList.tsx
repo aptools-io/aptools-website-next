@@ -68,7 +68,7 @@ const BlocksList: React.FC<IComponent> = ({
     const handleChangePerPage = (perPage) => {
         setPerPage(perPage);
         setLoading(1);
-        setCurrentPage(1)
+        setCurrentPage(1);
         handleData(1, perPage);
     };
 
