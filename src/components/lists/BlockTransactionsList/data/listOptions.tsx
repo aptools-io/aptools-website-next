@@ -43,7 +43,7 @@ const columnNames = [
         "ownLink": "/accounts",
         "ownLinkValueFormatter": (v, row) => {
             const transactionSender = (row?.sender || row?.proposer) || null;
-            return transactionSender
+            return transactionSender;
         },
         "sortByFormatter": true
     },
@@ -59,7 +59,7 @@ const columnNames = [
         "ownLinkValueFormatter": (v, row) => {
             const counterparty = getTransactionCounterparty(row);
             const { address } = counterparty || {};
-            return address || null
+            return address || null;
         },
         "sortByFormatter": true
     },

@@ -58,7 +58,7 @@ const AccountTransactionsList: React.FC<IComponent> = ({
             }));
             setLoading(0);
         });
-    }
+    };
 
     const handleChangePerPage = (perPage) => {
         setPerPage(perPage);
@@ -71,7 +71,7 @@ const AccountTransactionsList: React.FC<IComponent> = ({
             }));
             setLoading(0);
         });
-    }
+    };
 
     return (
         <div className={classes}>
