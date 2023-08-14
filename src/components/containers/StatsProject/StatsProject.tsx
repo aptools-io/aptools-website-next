@@ -15,7 +15,7 @@ import styles from "./StatsProject.module.scss";
 import ProjectsList from "../ProjectsList/ProjectsList";
 
 // Data
-import socialsImages from "../Projects/data/socials";
+import socialsImages from "src/scripts/common/socials";
 
 const StatsProject: React.FC<IComponent> = ({
     className 

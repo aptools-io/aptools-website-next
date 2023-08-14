@@ -1,106 +1,181 @@
 @import '/src/styles/static/general/variables.static';
 @import '/src/styles/static/general/mixins';
 
-.stats-project {
+
+.other-projects {
     display: flex;
-    @include mediaWMax('TABLET') {
-        flex-direction: column;
+
+    &__item {
+        min-width: 240px;
+        &-wrapper {
+            height: 100%;
+        }
     }
 
-    &__info {
-        padding: 16px;
-        background-color: var(--aptools-color-grey-c3);
-        max-width: 944px;
-        width: 100%;
-        min-height: 200px;
+   
+    &__dot {
+        &.active {
+            border: 4px solid var(--aptools-color-emphasis-c1);
+            cursor: default;
+        }
+        width: 6px;
+        min-height: 6px;
+        height: 100%;
+        border: 4px solid var(--aptools-color-grey-c3);
+        z-index: 1;
+        border-radius: 100%;
+        margin: 0 5px;
+        position: relative;
+        top: 0;
+        transition: left .3s ease;
+
+
+        &s {
+            height: fit-content;
+            overflow: hidden;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            position: relative;
+            white-space: nowrap;
+        }
+    }
+
+    &__outer {
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
+        justify-content: center;
+    }
 
-        @include mediaWMax('TABLET') {
-            min-height: 180px;
-            padding: 10px;
-            order: 1;
+    &__nav {
+        &--disabled {
+            svg path {
+                fill: var(--aptools-color-grey-c3);
+            }
+
+            cursor: default;
         }
-        &-description {
+
+        &--lock {
+            display: none !important;
+        }
+
+        &--button {
+            width: 32px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+
+            &:last-of-type {
+                transform: scaleX(-1);
+            }
+        }
+    }
+
+    &__inner {
+        overflow: hidden;
+        position: relative;
+        padding: 16px 0px;
+
+        & > div {
+            display: flex !important;
+        }
+    }
+
+    &__item {
+        padding: 16px;
+        border-radius: 10px;
+        display: flex;
+
+        &-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding-right: 10px;
+            width: 100%;
+        }
+
+        .title {
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+            letter-spacing: -1px;
+        }
+
+        &-bottom {
+            display: flex;
+            align-items: center;
+            color: var(--aptools-color-grey-c1);
+
+            i {
+                &:after {
+                    margin: 0 5px;
+                    content: '•';
+                }
+            }
+        }
+
+        .category {
+            background-color: var(--aptools-color-grey-c5);
+            padding: 4px 10px;
+            border-radius: 14px;
+
+            &.market {
+                background-color: var(--aptools-color-lights-primary);
+            }
+
+            &.technology {
+                background-color: var(--aptools-color-lights-danger);
+            }
+
+            &.update {
+                background-color: var(--aptools-color-emphasis-c1);
+            }
+
+            &.regulation {
+                background-color: var(--aptools-color-lights-warning);
+            }
+
+            &.security {
+                background-color: var(--aptools-color-lights-info);
+            }
+        }
+
+        .date {
             font-size: 14px;
             font-style: normal;
             font-weight: 400;
             line-height: 130%;
         }
-        &-social {
+
+        &-image {
+            min-width: 150px;
+            min-height: 132px;
+            border-radius: 10px;
+            overflow: hidden;
+            background-color: var(--aptools-color-grey-c3);
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+
+        
+        &s {
             display: flex;
-            align-items: center;
-            border-radius: 2px;
-            transition: background-color .3s ease;
+            z-index: 1;
+            position: relative;
 
-            svg path {
-                transition: fill .3s ease;
-                fill: var(--aptools-color-main-secondary);
-            }
-            transform: scale(1.5);
-
-            &:hover {
-                background-color: var(--aptools-color-emphasis-c1);
-
-                svg path {
-                    fill: var(--aptools-color-main-primary);
+            & > div {
+                margin-left: 16px;
+                @include mediaWMax('TABLET') {
+                    margin-left: unset;
+                    padding: 0 16px;
                 }
             }
-
-            &s {
-                display: flex;
-                align-items: center;
-                justify-content: flex-start;
-                margin-top: 9px;
-                z-index: 2;
-
-                &-container {
-                    height: 100%;
-                    display: flex;
-                    align-items: center;
-                }
-
-                span + span {
-                    margin-left: 16px;
-                }
-            }
-        }
-        &-socials {
-            display: flex;
-            align-items: center;
-            strong {
-                font-size: 20px;
-                font-style: normal;
-                font-weight: 400;
-                line-height: normal;
-                letter-spacing: -1px;
-                margin-right: 24px;
-            }
-        }
-    }
-
-    &__image {
-        min-width: 200px;
-        min-height: 200px;
-        height: 200px;
-        width: 200px;
-        margin-left: 10px;
-        border-radius: 2px;
-        overflow: hidden;
-        img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        @include mediaWMax('TABLET') {
-            margin-left: unset;
-            margin-bottom: 16px;
-            min-width: 100px;
-            min-height: 100px;
-            height: 100px;
-            width: 100px;
         }
     }
 }

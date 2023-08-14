@@ -44,12 +44,11 @@ const Tabs: React.ForwardRefRenderFunction<any, ITabsProps> = ({
 
     const entries = data ? Object.entries(data) : dataArray;
     const entry = entries?.[tabId]?.[1] || null;
-
+    
     const classes = classNames([
         styles.tabs,
         className
     ]);
-
     useEffect(() => {
         if(swiper?.el) updateLine(tabId);
     }, [swiper, lineElement]);
@@ -108,6 +107,8 @@ const Tabs: React.ForwardRefRenderFunction<any, ITabsProps> = ({
     const getComponent = () => {
         if(loading) return new Array(10).fill(null).map((_, index) => <Skeleton key={index} style={{ height: "60px", minHeight: "60px" }} />);
         if(dataArray?.[tabId]?.component) return dataArray?.[tabId].component();
+        
+        console.log( entry , customEntry , defaultEntry , [])
         return React.cloneElement(child as React.ReactElement<IListHeaderProps>, {
             data: entry || customEntry || defaultEntry || [],
             key: new Date().getTime()
