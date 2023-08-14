@@ -22,8 +22,9 @@ const formatDecimal = (decimal: string, toFixed: number = 2) => {
     return decimal;
 };
 
-const checkMinimum = (floating: string) => {
+const checkMinimum = (floating: string, expo: boolean) => {
     const getZeroInteger = floating.indexOf("0.");
+    if(expo) return `< 0.0001`;
     if(getZeroInteger > -1 && floating.slice(-1) === "0") return `< ${floating.slice(0, -1)}1`;
     return floating;
 };
@@ -36,6 +37,7 @@ const formatNumber = (number: string | number, toFixed = 2, checkMin = true) => 
     else num = Number(num);
 
     if(num === 0) return `${num}`;
+    
 
   
 
@@ -47,7 +49,8 @@ const formatNumber = (number: string | number, toFixed = 2, checkMin = true) => 
     const formattedInteger = new Intl.NumberFormat("en").format(Number(integer)).replaceAll(",", " ");
 
     const floating = `${formattedInteger}.${formatDecimal(decimal, toFixed)}`;
-    if(pointIndex !== -1 && checkMin) return checkMinimum(floating);
+    const expo = number.toString()?.indexOf("e") > -1;
+    if((pointIndex !== -1 || expo) && checkMin ) return checkMinimum(floating, expo);
     return `${formattedInteger}`;
     
    

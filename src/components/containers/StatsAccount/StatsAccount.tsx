@@ -13,7 +13,7 @@ import { IRootState } from "src/scripts/redux/store";
 
 // Components
 import { Grid, GridWrapper } from "src/components/general";
-import { CopyText, Img, Plate } from "src/components/ui";
+import { CopyText, Img, Plate, Plug } from "src/components/ui";
 import LinesEllipsis from "react-lines-ellipsis";
 import responsiveHOC from "react-lines-ellipsis/lib/responsiveHOC";
 
@@ -101,9 +101,6 @@ const StatsAccount: React.FC<IComponent> = ({
         className
     ]);
 
-    console.log(nft_first_trx_timestamp);
-
-
     const renderBalance = (title, balance, profit, balanceDiff, firstTrans, lastTrans) => {
         return (
             <>
@@ -156,6 +153,7 @@ const StatsAccount: React.FC<IComponent> = ({
 
     const renderPerformer = (title, volume, percent, name = "", symbol = "", image = "", hideIfNegative = false) => {
         const hidePercent = hideIfNegative && (Number(volume) < 0 || Number(percent) < 0);
+        if(title === "Best Token Performer") console.log(title, Number(volume))
         return (
             <div className={"stats__wrapper"}>
                 <div className={"stats__top"}>
@@ -163,8 +161,8 @@ const StatsAccount: React.FC<IComponent> = ({
                         <strong className={"stats__top-title"}>{title}</strong>
                     </div>
                 </div>
-                <div className={"stats__item"}>
-                    {!hidePercent && <div className={"stats__item-wrapper"}>
+                {Number(volume) && Number(percent) && !hidePercent ? <div className={"stats__item"}>
+                    {<div className={"stats__item-wrapper"}>
                         <span className={"title"}>
                             <div className={"item-data"}>
                                 <Img src={image ? `${process.env.BASE_IMAGES_URL}${image}` : getImageFromApi(symbol)} alt={name} />
@@ -175,14 +173,14 @@ const StatsAccount: React.FC<IComponent> = ({
                             </div>
                             
                         </span>
-                        <span className={"info percent"}>
+                        {Number(volume) && Number(percent) ? <span className={"info percent"}>
                             {volume === "" ? "-" : concatString(formatNumber(volume), "", "$")}
                             <span className={percentClass(percent)}>
                                 {percent === "" ? "-" : concatString(setSign(formatNumber(percent)), "", "%")}
                             </span>
-                        </span>
+                        </span> : <></>}
                     </div>}
-                </div>
+                </div> : <Plug noData noPaddings />}
             </div>
         );
     };

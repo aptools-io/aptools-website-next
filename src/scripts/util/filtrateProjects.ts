@@ -1,14 +1,27 @@
 
-const filtrateProjects = (projects: IApiProject[], categories: string[]) => {
+const filtrateProjects = (
+    projects: IApiProject[],
+    categories: string[], 
+    selectedCategories: string[] = null, 
+    asArray: boolean = false
+) => {
     const sortedProjectsObject = {};
-    if(categories.length) {
-        categories.forEach(category => {
+    let sortedProjectsArray = [];
+    const cats = categories || selectedCategories || [];
+    if(cats.length) {
+        cats.forEach(category => {
             if(projects.length) 
-                sortedProjectsObject[category] = projects
+            {
+                const elements = projects
                     .filter(project => project.category.includes(category.toLowerCase()))
                     .sort((a, b) => a.priority - b.priority);
+                if(!asArray) sortedProjectsObject[category] = elements;
+                else sortedProjectsArray = [...sortedProjectsArray, ...elements];
+            }
+                
         });
     }
+    if(asArray) return sortedProjectsArray;
     return sortedProjectsObject;
 };
     

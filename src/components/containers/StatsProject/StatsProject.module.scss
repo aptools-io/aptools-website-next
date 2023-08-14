@@ -1,0 +1,106 @@
+@import '/src/styles/static/general/variables.static';
+@import '/src/styles/static/general/mixins';
+
+.stats-project {
+    display: flex;
+    @include mediaWMax('TABLET') {
+        flex-direction: column;
+    }
+
+    &__info {
+        padding: 16px;
+        background-color: var(--aptools-color-grey-c3);
+        max-width: 944px;
+        width: 100%;
+        min-height: 200px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        @include mediaWMax('TABLET') {
+            min-height: 180px;
+            padding: 10px;
+            order: 1;
+        }
+        &-description {
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 130%;
+        }
+        &-social {
+            display: flex;
+            align-items: center;
+            border-radius: 2px;
+            transition: background-color .3s ease;
+
+            svg path {
+                transition: fill .3s ease;
+                fill: var(--aptools-color-main-secondary);
+            }
+            transform: scale(1.5);
+
+            &:hover {
+                background-color: var(--aptools-color-emphasis-c1);
+
+                svg path {
+                    fill: var(--aptools-color-main-primary);
+                }
+            }
+
+            &s {
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                margin-top: 9px;
+                z-index: 2;
+
+                &-container {
+                    height: 100%;
+                    display: flex;
+                    align-items: center;
+                }
+
+                span + span {
+                    margin-left: 16px;
+                }
+            }
+        }
+        &-socials {
+            display: flex;
+            align-items: center;
+            strong {
+                font-size: 20px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: normal;
+                letter-spacing: -1px;
+                margin-right: 24px;
+            }
+        }
+    }
+
+    &__image {
+        min-width: 200px;
+        min-height: 200px;
+        height: 200px;
+        width: 200px;
+        margin-left: 10px;
+        border-radius: 2px;
+        overflow: hidden;
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @include mediaWMax('TABLET') {
+            margin-left: unset;
+            margin-bottom: 16px;
+            min-width: 100px;
+            min-height: 100px;
+            height: 100px;
+            width: 100px;
+        }
+    }
+}
