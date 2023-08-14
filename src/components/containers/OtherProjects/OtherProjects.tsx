@@ -9,10 +9,8 @@ import { IRootState } from "src/scripts/redux/store";
 import classNames from "classnames";
 import { ActiveLink, Img, Plug, ProjectItem, Socials, Tabs } from "src/components/ui";
 import useWindowSize from "src/scripts/hooks/useWindowSize";
-import styles from "./OtherProjects.module.scss";
 
 // Components
-import ProjectsList from "../ProjectsList/ProjectsList";
 
 // Data
 import { ArrowLeftBig } from "src/components/svg";
@@ -20,6 +18,8 @@ import { ArrowLeftBig } from "src/components/svg";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { NavigationOptions } from "swiper/types";
 import { Navigation, Pagination } from "swiper";
+import ProjectsList from "../ProjectsList/ProjectsList";
+import styles from "./OtherProjects.module.scss";
 
 
 const OtherProjects: React.FC<IComponent> = ({
@@ -31,7 +31,7 @@ const OtherProjects: React.FC<IComponent> = ({
     const [swiper, setSwiper] = useState(null);
 
     const { name, image, description, socials } = project || {};
-    if(!otherProjects?.length) return <Plug noData />
+    if(!otherProjects?.length) return <Plug noData />;
 
     const classes = classNames([
         styles["other-projects"],

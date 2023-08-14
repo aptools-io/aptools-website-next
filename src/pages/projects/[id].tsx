@@ -21,11 +21,11 @@ const EcosystemId = (data: IApiProps) => {
     const dispatch = useDispatch();
     
     useEffect(() => {
-        const { name } = data?.project || {}
+        const { name } = data?.project || {};
         dispatch(setHeaders(data.headers) || null);
         dispatch(setPageTitle(name));
-        dispatch(setProjectData(data.project))
-        dispatch(setOtherProjectsData(data.other_projects))
+        dispatch(setProjectData(data.project));
+        dispatch(setOtherProjectsData(data.other_projects));
     }, [data, dispatch]);
 
     return <ProjectsSinglePage />;
@@ -40,7 +40,7 @@ export async function getServerSideProps(context) {
     const projectId = projectsUnfiltered.findIndex(x => x.name === id);
 
     const project = projectsUnfiltered[projectId];
-    const otherProjects = filtrateProjects(projectsUnfiltered, null, project.category, true) as [] || []
+    const otherProjects = filtrateProjects(projectsUnfiltered, null, project.category, true) as [] || [];
     const splicedProjects = [...otherProjects];
     splicedProjects.splice(projectId, 1);
 

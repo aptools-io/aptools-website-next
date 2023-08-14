@@ -9,13 +9,13 @@ import { IRootState } from "src/scripts/redux/store";
 import classNames from "classnames";
 import { ActiveLink, Img, Plug, Socials, Tabs } from "src/components/ui";
 import useWindowSize from "src/scripts/hooks/useWindowSize";
+import socialsImages from "src/scripts/common/socials";
 import styles from "./StatsProject.module.scss";
 
 // Components
 import ProjectsList from "../ProjectsList/ProjectsList";
 
 // Data
-import socialsImages from "src/scripts/common/socials";
 
 const StatsProject: React.FC<IComponent> = ({
     className 

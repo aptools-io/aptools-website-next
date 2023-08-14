@@ -3,17 +3,18 @@ import React from "react";
 
 // Components
 import { Grid, GridWrapper } from "src/components/general";
-import { ActiveLink, Plate } from "src/components/ui";
 import { ArrowMore } from "src/components/svg";
 import LinesEllipsis from "react-lines-ellipsis";
 import responsiveHOC from "react-lines-ellipsis/lib/responsiveHOC";
-
-// Styles
-import styles from "./ProjectItem.module.scss";
-
-// Data
 import socials from "src/scripts/common/socials";
 import classNames from "classnames";
+import ActiveLink from "../ActiveLink/ActiveLink";
+import Plate from "../Plate/Plate";
+
+// Styles
+
+// Data
+import styles from "./ProjectItem.module.scss";
 
 const ProjectItem: React.FC<{ 
     item: IApiProject, 

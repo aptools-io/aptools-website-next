@@ -24,7 +24,7 @@ const formatDecimal = (decimal: string, toFixed: number = 2) => {
 
 const checkMinimum = (floating: string, expo: boolean) => {
     const getZeroInteger = floating.indexOf("0.");
-    if(expo) return `< 0.0001`;
+    if(expo) return "< 0.0001";
     if(getZeroInteger > -1 && floating.slice(-1) === "0") return `< ${floating.slice(0, -1)}1`;
     return floating;
 };

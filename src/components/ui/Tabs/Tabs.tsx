@@ -108,7 +108,7 @@ const Tabs: React.ForwardRefRenderFunction<any, ITabsProps> = ({
         if(loading) return new Array(10).fill(null).map((_, index) => <Skeleton key={index} style={{ height: "60px", minHeight: "60px" }} />);
         if(dataArray?.[tabId]?.component) return dataArray?.[tabId].component();
         
-        console.log( entry , customEntry , defaultEntry , [])
+        console.log( entry , customEntry , defaultEntry , []);
         return React.cloneElement(child as React.ReactElement<IListHeaderProps>, {
             data: entry || customEntry || defaultEntry || [],
             key: new Date().getTime()

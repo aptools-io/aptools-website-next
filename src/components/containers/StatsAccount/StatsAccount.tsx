@@ -153,7 +153,7 @@ const StatsAccount: React.FC<IComponent> = ({
 
     const renderPerformer = (title, volume, percent, name = "", symbol = "", image = "", hideIfNegative = false) => {
         const hidePercent = hideIfNegative && (Number(volume) < 0 || Number(percent) < 0);
-        if(title === "Best Token Performer") console.log(title, Number(volume))
+        if(title === "Best Token Performer") console.log(title, Number(volume));
         return (
             <div className={"stats__wrapper"}>
                 <div className={"stats__top"}>

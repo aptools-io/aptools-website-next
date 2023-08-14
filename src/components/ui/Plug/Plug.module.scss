@@ -9,7 +9,6 @@
     justify-content: center;
     backdrop-filter: blur(5px);
     z-index: 2;
-    
 
     &__no-data {
         display: flex;
@@ -24,6 +23,7 @@
         letter-spacing: -1px;
         text-transform: capitalize;
         margin: var(--layout-indent) 0;
+
         &.no-paddings {
             margin: unset;
         }

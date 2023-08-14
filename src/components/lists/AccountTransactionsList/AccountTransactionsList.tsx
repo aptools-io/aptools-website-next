@@ -35,7 +35,7 @@ const AccountTransactionsList: React.FC<IComponent> = ({
     const dispatch = useDispatch();
     const router = useRouter();
     const { id = null } = router?.query || {};
-    console.log(transactions)
+    console.log(transactions);
 
 
 
