@@ -14,13 +14,15 @@ const columnNames = [
         "key": "version",
         "value": "Version",
         "cantSort": true,
-        "headHideMobile": true
+        "headHideMobile": true,
+        "ownLink": "/transactions",
     },
     {
         "key": "block",
         "value": "Block",
         "cantSort": true,
-        "headHideMobile": true
+        "headHideMobile": true,
+        "ownLink": "/blocks",
     },
     {
         "key": "type",
@@ -68,8 +70,8 @@ const columnNames = [
         "key": "value",
         "value": "Value",
         "description": "value_usd",
-        "formatter": (v) => `${concatString(formatNumber(v, 2), "", " APT") }`,
-        "descriptionFormatter": (v) => `${concatString(formatNumber(v, 2), "", " APT") }`,
+        "formatter": (v, row) => `${concatString(formatNumber(v, 2), "", ` ${row?.coin_symbol}`) }`,
+        "descriptionFormatter": (v) => `${concatString(formatNumber(v, 2), "", " $") }`,
         "cantSort": true,
         "headHideMobile": true
     },

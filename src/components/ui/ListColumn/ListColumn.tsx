@@ -116,7 +116,7 @@ const ListColumn: React.FC<IListProps> = ({
             style={style}
             className={classes}
             { ...(ownLink && ownLinkValueFormatter?.(unformattedValue, row)) ? { "href": `${ownLink}/${ownLinkValueFormatter?.(unformattedValue, row)}` } : {} }
-            { ...(ownLink && !ownLinkValueFormatter) ? { "href": `${unformattedValue}` } : {} }
+            { ...(ownLink && !ownLinkValueFormatter) ? { "href": `${ownLink}/${unformattedValue}` } : {} }
         >
             <>
                 <div className={styles["list-column__wrapper"]}>

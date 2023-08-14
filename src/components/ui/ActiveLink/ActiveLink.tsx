@@ -1,5 +1,5 @@
 // React
-import React, { Children } from "react";
+import React, { Children, useState } from "react";
 
 // Next
 import { useRouter } from "next/router";
@@ -21,8 +21,9 @@ const ActiveLink = ({ children, additiveClassName = "", ...props }) => {
     const router = useRouter();
     const child = Children.only(children);
     const dispatch = useDispatch();
+    const [mouseDown, setMouseDown] = useState(false);
 
-    let className = child.props.className || "";
+    let className = `${child.props.className} ${styles["active-link__content"]}` || "";
 
     if (router.asPath === props.href) {
         className = `${className} ${props.activeClassName ? props.activeClassName : ""}`.trim();
@@ -44,18 +45,31 @@ const ActiveLink = ({ children, additiveClassName = "", ...props }) => {
             () => dispatch(setLoading({ start: true, end: false }))
         );
     };
+
+    const handleMouseDown = (e) => setMouseDown(true);
+    const handleMouseUp = () => setMouseDown(false);
    
-    return <span className={classNames([styles["active-link__link"], additiveClassName])}>
-        {React.cloneElement(child, 
-            { 
-                className, 
-                ...{ 
-                    onClick: handleClick, 
-                    href: props.href 
-                } 
-            })
-        }
-    </span>;
+    return (
+        <span 
+            className={classNames([styles["active-link__link"], additiveClassName])} 
+            onMouseDown={handleMouseDown} 
+            onMouseUp={handleMouseUp}
+            onMouseLeave={handleMouseUp}
+        >
+            
+            {React.cloneElement(child, 
+                { 
+                    className, 
+                    
+                    ...{ 
+                        onClick: handleClick, 
+                        href: props.href 
+                    } 
+                })
+            }
+            {/* <div className={classNames([styles["active-link__clicked"], {[styles["active"]]: mouseDown}])} ></div> */}
+        </span>
+    );
 };
 
 export default ActiveLink;
