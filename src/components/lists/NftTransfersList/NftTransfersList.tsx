@@ -3,15 +3,15 @@ import React, { useState } from "react";
 import { ListHeader, List , Paginator, Skeleton } from "src/components/ui";
 import { shortenHashString } from "src/scripts/util/strings";
 import useWindowSize from "src/scripts/hooks/useWindowSize";
-import media from "./data/adaptive";
 import { useDispatch, useSelector } from "react-redux";
 import { IRootState } from "src/scripts/redux/store";
 
 // Options
-import { columnNames, columns } from "./data/listOptions";
 import { useRouter } from "next/router";
 import { nfts } from "src/scripts/api/requests";
 import { setNftsCollectionTransfers } from "src/scripts/redux/slices/nftsSlice";
+import { columnNames, columns } from "./data/listOptions";
+import media from "./data/adaptive";
 
 const NftTransfersList: React.FC<IComponent> = () => {
     const router = useRouter();

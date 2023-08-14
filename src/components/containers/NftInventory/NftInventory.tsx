@@ -4,12 +4,12 @@ import { Grid } from "src/components/general";
 import NftInventoryItem from "src/components/ui/NftInventoryItem/NftInventoryItem";
 import useWindowSize from "src/scripts/hooks/useWindowSize";
 import { Paginator, Plug, Skeleton } from "src/components/ui";
-import media from "./data/adaptive";
 import { useDispatch, useSelector } from "react-redux";
 import { IRootState } from "src/scripts/redux/store";
 import { nfts } from "src/scripts/api/requests";
 import { useRouter } from "next/router";
 import { setNftsCollectionInventory } from "src/scripts/redux/slices/nftsSlice";
+import media from "./data/adaptive";
 
 const NftInventory: React.FC<IComponent> = () => {
     const router = useRouter();

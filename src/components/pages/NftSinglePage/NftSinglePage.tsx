@@ -7,8 +7,8 @@ import NftHolders from "src/components/lists/NftHoldersList/NftHoldersList";
 import NftPending from "src/components/lists/NftPendingList/NftPendingList";
 import NftInventory from "src/components/containers/NftInventory/NftInventory";
 
-import styles from "./NftSinglePage.module.scss";
 import { Nft, StatsNftHead } from "src/components/containers";
+import styles from "./NftSinglePage.module.scss";
 
 const NftSinglePage: React.FC = () => {
 

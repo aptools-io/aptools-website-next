@@ -3,20 +3,20 @@ import React, { useState } from "react";
 import { ListHeader, List , Paginator, Plug, Skeleton } from "src/components/ui";
 import { shortenHashString } from "src/scripts/util/strings";
 import useWindowSize from "src/scripts/hooks/useWindowSize";
-import media from "./data/adaptive";
-import { columnNames, columns } from "./data/listOptions";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { IRootState } from "src/scripts/redux/store";
 import { nfts } from "src/scripts/api/requests";
 import { setNftsCollectionPendingClaims } from "src/scripts/redux/slices/nftsSlice";
+import { columnNames, columns } from "./data/listOptions";
+import media from "./data/adaptive";
 
 const NftPendingList: React.FC<IComponent> = () => {
     const router = useRouter();
     const dispatch = useDispatch();
     const { id, name } = router?.query || {};
     const { nftsCollectionPendingClaims, nftsLoading } = useSelector((state: IRootState) => state.nfts);
-    const { total, list } = nftsCollectionPendingClaims || {}
+    const { total, list } = nftsCollectionPendingClaims || {};
 
     const { width } = useWindowSize();
     const mediaData = media(width);

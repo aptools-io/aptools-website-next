@@ -6,6 +6,7 @@ import { AccountTransactionsList, AccountTokensList } from "src/components/lists
 import { Plug } from "src/components/ui";
 import { accounts, nfts } from "src/scripts/api/requests";
 
+import { setNftsCollectionHolders, setNftsCollectionInventory, setNftsCollectionPendingClaims, setNftsCollectionTransfers, setNftsLoading } from "src/scripts/redux/slices/nftsSlice";
 import AccountOverview from "../../AccountOverview/AccountOverview";
 import AccountNtfList from "../../AccountNtfList/AccountNtfList";
 
@@ -17,7 +18,6 @@ import NftTransfers from "../../../lists/NftTransfersList/NftTransfersList";
 import NftHolders from "../../../lists/NftHoldersList/NftHoldersList";
 import NftInventory from "../../NftInventory/NftInventory";
 import NftPending from "../../../lists/NftPendingList/NftPendingList";
-import { setNftsCollectionHolders, setNftsCollectionInventory, setNftsCollectionPendingClaims, setNftsCollectionTransfers, setNftsLoading } from "src/scripts/redux/slices/nftsSlice";
 
 const categories = (dispatch) => {
     return [

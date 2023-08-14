@@ -11,8 +11,8 @@ import { IRootState } from "src/scripts/redux/store";
 // Util
 import { formatNumber } from "src/scripts/util/numbers";
 import { ActiveLink, CopyText, Img, Plug } from "src/components/ui";
-import styles from "./StatsNftHead.module.scss";
 import useWindowSize from "src/scripts/hooks/useWindowSize";
+import styles from "./StatsNftHead.module.scss";
 import media from "./data/adaptive";
 
 
@@ -44,8 +44,8 @@ const StatsNftHead: React.FC<IComponent> = ({
 
     const cutUri = (uri) => {
         if(uri?.length > 35) return `${uri.slice(0, 35)}...`;
-        return uri
-    }
+        return uri;
+    };
 
     return (
         <div className={styles.nft__head}>

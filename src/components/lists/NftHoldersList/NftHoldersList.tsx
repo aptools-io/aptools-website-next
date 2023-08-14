@@ -27,7 +27,7 @@ const NftHoldersList: React.FC<IComponent> = () => {
 
     if (!width) return <></>;
 
-    if(!nftsCollectionHolders?.length) return <Plug noData />
+    if(!nftsCollectionHolders?.length) return <Plug noData />;
 
     const handleChangePage = (page) => {
         setLoading(1);

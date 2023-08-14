@@ -20,7 +20,7 @@ const NftId = (data: IApiProps) => {
         dispatch(setPageTitle(title ? `${title} – NFT` : ""));
         dispatch(setNftsCollectionGeneralInfo(data.nfts_collection_general_info));
         dispatch(setNftsCollectionTransfers(data.nfts_collection_transfers));
-        dispatch(setNftsCollectionInventory(data.nfts_collection_inventory))
+        dispatch(setNftsCollectionInventory(data.nfts_collection_inventory));
     }, [data, dispatch]);
 
     return <NftSinglePage />;
