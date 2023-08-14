@@ -26,7 +26,7 @@ const NftPage: React.FC = () => {
     const [perPage, setPerPage] = useState(10);
 
 
-    if(!list?.length || !inventoryList.length) return <Plug noData />;
+    if(!list?.length || !inventoryList.length || !width) return <Plug noData />;
 
     const renderList = (nft: IApiNftCollection, index: number) => {
         const { list } = inventoryList?.[index] || {};
@@ -64,6 +64,7 @@ const NftPage: React.FC = () => {
 
     const handleChangePerPage = (perPage) => {
         setPerPage(perPage);
+        setCurrrentPage(1);
         setLoading(1);
         nfts.getNftsCollectionListData(0, perPage).then((e: unknown) => {
             const result = e as IApiNftCollectionList;
@@ -93,6 +94,7 @@ const NftPage: React.FC = () => {
                 perPage={perPage}
                 changePerPage
                 total={total}
+                key={perPage}
                 setPerPage={setPerPage}
                 onChangePage={handleChangePage}
                 onChangePerPage={handleChangePerPage}
@@ -102,7 +104,7 @@ const NftPage: React.FC = () => {
                         {!loading ? 
                             list
                                 .filter((item, outerIndex) => outerIndex % 2 !== 1)
-                                .map((item, index) => renderList(item, index * 2)) :
+                                .map((item, index) => renderList(item, mediaData.indexLeft(index))) :
                             Array.from({length: Math.ceil(perPage / 2)}).map(renderSkeleton)
                         }
                     </GridWrapper>
@@ -110,7 +112,7 @@ const NftPage: React.FC = () => {
                         {!loading ?
                             list
                                 .filter((item, outerIndex) => outerIndex % 2 === 1)
-                                .map((item, index) => renderList(item, ((index + 1) * 2) - 1)) :
+                                .map((item, index) => renderList(item,  mediaData.indexRight(index, Math.floor(perPage / 2)))) :
                             Array.from({length: Math.floor(perPage / 2)}).map(renderSkeleton)
                         }
                     </GridWrapper>

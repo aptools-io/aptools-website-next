@@ -3,34 +3,69 @@ import React, { useState } from "react";
 import { Grid } from "src/components/general";
 import NftInventoryItem from "src/components/ui/NftInventoryItem/NftInventoryItem";
 import useWindowSize from "src/scripts/hooks/useWindowSize";
-import { Paginator } from "src/components/ui";
+import { Paginator, Plug, Skeleton } from "src/components/ui";
 import media from "./data/adaptive";
+import { useDispatch, useSelector } from "react-redux";
+import { IRootState } from "src/scripts/redux/store";
+import { nfts } from "src/scripts/api/requests";
+import { useRouter } from "next/router";
+import { setNftsCollectionInventory } from "src/scripts/redux/slices/nftsSlice";
 
 const NftInventory: React.FC<IComponent> = () => {
+    const router = useRouter();
+    const dispatch = useDispatch();
+    const { id, name } = router?.query || {};
+    
+    const { nftsCollectionListInventory, nftsLoading } = useSelector((state: IRootState) => state.nfts);
+    const { list, total } = nftsCollectionListInventory || {};
+
     const { width } = useWindowSize();
     const mediaData = media(width);
 
-    const [currentPage, setCurrrentPage] = useState(1);
+    const [loading, setLoading] = useState(false);
+    const [currentPage, setCurrentPage] = useState(1);
     const [perPage, setPerPage] = useState(10);
+
+    if(nftsLoading) return <Skeleton style={{ height: 460 }} />;
+
+    if(!list?.length) return <Plug noData />;
+
+    const handleChangePage = (page) => {
+        setLoading(true);
+        nfts.getNftsCollectionInventoryData(((page - 1) * perPage), perPage, id as string, name as string).then((e: unknown) => {
+            setCurrentPage(page);
+            const result = e as IApiNftCollectionInventories;
+            dispatch(setNftsCollectionInventory(result));
+            setLoading(false);
+        });
+    };
+
+    const handleChangePerPage = (perPage) => {
+        setPerPage(perPage);
+        setCurrentPage(1);
+        setLoading(true);
+        nfts.getNftsCollectionPendingClaimsData(currentPage, perPage, id as string, name as string).then((e: unknown) => {
+            const result = e as IApiNftCollectionInventories;
+            dispatch(setNftsCollectionInventory(result));
+            setLoading(false);
+        });
+    };
+
 
     return (
         <Paginator
             page={currentPage}
             perPage={perPage}
             changePerPage
-            total={100}
+            total={total}
             setPerPage={setPerPage}
-            onChangePage={(page) => {
-                setCurrrentPage(page);
-            }}
-            onChangePerPage={(perPage) => {
-                setPerPage(perPage);
-            }}
+            onChangePage={handleChangePage}
+            onChangePerPage={handleChangePerPage}
         >
             <Grid gap={16} columns={mediaData.moneyFlowWrapper}>
-                {Array.from({ length: 16 }, (_, index) => index + 1).map((item, index) => {
-                    return <NftInventoryItem key={index} />;
-                })}
+                {!loading ? 
+                    list.map((item, index) => <NftInventoryItem key={index} item={item} />) :
+                    list.map((item, index) => <NftInventoryItem key={index} />)}
             </Grid>
         </Paginator>
     );

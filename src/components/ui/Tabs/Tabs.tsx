@@ -77,7 +77,7 @@ const Tabs: React.ForwardRefRenderFunction<any, ITabsProps> = ({
         if(getData.action) {
             setLoading(true);
             const query = typeof router.query?.id === "string" ? router.query?.id : "";
-            getData.action(setCustomEntry, setLoading, getData.id, query);
+            getData.action(setCustomEntry, setLoading, getData.id, query, router?.query);
         } 
     };
     

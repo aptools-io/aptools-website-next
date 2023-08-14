@@ -30,7 +30,7 @@ const ListHeader: React.ForwardRefRenderFunction<any, IListHeaderProps> = ({
 
     const [sorting, setSorting] = hardSorting || softSorting;
 
-    const [sortedData, setSortedData] = useState(data.length ? data.map((item: any, index) => { 
+    const [sortedData, setSortedData] = useState(data?.length ? data.map((item: any, index) => { 
         return { ...item, "_id": index + 1 };
     }) : []);
     

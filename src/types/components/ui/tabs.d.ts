@@ -14,7 +14,8 @@ interface ITab {
         dataDispatch: React.Dispatch<object>, 
         loading: React.Dispatch<boolean>, 
         id: number,
-        queryId?: string
+        queryId?: string,
+        fullQuery?: any
     ) => void, 
     data?: object;
 }
