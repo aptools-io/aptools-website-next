@@ -21,6 +21,24 @@ const media = (width: number) => {
             },
             width,
         ) as number,
+
+        indexLeft: a(
+            {
+                [EBreakpoints.LAPTOP]: (index) => index * 2,
+                [EBreakpoints.TABLET]: (index) => index,
+                [EBreakpoints.MIN]: (index) => index,
+            },
+            width,
+        ) as (index: number) => number,
+
+        indexRight: a(
+            {
+                [EBreakpoints.LAPTOP]: (index) => ((index + 1) * 2) - 1,
+                [EBreakpoints.TABLET]: (index, additive) => index + additive,
+                [EBreakpoints.MIN]: (index, additive) => index + additive,
+            },
+            width,
+        ) as (index: number, additive: number) => number,
     };
 };
 

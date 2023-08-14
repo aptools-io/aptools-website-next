@@ -37,3 +37,9 @@ export { default as StatsSingleValidator } from "./StatsSingleValidator/StatsSin
 export { default as Validator } from "./Validator/Validator";
 export { default as ValidatorOverview } from "./ValidatorOverview/ValidatorOverview";
 export { default as StatsSingleBlock } from "./StatsSingleBlock/StatsSingleBlock";
+export { default as StatsNftHead } from "./StatsNftHead/StatsNftHead";
+export { default as Nft } from "./Nft/Nft";
+export { default as NftTransfers } from "../lists/NftTransfersList/NftTransfersList";
+export { default as NftHolders } from "../lists/NftHoldersList/NftHoldersList";
+export { default as NftPending } from "../lists/NftPendingList/NftPendingList";
+export { default as NftInventory } from "./NftInventory/NftInventory";

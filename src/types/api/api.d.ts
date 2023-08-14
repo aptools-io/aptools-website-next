@@ -23,7 +23,10 @@ interface IApiProps {
     "blocks": IApiBlock[],
     "block": IApiBlock,
     "nfts_collection_list": IApiNftCollectionList,
-    "nfts_collection_inventories": IApiNftCollectionInventories[]
+    "nfts_collection_inventories": IApiNftCollectionInventories[],
+    "nfts_collection_general_info": IApiNftCollectionGeneralInfo,
+    "nfts_collection_transfers": IApiNftCollectionTransfer[]
+    "nfts_collection_inventory": IApiNftCollectionInventories
 }
 
 interface IApiGuid {

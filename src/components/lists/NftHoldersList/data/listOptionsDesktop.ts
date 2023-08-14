@@ -1,5 +1,5 @@
 import { formatNumber, setSign } from "src/scripts/util/numbers";
-import { shortenHashString } from "src/scripts/util/strings";
+import { concatString, shortenHashString } from "src/scripts/util/strings";
 
 // Convert
 const columnNamesDesktop = [
@@ -10,28 +10,20 @@ const columnNamesDesktop = [
     {
         key: "owner",
         value: "Owner",
-        // formatter: (v) => `${shortenHashString(v, mediaData.format)}`,
         formatter: (v) => `${shortenHashString(v, [10, 10])}`,
-        link: "/accounts",
+        ownLink: "/accounts",
         underline: true,
     },
     {
         key: "amount",
         value: "Amount",
+        defaultSort: true,
         right: true,
-        // under: [
-        //   {
-        //     key: 'percentage',
-        //     value: '%',
-        //     right: true,
-        //     formatter: (v) => `${v}`,
-        //     colorize: true,
-        //   },
-        // ],
     },
     {
         key: "percentage",
         value: "Percentage",
+        formatter: (v) => `${concatString(formatNumber(v, 4), "", " %")}`,
         right: true,
     },
 ];

@@ -10,10 +10,8 @@ const columnNamesMobile = [
     {
         key: "owner",
         value: "",
-        // Из-за того что это не хук, я не могу применить адаптив под media format, можно ли это как-то переделать/переписать?
-        // formatter: (v) => `${shortenHashString(v, mediaData.format)}`,
         formatter: (v) => `${shortenHashString(v, [10, 10])}`,
-        link: "/accounts",
+        ownLink: "/accounts",
         underline: true,
     },
     {

@@ -14,7 +14,7 @@ const NftElement: React.FC<{
   transfers: number;
 }> = ({ id, nftImage, title, floor, creator, transfers }) => {
     return (
-        <ActiveLink href={`/nft/${creator}`}>
+        <ActiveLink href={`/nft/${creator}?name=${title}`}>
             <a>
                 <div className={styles["nft"]}>
                     <div className={styles["nft__number"]}>{id}</div>
