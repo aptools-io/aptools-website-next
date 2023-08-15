@@ -1,5 +1,5 @@
 // React
-import React, { forwardRef } from "react";
+import React, { forwardRef, useState } from "react";
 
 // Redux
 import { IRootState } from "src/scripts/redux/store";
@@ -31,6 +31,8 @@ const Search: React.ForwardRefRenderFunction<any, { open?: boolean, setOpen?: Re
     className
 }, ref) => {
 
+    const [searchTerm, setSearchTerm] = useState("");
+
     const classes = classNames([
         styles.search,
         { [styles["active"]]: open },
@@ -56,7 +58,7 @@ const Search: React.ForwardRefRenderFunction<any, { open?: boolean, setOpen?: Re
                     </ul>
                 </div>
                 <div className={styles["search__input"]}>
-                    <TextInput searchIcon  />
+                    <TextInput searchIcon value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
                 </div>
             </div>
         </div>
