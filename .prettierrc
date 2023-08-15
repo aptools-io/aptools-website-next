@@ -1,8 +1,8 @@
 {
   "jsxSingleQuote": true,
-  "trailingComma": "all",
+  "trailingComma": "none",
   "endOfLine": "auto",
   "semi": true,
-  "singleQuote": true,
+  "singleQuote": false,
   "tabWidth": 4
 }
