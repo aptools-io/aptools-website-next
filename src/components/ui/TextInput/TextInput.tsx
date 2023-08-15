@@ -1,10 +1,10 @@
 // React
-import classNames from 'classnames';
-import React, { useEffect, useState } from 'react';
-import { Magnifier } from 'src/components/svg';
-import Button from '../Button/Button';
+import classNames from "classnames";
+import React, { useEffect, useState } from "react";
+import { Magnifier } from "src/components/svg";
+import Button from "../Button/Button";
 
-import styles from './TextInput.module.scss';
+import styles from "./TextInput.module.scss";
 
 const TextInput: React.FC<
     {
@@ -15,28 +15,28 @@ const TextInput: React.FC<
     } & IComponent
 > = ({
     onChange = null,
-    value = '',
+    value = "",
     searchButton = false,
     searchIcon = false,
-    className,
+    className
 }) => {
-    console.log('test');
+    console.log("tesasdt");
     const classes = classNames([
-        styles['text-input'],
+        styles["text-input"],
         { [styles.icon]: searchIcon },
-        className,
+        className
     ]);
 
     return (
         <div className={classes}>
             {searchIcon && (
-                <div className={styles['text-input__icon']}>
+                <div className={styles["text-input__icon"]}>
                     <Magnifier />
                 </div>
             )}
-            <input type={'text'} value={value} onChange={onChange} />
+            <input type={"text"} value={value} onChange={onChange} />
             {searchButton && (
-                <div className={styles['text-input__button']}>
+                <div className={styles["text-input__button"]}>
                     <Button>Search</Button>
                 </div>
             )}
