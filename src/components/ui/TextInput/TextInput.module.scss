@@ -2,8 +2,8 @@
     width: 100%;
     margin-bottom: 8px;
     position: relative;
-   
-   
+
+
 
     &__button {
         position: absolute;
@@ -24,12 +24,15 @@
         align-items: center;
         justify-content: center;
     }
+
     &.icon {
         padding-left: 50px;
+
         input {
             border-left: 0px solid black;
         }
     }
+
     input {
         width: 100%;
         padding: 10px 16px;
@@ -39,7 +42,5 @@
         line-height: 20px;
         outline: unset;
         border: 1px solid var(--aptools-color-grey-c4);
-        
-        
     }
 }

@@ -23,7 +23,7 @@ const checkboxData = [
     "Transaction by version",
     "Projects",
     "News"
-]
+];
 
 const Search: React.ForwardRefRenderFunction<any, { open?: boolean, setOpen?: React.Dispatch<React.SetStateAction<boolean>>  } & IComponent> = ({ 
     open = false,
@@ -43,8 +43,8 @@ const Search: React.ForwardRefRenderFunction<any, { open?: boolean, setOpen?: Re
                 <input id={`checkbox-search-${index}`} type="checkbox" />
                 <label htmlFor={`checkbox-search-${index}`}>{item}</label>
             </li>
-        )
-    }
+        );
+    };
  
     return (
         <div ref={ref} className={classes} >

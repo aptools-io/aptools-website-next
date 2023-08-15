@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Magnifier } from "src/components/svg";
 import Button from "../Button/Button";
 
-import styles from "./TextInput.module.scss"
+import styles from "./TextInput.module.scss";
 
 
 const TextInput: React.FC<{ 
@@ -32,7 +32,7 @@ const TextInput: React.FC<{
             <input type={"text"} value={value} onChange={onChange} />
             {searchButton && <div className={styles["text-input__button"]}><Button>Search</Button></div>}
         </div>
-    )
+    );
 };
 
 export default TextInput;

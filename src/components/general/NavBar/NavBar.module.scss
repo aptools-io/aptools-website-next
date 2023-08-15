@@ -131,7 +131,7 @@
 
     &__outer {
         &.active {
-            --nav-bar-width: 170px; 
+            --nav-bar-width: 170px;
         }
     }
 
@@ -139,7 +139,8 @@
         display: none;
     }
 
-    &.expanded, &.opened {
+    &.expanded,
+    &.opened {
         #{$self}__search {
             span {
                 opacity: 1;
@@ -189,6 +190,7 @@
     &__search {
         svg {
             left: var(--nav-bar-v-padding);
+
             path {
                 transition: fill var(--nav-bar-transition-speed-1) ease;
             }
@@ -201,13 +203,16 @@
         display: flex;
         align-items: center;
         cursor: pointer;
-
         transition: background-color var(--nav-bar-transition-speed-1) ease;
-        &:hover, &.active {
+
+        &:hover,
+        &.active {
             background-color: rgb(var(--aptools-color-emphasis-c1--rgb) / 30%);
+
             span {
                 color: var(--aptools-color-main-primary);
             }
+
             svg path {
                 fill: var(--aptools-color-main-primary);
             }
