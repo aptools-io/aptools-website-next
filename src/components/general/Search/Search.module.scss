@@ -1,0 +1,73 @@
+.search {
+    position: fixed;
+    pointer-events: none;
+    top: 0;
+    left: 0;
+    z-index: 15;
+    width: 100%;
+
+    &.active {
+        pointer-events: all;
+        .search__inner {
+            transform: translate(0%);
+            box-shadow: 0px 15px 15px 0px rgba(0, 0, 0, 0.10);
+        }
+    }
+
+    &__inner {
+        padding: var(--layout-indent) var(--layout-indent) var(--layout-indent) calc(var(--layout-indent) + var(--nav-bar-width));
+        background-color: var(--aptools-color-main-primary);
+        transition: padding .5s ease, transform .5s ease, box-shadow .5s ease;
+        transform: translateY(-100%);
+        display: flex;
+    }
+
+    &__settings {
+        max-width: 516px;
+        min-width: 516px;
+        display: flex;
+    }
+
+    &__checkbox {
+        display: flex;
+        label {
+            cursor: pointer;
+            &::before {
+                content: "";
+                display: inline-block;
+                min-width: 10px;
+                min-height: 10px;
+                border: 1px solid var(--aptools-color-emphasis-c1);
+                border-radius: 2px;
+                margin-right: 4px;
+                background-image: url("/static/images/svg/checkmark.svg");
+                background-size: contain;
+            }
+        }
+        input:checked + label::before {
+            
+            background-color:  var(--aptools-color-emphasis-c1);
+        }
+        &es {
+            display: flex;
+            flex-wrap: wrap;
+        }
+    }
+
+    &__input {
+        margin-left: 24px;
+        width: 100%;
+    }
+
+    &__info {
+        display: block;
+        max-width: 100px;
+        width: 100%;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 130%;
+        margin-right: 16px;
+    }
+   
+}

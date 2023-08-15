@@ -4,7 +4,12 @@
 .other-projects {
     display: flex;
 
-
+    &__title {
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
 
     &__dot {
         &.active {
@@ -80,6 +85,9 @@
         border-radius: 10px;
         display: flex;
         min-width: 240px;
+        @include mediaWMax('TABLET') {
+            min-width: unset;
+        }
 
         &-wrapper {
             height: 100%;
@@ -171,7 +179,7 @@
 
                 @include mediaWMax('TABLET') {
                     margin-left: unset;
-                    padding: 0 16px;
+                    padding: 0 0px;
                 }
             }
         }

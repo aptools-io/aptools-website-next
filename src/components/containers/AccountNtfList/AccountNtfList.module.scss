@@ -11,44 +11,8 @@
     }
 
     &__search {
-        max-width: 624px;
+        max-width: 628px;
         width: 100%;
-        padding-left: 50px;
-        padding-right: 80px;
-        margin-bottom: 8px;
-        position: relative;
-
-        &-button {
-            position: absolute;
-            right: 6px;
-            top: 6px;
-        }
-
-        &-icon {
-            position: absolute;
-            top: 50%;
-            left: 16px;
-            transform: translateY(-50%);
-            border: 1px solid var(--aptools-color-grey-c4);
-            border-right: 0px solid black;
-            height: 100%;
-            width: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        input {
-            width: 100%;
-            padding: 10px 16px;
-            font-size: 14px;
-            font-style: normal;
-            font-weight: 400;
-            line-height: 20px;
-            outline: unset;
-            border: 1px solid var(--aptools-color-grey-c4);
-            border-left: 0px solid black;
-        }
     }
 
     &__folder {

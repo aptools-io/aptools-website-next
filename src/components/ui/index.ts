@@ -22,3 +22,4 @@ export { default as CopyText } from "./CopyText/CopyText";
 export { default as CodeArea } from "./CodeArea/CodeArea";
 export { default as NftElement } from "./NftElement/NftElement";
 export { default as ProjectItem } from "./ProjectItem/ProjectItem";
+export { default as TextInput } from "./TextInput/TextInput";

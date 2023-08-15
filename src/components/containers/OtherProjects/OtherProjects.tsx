@@ -66,7 +66,8 @@ const OtherProjects: React.FC<IComponent> = ({
     };
   
     return (
-        <div className={styles["other-projects__outer"]}>        
+        <div className={styles["other-projects__outer"]}>     
+            <strong className={styles["other-projects__title"]}>Other projects</strong>   
             <div className={classes}>
                 <div className={styles["other-projects__nav--button"]} onClick={() => swiper.slidePrev()} ref={navigationPrevRef}>
                     <ArrowLeftBig />  
