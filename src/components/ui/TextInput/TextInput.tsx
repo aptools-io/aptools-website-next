@@ -19,12 +19,12 @@ const TextInput: React.FC<{
     searchIcon = false,
     className
 }) => {
-
+    
     const classes = classNames([
         styles["text-input"],
         { [styles.icon]: searchIcon },
         className
-    ]);
+    ]);asd
 
     return (
         <div className={classes}>
