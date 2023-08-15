@@ -7,40 +7,41 @@ import Button from '../Button/Button';
 import styles from './TextInput.module.scss';
 
 const TextInput: React.FC<
-  {
-    onChange?: React.ChangeEventHandler<HTMLInputElement>;
-    value?: string;
-    searchButton?: boolean;
-    searchIcon?: boolean;
-  } & IComponent
+    {
+        onChange?: React.ChangeEventHandler<HTMLInputElement>;
+        value?: string;
+        searchButton?: boolean;
+        searchIcon?: boolean;
+    } & IComponent
 > = ({
-  onChange = null,
-  value = '',
-  searchButton = false,
-  searchIcon = false,
-  className,
-}) => {
-  const classes = classNames([
-    styles['text-input'],
-    { [styles.icon]: searchIcon },
+    onChange = null,
+    value = '',
+    searchButton = false,
+    searchIcon = false,
     className,
-  ]);
+}) => {
+    console.log('test');
+    const classes = classNames([
+        styles['text-input'],
+        { [styles.icon]: searchIcon },
+        className,
+    ]);
 
-  return (
-    <div className={classes}>
-      {searchIcon && (
-        <div className={styles['text-input__icon']}>
-          <Magnifier />
+    return (
+        <div className={classes}>
+            {searchIcon && (
+                <div className={styles['text-input__icon']}>
+                    <Magnifier />
+                </div>
+            )}
+            <input type={'text'} value={value} onChange={onChange} />
+            {searchButton && (
+                <div className={styles['text-input__button']}>
+                    <Button>Search</Button>
+                </div>
+            )}
         </div>
-      )}
-      <input type={'text'} value={value} onChange={onChange} />
-      {searchButton && (
-        <div className={styles['text-input__button']}>
-          <Button>Search</Button>
-        </div>
-      )}
-    </div>
-  );
+    );
 };
 
 export default TextInput;
