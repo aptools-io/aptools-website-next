@@ -16,57 +16,88 @@ import Plate from "../Plate/Plate";
 // Data
 import styles from "./ProjectItem.module.scss";
 
-const ProjectItem: React.FC<{ 
-    item: IApiProject, 
-    index: number, 
-    mediaData?: any, 
-    lastItem?: any, 
-    all?: boolean,
-    classNameWrapper?: string
-} & IComponent> = ({ item, index, mediaData, lastItem, all, className, classNameWrapper }) => {
+const ProjectItem: React.FC<
+    {
+        item: IApiProject;
+        index: number;
+        mediaData?: any;
+        lastItem?: any;
+        all?: boolean;
+        classNameWrapper?: string;
+        tabId?: number;
+    } & IComponent
+> = ({
+    item,
+    index,
+    mediaData,
+    lastItem,
+    all,
+    className,
+    classNameWrapper,
+    tabId
+}) => {
     const { description } = item || {};
-    const slicedDescription = item?.description?.length > 50 ? `${item?.description?.slice(0, 50)}...` : item?.description;
+    const slicedDescription =
+        item?.description?.length > 50
+            ? `${item?.description?.slice(0, 50)}...`
+            : item?.description;
 
     const renderSocial = (item: IApiProjectSocials, index: number) => (
-        <ActiveLink key={index} className={styles["projects-item__social-wrapper"]} href={item.link}>
+        <ActiveLink
+            key={index}
+            className={styles["projects-item__social-wrapper"]}
+            href={item.link}>
             <a className={styles["projects-item__social"]} target={"_blank"}>
                 {socials[item.name] || <>x</>}
             </a>
         </ActiveLink>
     );
-    
+
     return (
         <>
-            <GridWrapper gridWidth={mediaData.project} className={classNameWrapper}>
-                <Plate 
-                    compressed 
+            <GridWrapper
+                gridWidth={mediaData.project}
+                className={classNameWrapper}>
+                <Plate
+                    compressed
                     image={`${process.env.BASE_URL}/${item.image}`}
                     title={item.name}
                     className={classNames([styles["projects-item"], className])}
-                    style={{ animation: `fade-in .5s ${index / 10}s normal forwards ease` }}
-                    titleLink={`/projects/${item.name}`}
-                >
+                    style={{
+                        animation: `fade-in .5s ${
+                            index / 10
+                        }s normal forwards ease`
+                    }}
+                    titleLink={`/projects/${item.name}`}>
                     <ActiveLink href={`/projects/${item.name}`}>
                         <a className={styles["projects-item__description"]}>
                             {slicedDescription || ""}
                         </a>
                     </ActiveLink>
-                    {item?.socials && <span className={styles["projects-item__socials"]}>
-                        {item?.socials?.map(renderSocial)}
-                    </span>}
+                    {item?.socials && (
+                        <span className={styles["projects-item__socials"]}>
+                            {item?.socials?.map(renderSocial)}
+                        </span>
+                    )}
                 </Plate>
             </GridWrapper>
-            {(index === lastItem - 1 && !all) &&
+            {index === lastItem - 1 && !all && (
                 <GridWrapper gridWidth={mediaData.project}>
-                    <div style={{ animation: `fade-in .5s ${index / 10}s normal forwards ease` }} className={styles["projects-item__more"]}>
-                        <ActiveLink href={"/projects"}>
+                    <div
+                        style={{
+                            animation: `fade-in .5s ${
+                                index / 10
+                            }s normal forwards ease`
+                        }}
+                        className={styles["projects-item__more"]}>
+                        <ActiveLink href={`/projects?tab=${tabId}`}>
                             <a>
-                                See more <ArrowMore/>
+                                See more <ArrowMore />
                             </a>
                         </ActiveLink>
                     </div>
                 </GridWrapper>
-            }
+            )}
         </>
     );
 };

@@ -16,6 +16,7 @@ import {
     TextInput
 } from "src/components/ui";
 import { useRouter } from "next/router";
+import { Close } from "src/components/svg";
 import styles from "./Search.module.scss";
 
 const checkboxData = [
@@ -88,6 +89,8 @@ const Search: React.ForwardRefRenderFunction<
         />
     );
 
+    const handleClose = () => setOpen(false);
+
     return (
         <div ref={ref} className={classes}>
             <div className={styles["search__inner"]}>
@@ -107,6 +110,9 @@ const Search: React.ForwardRefRenderFunction<
                         onChange={(e) => setSearchTerm(e.target.value)}
                         sideComponent={handleSearchTooltip}
                     />
+                    <button onClick={handleClose}>
+                        <Close />
+                    </button>
                 </div>
             </div>
         </div>

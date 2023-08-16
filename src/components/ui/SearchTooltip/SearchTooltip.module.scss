@@ -61,6 +61,7 @@
             background-color: var(--aptools-color-main-primary);
             max-height: 350px;
             overflow-y: auto;
+            border-radius: 0 0 2px 2px;
 
             @include setScrollbar(7px, 10px, var(--aptools-color-grey-c4), var(--aptools-color-emphasis-c1));
         }

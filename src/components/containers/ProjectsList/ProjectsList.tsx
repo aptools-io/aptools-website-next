@@ -11,24 +11,36 @@ import responsiveHOC from "react-lines-ellipsis/lib/responsiveHOC";
 // Styles
 import styles from "./ProjectsList.module.scss";
 
-const ProjectsList: React.FC<{ all?: boolean, data?: IApiProject[], mediaData: any }> = ({ all = false, data, mediaData }) => {
+const ProjectsList: React.FC<{
+    all?: boolean;
+    data?: IApiProject[];
+    mediaData: any;
+    tabId?: number;
+}> = ({ all = false, data, mediaData, tabId = 0 }) => {
+    if (!mediaData.projectWrapper) return <></>;
 
-    if(!mediaData.projectWrapper) return <></>;
-
-    const lastItem = data.length > mediaData.projectsCount ? mediaData.projectsCount : data.length;
-
+    const lastItem =
+        data.length > mediaData.projectsCount
+            ? mediaData.projectsCount
+            : data.length;
 
     return (
-        <Grid columns={mediaData.projectWrapper} className={styles["projects-list__items"]}>
-            {data?.map((item, index) => 
-                <ProjectItem 
-                    key={index} 
-                    item={item} 
-                    mediaData={mediaData} 
-                    lastItem={lastItem} 
-                    all={all} 
-                    index={index} 
-                />).slice(0, !all ? mediaData.projectsCount : data.length)}
+        <Grid
+            columns={mediaData.projectWrapper}
+            className={styles["projects-list__items"]}>
+            {data
+                ?.map((item, index) => (
+                    <ProjectItem
+                        key={index}
+                        item={item}
+                        mediaData={mediaData}
+                        lastItem={lastItem}
+                        all={all}
+                        index={index}
+                        tabId={tabId}
+                    />
+                ))
+                .slice(0, !all ? mediaData.projectsCount : data.length)}
         </Grid>
     );
 };
