@@ -11,6 +11,7 @@ export { default as StatsTransaction } from "./StatsTransaction/StatsTransaction
 export { default as StatsBlockchainActivity } from "./StatsBlockchainActivity/StatsBlockchainActivity";
 export { default as StatsAptos } from "./StatsAptos/StatsAptos";
 export { default as StatsGas } from "./StatsGas/StatsGas";
+export { default as StatsProject } from "./StatsProject/StatsProject";
 export { default as TokenStatistics } from "./TokenStatistics/TokenStatistics";
 export { default as MoneyFlow } from "./MoneyFlow/MoneyFlow";
 export { default as ActiveUniqueAddresses } from "./ActiveUniqueAddresses/ActiveUniqueAddresses";
@@ -43,3 +44,4 @@ export { default as NftTransfers } from "../lists/NftTransfersList/NftTransfersL
 export { default as NftHolders } from "../lists/NftHoldersList/NftHoldersList";
 export { default as NftPending } from "../lists/NftPendingList/NftPendingList";
 export { default as NftInventory } from "./NftInventory/NftInventory";
+export { default as OtherProjects } from "./OtherProjects/OtherProjects";

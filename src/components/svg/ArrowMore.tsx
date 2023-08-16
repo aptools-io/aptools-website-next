@@ -7,8 +7,7 @@ const SvgArrowMore = (props: SVGProps<SVGSVGElement>) => (
         width={24}
         height={25}
         fill='none'
-        {...props}
-    >
+        {...props}>
         <path
             fill='#3B5998'
             fillRule='evenodd'

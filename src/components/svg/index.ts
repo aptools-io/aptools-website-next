@@ -7,6 +7,7 @@ export { default as ArrowLeftPagination } from "./ArrowLeftPagination";
 export { default as ArrowMore } from "./ArrowMore";
 export { default as ArrowRotated } from "./ArrowRotated";
 export { default as Block } from "./Block";
+export { default as Close } from "./Close";
 export { default as Coins } from "./Coins";
 export { default as ComingSoon } from "./ComingSoon";
 export { default as Compass } from "./Compass";

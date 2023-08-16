@@ -35,6 +35,7 @@ const AccountTransactionsList: React.FC<IComponent> = ({
     const dispatch = useDispatch();
     const router = useRouter();
     const { id = null } = router?.query || {};
+    console.log(transactions);
 
 
 
@@ -91,7 +92,7 @@ const AccountTransactionsList: React.FC<IComponent> = ({
                     data={transactions}
                     key={transactions?.[0]?.version}
                 >
-                    <List adoptMobile loadingCount={loading * 10} />
+                    <List adoptMobile loadingCount={loading * perPage} />
                 </ListHeader>
             </Paginator>
         </div>

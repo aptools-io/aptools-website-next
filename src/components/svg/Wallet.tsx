@@ -7,8 +7,7 @@ const SvgWallet = (props: SVGProps<SVGSVGElement>) => (
         width={25}
         height={24}
         fill='none'
-        {...props}
-    >
+        {...props}>
         <path
             fill='#fff'
             fillRule='evenodd'

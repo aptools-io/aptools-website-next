@@ -7,8 +7,7 @@ const SvgAptos = (props: SVGProps<SVGSVGElement>) => (
         width={35}
         height={34}
         fill='none'
-        {...props}
-    >
+        {...props}>
         <circle cx={17.391} cy={17} r={17} fill='#fff' />
         <path
             fill='#1D1F30'

@@ -7,8 +7,7 @@ const SvgServerErrorDude = (props: SVGProps<SVGSVGElement>) => (
         width={440}
         height={390}
         fill='none'
-        {...props}
-    >
+        {...props}>
         <g clipPath='url(#ServerErrorDude_svg__a)'>
             <path
                 fill='#FFF5CC'

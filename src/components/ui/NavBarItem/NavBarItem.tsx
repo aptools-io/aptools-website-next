@@ -17,12 +17,13 @@ import styles from "./NavBarItem.module.scss";
 const NavBarItem: React.FC<INavBarMenuItemProps> = ({ 
     data, 
     expanded, 
+    search,
     className 
 }) => {
     const router = useRouter();
     const classes = classNames([
         styles["nav-bar-item"],
-        { [styles.expanded]: expanded },
+        { [styles.expanded]: expanded || search },
         { [styles.active]: router.asPath === data.link },
         className
     ]);

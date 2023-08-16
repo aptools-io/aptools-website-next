@@ -7,8 +7,7 @@ const SvgComingSoon = (props: SVGProps<SVGSVGElement>) => (
         width={195}
         height={55}
         fill='none'
-        {...props}
-    >
+        {...props}>
         <path
             fill='#7D7D7D'
             d='M35.047 38.797v-7.025L16.189 41.996v-3.875l22-12.125v16h-6.286v-3.2h3.144Z'

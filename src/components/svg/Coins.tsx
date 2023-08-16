@@ -7,8 +7,7 @@ const SvgCoins = (props: SVGProps<SVGSVGElement>) => (
         width={24}
         height={24}
         fill='none'
-        {...props}
-    >
+        {...props}>
         <path
             fill='#fff'
             fillRule='evenodd'

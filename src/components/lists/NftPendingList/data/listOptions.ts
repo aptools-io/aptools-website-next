@@ -8,10 +8,12 @@ const columnNames = [
         key: "version",
         value: "version",
         headHideMobile: true,
+        ownLink: "/transactions",
     },
     {
         key: "block",
         value: "Block",
+        ownLink: "/blocks",
     },
     {
         key: "age",

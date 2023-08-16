@@ -28,7 +28,7 @@ const NftInventory: React.FC<IComponent> = () => {
 
     if(nftsLoading) return <Skeleton style={{ height: 460 }} />;
 
-    if(!list?.length) return <Plug noData />;
+    
 
     const handleChangePage = (page) => {
         setLoading(true);
@@ -44,7 +44,7 @@ const NftInventory: React.FC<IComponent> = () => {
         setPerPage(perPage);
         setCurrentPage(1);
         setLoading(true);
-        nfts.getNftsCollectionPendingClaimsData(currentPage, perPage, id as string, name as string).then((e: unknown) => {
+        nfts.getNftsCollectionInventoryData(((currentPage - 1) * perPage), perPage, id as string, name as string).then((e: unknown) => {
             const result = e as IApiNftCollectionInventories;
             dispatch(setNftsCollectionInventory(result));
             setLoading(false);
@@ -62,11 +62,11 @@ const NftInventory: React.FC<IComponent> = () => {
             onChangePage={handleChangePage}
             onChangePerPage={handleChangePerPage}
         >
-            <Grid gap={16} columns={mediaData.moneyFlowWrapper}>
+            {!list?.length ? <Plug noData /> : <Grid gap={16} columns={mediaData.moneyFlowWrapper}>
                 {!loading ? 
                     list.map((item, index) => <NftInventoryItem key={index} item={item} />) :
                     list.map((item, index) => <NftInventoryItem key={index} />)}
-            </Grid>
+            </Grid>}
         </Paginator>
     );
 };

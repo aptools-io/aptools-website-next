@@ -3,19 +3,21 @@ interface ITabsProps extends IComponent {
     dataArray?: ITab[];
     itemsCount?: boolean;
     defaultEntry?: object;
+    queryTab?: boolean;
+    onChangeTab?: (tabId: number) => void;
     hideSingle?: boolean;
 }
 
 interface ITab {
     title?: string;
     id?: number;
-    component?: () => JSX.Element,
+    component?: () => JSX.Element;
     action?: (
-        dataDispatch: React.Dispatch<object>, 
-        loading: React.Dispatch<boolean>, 
+        dataDispatch: React.Dispatch<object>,
+        loading: React.Dispatch<boolean>,
         id: number,
         queryId?: string,
         fullQuery?: any
-    ) => void, 
+    ) => void;
     data?: object;
 }

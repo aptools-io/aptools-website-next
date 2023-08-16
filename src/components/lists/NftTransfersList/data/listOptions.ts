@@ -8,10 +8,12 @@ const columnNames = [
         key: "version",
         value: "version",
         headHideMobile: true,
+        ownLink: "/transactions"
     },
     {
         key: "block",
         value: "Block",
+        ownLink: "/blocks"
     },
     {
         key: "age",
@@ -22,7 +24,7 @@ const columnNames = [
         key: "account",
         value: "Account",
         formatter: (v) => `${shortenHashString(v)}`,
-        link: "/accounts",
+        ownLink: "/accounts",
         headHideMobile: true,
         underline: true,
     },

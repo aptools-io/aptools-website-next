@@ -8,8 +8,7 @@ const SvgProjectSocialLinkedin = (props: SVGProps<SVGSVGElement>) => (
         height={16}
         fill='none'
         viewBox='0 0 24 24'
-        {...props}
-    >
+        {...props}>
         <path
             fill='#3B5998'
             fillRule='evenodd'

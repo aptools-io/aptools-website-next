@@ -25,6 +25,10 @@
         display: flex;
         flex-direction: column;
 
+        &.space-between {
+            justify-content: space-between;
+        }
+
         @include mediaWMax('TABLET') {
             padding: calc(var(--layout-indent) + var(--nav-bar-height)) var(--layout-v-padding) var(--layout-bottom-indent) calc(var(--nav-bar-width) + var(--layout-v-padding));
         }

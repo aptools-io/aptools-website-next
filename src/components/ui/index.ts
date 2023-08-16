@@ -21,3 +21,6 @@ export { default as Plug } from "./Plug/Plug";
 export { default as CopyText } from "./CopyText/CopyText";
 export { default as CodeArea } from "./CodeArea/CodeArea";
 export { default as NftElement } from "./NftElement/NftElement";
+export { default as ProjectItem } from "./ProjectItem/ProjectItem";
+export { default as TextInput } from "./TextInput/TextInput";
+export { default as SearchTooltip } from "./SearchTooltip/SearchTooltip";

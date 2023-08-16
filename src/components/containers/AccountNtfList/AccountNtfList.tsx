@@ -11,7 +11,7 @@ import { Grid, GridWrapper } from "src/components/general";
 
 // Styles
 import classNames from "classnames";
-import { Button, Img, Paginator, Plug, Skeleton } from "src/components/ui";
+import { Button, Img, Paginator, Plug, Skeleton, TextInput } from "src/components/ui";
 import { percentClass } from "src/scripts/util/classes";
 import { formatNumber } from "src/scripts/util/numbers";
 import { concatString } from "src/scripts/util/strings";
@@ -68,10 +68,8 @@ const AccountNtfList: React.FC<IComponent> = ({
 
     return (
         <div className={classes}>
-            <div  className={styles["account-nft-list__search"]}>
-                <div className={styles["account-nft-list__search-icon"]}><Magnifier /></div>
-                <input type={"text"} value={searchQuery} onChange={handleInputChange} />
-                <div className={styles["account-nft-list__search-button"]}><Button>Search</Button></div>
+            <div className={styles["account-nft-list__search"]}>
+                <TextInput value={searchQuery} onChange={handleInputChange} searchIcon />
             </div>
             {filteredNfts && 
                 <div className={styles["account-nft-list__inner"]}>

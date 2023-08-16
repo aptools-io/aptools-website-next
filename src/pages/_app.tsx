@@ -18,15 +18,14 @@ const AptoolsApp = (props) => {
 
     return (
         <Provider store={store}>
-            <Layout pageProps={{...pageProps/* , "hideNavBar": props.router.state?.route === "/404" */}}>
+            <Layout
+                pageProps={{
+                    ...pageProps /* , "hideNavBar": props.router.state?.route === "/404" */
+                }}>
                 <Component {...pageProps} />
             </Layout>
         </Provider>
     );
 };
-
-
-  
-
 
 export default AptoolsApp;

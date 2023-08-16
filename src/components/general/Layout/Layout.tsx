@@ -24,8 +24,6 @@ import styles from "./Layout.module.scss";
 // Other
 import menu from "./data/menu";
 
-
-
 const Layout: React.FC<{ children: React.ReactNode, pageProps }> = ({ children, pageProps }) => {
     const { title } = useSelector((state: IRootState) => state.pageTitle);
     const { t } = useTranslation("menu");
@@ -72,7 +70,7 @@ const Layout: React.FC<{ children: React.ReactNode, pageProps }> = ({ children, 
                 {/* <MainLoading /> */}
                 <NextNProgress  options={{ showSpinner: false }} color="#3b5998" />
                 {!pageProps?.hideNavBar && <NavBar data={menu(t)} />}
-                <div className={styles["layout__page-wrapper"]}>
+                <div className={classNames([styles["layout__page-wrapper"], { [styles["space-between"]]: pageProps?.spaceBetween }])}>
                     {children}
                 </div>
                 <Footer/>

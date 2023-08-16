@@ -59,6 +59,7 @@
         max-height: 32px;
         margin-right: 10px;
         overflow: hidden;
+        object-fit: contain;
     }
 
     &.compressed {
