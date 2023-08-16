@@ -34,7 +34,7 @@ const Tabs: React.ForwardRefRenderFunction<any, ITabsProps> = (
     const child: React.ReactNode = Children.only(children);
     const router = useRouter();
     const { tab } = router.query || {};
-    const [tabId, setTabId] = useState(queryTab ? Number(tab) : 0);
+    const [tabId, setTabId] = useState(queryTab ? Number(tab) || 0 : 0);
 
     const navigationPrevRef = useRef(null);
     const navigationNextRef = useRef(null);
