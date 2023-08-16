@@ -7,8 +7,7 @@ const SvgCopyBig = (props: SVGProps<SVGSVGElement>) => (
         width={25}
         height={24}
         fill='none'
-        {...props}
-    >
+        {...props}>
         <path
             fill='#3B5998'
             fillRule='evenodd'

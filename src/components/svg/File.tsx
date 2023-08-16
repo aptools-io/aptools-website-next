@@ -7,8 +7,7 @@ const SvgFile = (props: SVGProps<SVGSVGElement>) => (
         width={41}
         height={40}
         fill='none'
-        {...props}
-    >
+        {...props}>
         <path
             fill='#D9D9D9'
             fillRule='evenodd'

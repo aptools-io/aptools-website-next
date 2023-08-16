@@ -7,8 +7,7 @@ const SvgDifferenceArrow = (props: SVGProps<SVGSVGElement>) => (
         width={10}
         height={11}
         fill='none'
-        {...props}
-    >
+        {...props}>
         <path
             fill='#1D1F30'
             fillRule='evenodd'

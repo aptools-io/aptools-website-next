@@ -7,8 +7,7 @@ const SvgMoon = (props: SVGProps<SVGSVGElement>) => (
         width={14}
         height={14}
         fill='none'
-        {...props}
-    >
+        {...props}>
         <path
             fill='#D9D9D9'
             fillRule='evenodd'

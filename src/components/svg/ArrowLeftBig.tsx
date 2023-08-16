@@ -7,8 +7,7 @@ const SvgArrowLeftBig = (props: SVGProps<SVGSVGElement>) => (
         width={33}
         height={32}
         fill='none'
-        {...props}
-    >
+        {...props}>
         <path
             fill='#231F20'
             fillRule='evenodd'

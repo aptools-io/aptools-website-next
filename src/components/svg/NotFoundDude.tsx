@@ -7,8 +7,7 @@ const SvgNotFoundDude = (props: SVGProps<SVGSVGElement>) => (
         width={458}
         height={357}
         fill='none'
-        {...props}
-    >
+        {...props}>
         <g clipPath='url(#NotFoundDude_svg__a)'>
             <path
                 fill='#FFE5D3'
@@ -209,9 +208,8 @@ const SvgNotFoundDude = (props: SVGProps<SVGSVGElement>) => (
                 y={148}
                 maskUnits='userSpaceOnUse'
                 style={{
-                    maskType: "luminance",
-                }}
-            >
+                    maskType: "luminance"
+                }}>
                 <path
                     fill='#fff'
                     d='M262.26 171.55c-2.81 5.1-5.16 9.17-5.16 9.17s-12.75-21.04-17.21-24.54c-4.46-3.51-21.04-6.69-21.04-6.69-7.44-.98-13.12-1.14-20.42 0 0 0-16.57 3.19-21.04 6.69-4.46 3.51-17.21 24.54-17.21 24.54s-2.54-4.42-5.5-9.8l-8.77 5.34c2.56 8.79 5.23 17.22 6.63 19.44 3.19 5.1 6.69 11.47 15.3 7.65 8.61-3.82 19.44-16.26 19.44-16.26l18.19.28v.04l1.37-.02 1.16.02v-.03l22.02-.29s10.84 12.43 19.44 16.26c8.61 3.82 12.11-2.55 15.3-7.65 1.4-2.23 4.07-10.7 6.64-19.51l-9.14-4.64Z'
@@ -245,9 +243,8 @@ const SvgNotFoundDude = (props: SVGProps<SVGSVGElement>) => (
                 y={171}
                 maskUnits='userSpaceOnUse'
                 style={{
-                    maskType: "luminance",
-                }}
-            >
+                    maskType: "luminance"
+                }}>
                 <path
                     fill='#fff'
                     d='M181.24 171.8s-4.14 8.92-3.19 14.66c.96 5.74.96 7.01.96 7.01s-6.06 16.57-7.01 22.63c-.96 6.06 1.91 10.84 5.42 13.39 3.51 2.55 51.32 3.19 58.65 1.27 7.33-1.91 6.69-8.92 6.37-15.3-.32-6.37-2.87-20.08-2.87-20.08s.96-19.44-3.19-24.22'

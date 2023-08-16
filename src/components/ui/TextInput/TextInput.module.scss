@@ -3,7 +3,20 @@
     margin-bottom: 8px;
     position: relative;
 
+    $self: &;
 
+    transition: filter .3s ease;
+
+    &.focus {
+        filter: drop-shadow(0px 10px 10px var(--aptools-color-grey-c3));
+
+        input {
+            border-color: var(--aptools-color-emphasis-c1);
+        }
+        #{$self}__icon svg path {
+            fill: var(--aptools-color-emphasis-c1);
+        }
+    }
 
     &__button {
         position: absolute;
@@ -16,21 +29,27 @@
         top: 50%;
         left: 0px;
         transform: translateY(-50%);
-        border: 1px solid var(--aptools-color-grey-c4);
-        border-right: 0px solid black;
+        pointer-events: none;
+        transition: border-color .3s ease;
         height: 100%;
         width: 50px;
         display: flex;
         align-items: center;
         justify-content: center;
+
+        svg path {
+            transition: fill .3s ease;
+        }
     }
 
     &.icon {
-        padding-left: 50px;
-
         input {
-            border-left: 0px solid black;
+            padding-left: 50px;
         }
+    }
+
+    &__wrapper {
+        position: relative;
     }
 
     input {
@@ -38,9 +57,11 @@
         padding: 10px 16px;
         font-size: 14px;
         font-style: normal;
+        border-radius: 2px;
         font-weight: 400;
         line-height: 20px;
         outline: unset;
-        border: 1px solid var(--aptools-color-grey-c4);
+        border: 1px solid var(--aptools-color-emphasis-c5);
+        transition: border-color .3s ease;
     }
 }

@@ -7,8 +7,7 @@ const SvgLogoSmall = (props: SVGProps<SVGSVGElement>) => (
         width={30}
         height={30}
         fill='none'
-        {...props}
-    >
+        {...props}>
         <path
             fill='#fff'
             fillRule='evenodd'
