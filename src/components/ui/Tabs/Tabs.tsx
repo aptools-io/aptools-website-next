@@ -26,6 +26,7 @@ const Tabs: React.ForwardRefRenderFunction<any, ITabsProps> = (
         hideSingle = false,
         onChangeTab = null,
         queryTab = false,
+        tabsName = null,
         children,
         className
     },
@@ -48,12 +49,29 @@ const Tabs: React.ForwardRefRenderFunction<any, ITabsProps> = (
     const entry = entries?.[tabId]?.[1] || null;
 
     const classes = classNames([styles.tabs, className]);
+
     useEffect(() => {
         if (swiper?.el) updateLine(tabId);
     }, [swiper, lineElement]);
 
+    useEffect(() => {
+        if (!tabsName) return;
+        const handleSetRemoteTab = (e) => {
+            if (e.detail.tabsName !== tabsName) return;
+            const { tabId } = e.detail;
+            if (swiper?.el) {
+                const element = entries[tabId];
+                const checkItem = Array.isArray(element);
+                if (!checkItem) handleTabClick(tabId, element);
+            }
+        };
+        window.addEventListener("setRemoteTab", handleSetRemoteTab);
+        return () =>
+            window.removeEventListener("setRemoteTab", handleSetRemoteTab);
+    }, [swiper]);
+
     const updateLine = (index) => {
-        if (!swiper.el || !lineElement) return;
+        if (!swiper?.el || !lineElement) return;
 
         const items = swiper.el.querySelectorAll(`.${styles.tabs__item}`);
 
@@ -128,7 +146,6 @@ const Tabs: React.ForwardRefRenderFunction<any, ITabsProps> = (
         if (dataArray?.[tabId]?.component)
             return dataArray?.[tabId].component();
 
-        console.log(entry, customEntry, defaultEntry, []);
         return React.cloneElement(
             child as React.ReactElement<IListHeaderProps>,
             {

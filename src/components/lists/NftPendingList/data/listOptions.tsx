@@ -1,3 +1,4 @@
+import { Tooltip } from "src/components/ui";
 import { formatNumber } from "src/scripts/util/numbers";
 import { shortenHashString } from "src/scripts/util/strings";
 import { timeAgo, timeFull } from "src/scripts/util/timeConvert";
@@ -8,48 +9,50 @@ const columnNames = [
         key: "version",
         value: "version",
         headHideMobile: true,
-        ownLink: "/transactions",
+        ownLink: "/transactions"
     },
     {
         key: "block",
         value: "Block",
-        ownLink: "/blocks",
+        ownLink: "/blocks"
     },
     {
         key: "age",
         value: "Age",
-        formatter: (v) => `${timeAgo(v)}`,
+        formatter: (v) => (
+            <Tooltip text={timeAgo(v)}>{timeAgo(v, true)}</Tooltip>
+        )
     },
     {
         key: "from",
         value: "From",
         formatter: (v) => `${shortenHashString(v)}`,
         ownLink: "/accounts",
-        underline: true,
+        underline: true
     },
     {
         key: "to",
         value: "To",
         formatter: (v) => `${shortenHashString(v)}`,
         ownLink: "/accounts",
-        underline: true,
+        underline: true
     },
     {
         key: "token_name",
         value: "Token name",
-        headHideMobile: true,
+        headHideMobile: true
     },
     {
         key: "property_version",
         value: "Property Ver.",
         right: true,
-        headHideMobile: true,
+        headHideMobile: true
     },
     {
         key: "amount",
         value: "Amount",
-        right: true,
-    },
+        right: true
+    }
 ];
 
 // Columns

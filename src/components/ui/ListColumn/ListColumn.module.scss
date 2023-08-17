@@ -1,54 +1,87 @@
 @import '/src/styles//static/general/variables.static';
 @import '/src/styles//static/general/mixins';
 
+@mixin setAdopt($type, $self) {
+    @include mediaWMax($type) {
+        align-items: flex-start;
+        & + #{$self} {
+            margin-top: 2px;
+        }
+        &:not(.main) + #{$self}:not(.main) {
+            margin-top: 0;
+        }
+
+        &:before {
+            text-align: left;
+        }
+
+        &:not(.inner) {
+            padding: unset !important;
+            justify-content: space-between;
+
+            &::before + #{$self}__wrapper {
+                & > div {
+                    width: unset;
+                }
+            }
+
+            #{$self}__wrapper {
+                text-align: right;
+                width: 100%;
+                justify-content: flex-end;
+            }
+
+            #{$self}__info {
+                width: 100%;
+            }
+
+            &.hide-mobile {
+                display: none;
+            }
+
+            &.main-mobile {
+                font-weight: 500;
+                order: -1;
+
+                &:before {
+                    font-size: 14px;
+                    font-weight: 500;
+                    color: var(--aptools-color-main-secondary);
+                }
+            }
+
+            &:not(.main-mobile) {
+                font-size: 10px;
+                line-height: 15px;
+            }
+
+            &:not([data-column-name='']) {
+                & > div > * {
+                    width: fit-content;
+                }
+            }
+
+            &:not([data-column-name='']):before {
+                content: attr(data-column-name);
+                color: var(--aptools-color-grey-c1);
+                font-size: 10px;
+                min-width: max-content;
+                line-height: 15px;
+            }
+        }
+    }
+}
+
 .list-column {
     $self: &;
 
     &.adopt {
-        @include mediaWMax('TABLET') {
-            align-items: flex-start;
-            & + #{$self} {
-                margin-top: 2px;
-            }
-            &:not(.main) + #{$self}:not(.main) {
-                margin-top: 0;
-            }
+        @include setAdopt('TABLET', $self);
+    }
 
-            &:not(.inner) {
-                padding: unset !important;
-                justify-content: space-between;
-
-                #{$self}__wrapper {
-                    text-align: right;
-                }
-
-                &.hide-mobile {
-                    display: none;
-                }
-
-                &.main-mobile {
-                    font-weight: 500;
-                    order: -1;
-
-                    &:before {
-                        font-size: 14px;
-                        font-weight: 500;
-                        color: var(--aptools-color-main-secondary);
-                    }
-                }
-
-                &:not(.main-mobile) {
-                    font-size: 10px;
-                    line-height: 15px;
-                }
-
-                &:before {
-                    content: attr(data-column-name);
-                    color: var(--aptools-color-grey-c1);
-                    font-size: 10px;
-                    line-height: 15px;
-                }
-            }
+    @each $key, $value in $breakpoints {
+        &.adopt-#{$value} {
+            @include setAdopt($key, $self);
         }
     }
 
@@ -71,11 +104,16 @@
         align-items: center;
 
         .collapse-button {
-            width: 16px;
-            height: 16px;
+            width: 24px;
+            height: 24px;
             display: flex;
             justify-content: center;
             align-items: center;
+            border-radius: 2px;
+
+            &:hover {
+                background-color: var(--aptools-color-grey-c4);
+            }
 
             &.active {
                 & > div {

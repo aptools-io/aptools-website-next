@@ -15,6 +15,7 @@ export { default as Copy } from "./Copy";
 export { default as CopyBig } from "./CopyBig";
 export { default as DifferenceArrow } from "./DifferenceArrow";
 export { default as DifferenceArrowDouble } from "./DifferenceArrowDouble";
+export { default as EmptyCoin } from "./EmptyCoin";
 export { default as File } from "./File";
 export { default as Logo } from "./Logo";
 export { default as LogoFull } from "./LogoFull";

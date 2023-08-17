@@ -24,3 +24,4 @@ export { default as NftElement } from "./NftElement/NftElement";
 export { default as ProjectItem } from "./ProjectItem/ProjectItem";
 export { default as TextInput } from "./TextInput/TextInput";
 export { default as SearchTooltip } from "./SearchTooltip/SearchTooltip";
+export { default as Tooltip } from "./Tooltip/Tooltip";

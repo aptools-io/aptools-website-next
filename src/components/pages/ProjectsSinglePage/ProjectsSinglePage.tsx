@@ -6,7 +6,6 @@ import { OtherProjects, StatsProject } from "src/components/containers";
 import { Grid, GridWrapper, Topper } from "src/components/general";
 
 const ProjectsSinglePage: React.FC = () => {
-
     return (
         <>
             <Grid>
@@ -15,11 +14,14 @@ const ProjectsSinglePage: React.FC = () => {
                     <StatsProject />
                 </GridWrapper>
             </Grid>
-            <OtherProjects />
+            <Grid>
+                <GridWrapper>
+                    <OtherProjects />
+                </GridWrapper>
+            </Grid>
             {/* <Projects all /> */}
         </>
     );
 };
-
 
 export default ProjectsSinglePage;
