@@ -17,31 +17,27 @@ import ProjectsList from "../ProjectsList/ProjectsList";
 
 // Data
 
-const StatsProject: React.FC<IComponent> = ({
-    className 
-}) => {
+const StatsProject: React.FC<IComponent> = ({ className }) => {
     const { project } = useSelector((state: IRootState) => state.statsProjects);
     const { name, image, description, socials } = project || {};
     /* const { width } = useWindowSize();
     const mediaData = media(width); */
 
-    const classes = classNames([
-        styles["stats-project"],
-        className
-    ]);
-
+    const classes = classNames([styles["stats-project"], className]);
 
     const renderSocial = (item: IApiProjectSocials, index: number) => (
-        
-        <ActiveLink key={index} className={styles["stats-project__info-social-wrapper"]} href={item.link}>
-            <a className={styles["stats-project__info-social"]} target={"_blank"}>
+        <ActiveLink
+            key={index}
+            className={styles["stats-project__info-social-wrapper"]}
+            href={item.link}>
+            <a
+                className={styles["stats-project__info-social"]}
+                target={"_blank"}>
                 {socialsImages[item.name] || <>x</>}
             </a>
         </ActiveLink>
     );
 
-    console.log(socials);
-  
     return (
         <div className={classes}>
             <div className={styles["stats-project__info"]}>
@@ -50,9 +46,14 @@ const StatsProject: React.FC<IComponent> = ({
                 </div>
                 <div className={styles["stats-project__info-socials"]}>
                     <strong>Links</strong>
-                    {socials && <span className={styles["stats-project__info-socials-container"]}>
-                        {socials?.map(renderSocial)}
-                    </span>}
+                    {socials && (
+                        <span
+                            className={
+                                styles["stats-project__info-socials-container"]
+                            }>
+                            {socials?.map(renderSocial)}
+                        </span>
+                    )}
                 </div>
             </div>
             <div className={styles["stats-project__image"]}>
