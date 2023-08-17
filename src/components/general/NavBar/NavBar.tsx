@@ -55,10 +55,14 @@ const NavBar: React.FC<INavBarProps> = ({ data = [] }) => {
     ]);
 
     const handleMenu = () => {
+        setSearch(false);
         setOpened(!opened);
     };
 
-    const handleSearch = () => setSearch((e) => !e);
+    const handleSearch = () => {
+        if (width <= EBreakpoints.TABLET_MINI) setOpened(false);
+        setSearch((e) => !e);
+    };
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -77,12 +81,7 @@ const NavBar: React.FC<INavBarProps> = ({ data = [] }) => {
             document.removeEventListener("click", handleClickOutside, true);
         };
     }, []);
-    console.log(
-        search,
-        width,
-        width >= EBreakpoints.TABLET,
-        search && width && width >= EBreakpoints.TABLET
-    );
+
     return (
         <div
             ref={navBarRef}
