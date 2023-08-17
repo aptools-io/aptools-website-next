@@ -9,8 +9,8 @@ import store from "../scripts/redux/store";
 import "../styles/pages/index.scss";
 
 export function reportWebVitals(metric) {
-    const metrics = new CustomEvent("metrics", { detail: metric });
-    window.dispatchEvent(metrics);
+    /* const metrics = new CustomEvent("metrics", { detail: metric });
+    window.dispatchEvent(metrics); */
 }
 
 const AptoolsApp = (props) => {

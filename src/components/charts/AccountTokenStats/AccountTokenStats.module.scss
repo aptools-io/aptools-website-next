@@ -19,6 +19,15 @@
             align-items: center;
             padding: 4px 8px;
 
+            &.pointer {
+                cursor: pointer;
+                transition: background-color .3s ease;
+
+                &:hover {
+                    background-color: var(--aptools-color-grey-c4);
+                }
+            }
+
             .info {
                 display: flex;
                 align-items: center;

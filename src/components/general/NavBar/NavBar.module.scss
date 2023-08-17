@@ -129,6 +129,15 @@
         }
     }
 
+    &__burger {
+        display: flex;
+        align-items: center;
+
+        button {
+            min-width: 44px;
+        }
+    }
+
     &__outer {
         &.active {
             --nav-bar-width: 170px;

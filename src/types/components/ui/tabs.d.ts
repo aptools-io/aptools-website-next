@@ -1,6 +1,7 @@
 interface ITabsProps extends IComponent {
     data?: object;
     dataArray?: ITab[];
+    tabsName?: string;
     itemsCount?: boolean;
     defaultEntry?: object;
     queryTab?: boolean;

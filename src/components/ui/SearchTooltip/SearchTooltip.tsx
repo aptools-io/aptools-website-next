@@ -69,28 +69,36 @@ const SearchTooltip: React.FC<
 
     useEffect(() => {
         if (searchEmpty) return;
-        const accountsReady = fetchAccounts(terms, account, setAccount);
-        const blockByVersionReady = fetchBlockByVersion(
-            terms,
-            blockByVersion,
-            setBlockByVersion
-        );
-        const blockByHeightReady = fetchBlockByHeight(
-            terms,
-            blockByHeight,
-            setBlockByHeight
-        );
-        const transactionByHashReady = fetchTransactionByHash(
-            terms,
-            transactionByHash,
-            setTransactionByHash
-        );
-        const transactionByVersionReady = fetchTransactionByVersion(
-            terms,
-            transactionByVersion,
-            setTransactionByVersion
-        );
-        const projectsReady = fetchProjects(terms, projects, setProjects);
+        const accountsReady = categories.includes("Accounts")
+            ? fetchAccounts(terms, account, setAccount)
+            : null;
+        const blockByVersionReady = categories.includes("Block by version")
+            ? fetchBlockByVersion(terms, blockByVersion, setBlockByVersion)
+            : null;
+        const blockByHeightReady = categories.includes("Block by height")
+            ? fetchBlockByHeight(terms, blockByHeight, setBlockByHeight)
+            : null;
+        const transactionByHashReady = categories.includes(
+            "Transaction by hash"
+        )
+            ? fetchTransactionByHash(
+                  terms,
+                  transactionByHash,
+                  setTransactionByHash
+              )
+            : null;
+        const transactionByVersionReady = categories.includes(
+            "Transaction by version"
+        )
+            ? fetchTransactionByVersion(
+                  terms,
+                  transactionByVersion,
+                  setTransactionByVersion
+              )
+            : null;
+        const projectsReady = categories.includes("Projects")
+            ? fetchProjects(terms, projects, setProjects)
+            : null;
 
         return () => {
             if (accountsReady) accountsReady();

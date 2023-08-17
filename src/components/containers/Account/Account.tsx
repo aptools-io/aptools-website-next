@@ -19,24 +19,20 @@ import styles from "./Account.module.scss";
 // Data
 import categories from "./data/categories";
 
-
-
-
 const Account: React.FC<{ all?: boolean } & IComponent> = ({
     all = false,
-    className 
+    className
 }) => {
     const dispatch = useDispatch();
 
-    const classes = classNames([
-        styles.account,
-        className
-    ]);
-
+    const classes = classNames([styles.account, className]);
 
     return (
         <div className={classes}>
-            <Tabs dataArray={categories(dispatch)} itemsCount={false}>
+            <Tabs
+                tabsName={"account"}
+                dataArray={categories(dispatch)}
+                itemsCount={false}>
                 <div></div>
             </Tabs>
         </div>

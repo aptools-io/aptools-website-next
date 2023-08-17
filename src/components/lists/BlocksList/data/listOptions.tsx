@@ -1,3 +1,4 @@
+import { Tooltip } from "src/components/ui";
 import { formatNumber } from "src/scripts/util/numbers";
 import { concatString, shortenHashString } from "src/scripts/util/strings";
 import { timeAgo } from "src/scripts/util/timeConvert";
@@ -13,7 +14,11 @@ const columnNames = [
     {
         key: "block_timestamp",
         value: "Age",
-        formatter: (v) => `${timeAgo(v / 1000)}`
+        formatter: (v) => (
+            <Tooltip text={timeAgo(v / 1000)}>
+                {timeAgo(v / 1000, true)}
+            </Tooltip>
+        )
     },
     {
         key: "block_hash",
@@ -21,14 +26,14 @@ const columnNames = [
         underline: true,
         formatter: (v) => `${shortenHashString(v, [20, 20])}`
     },
-    {  
+    {
         key: "first_version",
         value: "First version"
     },
     {
         key: "last_version",
         value: "Last version"
-    },
+    }
 ];
 
 // Columns
