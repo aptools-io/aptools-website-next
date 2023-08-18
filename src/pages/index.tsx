@@ -6,7 +6,10 @@ import { useDispatch } from "react-redux";
 import { setGeneralStatsData } from "src/scripts/redux/slices/statsGeneralSlice";
 import { setProjectStatsData } from "src/scripts/redux/slices/statsProjectsSlice";
 import { setDexesVolumesStatsData } from "src/scripts/redux/slices/statsDexesVolumesSlice";
-import { setAddressesData, setTransactionsData } from "src/scripts/redux/slices/statsAddressesTransactionsSlice";
+import {
+    setAddressesData,
+    setTransactionsData
+} from "src/scripts/redux/slices/statsAddressesTransactionsSlice";
 import { setCoinTransactions } from "src/scripts/redux/slices/statsTransactionsSlice";
 import { setHeaders } from "src/scripts/redux/slices/headersSlice";
 
@@ -14,7 +17,14 @@ import { setHeaders } from "src/scripts/redux/slices/headersSlice";
 import { MainPage } from "src/components/pages";
 
 // API
-import { contractAddresses, contractTransactions, dexesVolumes, generalStats, projects, transactions } from "src/scripts/api/requests";
+import {
+    contractAddresses,
+    contractTransactions,
+    dexesVolumes,
+    generalStats,
+    projects,
+    transactions
+} from "src/scripts/api/requests";
 
 // Scripts
 import categories from "src/scripts/consts/categories";
@@ -24,17 +34,19 @@ import filtrateProjects from "src/scripts/util/filtrateProjects";
 import { aptosStats } from "src/scripts/websocket/connections";
 import { setPageTitle } from "src/scripts/redux/slices/pageTitleSlice";
 
-
 const Home = (data: IApiProps) => {
     const ws = useRef<WebSocket>(null);
     const dispatch = useDispatch();
-    
+
     useEffect(() => {
         aptosStats.openConnection(ws, dispatch);
-        return () => { ws.current.close(); }; 
+        return () => {
+            ws.current.close();
+        };
     }, [dispatch]);
 
     useEffect(() => {
+        console.log(data);
         dispatch(setHeaders(data.headers) || null);
         dispatch(setGeneralStatsData(data.general_stats || null));
         dispatch(setProjectStatsData(data.projects || null));
@@ -46,20 +58,22 @@ const Home = (data: IApiProps) => {
     }, [data, dispatch]);
 
     return <MainPage />;
-}; 
+};
 export default Home;
 
 export async function getServerSideProps(context) {
-    const projectsUnfiltered = await projects.getData() || []; 
+    const projectsUnfiltered = (await projects.getData()) || [];
     const { req } = context;
-    return { props: {
-        "overflow": true,
-        "headers": req.headers,
-        "general_stats": await generalStats.getData() || {},
-        "contract_addresses": await contractAddresses.getData() || [],
-        "contract_transactions": await contractTransactions.getData() || [],
-        "dexes_volumes": await dexesVolumes.getData() || [],
-        "projects": filtrateProjects(projectsUnfiltered, categories) || [],
-        "transactions": await transactions.getData() || [],
-    } };
+    return {
+        props: {
+            overflow: true,
+            headers: req.headers,
+            general_stats: (await generalStats.getData()) || {},
+            contract_addresses: (await contractAddresses.getData()) || [],
+            contract_transactions: (await contractTransactions.getData()) || [],
+            dexes_volumes: (await dexesVolumes.getData()) || [],
+            projects: filtrateProjects(projectsUnfiltered, categories) || [],
+            transactions: (await transactions.getData()) || []
+        }
+    };
 }
