@@ -148,7 +148,7 @@ const columnNamesTablet = [
                         <span className={styles["title"]}>Hash</span>
                         <span className={styles["value"]}>
                             <CopyText text={row?.hash} />
-                            <ActiveLink href={row?.hash}>
+                            <ActiveLink href={`/transactions/${row?.hash}`}>
                                 <a>{shortenHashString(row?.hash)}</a>
                             </ActiveLink>
                         </span>
@@ -160,7 +160,7 @@ const columnNamesTablet = [
                         <span className={styles["title"]}>Account</span>
                         <span className={styles["value"]}>
                             <CopyText text={row?.account} />
-                            <ActiveLink href={row?.account}>
+                            <ActiveLink href={`/accounts/${row?.account}`}>
                                 <a>{shortenHashString(row?.account)}</a>
                             </ActiveLink>
                         </span>

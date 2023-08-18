@@ -40,6 +40,7 @@ export class Api {
             const endpoint = `${this.base}${this.version}${url}${
                 Object.keys(params)?.length > 0 ? `?${paramsString}` : ""
             }`;
+
             const result: Response = await fetch(endpoint, init);
             return result;
         } catch (error) {
@@ -49,9 +50,10 @@ export class Api {
 
     handleResponse = (response) => {
         // eslint-disable-line class-methods-use-this
+        console.log(response);
         if (response.status >= 500)
             throw new Error(
-                `Error status code ${response.status} while fetching`
+                `Error status code ${response.status} while fetching, url ${response.url}`
             );
         if (
             response.status !== 201 &&
