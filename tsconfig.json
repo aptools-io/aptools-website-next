@@ -20,13 +20,16 @@
         "resolveJsonModule": true,
         "isolatedModules": true,
         "jsx": "preserve",
-        "incremental": true
+        "incremental": true,
+        "downlevelIteration": true
     },
     "include": [
         "next-env.d.ts",
         "**/*.ts",
-        "**/*.tsx"
-, "src/pages/chart.js"    ],
+        "**/*.tsx", 
+        "src/pages/chart.js", 
+        "src/pages/_error.js"    
+    ],
     "exclude": [
         "node_modules"
     ]

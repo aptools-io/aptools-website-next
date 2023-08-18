@@ -31,7 +31,7 @@ const StatsTotalRight: React.FC<IComponent> = ({
         className
     ]);
 
-    if(!blockchain_info) return <Plug noData />;
+    if(!blockchain_info || !total_validators || !total_wallets || !total_contracts) return <Plug noData />;
 
     return (
         <>

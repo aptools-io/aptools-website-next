@@ -28,8 +28,9 @@ export default DexId;
 
 export async function getServerSideProps(context) {
     const { req, query } = context;
+    const { id } = query || {};
 
-    const dex = await dexSingle.getData(query.id);
+    const dex = await dexSingle.getData(id);
 
     if(!dex) return {
         notFound: true

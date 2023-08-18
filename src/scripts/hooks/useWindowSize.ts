@@ -6,8 +6,8 @@ import { a } from "../common/adaptive";
 const useWindowSize = () => {
     const [media, setMedia] = useState(null);
     const [windowSize, setWindowSize] = useState({
-            width: null,
-            height: null,
+        width: null,
+        height: null,
     });
 
     useEffect(() => {

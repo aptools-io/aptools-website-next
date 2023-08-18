@@ -11,3 +11,7 @@ export { default as statsAddressesTransactionsSlice } from "./statsAddressesTran
 export { default as pageTitleSlice } from "./pageTitleSlice";
 export { default as newsSlice } from "./newsSlice";
 export { default as accountsSlice } from "./accountsSlice";
+export { default as validatorsSlice } from "./validatorsSlice";
+export { default as blocksSlice } from "./blocksSlice";
+export { default as blockchainSlice } from "./blockchainSlice";
+export { default as nftsSlice } from "./nftsSlice";

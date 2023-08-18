@@ -21,30 +21,30 @@ const List: React.FC<IListProps> = ({
     className 
 }) => {
     const classes = classNames([
-        styles["list"],
-        { [styles["adopt"]]: adoptMobile },
+        styles.list,
+        { [styles.adopt]: adoptMobile },
         className
     ]);
 
     if(loadingCount) return <ul className={classes}>{new Array(loadingCount).fill(null).map((_, index) => 
         loadingComponent ? 
-        <React.Fragment key={index}>{loadingComponent}</React.Fragment> : 
-        <Skeleton key={index} style={{ height: "35px", minHeight: "35px" }} />)}</ul>;
+            <React.Fragment key={index}>{loadingComponent}</React.Fragment> : 
+            <Skeleton key={index} style={{ height: "24px", minHeight: "24px" }} />)}</ul>;
     
     const processedData = slice ? data.slice(slice[0], slice[1]) : data;
 
     return (
         <ul className={classes}>
             {processedData.map((item, index) => 
-            <ListRow 
-                key={index} 
-                row={item} 
-                rowIndex={index} 
-                columnNames={columnNames} 
-                adoptMobile={adoptMobile} 
-                hardPageId={hardPageId}
-                hardPerPage={hardPerPage}
-            />)}
+                <ListRow 
+                    key={index} 
+                    row={item} 
+                    rowIndex={index} 
+                    columnNames={columnNames} 
+                    adoptMobile={adoptMobile} 
+                    hardPageId={hardPageId}
+                    hardPerPage={hardPerPage}
+                />)}
         </ul>
     );
 };

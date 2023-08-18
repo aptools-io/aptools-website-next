@@ -1,0 +1,33 @@
+.tooltip {
+    position: relative;
+    cursor: help;
+
+    &.left {
+        &:after {
+            transform: unset;
+            left: 0;
+        }
+    }
+
+    &:after {
+        content: attr(data-tooltip);
+        position: absolute;
+        bottom: calc(100% + 6px);
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: rgba(var(--aptools-color-emphasis-c1--rgb) / 80%);
+        color: var(--aptools-color-main-primary);
+        border-radius: 2px;
+        padding: 2px 6px;
+        opacity: 0;
+        transition: opacity .3s ease;
+        pointer-events: none;
+        white-space: nowrap;
+    }
+
+    &:hover {
+        &:after {
+            opacity: 1;
+        }
+    }
+}

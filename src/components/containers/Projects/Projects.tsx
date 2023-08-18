@@ -1,5 +1,5 @@
 // React
-import React from "react";
+import React, { useState } from "react";
 
 // Redux
 import { useSelector } from "react-redux";
@@ -15,26 +15,36 @@ import styles from "./Projects.module.scss";
 import ProjectsList from "../ProjectsList/ProjectsList";
 import media from "./data/adaptive";
 
-
-const Projects: React.FC<{ all?: boolean } & IComponent> = ({
-    all = false,
-    className 
-}) => {
-    const { data: projects = null } = useSelector((state: IRootState) => state.statsProjects);
+const Projects: React.FC<
+    { all?: boolean; queryTab?: boolean } & IComponent
+> = ({ all = false, queryTab = false, className }) => {
+    const { data: projects = null } = useSelector(
+        (state: IRootState) => state.statsProjects
+    );
+    const [currentTab, setCurrentTab] = useState(0);
     const { width } = useWindowSize();
     const mediaData = media(width);
 
-    const classes = classNames([
-        styles["projects"],
-        className
-    ]);
+    const classes = classNames([styles.projects, className]);
 
-    if(!projects || !Object.keys(projects)?.length) return <div className={classes}><Plug noData /></div>;
+    if (!projects || !Object.keys(projects)?.length)
+        return (
+            <div className={classes}>
+                <Plug noData />
+            </div>
+        );
 
     return (
         <div className={classes}>
-            <Tabs data={projects}>
-                <ProjectsList all={all} mediaData={mediaData} />
+            <Tabs
+                queryTab={queryTab}
+                data={projects}
+                onChangeTab={setCurrentTab}>
+                <ProjectsList
+                    all={all}
+                    mediaData={mediaData}
+                    tabId={currentTab}
+                />
             </Tabs>
         </div>
     );

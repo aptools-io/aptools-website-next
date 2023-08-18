@@ -37,7 +37,7 @@ const TransactionHistory: React.FC<IComponent> = ({
 
     useEffect(() => {
         const dailyWalletsUsage = {"7d": [], "14d": [],"30d": [], "all": allTimeTrans} as IApiWalletsUsage;
-        allTimeTrans.forEach(el => {
+        allTimeTrans?.forEach(el => {
             if(dateDiffInDays(new Date(el.x), new Date()) <= 8) dailyWalletsUsage["7d"].push(el);
             if(dateDiffInDays(new Date(el.x), new Date()) <= 15) dailyWalletsUsage["14d"].push(el);
             if(dateDiffInDays(new Date(el.x), new Date()) <= 31) dailyWalletsUsage["30d"].push(el);
@@ -48,7 +48,7 @@ const TransactionHistory: React.FC<IComponent> = ({
     const data = [
         {
             "name": "Aptos Transaction History",
-            "chart": [...volumes[volume]].slice(0, volumes[volume].length - 1)
+            "chart": volumes?.[volume]?.length ? [...volumes[volume]].slice(0, volumes[volume].length - 1) : []
         },
     ];
     return (
@@ -63,7 +63,7 @@ const TransactionHistory: React.FC<IComponent> = ({
                 </span>
             </strong>
             <div className={"chart__inner"}>
-                {allTimeTrans.length ? <ReactECharts className={"chart__wrapper"} theme={""} option={chartOptions(data)} /> : <Plug noData />}
+                {allTimeTrans?.length ? <ReactECharts className={"chart__wrapper"} theme={""} option={chartOptions(data)} /> : <Plug noData />}
             </div>
         </div>
     );

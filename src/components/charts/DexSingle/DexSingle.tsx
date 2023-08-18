@@ -102,18 +102,18 @@ const DexSingle: React.FC<IComponent> = ({
         return (
             <li className={classNames([
                 styles["dex-single__tab"],
-                { [styles["active"]]: currentDexData === item[0] }
+                { [styles.active]: currentDexData === item[0] }
             ])} key={index} onClick={() => setCurrentDexData(item[0])}>
                 <div className={styles["dex-single__tab-item"]}>
                     <strong>{item[1].name}</strong>
-                    <span>{concatString(formatNumber(item[1].value), "$", "")}</span>
+                    <span>{concatString(formatNumber(item[1].value), `${index !== 2 ? "$" : ""}`, "")}</span>
                 </div>
                 <div className={styles["dex-single__tab-item"]}>
                     <span></span>
                     <span className={classNames([
-                        styles["percent"],
-                        { [styles["green"]]: percent >= 0 },
-                        { [styles["red"]]: percent < 0 }
+                        styles.percent,
+                        { [styles.green]: percent >= 0 },
+                        { [styles.red]: percent < 0 }
                     ])}><DifferenceArrow />{concatString(setSign(formatNumber(percent)), "", "%")}</span>
                 </div>
             </li>

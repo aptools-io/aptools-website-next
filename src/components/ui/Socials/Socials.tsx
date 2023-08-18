@@ -20,21 +20,21 @@ const Socials: React.FC<ISocialsProps> = ({
     const { t } = useTranslation("common");
 
     const classes = classNames([
-        styles["socials"],
+        styles.socials,
         className
     ]);
 
     const renderSocial = (item: ISocialsItem, index) => 
-        <li key={index} className={styles["socials__item"]}>
-            <a href={item.link}>{item.svg}</a>
+        <li key={index} className={styles.socials__item}>
+            <a href={item.link} target={"_blank"} rel="noreferrer">{item.svg}</a>
         </li>;
 
     return (
         <div className={classes}>
-            {title && <div className={styles["socials__title"]}>{t("our social links")}</div>}
+            {title && <div className={styles.socials__title}>{t("our social links")}</div>}
             {!!data.length && 
-                <ul className={styles["socials__items"]}>
-                    {data.map(renderSocial)}
+                <ul className={styles.socials__items}>
+                	{data.map(renderSocial)}
                 </ul>
             }
         </div>

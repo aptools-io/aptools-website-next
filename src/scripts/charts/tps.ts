@@ -1,8 +1,8 @@
 import { graphic } from "echarts";
 
 const tpsOptions = (data: IPoint[]) => {
-    const xAxisArray = data.map(item => item.x);
-    const yAxisArray = data.map(item => item.y) as number[];
+    const xAxisArray = data?.map(item => item.x) || [];
+    const yAxisArray = data?.map(item => item.y) as number[] || [];
     
     const labels = {
         textStyle: {
@@ -26,32 +26,32 @@ const tpsOptions = (data: IPoint[]) => {
         },
         series: 
         [
-            {
-                data: yAxisArray,
-                type: "line",
-                symbol: "circle",
-                symbolSize: 4,
-                lineStyle: {
-                    color: "rgb(59, 89, 152)",
-                },
-                itemStyle: {
-                    color: "rgb(59, 89, 152)",
-                    borderWidth: 0,
-                },
-                areaStyle: {
-                    opacity: 0.8,
-                    color: new graphic.LinearGradient(0, 0, 0, 1, [
-                      {
-                        offset: 0,
-                        color: "rgba(59, 89, 152, 1)"
-                      },
-                      {
-                        offset: 1,
-                        color: "rgba(59, 89, 152, 0)"
-                      }
-                    ])
-                },
-            },
+        	{
+        		data: yAxisArray,
+        		type: "line",
+        		symbol: "circle",
+        		symbolSize: 4,
+        		lineStyle: {
+        			color: "rgb(59, 89, 152)",
+        		},
+        		itemStyle: {
+        			color: "rgb(59, 89, 152)",
+        			borderWidth: 0,
+        		},
+        		areaStyle: {
+        			opacity: 0.8,
+        			color: new graphic.LinearGradient(0, 0, 0, 1, [
+        				{
+        					offset: 0,
+        					color: "rgba(59, 89, 152, 1)"
+        				},
+        				{
+        					offset: 1,
+        					color: "rgba(59, 89, 152, 0)"
+        				}
+        			])
+        		},
+        	},
         ],
         tooltip: {
             trigger: "axis",

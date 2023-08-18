@@ -52,7 +52,7 @@ const StatsAptos: React.FC<IComponent> = ({
 
     const totalHolders = token_statistics?.["24h"]
         ?.tokens_by_total
-        ?.find(el => el.symbol === "APT").number || 0;
+        ?.find(el => el.symbol === "APT")?.number || 0;
 
     const classes = classNames([
         styles["stats-aptos"],

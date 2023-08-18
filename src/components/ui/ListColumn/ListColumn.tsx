@@ -1,5 +1,5 @@
 // React
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 // Styles
 import classNames from "classnames";
@@ -13,29 +13,28 @@ import { copyText } from "src/scripts/util/copyText";
 import styles from "./ListColumn.module.scss";
 import CopyText from "../CopyText/CopyText";
 
-
 const ListColumn: React.FC<IListProps> = ({
     hardPageId = null,
     hardPerPage = null,
     row,
-    rowIndex, 
-    column, 
-    columnIndex, 
-    under = [], 
-    valueGridReplace = [], 
-    inner = false, 
+    rowIndex,
+    column,
+    columnIndex,
+    under = [],
+    valueGridReplace = [],
+    inner = false,
     handleCollapse,
     adoptMobile,
     className
 }) => {
     const [collapseActive, setCollapseActive] = useState(false);
-    const { 
-        collapser = null, 
-        key = null, 
-        value: valueRef = null, 
-        symbol: symbolRef = null, 
+    const {
+        collapser = null,
+        key = null,
+        value: valueRef = null,
+        symbol: symbolRef = null,
         copy = null,
-        description: descriptionRef = null, 
+        description: descriptionRef = null,
         formatter = null,
         replacedFormatter = null,
         descriptionFormatter = null,
@@ -51,101 +50,176 @@ const ListColumn: React.FC<IListProps> = ({
         elementRemove = false,
         bold = false,
         ownLink = null,
+        ownLinkValueFormatter = null,
         approxKey = null
     } = column;
-    if(elementRemove) return <></>;
+    if (elementRemove) return <></>;
 
     const style = {
-        "fontSize": fontSize || null,
-        "gridColumn": span ? `${span} span` : null,
-        "fontWeight": bold ? "500" : null,
+        fontSize: fontSize || null,
+        gridColumn: span ? `${span} span` : null,
+        fontWeight: bold ? "500" : null
     } as React.CSSProperties;
 
-    const combinedValues = row?.combined; 
+    const combinedValues = row?.combined;
 
     const unformattedValue = row?.[key];
     const approxed = row?.[approxKey];
-    let value = !formatter ? unformattedValue : formatter(unformattedValue);
-    
-    if(approxed) value = `~ ${value}`;
+    let value = !formatter
+        ? unformattedValue
+        : formatter(unformattedValue, row);
 
-    if(key === "_id" && hardPageId !== null && hardPerPage !== null) value = (rowIndex + 1) + (hardPageId * hardPerPage);
-    const combinedValue = formatter && combinedValues ? formatter(combinedValues?.[key]) : undefined;
+    if (approxed) value = `~ ${value}`;
+
+    if (key === "_id" && hardPageId !== null && hardPerPage !== null)
+        value = rowIndex + 1 + hardPageId * hardPerPage;
+    const combinedValue =
+        formatter && combinedValues
+            ? formatter(combinedValues?.[key], row)
+            : undefined;
 
     const unformattedReplacedValueMobile = row?.[replacedKeyMobile];
-    const replacedValueMobile = !replacedFormatter ? unformattedReplacedValueMobile : replacedFormatter(unformattedReplacedValueMobile);
-    const replacedCombinedValueMobile = replacedFormatter && combinedValues ? replacedFormatter(combinedValues?.[replacedKeyMobile]) : undefined;
-
-
+    const replacedValueMobile = !replacedFormatter
+        ? unformattedReplacedValueMobile
+        : replacedFormatter(unformattedReplacedValueMobile, row);
+    const replacedCombinedValueMobile =
+        replacedFormatter && combinedValues
+            ? replacedFormatter(combinedValues?.[replacedKeyMobile], row)
+            : undefined;
 
     let firstSymbol = row?.[symbolRef];
     let secondSymbol = null;
-    if(typeof firstSymbol === "string" && firstSymbol && firstSymbol.indexOf("/") > -1) {
+    if (
+        typeof firstSymbol === "string" &&
+        firstSymbol &&
+        firstSymbol.indexOf("/") > -1
+    ) {
         secondSymbol = firstSymbol.substring(firstSymbol.indexOf("/") + 1);
         firstSymbol = firstSymbol.substring(0, firstSymbol.indexOf("/"));
     }
-    const description = !descriptionFormatter ? row?.[descriptionRef] : descriptionFormatter(row?.[descriptionRef]);
+    const description = !descriptionFormatter
+        ? row?.[descriptionRef]
+        : descriptionFormatter(row?.[descriptionRef], row);
 
-    if(valueGridReplace?.length) return (<div key={columnIndex} className={styles["list-column__inner"]}>{valueGridReplace}</div>); 
+    if (valueGridReplace?.length)
+        return (
+            <div key={columnIndex} className={styles["list-column__inner"]}>
+                {valueGridReplace}
+            </div>
+        );
 
+    const ownLinkVisible =
+        (ownLink && ownLinkValueFormatter?.(unformattedValue, row)) ||
+        (ownLink && !ownLinkValueFormatter);
     const classes = classNames([
         styles["list-column"],
-        { [styles["right"]]: right },
-        { [styles["under"]]: underRef },
-        { [styles["inner"]]: inner },
-        { [styles["adopt"]]: adoptMobile },
-        { [styles["underline"]]: underline },
-        { [styles["own-link"]]: ownLink },
+        { [styles.right]: right },
+        { [styles.under]: underRef },
+        { [styles.inner]: inner },
+        { [styles.adopt]: adoptMobile === true },
+        { [styles[`adopt-${adoptMobile}px`]]: typeof adoptMobile === "number" },
+        { [styles.underline]: underline },
+        { [styles["own-link"]]: ownLinkVisible },
+        { "prior-link": ownLinkVisible },
         /* { [styles["center"]]: key === "_id" }, */
         { [styles["main-mobile"]]: mainMobile },
         { [styles["hide-mobile"]]: hideMobile },
-        { [styles["red"]]: colorize && unformattedValue < 0 },
-        { [styles["green"]]: colorize && unformattedValue >= 0 },
+        { [styles.red]: colorize && unformattedValue < 0 },
+        { [styles.green]: colorize && unformattedValue >= 0 },
         className
     ]);
 
     const ComponentWrapper = ownLink ? "a" : "div";
 
     return (
-        <ComponentWrapper 
-            key={columnIndex} 
-            data-column-name={!column?.["replacedKeyMobile"] ? valueRef : value}
+        <ComponentWrapper
+            key={columnIndex}
+            data-column-name={!column?.replacedKeyMobile ? valueRef : value}
             style={style}
             className={classes}
-            { ...ownLink ? { "href": `${ownLink}/${unformattedValue}` } : {} }
-        >
+            {...(ownLink && ownLinkValueFormatter?.(unformattedValue, row)
+                ? {
+                      href: `${ownLink}/${ownLinkValueFormatter?.(
+                          unformattedValue,
+                          row
+                      )}`
+                  }
+                : {})}
+            {...(ownLink && !ownLinkValueFormatter
+                ? { href: `${ownLink}/${unformattedValue}` }
+                : {})}>
             <>
                 <div className={styles["list-column__wrapper"]}>
-                    {collapser && 
-                        <button 
+                    {collapser && (
+                        <button
                             className={classNames([
-                                styles["collapse-button"], 
-                                {[styles["active"]]: collapseActive}])} 
-                            onClick={() => {handleCollapse(); setCollapseActive(!collapseActive);} }>
-                                <div><ArrowLeft /></div>
-                        </button>}
-                    {column["colorize"] && <DifferenceArrow />}
+                                styles["collapse-button"],
+                                { [styles.active]: collapseActive }
+                            ])}
+                            onClick={() => {
+                                handleCollapse();
+                                setCollapseActive(!collapseActive);
+                            }}>
+                            <div>
+                                <ArrowLeft />
+                            </div>
+                        </button>
+                    )}
+                    {column.colorize && <DifferenceArrow />}
 
-                    {firstSymbol && <img className={styles["list-column__icon"]} src={getImageFromApi(firstSymbol)} alt={firstSymbol}/>}
-                    {secondSymbol && <img className={styles["list-column__icon"]} src={getImageFromApi(secondSymbol)} alt={secondSymbol}/>}
+                    {firstSymbol && (
+                        <img
+                            className={styles["list-column__icon"]}
+                            src={getImageFromApi(firstSymbol)}
+                            alt={firstSymbol}
+                        />
+                    )}
+                    {secondSymbol && (
+                        <img
+                            className={styles["list-column__icon"]}
+                            src={getImageFromApi(secondSymbol)}
+                            alt={secondSymbol}
+                        />
+                    )}
 
-                    {replacedKeyMobile && <div className={classNames([styles["list-column__info"], styles["next-hide"]])}>
-                        {(replacedCombinedValueMobile !== undefined) ? `${replacedCombinedValueMobile} / ` : ""}
-                        {replacedValueMobile}
-                    </div>}
-
-                    {column?.["formatterComponent"] ? 
-                        <div className={styles["list-column__info"]}>{column?.["formatterComponent"](unformattedValue)}</div> : 
-                        <div className={styles["list-column__info"]}>
-                            {(combinedValue !== undefined && !column?.["ignoreCombined"]) ? `${combinedValue} / ` : ""}
-                            {value}
-                            {description && <div className={styles["list-column__description"]}>{description}</div>}
+                    {replacedKeyMobile && (
+                        <div
+                            className={classNames([
+                                styles["list-column__info"],
+                                styles["next-hide"]
+                            ])}>
+                            {replacedCombinedValueMobile !== undefined
+                                ? `${replacedCombinedValueMobile} / `
+                                : ""}
+                            {replacedValueMobile}
                         </div>
-                    }
-                    
+                    )}
+
+                    {column?.formatterComponent ? (
+                        <div className={styles["list-column__info"]}>
+                            {column?.formatterComponent(unformattedValue, row)}
+                        </div>
+                    ) : (
+                        <div className={styles["list-column__info"]}>
+                            {combinedValue !== undefined &&
+                            !column?.ignoreCombined
+                                ? `${combinedValue} / `
+                                : ""}
+                            {value}
+                            {description && (
+                                <div
+                                    className={
+                                        styles["list-column__description"]
+                                    }>
+                                    {description}
+                                </div>
+                            )}
+                        </div>
+                    )}
+
                     {copy && <CopyText text={row?.[copy]} />}
 
-                    {ownLink && <ArrowRotated />}
+                    {ownLinkVisible && <ArrowRotated />}
                 </div>
                 {under}
             </>

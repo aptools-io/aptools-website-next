@@ -20,13 +20,11 @@ const Select: React.FC<ISelectProps> = ({ customSelectWrapper, onChange, value =
     useEffect(() => {
         const selectWrapperElement = customSelectWrapper?.current || window;
         const customParams = customSelectWrapper?.current?.getBoundingClientRect();
-        const customPlus = !Number.isNaN(customParams?.height) && Number.isNaN(customParams?.top) ? customParams.height + customParams.top : null;
+
+        const customPlus = (!Number.isNaN(customParams?.height) && !Number.isNaN(customParams?.top)) ? (customParams?.height || 0) + (customParams?.top || 0) : null;
         const wrapperHeight = customPlus || window?.innerHeight;
-        
         const handleClickOutside = (event) => {
-            if (selectRef.current && !selectRef.current.contains(event.target)) {
-                setShow(false);   
-            }
+            if (selectRef.current && !selectRef.current.contains(event.target)) setShow(false);   
         };
         const handleFromBottom = () => {
             if(!selectRef.current || !optionsRef.current) return;
@@ -49,11 +47,11 @@ const Select: React.FC<ISelectProps> = ({ customSelectWrapper, onChange, value =
     }, [show]);
 
     const classes = classNames([
-        styles["select"], 
+        styles.select, 
         { [styles["from-bottom"]]: fromBottom },
-        { [styles["show"]]: show,
-        className
-    }]);
+        { [styles.show]: show,
+            className
+        }]);
 
     const renderOptions = (child, index) => {
         const id = index.toString();
@@ -62,9 +60,9 @@ const Select: React.FC<ISelectProps> = ({ customSelectWrapper, onChange, value =
         const optionProps = {
             onClick,
             className: classNames([
-                styles["select__option"], 
-                { [styles["active"]]: value === id 
-            }])
+                styles.select__option, 
+                { [styles.active]: value === id 
+                }])
         };
 
         return <div key={index} {...optionProps}>{cloneElement(child)}</div>;
@@ -73,12 +71,12 @@ const Select: React.FC<ISelectProps> = ({ customSelectWrapper, onChange, value =
     return (
         <div ref={selectRef} className={classes}>
             {title && <strong>{title}</strong>}
-            <button type={"button"} onClick={() => setShow(!show)} className={styles["select__wrapper"]}>
-                <div className={styles["select__input"]}>
+            <button type={"button"} onClick={() => setShow(!show)} className={styles.select__wrapper}>
+                <div className={styles.select__input}>
                     <span>{childs[value]?.props?.children}</span>
                     <ArrowLeft />
                 </div>
-                <div ref={optionsRef} className={styles["select__options"]}>
+                <div ref={optionsRef} className={styles.select__options}>
                     {!fromBottom ? childs.map(renderOptions) : childs.map(renderOptions).reverse()}
                 </div>
             </button>

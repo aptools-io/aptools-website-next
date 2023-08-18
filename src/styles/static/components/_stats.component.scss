@@ -8,6 +8,86 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+
+        .placeholder {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .data {
+                .value {
+                    font-size: 14px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 130%;
+                    color: var(--aptools-color-grey-c1);
+                    margin-right: 8px;
+                }
+
+                .percent {
+                    padding: 2px 6px;
+                    border-radius: 2px;
+                    color: var(--aptools-color-grey-c2);
+                    background-color: var(--aptools-color-grey-c4);
+                    font-size: 10px;
+                    font-style: normal;
+                    font-weight: 500;
+                    line-height: 15px;
+
+                    svg {
+                        margin-right: 2px;
+
+                        path {
+                            fill: var(--aptools-color-grey-c2);
+                        }
+                    }
+                }
+            }
+
+            .preview {
+                display: flex;
+
+                &__info {
+                    margin-left: 8px;
+                    display: flex;
+                    flex-direction: column;
+
+                    strong {
+                        font-size: 14px;
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: 130%;
+                    }
+
+                    span {
+                        color: var(--aptools-color-grey-c1);
+                        margin-top: 2px;
+                        font-size: 10px;
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: 15px;
+                    }
+                }
+
+                &__image {
+                    &:not(.coin) {
+                        height: 32px;
+                        width: 32px;
+                        background-color: var(--aptools-color-grey-c4);
+                        border-radius: 4px;
+
+                        svg {
+                            transform: scale(.75);
+                        }
+                    }
+
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+            }
+        }
     }
 
     &__top {
@@ -43,6 +123,10 @@
             &.row {
                 flex-direction: row;
                 overflow: hidden;
+            }
+
+            &.center {
+                align-items: center;
             }
 
             button {
@@ -96,6 +180,14 @@
                 color: var(--aptools-color-grey-c1);
                 display: flex;
                 align-items: center;
+
+                &.positive {
+                    color: var(--aptools-color-emphasis-c2);
+                }
+
+                &.negative {
+                    color: var(--aptools-color-emphasis-c4);
+                }
 
                 .additive {
                     font-weight: 500;
@@ -162,10 +254,26 @@
     }
 
     &__item {
+        &-wrapper + &-wrapper {
+            margin-top: 2px;
+        }
+
         &-wrapper {
             display: flex;
             justify-content: space-between;
             align-items: flex-end;
+
+            &.wrap {
+                flex-wrap: wrap;
+            }
+
+            &.flex-start {
+                align-items: flex-start;
+            }
+
+            &.indent {
+                margin-top: 17px;
+            }
 
             &.emphasis {
                 padding: 8px 13px;
@@ -272,6 +380,51 @@
                 font-size: 14px;
                 line-height: 130%;
                 text-align: right;
+                margin-left: 15px;
+
+                &.emphasis {
+                    color: var(--aptools-color-main-primary);
+                    background-color: var(--aptools-color-emphasis-c1);
+                    padding: 2px 10px;
+                    border-radius: 2px;
+                    text-align: left;
+                }
+
+                &.break {
+                    word-break: break-all;
+                }
+
+                &.success-color {
+                    color: var(--aptools-color-emphasis-c2);
+                }
+
+                &.cancel-color {
+                    color: var(--aptools-color-emphasis-c4);
+                }
+
+                &.success {
+                    color: var(--aptools-color-emphasis-c2);
+                }
+
+                &.success-type,
+                &.cancel-type {
+                    padding: 2px 6px;
+                    background-color: var(--aptools-color-lights-success);
+                    color: var(--aptools-color-emphasis-c2);
+                    border-radius: 4px;
+                    font-size: 10px;
+                    margin-top: 2px;
+                }
+
+                &.success-type {
+                    background-color: var(--aptools-color-lights-success);
+                    color: var(--aptools-color-emphasis-c2);
+                }
+
+                &.cancel-type {
+                    background-color: var(--aptools-color-lights-danger);
+                    color: var(--aptools-color-emphasis-c4);
+                }
 
                 span {
                     color: var(--aptools-color-emphasis-c1);
@@ -282,6 +435,34 @@
                         font-size: 10px;
                         line-height: 15px;
                     }
+
+                    &.little {
+                        color: var(--aptools-color-grey-c1);
+                    }
+
+                    &.success {
+                        color: var(--aptools-color-emphasis-c2);
+                    }
+                }
+
+                &.column {
+                    display: flex;
+                    flex-direction: column;
+                }
+
+                &.row {
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    column-gap: 5px;
+                }
+
+                .blue {
+                    color: var(--aptools-color-emphasis-c1);
+                }
+
+                .small {
+                    font-size: 10px;
                 }
 
                 .additive {

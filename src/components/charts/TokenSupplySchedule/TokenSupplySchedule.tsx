@@ -34,7 +34,7 @@ const TokenSupplySchedule: React.FC<IComponent> = ({
                 {x: "2022-10-23", y: 26},
                 {x: "2022-10-24", y: 26},
                 {x: "2022-10-25", y: 28},
-             ]
+            ]
         },
         {
             "category": "Community",
@@ -46,7 +46,7 @@ const TokenSupplySchedule: React.FC<IComponent> = ({
                 {x: "2022-10-23", y: 28},
                 {x: "2022-10-24", y: 29},
                 {x: "2022-10-25", y: 32},
-             ]
+            ]
         },
         {
             "category": "Core contributors",
@@ -58,7 +58,7 @@ const TokenSupplySchedule: React.FC<IComponent> = ({
                 {x: "2022-10-23", y: 32},
                 {x: "2022-10-24", y: 35},
                 {x: "2022-10-25", y: 36},
-             ]
+            ]
         },
         {
             "category": "Foundation",
@@ -70,7 +70,7 @@ const TokenSupplySchedule: React.FC<IComponent> = ({
                 {x: "2022-10-23", y: 34},
                 {x: "2022-10-24", y: 36},
                 {x: "2022-10-25", y: 40},
-             ]
+            ]
         },
         {
             "category": "Investors",
@@ -82,7 +82,7 @@ const TokenSupplySchedule: React.FC<IComponent> = ({
                 {x: "2022-10-23", y: 37},
                 {x: "2022-10-24", y: 42},
                 {x: "2022-10-25", y: 46},
-             ]
+            ]
         },
     ];
 

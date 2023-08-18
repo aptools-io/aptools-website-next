@@ -40,7 +40,7 @@ export async function getServerSideProps(context) {
 
     return { props: {
         "headers": req.headers,
-        "account_stats": await accounts.getAccountStatsData(id),
-        "account_profitabilities": await accounts.getAccountProfitabilitiesData(id),
+        "account_stats": stats,
+        "account_profitabilities": profitabilities,
     } };
 }

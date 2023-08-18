@@ -1,0 +1,205 @@
+@import '/src/styles/static/general/variables.static';
+@import '/src/styles/static/general/mixins';
+
+.nft {
+    &__head {
+        display: flex;
+
+        &_image {
+            img {
+                width: 149px;
+                min-width: 149px;
+                height: 149px;
+                border-radius: 2px;
+                margin-right: 11px;
+                object-fit: cover;
+            }
+        }
+
+        &_mobile {
+            &_title {
+                display: none;
+            }
+        }
+
+        &_body {
+            height: 149px;
+            border-radius: 2px;
+            background-color: var(--aptools-color-grey-c5);
+            width: 100%;
+            padding: 23px 76px 23px 20px;
+        }
+
+        &_wrapper {
+            display: flex;
+            gap: 7px 32px;
+        }
+
+        &_title {
+            color: var(--aptools-color-main-secondary);
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: -1px;
+            margin-bottom: 30px;
+        }
+
+        &_row {
+            display: flex;
+            column-gap: 10px;
+
+            div {
+                color: var(--aptools-color-main-secondary);
+                font-size: 14px;
+                font-weight: 400;
+                line-height: 130%;
+
+                > a {
+                    color: var(--aptools-color-emphasis-c1);
+                    width: 200px;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                }
+            }
+        }
+
+        &_label {
+            width: 131px;
+        }
+
+        &_suply {
+            width: 150px;
+        }
+
+        &_holders {
+            width: 200px;
+        }
+
+        &_hash {
+            display: flex;
+            align-items: center;
+        }
+    }
+}
+
+@media screen and (max-width: 1391px) {
+    .nft {
+        &__head {
+            &_label {
+                min-width: 115px;
+                width: 115px;
+            }
+
+            &_suply {
+                width: 120px;
+            }
+
+            &_body {
+                padding: 23px 34px 23px 20px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1271px) {
+    .nft {
+        &__head {
+            &_wrapper {
+                flex-direction: column;
+            }
+
+            &_title {
+                margin-bottom: 12px;
+            }
+
+            &_body {
+                height: auto;
+            }
+
+            &_row {
+                div {
+                    > a {
+                        width: auto;
+                    }
+                }
+            }
+
+            &_suply {
+                width: auto;
+            }
+
+            &_holders {
+                width: auto;
+            }
+        }
+    }
+}
+
+@include mediaWMax('LAPTOP') {
+    .nft {
+        &__head {
+            flex-direction: column;
+
+            &_title {
+                display: none;
+            }
+
+            &_body {
+                padding: 10px;
+                margin-top: 8px;
+            }
+
+            &_image {
+                display: flex;
+                align-items: flex-start;
+
+                img {
+                    width: 80px;
+                    min-width: 80px;
+                    height: 80px;
+                    margin-right: 10px;
+                }
+            }
+
+            &_mobile {
+                &_title {
+                    display: block;
+                    color: var(--aptools-color-main-secondary);
+                    font-size: 22px;
+                    font-weight: 700;
+                    letter-spacing: -1px;
+                }
+            }
+
+            &_row {
+                div {
+                    > a {
+                        width: 100%;
+                    }
+                }
+            }
+
+            &_hash {
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+
+                a {
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                }
+            }
+
+            &_holders,
+            &_suply {
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+            }
+        }
+
+        &__tabs {
+            padding: 18px 0;
+        }
+    }
+}

@@ -1,0 +1,16 @@
+@import '/src/styles/static/general/variables.static';
+@import '/src/styles/static/general/mixins';
+
+.nft {
+    &__tabs {
+        padding: 18px 24px;
+    }
+}
+
+@include mediaWMax('LAPTOP') {
+    .nft {
+        &__tabs {
+            padding: 18px 0;
+        }
+    }
+}

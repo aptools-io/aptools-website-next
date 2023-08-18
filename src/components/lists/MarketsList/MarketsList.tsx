@@ -24,7 +24,7 @@ const MarketsList: React.FC<IComponent> = ({
     const { columnNames = null, columns = null } = media(width) || {};
 
     const classes = classNames([
-        styles["market"],
+        styles.market,
         "list",
         className
     ]);

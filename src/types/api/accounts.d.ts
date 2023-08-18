@@ -23,7 +23,14 @@ interface IApiAccountStats {
     current_nft_balance: string;
     portfolio_chart: IPoint[]
     net_worth: string;
-    token_stats: IApiAccountTokenStat[]
+    balance_diff: string;
+    net_worth_diff: string;
+    nft_balance_diff: string;
+    token_stats: IApiAccountTokenStat[],
+    token_first_trx_timestamp: string;
+    token_last_trx_timestamp: string;
+    nft_first_trx_timestamp: string;
+    nft_last_trx_timestamp: string;
 }
 
 interface IApiAccountTokenStat {
@@ -138,6 +145,29 @@ interface IApiAccountNft {
 
 interface IApiAccountResource {
     data: string;
+    type: string;
+    name?: string;
+    structs?: string;
+    functions?: string;
+}
+
+interface IApiAccountResourceDetails {
+    data: {
+        epoch: string;
+        epoch_interval?: string;
+        events: {
+            counter: string;
+            guid: IApiGuid
+        }
+        last_reconfiguration_time: string;
+        allow_validator_set_change?: boolean;
+        maximum_stake?: string;
+        minimum_stake?: string;
+        recurring_lockup_duration_secs?: string;
+        rewards_rate?: string;
+        rewards_rate_denominator?: string;
+        voting_power_increase_limit?: string;
+    }
     type: string;
 }
 

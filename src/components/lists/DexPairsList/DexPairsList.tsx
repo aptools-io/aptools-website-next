@@ -41,6 +41,10 @@ const DexPairsList: React.FC<IComponent> = ({
 
     if(!singleDexData || !coin_pairs) return <></>;
 
+    const handleChangePage = (page) => setCurrentPage(page);
+
+    const handleChangePerPage = (perPage) => setPerPage(perPage);
+
     return (
         <div className={classes}>
             <strong className={"list__title"}>
@@ -55,9 +59,8 @@ const DexPairsList: React.FC<IComponent> = ({
                 perPage={perPage} 
                 setPerPage={setPerPage} 
                 total={coin_pairs.length} 
-                onChangePage={(page) => {
-                    setCurrentPage(page);
-                }}
+                onChangePage={handleChangePage}
+                onChangePerPage={handleChangePerPage}
             >
                 <ListHeader 
                     columnNames={singleDexData?.name === "Tsunami" ? columnNamesType : columnNames} 

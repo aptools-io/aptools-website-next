@@ -13,7 +13,7 @@ const Notifications: React.FC<IComponent> = ({
     const { notifications = [] } = useSelector((state: IRootState) => state.notification);
 
     const classes = classNames([
-        styles["notifications"],
+        styles.notifications,
         className
     ]);
 
@@ -21,21 +21,19 @@ const Notifications: React.FC<IComponent> = ({
         return (
             <div key={index} 
                 className={classNames([
-                    styles["notifications__plate"],
-                    { [styles["hide"]]: item?.hide },
+                    styles.notifications__plate,
+                    { [styles.hide]: item?.hide },
                     className
                 ])}
             >
-                <div>
-                    {item?.text}
-                </div>
+                <div dangerouslySetInnerHTML={{ __html: item?.text }} />
             </div>
         );
     };
  
     return (
         <div className={classes}>
-            <ul className={styles["notifications__plates"]}>
+            <ul className={styles.notifications__plates}>
                 {notifications.map(renderNotification)}
             </ul>
         </div>

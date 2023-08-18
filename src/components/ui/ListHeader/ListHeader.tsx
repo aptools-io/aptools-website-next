@@ -30,7 +30,7 @@ const ListHeader: React.ForwardRefRenderFunction<any, IListHeaderProps> = ({
 
     const [sorting, setSorting] = hardSorting || softSorting;
 
-    const [sortedData, setSortedData] = useState(data.length ? data.map((item: any, index) => { 
+    const [sortedData, setSortedData] = useState(data?.length ? data.map((item: any, index) => { 
         return { ...item, "_id": index + 1 };
     }) : []);
     
@@ -65,17 +65,26 @@ const ListHeader: React.ForwardRefRenderFunction<any, IListHeaderProps> = ({
     };
 
     const sort = (a, b) => {
-        const x = a?.[sorting.key];
-        const y = b?.[sorting.key];
+        const sortByFormatter = columnNames?.find(x => (x.key === sorting.key && x.sortByFormatter));
+       
+        let x = a?.[sorting.key];
+        let y = b?.[sorting.key];
+
+        if(sortByFormatter) {
+            x = sortByFormatter.formatter(a?.[sorting.key], a);
+            y = sortByFormatter.formatter(b?.[sorting.key], b);
+        }
 
         if(!Number.isNaN(Number(x)) && !Number.isNaN(Number(y))) return Number(x) - Number(y);
         if(typeof x === "string" && typeof y === "string") return x.localeCompare(y);
+       
         return x - y;
     };
 
     useEffect(() => {
         const newArray = [...sortedData];
         let sorted = newArray.sort(sort);
+       
         sorted = sorting.sort === "desc" ? sorted.reverse() : sorted;
 
         setSortedData([...sorted]);
@@ -90,24 +99,24 @@ const ListHeader: React.ForwardRefRenderFunction<any, IListHeaderProps> = ({
             <React.Fragment key={index}>
                 {item.headHideMobile && 
                     <div className={classNames([
-                        styles["list-header__item"], 
-                        styles["hide-mobile"]
+                    	styles["list-header__item"], 
+                    	styles["hide-mobile"]
                     ])}/>
                 }
                 <button 
                     className={
                         classNames([
                             styles["list-header__item"], 
-                            { [styles["right"]]: item.right },
+                            { [styles.right]: item.right },
                             { [styles["cant-sort"]]: item.cantSort },
-                            { [styles["sorted"]]: item.key === sorting.key }
+                            { [styles.sorted]: item.key === sorting.key }
                         ])}
                     key={index}
                     data-sort={defaultSortType}
                     onClick={(e) => handleSort(e, item.key)}
                 >
                     {item.value} 
-                    {(!item.cantSort && defaultSortIndex !== undefined) && <div className={styles["sort"]}><SortArrowUp /> <SortArrowDown /></div>}
+                    {(!item.cantSort && defaultSortIndex !== undefined) && <div className={styles.sort}><SortArrowUp /> <SortArrowDown /></div>}
                 </button>
             </React.Fragment>
         );

@@ -14,21 +14,26 @@ import { useRouter } from "next/router";
 import styles from "./Topper.module.scss";
 
 
-const Topper: React.FC<{ backlink?: string, customTitle?: string | string[] } & IComponent> = ({ 
+const Topper: React.FC<{ 
+    backlink?: string, 
+    customTitle?: string | string[],
+    additiveTitle?: string;
+} & IComponent> = ({ 
     backlink = null,
     customTitle = null,
+    additiveTitle = "",
     className
 }) => {
     const { title } = useSelector((state: IRootState) => state.pageTitle);
 
     const classes = classNames([
-        styles["topper"],
+        styles.topper,
         className
     ]);
  
     return (
         <div className={classes}>
-            <strong className={styles["topper__title"]}>{title}</strong>
+            <strong className={styles.topper__title} dangerouslySetInnerHTML={{ __html: `${title}${additiveTitle}` }}></strong>
             <Breadcrumbs key={title} customTitle={customTitle || title} />
             <Button { ...backlink ? { href: backlink } : {} } before={"back"}>Back</Button>
         </div>

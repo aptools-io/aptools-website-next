@@ -12,7 +12,7 @@ const Title: React.FC<IComponent> = ({
 }) => {
 
     const classes = classNames([
-        styles["title"],
+        styles.title,
         className
     ]);
 

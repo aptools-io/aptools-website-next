@@ -54,34 +54,27 @@ const Accounts: React.FC<IComponent> = ({
     }, [perPage]) */
 
     const classes = classNames([
-        styles["accounts"],
+        styles.accounts,
         "list",
         className
     ]);
 
     if(!wallets || !columnNames || !columns || !width) return <></>;
 
-    const slicedData = accountsData.slice(perPage * (currentPage - 1), perPage * currentPage);
-    const { balance_rank: last_balance_rank = currentPage } = accountsData[accountsData.length - 1] || {};
-    
+    const handleChangePage = (page) => setCurrrentPage(page);
+
+    const handleChangePerPage = (perPage) => setPerPage(perPage);
 
     return (
         <div className={classes}>
-            {/* <strong className={"list__title"}>
-                <span>DEX Volume</span>
-            </strong> */}
             <Paginator 
                 page={currentPage} 
                 perPage={perPage} 
                 changePerPage
                 total={100} 
                 setPerPage={setPerPage}
-                onChangePage={(page) => {
-                    setCurrrentPage(page);
-                }}
-                onChangePerPage={(perPage) => {
-                    setPerPage(perPage);
-                }}
+                onChangePage={handleChangePage}
+                onChangePerPage={handleChangePerPage}
             >
                 <ListHeader 
                     columnNames={columnNames} 

@@ -37,6 +37,7 @@
         "no-plusplus": "off",
         "no-shadow": "off",
         "no-unused-vars": "off",
+        "class-methods-use-this": "off",
         "import/prefer-default-export": "off",
         "@typescript-eslint/no-inferrable-types": "off",
         "no-use-before-define": "off",
@@ -48,6 +49,6 @@
         "no-param-reassign": "off",
         "import/no-dynamic-require": "off",
         "global-require": "off",
-        "camelcase": "off" // чисто из-за бэков, которые решили что нужно присылать мне данные на верблюжем.
+        "camelcase": "off" // чисто из-за бэков, которые решили что нужно присылать мне данные на снейке.
     }
 }

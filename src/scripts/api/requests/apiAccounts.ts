@@ -44,9 +44,24 @@ const getAccountResourcesData = async (address = null) => {
     return api.get("/account_resources", {}, { address });
 };
 
+const getAccountModulesData = async (address = null) => {
+    const api = new Api(true);
+    return api.get("/account_modules", {}, { address });
+};
+
 const getAccountInfoData = async (address = null) => {
     const api = new Api(true);
     return api.get("/account_info", {}, { address });
+};
+
+const getAccountResourceData = async (address = null, resource = null) => {
+    const api = new Api(false, process.env.OUTSIDE_URL);
+    return api.get(`/accounts/${address}/resource/${resource}`, { }, { });
+};
+
+const getAccountConfigPoolData = async (address = null) => {
+    const api = new Api(false, process.env.OUTSIDE_URL);
+    return api.get(`/accounts/${address}/resources`, { }, { });
 };
 
 const accounts = {
@@ -59,7 +74,10 @@ const accounts = {
     getAccountNftCollectionsData,
     getAccountNftData,
     getAccountResourcesData,
-    getAccountInfoData
+    getAccountModulesData,
+    getAccountInfoData,
+    getAccountResourceData,
+    getAccountConfigPoolData
 };
 
 export default accounts;

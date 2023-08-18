@@ -1,10 +1,20 @@
 @import '/src/styles//static/general/variables.static';
 @import '/src/styles//static/general/mixins';
 
+@mixin setAdopt($type) {
+    @include mediaWMax($type) {
+        grid-template-columns: 100%;
+    }
+}
+
 .list-row {
     &.adopt {
-        @include mediaWMax('TABLET') {
-            grid-template-columns: 100%;
+        @include setAdopt('TABLET');
+    }
+
+    @each $key, $value in $breakpoints {
+        &.adopt-#{$value} {
+            @include setAdopt($key);
         }
     }
 
@@ -17,6 +27,31 @@
     border-width: 1px;
     border-style: solid;
     margin: -1px -1px 0;
+
+    &__collapsed {
+        grid-template-rows: 0fr;
+        transition: grid-template-rows .3s ease;
+        display: grid;
+        overflow: hidden;
+
+        &.open {
+            grid-template-rows: 1fr;
+        }
+
+        .list-row__collapsed-inner {
+            min-height: 0;
+        }
+
+        &:not(.not-stretch) {
+            .list-row__collapsed-inner {
+                & > div,
+                & > div > div,
+                & > div > div > div {
+                    min-width: 100%;
+                }
+            }
+        }
+    }
 
     &.collapse {
         overflow: hidden;
@@ -31,13 +66,25 @@
 
         &:not(.uncollapsed) {
             .hide {
-                line-height: 0px;
+                /*line-height: 0px;*/
                 overflow: hidden;
+
+                &:before {
+                    text-align: left;
+                }
+
+                & > div {
+                    justify-content: flex-end;
+                }
+
+                & > div > div {
+                    width: 100%;
+                }
 
                 &:before,
                 & > div,
                 & > div > div {
-                    line-height: 0px;
+                    /*line-height: 0px;*/
                     overflow: hidden;
                     position: relative;
                 }

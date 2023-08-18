@@ -12,10 +12,17 @@ import {
     pageTitleSlice,
     newsSlice,
     accountsSlice,
-    notificationSlice
+    validatorsSlice,
+    notificationSlice,
+    blocksSlice,
+    blockchainSlice,
+    nftsSlice
 } from "../slices/index";
 
+
+
 const store = configureStore({
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: false }),
     reducer: {
         headers: headersSlice,
         loading: loadingSlice,
@@ -29,7 +36,11 @@ const store = configureStore({
         singleDex: singleDexSlice,
         pageTitle: pageTitleSlice,
         news: newsSlice,
-        accounts: accountsSlice
+        accounts: accountsSlice,
+        validators: validatorsSlice,
+        blocks: blocksSlice,
+        blockchain: blockchainSlice,
+        nfts: nftsSlice
     },
 });
 export default store;

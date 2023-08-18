@@ -1,0 +1,10 @@
+.account-tokens-list {
+    &__percent {
+        display: flex;
+        justify-content: flex-end;
+
+        & > div {
+            margin-left: 12px !important;
+        }
+    }
+}

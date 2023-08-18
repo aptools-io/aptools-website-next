@@ -10,6 +10,21 @@
     flex-direction: column;
     justify-content: space-between;
     border-radius: 2px;
+    position: relative;
+
+    &__link {
+        position: absolute;
+
+        a {
+            width: 100%;
+            height: 100%;
+        }
+
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0%;
+    }
 
     @include mediaWMax('TABLET') {
         padding: 17px 10px;
@@ -44,6 +59,7 @@
         max-height: 32px;
         margin-right: 10px;
         overflow: hidden;
+        object-fit: contain;
     }
 
     &.compressed {

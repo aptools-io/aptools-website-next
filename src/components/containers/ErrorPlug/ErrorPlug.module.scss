@@ -1,3 +1,6 @@
+@import '/src/styles//static/general/variables.static';
+@import '/src/styles//static/general/mixins';
+
 .error-plug {
     flex: 1 0;
     display: flex;
@@ -5,11 +8,25 @@
     justify-content: center;
     margin: 40px;
 
+    @include mediaWMax('TABLET') {
+        flex: 0 0;
+    }
+
+    @include mediaWMax('LAPTOP') {
+        flex-direction: column;
+        margin: 0px;
+    }
+
     &__info {
         max-width: 470px;
         width: 100%;
         display: flex;
         flex-direction: column;
+
+        @include mediaWMax('LAPTOP') {
+            order: 2;
+            margin-bottom: 10px;
+        }
     }
 
     &__status,
@@ -24,6 +41,14 @@
         line-height: 110%; /*132px*/
         letter-spacing: -1px;
         margin-bottom: 16px;
+
+        @include mediaWMax('LAPTOP') {
+            font-size: 80px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 110%; /*88px*/
+            letter-spacing: -1px;
+        }
     }
 
     &__title {
@@ -46,9 +71,41 @@
 
     &__buttons {
         margin-top: 16px;
+        align-self: flex-start;
+
+        @include mediaWMax('LAPTOP') {
+            align-self: center;
+            width: 100%;
+
+            span {
+                width: 100%;
+
+                a {
+                    text-align: center;
+                    width: 100%;
+                    display: block;
+                }
+            }
+        }
     }
 
     &__image {
         margin-left: 10px;
+
+        @include mediaWMax('LAPTOP') {
+            margin-left: 0px;
+        }
+
+        @include mediaWMax('TABLET') {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-bottom: 10px;
+
+            img {
+                max-width: 470px;
+                width: 100%;
+            }
+        }
     }
 }

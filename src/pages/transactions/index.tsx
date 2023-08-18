@@ -21,7 +21,7 @@ const Transactions = (data: IApiProps) => {
     const dispatch = useDispatch();
     
     useEffect(() => {
-        aptosStats.openConnection(ws, dispatch);
+        aptosStats.openFullConnection(ws, dispatch, 25);
         return () => { ws.current.close(); }; 
     }, [dispatch]);
     
@@ -39,6 +39,6 @@ export async function getServerSideProps(context) {
     const { req } = context;
     return { props: {
         "headers": req.headers,
-        "transactions": await transactions.getData() || [],
+        "transactions": await transactions.getData(25) || [],
     } };
 }

@@ -19,7 +19,7 @@ const columnNamesType = [
             return (
                 <span className={classNames([
                     styles["dex-pairs__type"],
-                    { [styles["spot"]]: v === "Spot" },
+                    { [styles.spot]: v === "Spot" },
                     { [styles["margin-short"]]: v === "Margin Short" },
                     { [styles["margin-long"]]: v === "Margin Long" }
                 ])}>{v}</span>

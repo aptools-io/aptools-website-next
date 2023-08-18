@@ -11,7 +11,7 @@ import { Grid, GridWrapper } from "src/components/general";
 
 // Styles
 import classNames from "classnames";
-import { Button, Img, Paginator, Plug, Skeleton } from "src/components/ui";
+import { Button, Img, Paginator, Plug, Skeleton, TextInput } from "src/components/ui";
 import { percentClass } from "src/scripts/util/classes";
 import { formatNumber } from "src/scripts/util/numbers";
 import { concatString } from "src/scripts/util/strings";
@@ -58,16 +58,22 @@ const AccountNtfList: React.FC<IComponent> = ({
         setSearchQuery(e.currentTarget.value);
     };
 
+    const handleLoadMore = async () => {
+        setCurrrentPage((page) => page + 1);
+        await accounts.getAccountNftCollectionsData(id, perPage, currentPage + 1).then((e: unknown) => {
+            const result = e as IApiAccountNftCollections;
+            dispatch(setAccountNftsCollectionsData({ ...result, collections: [...collections || [], ...result?.collections || []] }));
+        });
+    };
+
     return (
         <div className={classes}>
-            <div  className={styles["account-nft-list__search"]}>
-                <div className={styles["account-nft-list__search-icon"]}><Magnifier /></div>
-                <input type={"text"} value={searchQuery} onChange={handleInputChange} />
-                <div className={styles["account-nft-list__search-button"]}><Button>Search</Button></div>
+            <div className={styles["account-nft-list__search"]}>
+                <TextInput value={searchQuery} onChange={handleInputChange} searchIcon />
             </div>
             {filteredNfts && 
                 <div className={styles["account-nft-list__inner"]}>
-                    <Paginator
+                	{/* <Paginator
                         page={currentPage} 
                         perPage={perPage} 
                         changePerPage
@@ -87,11 +93,19 @@ const AccountNtfList: React.FC<IComponent> = ({
                                 dispatch(setAccountNftsCollectionsData(result));
                             });
                         }}
-                    >
-                        <ul className={styles["account-nft-list__folders"]}>
-                            {filteredNfts.map((item, index) => <AccountNtfFolder index={index} key={index} item={item} />)}
-                        </ul>
-                    </Paginator>
+                    > */}
+                	<ul className={styles["account-nft-list__folders"]}>
+                		{filteredNfts.map((item, index) => <AccountNtfFolder index={index} key={index} item={item} />)}
+                	</ul>
+                	{/* </Paginator> */}
+                	<Button
+                		disabled={!(filteredNfts?.length < total) || !!searchQuery} 
+                		invert 
+                		className={styles["account-nft-list__load-more"]} 
+                		onClick={handleLoadMore}
+                	>
+                        Load more
+                	</Button>
                 </div>
             }
         </div>

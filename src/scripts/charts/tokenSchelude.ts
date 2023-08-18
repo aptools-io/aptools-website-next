@@ -1,3 +1,6 @@
+import { chartNumbers } from "../util/numbers";
+import { chartDate } from "../util/timeConvert";
+
 const tokenScheludeOptions = (data: IApiTokenSchelude[]) => {
     const xAxisArray = data[0].chart.map(item => item.x);
 
@@ -54,22 +57,14 @@ const tokenScheludeOptions = (data: IApiTokenSchelude[]) => {
             boundaryGap: false,
             data: xAxisArray,
             axisLabel: {
-                formatter: (v) => {
-                    const formatter = new Intl.DateTimeFormat("en", { month: "short" });
-                    return `${formatter.format(new Date(v))}'${new Date(v).getFullYear() % 100}`;
-                },
+                formatter: chartDate,
                 ...labels
             },
         },
         yAxis: {
             type: "value",
             axisLabel: {
-                formatter: (v) => {
-                    if(v >= 1000000)
-                        return `${v/1000000  }M`;
-                    if(v >= 1000)
-                        return `${v/1000  }k`; 
-                },
+                formatter: chartNumbers,
                 ...labels
             },
             splitLine: {
