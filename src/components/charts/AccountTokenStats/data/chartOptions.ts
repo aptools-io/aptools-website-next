@@ -39,7 +39,7 @@ const chartOptions = (data: IBar[]) => {
                     };
                 }),
                 barWidth: 5,
-                radius: "100%",
+                radius: "85%",
                 stack: "a",
                 label: {
                     show: false,
@@ -47,7 +47,11 @@ const chartOptions = (data: IBar[]) => {
                     formatter: "{b}: {c}"
                 },
                 emphasis: {
-                    scale: false
+                    itemStyle: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: "rgba(0, 0, 0, 0.5)"
+                    }
                 }
             }
         ]

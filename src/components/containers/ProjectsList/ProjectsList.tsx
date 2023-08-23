@@ -3,7 +3,7 @@ import React from "react";
 
 // Components
 import { Grid, GridWrapper } from "src/components/general";
-import { ActiveLink, Plate, ProjectItem } from "src/components/ui";
+import { ActiveLink, Plate, ProjectItem, Skeleton } from "src/components/ui";
 import { ArrowMore } from "src/components/svg";
 import LinesEllipsis from "react-lines-ellipsis";
 import responsiveHOC from "react-lines-ellipsis/lib/responsiveHOC";
@@ -17,7 +17,7 @@ const ProjectsList: React.FC<{
     mediaData: any;
     tabId?: number;
 }> = ({ all = false, data, mediaData, tabId = 0 }) => {
-    if (!mediaData.projectWrapper) return <></>;
+    if (!mediaData.projectWrapper) return <Skeleton />;
 
     const lastItem =
         data.length > mediaData.projectsCount

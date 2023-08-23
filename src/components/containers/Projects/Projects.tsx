@@ -7,7 +7,7 @@ import { IRootState } from "src/scripts/redux/store";
 
 // Styles
 import classNames from "classnames";
-import { Plug, Tabs } from "src/components/ui";
+import { Plug, Skeleton, Tabs } from "src/components/ui";
 import useWindowSize from "src/scripts/hooks/useWindowSize";
 import styles from "./Projects.module.scss";
 
@@ -30,7 +30,7 @@ const Projects: React.FC<
     if (!projects || !Object.keys(projects)?.length)
         return (
             <div className={classes}>
-                <Plug noData />
+                <Skeleton />
             </div>
         );
 
