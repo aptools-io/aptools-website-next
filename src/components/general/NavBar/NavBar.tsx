@@ -137,17 +137,16 @@ const NavBar: React.FC<INavBarProps> = ({ data = [] }) => {
                     </div>
                 </div>
 
-                {width && width >= EBreakpoints.TABLET && (
-                    <button
-                        className={classNames([
-                            styles["nav-bar__search"],
-                            { [styles["active"]]: search }
-                        ])}
-                        onClick={handleSearch}>
-                        <Magnifier />
-                        <span>Search</span>
-                    </button>
-                )}
+                <button
+                    className={classNames([
+                        styles["nav-bar__search"],
+                        styles["desktop"],
+                        { [styles["active"]]: search }
+                    ])}
+                    onClick={handleSearch}>
+                    <Magnifier />
+                    <span>Search</span>
+                </button>
 
                 <i className={styles["nav-bar__line"]} />
 

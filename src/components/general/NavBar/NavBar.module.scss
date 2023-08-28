@@ -214,9 +214,19 @@
         cursor: pointer;
         transition: background-color var(--nav-bar-transition-speed-1) ease;
 
+        &.desktop {
+            @include mediaWMax('TABLET') {
+                display: none;
+            }
+        }
+
         &:hover,
         &.active {
             background-color: rgb(var(--aptools-color-emphasis-c1--rgb) / 30%);
+
+            @include mediaWMax('TABLET') {
+                background-color: unset;
+            }
 
             span {
                 color: var(--aptools-color-main-primary);

@@ -24,12 +24,15 @@ export class Api {
         params: Record<string, any> = {},
         body: Record<string, any> | string = null
     ) => {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 10000);
         try {
             const init = {
                 method: type,
                 headers: {
                     ...headers
                 },
+                signal: controller.signal,
                 ...(body && { body: JSON.stringify(body) })
             };
 
