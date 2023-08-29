@@ -85,7 +85,7 @@ export class Api {
         params: Record<string, any> = {},
         body: Record<string, any> | string = null
     ): Promise<Response> => {
-        return this.fetch("GET", url, headers, params).then((response) =>
+        return this.fetch("GET", url, headers, params, null).then((response) =>
             this.handleResponse(response)
         );
     };
