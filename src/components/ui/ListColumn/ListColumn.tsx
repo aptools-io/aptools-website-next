@@ -165,7 +165,6 @@ const ListColumn: React.FC<IListProps> = ({
                             </div>
                         </button>
                     )}
-                    {column.colorize && <DifferenceArrow />}
 
                     {firstSymbol && (
                         <img
@@ -201,11 +200,14 @@ const ListColumn: React.FC<IListProps> = ({
                         </div>
                     ) : (
                         <div className={styles["list-column__info"]}>
-                            {combinedValue !== undefined &&
-                            !column?.ignoreCombined
-                                ? `${combinedValue} / `
-                                : ""}
-                            {value}
+                            <span>
+                                {column.colorize && <DifferenceArrow />}
+                                {combinedValue !== undefined &&
+                                !column?.ignoreCombined
+                                    ? `${combinedValue} / `
+                                    : ""}
+                                {value}
+                            </span>
                             {description && (
                                 <div
                                     className={

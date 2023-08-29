@@ -32,6 +32,7 @@ const columnNamesDesktop = [
         key: "remainder_usd",
         value: "Value, USD",
         formatter: (v) => `${concatString(formatNumber(v, 2), "", "$")}`,
+        descriptionFormatter: () => <span></span>,
         headHideMobile: true,
         approxKey: "approximately"
     },
@@ -46,6 +47,7 @@ const columnNamesDesktop = [
         key: "all_time_sold_usd",
         value: "Sold (all time), USD",
         formatter: (v) => `${concatString(formatNumber(v, 2), "", "$")}`,
+        descriptionFormatter: () => <span></span>,
         headHideMobile: true,
         approxKey: "approximately"
     },
@@ -60,6 +62,7 @@ const columnNamesDesktop = [
         key: "all_time_bought_usd",
         value: "Bought (all time), USD",
         formatter: (v) => `${concatString(formatNumber(v, 2), "", "$")}`,
+        descriptionFormatter: () => <span></span>,
         headHideMobile: true,
         approxKey: "approximately"
     },
@@ -67,6 +70,7 @@ const columnNamesDesktop = [
         key: "profit_usd",
         value: "Profit (all time), USD",
         formatter: (v) => `${formatNumber(v)}`,
+        descriptionFormatter: () => <span></span>,
         headHideMobile: true,
         approxKey: "approximately"
     },
@@ -74,6 +78,7 @@ const columnNamesDesktop = [
         key: "profit_percentage",
         value: "Profit (all time), %",
         formatter: (v) => `${concatString(formatNumber(v, 5), "", "%")}`,
+        descriptionFormatter: () => <span></span>,
         colorize: true,
         headHideMobile: true
     }

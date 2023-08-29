@@ -24,8 +24,8 @@ const getValidatorsMoveResourcesData = async (
         {
             query: "query AccountTransactionsData($address: String, $limit: Int, $offset: Int) {\n    move_resources(\n      where: {address: {_eq: $address}}\n      order_by: {transaction_version: desc}\n      distinct_on: transaction_version\n      limit: $limit\n      offset: $offset\n    ) {\n      transaction_version\n    }\n  }",
             variables: {
-                limit: limit,
-                address: address,
+                limit,
+                address,
                 offset: start
             }
         }
