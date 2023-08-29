@@ -5,7 +5,6 @@ const ServerError = ({ errorText, text }) => {
     useEffect(() => {
         if (!window) return;
         const onError = (e) => {
-            console.log("Testikkk 223", e);
             if (!e) return;
             if (e.type === "error") {
                 const { message, stack } = e?.error || {};

@@ -53,7 +53,6 @@ export class Api {
 
     handleResponse = (response) => {
         // eslint-disable-line class-methods-use-this
-        console.log(response);
         if (response.status >= 500)
             throw new Error(
                 `Error status code ${response.status} while fetching, url ${response.url}`

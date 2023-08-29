@@ -14,11 +14,22 @@ const columnNames = (validatorIndex) => [
         key: "version",
         value: "Version",
         headHideMobile: true,
-        defaultSort: true
+        defaultSort: true,
+        ownLink: "/transactions",
+        underline: true,
+        ownLinkValueFormatter: (v, row) => {
+            return row?.version;
+        }
     },
     {
         key: "changes",
         value: "Block",
+        ownLink: "/blocks",
+        underline: true,
+        ownLinkValueFormatter: (v, row) => {
+            const height = v?.[0]?.data?.data?.height;
+            return height;
+        },
         formatter: (changes) => {
             const height = changes?.[0]?.data?.data?.height;
             return `${height || "-"}`;

@@ -103,7 +103,11 @@ const columnNamesMobile = [
     {
         value: "Version",
         key: "version",
-        headRemove: true
+        headRemove: true,
+        ownLink: "/transactions",
+        ownLinkValueFormatter: (v, row) => {
+            return row?.version;
+        }
     },
     {
         value: "Hash",
