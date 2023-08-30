@@ -8,17 +8,19 @@ const columnNames = [
         key: "version",
         value: "version",
         headHideMobile: true,
-        ownLink: "/transactions"
+        ownLink: "/transactions",
+        underline: true
     },
     {
         key: "block",
         value: "Block",
-        ownLink: "/blocks"
+        ownLink: "/blocks",
+        underline: true
     },
     {
         key: "age",
         value: "Age",
-        formatter: (v) => `${timeFull(v * 1000)}`,
+        formatter: (v) => `${timeFull(v * 1000)}`
     },
     {
         key: "account",
@@ -26,29 +28,29 @@ const columnNames = [
         formatter: (v) => `${shortenHashString(v)}`,
         ownLink: "/accounts",
         headHideMobile: true,
-        underline: true,
+        underline: true
     },
     {
         key: "activity_type",
         value: "Active type",
-        headHideMobile: true,
+        headHideMobile: true
     },
     {
         key: "token_name",
         value: "Token name",
-        headHideMobile: true,
+        headHideMobile: true
     },
     {
         key: "property_version",
         value: "Property ver.",
         right: true,
-        headHideMobile: true,
+        headHideMobile: true
     },
     {
         key: "amount",
         value: "Amount",
-        right: true,
-    },
+        right: true
+    }
 ];
 
 // Columns

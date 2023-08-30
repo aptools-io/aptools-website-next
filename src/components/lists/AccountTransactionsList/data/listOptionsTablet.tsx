@@ -23,6 +23,11 @@ const columnNamesTablet = [
             {
                 key: "block",
                 description: "timestamp",
+                ownLink: "/blocks",
+                underline: true,
+                ownLinkValueFormatter: (v, row) => {
+                    return row?.block;
+                },
                 descriptionFormatter: (v) => (
                     <Tooltip left text={timeAgo(v)}>
                         {timeAgo(v, true)}

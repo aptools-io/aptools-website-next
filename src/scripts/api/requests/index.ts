@@ -11,3 +11,4 @@ export { default as validators } from "./apiValidators";
 export { default as blockchain } from "./apiBlockchain";
 export { default as blocks } from "./apiBlocks";
 export { default as nfts } from "./apiNft";
+export { default as logger } from "./apiLogger";
