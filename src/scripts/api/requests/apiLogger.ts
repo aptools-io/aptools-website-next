@@ -13,7 +13,7 @@ const postErrorToLogger = async (type: string, title: string, info: string) => {
             serviceName: "AptoolsAnalyticsWebsite", // requeired
             timestamp: Math.floor(new Date().getTime() / 1000), // requeired
             errorType: type, // requeired
-            env: "dev", // requeired
+            env: process.env.BASE_ENV, // requeired
             errorTitle: title, // required,
             error: info,
             customData: "{}"
