@@ -8,8 +8,12 @@ const columnNames = [
     {
         key: "block_height",
         value: "Block",
-        link: "/blocks",
-        defaultSort: true
+        defaultSort: true,
+        ownLink: "/blocks",
+        underline: true,
+        ownLinkValueFormatter: (v, row) => {
+            return row?.block_height;
+        }
     },
     {
         key: "block_timestamp",
@@ -24,15 +28,29 @@ const columnNames = [
         key: "block_hash",
         value: "Hash",
         underline: true,
+        ownLink: "/blocks",
+        ownLinkValueFormatter: (v, row) => {
+            return row?.block_height;
+        },
         formatter: (v) => `${shortenHashString(v, [20, 20])}`
     },
     {
         key: "first_version",
-        value: "First version"
+        value: "First version",
+        ownLink: "/transactions",
+        underline: true,
+        ownLinkValueFormatter: (v, row) => {
+            return row?.first_version;
+        }
     },
     {
         key: "last_version",
-        value: "Last version"
+        value: "Last version",
+        ownLink: "/transactions",
+        underline: true,
+        ownLinkValueFormatter: (v, row) => {
+            return row?.last_version;
+        }
     }
 ];
 

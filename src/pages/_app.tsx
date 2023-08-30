@@ -1,5 +1,8 @@
 // Components
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 import { Provider } from "react-redux";
+import { logger } from "src/scripts/api/requests";
 import { Layout } from "../components/general/index";
 
 // Redux
@@ -15,6 +18,29 @@ export function reportWebVitals(metric) {
 
 const AptoolsApp = (props) => {
     const { Component, pageProps } = props;
+    const router = useRouter();
+    const { asPath } = router;
+
+    useEffect(() => {
+        if (!window) return;
+        const onError = (e) => {
+            if (!e) return;
+            if (e.type === "error") {
+                const { message, stack } = e?.error || {};
+                logger.postErrorToLogger(
+                    "error",
+                    `Page: ${asPath}. Message: ${message}`,
+                    stack
+                );
+                console.log(`Error. ${message}: ${stack}`);
+            }
+        };
+
+        window.addEventListener("error", onError);
+        return () => {
+            window.removeEventListener("error", onError);
+        };
+    }, []);
 
     return (
         <Provider store={store}>

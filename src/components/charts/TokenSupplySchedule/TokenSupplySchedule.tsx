@@ -29,7 +29,6 @@ const TokenSupplySchedule: React.FC<IComponent> = ({ className }) => {
             })
         };
     });
-    console.log(data);
     /*     const data = [
         {
             "category": "Stacking Rewards",

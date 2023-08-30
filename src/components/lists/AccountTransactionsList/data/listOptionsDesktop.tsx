@@ -15,14 +15,16 @@ const columnNamesDesktop = [
         value: "Version",
         cantSort: true,
         headHideMobile: true,
-        ownLink: "/transactions"
+        ownLink: "/transactions",
+        underline: true
     },
     {
         key: "block",
         value: "Block",
         cantSort: true,
         headHideMobile: true,
-        ownLink: "/blocks"
+        ownLink: "/blocks",
+        underline: true
     },
     {
         key: "type",
