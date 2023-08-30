@@ -28,6 +28,7 @@ const nextConfig = nextTranslate({
         includePaths: [path.join(__dirname, "styles")]
     },
     env: {
+        BASE_ENV: process.env.BASE_ENV,
         BASE_TOKEN: process.env.BASE_TOKEN,
         BASE_URL: process.env.BASE_URL,
         BASE_API_LOGGER: process.env.BASE_API_LOGGER,
