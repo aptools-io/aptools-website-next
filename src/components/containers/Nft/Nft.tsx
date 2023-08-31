@@ -19,23 +19,18 @@ import styles from "./Nft.module.scss";
 // Data
 import categories from "./data/categories";
 
-
-
-
-const Nft: React.FC<IComponent> = ({
-    className 
-}) => {
+const Nft: React.FC<IComponent> = ({ className }) => {
     const dispatch = useDispatch();
 
-    const classes = classNames([
-        styles.nft__tabs,
-        className
-    ]);
-
+    const classes = classNames([styles.nft__tabs, className]);
 
     return (
         <div className={classes}>
-            <Tabs dataArray={categories(dispatch)} itemsCount={false}>
+            <Tabs
+                windowLoad
+                tabsName={"nftTabs"}
+                dataArray={categories(dispatch)}
+                itemsCount={false}>
                 <></>
             </Tabs>
         </div>

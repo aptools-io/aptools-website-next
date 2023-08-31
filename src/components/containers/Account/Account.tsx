@@ -30,7 +30,8 @@ const Account: React.FC<{ all?: boolean } & IComponent> = ({
     return (
         <div className={classes}>
             <Tabs
-                tabsName={"account"}
+                tabsName={"accountTabs"}
+                windowLoad
                 dataArray={categories(dispatch)}
                 itemsCount={false}>
                 <div></div>

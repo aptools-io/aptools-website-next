@@ -14,6 +14,7 @@ import { ArrowLeft } from "src/components/svg";
 import classNames from "classnames";
 
 // Adaptive
+import useLocalStorage from "src/scripts/hooks/useLocalStorage";
 import styles from "./Tabs.module.scss";
 import Skeleton from "../Skeleton/Skeleton";
 
@@ -26,6 +27,7 @@ const Tabs: React.ForwardRefRenderFunction<any, ITabsProps> = (
         hideSingle = false,
         onChangeTab = null,
         queryTab = false,
+        windowLoad = false,
         tabsName = null,
         children,
         className
@@ -35,6 +37,7 @@ const Tabs: React.ForwardRefRenderFunction<any, ITabsProps> = (
     const child: React.ReactNode = Children.only(children);
     const router = useRouter();
     const { tab } = router.query || {};
+    const [tabsStates, setTabsStates] = useLocalStorage("tabsStates", {});
     const [tabId, setTabId] = useState(queryTab ? Number(tab) || 0 : 0);
 
     const navigationPrevRef = useRef(null);
@@ -55,7 +58,28 @@ const Tabs: React.ForwardRefRenderFunction<any, ITabsProps> = (
     }, [swiper, lineElement]);
 
     useEffect(() => {
+        if (typeof window === "undefined") return;
+        const settedTab = tabsStates?.[tabsName] || null;
+        const currentEntry = entries[settedTab] || null;
+
+        const handleSettedTab = () => {
+            if (settedTab !== null)
+                handleTabClick(settedTab, currentEntry as ITab, true);
+        };
+        if (!windowLoad) {
+            if (settedTab !== null)
+                handleTabClick(settedTab, currentEntry as ITab, true);
+            return;
+        }
+        window.addEventListener("load", handleSettedTab);
+        return () => {
+            window.removeEventListener("load", handleSettedTab);
+        };
+    }, [tabsStates]);
+
+    useEffect(() => {
         if (!tabsName) return;
+
         const handleSetRemoteTab = (e) => {
             if (e.detail.tabsName !== tabsName) return;
             const { tabId } = e.detail;
@@ -66,8 +90,9 @@ const Tabs: React.ForwardRefRenderFunction<any, ITabsProps> = (
             }
         };
         window.addEventListener("setRemoteTab", handleSetRemoteTab);
-        return () =>
+        return () => {
             window.removeEventListener("setRemoteTab", handleSetRemoteTab);
+        };
     }, [swiper]);
 
     const updateLine = (index) => {
@@ -83,13 +108,23 @@ const Tabs: React.ForwardRefRenderFunction<any, ITabsProps> = (
         }px`;
     };
 
-    const handleTabClick = (index: number, getData: ITab) => {
+    const handleTabClick = (
+        index: number,
+        getData: ITab,
+        noSaveStates = false
+    ) => {
+        if (tabsName && !noSaveStates) {
+            setTabsStates({
+                ...tabsStates,
+                [tabsName]: index
+            });
+        }
         if (tabId === index) return;
         if (onChangeTab) onChangeTab(index);
         setTabId(index);
         updateLine(index);
 
-        if (getData.action) {
+        if (getData?.action) {
             setLoading(true);
             const query =
                 typeof router.query?.id === "string" ? router.query?.id : "";

@@ -37,6 +37,7 @@ const Projects: React.FC<
     return (
         <div className={classes}>
             <Tabs
+                tabsName={"projectsTabs"}
                 queryTab={queryTab}
                 data={projects}
                 onChangeTab={setCurrentTab}>

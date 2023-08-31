@@ -16,24 +16,24 @@ import styles from "./Accounts.module.scss";
 // Data
 import categories from "./data/categories";
 
-
-
 const Accounts: React.FC<{ all?: boolean } & IComponent> = ({
     all = false,
-    className 
+    className
 }) => {
-    const { accountsWallets } = useSelector((state: IRootState) => state.accounts);
+    const { accountsWallets } = useSelector(
+        (state: IRootState) => state.accounts
+    );
 
-    const classes = classNames([
-        styles.accounts,
-        className
-    ]);
+    const classes = classNames([styles.accounts, className]);
 
-    if(!accountsWallets) return <></>;
+    if (!accountsWallets) return <></>;
 
     return (
         <div className={classes}>
-            <Tabs dataArray={categories} itemsCount={false}>
+            <Tabs
+                tabsName={"accountsTabs"}
+                dataArray={categories}
+                itemsCount={false}>
                 <AccountsList />
             </Tabs>
         </div>
