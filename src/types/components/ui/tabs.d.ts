@@ -4,6 +4,7 @@ interface ITabsProps extends IComponent {
     tabsName?: string;
     itemsCount?: boolean;
     defaultEntry?: object;
+    windowLoad?: boolean;
     queryTab?: boolean;
     onChangeTab?: (tabId: number) => void;
     hideSingle?: boolean;

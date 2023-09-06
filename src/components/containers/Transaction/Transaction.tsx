@@ -19,25 +19,23 @@ import styles from "./Transaction.module.scss";
 // Data
 import categories from "./data/categories";
 
-
-
-
-const Transaction: React.FC<IComponent> = ({
-    className 
-}) => {
+const Transaction: React.FC<IComponent> = ({ className }) => {
     /* const dispatch = useDispatch(); */
-    const { transaction } = useSelector((state: IRootState) => state.statsTransactions);
+    const { transaction } = useSelector(
+        (state: IRootState) => state.statsTransactions
+    );
     const { type } = transaction || {};
 
-    const classes = classNames([
-        styles.transaction,
-        className
-    ]);
-
+    const classes = classNames([styles.transaction, className]);
 
     return (
         <div className={classes}>
-            <Tabs dataArray={categories(type)} itemsCount={false} hideSingle>
+            <Tabs
+                windowLoad
+                tabsName={"transactionTabs"}
+                dataArray={categories(type)}
+                itemsCount={false}
+                hideSingle>
                 <div></div>
             </Tabs>
         </div>

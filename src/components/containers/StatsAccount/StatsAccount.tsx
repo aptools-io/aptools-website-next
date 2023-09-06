@@ -155,7 +155,7 @@ const StatsAccount: React.FC<IComponent> = ({ className }) => {
                         {firstTrans !== 0 && firstTrans && (
                             <div>
                                 <span className={"title"}>
-                                    First transaction
+                                    Account creation date
                                 </span>
                                 <span className={"info additive"}>
                                     <span className={"blue small"}>

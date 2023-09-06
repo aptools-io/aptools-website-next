@@ -64,7 +64,7 @@ const AccountTokenStats: React.FC<IComponent> = ({ className }) => {
     const handleTokens = () => {
         const metrics = new CustomEvent("setRemoteTab", {
             detail: {
-                tabsName: "account",
+                tabsName: "accountTabs",
                 tabId: 2
             }
         });
