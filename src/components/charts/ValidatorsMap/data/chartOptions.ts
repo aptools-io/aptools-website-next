@@ -10,7 +10,7 @@ const chartOptions = (locations: IApiValidatorLocation[], zoom = 1.25) => {
 
     const getOccurrences = (array) =>
         array.reduce((acc, curr) => {
-            return (acc[curr] = (acc[curr] || 0) + 1), acc; // eslint-disable-line no-return-assign
+            return (acc[curr] = (acc[curr] || 0) + 1), acc; // eslint-disable-line no-return-assign, no-sequences
         }, {});
 
     const getMax = (array) => {
@@ -44,7 +44,7 @@ const chartOptions = (locations: IApiValidatorLocation[], zoom = 1.25) => {
                 Singapore: "Malaysia"
             }[item[0]] || item[0];
         return {
-            name: name,
+            name,
             itemStyle: {
                 areaColor: `rgba(${getColor(max, item[1]).join(", ")})`
             }
