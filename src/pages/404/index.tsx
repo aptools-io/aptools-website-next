@@ -8,12 +8,11 @@ const NotFound = () => {
     const { asPath } = router;
 
     useEffect(() => {
-        console.log("test");
         if (!window) return;
         logger.postErrorToLogger(
-            "info",
+            "error",
             `Page: ${asPath}. Status code: 404 not found`,
-            ""
+            "This page is not found. Status code 404 not found"
         );
     }, []);
 

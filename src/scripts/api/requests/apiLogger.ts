@@ -1,6 +1,10 @@
 import { Api } from "../api";
 
-const postErrorToLogger = async (type: string, title: string, info: string) => {
+const postErrorToLogger = async (
+    type: string,
+    title: string,
+    info: string = null
+) => {
     const api = new Api(false, process.env.BASE_API_LOGGER);
     return api.post(
         "/errors/new",

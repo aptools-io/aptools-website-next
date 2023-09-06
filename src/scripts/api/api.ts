@@ -43,7 +43,6 @@ export class Api {
             const endpoint = `${this.base}${this.version}${url}${
                 Object.keys(params)?.length > 0 ? `?${paramsString}` : ""
             }`;
-
             const result: Response = await fetch(endpoint, init);
             return result;
         } catch (error) {

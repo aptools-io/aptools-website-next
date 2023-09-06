@@ -20,7 +20,6 @@ const Validators = (data: IApiProps) => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        console.log(data);
         dispatch(setValidatorsLocations(data.validators_locations) || null);
         dispatch(setValidatorsBlocks(data.validators_blocks) || null);
         dispatch(setValidators(data.validators) || null);

@@ -113,13 +113,13 @@ const Tabs: React.ForwardRefRenderFunction<any, ITabsProps> = (
         getData: ITab,
         noSaveStates = false
     ) => {
+        if (tabId === index) return;
         if (tabsName && !noSaveStates) {
             setTabsStates({
                 ...tabsStates,
                 [tabsName]: index
             });
         }
-        if (tabId === index) return;
         if (onChangeTab) onChangeTab(index);
         setTabId(index);
         updateLine(index);
