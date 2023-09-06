@@ -1,6 +1,30 @@
-.accounts {
-    &__inner {
-        height: 30vh;
+@import '/src/styles//static/general/variables.static';
+@import '/src/styles//static/general/mixins';
+
+.validators {
+    &__map {
         position: relative;
+        height: 500px;
+        padding: 10px;
+        border-radius: 4px;
+        border: 1px solid rgb(var(--aptools-color-emphasis-c1--rgb) / 15%);
+
+        @include mediaWMax('LAPTOP') {
+            height: auto;
+            border-radius: unset;
+            border: unset;
+            padding: unset;
+        }
+
+        &-scheme {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: calc(100% - 10px);
+        }
+
+        &-stats {
+            z-index: 2;
+        }
     }
 }

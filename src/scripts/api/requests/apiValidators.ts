@@ -5,10 +5,11 @@ const getValidatorsLocationsData = async (
     limit: number = 10
 ) => {
     const api = new Api(false, process.env.OUTSIDE_MAP_URL, "");
-    console.log(
-        await api.get("/validator_location_stats.json", {}, { start, limit })
+    return api.get(
+        "/validator_stats_v2.json?cache-version=0",
+        {},
+        { start, limit }
     );
-    return api.get("/validator_location_stats.json", {}, { start, limit });
 };
 
 const getValidatorsMoveResourcesData = async (

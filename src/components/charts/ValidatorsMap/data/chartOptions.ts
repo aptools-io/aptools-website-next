@@ -1,11 +1,58 @@
 import { registerMap } from "echarts";
 import world from "./world";
 
-const chartOptions = (locations: IApiValidatorLocation[]) => {
+const chartOptions = (locations: IApiValidatorLocation[], zoom = 1.25) => {
     registerMap("world", world as any);
-    const countries = [...new Set(locations.map(item => item?.country))];
+
+    const countries = [
+        ...new Set(locations.map((item) => item?.location_stats.country))
+    ];
+
+    const getOccurrences = (array) =>
+        array.reduce((acc, curr) => {
+            return (acc[curr] = (acc[curr] || 0) + 1), acc; // eslint-disable-line no-return-assign, no-sequences
+        }, {});
+
+    const getMax = (array) => {
+        let max = 0;
+        for (let i = 0; i < array.length; i++) {
+            if (array[i] > max) max = array[i];
+        }
+        return max;
+    };
+
+    const getColor = (max, count) => {
+        return [59, 89, 152, (count / max).toFixed(2)];
+    };
+
+    const countriesOccurrences = Object.entries(
+        getOccurrences(locations.map((item) => item?.location_stats.country))
+    );
+
+    console.log(
+        getOccurrences(locations.map((item) => item?.location_stats.country))
+    );
+
+    const max = getMax(countriesOccurrences.map((item) => item[1]));
+
+    const regions = countriesOccurrences.map((item) => {
+        const name =
+            {
+                "United States": "United States of America",
+                "Hong Kong": "China",
+                Taiwan: "China",
+                Singapore: "Malaysia"
+            }[item[0]] || item[0];
+        return {
+            name,
+            itemStyle: {
+                areaColor: `rgba(${getColor(max, item[1]).join(", ")})`
+            }
+        };
+    });
+
     const data = locations.map((item, index) => {
-        return  {
+        return {
             type: "scatter",
             progressive: 1e6,
             coordinateSystem: "geo",
@@ -17,21 +64,22 @@ const chartOptions = (locations: IApiValidatorLocation[]) => {
                 enable: true
             },
             dimensions: ["lng", "lat"],
-            data: [[item.longitude, item.latitude]],
+            data: [
+                [item.location_stats.longitude, item.location_stats.latitude]
+            ],
             tooltip: {
                 trigger: "item",
                 show: true,
                 formatter: (value) => `
-                    Country: <b>${item.country}</b><br/>
-                    City: <b>${item.city}</b><br/>
-                    Epoch: <b>${item.epoch}</b>`
+                    Country: <b>${item.location_stats.country}</b><br/>
+                    City: <b>${item.location_stats.city}</b><br/>
+                    Epoch: <b>${item.last_epoch}</b>`
             },
             itemStyle: {
                 normal: {
                     color: "#ef8686",
                     borderColor: "#3b5998"
-                },
-                
+                }
             }
         };
     });
@@ -43,13 +91,31 @@ const chartOptions = (locations: IApiValidatorLocation[]) => {
             tooltip: {
                 trigger: "item",
                 show: true,
-                formatter: v => {
-                    return `${v.name} - ${locations.filter(country => {
+                formatter: (v) => {
+                    const elements = locations.filter((item) => {
                         return (
-                            country.country === v.name || 
-                            country.country === "United States" && v.name === "United States of America" ||
-                            country.country === "Hong Kong" && v.name === "China");
-                    }).length}`;
+                            item.location_stats.country === v.name ||
+                            (item.location_stats.country === "United States" &&
+                                v.name === "United States of America") ||
+                            (item.location_stats.country === "Hong Kong" &&
+                                v.name === "China") ||
+                            (item.location_stats.country === "Taiwan" &&
+                                v.name === "China") ||
+                            (item.location_stats.country === "Singapore" &&
+                                v.name === "Malaysia")
+                        );
+                    });
+                    const cities = Object.entries(
+                        getOccurrences(
+                            elements.map((item) => item.location_stats.city)
+                        )
+                    );
+                    const citiesString = cities
+                        .map((item) => `${item[0]} - ${item[1]}`)
+                        .join("<br/>");
+                    return `<strong>${v.name}</strong>${
+                        cities?.length ? `<br /><br />${citiesString}` : ""
+                    }`;
                 }
             },
             map: "world",
@@ -59,19 +125,23 @@ const chartOptions = (locations: IApiValidatorLocation[]) => {
                     show: false
                 }
             },
-            zoom: 1.25,
+            zoom,
+            scaleLimit: {
+                min: 1.15,
+                max: 7
+            },
             itemStyle: {
                 normal: {
-                    areaColor: "#fff",
-                    borderColor: "#3B5998"
+                    areaColor: "#F7F7F7",
+                    borderColor: "#3B599800"
                 },
                 emphasis: {
-                    areaColor: "#DFE3EE"
-                },
+                    areaColor: "#3b5998"
+                }
             },
-            
-        },
-        series: data
+            regions
+        }
+        /* series: data */
     };
 };
 

@@ -1,5 +1,5 @@
 import * as React from "react";
-import type { SVGProps } from "react";
+import { SVGProps } from "react";
 
 const SvgSocialMedium = (props: SVGProps<SVGSVGElement>) => (
     <svg

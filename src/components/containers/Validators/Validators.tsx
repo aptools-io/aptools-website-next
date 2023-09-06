@@ -123,9 +123,11 @@ const Validators: React.FC<IComponent> = ({ className }) => {
 
     return (
         <div className={classes}>
-            <Grid>
-                <GridWrapper gridWidth={mediaData.validatorsLeft}>
-                    <Topper backlink={"/"} />
+            <Topper backlink={"/"} />
+            <Grid className={styles["validators__map"]}>
+                <GridWrapper
+                    className={styles["validators__map-stats"]}
+                    gridWidth={mediaData.validatorsLeft}>
                     <Grid>
                         <GridWrapper>
                             <Plate noMin min compressed>
@@ -225,7 +227,9 @@ const Validators: React.FC<IComponent> = ({ className }) => {
                     </Grid>
                 </GridWrapper>
                 {mediaData.validatorsRightVisible && (
-                    <GridWrapper gridWidth={7}>
+                    <GridWrapper
+                        className={styles["validators__map-scheme"]}
+                        gridWidth={7}>
                         <ValidatorsMap />
                     </GridWrapper>
                 )}

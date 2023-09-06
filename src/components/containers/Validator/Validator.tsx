@@ -19,24 +19,19 @@ import styles from "./Validator.module.scss";
 // Data
 import categories from "./data/categories";
 
-
-
-
-const Validator: React.FC<IComponent> = ({
-    className 
-}) => {
+const Validator: React.FC<IComponent> = ({ className }) => {
     const dispatch = useDispatch();
     const { validator } = useSelector((state: IRootState) => state.validators);
 
-    const classes = classNames([
-        styles.validator,
-        className
-    ]);
-
+    const classes = classNames([styles.validator, className]);
 
     return (
         <div className={classes}>
-            <Tabs dataArray={categories(dispatch, validator)} itemsCount={false}>
+            <Tabs
+                windowLoad
+                tabsName={"validatorTabs"}
+                dataArray={categories(dispatch, validator)}
+                itemsCount={false}>
                 <div></div>
             </Tabs>
         </div>
