@@ -40,10 +40,13 @@ export class Api {
                 ...params,
                 ...(this.isToken && { API_KEY: this.token })
             });
+
             const endpoint = `${this.base}${this.version}${url}${
                 Object.keys(params)?.length > 0 ? `?${paramsString}` : ""
             }`;
+            console.log(endpoint);
             const result: Response = await fetch(endpoint, init);
+            console.log(result);
             return result;
         } catch (error) {
             return error;

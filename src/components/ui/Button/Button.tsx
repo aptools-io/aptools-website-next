@@ -3,11 +3,11 @@ import React from "react";
 
 // Styles
 import classNames from "classnames";
-import { ArrowLeft } from "src/components/svg";
+import { ArrowForward, ArrowLeft, Plus } from "src/components/svg";
 import styles from "./Button.module.scss";
 import ActiveLink from "../ActiveLink/ActiveLink";
 
-const Button: React.FC<IButtonProps> = ({ 
+const Button: React.FC<IButtonProps> = ({
     href = null,
     after = null,
     before = null,
@@ -17,24 +17,33 @@ const Button: React.FC<IButtonProps> = ({
     onClick = null,
     children,
     className,
-    style,
+    style
 }) => {
-
     const classes = classNames([
         styles.button,
         { [styles.invert]: invert },
         { [styles.fill]: fill },
         { [styles.disabled]: disabled },
+        { [styles[after]]: after },
+        { [styles[before]]: before },
         className
     ]);
 
     const additive = {
-        "back": <ArrowLeft />,
+        back: <ArrowLeft />,
+        forward: <ArrowForward />,
+        plus: <Plus />
     };
 
-    const ChildrenWrapper = <>{additive[before]}{children}{additive[after]}</>;
+    const ChildrenWrapper = (
+        <>
+            {additive[before]}
+            {children}
+            {additive[after]}
+        </>
+    );
 
-    if(href && !disabled) {
+    if (href && !disabled) {
         return (
             <ActiveLink href={href}>
                 <a className={classes}>{ChildrenWrapper}</a>
@@ -43,11 +52,7 @@ const Button: React.FC<IButtonProps> = ({
     }
 
     return (
-        <button 
-            style={style} 
-            className={classes}
-            onClick={onClick}
-        >
+        <button style={style} className={classes} onClick={onClick}>
             {ChildrenWrapper}
         </button>
     );
