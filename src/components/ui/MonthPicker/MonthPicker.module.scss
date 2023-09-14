@@ -1,0 +1,78 @@
+.month-picker {
+    background-color: var(--aptools-color-main-primary);
+    padding: 16px;
+    transition: outline .3s ease;
+    outline: 1px solid transparent;
+
+    &.active {
+        outline: 1px solid var(--aptools-color-emphasis-c1);
+    }
+
+    &__months {
+        display: grid;
+        grid-template-columns: repeat(3, calc(100% / 3));
+        margin-top: 6px;
+
+        li,
+        button {
+            width: 100%;
+            height: 100%;
+        }
+
+        li {
+            padding: 2px;
+        }
+
+        button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 4px;
+            border-radius: 2px;
+            border: 1px solid var(--aptools-color-grey-c3);
+            transition: color .3s ease, background-color .3s ease;
+
+            &.selected {
+                background-color: var(--aptools-color-grey-c3);
+            }
+
+            &.active {
+                background-color: var(--aptools-color-emphasis-c1);
+                color: var(--aptools-color-main-primary);
+            }
+
+            &.ranged:not(.active) {
+                background-color: var(--aptools-color-lights-primary);
+            }
+        }
+    }
+
+    &__years {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .year {
+            margin: 0 25px;
+        }
+
+        button {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 2px;
+            border: 1px solid var(--aptools-color-grey-c3);
+
+            &:hover {
+                background-color: var(--aptools-color-grey-c3);
+            }
+
+            &:last-child {
+                svg {
+                    transform: scaleX(-1);
+                }
+            }
+        }
+    }
+}

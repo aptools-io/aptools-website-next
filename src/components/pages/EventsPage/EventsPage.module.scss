@@ -21,9 +21,7 @@
         }
 
         .inner {
-            display: grid;
-            grid-template-columns: calc(100% - 118px) 110px;
-            column-gap: 8px;
+            width: 100%;
         }
     }
 }

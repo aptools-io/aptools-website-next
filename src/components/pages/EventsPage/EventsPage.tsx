@@ -1,7 +1,7 @@
 // React
 import moment from "moment";
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 // Components
 import { News, NewsBanner, TrendsList } from "src/components/containers";
@@ -12,6 +12,7 @@ import {
     Button,
     CategoryTitle,
     Img,
+    MonthPicker,
     Select,
     TextInput
 } from "src/components/ui";
@@ -20,6 +21,8 @@ import { IRootState } from "src/scripts/redux/store";
 // static
 import NoImageEvent from "public/static/images/svg/no_image_event.svg";
 
+import { events } from "src/scripts/api/requests";
+import { setEventsData } from "src/scripts/redux/slices/eventsSlice";
 import styles from "./EventsPage.module.scss";
 
 interface ISortedEvent {
@@ -29,6 +32,23 @@ interface ISortedEvent {
 
 const EventsPage: React.FC = () => {
     const [sortedEvents, setSortedEvents] = useState([]);
+    const [searchText, setSearchText] = useState("");
+    const dispatch = useDispatch();
+
+    const [dateRange, setDateRange] = useState({
+        month: {
+            from: {
+                month: moment().month(),
+                year: moment().year()
+            },
+            to: {
+                month: moment().month(),
+                year: moment().year()
+            }
+        },
+        selectedYear: moment().year(),
+        selecting: false
+    });
     const { eventsData = [] } = useSelector(
         (state: IRootState) => state.events
     );
@@ -56,9 +76,35 @@ const EventsPage: React.FC = () => {
     };
 
     useEffect(() => {
+        console.log(eventsData);
+
         setSortedEvents(sortEvents(eventsData));
-        console.log(sortEvents(eventsData), eventsData);
     }, [eventsData]);
+
+    const handleSearch = async () => {
+        const results = await events.getData(searchText);
+        dispatch(setEventsData(results));
+    };
+
+    const getRange = () => {
+        let to = null;
+
+        if (dateRange.selecting) return "Selecting...";
+
+        if (
+            !(
+                dateRange.month.from.month === dateRange.month.to.month &&
+                dateRange.month.from.year === dateRange.month.to.year
+            )
+        )
+            to = `${moment.monthsShort(dateRange.month.to.month)} ${
+                dateRange.month.to.year
+            }`;
+
+        return `${moment.monthsShort(dateRange.month.from.month)} ${
+            dateRange.month.from.year
+        }${to ? ` - ${to}` : ""}`;
+    };
 
     const renderCategory = (item, index) => (
         <li key={index}>{item.categoryTitle}</li>
@@ -84,7 +130,7 @@ const EventsPage: React.FC = () => {
                         </span>
                         <div className={styles["image"]}>
                             <Img
-                                src={imageLink}
+                                src={`${process.env.BASE_URL}${imageLink}`}
                                 alt={title}
                                 customNoImageLogo={NoImageEvent.src}
                             />
@@ -156,11 +202,16 @@ const EventsPage: React.FC = () => {
                                     <TextInput
                                         searchIcon
                                         placeholder={"Search"}
+                                        value={searchText}
+                                        onChange={(e) =>
+                                            setSearchText(e.target.value)
+                                        }
                                     />
                                     <Button
                                         className={
                                             styles["events-filter__search"]
                                         }
+                                        onClick={handleSearch}
                                         invert>
                                         Search
                                     </Button>
@@ -170,25 +221,11 @@ const EventsPage: React.FC = () => {
                                         View on page
                                     </span>
                                     <div className={styles["inner"]}>
-                                        <Select
-                                            onChange={() =>
-                                                console.log("change!")
-                                            }
-                                            value={1}>
-                                            <span>All months</span>
-                                            <span>All months</span>
-                                            <span>All months</span>
-                                            <span>All months</span>
-                                        </Select>
-                                        <Select
-                                            onChange={() =>
-                                                console.log("change!")
-                                            }
-                                            value={1}>
-                                            <span>2023</span>
-                                            <span>2023</span>
-                                            <span>2023</span>
-                                            <span>2023</span>
+                                        <Select label={getRange()}>
+                                            <MonthPicker
+                                                value={dateRange}
+                                                onChange={setDateRange}
+                                            />
                                         </Select>
                                     </div>
                                 </div>
