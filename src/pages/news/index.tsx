@@ -35,11 +35,11 @@ export async function getServerSideProps(context) {
     const { req } = context;
 
     return {
-        notFound: true,
-        props: {
+        notFound: true
+        /* props: {
             headers: req.headers,
             news_categories: (await news.getNewsCategoriesData()) || [],
             news: (await news.getNewsData()) || []
-        }
+        } */
     };
 }
