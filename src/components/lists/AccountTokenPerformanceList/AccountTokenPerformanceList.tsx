@@ -58,6 +58,7 @@ const AccountTokenPerformanceList: React.FC<IComponent> = ({ className }) => {
 
     const handleChangePage = (page) => {
         setLoading(1);
+
         accounts
             .getAccountProfitabilitiesData(id, page, undefined, undefined)
             .then((e: unknown) => {
@@ -103,6 +104,7 @@ const AccountTokenPerformanceList: React.FC<IComponent> = ({ className }) => {
                 <span>Tokens Trades PnL (Profit And Loss)</span>
             </strong>
             <Paginator
+                paginatorName={"accountTokenPerformanceList"}
                 key={profitability?.length}
                 page={currentPage}
                 perPage={perPage}

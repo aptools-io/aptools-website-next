@@ -1,11 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { 
+import {
     headersSlice,
-    loadingSlice, 
-    statsAptosSlice, 
-    statsGeneralSlice, 
+    loadingSlice,
+    statsAptosSlice,
+    statsGeneralSlice,
     statsTransactions,
-    statsProjectsSlice, 
+    statsProjectsSlice,
     statsDexesVolumesSlice,
     statsAddressesTransactionsSlice,
     singleDexSlice,
@@ -16,13 +16,13 @@ import {
     notificationSlice,
     blocksSlice,
     blockchainSlice,
-    nftsSlice
+    nftsSlice,
+    eventsSlice
 } from "../slices/index";
 
-
-
 const store = configureStore({
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: false }),
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware({ serializableCheck: false }),
     reducer: {
         headers: headersSlice,
         loading: loadingSlice,
@@ -40,8 +40,9 @@ const store = configureStore({
         validators: validatorsSlice,
         blocks: blocksSlice,
         blockchain: blockchainSlice,
-        nfts: nftsSlice
-    },
+        nfts: nftsSlice,
+        events: eventsSlice
+    }
 });
 export default store;
 

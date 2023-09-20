@@ -10,7 +10,10 @@ import { BlocksSinglePage } from "src/components/pages";
 // API
 import { blocks } from "src/scripts/api/requests";
 import { setBlock } from "src/scripts/redux/slices/blocksSlice";
-import { setPageTitle } from "src/scripts/redux/slices/pageTitleSlice";
+import {
+    setPageTitle,
+    setPageType
+} from "src/scripts/redux/slices/pageTitleSlice";
 
 const BlocksId = (data: IApiProps) => {
     const dispatch = useDispatch();
@@ -19,8 +22,8 @@ const BlocksId = (data: IApiProps) => {
         dispatch(setPageTitle("Block"));
         dispatch(setBlock(data.block));
     }, []);
-    return <BlocksSinglePage/>;
-}; 
+    return <BlocksSinglePage />;
+};
 export default BlocksId;
 
 export async function getServerSideProps(context) {
@@ -29,16 +32,19 @@ export async function getServerSideProps(context) {
 
     const isHeight = !(id.indexOf("v-") > -1);
 
-    const block = isHeight ? 
-        await blocks.getBlockByHeightData(id, true) : 
-        await blocks.getBlockByVersionData(id.slice(2), true);
+    const block = isHeight
+        ? await blocks.getBlockByHeightData(id, true)
+        : await blocks.getBlockByVersionData(id.slice(2), true);
 
-    if(!block) return {
-        notFound: true
+    if (!block)
+        return {
+            notFound: true
+        };
+
+    return {
+        props: {
+            headers: req.headers,
+            block
+        }
     };
-
-    return { props: {
-        headers: req.headers,
-        block
-    } };
 }

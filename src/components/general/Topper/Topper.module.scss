@@ -8,6 +8,53 @@
         span {
             background-color: transparent !important;
         }
+
+        &-wrapper {
+            display: flex;
+            align-items: center;
+        }
+    }
+
+    &__type {
+        padding: 4px 10px;
+        border-radius: 2px;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 130%;
+        margin-left: 16px;
+        display: flex;
+        align-items: center;
+
+        svg {
+            margin-right: 4px;
+        }
+
+        &.color {
+            &-wallet {
+                background-color: var(--aptools-color-lights-primary);
+            }
+
+            &-validator {
+                background-color: var(--aptools-color-lights-indicator-green-2);
+            }
+
+            &-smart-contract {
+                background-color: var(--aptools-color-lights-indicator-violet-2);
+            }
+
+            &-nft-creator {
+                background-color: var(--aptools-color-lights-indicator-blue-3);
+            }
+
+            &-nft-marketplace {
+                background-color: var(--aptools-color-lights-indicator-blue-2);
+            }
+
+            &-dex {
+                background-color: var(--aptools-color-lights-indicator-green-1);
+            }
+        }
     }
 
     margin-bottom: var(--layout-indent);

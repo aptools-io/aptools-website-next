@@ -5,7 +5,10 @@ import React, { useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { setSingleDex } from "src/scripts/redux/slices/singleDexSlice";
 import { setHeaders } from "src/scripts/redux/slices/headersSlice";
-import { setPageTitle } from "src/scripts/redux/slices/pageTitleSlice";
+import {
+    setPageTitle,
+    setPageType
+} from "src/scripts/redux/slices/pageTitleSlice";
 
 // Components
 import { DexSinglePage } from "src/components/pages";
@@ -20,10 +23,11 @@ const DexId = (data: IApiProps) => {
         dispatch(setHeaders(data.headers) || null);
         dispatch(setSingleDex(data.dex_single) || null);
         dispatch(setPageTitle(title ? `${title} – Dex Analytics` : ""));
+        dispatch(setPageType("DEX"));
     }, [data, dispatch]);
 
     return <DexSinglePage />;
-}; 
+};
 export default DexId;
 
 export async function getServerSideProps(context) {
@@ -32,12 +36,15 @@ export async function getServerSideProps(context) {
 
     const dex = await dexSingle.getData(id);
 
-    if(!dex) return {
-        notFound: true
-    };
+    if (!dex)
+        return {
+            notFound: true
+        };
 
-    return { props: {
-        "headers": req.headers,
-        "dex_single": dex,
-    } };
+    return {
+        props: {
+            headers: req.headers,
+            dex_single: dex
+        }
+    };
 }

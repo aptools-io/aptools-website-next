@@ -87,7 +87,8 @@ const AccountTransactionsList: React.FC<IComponent> = ({ className }) => {
         <div className={classes}>
             <Paginator
                 changePerPage
-                key={transactions?.[0]?.version}
+                paginatorName={"accountTransactionsList"}
+                key={transactions?.length ? JSON.stringify(transactions) : "0"}
                 page={currentPage}
                 perPage={perPage}
                 setPerPage={setPerPage}
@@ -98,7 +99,11 @@ const AccountTransactionsList: React.FC<IComponent> = ({ className }) => {
                     columnNames={columnNames}
                     columns={columns}
                     data={transactions}
-                    key={transactions?.[0]?.version}>
+                    key={
+                        transactions?.length
+                            ? JSON.stringify(transactions)
+                            : "0"
+                    }>
                     <List adoptMobile={1439} loadingCount={loading * perPage} />
                 </ListHeader>
             </Paginator>

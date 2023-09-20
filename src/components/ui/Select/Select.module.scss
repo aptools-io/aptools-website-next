@@ -55,6 +55,7 @@
         line-height: 20px;
         display: flex;
         align-items: center;
+        justify-content: space-between;
         transition: background-color .3s ease;
         z-index: 2;
         position: relative;
@@ -83,6 +84,7 @@
         &s {
             overflow-y: auto;
             max-height: 210px;
+            z-index: 2;
             width: 100%;
             opacity: 0;
             visibility: hidden;

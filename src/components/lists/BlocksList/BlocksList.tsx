@@ -78,6 +78,7 @@ const BlocksList: React.FC<IComponent> = ({ className }) => {
         <div className={classes}>
             <Paginator
                 changePerPage
+                paginatorName={"blocksList"}
                 page={currentPage}
                 perPage={perPage}
                 setPerPage={setPerPage}

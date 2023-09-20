@@ -1,6 +1,6 @@
 // React
 import React, { useState } from "react";
-import { ListHeader, List , Paginator, Skeleton } from "src/components/ui";
+import { ListHeader, List, Paginator, Skeleton } from "src/components/ui";
 import { shortenHashString } from "src/scripts/util/strings";
 import useWindowSize from "src/scripts/hooks/useWindowSize";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,7 +17,8 @@ const NftTransfersList: React.FC<IComponent> = () => {
     const router = useRouter();
     const dispatch = useDispatch();
     const { id, name } = router?.query || {};
-    const { nftsCollectionTransfers, nftsCollectionGeneralInfo, nftsLoading } = useSelector((state: IRootState) => state.nfts);
+    const { nftsCollectionTransfers, nftsCollectionGeneralInfo, nftsLoading } =
+        useSelector((state: IRootState) => state.nfts);
 
     const { width } = useWindowSize();
     const mediaData = media(width);
@@ -26,13 +27,18 @@ const NftTransfersList: React.FC<IComponent> = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [perPage, setPerPage] = useState(10);
 
-    if(nftsLoading) return <Skeleton style={{ height: 460 }} />;
+    if (nftsLoading) return <Skeleton style={{ height: 460 }} />;
 
     if (!width) return <></>;
 
     const handleChangePage = (page) => {
         setLoading(1);
-        nfts.getNftsCollectionTransfersData(page, perPage, id as string, name as string).then((e: unknown) => {
+        nfts.getNftsCollectionTransfersData(
+            page,
+            perPage,
+            id as string,
+            name as string
+        ).then((e: unknown) => {
             setCurrentPage(page);
             const result = e as IApiNftCollectionTransfer[];
             dispatch(setNftsCollectionTransfers(result));
@@ -44,7 +50,12 @@ const NftTransfersList: React.FC<IComponent> = () => {
         setPerPage(perPage);
         setCurrentPage(1);
         setLoading(1);
-        nfts.getNftsCollectionTransfersData(currentPage, perPage, id as string, name as string).then((e: unknown) => {
+        nfts.getNftsCollectionTransfersData(
+            currentPage,
+            perPage,
+            id as string,
+            name as string
+        ).then((e: unknown) => {
             const result = e as IApiNftCollectionTransfer[];
             dispatch(setNftsCollectionTransfers(result));
             setLoading(0);
@@ -53,20 +64,19 @@ const NftTransfersList: React.FC<IComponent> = () => {
 
     return (
         <Paginator
+            paginatorName={"nftTransfersList"}
             page={currentPage}
             perPage={perPage}
-            key={`${nftsCollectionTransfers?.[0]?.version}+${nftsCollectionTransfers?.length}`} 
+            key={`${nftsCollectionTransfers?.[0]?.version}+${nftsCollectionTransfers?.length}`}
             changePerPage
             total={nftsCollectionGeneralInfo?.transfers}
             setPerPage={setPerPage}
             onChangePage={handleChangePage}
-            onChangePerPage={handleChangePerPage}
-        >
+            onChangePerPage={handleChangePerPage}>
             <ListHeader
                 columnNames={columnNames}
                 columns={columns}
-                data={nftsCollectionTransfers}
-            >
+                data={nftsCollectionTransfers}>
                 <List loadingCount={loading * perPage} adoptMobile />
             </ListHeader>
         </Paginator>

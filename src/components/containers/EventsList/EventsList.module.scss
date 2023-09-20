@@ -1,0 +1,168 @@
+@import '/src/styles//static/general/variables.static';
+@import '/src/styles//static/general/mixins';
+
+.events-list {
+    &__categories {
+        margin-bottom: var(--layout-indent);
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__more {
+        margin: 0 0 0 auto;
+
+        @include mediaWMax('TABLET') {
+            width: 100%;
+            justify-content: center;
+        }
+    }
+
+    &__category {
+        &-item {
+            padding: 8px 16px 16px;
+            border-radius: 2px;
+            transition: background-color .3s ease;
+
+            @include mediaWMax('TABLET') {
+                padding: 8px 10px;
+            }
+
+            &:hover {
+                background-color: var(--aptools-color-grey-c4);
+            }
+
+            &-inner {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                height: 100%;
+
+                .top {
+                    display: flex;
+                    flex-direction: column;
+                }
+            }
+
+            .date,
+            .image,
+            .title {
+                margin-bottom: 4px;
+            }
+
+            .date {
+                font-size: 10px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 130%;
+                display: flex;
+                align-items: center;
+
+                svg {
+                    margin-right: 8px;
+                }
+            }
+
+            .image {
+                min-height: 200px;
+                max-height: 200px;
+                background: linear-gradient(119deg, rgb(235 238 245 / 15%) 2.25%, rgb(59 89 152 / 15%) 77.9%);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                overflow: hidden;
+                position: relative;
+
+                @include mediaWMax('TABLET') {
+                    img {
+                        display: none;
+                    }
+
+                    order: 1;
+                    display: block;
+                    max-height: unset;
+                    min-height: unset;
+                    background: unset;
+                }
+
+                .categories {
+                    @include mediaWMax('TABLET') {
+                        position: relative;
+                        padding: unset;
+                        margin-top: 26px;
+                    }
+
+                    position: absolute;
+                    padding: 6px 12px;
+                    top: 0;
+                    left: 0;
+                    display: flex;
+                    column-gap: 10px;
+
+                    li {
+                        padding: 2px 6px;
+                        border-radius: 4px;
+                        background-color: var(--aptools-color-lights-primary);
+                        font-size: 10px;
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: 15px;
+                    }
+                }
+            }
+
+            .title {
+                font-size: 20px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: normal;
+                letter-spacing: -1px;
+            }
+
+            .description {
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 130%;
+                margin-bottom: 8px;
+            }
+
+            .bottom {
+                display: flex;
+                justify-content: space-between;
+
+                & > span {
+                    height: 100%;
+                    display: flex;
+                    align-items: center;
+                }
+
+                .social {
+                    display: flex;
+                    align-items: center;
+                    font-size: 10px;
+                    font-style: normal;
+                    font-weight: 500;
+                    line-height: 15px;
+                    color: var(--aptools-color-emphasis-c1);
+
+                    svg {
+                        margin-right: 8px;
+                    }
+                }
+            }
+
+            &s {
+                display: grid;
+                grid-template-columns: repeat(3, calc(100% / 3));
+
+                @include mediaWMax('LARGE') {
+                    grid-template-columns: repeat(2, calc(100% / 2));
+                }
+
+                @include mediaWMax('LAPTOP') {
+                    grid-template-columns: repeat(1, calc(100% / 1));
+                }
+            }
+        }
+    }
+}
