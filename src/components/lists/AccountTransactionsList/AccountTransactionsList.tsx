@@ -87,6 +87,7 @@ const AccountTransactionsList: React.FC<IComponent> = ({ className }) => {
         <div className={classes}>
             <Paginator
                 changePerPage
+                paginatorName={"accountTransactionsList"}
                 key={transactions?.length ? JSON.stringify(transactions) : "0"}
                 page={currentPage}
                 perPage={perPage}

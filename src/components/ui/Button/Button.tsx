@@ -52,7 +52,13 @@ const Button: React.FC<IButtonProps> = ({
     }
 
     return (
-        <button style={style} className={classes} onClick={onClick}>
+        <button
+            style={style}
+            className={classes}
+            onClick={() => {
+                if (disabled) return;
+                onClick();
+            }}>
             {ChildrenWrapper}
         </button>
     );

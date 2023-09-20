@@ -6,5 +6,6 @@
     "nft": "NFT",
     "validators": "Validators",
     "projects": "Projects",
-    "dex": "Dex"
+    "dex": "Dex",
+    "events": "Events"
 }

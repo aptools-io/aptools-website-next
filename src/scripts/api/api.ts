@@ -26,6 +26,7 @@ export class Api {
     ) => {
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), 10000);
+        console.log(body);
         try {
             const init = {
                 method: type,
@@ -44,11 +45,10 @@ export class Api {
             const endpoint = `${this.base}${this.version}${url}${
                 Object.keys(params)?.length > 0 ? `?${paramsString}` : ""
             }`;
-            console.log(endpoint);
             const result: Response = await fetch(endpoint, init);
-            console.log(result);
             return result;
         } catch (error) {
+            console.log(error);
             return error;
         }
     };
@@ -86,7 +86,7 @@ export class Api {
         params: Record<string, any> = {},
         body: Record<string, any> | string = null
     ): Promise<Response> => {
-        return this.fetch("GET", url, headers, params, null).then((response) =>
+        return this.fetch("GET", url, headers, params, body).then((response) =>
             this.handleResponse(response)
         );
     };

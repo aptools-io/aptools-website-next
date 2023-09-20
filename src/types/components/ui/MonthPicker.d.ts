@@ -1,7 +1,7 @@
 interface IMonthPickerProps extends IComponent {
     onChange: (any) => void;
     value: {
-        month: {
+        date: {
             from: {
                 month: number;
                 year: number;
@@ -10,6 +10,10 @@ interface IMonthPickerProps extends IComponent {
                 month: number;
                 year: number;
             };
+            start: string;
+            end: string;
+            startShort: string;
+            endShort: string;
         };
         selectedYear: number;
         selecting: boolean;

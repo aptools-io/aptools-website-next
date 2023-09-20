@@ -6,8 +6,11 @@ interface IPaginatorProps extends IComponent {
     changePerPage?: boolean;
     total: number;
     shift?: number;
-    onChangePage?: (page: number) => any;
-    onChangePerPage?: (page: number) => any;
+    paginatorName?: string;
+    noSaveStates?: boolean;
+    checkState?: boolean;
+    onChangePage?: (page: number, action?: () => any) => any;
+    onChangePerPage?: (page: number, action?: () => any) => any;
     setPerPage?: React.Dispatch<React.SetStateAction<number>>;
     customPaginatorWrapper?: React.MutableRefObject<any>;
 }

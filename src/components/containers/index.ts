@@ -45,3 +45,5 @@ export { default as NftHolders } from "../lists/NftHoldersList/NftHoldersList";
 export { default as NftPending } from "../lists/NftPendingList/NftPendingList";
 export { default as NftInventory } from "./NftInventory/NftInventory";
 export { default as OtherProjects } from "./OtherProjects/OtherProjects";
+export { default as EventsFilter } from "./EventsFilter/EventsFilter";
+export { default as EventsList } from "./EventsList/EventsList";

@@ -1,6 +1,6 @@
 // React
 import React, { useState } from "react";
-import { ListHeader, List , Paginator, Plug, Skeleton } from "src/components/ui";
+import { ListHeader, List, Paginator, Plug, Skeleton } from "src/components/ui";
 import { shortenHashString } from "src/scripts/util/strings";
 import useWindowSize from "src/scripts/hooks/useWindowSize";
 import { useRouter } from "next/router";
@@ -15,7 +15,9 @@ const NftPendingList: React.FC<IComponent> = () => {
     const router = useRouter();
     const dispatch = useDispatch();
     const { id, name } = router?.query || {};
-    const { nftsCollectionPendingClaims, nftsLoading } = useSelector((state: IRootState) => state.nfts);
+    const { nftsCollectionPendingClaims, nftsLoading } = useSelector(
+        (state: IRootState) => state.nfts
+    );
     const { total, list } = nftsCollectionPendingClaims || {};
 
     const { width } = useWindowSize();
@@ -25,7 +27,7 @@ const NftPendingList: React.FC<IComponent> = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [perPage, setPerPage] = useState(10);
 
-    if(nftsLoading) return <Skeleton style={{ height: 460 }} />;
+    if (nftsLoading) return <Skeleton style={{ height: 460 }} />;
 
     if (!width) return <></>;
 
@@ -33,7 +35,12 @@ const NftPendingList: React.FC<IComponent> = () => {
 
     const handleChangePage = (page) => {
         setLoading(1);
-        nfts.getNftsCollectionPendingClaimsData(page, perPage, id as string, name as string).then((e: unknown) => {
+        nfts.getNftsCollectionPendingClaimsData(
+            page,
+            perPage,
+            id as string,
+            name as string
+        ).then((e: unknown) => {
             setCurrentPage(page);
             const result = e as IApiNftCollectionPendingClaims;
             dispatch(setNftsCollectionPendingClaims(result));
@@ -45,7 +52,12 @@ const NftPendingList: React.FC<IComponent> = () => {
         setPerPage(perPage);
         setCurrentPage(1);
         setLoading(1);
-        nfts.getNftsCollectionPendingClaimsData(currentPage, perPage, id as string, name as string).then((e: unknown) => {
+        nfts.getNftsCollectionPendingClaimsData(
+            currentPage,
+            perPage,
+            id as string,
+            name as string
+        ).then((e: unknown) => {
             const result = e as IApiNftCollectionPendingClaims;
             dispatch(setNftsCollectionPendingClaims(result));
             setLoading(0);
@@ -54,20 +66,16 @@ const NftPendingList: React.FC<IComponent> = () => {
 
     return (
         <Paginator
-            key={`${list?.[0]?.version}+${list?.length}`} 
+            paginatorName={"nftPendingList"}
+            key={`${list?.[0]?.version}+${list?.length}`}
             page={currentPage}
             perPage={perPage}
             changePerPage
             total={total}
             setPerPage={setPerPage}
             onChangePage={handleChangePage}
-            onChangePerPage={handleChangePerPage}
-        >
-            <ListHeader
-                columnNames={columnNames}
-                columns={columns}
-                data={list}
-            >
+            onChangePerPage={handleChangePerPage}>
+            <ListHeader columnNames={columnNames} columns={columns} data={list}>
                 <List loadingCount={loading * perPage} adoptMobile />
             </ListHeader>
         </Paginator>

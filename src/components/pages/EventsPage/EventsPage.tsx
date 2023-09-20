@@ -4,9 +4,15 @@ import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // Components
-import { News, NewsBanner, TrendsList } from "src/components/containers";
+import {
+    EventsFilter,
+    EventsList,
+    News,
+    NewsBanner,
+    TrendsList
+} from "src/components/containers";
 import { Grid, GridWrapper, Topper } from "src/components/general";
-import { Monitor, Calendar } from "src/components/svg";
+import { Monitor, Calendar, Close } from "src/components/svg";
 import {
     ActiveLink,
     Button,
@@ -22,8 +28,15 @@ import { IRootState } from "src/scripts/redux/store";
 import NoImageEvent from "public/static/images/svg/no_image_event.svg";
 
 import { events } from "src/scripts/api/requests";
-import { setEventsData } from "src/scripts/redux/slices/eventsSlice";
+import {
+    ISearchEventsData,
+    setEventsData,
+    setEventsSearchLoading
+} from "src/scripts/redux/slices/eventsSlice";
+import classNames from "classnames";
+import useWindowSize from "src/scripts/hooks/useWindowSize";
 import styles from "./EventsPage.module.scss";
+import media from "./data/adaptive";
 
 interface ISortedEvent {
     title: string;
@@ -32,26 +45,16 @@ interface ISortedEvent {
 
 const EventsPage: React.FC = () => {
     const [sortedEvents, setSortedEvents] = useState([]);
-    const [searchText, setSearchText] = useState("");
+    const [currentPage, setCurrentPage] = useState(0);
+    const [filterCollapse, setFilterCollaspe] = useState(false);
     const dispatch = useDispatch();
 
-    const [dateRange, setDateRange] = useState({
-        month: {
-            from: {
-                month: moment().month(),
-                year: moment().year()
-            },
-            to: {
-                month: moment().month(),
-                year: moment().year()
-            }
-        },
-        selectedYear: moment().year(),
-        selecting: false
-    });
-    const { eventsData = [] } = useSelector(
+    const { eventsData = [], searchEventsData = null } = useSelector(
         (state: IRootState) => state.events
     );
+
+    const { width } = useWindowSize();
+    const mediaData = media(width);
 
     const sortEvents = (events: IApiEvent[], existed?: ISortedEvent[]) => {
         if (!events?.length) return [];
@@ -75,186 +78,81 @@ const EventsPage: React.FC = () => {
         return sorted;
     };
 
-    useEffect(() => {
-        console.log(eventsData);
+    const handleSearch = (page, data: ISearchEventsData) => {
+        if (!page) setCurrentPage(0);
 
+        dispatch(setEventsSearchLoading(true));
+        events
+            .getData(
+                data.searchText,
+                "desc",
+                data.startDate,
+                data.endDate,
+                page,
+                20,
+                data.paidOrFree,
+                data.categoryIds
+            )
+            .then((results) => {
+                dispatch(setEventsData(results));
+                dispatch(setEventsSearchLoading(false));
+            });
+    };
+
+    const handleLoadMore = () => {
+        handleSearch(currentPage + 1, searchEventsData);
+        setCurrentPage((e) => e + 1);
+    };
+
+    useEffect(() => {
         setSortedEvents(sortEvents(eventsData));
     }, [eventsData]);
+    console.log(sortedEvents);
 
-    const handleSearch = async () => {
-        const results = await events.getData(searchText);
-        dispatch(setEventsData(results));
-    };
+    useEffect(() => {
+        if (!searchEventsData.clicked) return;
+        handleSearch(0, searchEventsData);
+    }, [searchEventsData]);
 
-    const getRange = () => {
-        let to = null;
-
-        if (dateRange.selecting) return "Selecting...";
-
-        if (
-            !(
-                dateRange.month.from.month === dateRange.month.to.month &&
-                dateRange.month.from.year === dateRange.month.to.year
-            )
-        )
-            to = `${moment.monthsShort(dateRange.month.to.month)} ${
-                dateRange.month.to.year
-            }`;
-
-        return `${moment.monthsShort(dateRange.month.from.month)} ${
-            dateRange.month.from.year
-        }${to ? ` - ${to}` : ""}`;
-    };
-
-    const renderCategory = (item, index) => (
-        <li key={index}>{item.categoryTitle}</li>
-    );
-
-    const renderEvents = (item: IApiEvent, index: number) => {
-        const {
-            eventDateRange,
-            imageLink,
-            title,
-            description,
-            categoryList,
-            paidOrFree
-        } = item || {};
-        const date = moment(eventDateRange?.startDate).format("DD.MM.YYYY");
-        return (
-            <li key={index} className={styles["events__category-item"]}>
-                <div className={styles["events__category-item-inner"]}>
-                    <div className={styles["top"]}>
-                        <span className={styles["date"]}>
-                            <Calendar />
-                            {date}
-                        </span>
-                        <div className={styles["image"]}>
-                            <Img
-                                src={`${process.env.BASE_URL}${imageLink}`}
-                                alt={title}
-                                customNoImageLogo={NoImageEvent.src}
-                            />
-                            <ul className={styles["categories"]}>
-                                {categoryList.map(renderCategory)}
-                                {paidOrFree.title === "Free"
-                                    ? renderCategory(
-                                          { categoryTitle: "Free" },
-                                          "Free"
-                                      )
-                                    : renderCategory(
-                                          { categoryTitle: "Paid" },
-                                          "Paid"
-                                      )}
-                            </ul>
-                        </div>
-
-                        <strong className={styles["title"]}>{title}</strong>
-                        <p className={styles["description"]}>
-                            {description.length > 80
-                                ? `${description.slice(0, 80)}...`
-                                : description}
-                        </p>
-                    </div>
-
-                    <div className={styles["bottom"]}>
-                        <div className={styles["social"]}>
-                            <Monitor />
-                            t.me/TurkeyAptos
-                        </div>
-                        <Button href={`/events/${item?.id}`} after={"forward"}>
-                            Go
-                        </Button>
-                    </div>
-                </div>
-            </li>
-        );
-    };
-
-    const renderEventsCategories = (item: ISortedEvent, index: number) => {
-        return (
-            <li key={index} className={styles["events__category"]}>
-                <CategoryTitle title={item?.title} />
-                <ul className={styles["events__category-items"]}>
-                    {item?.elements.map(renderEvents)}
-                </ul>
-            </li>
-        );
-    };
+    if (!width) return <></>;
 
     return (
         <>
             <Topper backlink={"/"} />
             <Grid>
                 <GridWrapper>
-                    <Grid>
+                    <Grid className={styles["events-page__banner"]}>
                         <GridWrapper>
                             <NewsBanner />
                         </GridWrapper>
                     </Grid>
-                    <Grid>
-                        <GridWrapper gridWidth={3}>
-                            <CategoryTitle title={"Filter"} />
-                            <div className={styles["events-filter"]}>
+                    <Grid className={styles["events-page__content"]}>
+                        <GridWrapper gridWidth={mediaData.eventsFilterWrapper}>
+                            <CategoryTitle
+                                title={"Filter"}
+                                greyLine
+                                className={styles["events-page__filter-title"]}
+                                collapse={filterCollapse}
+                                setCollapse={setFilterCollaspe}
+                            />
+                            <div
+                                className={classNames([
+                                    styles["events-page__collapse"],
+                                    { [styles["open"]]: filterCollapse }
+                                ])}>
                                 <div
                                     className={
-                                        styles["events-filter__input-search"]
+                                        styles["events-page__collapse-inner"]
                                     }>
-                                    <TextInput
-                                        searchIcon
-                                        placeholder={"Search"}
-                                        value={searchText}
-                                        onChange={(e) =>
-                                            setSearchText(e.target.value)
-                                        }
-                                    />
-                                    <Button
-                                        className={
-                                            styles["events-filter__search"]
-                                        }
-                                        onClick={handleSearch}
-                                        invert>
-                                        Search
-                                    </Button>
-                                </div>
-                                <div className={styles["events-filter__input"]}>
-                                    <span className={styles["title"]}>
-                                        View on page
-                                    </span>
-                                    <div className={styles["inner"]}>
-                                        <Select label={getRange()}>
-                                            <MonthPicker
-                                                value={dateRange}
-                                                onChange={setDateRange}
-                                            />
-                                        </Select>
-                                    </div>
-                                </div>
-                                <div className={styles["events-filter__input"]}>
-                                    <span className={styles["title"]}>
-                                        Event type
-                                    </span>
-                                    <div className={styles["inner"]}></div>
-                                </div>
-                                <div className={styles["events-filter__input"]}>
-                                    <span className={styles["title"]}>
-                                        Payment
-                                    </span>
-                                    <div className={styles["inner"]}></div>
+                                    <EventsFilter />
                                 </div>
                             </div>
                         </GridWrapper>
-                        <GridWrapper gridWidth={7}>
-                            <div className={styles["events"]}>
-                                <ul className={styles["events__categories"]}>
-                                    {sortedEvents.map(renderEventsCategories)}
-                                </ul>
-                                <Button
-                                    className={styles["events__more"]}
-                                    invert
-                                    before={"plus"}>
-                                    Load more events
-                                </Button>
-                            </div>
+                        <GridWrapper gridWidth={mediaData.eventsListWrapper}>
+                            <EventsList
+                                sortedEvents={sortedEvents}
+                                handleLoadMore={handleLoadMore}
+                            />
                         </GridWrapper>
                     </Grid>
                 </GridWrapper>

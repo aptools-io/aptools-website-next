@@ -11,6 +11,7 @@ import React, {
 import classNames from "classnames";
 import { ArrowLeft } from "src/components/svg";
 import moment from "moment";
+import { addZero } from "src/scripts/util/timeConvert";
 import styles from "./MonthPicker.module.scss";
 
 // Util
@@ -41,8 +42,8 @@ const MonthPicker: React.FC<IMonthPickerProps> = ({
     const handleChangeMonth = (month) => {
         const setted = {
             ...value,
-            month: {
-                ...value.month,
+            date: {
+                ...value.date,
                 [!lastDate ? "from" : "to"]: {
                     year: value.selectedYear,
                     month
@@ -53,14 +54,30 @@ const MonthPicker: React.FC<IMonthPickerProps> = ({
 
         if (
             lastDate &&
-            (setted.month.to.year < setted.month.from.year ||
-                (setted.month.to.year === setted.month.from.year &&
-                    setted.month.to.month < setted.month.from.month))
+            (setted.date.to.year < setted.date.from.year ||
+                (setted.date.to.year === setted.date.from.year &&
+                    setted.date.to.month < setted.date.from.month))
         ) {
             const tempSetted = structuredClone(setted);
-            setted.month.from = tempSetted.month.to;
-            setted.month.to = tempSetted.month.from;
+            setted.date.from = tempSetted.date.to;
+            setted.date.to = tempSetted.date.from;
         }
+
+        const startDate = moment(
+            `${setted.date.from.year}-${addZero(
+                setted.date.from.month + 1
+            )}-01T00:00:00`
+        );
+        const endDate = moment(
+            `${setted.date.to.year}-${addZero(
+                setted.date.to.month + 1
+            )}-01T00:00:00`
+        );
+        setted.date.start = startDate.startOf("month").format("YYYY-MM-DD");
+        setted.date.end = endDate.endOf("month").format("YYYY-MM-DD");
+
+        setted.date.startShort = startDate.format("MMM YYYY");
+        setted.date.endShort = endDate.format("MMM YYYY");
 
         if (onChange) onChange(setted);
         setLastDate(!lastDate);
@@ -74,10 +91,10 @@ const MonthPicker: React.FC<IMonthPickerProps> = ({
         const classes = classNames([
             {
                 [styles["active"]]:
-                    (value.month.from.month === index &&
-                        value.month.from.year === value.selectedYear) ||
-                    (value.month.to.month === index &&
-                        value.month.to.year === value.selectedYear &&
+                    (value.date.from.month === index &&
+                        value.date.from.year === value.selectedYear) ||
+                    (value.date.to.month === index &&
+                        value.date.to.year === value.selectedYear &&
                         !lastDate)
             },
             {
@@ -89,28 +106,28 @@ const MonthPicker: React.FC<IMonthPickerProps> = ({
                 [styles["ranged"]]:
                     (lastDate &&
                         ((hoveredMonth.month < index &&
-                            index < value.month.from.month &&
-                            value.month.from.year === value.selectedYear) ||
+                            index < value.date.from.month &&
+                            value.date.from.year === value.selectedYear) ||
                             (hoveredMonth.month < index &&
-                                value.month.from.year > value.selectedYear) || // back
+                                value.date.from.year > value.selectedYear) || // back
                             (hoveredMonth.month > index &&
-                                index > value.month.from.month &&
-                                value.month.from.year === value.selectedYear) ||
+                                index > value.date.from.month &&
+                                value.date.from.year === value.selectedYear) ||
                             (hoveredMonth.month > index &&
-                                value.month.from.year < value.selectedYear))) || // front
+                                value.date.from.year < value.selectedYear))) || // front
                     (!lastDate &&
-                        ((value.selectedYear === value.month.from.year &&
-                            value.selectedYear !== value.month.to.year &&
-                            value.month.from.month < index) ||
-                            (value.selectedYear === value.month.to.year &&
-                                value.selectedYear !== value.month.from.year &&
-                                value.month.to.month > index) ||
-                            (value.selectedYear > value.month.from.year &&
-                                value.selectedYear < value.month.to.year) ||
-                            (value.selectedYear === value.month.from.year &&
-                                value.selectedYear === value.month.to.year &&
-                                index > value.month.from.month &&
-                                index < value.month.to.month)))
+                        ((value.selectedYear === value.date.from.year &&
+                            value.selectedYear !== value.date.to.year &&
+                            value.date.from.month < index) ||
+                            (value.selectedYear === value.date.to.year &&
+                                value.selectedYear !== value.date.from.year &&
+                                value.date.to.month > index) ||
+                            (value.selectedYear > value.date.from.year &&
+                                value.selectedYear < value.date.to.year) ||
+                            (value.selectedYear === value.date.from.year &&
+                                value.selectedYear === value.date.to.year &&
+                                index > value.date.from.month &&
+                                index < value.date.to.month)))
             }
         ]);
         return (

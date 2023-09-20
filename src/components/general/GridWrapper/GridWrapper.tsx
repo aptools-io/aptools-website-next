@@ -8,17 +8,23 @@ import { COLUMNS_COUNT } from "src/scripts/consts/grid";
 import classNames from "classnames";
 import styles from "./GridWrapper.module.scss";
 
-const GridWrapper: React.FC<IGridWrapperProps> = ({ grid = {}, gridWidth = null, className, children }) => {
-    const { start = 1, end = COLUMNS_COUNT } = grid;
+const GridWrapper: React.FC<IGridWrapperProps> = ({
+    grid = {},
+    gridWidth = null,
+    className,
+    children
+}) => {
+    const { start = 1, end = COLUMNS_COUNT } = grid as IGrid;
 
-    const gridColumn = start > end || start < 1 ? `${1} / span ${COLUMNS_COUNT}` : `${start} / span ${end - (start - 1)}`;
-    const style = { "--grid-column": !gridWidth ? gridColumn : `${gridWidth} span` } as React.CSSProperties;
+    const gridColumn =
+        start > end || start < 1
+            ? `${1} / span ${COLUMNS_COUNT}`
+            : `${start} / span ${end - (start - 1)}`;
+    const style = {
+        "--grid-column": !gridWidth ? gridColumn : `${gridWidth} span`
+    } as React.CSSProperties;
 
-    const classes = classNames([
-        styles["grid-wrapper"],
-        className
-    ]);
-    
+    const classes = classNames([styles["grid-wrapper"], className]);
 
     return (
         <div style={style} className={classes}>
@@ -26,6 +32,5 @@ const GridWrapper: React.FC<IGridWrapperProps> = ({ grid = {}, gridWidth = null,
         </div>
     );
 };
-
 
 export default React.memo(GridWrapper);

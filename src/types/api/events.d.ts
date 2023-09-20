@@ -3,6 +3,7 @@ interface IApiEvent {
     title: string;
     description: string;
     imageLink: string;
+    socialMediaLink: string;
     typeOfEntry: {
         id: number;
         entryTypeTitle: string;
@@ -24,4 +25,14 @@ interface IApiEvent {
         id: number;
         title: string;
     };
+}
+
+interface IApiEventSingle {
+    test: string;
+}
+
+interface IApiEventCategory {
+    id: number;
+    categoryTitle: string;
+    visible: boolean;
 }

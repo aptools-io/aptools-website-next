@@ -9,6 +9,29 @@
     text-transform: uppercase;
     margin-bottom: 20px;
 
+    &.grey-line {
+        &:after {
+            background-color: var(--aptools-color-grey-c3);
+        }
+    }
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    button {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transform: rotate(90deg);
+        transition: transform .3s ease;
+
+        &.active {
+            transform: rotate(-90deg);
+        }
+    }
+
     &:after {
         position: absolute;
         bottom: 0;

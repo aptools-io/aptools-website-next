@@ -84,6 +84,7 @@
         &s {
             overflow-y: auto;
             max-height: 210px;
+            z-index: 2;
             width: 100%;
             opacity: 0;
             visibility: hidden;
