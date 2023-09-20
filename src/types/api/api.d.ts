@@ -1,6 +1,7 @@
 interface IApiProps {
     headers: IncomingHttpHeaders;
     general_stats?: IApiGeneralStats;
+    page_type?: string;
     projects?: IApiProject[];
     project?: IApiProject;
     other_projects?: IApiProject[];
