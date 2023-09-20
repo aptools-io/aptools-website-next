@@ -1,0 +1,50 @@
+@import '/src/styles//static/general/variables.static';
+@import '/src/styles//static/general/mixins';
+
+.events-page {
+    &__banner {
+        @include mediaWMax('TABLET') {
+            display: none;
+        }
+    }
+
+    &__content {
+        @include mediaWMax('TABLET') {
+            margin-top: 0 !important;
+        }
+    }
+
+    &__filter-title {
+        button {
+            display: none;
+        }
+
+        @include mediaWMax('TABLET') {
+            button {
+                display: flex;
+            }
+        }
+    }
+
+    &__collapse {
+        display: grid;
+        transition: grid-template-rows .3s ease;
+        grid-template-rows: 1fr;
+
+        @include mediaWMax('TABLET') {
+            grid-template-rows: 0fr;
+
+            &:not(.open) {
+                overflow: hidden;
+            }
+        }
+
+        &.open {
+            grid-template-rows: 1fr;
+        }
+
+        &-inner {
+            min-height: 0;
+        }
+    }
+}

@@ -108,6 +108,7 @@ const AccountTokensList: React.FC<IComponent> = ({ className }) => {
         <div className={classes}>
             <Paginator
                 changePerPage
+                paginatorName={"accountTokensList"}
                 key={`${balance?.[0]?.coin}${balance?.length}`}
                 page={currentPage}
                 perPage={perPage}

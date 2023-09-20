@@ -15,8 +15,10 @@ const NftInventory: React.FC<IComponent> = () => {
     const router = useRouter();
     const dispatch = useDispatch();
     const { id, name } = router?.query || {};
-    
-    const { nftsCollectionListInventory, nftsLoading } = useSelector((state: IRootState) => state.nfts);
+
+    const { nftsCollectionListInventory, nftsLoading } = useSelector(
+        (state: IRootState) => state.nfts
+    );
     const { list, total } = nftsCollectionListInventory || {};
 
     const { width } = useWindowSize();
@@ -26,13 +28,16 @@ const NftInventory: React.FC<IComponent> = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [perPage, setPerPage] = useState(10);
 
-    if(nftsLoading) return <Skeleton style={{ height: 460 }} />;
-
-    
+    if (nftsLoading) return <Skeleton style={{ height: 460 }} />;
 
     const handleChangePage = (page) => {
         setLoading(true);
-        nfts.getNftsCollectionInventoryData(((page - 1) * perPage), perPage, id as string, name as string).then((e: unknown) => {
+        nfts.getNftsCollectionInventoryData(
+            (page - 1) * perPage,
+            perPage,
+            id as string,
+            name as string
+        ).then((e: unknown) => {
             setCurrentPage(page);
             const result = e as IApiNftCollectionInventories;
             dispatch(setNftsCollectionInventory(result));
@@ -44,29 +49,41 @@ const NftInventory: React.FC<IComponent> = () => {
         setPerPage(perPage);
         setCurrentPage(1);
         setLoading(true);
-        nfts.getNftsCollectionInventoryData(((currentPage - 1) * perPage), perPage, id as string, name as string).then((e: unknown) => {
+        nfts.getNftsCollectionInventoryData(
+            (currentPage - 1) * perPage,
+            perPage,
+            id as string,
+            name as string
+        ).then((e: unknown) => {
             const result = e as IApiNftCollectionInventories;
             dispatch(setNftsCollectionInventory(result));
             setLoading(false);
         });
     };
 
-
     return (
         <Paginator
+            paginatorName={"nftInventory"}
             page={currentPage}
             perPage={perPage}
             changePerPage
             total={total}
             setPerPage={setPerPage}
             onChangePage={handleChangePage}
-            onChangePerPage={handleChangePerPage}
-        >
-            {!list?.length ? <Plug noData /> : <Grid gap={16} columns={mediaData.moneyFlowWrapper}>
-                {!loading ? 
-                    list.map((item, index) => <NftInventoryItem key={index} item={item} />) :
-                    list.map((item, index) => <NftInventoryItem key={index} />)}
-            </Grid>}
+            onChangePerPage={handleChangePerPage}>
+            {!list?.length ? (
+                <Plug noData />
+            ) : (
+                <Grid gap={16} columns={mediaData.moneyFlowWrapper}>
+                    {!loading
+                        ? list.map((item, index) => (
+                              <NftInventoryItem key={index} item={item} />
+                          ))
+                        : list.map((item, index) => (
+                              <NftInventoryItem key={index} />
+                          ))}
+                </Grid>
+            )}
         </Paginator>
     );
 };

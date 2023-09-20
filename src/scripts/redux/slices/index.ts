@@ -15,3 +15,4 @@ export { default as validatorsSlice } from "./validatorsSlice";
 export { default as blocksSlice } from "./blocksSlice";
 export { default as blockchainSlice } from "./blockchainSlice";
 export { default as nftsSlice } from "./nftsSlice";
+export { default as eventsSlice } from "./eventsSlice";
