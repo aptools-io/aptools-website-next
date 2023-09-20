@@ -34,7 +34,9 @@ export default Events;
 
 export async function getServerSideProps(context) {
     const { req } = context;
+
     return {
+        notFound: true,
         props: {
             headers: req.headers,
             events: [],
