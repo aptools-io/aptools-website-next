@@ -29,10 +29,6 @@ const chartOptions = (locations: IApiValidatorLocation[], zoom = 1.25) => {
         getOccurrences(locations.map((item) => item?.location_stats.country))
     );
 
-    console.log(
-        getOccurrences(locations.map((item) => item?.location_stats.country))
-    );
-
     const max = getMax(countriesOccurrences.map((item) => item[1]));
 
     const regions = countriesOccurrences.map((item) => {

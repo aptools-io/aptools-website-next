@@ -17,3 +17,5 @@ export { default as ValidatorsPage } from "./ValidatorsPage/ValidatorsPage";
 export { default as ValidatorsSinglePage } from "./ValidatorsSinglePage/ValidatorsSinglePage";
 export { default as BlocksPage } from "./BlocksPage/BlocksPage";
 export { default as BlocksSinglePage } from "./BlocksSinglePage/BlocksSinglePage";
+export { default as EventsPage } from "./EventsPage/EventsPage";
+export { default as EventsSinglePage } from "./EventsSinglePage/EventsSinglePage";

@@ -34,8 +34,10 @@ const nextConfig = nextTranslate({
         BASE_API_LOGGER: process.env.BASE_API_LOGGER,
         BASE_API_URL: process.env.BASE_API_URL,
         BASE_API2_URL: process.env.BASE_API2_URL,
+        BASE_API3_URL: process.env.BASE_API3_URL,
         BASE_WEBSOCKET_URL: process.env.BASE_WEBSOCKET_URL,
         BASE_IMAGES_URL: process.env.BASE_IMAGES_URL,
+        BASE_MEDIA_URL: process.env.BASE_MEDIA_URL,
 
         OUTSIDE_URL: process.env.OUTSIDE_URL,
         OUTSIDE_URL_2: process.env.OUTSIDE_URL_2,
