@@ -56,7 +56,7 @@ const StatsAptos: React.FC<IComponent> = ({ className }) => {
     const [currentTimestamp, setCurrentTimestamp] = useState(
         new Date().getTime()
     );
-    console.log(token_statistics);
+
     const totalHolders =
         token_statistics?.["1d"]?.tokens_by_total?.find(
             (el) => el.symbol === "APT"
