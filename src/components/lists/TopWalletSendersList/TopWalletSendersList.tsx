@@ -26,7 +26,7 @@ const TopWalletSendersList: React.FC<IListWrapperProps> = ({
     const { token_statistics } = generalData || {};
     const { tokens_by_senders } =
         (token_statistics?.[keyValue] as IApiTokenStatisticsBy) || {};
-    console.log(token_statistics, keyValue);
+
     const classes = classNames([
         styles["top-wallet-senders"],
         "list",

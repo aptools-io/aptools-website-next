@@ -107,7 +107,6 @@ const EventsPage: React.FC = () => {
     useEffect(() => {
         setSortedEvents(sortEvents(eventsData));
     }, [eventsData]);
-    console.log(sortedEvents);
 
     useEffect(() => {
         if (!searchEventsData.clicked) return;
