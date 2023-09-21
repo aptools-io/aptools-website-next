@@ -19,35 +19,34 @@ import styles from "./MoneyFlow.module.scss";
 // Adaptive
 import media from "./data/adaptive";
 
-const MoneyFlow: React.FC<IComponent> = ({
-    className 
-}) => {
+const MoneyFlow: React.FC<IComponent> = ({ className }) => {
     const [value, setValue] = useState(switcherOptions[0]);
     const { width } = useWindowSize();
     const mediaData = media(width);
 
-    const classes = classNames([
-        styles["money-flow"],
-        className
-    ]);
+    const classes = classNames([styles["money-flow"], className]);
 
     return (
         <div className={classes}>
-            <TitleSwitcher 
-                title={"Money Flow"} 
-                data={switcherOptions} 
-                setData={setValue} 
-                settedData={value} 
-            >
-                <Grid columns={mediaData.moneyFlowWrapper} gap={mediaData.moneyFlowWrapperGap}>
+            <TitleSwitcher
+                title={"Money Flow"}
+                data={switcherOptions}
+                setData={setValue}
+                settedData={value}>
+                <Grid
+                    columns={mediaData.moneyFlowWrapper}
+                    gap={mediaData.moneyFlowWrapperGap}>
                     <GridWrapper gridWidth={1}>
                         <TopSendersList key={value.key} keyValue={value.key} />
                     </GridWrapper>
                     <GridWrapper gridWidth={1}>
-                        <TopReceiversList key={value.key} keyValue={value.key} />
+                        <TopReceiversList
+                            key={value.key}
+                            keyValue={value.key}
+                        />
                     </GridWrapper>
                 </Grid>
-            </TitleSwitcher>    
+            </TitleSwitcher>
         </div>
     );
 };
