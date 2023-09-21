@@ -120,11 +120,11 @@ const Paginator: React.FC<IPaginatorProps> = ({
     };
 
     useEffect(() => {
-        const states = JSON.parse(localStorage.getItem("paginatorStates"));
+        /* const states = JSON.parse(localStorage.getItem("paginatorStates"));
         if (states?.[paginatorName]?.perPage && setPerPage)
             handleChangePerPage(states?.[paginatorName].perPage, false);
         if (states?.[paginatorName]?.page)
-            handleChangePage(states?.[paginatorName].page, false);
+            handleChangePage(states?.[paginatorName].page, false); */
     }, [checkState]);
 
     const renderPagination = (item, index) => {
