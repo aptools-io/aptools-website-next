@@ -30,25 +30,25 @@ const TokenPrice: React.FC<IComponent> = ({ className }) => {
     const [volume, setVolume] = useState("all");
     const [volumes, setVolumes] = useState({
         "7d": [],
-        "14d": [],
         "30d": [],
+        "90d": [],
         all: allTimePrices
     });
 
     useEffect(() => {
         const dailyWalletsUsage = {
             "7d": [],
-            "14d": [],
             "30d": [],
+            "90d": [],
             all: allTimePrices
         } as IApiWalletsUsage;
         allTimePrices?.forEach((el) => {
             if (dateDiffInDays(new Date(el.x), new Date()) <= 8)
                 dailyWalletsUsage["7d"].push(el);
-            if (dateDiffInDays(new Date(el.x), new Date()) <= 15)
-                dailyWalletsUsage["14d"].push(el);
             if (dateDiffInDays(new Date(el.x), new Date()) <= 31)
                 dailyWalletsUsage["30d"].push(el);
+            if (dateDiffInDays(new Date(el.x), new Date()) <= 91)
+                dailyWalletsUsage["90d"].push(el);
         });
         setVolumes(dailyWalletsUsage);
     }, []);
@@ -73,18 +73,18 @@ const TokenPrice: React.FC<IComponent> = ({ className }) => {
                         7D
                     </button>
                     <button
-                        className={classNames([{ active: volume === "14d" }])}
-                        onClick={() => {
-                            setVolume("14d");
-                        }}>
-                        14D
-                    </button>
-                    <button
                         className={classNames([{ active: volume === "30d" }])}
                         onClick={() => {
                             setVolume("30d");
                         }}>
                         30D
+                    </button>
+                    <button
+                        className={classNames([{ active: volume === "90d" }])}
+                        onClick={() => {
+                            setVolume("90d");
+                        }}>
+                        90D
                     </button>
                     <button
                         className={classNames([{ active: volume === "all" }])}
