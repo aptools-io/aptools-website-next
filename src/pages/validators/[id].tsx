@@ -29,7 +29,7 @@ const ValidatorsId = (data: IApiProps) => {
         dispatch(setPageTitle("Validator"));
         dispatch(setValidator(data.validator) || null);
         dispatch(setValidators(data.validators) || null);
-        dispatch(setPageType("Validator"));
+        /* dispatch(setPageType("Validator")); */
     }, [data, dispatch]);
 
     return <ValidatorsSinglePage />;
