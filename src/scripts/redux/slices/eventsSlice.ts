@@ -12,7 +12,7 @@ export interface ISearchEventsData {
 const eventsSlice = createSlice({
     name: "events",
     initialState: {
-        eventsData: null as IApiEvent[],
+        eventsData: null as IApiEvents,
         eventData: null as IApiEventSingle,
         eventsCategoriesData: null as IApiEventCategory[],
         searchLoading: false,
@@ -26,7 +26,7 @@ const eventsSlice = createSlice({
         }
     },
     reducers: {
-        setEventsData: (state, action: PayloadAction<IApiEvent[]>) => {
+        setEventsData: (state, action: PayloadAction<IApiEvents>) => {
             state.eventsData = action.payload || null;
         },
         setEventsCategoriesData: (

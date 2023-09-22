@@ -26,6 +26,34 @@ interface IApiEvent {
         title: string;
     };
 }
+interface IApiEvents {
+    content: IApiEvent[];
+    totalElements: number;
+    totalPages: number;
+    sort: {
+        empty: boolean;
+        sotred: boolean;
+        unsorted: boolean;
+    };
+    size: number;
+    pageable: {
+        offset: number;
+        pageNumber: number;
+        pageSize: number;
+        paged: boolean;
+        sort: {
+            empty: boolean;
+            sotred: boolean;
+            unsorted: boolean;
+        };
+        unpaged: boolean;
+    };
+    numberOfElements: number;
+    number: number;
+    last: boolean;
+    first: boolean;
+    empty: boolean;
+}
 
 interface IApiEventSingle {
     test: string;

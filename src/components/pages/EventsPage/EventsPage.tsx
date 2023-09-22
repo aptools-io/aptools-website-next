@@ -49,7 +49,7 @@ const EventsPage: React.FC = () => {
     const [filterCollapse, setFilterCollaspe] = useState(false);
     const dispatch = useDispatch();
 
-    const { eventsData = [], searchEventsData = null } = useSelector(
+    const { eventsData, searchEventsData = null } = useSelector(
         (state: IRootState) => state.events
     );
 
@@ -81,7 +81,7 @@ const EventsPage: React.FC = () => {
     const handleSearch = (page, data: ISearchEventsData) => {
         if (!page) setCurrentPage(0);
 
-        dispatch(setEventsSearchLoading(true));
+        /* dispatch(setEventsSearchLoading(true)); */
         events
             .getData(
                 data.searchText,
@@ -94,8 +94,18 @@ const EventsPage: React.FC = () => {
                 data.categoryIds
             )
             .then((results) => {
-                dispatch(setEventsData(results));
-                dispatch(setEventsSearchLoading(false));
+                if (results && results?.content)
+                    dispatch(
+                        setEventsData({
+                            ...eventsData,
+                            content: [
+                                ...eventsData.content,
+                                ...results.content
+                            ],
+                            last: results.last
+                        })
+                    );
+                /* dispatch(setEventsSearchLoading(false)); */
             });
     };
 
@@ -105,7 +115,8 @@ const EventsPage: React.FC = () => {
     };
 
     useEffect(() => {
-        setSortedEvents(sortEvents(eventsData));
+        if (!eventsData?.content?.length) return;
+        setSortedEvents(sortEvents(eventsData?.content));
     }, [eventsData]);
 
     useEffect(() => {
@@ -151,6 +162,7 @@ const EventsPage: React.FC = () => {
                             <EventsList
                                 sortedEvents={sortedEvents}
                                 handleLoadMore={handleLoadMore}
+                                last={eventsData?.last}
                             />
                         </GridWrapper>
                     </Grid>
