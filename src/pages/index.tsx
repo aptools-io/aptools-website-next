@@ -54,6 +54,7 @@ const Home = (data: IApiProps) => {
         dispatch(setTransactionsData(data.contract_transactions || null));
         dispatch(setCoinTransactions(data.transactions) || null);
         dispatch(setPageTitle(""));
+        console.log(data.general_stats);
     }, [data, dispatch]);
 
     return <MainPage />;
@@ -67,7 +68,16 @@ export async function getServerSideProps(context) {
         props: {
             overflow: true,
             headers: req.headers,
-            general_stats: (await generalStats.getData()) || {},
+            general_stats:
+                {
+                    ...(await generalStats.getData()),
+                    aaaa_token_statistics:
+                        await generalStats.getTokenStatisticsData(),
+                    aaaa_blockchain_info:
+                        await generalStats.getBlockchainInfoData(),
+                    aaaa_dex_volumes:
+                        await generalStats.getDexesStatisticsData()
+                } || {},
             contract_addresses: (await contractAddresses.getData()) || [],
             contract_transactions: (await contractTransactions.getData()) || [],
             dexes_volumes: (await dexesVolumes.getData()) || [],

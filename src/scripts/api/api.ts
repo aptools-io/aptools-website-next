@@ -30,7 +30,10 @@ export class Api {
             const init = {
                 method: type,
                 headers: {
-                    ...headers
+                    ...headers,
+                    ...(this.base === process.env.BASE_API_URL
+                        ? { Authorization: "enPQsFzdACGdNAGsFegUV5vuzRWjwz5x" }
+                        : {})
                 },
                 signal: controller.signal,
                 ...(body && { body: JSON.stringify(body) })

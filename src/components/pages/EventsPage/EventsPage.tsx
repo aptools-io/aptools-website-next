@@ -105,7 +105,6 @@ const EventsPage: React.FC = () => {
                             last: results.last
                         })
                     );
-                /* dispatch(setEventsSearchLoading(false)); */
             });
     };
 
