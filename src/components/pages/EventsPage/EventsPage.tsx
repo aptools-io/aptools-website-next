@@ -78,10 +78,10 @@ const EventsPage: React.FC = () => {
         return sorted;
     };
 
-    const handleSearch = (page, data: ISearchEventsData) => {
+    const handleSearch = (page, data: ISearchEventsData, addNew = false) => {
         if (!page) setCurrentPage(0);
 
-        /* dispatch(setEventsSearchLoading(true)); */
+        if (!addNew) dispatch(setEventsSearchLoading(true));
         events
             .getData(
                 data.searchText,
@@ -94,33 +94,41 @@ const EventsPage: React.FC = () => {
                 data.categoryIds
             )
             .then((results) => {
-                if (results && results?.content)
+                if (results && results?.content) {
                     dispatch(
-                        setEventsData({
-                            ...eventsData,
-                            content: [
-                                ...eventsData.content,
-                                ...results.content
-                            ],
-                            last: results.last
-                        })
+                        setEventsData(
+                            addNew
+                                ? {
+                                      ...eventsData,
+                                      content: [
+                                          ...eventsData.content,
+                                          ...results.content
+                                      ],
+                                      last: results.last
+                                  }
+                                : results
+                        )
                     );
-                /* dispatch(setEventsSearchLoading(false)); */
+                }
+                if (!addNew) dispatch(setEventsSearchLoading(false));
             });
     };
 
     const handleLoadMore = () => {
-        handleSearch(currentPage + 1, searchEventsData);
+        handleSearch(currentPage + 1, searchEventsData, true);
         setCurrentPage((e) => e + 1);
     };
 
     useEffect(() => {
-        if (!eventsData?.content?.length) return;
+        if (!eventsData?.content?.length) {
+            setSortedEvents([]);
+            return;
+        }
         setSortedEvents(sortEvents(eventsData?.content));
     }, [eventsData]);
 
     useEffect(() => {
-        if (!searchEventsData.clicked) return;
+        if (!searchEventsData?.clicked) return;
         handleSearch(0, searchEventsData);
     }, [searchEventsData]);
 

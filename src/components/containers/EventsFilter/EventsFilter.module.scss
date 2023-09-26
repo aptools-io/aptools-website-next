@@ -3,6 +3,13 @@
     flex-direction: column;
     row-gap: 25px;
 
+    --default-plate-color: var(--aptools-color-lights-primary);
+
+    &__reset {
+        justify-content: center;
+        width: 100%;
+    }
+
     &__input {
         &-search {
             display: flex;
@@ -54,7 +61,7 @@
             }
 
             &.active {
-                background-color: var(--aptools-color-lights-primary);
+                background-color: var(--default-plate-color);
                 border-color: var(--aptools-color-lights-primary);
                 color: var(--aptools-color-main-secondary);
 

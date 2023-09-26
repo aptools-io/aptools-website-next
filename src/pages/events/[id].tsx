@@ -24,8 +24,8 @@ const Events = (data: IApiProps) => {
 
     useEffect(() => {
         dispatch(setHeaders(data.headers) || null);
-        dispatch(setPageTitle("Events"));
-        dispatch(setEventData(null) || null);
+        dispatch(setPageTitle(data.event?.title || "Events"));
+        dispatch(setEventData(data.event) || null);
     }, [data, dispatch]);
 
     return <EventsSinglePage />;
@@ -33,11 +33,20 @@ const Events = (data: IApiProps) => {
 export default Events;
 
 export async function getServerSideProps(context) {
-    const { req } = context;
+    const { req, query } = context;
+    const { id } = query || {};
+
+    const event = await events.getEventData(id);
+
+    if (!event)
+        return {
+            notFound: true
+        };
+
     return {
         props: {
             headers: req.headers,
-            events: [],
+            event: event || [],
             eventsCategories: (await events.getCategoriesData()) || []
         }
     };

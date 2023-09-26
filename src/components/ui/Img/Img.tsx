@@ -26,6 +26,7 @@ const Img: React.FC<
     if ((error || !src) && !off && customNoImageLogo)
         return (
             <img
+                data-link={src}
                 className={className}
                 src={customNoImageLogo}
                 alt={"image not found"}
@@ -34,6 +35,7 @@ const Img: React.FC<
     if ((error || !src) && !off)
         return (
             <img
+                data-link={src}
                 className={className}
                 style={{ objectFit: "contain", transform: "scale(.25, .25)" }}
                 src={NoImageLogo.src}

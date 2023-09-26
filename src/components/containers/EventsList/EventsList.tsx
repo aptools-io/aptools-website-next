@@ -42,9 +42,17 @@ const EventsList: React.FC<
     const { searchLoading } = useSelector((state: IRootState) => state.events);
     const classes = classNames([styles["events-list"], className]);
 
-    const renderCategory = (item, index) => (
-        <li key={index}>{item.categoryTitle}</li>
-    );
+    const renderCategory = (item, index) => {
+        const style = {
+            "--default-plate-color": item?.color
+        } as React.CSSProperties;
+
+        return (
+            <li style={style} key={index}>
+                {item.categoryTitle}
+            </li>
+        );
+    };
 
     const renderEvents = (item: IApiEvent, index: number) => {
         const {

@@ -30,6 +30,7 @@ interface IApiProps {
     nfts_collection_transfers: IApiNftCollectionTransfer[];
     nfts_collection_inventory: IApiNftCollectionInventories;
     events: IApiEvents;
+    event: IApiEventSingle;
     eventsCategories: IApiEventCategory[];
 }
 

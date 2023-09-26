@@ -34,6 +34,11 @@ const getData = async (
     ) as unknown as any;
 };
 
+const getEventData = async (id: string): Promise<any> => {
+    const api = new Api(false, process.env.BASE_API3_URL, "");
+    return api.get(`/find/by_id/${id}`, {}, {}, null) as unknown as any;
+};
+
 const getCategoriesData = async (): Promise<any> => {
     const api = new Api(false, process.env.BASE_API3_URL, "");
     return api.get("/category/get/all", {}, {}, null) as unknown as any;
@@ -41,6 +46,7 @@ const getCategoriesData = async (): Promise<any> => {
 
 const events = {
     getData,
+    getEventData,
     getCategoriesData
 };
 

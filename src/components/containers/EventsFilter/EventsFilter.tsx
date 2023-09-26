@@ -23,37 +23,22 @@ import {
     setEventsSearchLoading
 } from "src/scripts/redux/slices/eventsSlice";
 import styles from "./EventsFilter.module.scss";
+import dateRangeDefault from "./dateRangeDefault";
 
 // Other
 
 const EventsFilter: React.FC<IComponent> = ({ className }) => {
-    const { eventsData = [], eventsCategoriesData = [] } = useSelector(
+    const { eventsCategoriesData = [] } = useSelector(
         (state: IRootState) => state.events
     );
+
     const dispatch = useDispatch();
 
     const [searchText, setSearchText] = useState("");
     const [searchCategories, setSearchCategories] = useState([]);
     const [paid, setPaid] = useState(null);
 
-    const [dateRange, setDateRange] = useState({
-        date: {
-            from: {
-                month: moment().month(),
-                year: moment().year()
-            },
-            to: {
-                month: moment().month(),
-                year: moment().year()
-            },
-            start: moment().startOf("month").format("YYYY-MM-DD"),
-            end: moment().endOf("month").format("YYYY-MM-DD"),
-            startShort: moment().format("MMM YYYY"),
-            endShort: moment().format("MMM YYYY")
-        },
-        selectedYear: moment().year(),
-        selecting: false
-    });
+    const [dateRange, setDateRange] = useState(dateRangeDefault);
 
     const classes = classNames([styles["events-filter"], className]);
 
@@ -76,32 +61,50 @@ const EventsFilter: React.FC<IComponent> = ({ className }) => {
         setSearchCategories(tempCategories);
     };
 
-    const handleSearch = () => {
+    const handleReset = () => {
+        setSearchText("");
+        setSearchCategories([]);
+        setPaid(null);
+        setDateRange(dateRangeDefault);
+        handleSearch({
+            clicked: true,
+            searchText: "",
+            startDate: null,
+            endDate: null,
+            paidOrFree: null,
+            categoryIds: null
+        });
+    };
+
+    const handleSearch = (customData = null) => {
         const paidTypes = {
             paid: 1,
             free: 2
         };
 
-        dispatch(
-            setEventsSearchData({
-                clicked: true,
-                searchText,
-                startDate: dateRange.date.start,
-                endDate: dateRange.date.end,
-                paidOrFree: paidTypes[paid] || null,
-                categoryIds:
-                    searchCategories.length === 0 ? null : searchCategories
-            })
-        );
+        const data = customData || {
+            clicked: true,
+            searchText,
+            startDate: dateRange.date.start,
+            endDate: dateRange.date.end,
+            paidOrFree: paidTypes[paid] || null,
+            categoryIds: searchCategories.length === 0 ? null : searchCategories
+        };
+
+        dispatch(setEventsSearchData(data));
     };
 
     const renderSearchEventsCategories = (
         item: IApiEventCategory,
         index: number
     ) => {
+        const style = {
+            "--default-plate-color": item?.color
+        } as React.CSSProperties;
         return (
             <li
                 key={index}
+                style={style}
                 className={classNames([
                     styles["events-filter__categories-item"],
                     {
@@ -183,6 +186,15 @@ const EventsFilter: React.FC<IComponent> = ({ className }) => {
                         Paid
                     </button>
                 </div>
+            </div>
+            <div className={styles["events-filter__input"]}>
+                <span className={styles["title"]}>Reset filter</span>
+                <Button
+                    className={styles["events-filter__reset"]}
+                    onClick={handleReset}
+                    invert>
+                    Reset
+                </Button>
             </div>
         </div>
     );

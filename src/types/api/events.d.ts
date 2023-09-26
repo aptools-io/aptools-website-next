@@ -55,12 +55,20 @@ interface IApiEvents {
     empty: boolean;
 }
 
-interface IApiEventSingle {
-    test: string;
-}
-
 interface IApiEventCategory {
     id: number;
     categoryTitle: string;
+    color: string;
     visible: boolean;
+}
+
+interface IApiEventSingle extends IApiEvent {
+    contentList: IApiEventSingleContent[];
+}
+
+interface IApiEventSingleContent {
+    id: number;
+    order: number;
+    message: string;
+    imageLink: string;
 }
