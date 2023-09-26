@@ -4,6 +4,7 @@
   "bracketSpacing": true,
   "bracketSameLine": true,
   "endOfLine": "auto",
+  "proseWrap": "never",
   "semi": true,
   "singleQuote": false,
   "tabWidth": 4
