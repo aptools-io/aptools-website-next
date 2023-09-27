@@ -2,19 +2,7 @@
 import React, { useState } from "react";
 
 // Components
-import {
-    ActiveLink,
-    AptLogoBanner,
-    Button,
-    CategoryTitle,
-    Img,
-    MonthPicker,
-    Select,
-    Skeleton,
-    Socials,
-    TextInput,
-    ThemeSwitcher
-} from "src/components/ui";
+import { ActiveLink, AptLogoBanner, Button, CategoryTitle, Img, MonthPicker, Select, Skeleton, Socials, TextInput, ThemeSwitcher } from "src/components/ui";
 
 // Styles
 import classNames from "classnames";
@@ -42,20 +30,20 @@ const EventsList: React.FC<
     const { searchLoading } = useSelector((state: IRootState) => state.events);
     const classes = classNames([styles["events-list"], className]);
 
-    const renderCategory = (item, index) => (
-        <li key={index}>{item.categoryTitle}</li>
-    );
+    const renderCategory = (item, index) => {
+        const style = {
+            "--default-plate-color": item?.color
+        } as React.CSSProperties;
+
+        return (
+            <li style={style} key={index}>
+                {item.categoryTitle}
+            </li>
+        );
+    };
 
     const renderEvents = (item: IApiEvent, index: number) => {
-        const {
-            eventDateRange,
-            imageLink,
-            title,
-            description,
-            categoryList,
-            socialMediaLink,
-            paidOrFree
-        } = item || {};
+        const { eventDateRange, imageLink, title, description, categoryList, socialMediaLink, paidOrFree } = item || {};
         const date = moment(eventDateRange?.startDate).format("DD.MM.YYYY");
         return (
             <li key={index} className={styles["events-list__category-item"]}>
@@ -66,31 +54,15 @@ const EventsList: React.FC<
                             {date}
                         </span>
                         <div className={styles["image"]}>
-                            <Img
-                                src={`${process.env.BASE_URL}${imageLink}`}
-                                alt={title}
-                                customNoImageLogo={NoImageEvent.src}
-                            />
+                            <Img src={`${process.env.BASE_URL}${imageLink}`} alt={title} customNoImageLogo={NoImageEvent.src} />
                             <ul className={styles["categories"]}>
                                 {categoryList.map(renderCategory)}
-                                {paidOrFree.title === "Free"
-                                    ? renderCategory(
-                                          { categoryTitle: "Free" },
-                                          "Free"
-                                      )
-                                    : renderCategory(
-                                          { categoryTitle: "Paid" },
-                                          "Paid"
-                                      )}
+                                {paidOrFree.title === "Free" ? renderCategory({ categoryTitle: "Free" }, "Free") : renderCategory({ categoryTitle: "Paid" }, "Paid")}
                             </ul>
                         </div>
 
                         <strong className={styles["title"]}>{title}</strong>
-                        <p className={styles["description"]}>
-                            {description.length > 80
-                                ? `${description.slice(0, 80)}...`
-                                : description}
-                        </p>
+                        <p className={styles["description"]}>{description.length > 80 ? `${description.slice(0, 80)}...` : description}</p>
                     </div>
 
                     <div className={styles["bottom"]}>
@@ -117,9 +89,7 @@ const EventsList: React.FC<
         return (
             <li key={index} className={styles["events-list__category"]}>
                 <CategoryTitle title={item?.title} />
-                <ul className={styles["events-list__category-items"]}>
-                    {item?.elements.map(renderEvents)}
-                </ul>
+                <ul className={styles["events-list__category-items"]}>{item?.elements.map(renderEvents)}</ul>
             </li>
         );
     };
@@ -132,21 +102,9 @@ const EventsList: React.FC<
 
     return (
         <div className={classes}>
-            {!searchLoading ? (
-                <ul className={styles["events-list__categories"]}>
-                    {sortedEvents.map(renderEventsCategories)}
-                </ul>
-            ) : (
-                <ul className={styles["events-list__category-items"]}>
-                    {new Array(20).fill(null).map(renderSkeletons)}
-                </ul>
-            )}
+            {!searchLoading ? <ul className={styles["events-list__categories"]}>{sortedEvents.map(renderEventsCategories)}</ul> : <ul className={styles["events-list__category-items"]}>{new Array(20).fill(null).map(renderSkeletons)}</ul>}
             {!last && (
-                <Button
-                    className={styles["events-list__more"]}
-                    invert
-                    before={"plus"}
-                    onClick={handleLoadMore}>
+                <Button className={styles["events-list__more"]} invert before={"plus"} onClick={handleLoadMore}>
                     Load more events
                 </Button>
             )}

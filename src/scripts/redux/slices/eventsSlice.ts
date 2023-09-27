@@ -15,6 +15,7 @@ const eventsSlice = createSlice({
         eventsData: null as IApiEvents,
         eventData: null as IApiEventSingle,
         eventsCategoriesData: null as IApiEventCategory[],
+        eventsSlidesData: null as IApiEventsSlide[],
         searchLoading: false,
         searchEventsData: {
             clicked: false,
@@ -29,16 +30,10 @@ const eventsSlice = createSlice({
         setEventsData: (state, action: PayloadAction<IApiEvents>) => {
             state.eventsData = action.payload || null;
         },
-        setEventsCategoriesData: (
-            state,
-            action: PayloadAction<IApiEventCategory[]>
-        ) => {
+        setEventsCategoriesData: (state, action: PayloadAction<IApiEventCategory[]>) => {
             state.eventsCategoriesData = action.payload || null;
         },
-        setEventsSearchData: (
-            state,
-            action: PayloadAction<ISearchEventsData>
-        ) => {
+        setEventsSearchData: (state, action: PayloadAction<ISearchEventsData>) => {
             state.searchEventsData = action.payload || null;
         },
         setEventsSearchLoading: (state, action: PayloadAction<boolean>) => {
@@ -46,15 +41,12 @@ const eventsSlice = createSlice({
         },
         setEventData: (state, action: PayloadAction<IApiEventSingle>) => {
             state.eventData = action.payload || null;
+        },
+        setEventsSlidesData: (state, action: PayloadAction<IApiEventsSlide[]>) => {
+            state.eventsSlidesData = action.payload || null;
         }
     }
 });
 
-export const {
-    setEventsData,
-    setEventsCategoriesData,
-    setEventsSearchData,
-    setEventsSearchLoading,
-    setEventData
-} = eventsSlice.actions;
+export const { setEventsData, setEventsCategoriesData, setEventsSearchData, setEventsSearchLoading, setEventData, setEventsSlidesData } = eventsSlice.actions;
 export default eventsSlice.reducer;
