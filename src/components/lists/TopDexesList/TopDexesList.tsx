@@ -16,9 +16,7 @@ import styles from "./TopDexesList.module.scss";
 import { columnNames, columns } from "./data/listOptions";
 
 const TopDexesList: React.FC<IComponent> = ({ className }) => {
-    const { addressesData, transactionsData } = useSelector(
-        (state: IRootState) => state.statsAddressesTransactions
-    );
+    const { addressesData, transactionsData } = useSelector((state: IRootState) => state.statsAddressesTransactions);
     const classes = classNames([styles["top-dexes"], "list", className]);
 
     if (!addressesData || !transactionsData) return <></>;
@@ -30,17 +28,12 @@ const TopDexesList: React.FC<IComponent> = ({ className }) => {
         };
     });
 
-    console.log(combinedData);
-
     return (
         <div className={classes}>
             <strong className={"list__title"}>
                 <span>Top DEXes by Users/Transactions</span>
             </strong>
-            <ListHeader
-                columnNames={columnNames}
-                columns={columns}
-                data={combinedData}>
+            <ListHeader columnNames={columnNames} columns={columns} data={combinedData}>
                 <List adoptMobile />
             </ListHeader>
         </div>
