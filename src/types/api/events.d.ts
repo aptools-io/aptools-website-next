@@ -26,13 +26,65 @@ interface IApiEvent {
         title: string;
     };
 }
-
-interface IApiEventSingle {
-    test: string;
+interface IApiEvents {
+    content: IApiEvent[];
+    totalElements: number;
+    totalPages: number;
+    sort: {
+        empty: boolean;
+        sotred: boolean;
+        unsorted: boolean;
+    };
+    size: number;
+    pageable: {
+        offset: number;
+        pageNumber: number;
+        pageSize: number;
+        paged: boolean;
+        sort: {
+            empty: boolean;
+            sotred: boolean;
+            unsorted: boolean;
+        };
+        unpaged: boolean;
+    };
+    numberOfElements: number;
+    number: number;
+    last: boolean;
+    first: boolean;
+    empty: boolean;
 }
 
 interface IApiEventCategory {
     id: number;
     categoryTitle: string;
+    color: string;
+    visible: boolean;
+}
+
+interface IApiEventSingle extends IApiEvent {
+    contentList: IApiEventSingleContent[];
+    url?: string;
+}
+
+interface IApiEventSingleContent {
+    id: number;
+    order: number;
+    message: string;
+    imageLink: string;
+}
+
+interface IApiEventsSlide {
+    id: number;
+    title: string;
+    description: string;
+    eventLink: string;
+    imageLink: string;
+    dateRange: {
+        startDate: string;
+        endDate: string;
+        startTime: string;
+        endTime: string;
+    };
     visible: boolean;
 }

@@ -23,7 +23,7 @@ const DexId = (data: IApiProps) => {
         dispatch(setHeaders(data.headers) || null);
         dispatch(setSingleDex(data.dex_single) || null);
         dispatch(setPageTitle(title ? `${title} – Dex Analytics` : ""));
-        dispatch(setPageType("DEX"));
+        /* dispatch(setPageType("DEX")); */
     }, [data, dispatch]);
 
     return <DexSinglePage />;
