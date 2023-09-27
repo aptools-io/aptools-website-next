@@ -15,17 +15,10 @@ import styles from "./TopSendersList.module.scss";
 // Options
 import { columnNames, columns } from "./data/listOptions";
 
-const TopSendersList: React.FC<IListWrapperProps> = ({
-    keyValue,
-    className
-}) => {
-    const { data: generalData } = useSelector(
-        (state: IRootState) => state.statsGeneral
-    );
+const TopSendersList: React.FC<IListWrapperProps> = ({ keyValue, className }) => {
+    const { data: generalData } = useSelector((state: IRootState) => state.statsGeneral);
     const { top_statistics } = generalData || {};
-    console.log(generalData, top_statistics);
-    const { top_apt_senders } =
-        (top_statistics?.[keyValue] as IApiTopStatisticsBy) || {};
+    const { top_apt_senders } = (top_statistics?.[keyValue] as IApiTopStatisticsBy) || {};
 
     const classes = classNames([styles["top-senders"], "list", className]);
 
@@ -35,10 +28,7 @@ const TopSendersList: React.FC<IListWrapperProps> = ({
                 <span>Top Senders</span>
             </strong>
             {!(!top_statistics || !top_apt_senders) ? (
-                <ListHeader
-                    columnNames={columnNames}
-                    columns={columns}
-                    data={top_apt_senders}>
+                <ListHeader columnNames={columnNames} columns={columns} data={top_apt_senders}>
                     <List />
                 </ListHeader>
             ) : (

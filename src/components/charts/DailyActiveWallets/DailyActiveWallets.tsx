@@ -17,12 +17,9 @@ import styles from "./DailyActiveWallets.module.scss";
 import chartOptions from "./data/chartOptions";
 
 const DailyActiveWallets: React.FC<IComponent> = ({ className }) => {
-    const { data: generalData } = useSelector(
-        (state: IRootState) => state.statsGeneral
-    );
+    const { data: generalData } = useSelector((state: IRootState) => state.statsGeneral);
 
     const { transactions_plot, addresses_plot } = generalData || {};
-    console.log(transactions_plot, addresses_plot);
 
     const dailyTransactions = transactions_plot || {};
     const dailyAddresses = addresses_plot || {};
@@ -43,17 +40,7 @@ const DailyActiveWallets: React.FC<IComponent> = ({ className }) => {
     return (
         <div className={classes}>
             <strong className={"chart__title"}>Daily Active Wallets</strong>
-            <div className={"chart__inner"}>
-                {!(!dailyTransactions || !dailyAddresses) ? (
-                    <ReactECharts
-                        className={"chart__wrapper"}
-                        theme={""}
-                        option={chartOptions(data)}
-                    />
-                ) : (
-                    <Plug noData />
-                )}
-            </div>
+            <div className={"chart__inner"}>{!(!dailyTransactions || !dailyAddresses) ? <ReactECharts className={"chart__wrapper"} theme={""} option={chartOptions(data)} /> : <Plug noData />}</div>
         </div>
     );
 };
