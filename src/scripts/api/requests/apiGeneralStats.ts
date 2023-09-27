@@ -10,7 +10,7 @@ const getTokenStatisticsData = async () => {
     return api.get("/tokens_statistics");
 };
 
-const getBlockchainInfoData = async () => {
+const getBlockchainStatisticsData = async () => {
     const api = new Api();
     return api.get("/blockchain_statistics");
 };
@@ -23,7 +23,7 @@ const getDexesStatisticsData = async () => {
 const generalStats = {
     getData,
     getTokenStatisticsData,
-    getBlockchainInfoData,
+    getBlockchainStatisticsData,
     getDexesStatisticsData
 };
 

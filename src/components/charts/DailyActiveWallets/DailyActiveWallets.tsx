@@ -16,33 +16,27 @@ import styles from "./DailyActiveWallets.module.scss";
 // Other
 import chartOptions from "./data/chartOptions";
 
+const DailyActiveWallets: React.FC<IComponent> = ({ className }) => {
+    const { data: generalData } = useSelector(
+        (state: IRootState) => state.statsGeneral
+    );
 
+    const { transactions_plot, addresses_plot } = generalData || {};
+    console.log(transactions_plot, addresses_plot);
 
-const DailyActiveWallets: React.FC<IComponent> = ({
-    className 
-}) => {
-    const { data: generalData } = useSelector((state: IRootState) => state.statsGeneral);
-    const { 
-        transactions_plot, 
-        addresses_plot
-    } = generalData || {};
+    const dailyTransactions = transactions_plot || {};
+    const dailyAddresses = addresses_plot || {};
 
-    const { daily: dailyTransactions = null } = transactions_plot || {};
-    const { daily: dailyAddresses = null } = addresses_plot || {};
-    
-    const classes = classNames([
-        styles["daily-active-wallets"],
-        className
-    ]);
+    const classes = classNames([styles["daily-active-wallets"], className]);
 
     const data = [
         {
-            "name": "Daily Active Transactions",
-            "chart": dailyTransactions,
+            name: "Daily Active Transactions",
+            chart: dailyTransactions
         },
         {
-            "name": "Daily Active Addresses",
-            "chart": dailyAddresses,
+            name: "Daily Active Addresses",
+            chart: dailyAddresses
         }
     ];
 
@@ -50,7 +44,15 @@ const DailyActiveWallets: React.FC<IComponent> = ({
         <div className={classes}>
             <strong className={"chart__title"}>Daily Active Wallets</strong>
             <div className={"chart__inner"}>
-                {!(!dailyTransactions || !dailyAddresses) ? <ReactECharts className={"chart__wrapper"} theme={""} option={chartOptions(data)} /> : <Plug noData/>}
+                {!(!dailyTransactions || !dailyAddresses) ? (
+                    <ReactECharts
+                        className={"chart__wrapper"}
+                        theme={""}
+                        option={chartOptions(data)}
+                    />
+                ) : (
+                    <Plug noData />
+                )}
             </div>
         </div>
     );

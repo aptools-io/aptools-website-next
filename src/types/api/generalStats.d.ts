@@ -18,6 +18,9 @@ interface IApitActiveUniqueAddresses {
     day: number;
     week: number;
     month: number;
+    "1d": number;
+    "7d": number;
+    "30d": number;
 }
 interface IApiTokenVolume {
     change: number;

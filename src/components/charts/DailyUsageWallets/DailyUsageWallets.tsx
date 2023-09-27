@@ -23,7 +23,7 @@ const DailyUsageWallets: React.FC<IComponent> = ({ className }) => {
     );
     const { addresses_plot } = generalData || {};
 
-    const { daily: dailyAddresses = [] } = addresses_plot || {};
+    const dailyAddresses = addresses_plot || ({} as any);
 
     const classes = classNames([styles["daily-new-wallets"], className]);
     const [volume, setVolume] = useState("7d");
