@@ -24,7 +24,7 @@ const TokenPrice: React.FC<IComponent> = ({ className }) => {
     const { blockchain_info } = generalData || {};
 
     const { token_price_chart } = blockchain_info || {};
-    const { all_time: allTimePrices = [] } = token_price_chart || {};
+    const allTimePrices = token_price_chart || ({} as any);
 
     const classes = classNames([styles["token-price"], className]);
     const [volume, setVolume] = useState("all");

@@ -17,30 +17,33 @@ import { columnNames, columns } from "./data/listOptions";
 
 const TopSendersList: React.FC<IListWrapperProps> = ({
     keyValue,
-    className 
+    className
 }) => {
-    const { data: generalData } = useSelector((state: IRootState) => state.statsGeneral);
+    const { data: generalData } = useSelector(
+        (state: IRootState) => state.statsGeneral
+    );
     const { top_statistics } = generalData || {};
-    const { top_apt_senders } = top_statistics?.[keyValue] as IApiTopStatisticsBy || {};
+    console.log(generalData, top_statistics);
+    const { top_apt_senders } =
+        (top_statistics?.[keyValue] as IApiTopStatisticsBy) || {};
 
-    const classes = classNames([
-        styles["top-senders"],
-        "list",
-        className
-    ]);
+    const classes = classNames([styles["top-senders"], "list", className]);
 
     return (
         <div className={classes}>
             <strong className={"list__title"}>
                 <span>Top Senders</span>
             </strong>
-            {!(!top_statistics || !top_apt_senders) ? <ListHeader 
-                columnNames={columnNames} 
-                columns={columns} 
-                data={top_apt_senders}
-            >
-                <List />
-            </ListHeader> : <Plug noData />}
+            {!(!top_statistics || !top_apt_senders) ? (
+                <ListHeader
+                    columnNames={columnNames}
+                    columns={columns}
+                    data={top_apt_senders}>
+                    <List />
+                </ListHeader>
+            ) : (
+                <Plug noData />
+            )}
         </div>
     );
 };
