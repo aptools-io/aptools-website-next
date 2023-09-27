@@ -33,14 +33,26 @@ interface ISortedEvent {
 }
 
 const EventsList: React.FC<
-    IComponent & { sortedEvents: ISortedEvent[]; handleLoadMore: () => void }
-> = ({ className, sortedEvents, handleLoadMore = null }) => {
+    IComponent & {
+        sortedEvents: ISortedEvent[];
+        handleLoadMore: () => void;
+        last: boolean;
+    }
+> = ({ className, sortedEvents, handleLoadMore = null, last = false }) => {
     const { searchLoading } = useSelector((state: IRootState) => state.events);
     const classes = classNames([styles["events-list"], className]);
 
-    const renderCategory = (item, index) => (
-        <li key={index}>{item.categoryTitle}</li>
-    );
+    const renderCategory = (item, index) => {
+        const style = {
+            "--default-plate-color": item?.color
+        } as React.CSSProperties;
+
+        return (
+            <li style={style} key={index}>
+                {item.categoryTitle}
+            </li>
+        );
+    };
 
     const renderEvents = (item: IApiEvent, index: number) => {
         const {
@@ -137,13 +149,15 @@ const EventsList: React.FC<
                     {new Array(20).fill(null).map(renderSkeletons)}
                 </ul>
             )}
-            <Button
-                className={styles["events-list__more"]}
-                invert
-                before={"plus"}
-                onClick={handleLoadMore}>
-                Load more events
-            </Button>
+            {!last && (
+                <Button
+                    className={styles["events-list__more"]}
+                    invert
+                    before={"plus"}
+                    onClick={handleLoadMore}>
+                    Load more events
+                </Button>
+            )}
         </div>
     );
 };
