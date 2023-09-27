@@ -24,7 +24,6 @@ const Events = (data: IApiProps) => {
         dispatch(setEventsData(data.events) || null);
         dispatch(setEventsCategoriesData(data.eventsCategories) || null);
         dispatch(setEventsSlidesData(data.eventsSlides) || null);
-        console.log(data);
     }, [data, dispatch]);
 
     return <EventsPage />;

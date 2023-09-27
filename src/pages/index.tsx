@@ -6,10 +6,7 @@ import { useDispatch } from "react-redux";
 import { setGeneralStatsData } from "src/scripts/redux/slices/statsGeneralSlice";
 import { setProjectStatsData } from "src/scripts/redux/slices/statsProjectsSlice";
 import { setDexesVolumesStatsData } from "src/scripts/redux/slices/statsDexesVolumesSlice";
-import {
-    setAddressesData,
-    setTransactionsData
-} from "src/scripts/redux/slices/statsAddressesTransactionsSlice";
+import { setAddressesData, setTransactionsData } from "src/scripts/redux/slices/statsAddressesTransactionsSlice";
 import { setCoinTransactions } from "src/scripts/redux/slices/statsTransactionsSlice";
 import { setHeaders } from "src/scripts/redux/slices/headersSlice";
 
@@ -17,14 +14,7 @@ import { setHeaders } from "src/scripts/redux/slices/headersSlice";
 import { MainPage } from "src/components/pages";
 
 // API
-import {
-    contractAddresses,
-    contractTransactions,
-    dexesVolumes,
-    generalStats,
-    projects,
-    transactions
-} from "src/scripts/api/requests";
+import { contractAddresses, contractTransactions, dexesVolumes, generalStats, projects, transactions } from "src/scripts/api/requests";
 
 // Scripts
 import categories from "src/scripts/consts/categories";
@@ -54,7 +44,6 @@ const Home = (data: IApiProps) => {
         dispatch(setTransactionsData(data.contract_transactions || null));
         dispatch(setCoinTransactions(data.transactions) || null);
         dispatch(setPageTitle(""));
-        console.log(data);
     }, [data, dispatch]);
 
     return <MainPage />;
@@ -65,12 +54,9 @@ export async function getServerSideProps(context) {
     const projectsUnfiltered = (await projects.getData()) || [];
     const { req } = context;
 
-    const blockchainStatistics =
-        (await generalStats.getBlockchainStatisticsData()) || ({} as any);
-    const dexesStatistics =
-        (await generalStats.getDexesStatisticsData()) || ({} as any);
-    const tokenStatistics =
-        (await generalStats.getTokenStatisticsData()) || ({} as any);
+    const blockchainStatistics = (await generalStats.getBlockchainStatisticsData()) || ({} as any);
+    const dexesStatistics = (await generalStats.getDexesStatisticsData()) || ({} as any);
+    const tokenStatistics = (await generalStats.getTokenStatisticsData()) || ({} as any);
     return {
         props: {
             overflow: true,
@@ -80,35 +66,26 @@ export async function getServerSideProps(context) {
                     blockchain_info: {
                         ...blockchainStatistics,
                         low_high_price: tokenStatistics.low_high_price || {},
-                        token_price_chart:
-                            tokenStatistics.token_price_chart || [],
-                        trans_history:
-                            blockchainStatistics.transactions_history || [],
-                        dex_trading_volume:
-                            dexesStatistics.dex_trading_volume || null,
-                        total_value_locked:
-                            dexesStatistics.total_value_locked || null
+                        token_price_chart: tokenStatistics.token_price_chart || [],
+                        trans_history: blockchainStatistics.transactions_history || [],
+                        dex_trading_volume: dexesStatistics.dex_trading_volume || null,
+                        total_value_locked: dexesStatistics.total_value_locked || null,
+                        vol_24h: dexesStatistics.vol_24h || null
                     },
 
                     dex_tvl: dexesStatistics.dex_tvl_chart || [],
                     dex_volumes: dexesStatistics.dex_volumes_chart || [],
-                    daily_unique_contract_addresses:
-                        dexesStatistics.dex_addresses_chart || [],
-                    daily_contract_transactions:
-                        dexesStatistics.dex_transactions_chart || [],
+                    daily_unique_contract_addresses: dexesStatistics.dex_addresses_chart || [],
+                    daily_contract_transactions: dexesStatistics.dex_transactions_chart || [],
                     markets: dexesStatistics.dex_markets || [],
                     token_statistics: tokenStatistics.token_statistics || [],
-                    top_tokens_by_volume:
-                        tokenStatistics.top_tokens_by_volume || [],
+                    top_tokens_by_volume: tokenStatistics.top_tokens_by_volume || [],
 
                     top_statistics: blockchainStatistics.money_flow || {},
-                    transactions_plot:
-                        blockchainStatistics.user_transactions_history || [],
+                    transactions_plot: blockchainStatistics.user_transactions_history || [],
                     addresses_plot: blockchainStatistics.addresses_plot || [],
-                    daily_new_created_wallets:
-                        blockchainStatistics.daily_new_created_wallets || [],
-                    active_unique_addresses:
-                        blockchainStatistics.active_unique_addresses || {}
+                    daily_new_created_wallets: blockchainStatistics.daily_new_created_wallets || [],
+                    active_unique_addresses: blockchainStatistics.active_unique_addresses || {}
                 } || {},
 
             contract_addresses: dexesStatistics.dex_users_activity?.length

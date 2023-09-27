@@ -39,7 +39,6 @@ export async function getServerSideProps(context) {
             notFound: true
         };
 
-    console.log(event);
     if (event?.url)
         return {
             redirect: {

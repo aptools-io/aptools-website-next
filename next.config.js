@@ -3,16 +3,7 @@ const nextTranslate = require("next-translate");
 const loaderUtils = require("loader-utils");
 
 const hashOnlyIdent = (context, _, exportName) => {
-    const hash = loaderUtils.getHashDigest(
-        Buffer.from(
-            `filePath:${path
-                .relative(context.rootContext, context.resourcePath)
-                .replace(/\\+/g, "/")}#className:${exportName}`
-        ),
-        "md4",
-        "base64",
-        4
-    );
+    const hash = loaderUtils.getHashDigest(Buffer.from(`filePath:${path.relative(context.rootContext, context.resourcePath).replace(/\\+/g, "/")}#className:${exportName}`), "md4", "base64", 4);
     return hash.replace(/[^a-zA-Z0-9-_]/g, "_").replace(/^(-?\d|--)/, "_$1");
 };
 
@@ -33,6 +24,7 @@ const nextConfig = nextTranslate({
         BASE_URL: process.env.BASE_URL,
         BASE_API_LOGGER: process.env.BASE_API_LOGGER,
         BASE_API_URL: process.env.BASE_API_URL,
+        BASE_API_AUTH: process.env.BASE_API_AUTH,
         BASE_API2_URL: process.env.BASE_API2_URL,
         BASE_API3_URL: process.env.BASE_API3_URL,
         BASE_WEBSOCKET_URL: process.env.BASE_WEBSOCKET_URL,
@@ -53,19 +45,12 @@ const nextConfig = nextTranslate({
     },
 
     webpack: (config, { dev }) => {
-        const rules = config.module.rules
-            .find((rule) => typeof rule.oneOf === "object")
-            .oneOf.filter((rule) => Array.isArray(rule.use));
+        const rules = config.module.rules.find((rule) => typeof rule.oneOf === "object").oneOf.filter((rule) => Array.isArray(rule.use));
 
         if (!dev)
             rules.forEach((rule) => {
                 rule.use.forEach((moduleLoader) => {
-                    if (
-                        moduleLoader.loader?.includes("css-loader") &&
-                        !moduleLoader.loader?.includes("postcss-loader")
-                    )
-                        moduleLoader.options.modules.getLocalIdent =
-                            hashOnlyIdent;
+                    if (moduleLoader.loader?.includes("css-loader") && !moduleLoader.loader?.includes("postcss-loader")) moduleLoader.options.modules.getLocalIdent = hashOnlyIdent;
                 });
             });
 

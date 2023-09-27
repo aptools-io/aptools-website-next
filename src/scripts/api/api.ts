@@ -21,7 +21,7 @@ export class Api {
                 method: type,
                 headers: {
                     ...headers,
-                    ...(this.base === process.env.BASE_API_URL ? { Authorization: "enPQsFzdACGdNAGsFegUV5vuzRWjwz5x" } : {})
+                    ...(this.base === process.env.BASE_API_URL ? { Authorization: process.env.BASE_API_AUTH } : {})
                 },
                 signal: controller.signal,
                 ...(body && { body: JSON.stringify(body) })
@@ -33,7 +33,6 @@ export class Api {
             });
 
             const endpoint = `${this.base}${this.version}${url}${Object.keys(params)?.length > 0 ? `?${paramsString}` : ""}`;
-            console.log(endpoint);
             const result: Response = await fetch(endpoint, init);
             return result;
         } catch (error) {
