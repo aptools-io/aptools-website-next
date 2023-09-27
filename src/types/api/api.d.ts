@@ -32,6 +32,7 @@ interface IApiProps {
     events: IApiEvents;
     event: IApiEventSingle;
     eventsCategories: IApiEventCategory[];
+    eventsSlides: IApiEventsSlide[];
 }
 
 interface IApiGuid {

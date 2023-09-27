@@ -64,6 +64,7 @@ interface IApiEventCategory {
 
 interface IApiEventSingle extends IApiEvent {
     contentList: IApiEventSingleContent[];
+    url?: string;
 }
 
 interface IApiEventSingleContent {
@@ -71,4 +72,19 @@ interface IApiEventSingleContent {
     order: number;
     message: string;
     imageLink: string;
+}
+
+interface IApiEventsSlide {
+    id: number;
+    title: string;
+    description: string;
+    eventLink: string;
+    imageLink: string;
+    dateRange: {
+        startDate: string;
+        endDate: string;
+        startTime: string;
+        endTime: string;
+    };
+    visible: boolean;
 }

@@ -11,11 +11,7 @@ import { EventsPage, EventsSinglePage } from "src/components/pages";
 
 // API
 import { events } from "src/scripts/api/requests";
-import {
-    setEventData,
-    setEventsCategoriesData,
-    setEventsData
-} from "src/scripts/redux/slices/eventsSlice";
+import { setEventData, setEventsCategoriesData, setEventsData } from "src/scripts/redux/slices/eventsSlice";
 
 // dummy
 
@@ -41,6 +37,14 @@ export async function getServerSideProps(context) {
     if (!event)
         return {
             notFound: true
+        };
+
+    console.log(event);
+    if (event?.url)
+        return {
+            redirect: {
+                destination: event?.url
+            }
         };
 
     return {

@@ -1,15 +1,6 @@
 import { Api } from "../api";
 
-const getData = async (
-    search: string = "",
-    sortDate: string = "desc",
-    startDate: string = "",
-    endDate: string = "",
-    page: number = 0,
-    limit: number = 20,
-    paidOrFree: number = 0,
-    categoryIds: number[] = null
-): Promise<any> => {
+const getData = async (search: string = "", sortDate: string = "desc", startDate: string = "", endDate: string = "", page: number = 0, limit: number = 20, paidOrFree: number = 0, categoryIds: number[] = null): Promise<any> => {
     const api = new Api(false, process.env.BASE_API3_URL, "");
 
     return api.post(
@@ -44,10 +35,16 @@ const getCategoriesData = async (): Promise<any> => {
     return api.get("/category/get/all", {}, {}, null) as unknown as any;
 };
 
+const getSlidesData = async (): Promise<any> => {
+    const api = new Api(false, process.env.BASE_API3_URL, "");
+    return api.get("/slider/find/all?limit=10&page=0", {}, {}, null) as unknown as any;
+};
+
 const events = {
     getData,
     getEventData,
-    getCategoriesData
+    getCategoriesData,
+    getSlidesData
 };
 
 export default events;

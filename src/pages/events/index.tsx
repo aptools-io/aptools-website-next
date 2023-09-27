@@ -11,10 +11,7 @@ import { EventsPage } from "src/components/pages";
 
 // API
 import { events } from "src/scripts/api/requests";
-import {
-    setEventsCategoriesData,
-    setEventsData
-} from "src/scripts/redux/slices/eventsSlice";
+import { setEventsCategoriesData, setEventsData, setEventsSlidesData } from "src/scripts/redux/slices/eventsSlice";
 
 // dummy
 
@@ -26,6 +23,7 @@ const Events = (data: IApiProps) => {
         dispatch(setPageTitle("Events"));
         dispatch(setEventsData(data.events) || null);
         dispatch(setEventsCategoriesData(data.eventsCategories) || null);
+        dispatch(setEventsSlidesData(data.eventsSlides) || null);
         console.log(data);
     }, [data, dispatch]);
 
@@ -38,18 +36,9 @@ export async function getServerSideProps(context) {
     return {
         props: {
             headers: req.headers,
-            events:
-                (await events.getData(
-                    "",
-                    "desc",
-                    null,
-                    null,
-                    0,
-                    20,
-                    null,
-                    null
-                )) || [],
-            eventsCategories: (await events.getCategoriesData()) || []
+            events: (await events.getData("", "desc", null, null, 0, 20, null, null)) || [],
+            eventsCategories: (await events.getCategoriesData()) || [],
+            eventsSlides: (await events.getSlidesData()) || []
         }
     };
 }
