@@ -41,8 +41,8 @@ app.prepare().then(() => {
 
     if (!dev) {
         consul = new Consul({
-            host: "5.9.118.243",
-            port: 2209
+            host: "192.168.1.29",
+            port: 8500
         });
         registerService(consul);
     }
