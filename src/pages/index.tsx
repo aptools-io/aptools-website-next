@@ -14,7 +14,7 @@ import { setHeaders } from "src/scripts/redux/slices/headersSlice";
 import { MainPage } from "src/components/pages";
 
 // API
-import { contractAddresses, contractTransactions, dexesVolumes, generalStats, projects, transactions } from "src/scripts/api/requests";
+import { contractAddresses, contractTransactions, dexesVolumes, generalStats, logger, projects, transactions } from "src/scripts/api/requests";
 
 // Scripts
 import categories from "src/scripts/consts/categories";
@@ -23,6 +23,7 @@ import filtrateProjects from "src/scripts/util/filtrateProjects";
 // Websocket
 import { aptosStats } from "src/scripts/websocket/connections";
 import { setPageTitle } from "src/scripts/redux/slices/pageTitleSlice";
+import { timeSpent } from "src/scripts/util/time";
 
 const Home = (data: IApiProps) => {
     const ws = useRef<WebSocket>(null);
@@ -51,12 +52,23 @@ const Home = (data: IApiProps) => {
 export default Home;
 
 export async function getServerSideProps(context) {
+    const start = Date.now();
     const projectsUnfiltered = (await projects.getData()) || [];
+    logger.postErrorToLogger("info", `Timer on index page #1. /projects. Message: ${timeSpent(start)}`, "");
+
     const { req } = context;
 
     const blockchainStatistics = (await generalStats.getBlockchainStatisticsData()) || ({} as any);
+    logger.postErrorToLogger("info", `Timer on index page #2. /blockchain_statistics. Message: ${timeSpent(start)}`, "");
+
     const dexesStatistics = (await generalStats.getDexesStatisticsData()) || ({} as any);
+    logger.postErrorToLogger("info", `Timer on index page #3. /dexes_statistics. Message: ${timeSpent(start)}`, "");
+
     const tokenStatistics = (await generalStats.getTokenStatisticsData()) || ({} as any);
+    logger.postErrorToLogger("info", `Timer on index page #4. /tokens_statistics. Message: ${timeSpent(start)}`, "");
+
+    const transactionsData = (await transactions.getData()) || [];
+    logger.postErrorToLogger("info", `Timer on index page #5. /transactions. Message: ${timeSpent(start)}`, "");
     return {
         props: {
             overflow: true,
@@ -112,7 +124,7 @@ export async function getServerSideProps(context) {
             dexes_volumes: dexesStatistics.dexes_volumes || [],
 
             projects: filtrateProjects(projectsUnfiltered, categories) || [],
-            transactions: (await transactions.getData()) || []
+            transactions: transactionsData
         }
     };
 }
