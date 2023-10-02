@@ -32,21 +32,9 @@ const TransactionRealTime: React.FC<{
     setPerPage: React.Dispatch<React.SetStateAction<number>>;
     perPage: number;
     handlePerPage: (perPage: number) => void;
-}> = ({
-    currentPage,
-    setCurrentPage,
-    width,
-    full,
-    perPage,
-    setPerPage,
-    handlePerPage = null
-}) => {
-    const { data: aptosStats } = useSelector(
-        (state: IRootState) => state.statsAptos
-    );
-    const { transactions, websocket } = useSelector(
-        (state: IRootState) => state.statsAptos
-    );
+}> = ({ currentPage, setCurrentPage, width, full, perPage, setPerPage, handlePerPage = null }) => {
+    const { data: aptosStats } = useSelector((state: IRootState) => state.statsAptos);
+    const { transactions, websocket } = useSelector((state: IRootState) => state.statsAptos);
 
     const { transactions: trans } = aptosStats || {};
     const fullTransactions = !full ? trans : transactions;
@@ -58,20 +46,8 @@ const TransactionRealTime: React.FC<{
     const handleChangePage = (page) => setCurrentPage(page);
 
     return (
-        <Paginator
-            paginatorName={"transactions"}
-            changePerPage={full}
-            page={currentPage}
-            perPage={perPage}
-            setPerPage={setPerPage}
-            total={fullTransactions[0]?.version}
-            onChangePage={handleChangePage}
-            onChangePerPage={handlePerPage}>
-            <ListHeader
-                key={fullTransactions[0]?.version}
-                columnNames={columnNames as any}
-                columns={columns}
-                data={fullTransactions}>
+        <Paginator paginatorName={"transactions"} changePerPage={full} page={currentPage} perPage={perPage} setPerPage={setPerPage} total={fullTransactions[0]?.version} onChangePage={handleChangePage} onChangePerPage={handlePerPage}>
+            <ListHeader key={fullTransactions[0]?.version} columnNames={columnNames as any} columns={columns} data={fullTransactions}>
                 <List adoptMobile />
             </ListHeader>
         </Paginator>
@@ -87,19 +63,8 @@ const Transaction: React.FC<{
     setPerPage: React.Dispatch<React.SetStateAction<number>>;
     perPage: number;
     loading: boolean;
-}> = ({
-    currentPage,
-    setCurrentPage,
-    width,
-    setLoading,
-    loading,
-    full,
-    setPerPage,
-    perPage
-}) => {
-    const { data: transactionsData } = useSelector(
-        (state: IRootState) => state.statsTransactions
-    );
+}> = ({ currentPage, setCurrentPage, width, setLoading, loading, full, setPerPage, perPage }) => {
+    const { data: transactionsData } = useSelector((state: IRootState) => state.statsTransactions);
     const [total, setTotal] = useState(transactionsData?.[0]?.version || 0);
     const [currentInnerPage, setCurrentInnerPage] = useState(currentPage);
     const dispatch = useDispatch();
@@ -124,21 +89,20 @@ const Transaction: React.FC<{
         }
         if (currentPage !== 1) {
             transactions.getData().then((response) => {
-                if (!response) return;
+                if (!response) {
+                    setLoading(false);
+                    setCurrentPage(1);
+                    return;
+                }
                 const lastTransaction = response[0]?.version;
                 setTotal(lastTransaction);
 
-                transactions
-                    .getData(
-                        lastTransaction - perPage * (currentInnerPage - 1),
-                        perPage
-                    )
-                    .then((response) => {
-                        const resp = response as unknown as IApiTransaction[];
-                        dispatch(setCoinTransactions(resp));
-                        setCurrentPage(currentInnerPage);
-                        setLoading(false);
-                    });
+                transactions.getData(lastTransaction - perPage * (currentInnerPage - 1), perPage).then((response) => {
+                    const resp = response as unknown as IApiTransaction[];
+                    dispatch(setCoinTransactions(resp));
+                    setCurrentPage(currentInnerPage);
+                    setLoading(false);
+                });
             });
         }
     }, [currentInnerPage, perPage, dispatch, setCurrentPage]);
@@ -157,20 +121,14 @@ const Transaction: React.FC<{
                 setCurrentInnerPage(page);
             }}
             onChangePerPage={(perPage) => setPerPage(perPage)}>
-            <ListHeader
-                key={transactionsData[0]?.version}
-                columnNames={columnNames as any}
-                columns={columns}
-                data={transactionsData}>
+            <ListHeader key={transactionsData[0]?.version} columnNames={columnNames as any} columns={columns} data={transactionsData}>
                 <List adoptMobile loadingCount={loading && perPage} />
             </ListHeader>
         </Paginator>
     );
 };
 
-const TransactionsList: React.FC<
-    { title?: string; full?: boolean } & IComponent
-> = ({ title = "Last transactions", full = false, className }) => {
+const TransactionsList: React.FC<{ title?: string; full?: boolean } & IComponent> = ({ title = "Last transactions", full = false, className }) => {
     const [currentPage, setCurrrentPage] = useState(1);
     const [loading, setLoading] = useState(false);
     const [perPage, setPerPage] = useState(full ? 25 : 10);
@@ -190,30 +148,7 @@ const TransactionsList: React.FC<
                     <span>Last transactions</span>
                 </strong>
             )}
-            {currentPage === 1 ? (
-                <TransactionRealTime
-                    perPage={perPage}
-                    setPerPage={setPerPage}
-                    handlePerPage={handlePerPage}
-                    full={full}
-                    loading={loading}
-                    setLoading={setLoading}
-                    currentPage={currentPage}
-                    width={width}
-                    setCurrentPage={setCurrrentPage}
-                />
-            ) : (
-                <Transaction
-                    perPage={perPage}
-                    setPerPage={setPerPage}
-                    full={full}
-                    loading={loading}
-                    setLoading={setLoading}
-                    currentPage={currentPage}
-                    width={width}
-                    setCurrentPage={setCurrrentPage}
-                />
-            )}
+            {currentPage === 1 ? <TransactionRealTime perPage={perPage} setPerPage={setPerPage} handlePerPage={handlePerPage} full={full} loading={loading} setLoading={setLoading} currentPage={currentPage} width={width} setCurrentPage={setCurrrentPage} /> : <Transaction perPage={perPage} setPerPage={setPerPage} full={full} loading={loading} setLoading={setLoading} currentPage={currentPage} width={width} setCurrentPage={setCurrrentPage} />}
         </div>
     );
 };

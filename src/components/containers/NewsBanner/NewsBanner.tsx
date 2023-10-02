@@ -4,7 +4,7 @@ import React, { useState } from "react";
 // Swiper / Components
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper";
-import { Button, Img } from "src/components/ui";
+import { Button, Img, Plug } from "src/components/ui";
 
 // Styles
 import classNames from "classnames";
@@ -16,26 +16,9 @@ import NewsImage2 from "public/static/images/png/news_2.png";
 import { Calendar } from "src/components/svg";
 import styles from "./NewsBanner.module.scss";
 
-const dummyData = [
-    {
-        id: 1,
-        title: "Hello World",
-        description: "Delve into the fascinating world of cryptocurrency and discover the revolutionary concept behind Aptos Coin and other digital currencies.",
-        color: "blue",
-        image: NewsImage1.src
-    },
-    {
-        id: 1,
-        title: "Hello World 2",
-        description: "22 Delve into the fascinating world of cryptocurrency and discover the revolutionary concept behind Aptos Coin and other digital currencies.",
-        color: "green",
-        image: NewsImage2.src
-    }
-];
-
 const NewsBanner: React.FC<{ data?: IApiEventsSlide[]; hideBackground?: boolean } & IComponent> = ({ hideBackground = false, data, className }) => {
     const [currentSlide, setCurrentSlide] = useState(0);
-    const classes = classNames([styles["news-banner"], className]);
+    const classes = classNames([styles["news-banner"], { [styles["no-data"]]: !(data?.length > 0) }, className]);
 
     const renderBannerItems = (item: IApiEventsSlide, index) => {
         const { title, description, imageLink, eventLink, id, dateRange } = item || {};
@@ -87,18 +70,22 @@ const NewsBanner: React.FC<{ data?: IApiEventsSlide[]; hideBackground?: boolean 
                     styles["news-banner__inner"]
                     /* styles[dummyData[currentSlide].color] */
                 ])}>
-                <Swiper
-                    pagination={pagination}
-                    modules={[Pagination]}
-                    slidesPerView={1}
-                    onInit={(swiper) => {
-                        swiper.wrapperEl.classList.add(styles["news-banner__items"]);
-                    }}
-                    onSlideChange={(swiper) => {
-                        setCurrentSlide(swiper.activeIndex);
-                    }}>
-                    {data?.map(renderBannerItems)}
-                </Swiper>
+                {data?.length > 0 ? (
+                    <Swiper
+                        pagination={pagination}
+                        modules={[Pagination]}
+                        slidesPerView={1}
+                        onInit={(swiper) => {
+                            swiper.wrapperEl.classList.add(styles["news-banner__items"]);
+                        }}
+                        onSlideChange={(swiper) => {
+                            setCurrentSlide(swiper.activeIndex);
+                        }}>
+                        {data?.map(renderBannerItems)}
+                    </Swiper>
+                ) : (
+                    <Plug noData />
+                )}
             </div>
             <div className={styles["news-banner__dots"]} />
         </div>
