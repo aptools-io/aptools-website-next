@@ -7,7 +7,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const port = parseInt(process.env.NODE_PORT || "3000", 10);
-const dev = process.env.BASE_ENV !== "prod";
+const dev = process.env.BASE_NEXT_START_ENV !== "prod";
 const app = next({ dev });
 const handle = app.getRequestHandler();
 

@@ -19,8 +19,9 @@ const nextConfig = nextTranslate({
         includePaths: [path.join(__dirname, "styles")]
     },
     env: {
-        BASE_ENV: process.env.NODE_PORT,
-        BASE_ENV: process.env.BASE_ENV,
+        NODE_PORT: process.env.NODE_PORT,
+        BASE_LOGGER_ENV: process.env.BASE_LOGGER_ENV,
+        BASE_NEXT_START_ENV: process.env.BASE_NEXT_START_ENV,
         BASE_ENV_FULL: process.env.BASE_ENV_FULL,
         SITE_URL: process.env.SITE_URL,
 
