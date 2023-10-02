@@ -10,22 +10,14 @@ const ErrorPage = (props) => {
     useEffect(() => {
         if (!window) return;
         const { statusCode, text } = props;
-        logger.postErrorToLogger(
-            "error",
-            `Page: ${asPath}. Status code: ${statusCode}`,
-            text
-        );
+        logger.postErrorToLogger("error", `Page: ${asPath}. Status code: ${statusCode || "Error"}`, text);
     }, []);
 
     return <ClientSideErrorPage />;
 };
 
 ErrorPage.getInitialProps = ({ res, err }) => {
-    const statusCode =
-        err?.response?.status ??
-        res?.statusCode ??
-        err?.statusCode ??
-        undefined;
+    const statusCode = err?.response?.status ?? res?.statusCode ?? err?.statusCode ?? undefined;
     if (res && statusCode) {
         res.statusCode = statusCode;
     }

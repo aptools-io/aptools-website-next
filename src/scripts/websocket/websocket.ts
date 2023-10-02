@@ -4,7 +4,9 @@ export class WSocket {
     version = "/v1";
 
     token = process.env.BASE_TOKEN;
-    
+
+    isDataOut = true;
+
     open = (url: string, wsRef: React.MutableRefObject<WebSocket>, setData: (data: any) => any, limit: number = null) => {
         if ("WebSocket" in window) {
             const endpoint = `${this.base}${this.version}${url}`;
@@ -12,7 +14,7 @@ export class WSocket {
             wsRef.current.onopen = () => {
                 console.log("ws opened");
                 wsRef.current.send(this.token);
-                if(limit) wsRef.current.send(`${limit}`);
+                if (limit) wsRef.current.send(`${limit}`);
             };
             wsRef.current.onclose = () => console.log("ws closed");
 
@@ -20,11 +22,11 @@ export class WSocket {
 
             if (!wsCurrent) return;
 
-            wsCurrent.onmessage = e => {
+            wsCurrent.onmessage = (e) => {
                 /* if (isPaused) return; */
                 const reader = new FileReader();
                 reader.onload = () => {
-                    if(typeof reader.result !== "string") return;
+                    if (typeof reader.result !== "string" || !this.isDataOut) return;
                     setData(JSON.parse(reader.result));
                 };
                 reader.readAsText(e.data);
@@ -36,6 +38,10 @@ export class WSocket {
     };
 
     send = (wsRef: WebSocket, data: any) => {
-        if(wsRef.readyState === WebSocket.OPEN)  wsRef.send(data);
+        if (wsRef.readyState === WebSocket.OPEN) wsRef.send(data);
+    };
+
+    canSetData = (canSetData) => {
+        this.isDataOut = canSetData;
     };
 }

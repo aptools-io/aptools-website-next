@@ -3,7 +3,7 @@ import moment from "moment";
 import React, { useEffect, useRef, useState } from "react";
 
 import { Grid, GridWrapper, Topper } from "src/components/general";
-import { Img } from "src/components/ui";
+import { Img, Plug } from "src/components/ui";
 import { useSelector } from "react-redux";
 import { IRootState } from "src/scripts/redux/store";
 import useWindowSize from "src/scripts/hooks/useWindowSize";
@@ -66,7 +66,7 @@ const EventsSinglePage: React.FC = () => {
                                     </div>
                                     <div className={styles["event-content__text-content"]}>
                                         <strong className={styles["title"]}>{title}</strong>
-                                        {contentList?.length > 0 && <div className={styles["event-content__text-content-inner"]}>{contentList.map(renderContent)}</div>}
+                                        {contentList?.length > 0 ? <div className={styles["event-content__text-content-inner"]}>{contentList.map(renderContent)}</div> : <Plug noData />}
                                     </div>
                                 </div>
                             </GridWrapper>

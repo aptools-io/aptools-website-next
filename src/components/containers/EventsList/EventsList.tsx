@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 
 // Components
-import { ActiveLink, AptLogoBanner, Button, CategoryTitle, Img, MonthPicker, Select, Skeleton, Socials, TextInput, ThemeSwitcher } from "src/components/ui";
+import { ActiveLink, AptLogoBanner, Button, CategoryTitle, Img, MonthPicker, Plug, Select, Skeleton, Socials, TextInput, ThemeSwitcher } from "src/components/ui";
 
 // Styles
 import classNames from "classnames";
@@ -99,6 +99,8 @@ const EventsList: React.FC<
             <Skeleton style={{ minHeight: 230 }} />
         </li>
     );
+
+    if (!(sortedEvents?.length > 0)) return <Plug noData />;
 
     return (
         <div className={classes}>
