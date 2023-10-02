@@ -1,3 +1,25 @@
+/* import { logger } from "./requests"; */
+
+const loggerPost = async (type: string, title: string, info: string = null, avoidErrorRecursion: boolean = false) => {
+    const api = new Api(false, process.env.BASE_API_LOGGER, null, avoidErrorRecursion);
+    return api.post(
+        "/errors/new",
+        {
+            Authorization: "Bearer a23ert*HJGJGHg@HHJ*KKLDFD*sNSFSDAAAa@12343455@HHJ*KKLDFDlmDFDSFS"
+        },
+        {},
+        {
+            serviceName: "AptoolsAnalyticsWebsite", // requeired
+            timestamp: Math.floor(new Date().getTime() / 1000), // requeired
+            errorType: type, // requeired
+            env: process.env.BASE_ENV, // requeired
+            errorTitle: title, // required,
+            error: info,
+            customData: "{}"
+        }
+    );
+};
+
 export class Api {
     isToken = false;
 
@@ -7,15 +29,18 @@ export class Api {
 
     token = process.env.BASE_TOKEN;
 
-    constructor(isToken: boolean = true, custom: string = null, customVersion: string = null) {
+    avoidRecursion = false;
+
+    constructor(isToken: boolean = true, custom: string = null, customVersion: string = null, avoidErrorRecursion: boolean = false) {
         if (isToken) this.isToken = true;
         if (custom !== null) this.base = custom;
         if (customVersion !== null) this.version = customVersion;
+        this.avoidRecursion = avoidErrorRecursion;
     }
 
     fetch = async (type: string, url: string, headers: HeadersInit, params: Record<string, any> = {}, body: Record<string, any> | string = null) => {
         const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 10000);
+        setTimeout(() => controller.abort(), 10000);
         try {
             const init = {
                 method: type,
@@ -33,10 +58,14 @@ export class Api {
             });
 
             const endpoint = `${this.base}${this.version}${url}${Object.keys(params)?.length > 0 ? `?${paramsString}` : ""}`;
+            console.log(endpoint);
             const result: Response = await fetch(endpoint, init);
             return result;
         } catch (error) {
-            console.log(error);
+            const page = window?.location?.href ? `Page: ${window.location.href}` : "";
+            if (!this.avoidRecursion) {
+                loggerPost("error", `${page}. Message: ${error.message}`, error.stack, true);
+            }
             return error;
         }
     };

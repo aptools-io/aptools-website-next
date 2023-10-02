@@ -1,5 +1,5 @@
 // React
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 // Redux
 import { useDispatch, useSelector } from "react-redux";
@@ -21,12 +21,9 @@ import { columnNames, columns } from "./data/listOptions";
 import styles from "./BlocksList.module.scss";
 
 const BlocksList: React.FC<IComponent> = ({ className }) => {
-    const { blockchain: blockchainData } = useSelector(
-        (state: IRootState) => state.blockchain
-    );
-    const { blocks: blocksData } = useSelector(
-        (state: IRootState) => state.blocks
-    );
+    const { websocket } = useSelector((state: IRootState) => state.statsAptos);
+    const { blockchain: blockchainData } = useSelector((state: IRootState) => state.blockchain);
+    const { blocks: blocksData } = useSelector((state: IRootState) => state.blocks);
     const [currentPage, setCurrentPage] = useState(1);
     const [perPage, setPerPage] = useState(25);
     const [loading, setLoading] = useState(0);
@@ -37,6 +34,10 @@ const BlocksList: React.FC<IComponent> = ({ className }) => {
 
     const classes = classNames([styles["blocks-list"], "list", className]);
 
+    useEffect(() => {
+        /* console.log(blocksData) */
+    }, [blocksData]);
+
     if (!blocksData || !block_height) return <Plug noData />;
 
     const handleData = (page: number, perPage: number) => {
@@ -46,13 +47,9 @@ const BlocksList: React.FC<IComponent> = ({ className }) => {
             const { block_height } = blockchainData || {};
 
             const promises =
-                Array.from(
-                    { length: perPage },
-                    (_, i) => Number(block_height) - (i + page * perPage)
-                )
+                Array.from({ length: perPage }, (_, i) => Number(block_height) - (i + page * perPage))
                     ?.filter((x) => x >= 0)
-                    ?.map((element) => blocks.getBlockByHeightData(element)) ||
-                [];
+                    ?.map((element) => blocks.getBlockByHeightData(element)) || [];
 
             Promise.all(promises).then((blocks: unknown) => {
                 dispatch(setBlocks(blocks as IApiBlock[]));
@@ -62,12 +59,17 @@ const BlocksList: React.FC<IComponent> = ({ className }) => {
     };
 
     const handleChangePage = (page) => {
+        if (websocket?.ws) websocket?.ws?.canSetData(page === 1);
+
         setCurrentPage(page);
         setLoading(1);
         handleData(page, perPage);
     };
 
     const handleChangePerPage = (perPage) => {
+        if (websocket?.ws) websocket?.ws?.send(websocket?.wsRef, perPage);
+        if (websocket?.ws) websocket?.ws?.canSetData(true);
+
         setPerPage(perPage);
         setLoading(1);
         setCurrentPage(1);
@@ -76,20 +78,8 @@ const BlocksList: React.FC<IComponent> = ({ className }) => {
 
     return (
         <div className={classes}>
-            <Paginator
-                changePerPage
-                paginatorName={"blocksList"}
-                page={currentPage}
-                perPage={perPage}
-                setPerPage={setPerPage}
-                total={Number(block_height)}
-                onChangePage={handleChangePage}
-                onChangePerPage={handleChangePerPage}>
-                <ListHeader
-                    columnNames={columnNames}
-                    columns={columns}
-                    data={blocksData}
-                    key={blocksData?.[0]?.block_height}>
+            <Paginator changePerPage paginatorName={"blocksList"} page={currentPage} perPage={perPage} setPerPage={setPerPage} total={Number(block_height)} onChangePage={handleChangePage} onChangePerPage={handleChangePerPage}>
+                <ListHeader columnNames={columnNames} columns={columns} data={blocksData} key={blocksData?.[0]?.block_height}>
                     <List adoptMobile={1023} loadingCount={loading * perPage} />
                 </ListHeader>
             </Paginator>

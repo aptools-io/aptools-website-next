@@ -16,11 +16,7 @@ import { DifferenceArrow } from "src/components/svg";
 import { Grid, GridWrapper } from "src/components/general";
 
 // Other
-import {
-    formatNumber,
-    percentDifference,
-    setSign
-} from "src/scripts/util/numbers";
+import { formatNumber, percentDifference, setSign } from "src/scripts/util/numbers";
 import { concatString } from "src/scripts/util/strings";
 import { dateDiffInDays } from "src/scripts/util/timeConvert";
 
@@ -35,14 +31,8 @@ import chartOptions from "./data/chartOptions";
 import media from "./data/adaptive";
 
 const DexSingle: React.FC<IComponent> = ({ className }) => {
-    const { data: singleDexData } = useSelector(
-        (state: IRootState) => state.singleDex
-    );
-    const {
-        tvl = [],
-        total_24h_volume = [],
-        total_24h_transactions = []
-    } = singleDexData || {};
+    const { data: singleDexData } = useSelector((state: IRootState) => state.singleDex);
+    const { tvl = [], total_24h_volume = [], total_24h_transactions = [] } = singleDexData || {};
 
     const [currentDexData, setCurrentDexData] = useState("tvl");
     const [dexData, setDexData] = useState({});
@@ -59,37 +49,30 @@ const DexSingle: React.FC<IComponent> = ({ className }) => {
         all: dexData[currentDexData]
     });
 
+    console.log(singleDexData);
+
     useEffect(() => {
-        const lastTvl = tvl.slice(-2);
-        const lastTotalVolume = total_24h_volume.slice(-2);
-        const lastTotalTransactions = total_24h_transactions.slice(-2);
+        const lastTvl = tvl?.slice(-2);
+        const lastTotalVolume = total_24h_volume?.slice(-2);
+        const lastTotalTransactions = total_24h_transactions?.slice(-2);
 
         setDexData({
             tvl: {
                 name: "Total Value Locked",
                 value: lastTvl?.[0]?.y || 0,
-                percent: percentDifference(
-                    lastTvl?.[0]?.y as number,
-                    lastTvl?.[1]?.y as number
-                ),
+                percent: percentDifference(lastTvl?.[0]?.y as number, lastTvl?.[1]?.y as number),
                 data: tvl
             },
             total_24h_volume: {
                 name: "Total 24h Volume",
                 value: lastTotalVolume?.[0]?.y || 0,
-                percent: percentDifference(
-                    lastTotalVolume?.[0]?.y as number,
-                    lastTotalVolume?.[1]?.y as number
-                ),
+                percent: percentDifference(lastTotalVolume?.[0]?.y as number, lastTotalVolume?.[1]?.y as number),
                 data: total_24h_volume
             },
             total_24h_transactions: {
                 name: "Total 24h Transactions",
                 value: lastTotalTransactions?.[0]?.y || 0,
-                percent: percentDifference(
-                    lastTotalTransactions?.[0]?.y as number,
-                    lastTotalTransactions?.[1]?.y as number
-                ),
+                percent: percentDifference(lastTotalTransactions?.[0]?.y as number, lastTotalTransactions?.[1]?.y as number),
                 data: total_24h_transactions
             }
         });
@@ -105,62 +88,33 @@ const DexSingle: React.FC<IComponent> = ({ className }) => {
         } as IApiWalletsUsage;
 
         dexData[currentDexData].data.forEach((el) => {
-            if (dateDiffInDays(new Date(el.x), new Date()) <= 8)
-                dailyWalletsUsage["7d"].push(el);
-            if (dateDiffInDays(new Date(el.x), new Date()) <= 31)
-                dailyWalletsUsage["30d"].push(el);
-            if (dateDiffInDays(new Date(el.x), new Date()) <= 91)
-                dailyWalletsUsage["90d"].push(el);
+            if (dateDiffInDays(new Date(el.x), new Date()) <= 8) dailyWalletsUsage["7d"].push(el);
+            if (dateDiffInDays(new Date(el.x), new Date()) <= 31) dailyWalletsUsage["30d"].push(el);
+            if (dateDiffInDays(new Date(el.x), new Date()) <= 91) dailyWalletsUsage["90d"].push(el);
         });
 
         setVolumes(dailyWalletsUsage);
     }, [volume, dexData, currentDexData]);
 
-    if (
-        !currentDexData ||
-        !tvl ||
-        !total_24h_volume ||
-        !total_24h_transactions ||
-        !width
-    )
-        return <></>;
+    if (!currentDexData || !tvl || !total_24h_volume || !total_24h_transactions || !width) return <></>;
     const data = [
         {
             name: dexData[currentDexData]?.name,
-            chart: volumes[volume]?.length
-                ? [...volumes[volume]].slice(0, volumes[volume].length - 1)
-                : []
+            chart: volumes[volume]?.length ? [...volumes[volume]].slice(0, volumes[volume].length - 1) : []
         }
     ];
 
     const renderTab = (item, index) => {
         const { percent } = item[1];
         return (
-            <li
-                className={classNames([
-                    styles["dex-single__tab"],
-                    { [styles.active]: currentDexData === item[0] }
-                ])}
-                key={index}
-                onClick={() => setCurrentDexData(item[0])}>
+            <li className={classNames([styles["dex-single__tab"], { [styles.active]: currentDexData === item[0] }])} key={index} onClick={() => setCurrentDexData(item[0])}>
                 <div className={styles["dex-single__tab-item"]}>
                     <strong>{item[1].name}</strong>
-                    <span>
-                        {concatString(
-                            formatNumber(item[1].value),
-                            `${index !== 2 ? "$" : ""}`,
-                            ""
-                        )}
-                    </span>
+                    <span>{concatString(formatNumber(item[1].value), `${index !== 2 ? "$" : ""}`, "")}</span>
                 </div>
                 <div className={styles["dex-single__tab-item"]}>
                     <span></span>
-                    <span
-                        className={classNames([
-                            styles.percent,
-                            { [styles.green]: percent >= 0 },
-                            { [styles.red]: percent < 0 }
-                        ])}>
+                    <span className={classNames([styles.percent, { [styles.green]: percent >= 0 }, { [styles.red]: percent < 0 }])}>
                         <DifferenceArrow />
                         {concatString(setSign(formatNumber(percent)), "", "%")}
                     </span>
@@ -173,9 +127,7 @@ const DexSingle: React.FC<IComponent> = ({ className }) => {
         <div className={classes}>
             <Grid columns={4}>
                 <GridWrapper gridWidth={mediaData.tabs}>
-                    <ul className={styles["dex-single__tabs"]}>
-                        {Object.entries(dexData).map(renderTab)}
-                    </ul>
+                    <ul className={styles["dex-single__tabs"]}>{Object.entries(dexData).map(renderTab)}</ul>
                 </GridWrapper>
                 <GridWrapper gridWidth={mediaData.chart}>
                     <div className={styles["dex-single__inner"]}>
@@ -183,36 +135,28 @@ const DexSingle: React.FC<IComponent> = ({ className }) => {
                             <span>{dexData[currentDexData]?.name}</span>
                             <span className={"chart__switcher"}>
                                 <button
-                                    className={classNames([
-                                        { active: volume === "7d" }
-                                    ])}
+                                    className={classNames([{ active: volume === "7d" }])}
                                     onClick={() => {
                                         setVolume("7d");
                                     }}>
                                     7D
                                 </button>
                                 <button
-                                    className={classNames([
-                                        { active: volume === "30d" }
-                                    ])}
+                                    className={classNames([{ active: volume === "30d" }])}
                                     onClick={() => {
                                         setVolume("30d");
                                     }}>
                                     30D
                                 </button>
                                 <button
-                                    className={classNames([
-                                        { active: volume === "90d" }
-                                    ])}
+                                    className={classNames([{ active: volume === "90d" }])}
                                     onClick={() => {
                                         setVolume("90d");
                                     }}>
                                     90D
                                 </button>
                                 <button
-                                    className={classNames([
-                                        { active: volume === "all" }
-                                    ])}
+                                    className={classNames([{ active: volume === "all" }])}
                                     onClick={() => {
                                         setVolume("all");
                                     }}>
@@ -221,12 +165,7 @@ const DexSingle: React.FC<IComponent> = ({ className }) => {
                             </span>
                         </strong>
                         <div className={"chart__inner"}>
-                            <ReactECharts
-                                className={"chart__wrapper own-height"}
-                                style={{ height: "250px" }}
-                                theme={""}
-                                option={chartOptions(data)}
-                            />
+                            <ReactECharts className={"chart__wrapper own-height"} style={{ height: "250px" }} theme={""} option={chartOptions(data)} />
                         </div>
                     </div>
                 </GridWrapper>

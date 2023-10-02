@@ -6,6 +6,13 @@
     background-color: var(--aptools-color-main-secondary);
     min-height: 382px;
 
+    &.no-data {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+
     @include mediaWMax('LARGE') {
         min-height: 330px;
     }
