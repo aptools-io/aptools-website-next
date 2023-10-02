@@ -35,7 +35,7 @@ app.prepare().then(() => {
         const parsedUrl = parse(req.url, true);
         handle(req, res, parsedUrl);
         req.on("close", () => {
-            if (consul) deregisterService(consul);
+            //if (consul) deregisterService(consul);
         });
     }).listen(port);
 
