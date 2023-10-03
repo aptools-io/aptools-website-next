@@ -41,30 +41,30 @@ export class Api {
     fetch = async (type: string, url: string, headers: HeadersInit, params: Record<string, any> = {}, body: Record<string, any> | string = null) => {
         const controller = new AbortController();
         setTimeout(() => controller.abort(), 10000);
+
+        const init = {
+            method: type,
+            headers: {
+                ...headers,
+                ...(this.base === process.env.BASE_API_URL ? { Authorization: process.env.BASE_API_AUTH } : {})
+            },
+            signal: controller.signal,
+            ...(body && { body: JSON.stringify(body) })
+        };
+
+        const paramsString = new URLSearchParams({
+            ...params,
+            ...(this.isToken && { API_KEY: this.token })
+        });
+        const endpoint = `${this.base}${this.version}${url}${Object.keys(params)?.length > 0 ? `?${paramsString}` : ""}`;
+
         try {
-            const init = {
-                method: type,
-                headers: {
-                    ...headers,
-                    ...(this.base === process.env.BASE_API_URL ? { Authorization: process.env.BASE_API_AUTH } : {})
-                },
-                signal: controller.signal,
-                ...(body && { body: JSON.stringify(body) })
-            };
-
-            const paramsString = new URLSearchParams({
-                ...params,
-                ...(this.isToken && { API_KEY: this.token })
-            });
-
-            const endpoint = `${this.base}${this.version}${url}${Object.keys(params)?.length > 0 ? `?${paramsString}` : ""}`;
-            console.log(endpoint);
             const result: Response = await fetch(endpoint, init);
             return result;
         } catch (error) {
             const page = window?.location?.href ? `Page: ${window.location.href}` : "";
             if (!this.avoidRecursion) {
-                loggerPost("error", `${page}. Message: ${error.message}`, error.stack, true);
+                loggerPost("error", `${page}. Message: ${error.message}`, `Endpoint: ${endpoint}\n${error.stack}`, true);
             }
             return error;
         }
