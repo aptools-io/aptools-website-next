@@ -4,7 +4,6 @@
 .main-banner {
     min-height: calc(270px - var(--layout-indent));
 
-
     @include mediaWMax('TABLET') {
         min-height: calc(300px - var(--layout-indent));
     }

@@ -24,13 +24,12 @@ import styles from "./AccountTokenStats.module.scss";
 import media from "./data/adaptive";
 
 const AccountTokenStats: React.FC<IComponent> = ({ className }) => {
-    const { accountStats, accountsLoading: loading = false } = useSelector(
-        (state: IRootState) => state.accounts
-    );
+    const { accountStats, accountsLoading: loading = false } = useSelector((state: IRootState) => state.accounts);
     const { token_stats = [] } = accountStats || {};
 
     const { width } = useWindowSize();
     const m = media(width) || {};
+    console.log(token_stats);
 
     if (loading) return <Skeleton />;
     if (!accountStats || !token_stats || !token_stats?.length || !width)
@@ -55,11 +54,7 @@ const AccountTokenStats: React.FC<IComponent> = ({ className }) => {
         };
     });
 
-    const classes = classNames([
-        styles["account-token-stats"],
-        "chart",
-        className
-    ]);
+    const classes = classNames([styles["account-token-stats"], "chart", className]);
 
     const handleTokens = () => {
         const metrics = new CustomEvent("setRemoteTab", {
@@ -75,36 +70,16 @@ const AccountTokenStats: React.FC<IComponent> = ({ className }) => {
         const isOther = item.title === "Other";
 
         return (
-            <li
-                key={index}
-                {...(isOther && { onClick: handleTokens })}
-                className={classNames([
-                    styles["account-performance__list-item"],
-                    { [styles["pointer"]]: isOther }
-                ])}>
+            <li key={index} {...(isOther && { onClick: handleTokens })} className={classNames([styles["account-performance__list-item"], { [styles["pointer"]]: isOther }])}>
                 <div className={styles.info}>
-                    <div
-                        className={styles.color}
-                        style={{ backgroundColor: item.color }}
-                    />
-                    {!isOther && (
-                        <Img
-                            src={getImageFromApi(item.symbol)}
-                            alt={item.title}
-                        />
-                    )}
+                    <div className={styles.color} style={{ backgroundColor: item.color }} />
+                    {!isOther && <Img src={getImageFromApi(item.symbol)} alt={item.title} />}
                     <div className={styles.inner}>
                         <strong className={styles.title}>{item.title}</strong>
-                        {!isOther && (
-                            <span className={styles.description}>
-                                {item.symbol}
-                            </span>
-                        )}
+                        {!isOther && <span className={styles.description}>{item.symbol}</span>}
                     </div>
                 </div>
-                <span>
-                    {concatString(formatNumber(item.value, 5), "", "%")}
-                </span>
+                <span>{concatString(formatNumber(item.value, 5), "", "%")}</span>
             </li>
         );
     };
@@ -115,14 +90,8 @@ const AccountTokenStats: React.FC<IComponent> = ({ className }) => {
                 <span>Tokens Stats</span>
             </strong>
             <div className={styles["account-performance__inner"]}>
-                <ReactECharts
-                    style={{ height: m, width: m }}
-                    theme={""}
-                    option={chartOptions(data)}
-                />
-                <ul className={styles["account-performance__list-items"]}>
-                    {data.map(renderList)}
-                </ul>
+                <ReactECharts style={{ height: m, width: m }} theme={""} option={chartOptions(data)} />
+                <ul className={styles["account-performance__list-items"]}>{data.map(renderList)}</ul>
             </div>
         </div>
     );
