@@ -49,8 +49,6 @@ const DexSingle: React.FC<IComponent> = ({ className }) => {
         all: dexData[currentDexData]
     });
 
-    console.log(singleDexData);
-
     useEffect(() => {
         const lastTvl = tvl?.slice(-2);
         const lastTotalVolume = total_24h_volume?.slice(-2);

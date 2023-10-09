@@ -34,10 +34,6 @@ const BlocksList: React.FC<IComponent> = ({ className }) => {
 
     const classes = classNames([styles["blocks-list"], "list", className]);
 
-    useEffect(() => {
-        /* console.log(blocksData) */
-    }, [blocksData]);
-
     if (!blocksData || !block_height) return <Plug noData />;
 
     const handleData = (page: number, perPage: number) => {

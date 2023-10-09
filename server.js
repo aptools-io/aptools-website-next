@@ -66,37 +66,20 @@ const rewriteV = async (consul, data, production, server) => {
         if (keysFromConsul?.Value) {
             const parsedKeysFromConsul = JSON.parse(keysFromConsul.Value);
 
-            const envFileData = fs.readFileSync(".env", "utf8");
-            const envParsed = dotenv.parse(envFileData);
+            const envParsed = process.env;
 
             Object.keys(envParsed).forEach((key) => {
                 if (parsedKeysFromConsul[key] && envParsed[key] !== parsedKeysFromConsul[key]) {
                     envParsed[key] = parsedKeysFromConsul[key];
-                    const envstr = stringify(envParsed);
                     server.close();
                     app.close();
-                    fs.writeFile(".env", envstr, (err) => {
-                        if (err) console.log(err);
-                        console.log("env updated!");
-                        dotenv.config({
-                            path: ".env"
-                        });
 
-                        const newEnvFileData = fs.readFileSync(".env", "utf8");
-                        const newEnvParsed = dotenv.parse(newEnvFileData);
-                        execSync("npm run start:custom", { stdio: "inherit", env: newEnvParsed });
-                    });
+                    execSync("npm run start:custom:u", { stdio: "inherit", env: parsedKeysFromConsul });
                 }
             });
         }
     }
 };
-
-/* const deregisterService = async (consul) => {
-    await consul.agent.service.deregister({
-        id: `aptools-analytics-website-${process.env.BASE_ENV_FULL}-1`
-    });
-}; */
 
 const checkKeys = async (consul, data, production, server) => {
     setInterval(() => {
@@ -117,6 +100,7 @@ const appStart = () => {
         }).listen(port);
 
         if (!dev) {
+            const notWrite = process.argv[2] === "--unconsul";
             consul = new Consul({
                 host: "localhost",
                 port: 8500
@@ -128,7 +112,7 @@ const appStart = () => {
                 const envFileData = fs.readFileSync(".env", "utf8");
                 const envParsed = dotenv.parse(envFileData);
 
-                writeKV(consul, envParsed, production);
+                if (!notWrite) writeKV(consul, envParsed, production);
                 checkKeys(consul, envParsed, production, server);
             } catch (err) {
                 console.error(err);
