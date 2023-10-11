@@ -5,10 +5,7 @@ import React, { useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { setSingleDex } from "src/scripts/redux/slices/singleDexSlice";
 import { setHeaders } from "src/scripts/redux/slices/headersSlice";
-import {
-    setPageTitle,
-    setPageType
-} from "src/scripts/redux/slices/pageTitleSlice";
+import { setPageTitle, setPageType } from "src/scripts/redux/slices/pageTitleSlice";
 
 // Components
 import { DexSinglePage } from "src/components/pages";
@@ -34,7 +31,8 @@ export async function getServerSideProps(context) {
     const { req, query } = context;
     const { id } = query || {};
 
-    const dex = await dexSingle.getData(id);
+    console.log(id);
+    const dex = await dexSingle.getData(id.replaceAll(" ", "-"));
 
     if (!dex)
         return {

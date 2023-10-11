@@ -28,7 +28,6 @@ import { timeSpent } from "src/scripts/util/time";
 const Home = (data: IApiProps) => {
     const ws = useRef<WebSocket>(null);
     const dispatch = useDispatch();
-
     useEffect(() => {
         aptosStats.openConnection(ws, dispatch);
         return () => {

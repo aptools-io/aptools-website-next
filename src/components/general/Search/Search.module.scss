@@ -57,28 +57,6 @@
     }
 
     &__checkbox {
-        display: flex;
-
-        label {
-            cursor: pointer;
-
-            &:before {
-                content: '';
-                display: inline-block;
-                min-width: 10px;
-                min-height: 10px;
-                border: 1px solid var(--aptools-color-emphasis-c1);
-                border-radius: 2px;
-                margin-right: 4px;
-                background-image: url('/static/images/svg/checkmark.svg');
-                background-size: contain;
-            }
-        }
-
-        input:checked + label:before {
-            background-color: var(--aptools-color-emphasis-c1);
-        }
-
         &es {
             display: flex;
             flex-wrap: wrap;

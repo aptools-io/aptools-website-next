@@ -3,36 +3,18 @@ import React from "react";
 
 // Styles
 import classNames from "classnames";
-import { ArrowForward, ArrowLeft, Plus } from "src/components/svg";
+import { ArrowForward, ArrowLeft, Plus, WalletSignUp } from "src/components/svg";
 import styles from "./Button.module.scss";
 import ActiveLink from "../ActiveLink/ActiveLink";
 
-const Button: React.FC<IButtonProps> = ({
-    href = null,
-    after = null,
-    before = null,
-    invert = false,
-    fill = false,
-    disabled = false,
-    onClick = null,
-    children,
-    className,
-    style
-}) => {
-    const classes = classNames([
-        styles.button,
-        { [styles.invert]: invert },
-        { [styles.fill]: fill },
-        { [styles.disabled]: disabled },
-        { [styles[after]]: after },
-        { [styles[before]]: before },
-        className
-    ]);
+const Button: React.FC<IButtonProps> = ({ href = null, after = null, before = null, invert = false, fill = false, disabled = false, onClick = null, children, className, style }) => {
+    const classes = classNames([styles.button, { [styles.invert]: invert }, { [styles.fill]: fill }, { [styles.disabled]: disabled }, { [styles[after]]: after }, { [styles[before]]: before }, className]);
 
     const additive = {
         back: <ArrowLeft />,
         forward: <ArrowForward />,
-        plus: <Plus />
+        plus: <Plus />,
+        wallet: <WalletSignUp />
     };
 
     const ChildrenWrapper = (
