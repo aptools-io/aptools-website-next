@@ -9,6 +9,8 @@ import styles from "./TextInput.module.scss";
 
 const TextInput: React.FC<
     {
+        id?: string;
+        label?: string;
         onChange?: React.ChangeEventHandler<HTMLInputElement>;
         value?: string;
         searchButton?: boolean;
@@ -16,23 +18,10 @@ const TextInput: React.FC<
         placeholder?: string;
         sideComponent?: (focused?: boolean) => JSX.Element;
     } & IComponent
-> = ({
-    onChange = null,
-    value = "",
-    searchButton = false,
-    searchIcon = false,
-    placeholder = "",
-    sideComponent = null,
-    className
-}) => {
+> = ({ id = null, label = null, onChange = null, value = "", searchButton = false, searchIcon = false, placeholder = "", sideComponent = null, className }) => {
     const router = useRouter();
     const [focus, setFocus] = useState(false);
-    const classes = classNames([
-        styles["text-input"],
-        { [styles["icon"]]: searchIcon },
-        { [styles["focus"]]: focus },
-        className
-    ]);
+    const classes = classNames([styles["text-input"], { [styles["icon"]]: searchIcon }, { [styles["focus"]]: focus }, className]);
 
     useEffect(() => {
         const handleRouteChange = () => setFocus(false);
@@ -45,18 +34,14 @@ const TextInput: React.FC<
 
     return (
         <div className={classes} onBlur={handleBlur} onFocus={handleFocus}>
+            {label && <label {...(id && { htmlFor: id })}>{label}</label>}
             <div className={styles["text-input__wrapper"]}>
                 {searchIcon && (
                     <div className={styles["text-input__icon"]}>
                         <Magnifier />
                     </div>
                 )}
-                <input
-                    placeholder={placeholder}
-                    type={"text"}
-                    value={value}
-                    onChange={onChange}
-                />
+                <input {...(id && { id })} placeholder={placeholder} type={"text"} value={value} onChange={onChange} />
                 {searchButton && (
                     <div className={styles["text-input__button"]}>
                         <Button>Search</Button>

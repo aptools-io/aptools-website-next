@@ -9,25 +9,12 @@ import { useSelector } from "react-redux";
 import classNames from "classnames";
 
 // Components
-import {
-    Breadcrumbs,
-    Button,
-    SearchTooltip,
-    TextInput
-} from "src/components/ui";
+import { Breadcrumbs, Button, Checkbox, SearchTooltip, TextInput } from "src/components/ui";
 import { useRouter } from "next/router";
 import { Close } from "src/components/svg";
 import styles from "./Search.module.scss";
 
-const checkboxData = [
-    "All categories",
-    "Accounts",
-    "Block by version",
-    "Block by height",
-    "Transaction by hash",
-    "Transaction by version",
-    "Projects"
-];
+const checkboxData = ["All categories", "Accounts", "Block by version", "Block by height", "Transaction by hash", "Transaction by version", "Projects"];
 
 const Search: React.ForwardRefRenderFunction<
     any,
@@ -40,11 +27,7 @@ const Search: React.ForwardRefRenderFunction<
     const [checked, setChecked] = useState(checkboxData);
     const [searchTerm, setSearchTerm] = useState("");
 
-    const classes = classNames([
-        styles.search,
-        { [styles["active"]]: open },
-        className
-    ]);
+    const classes = classNames([styles.search, { [styles["active"]]: open }, className]);
 
     useEffect(() => {
         const handleRouteChange = () => setOpen(false);
@@ -69,25 +52,12 @@ const Search: React.ForwardRefRenderFunction<
     const renderCheckboxes = (item, index) => {
         return (
             <li key={index} className={styles["search__checkbox"]}>
-                <input
-                    checked={checked.includes(item)}
-                    id={`checkbox-search-${index}`}
-                    type='checkbox'
-                    value={item}
-                    onChange={handleCheckbox}
-                />
-                <label htmlFor={`checkbox-search-${index}`}>{item}</label>
+                <Checkbox checked={checked.includes(item)} id={`checkbox-search-${index}`} value={item} onChange={handleCheckbox} label={item} />
             </li>
         );
     };
 
-    const handleSearchTooltip = (focused) => (
-        <SearchTooltip
-            hidden={!focused}
-            terms={searchTerm}
-            categories={checked}
-        />
-    );
+    const handleSearchTooltip = (focused) => <SearchTooltip hidden={!focused} terms={searchTerm} categories={checked} />;
 
     const handleClose = () => setOpen(false);
 
@@ -95,21 +65,11 @@ const Search: React.ForwardRefRenderFunction<
         <div ref={ref} className={classes}>
             <div className={styles["search__inner"]}>
                 <div className={styles["search__settings"]}>
-                    <strong className={styles["search__info"]}>
-                        Choose Search Category
-                    </strong>
-                    <ul className={styles["search__checkboxes"]}>
-                        {checkboxData.map(renderCheckboxes)}
-                    </ul>
+                    <strong className={styles["search__info"]}>Choose Search Category</strong>
+                    <ul className={styles["search__checkboxes"]}>{checkboxData.map(renderCheckboxes)}</ul>
                 </div>
                 <div className={styles["search__input"]}>
-                    <TextInput
-                        placeholder={"Search"}
-                        searchIcon
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
-                        sideComponent={handleSearchTooltip}
-                    />
+                    <TextInput placeholder={"Search"} searchIcon value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} sideComponent={handleSearchTooltip} />
                     <button onClick={handleClose}>
                         <Close />
                     </button>
