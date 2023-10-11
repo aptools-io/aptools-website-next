@@ -74,7 +74,7 @@ const rewriteV = async (consul, data, production, server) => {
                     server.close();
                     app.close();
 
-                    execSync("npm run start:custom:u", { stdio: "inherit", env: parsedKeysFromConsul });
+                    execSync(`${process.env.NODE_COMMAND || "npm"} run start:custom:u`, { stdio: "inherit", env: parsedKeysFromConsul, shell: "/bin/bash" });
                 }
             });
         }
@@ -102,7 +102,7 @@ const appStart = () => {
         if (!dev) {
             const notWrite = process.argv[2] === "--unconsul";
             consul = new Consul({
-                host: "localhost",
+                host: "192.168.1.29",
                 port: 8500
             });
             registerService(consul);
