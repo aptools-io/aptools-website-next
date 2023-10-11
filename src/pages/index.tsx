@@ -27,7 +27,6 @@ import { setPageTitle } from "src/scripts/redux/slices/pageTitleSlice";
 const Home = (data: IApiProps) => {
     const ws = useRef<WebSocket>(null);
     const dispatch = useDispatch();
-
     useEffect(() => {
         aptosStats.openConnection(ws, dispatch);
         return () => {

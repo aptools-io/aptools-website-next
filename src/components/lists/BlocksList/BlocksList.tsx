@@ -34,27 +34,16 @@ const BlocksList: React.FC<IComponent> = ({ className }) => {
 
     const classes = classNames([styles["blocks-list"], "list", className]);
 
-    useEffect(() => {
-        /* console.log(blocksData) */
-    }, [blocksData]);
-
     if (!blocksData || !block_height) return <Plug noData />;
 
     const handleData = (page: number, perPage: number) => {
-        blockchain.getMainData().then((blockchain: unknown) => {
-            const blockchainData = blockchain as IApiBlockchainMainData;
-            dispatch(setBlockchain(blockchainData));
-            const { block_height } = blockchainData || {};
-
-            const promises =
-                Array.from({ length: perPage }, (_, i) => Number(block_height) - (i + page * perPage))
-                    ?.filter((x) => x >= 0)
-                    ?.map((element) => blocks.getBlockByHeightData(element)) || [];
-
-            Promise.all(promises).then((blocks: unknown) => {
-                dispatch(setBlocks(blocks as IApiBlock[]));
-                setLoading(0);
-            });
+        //console.log(perPage, page)
+        const topHeight = blocksData?.[0].block_height || 0;
+        console.log(blocksData?.[0].block_height);
+        blocks.getBlocks(perPage, Number(topHeight) - 1 - perPage * page).then((e: unknown) => {
+            const data = e as IApiBlock[];
+            dispatch(setBlocks(data || []));
+            setLoading(0);
         });
     };
 

@@ -4,6 +4,9 @@ const next = require("next");
 const Consul = require("consul");
 const dotenv = require("dotenv");
 const fs = require("fs");
+const stringify = require("dotenv-stringify");
+const { series } = require("async");
+const { execSync } = require("child_process");
 
 dotenv.config({
     path: ".env"
@@ -26,9 +29,8 @@ const registerService = async (consul) => {
     });
 };
 
-const writeKV = async (consul, data) => {
+const writeKV = async (consul, data, production) => {
     if (data) {
-        const production = process.env.BASE_ENV_FULL === "production" ? "prod" : process.env.BASE_ENV_FULL;
         consul.kv.set({
             key: `configurations-${production}/aptools-analytics-website`,
             value: JSON.stringify(data, null, 4)
@@ -36,38 +38,89 @@ const writeKV = async (consul, data) => {
     }
 };
 
-/* const deregisterService = async (consul) => {
-    await consul.agent.service.deregister({
-        id: `aptools-analytics-website-${process.env.BASE_ENV_FULL}-1`
-    });
-}; */
-
-app.prepare().then(() => {
-    let consul = null;
-    createServer((req, res) => {
-        const parsedUrl = parse(req.url, true);
-        handle(req, res, parsedUrl);
-        req.on("close", () => {
-            //if (consul) deregisterService(consul);
+const readKV = async (consul, data, production) => {
+    if (data) {
+        const keysFromConsul = await consul.kv.get({
+            key: `configurations-${production}/aptools-analytics-website`
         });
-    }).listen(port);
+        if (keysFromConsul?.Value) {
+            const parsedKeysFromConsul = JSON.parse(keysFromConsul.Value);
 
-    if (!dev) {
-        consul = new Consul({
-            host: "192.168.1.29",
-            port: 8500
-        });
-        registerService(consul);
-
-        try {
             const envFileData = fs.readFileSync(".env", "utf8");
             const envParsed = dotenv.parse(envFileData);
-
-            writeKV(consul, envParsed);
-        } catch (err) {
-            console.error(err);
+            Object.keys(envParsed).forEach((key) => {
+                if (!parsedKeysFromConsul?.[key]) {
+                    parsedKeysFromConsul[key] = envParsed[key];
+                    writeKV(consul, parsedKeysFromConsul, production);
+                }
+            });
         }
     }
+};
 
-    console.log(`> Server listening at http://localhost:${port} as ${dev ? "development" : process.env.BASE_NEXT_START_ENV}`);
-});
+const rewriteV = async (consul, data, production, server) => {
+    if (data) {
+        const keysFromConsul = await consul.kv.get({
+            key: `configurations-${production}/aptools-analytics-website`
+        });
+        if (keysFromConsul?.Value) {
+            const parsedKeysFromConsul = JSON.parse(keysFromConsul.Value);
+
+            const envParsed = process.env;
+
+            Object.keys(envParsed).forEach((key) => {
+                if (parsedKeysFromConsul[key] && envParsed[key] !== parsedKeysFromConsul[key]) {
+                    envParsed[key] = parsedKeysFromConsul[key];
+                    server.close();
+                    app.close();
+
+                    execSync("npm run start:custom:u", { stdio: "inherit", env: parsedKeysFromConsul });
+                }
+            });
+        }
+    }
+};
+
+const checkKeys = async (consul, data, production, server) => {
+    setInterval(() => {
+        readKV(consul, data, production);
+        rewriteV(consul, data, production, server);
+    }, 10000);
+};
+
+const appStart = () => {
+    app.prepare().then(() => {
+        let consul = null;
+        const server = createServer((req, res) => {
+            const parsedUrl = parse(req.url, true);
+            handle(req, res, parsedUrl);
+            req.on("close", () => {
+                //if (consul) deregisterService(consul);
+            });
+        }).listen(port);
+
+        if (!dev) {
+            const notWrite = process.argv[2] === "--unconsul";
+            consul = new Consul({
+                host: "localhost",
+                port: 8500
+            });
+            registerService(consul);
+            const production = process.env.BASE_ENV_FULL === "production" ? "prod" : process.env.BASE_ENV_FULL;
+
+            try {
+                const envFileData = fs.readFileSync(".env", "utf8");
+                const envParsed = dotenv.parse(envFileData);
+
+                if (!notWrite) writeKV(consul, envParsed, production);
+                checkKeys(consul, envParsed, production, server);
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        console.log(`> Server listening at http://localhost:${port} as ${dev ? "development" : process.env.BASE_NEXT_START_ENV}`);
+    });
+};
+
+appStart();
