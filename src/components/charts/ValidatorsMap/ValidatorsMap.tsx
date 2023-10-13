@@ -20,9 +20,8 @@ import styles from "./ValidatorsMap.module.scss";
 import chartOptions from "./data/chartOptions";
 
 const ValidatorsMap: React.FC<IComponent> = ({ className }) => {
-    const { validatorsLocations } = useSelector(
-        (state: IRootState) => state.validators
-    );
+    const { validatorsLocations } = useSelector((state: IRootState) => state.validators);
+
     const mapRef = useRef(null);
     const [zoom, setZoom] = useState(1.25);
 
@@ -45,18 +44,7 @@ const ValidatorsMap: React.FC<IComponent> = ({ className }) => {
     return (
         <div className={classes}>
             {/* <strong className={"chart__title"}>Daily Active Wallets</strong> */}
-            <div>
-                {validatorsLocations?.length > 0 ? (
-                    <ReactECharts
-                        ref={mapRef}
-                        theme={""}
-                        option={chartOptions(validatorsLocations, zoom)}
-                        style={{ height: "480px", width: "100%" }}
-                    />
-                ) : (
-                    <Skeleton style={{ height: "480px", width: "100%" }} />
-                )}
-            </div>
+            <div>{validatorsLocations?.length > 0 ? <ReactECharts ref={mapRef} theme={""} option={chartOptions(validatorsLocations, zoom)} style={{ height: "480px", width: "100%" }} /> : <Skeleton style={{ height: "480px", width: "100%" }} />}</div>
             <div className={styles["validators-map__buttons"]}>
                 <button onClick={handleFullscreen}>
                     <Expand />

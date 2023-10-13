@@ -4,9 +4,7 @@ import world from "./world";
 const chartOptions = (locations: IApiValidatorLocation[], zoom = 1.25) => {
     registerMap("world", world as any);
 
-    const countries = [
-        ...new Set(locations.map((item) => item?.location_stats.country))
-    ];
+    const countries = [...new Set(locations.map((item) => item?.location_stats?.country))];
 
     const getOccurrences = (array) =>
         array.reduce((acc, curr) => {
@@ -25,9 +23,7 @@ const chartOptions = (locations: IApiValidatorLocation[], zoom = 1.25) => {
         return [59, 89, 152, (count / max).toFixed(2)];
     };
 
-    const countriesOccurrences = Object.entries(
-        getOccurrences(locations.map((item) => item?.location_stats.country))
-    );
+    const countriesOccurrences = Object.entries(getOccurrences(locations.map((item) => item?.location_stats?.country)));
 
     const max = getMax(countriesOccurrences.map((item) => item[1]));
 
@@ -60,9 +56,7 @@ const chartOptions = (locations: IApiValidatorLocation[], zoom = 1.25) => {
                 enable: true
             },
             dimensions: ["lng", "lat"],
-            data: [
-                [item.location_stats.longitude, item.location_stats.latitude]
-            ],
+            data: [[item?.location_stats?.longitude, item?.location_stats?.latitude]],
             tooltip: {
                 trigger: "item",
                 show: true,
@@ -89,29 +83,11 @@ const chartOptions = (locations: IApiValidatorLocation[], zoom = 1.25) => {
                 show: true,
                 formatter: (v) => {
                     const elements = locations.filter((item) => {
-                        return (
-                            item.location_stats.country === v.name ||
-                            (item.location_stats.country === "United States" &&
-                                v.name === "United States of America") ||
-                            (item.location_stats.country === "Hong Kong" &&
-                                v.name === "China") ||
-                            (item.location_stats.country === "Taiwan" &&
-                                v.name === "China") ||
-                            (item.location_stats.country === "Singapore" &&
-                                v.name === "Malaysia")
-                        );
+                        return item?.location_stats?.country === v.name || (item?.location_stats?.country === "United States" && v.name === "United States of America") || (item?.location_stats?.country === "Hong Kong" && v.name === "China") || (item?.location_stats?.country === "Taiwan" && v.name === "China") || (item?.location_stats?.country === "Singapore" && v.name === "Malaysia");
                     });
-                    const cities = Object.entries(
-                        getOccurrences(
-                            elements.map((item) => item.location_stats.city)
-                        )
-                    );
-                    const citiesString = cities
-                        .map((item) => `${item[0]} - ${item[1]}`)
-                        .join("<br/>");
-                    return `<strong>${v.name}</strong>${
-                        cities?.length ? `<br /><br />${citiesString}` : ""
-                    }`;
+                    const cities = Object.entries(getOccurrences(elements.map((item) => item?.location_stats?.city)));
+                    const citiesString = cities.map((item) => `${item[0]} - ${item[1]}`).join("<br/>");
+                    return `<strong>${v.name}</strong>${cities?.length ? `<br /><br />${citiesString}` : ""}`;
                 }
             },
             map: "world",
