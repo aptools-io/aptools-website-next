@@ -42,14 +42,14 @@ const ListHeader: React.ForwardRefRenderFunction<any, IListHeaderProps> = ({ col
 
         if (onSortingChange) {
             onSortingChange({
-                key: key,
+                key,
                 sort: sortType
             });
             return;
         }
 
         setSorting({
-            key: key,
+            key,
             sort: sortType
         });
     };

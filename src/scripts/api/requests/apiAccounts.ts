@@ -4,6 +4,12 @@ const getAccountsData = async (limit = 10, offset = 0) => {
     const api = new Api(true);
     return api.get("/rich_list", {}, { limit, offset });
 };
+
+const getAccountsNftData = async (limit = 10, offset = 0) => {
+    const api = new Api(true);
+    return api.get("/rich_nft_list", {}, { limit, offset });
+};
+
 const getAccountsStatsData = async () => {
     const api = new Api(true);
     return api.get("/account_stats", {});
@@ -31,12 +37,12 @@ const getAccountTokensData = async (address = null, limit = 10, page = 1, key = 
 
 const getAccountNftCollectionsData = async (address = null, pageSize = 5, currentPage = 1) => {
     const api = new Api(true);
-    return api.post("/account_nft_collections", {}, { }, { account: address, pageSize, currentPage });
+    return api.post("/account_nft_collections", {}, {}, { account: address, pageSize, currentPage });
 };
 
 const getAccountNftData = async (address = null, collectionID = null, pageSize = 10, currentPage = 1) => {
     const api = new Api(true);
-    return api.post("/account_nfts", {}, { }, { account: address, collectionID, pageSize, currentPage });
+    return api.post("/account_nfts", {}, {}, { account: address, collectionID, pageSize, currentPage });
 };
 
 const getAccountResourcesData = async (address = null) => {
@@ -56,16 +62,17 @@ const getAccountInfoData = async (address = null) => {
 
 const getAccountResourceData = async (address = null, resource = null) => {
     const api = new Api(false, process.env.OUTSIDE_URL);
-    return api.get(`/accounts/${address}/resource/${resource}`, { }, { });
+    return api.get(`/accounts/${address}/resource/${resource}`, {}, {});
 };
 
 const getAccountConfigPoolData = async (address = null) => {
     const api = new Api(false, process.env.OUTSIDE_URL);
-    return api.get(`/accounts/${address}/resources`, { }, { });
+    return api.get(`/accounts/${address}/resources`, {}, {});
 };
 
 const accounts = {
     getAccountsData,
+    getAccountsNftData,
     getAccountsStatsData,
     getAccountStatsData,
     getAccountProfitabilitiesData,

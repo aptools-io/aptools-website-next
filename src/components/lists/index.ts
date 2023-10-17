@@ -22,3 +22,4 @@ export { default as NftTransfersList } from "./NftTransfersList/NftTransfersList
 export { default as NftHoldersList } from "./NftHoldersList/NftHoldersList";
 export { default as NftPendingList } from "./NftPendingList/NftPendingList";
 export { default as AccountsBalanceInRangeList } from "./AccountsBalanceInRangeList/AccountsBalanceInRangeList";
+export { default as AccountsTopNftHoldersList } from "./AccountsTopNftHoldersList/AccountsTopNftHoldersList";
