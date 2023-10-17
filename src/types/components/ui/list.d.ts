@@ -36,6 +36,7 @@ interface IColumnName {
     value: string;
     collapser?: boolean;
     right?: boolean;
+    center?: boolean;
     defaultSort?: boolean;
     defaultSortType?: string;
     cantSort?: boolean;

@@ -3,6 +3,7 @@ interface IApiGeneralStats {
     token_statistics: IApiTokenStatistics;
     top_statistics: IApiTopStatistics;
     top_tokens_by_volume: IApiTokenVolume[];
+    balance_range_distribution: IApiBalanceRangeDistribution[];
     dex_tvl: IApiDex[];
     dex_volumes: IApiDex[];
     daily_unique_contract_addresses: IApiDex[];
@@ -12,6 +13,12 @@ interface IApiGeneralStats {
     addresses_plot: IApiAddressTransactionsPlot;
     daily_new_created_wallets: IPoint[];
     active_unique_addresses: IApitActiveUniqueAddresses;
+}
+
+interface IApiBalanceRangeDistribution {
+    amount: number;
+    max: number;
+    min: number;
 }
 
 interface IApitActiveUniqueAddresses {

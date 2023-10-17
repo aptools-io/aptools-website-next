@@ -6,7 +6,7 @@ import classNames from "classnames";
 
 // Components
 import { TitleSwitcher } from "src/components/ui";
-import { TopReceiversList, TopSendersList } from "src/components/lists";
+import { AccountsBalanceInRangeList, TopReceiversList, TopSendersList } from "src/components/lists";
 import { Grid, GridWrapper } from "src/components/general";
 
 // Other
@@ -28,22 +28,16 @@ const MoneyFlow: React.FC<IComponent> = ({ className }) => {
 
     return (
         <div className={classes}>
-            <TitleSwitcher
-                title={"Money Flow"}
-                data={switcherOptions}
-                setData={setValue}
-                settedData={value}>
-                <Grid
-                    columns={mediaData.moneyFlowWrapper}
-                    gap={mediaData.moneyFlowWrapperGap}>
+            <TitleSwitcher title={"Money Flow"} data={switcherOptions} setData={setValue} settedData={value}>
+                <Grid columns={mediaData.moneyFlowWrapper} gap={mediaData.moneyFlowWrapperGap}>
                     <GridWrapper gridWidth={1}>
                         <TopSendersList key={value.key} keyValue={value.key} />
                     </GridWrapper>
                     <GridWrapper gridWidth={1}>
-                        <TopReceiversList
-                            key={value.key}
-                            keyValue={value.key}
-                        />
+                        <TopReceiversList key={value.key} keyValue={value.key} />
+                    </GridWrapper>
+                    <GridWrapper gridWidth={1}>
+                        <AccountsBalanceInRangeList key={value.key} keyValue={value.key} />
                     </GridWrapper>
                 </Grid>
             </TitleSwitcher>

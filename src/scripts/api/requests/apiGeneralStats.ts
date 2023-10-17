@@ -20,8 +20,20 @@ const getDexesStatisticsData = async () => {
     return api.get("/dexes_statistics");
 };
 
+const getBalanceRangeDistribution = async () => {
+    const api = new Api();
+    return api.get("/balance_range_distribution");
+};
+
+const getRichNftList = async () => {
+    const api = new Api();
+    return api.get("/rich_nft_list");
+};
+
 const generalStats = {
     getData,
+    getBalanceRangeDistribution,
+    getRichNftList,
     getTokenStatisticsData,
     getBlockchainStatisticsData,
     getDexesStatisticsData
