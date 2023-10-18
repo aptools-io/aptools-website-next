@@ -74,7 +74,7 @@ const tokenScheludeOptions = (data: IApiTokenSchelude[]) => {
             }
         },
         series,
-        color: ["#EF8686", "#FDD97D", "#60C6A8", "#9B9B9B", "#1D1F30"],
+        color: ["#8D9FE9", "#ECA584", "#F1CE73", "#87C4A3"],
         legend,
         tooltip: {
             trigger: "axis",
