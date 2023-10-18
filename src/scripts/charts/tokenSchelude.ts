@@ -2,7 +2,7 @@ import { chartNumbers } from "../util/numbers";
 import { chartDate } from "../util/timeConvert";
 
 const tokenScheludeOptions = (data: IApiTokenSchelude[]) => {
-    const xAxisArray = data[0].chart.map(item => item.x);
+    const xAxisArray = data[0]?.chart.map((item) => item.x);
 
     const labels = {
         textStyle: {
@@ -13,7 +13,7 @@ const tokenScheludeOptions = (data: IApiTokenSchelude[]) => {
     };
 
     const legend = {
-        data: data.map(item => item.category),
+        data: data.map((item) => item.category),
         icon: "circle",
         itemWidth: 6,
         itemHeight: 6,
@@ -32,8 +32,8 @@ const tokenScheludeOptions = (data: IApiTokenSchelude[]) => {
         }
     };
 
-    const series = data.map(dex => {
-        const yAxisArray = dex.chart.map(point => point.y) as number[];
+    const series = data.map((dex) => {
+        const yAxisArray = dex.chart.map((point) => point.y) as number[];
         return {
             data: yAxisArray,
             type: "line",
@@ -41,17 +41,17 @@ const tokenScheludeOptions = (data: IApiTokenSchelude[]) => {
             symbol: "circle",
             symbolSize: 4,
             itemStyle: {
-                borderWidth: 0,
+                borderWidth: 0
             },
             areaStyle: {
-                opacity: 0,
-            },
+                opacity: 0
+            }
         };
     });
-    
+
     return {
         grid: { top: 50, left: 10, right: 10, bottom: 20 },
-        
+
         xAxis: {
             type: "category",
             boundaryGap: false,
@@ -59,7 +59,7 @@ const tokenScheludeOptions = (data: IApiTokenSchelude[]) => {
             axisLabel: {
                 formatter: chartDate,
                 ...labels
-            },
+            }
         },
         yAxis: {
             type: "value",
@@ -79,7 +79,7 @@ const tokenScheludeOptions = (data: IApiTokenSchelude[]) => {
         tooltip: {
             trigger: "axis",
             order: "valueDesc"
-        },
+        }
     };
 };
 
