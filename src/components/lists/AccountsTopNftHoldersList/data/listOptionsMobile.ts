@@ -29,7 +29,7 @@ const columnNamesMobile = [
         ]
     },
     {
-        key: "amount",
+        key: "balance",
         value: "NFT amount",
         formatter: (v) => `${concatString(formatNumber(v), "", " APT")}`,
         headRemove: true

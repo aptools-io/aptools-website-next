@@ -16,7 +16,7 @@ const columnNamesDesktop = [
         ownLink: "/accounts"
     },
     {
-        key: "amount",
+        key: "balance",
         value: "NFT amount",
         formatter: (v) => `${concatString(formatNumber(v), "", " APT")}`,
         right: true
