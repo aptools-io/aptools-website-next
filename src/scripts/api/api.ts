@@ -52,11 +52,12 @@ export class Api {
             ...(body && { body: JSON.stringify(body) })
         };
 
-        const paramsString = new URLSearchParams({
+        const paramsObject = {
             ...params,
-            ...(this.isToken && { API_KEY: this.token })
-        });
-        const endpoint = `${this.base}${this.version}${url}${Object.keys(params)?.length > 0 || this.isToken ? `?${paramsString}` : ""}`;
+            ...(this.isToken ? { API_KEY: this.token } : {})
+        };
+        const paramsString = new URLSearchParams(paramsObject);
+        const endpoint = `${this.base}${this.version}${url}${Object.keys(params)?.length > 0 ? `?${paramsString}` : ""}`;
 
         try {
             const result: Response = await fetch(endpoint, init);
