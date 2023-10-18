@@ -12,6 +12,7 @@ import classNames from "classnames";
 
 // Public
 import AptLogoBig from "public/static/images/svg/apt_logo_big.svg";
+import { auth } from "src/scripts/api/requests";
 import styles from "./AuthSignUp.module.scss";
 
 const AuthSignUp: React.FC = () => {
@@ -21,6 +22,21 @@ const AuthSignUp: React.FC = () => {
     const [subscribe, setSubscribe] = useState(true);
 
     const classes = classNames([styles["sign-up"]]);
+
+    const handleSignUp = () => {
+        console.log("Test");
+        auth.registerEmail(email, agree, subscribe).then((e: unknown) => {
+            const response = e as {
+                status: string;
+            };
+
+            if (response?.status === "ok") {
+                router.push("/auth/confirm");
+            } else {
+                console.log("something went wrong");
+            }
+        });
+    };
 
     return (
         <>
@@ -40,7 +56,7 @@ const AuthSignUp: React.FC = () => {
                         <Checkbox id={"id-subscribe"} checked={subscribe} onChange={(e) => setSubscribe(e.target.checked)} label={"Subscribe to receive company news and product updates from Aptools. You may unsubscribe at any time"} />
                     </div>
                     <div className={styles["sign-up__foreground-item-button"]}>
-                        <Button href={"/"} invert className={styles["button"]}>
+                        <Button invert className={styles["button"]} onClick={handleSignUp}>
                             Sign up
                         </Button>
                     </div>

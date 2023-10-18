@@ -21,3 +21,4 @@ export { default as EventsPage } from "./EventsPage/EventsPage";
 export { default as EventsSinglePage } from "./EventsSinglePage/EventsSinglePage";
 
 export { default as AuthSignUp } from "./AuthSignUp/AuthSignUp";
+export { default as AuthEmailConfirm } from "./AuthEmailConfirm/AuthEmailConfirm";

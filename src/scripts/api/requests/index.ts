@@ -13,3 +13,4 @@ export { default as blocks } from "./apiBlocks";
 export { default as nfts } from "./apiNft";
 export { default as logger } from "./apiLogger";
 export { default as events } from "./apiEvents";
+export { default as auth } from "./apiAuth";
