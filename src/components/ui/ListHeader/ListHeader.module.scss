@@ -54,6 +54,11 @@
             justify-content: right;
         }
 
+        &.center {
+            text-align: center;
+            justify-content: center;
+        }
+
         &.cant-sort {
             pointer-events: none;
         }

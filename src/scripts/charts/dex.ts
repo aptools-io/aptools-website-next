@@ -2,7 +2,7 @@ import { chartNumbers } from "../util/numbers";
 import { chartDate } from "../util/timeConvert";
 
 const dexOptions = (data: IApiDex[]) => {
-    const xAxisArray = data[0].chart.map(item => item.x);
+    const xAxisArray = data[0]?.chart.map((item) => item.x);
 
     const labels = {
         textStyle: {
@@ -13,7 +13,7 @@ const dexOptions = (data: IApiDex[]) => {
     };
 
     const legend = {
-        data: data.map(item => item.dex),
+        data: data.map((item) => item.dex),
         icon: "circle",
         itemWidth: 6,
         itemHeight: 6,
@@ -32,8 +32,8 @@ const dexOptions = (data: IApiDex[]) => {
         }
     };
 
-    const series = data.map(dex => {
-        const yAxisArray = dex.chart.map(point => point.y) as number[];
+    const series = data.map((dex) => {
+        const yAxisArray = dex.chart.map((point) => point.y) as number[];
         return {
             data: yAxisArray,
             type: "line",
@@ -41,14 +41,14 @@ const dexOptions = (data: IApiDex[]) => {
             symbol: "circle",
             symbolSize: 4,
             itemStyle: {
-                borderWidth: 0,
+                borderWidth: 0
             },
             areaStyle: {
-                opacity: 0,
-            },
+                opacity: 0
+            }
         };
     });
-    
+
     return {
         grid: { top: 50, left: 35, right: 10, bottom: 20 },
         xAxis: {
@@ -58,7 +58,7 @@ const dexOptions = (data: IApiDex[]) => {
             axisLabel: {
                 formatter: chartDate,
                 ...labels
-            },
+            }
         },
         yAxis: {
             type: "value",
@@ -77,7 +77,7 @@ const dexOptions = (data: IApiDex[]) => {
         tooltip: {
             trigger: "axis",
             order: "valueDesc"
-        },
+        }
     };
 };
 

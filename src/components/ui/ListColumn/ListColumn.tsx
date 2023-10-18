@@ -13,46 +13,9 @@ import { copyText } from "src/scripts/util/copyText";
 import styles from "./ListColumn.module.scss";
 import CopyText from "../CopyText/CopyText";
 
-const ListColumn: React.FC<IListProps> = ({
-    hardPageId = null,
-    hardPerPage = null,
-    row,
-    rowIndex,
-    column,
-    columnIndex,
-    under = [],
-    valueGridReplace = [],
-    inner = false,
-    handleCollapse,
-    adoptMobile,
-    className
-}) => {
+const ListColumn: React.FC<IListProps> = ({ hardPageId = null, hardPerPage = null, row, rowIndex, column, columnIndex, under = [], valueGridReplace = [], inner = false, handleCollapse, adoptMobile, className }) => {
     const [collapseActive, setCollapseActive] = useState(false);
-    const {
-        collapser = null,
-        key = null,
-        value: valueRef = null,
-        symbol: symbolRef = null,
-        copy = null,
-        description: descriptionRef = null,
-        formatter = null,
-        replacedFormatter = null,
-        descriptionFormatter = null,
-        replacedKeyMobile = null,
-        under: underRef = null,
-        right = false,
-        underline = false,
-        mainMobile = false,
-        hideMobile = false,
-        colorize = false,
-        fontSize = null,
-        span = null,
-        elementRemove = false,
-        bold = false,
-        ownLink = null,
-        ownLinkValueFormatter = null,
-        approxKey = null
-    } = column;
+    const { collapser = null, key = null, value: valueRef = null, symbol: symbolRef = null, copy = null, description: descriptionRef = null, formatter = null, replacedFormatter = null, descriptionFormatter = null, replacedKeyMobile = null, under: underRef = null, right = false, center = false, underline = false, mainMobile = false, hideMobile = false, colorize = false, fontSize = null, span = null, elementRemove = false, bold = false, ownLink = null, ownLinkValueFormatter = null, approxKey = null } = column;
     if (elementRemove) return <></>;
 
     const style = {
@@ -65,41 +28,24 @@ const ListColumn: React.FC<IListProps> = ({
 
     const unformattedValue = row?.[key];
     const approxed = row?.[approxKey];
-    let value = !formatter
-        ? unformattedValue
-        : formatter(unformattedValue, row);
+    let value = !formatter ? unformattedValue : formatter(unformattedValue, row);
 
     if (approxed) value = `~ ${value}`;
 
-    if (key === "_id" && hardPageId !== null && hardPerPage !== null)
-        value = rowIndex + 1 + hardPageId * hardPerPage;
-    const combinedValue =
-        formatter && combinedValues
-            ? formatter(combinedValues?.[key], row)
-            : undefined;
+    if (key === "_id" && hardPageId !== null && hardPerPage !== null) value = rowIndex + 1 + hardPageId * hardPerPage;
+    const combinedValue = formatter && combinedValues ? formatter(combinedValues?.[key], row) : undefined;
 
     const unformattedReplacedValueMobile = row?.[replacedKeyMobile];
-    const replacedValueMobile = !replacedFormatter
-        ? unformattedReplacedValueMobile
-        : replacedFormatter(unformattedReplacedValueMobile, row);
-    const replacedCombinedValueMobile =
-        replacedFormatter && combinedValues
-            ? replacedFormatter(combinedValues?.[replacedKeyMobile], row)
-            : undefined;
+    const replacedValueMobile = !replacedFormatter ? unformattedReplacedValueMobile : replacedFormatter(unformattedReplacedValueMobile, row);
+    const replacedCombinedValueMobile = replacedFormatter && combinedValues ? replacedFormatter(combinedValues?.[replacedKeyMobile], row) : undefined;
 
     let firstSymbol = row?.[symbolRef];
     let secondSymbol = null;
-    if (
-        typeof firstSymbol === "string" &&
-        firstSymbol &&
-        firstSymbol.indexOf("/") > -1
-    ) {
+    if (typeof firstSymbol === "string" && firstSymbol && firstSymbol.indexOf("/") > -1) {
         secondSymbol = firstSymbol.substring(firstSymbol.indexOf("/") + 1);
         firstSymbol = firstSymbol.substring(0, firstSymbol.indexOf("/"));
     }
-    const description = !descriptionFormatter
-        ? row?.[descriptionRef]
-        : descriptionFormatter(row?.[descriptionRef], row);
+    const description = !descriptionFormatter ? row?.[descriptionRef] : descriptionFormatter(row?.[descriptionRef], row);
 
     if (valueGridReplace?.length)
         return (
@@ -108,12 +54,11 @@ const ListColumn: React.FC<IListProps> = ({
             </div>
         );
 
-    const ownLinkVisible =
-        (ownLink && ownLinkValueFormatter?.(unformattedValue, row)) ||
-        (ownLink && !ownLinkValueFormatter);
+    const ownLinkVisible = (ownLink && ownLinkValueFormatter?.(unformattedValue, row)) || (ownLink && !ownLinkValueFormatter);
     const classes = classNames([
         styles["list-column"],
         { [styles.right]: right },
+        { [styles.center]: center },
         { [styles.under]: underRef },
         { [styles.inner]: inner },
         { [styles.adopt]: adoptMobile === true },
@@ -139,23 +84,15 @@ const ListColumn: React.FC<IListProps> = ({
             className={classes}
             {...(ownLink && ownLinkValueFormatter?.(unformattedValue, row)
                 ? {
-                      href: `${ownLink}/${ownLinkValueFormatter?.(
-                          unformattedValue,
-                          row
-                      )}`
+                      href: `${ownLink}/${ownLinkValueFormatter?.(unformattedValue, row)}`
                   }
                 : {})}
-            {...(ownLink && !ownLinkValueFormatter
-                ? { href: `${ownLink}/${unformattedValue}` }
-                : {})}>
+            {...(ownLink && !ownLinkValueFormatter ? { href: `${ownLink}/${unformattedValue}` } : {})}>
             <>
                 <div className={styles["list-column__wrapper"]}>
                     {collapser && (
                         <button
-                            className={classNames([
-                                styles["collapse-button"],
-                                { [styles.active]: collapseActive }
-                            ])}
+                            className={classNames([styles["collapse-button"], { [styles.active]: collapseActive }])}
                             onClick={() => {
                                 handleCollapse();
                                 setCollapseActive(!collapseActive);
@@ -166,56 +103,26 @@ const ListColumn: React.FC<IListProps> = ({
                         </button>
                     )}
 
-                    {firstSymbol && (
-                        <img
-                            className={styles["list-column__icon"]}
-                            src={getImageFromApi(firstSymbol)}
-                            alt={firstSymbol}
-                        />
-                    )}
-                    {secondSymbol && (
-                        <img
-                            className={styles["list-column__icon"]}
-                            src={getImageFromApi(secondSymbol)}
-                            alt={secondSymbol}
-                        />
-                    )}
+                    {firstSymbol && <img className={styles["list-column__icon"]} src={getImageFromApi(firstSymbol)} alt={firstSymbol} />}
+                    {secondSymbol && <img className={styles["list-column__icon"]} src={getImageFromApi(secondSymbol)} alt={secondSymbol} />}
 
                     {replacedKeyMobile && (
-                        <div
-                            className={classNames([
-                                styles["list-column__info"],
-                                styles["next-hide"]
-                            ])}>
-                            {replacedCombinedValueMobile !== undefined
-                                ? `${replacedCombinedValueMobile} / `
-                                : ""}
+                        <div className={classNames([styles["list-column__info"], styles["next-hide"]])}>
+                            {replacedCombinedValueMobile !== undefined ? `${replacedCombinedValueMobile} / ` : ""}
                             {replacedValueMobile}
                         </div>
                     )}
 
                     {column?.formatterComponent ? (
-                        <div className={styles["list-column__info"]}>
-                            {column?.formatterComponent(unformattedValue, row)}
-                        </div>
+                        <div className={styles["list-column__info"]}>{column?.formatterComponent(unformattedValue, row)}</div>
                     ) : (
                         <div className={styles["list-column__info"]}>
                             <span>
                                 {column.colorize && <DifferenceArrow />}
-                                {combinedValue !== undefined &&
-                                !column?.ignoreCombined
-                                    ? `${combinedValue} / `
-                                    : ""}
+                                {combinedValue !== undefined && !column?.ignoreCombined ? `${combinedValue} / ` : ""}
                                 {value}
                             </span>
-                            {description && (
-                                <div
-                                    className={
-                                        styles["list-column__description"]
-                                    }>
-                                    {description}
-                                </div>
-                            )}
+                            {description && <div className={styles["list-column__description"]}>{description}</div>}
                         </div>
                     )}
 

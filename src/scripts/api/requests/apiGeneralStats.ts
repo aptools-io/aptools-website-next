@@ -20,8 +20,14 @@ const getDexesStatisticsData = async () => {
     return api.get("/dexes_statistics");
 };
 
+const getBalanceRangeDistribution = async () => {
+    const api = new Api();
+    return api.get("/balance_range_distribution");
+};
+
 const generalStats = {
     getData,
+    getBalanceRangeDistribution,
     getTokenStatisticsData,
     getBlockchainStatisticsData,
     getDexesStatisticsData

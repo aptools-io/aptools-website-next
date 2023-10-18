@@ -1,9 +1,9 @@
 // React
 import React, { useEffect, useRef } from "react";
-import { AuthSignUp } from "src/components/pages";
+import { AuthEmailConfirm } from "src/components/pages";
 
 const Confirm = () => {
-    return <AuthSignUp />;
+    return <AuthEmailConfirm />;
 };
 export default Confirm;
 

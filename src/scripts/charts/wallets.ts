@@ -2,8 +2,8 @@ import { chartNumbers } from "../util/numbers";
 import { chartDate } from "../util/timeConvert";
 
 const walletsOptions = (data: IApiWallets[]) => {
-    const xAxisArray = data[0].chart.map(item => item.x);
-    const yAxisArray = data[0].chart.map(item => item.y) as number[];
+    const xAxisArray = data[0]?.chart.map((item) => item.x);
+    const yAxisArray = data[0]?.chart.map((item) => item.y) as number[];
 
     const labels = {
         textStyle: {
@@ -14,7 +14,7 @@ const walletsOptions = (data: IApiWallets[]) => {
     };
 
     const legend = {
-        data: data.map(item => item.name),
+        data: data.map((item) => item.name),
         icon: "circle",
         itemWidth: 6,
         itemHeight: 6,
@@ -33,8 +33,8 @@ const walletsOptions = (data: IApiWallets[]) => {
         }
     };
 
-    const series = data.map(wallet => {
-        const yAxisArray = wallet.chart.map(point => point.y) as number[];
+    const series = data.map((wallet) => {
+        const yAxisArray = wallet.chart.map((point) => point.y) as number[];
         return {
             data: yAxisArray,
             type: "line",
@@ -42,14 +42,14 @@ const walletsOptions = (data: IApiWallets[]) => {
             symbol: "circle",
             symbolSize: 4,
             itemStyle: {
-                borderWidth: 0,
+                borderWidth: 0
             },
             areaStyle: {
-                opacity: 0,
-            },
+                opacity: 0
+            }
         };
     });
-    
+
     return {
         grid: { top: 30, left: 35, right: 10, bottom: 20 },
         xAxis: {
@@ -59,7 +59,7 @@ const walletsOptions = (data: IApiWallets[]) => {
             axisLabel: {
                 formatter: chartDate,
                 ...labels
-            },
+            }
         },
         yAxis: {
             type: "value",
@@ -78,7 +78,7 @@ const walletsOptions = (data: IApiWallets[]) => {
         tooltip: {
             trigger: "axis",
             order: "valueDesc"
-        },
+        }
     };
 };
 

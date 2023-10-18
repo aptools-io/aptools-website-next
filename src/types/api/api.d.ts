@@ -15,6 +15,7 @@ interface IApiProps {
     news_categories: IApiNewsCategory[];
     accounts_stats: IApiAccountsStats;
     accounts_wallets: IApiAccountsWallets;
+    accounts_nft_wallets: IApiNftWallet[];
     account_stats: IApiAccountStats;
     account_profitabilities: IApiAccountProfitabilities;
     validators_locations: IApiValidatorLocation[];
