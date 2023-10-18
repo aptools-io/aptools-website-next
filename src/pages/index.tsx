@@ -56,6 +56,9 @@ export async function getServerSideProps(context) {
     const blockchainStatistics = (await generalStats.getBlockchainStatisticsData()) || ({} as any);
     const dexesStatistics = (await generalStats.getDexesStatisticsData()) || ({} as any);
     const tokenStatistics = (await generalStats.getTokenStatisticsData()) || ({} as any);
+
+    const balanceRangeDistribution = (await generalStats.getBalanceRangeDistribution()) || [];
+
     return {
         props: {
             overflow: true,
@@ -71,7 +74,7 @@ export async function getServerSideProps(context) {
                         total_value_locked: dexesStatistics.total_value_locked || null,
                         vol_24h: dexesStatistics.vol_24h || null
                     },
-
+                    balance_range_distribution: balanceRangeDistribution || [],
                     dex_tvl: dexesStatistics.dex_tvl_chart || [],
                     dex_volumes: dexesStatistics.dex_volumes_chart || [],
                     daily_unique_contract_addresses: dexesStatistics.dex_addresses_chart || [],
@@ -107,9 +110,7 @@ export async function getServerSideProps(context) {
                       };
                   })
                 : [],
-
             dexes_volumes: dexesStatistics.dexes_volumes || [],
-
             projects: filtrateProjects(projectsUnfiltered, categories) || [],
             transactions: (await transactions.getData()) || []
         }

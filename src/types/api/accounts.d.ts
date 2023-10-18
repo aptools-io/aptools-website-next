@@ -10,6 +10,18 @@ interface IApiWallet {
     total_balance: string;
 }
 
+interface IApiNftWallet {
+    address: string;
+    amount: number;
+    balance: string;
+    balanceUSD: string;
+    maxPrice: string;
+    maxPriceUSD: string;
+    minPrice: string;
+    minPriceUSD: string;
+    rank: number;
+}
+
 interface IApiAccountStats {
     all_time_nft_profit: string;
     all_time_profit: string;

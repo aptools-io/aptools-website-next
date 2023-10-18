@@ -1,5 +1,4 @@
-
-import { AccountsList } from "src/components/lists";
+import { AccountsList, AccountsTopNftHoldersList } from "src/components/lists";
 import { Plug } from "src/components/ui";
 import styles from "../Accounts.module.scss";
 
@@ -14,24 +13,44 @@ const categories = [
     },
     {
         id: 2,
-        title: "Holders",
-        component: () => <div className={styles.accounts__inner}><Plug /></div>,
+        title: "TOP 200 NFT holders by value",
+        component: () => <AccountsTopNftHoldersList />,
         action: (setCustomEntry, setLoading, id) => {
             setLoading(false);
         }
     },
     {
         id: 3,
-        title: "Pending Claims",
-        component: () => <div className={styles.accounts__inner}><Plug /></div>,
+        title: "Holders",
+        component: () => (
+            <div className={styles.accounts__inner}>
+                <Plug />
+            </div>
+        ),
         action: (setCustomEntry, setLoading, id) => {
             setLoading(false);
         }
     },
     {
         id: 4,
+        title: "Pending Claims",
+        component: () => (
+            <div className={styles.accounts__inner}>
+                <Plug />
+            </div>
+        ),
+        action: (setCustomEntry, setLoading, id) => {
+            setLoading(false);
+        }
+    },
+    {
+        id: 5,
         title: "Inventory",
-        component: () => <div className={styles.accounts__inner}><Plug /></div>,
+        component: () => (
+            <div className={styles.accounts__inner}>
+                <Plug />
+            </div>
+        ),
         action: (setCustomEntry, setLoading, id) => {
             setLoading(false);
         }

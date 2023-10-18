@@ -56,7 +56,7 @@ export class Api {
             ...params,
             ...(this.isToken && { API_KEY: this.token })
         });
-        const endpoint = `${this.base}${this.version}${url}${Object.keys(params)?.length > 0 ? `?${paramsString}` : ""}`;
+        const endpoint = `${this.base}${this.version}${url}${Object.keys(params)?.length > 0 || this.isToken ? `?${paramsString}` : ""}`;
 
         try {
             const result: Response = await fetch(endpoint, init);
