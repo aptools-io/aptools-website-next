@@ -2,7 +2,7 @@ import { chartNumbers } from "../util/numbers";
 import { chartDate } from "../util/timeConvert";
 
 const tokenScheludeOptions = (data: IApiTokenSchelude[]) => {
-    const xAxisArray = data[0].chart.map((item) => item.x);
+    const xAxisArray = data[0]?.chart.map((item) => item.x);
 
     const labels = {
         textStyle: {
