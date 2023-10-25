@@ -24,7 +24,6 @@ const AuthSignUp: React.FC = () => {
     const classes = classNames([styles["sign-up"]]);
 
     const handleSignUp = () => {
-        console.log("Test");
         auth.registerEmail(email, agree, subscribe).then((e: unknown) => {
             const response = e as {
                 status: string;

@@ -37,9 +37,7 @@ const BlocksList: React.FC<IComponent> = ({ className }) => {
     if (!blocksData || !block_height) return <Plug noData />;
 
     const handleData = (page: number, perPage: number) => {
-        //console.log(perPage, page)
         const topHeight = blocksData?.[0].block_height || 0;
-        console.log(blocksData?.[0].block_height);
         blocks.getBlocks(perPage, Number(topHeight) - 1 - perPage * page).then((e: unknown) => {
             const data = e as IApiBlock[];
             dispatch(setBlocks(data || []));

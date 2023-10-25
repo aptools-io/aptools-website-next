@@ -78,7 +78,7 @@ const ListHeader: React.ForwardRefRenderFunction<any, IListHeaderProps> = ({ col
         sorted = sorting.sort === "desc" ? sorted.reverse() : sorted;
 
         setSortedData([...sorted]);
-    }, [data, sorting]); // eslint-disable-line react-hooks/exhaustive-deps
+    }, [sorting]); // eslint-disable-line react-hooks/exhaustive-deps
 
     if (!data?.length) return <Plug noData />;
 

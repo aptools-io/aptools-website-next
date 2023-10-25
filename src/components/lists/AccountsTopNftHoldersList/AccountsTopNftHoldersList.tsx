@@ -47,7 +47,6 @@ const AccountsTopNftHoldersList: React.FC<IComponent> = ({ className }) => {
     const handleChangePage = (page) => setCurrrentPage(page);
 
     const handleChangePerPage = (perPage) => setPerPage(perPage);
-    console.log(accountsNftWallets);
     return (
         <div className={classes}>
             <Paginator paginatorName={"accountsList"} page={currentPage} perPage={perPage} changePerPage total={200} setPerPage={setPerPage} onChangePage={handleChangePage} onChangePerPage={handleChangePerPage}>

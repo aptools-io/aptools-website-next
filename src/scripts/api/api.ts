@@ -58,6 +58,7 @@ export class Api {
         };
         const paramsString = new URLSearchParams(paramsObject);
         const endpoint = `${this.base}${this.version}${url}${Object.keys(params)?.length > 0 ? `?${paramsString}` : ""}`;
+        console.log(endpoint);
 
         try {
             const result: Response = await fetch(endpoint, init);

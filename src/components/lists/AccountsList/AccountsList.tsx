@@ -21,7 +21,7 @@ import styles from "./AccountsList.module.scss";
 // Options
 /* import { columnNames, columns } from "./data/listOptionsDesktop"; */
 
-const AccountsList: React.FC<IComponent> = ({ className }) => {
+const AccountsList: React.FC<IComponent & { staticCount?: number }> = ({ className, staticCount = 100 }) => {
     const { accountsWallets } = useSelector((state: IRootState) => state.accounts);
     const { wallets } = accountsWallets || {};
     const { width } = useWindowSize();
@@ -64,8 +64,8 @@ const AccountsList: React.FC<IComponent> = ({ className }) => {
 
     return (
         <div className={classes}>
-            <Paginator paginatorName={"accountsList"} page={currentPage} perPage={perPage} changePerPage total={100} setPerPage={setPerPage} onChangePage={handleChangePage} onChangePerPage={handleChangePerPage}>
-                <ListHeader columnNames={columnNames} columns={columns} hardSorting={hardSorting} data={accountsData}>
+            <Paginator paginatorName={"accountsList"} page={currentPage} perPage={perPage} changePerPage total={wallets?.length || staticCount} setPerPage={setPerPage} onChangePage={handleChangePage} onChangePerPage={handleChangePerPage}>
+                <ListHeader columnNames={columnNames} columns={columns} hardSorting={hardSorting} data={wallets}>
                     <List loadingCount={perPage * loading} loadingComponent={<Skeleton style={{ height: "20px", minHeight: "20px" }} />} slice={[(currentPage - 1) * perPage, currentPage * perPage]} />
                 </ListHeader>
             </Paginator>

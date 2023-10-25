@@ -5,20 +5,20 @@ import styles from "../Accounts.module.scss";
 const categories = [
     {
         id: 1,
-        title: "Transfers",
+        title: "Top 200 wallets by balance",
         component: () => <AccountsList />,
         action: (setCustomEntry, setLoading, id) => {
             setLoading(false);
         }
     },
-    {
+    /* {
         id: 2,
         title: "TOP 200 NFT holders by value",
         component: () => <AccountsTopNftHoldersList />,
         action: (setCustomEntry, setLoading, id) => {
             setLoading(false);
         }
-    },
+    }, */
     {
         id: 3,
         title: "Holders",

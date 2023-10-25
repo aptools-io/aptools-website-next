@@ -17,7 +17,6 @@ import { columnNames, columns } from "./data/listOptions";
 
 const AccountsBalanceInRangeList: React.FC<IListWrapperProps> = ({ keyValue, className }) => {
     const { data: generalData } = useSelector((state: IRootState) => state.statsGeneral);
-    console.log(generalData);
     const { balance_range_distribution = [] } = generalData || {};
     //const { top_apt_receivers } = top_statistics?.[keyValue] as IApiTopStatisticsBy || {};
 
