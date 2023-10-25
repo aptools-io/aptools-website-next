@@ -7,6 +7,8 @@ export { default as DexSinglePage } from "./DexSinglePage/DexSinglePage";
 export { default as NewsPage } from "./NewsPage/NewsPage";
 export { default as UpdatesPage } from "./UpdatesPage/UpdatesPage";
 export { default as AccountsPage } from "./AccountsPage/AccountsPage";
+export { default as AccountsNftValuePage } from "./AccountsNftValuePage/AccountsNftValuePage";
+export { default as AccountsCoinsSinglePage } from "./AccountsCoinsSinglePage/AccountsCoinsSinglePage";
 export { default as AccountsSinglePage } from "./AccountsSinglePage/AccountsSinglePage";
 export { default as NotFoundPage } from "./NotFoundPage/NotFoundPage";
 export { default as ServerErrorPage } from "./ServerErrorPage/ServerErrorPage";

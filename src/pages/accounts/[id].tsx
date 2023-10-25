@@ -4,14 +4,8 @@ import React, { useEffect, useRef } from "react";
 // Redux
 import { useDispatch } from "react-redux";
 import { setHeaders } from "src/scripts/redux/slices/headersSlice";
-import {
-    setPageTitle,
-    setPageType
-} from "src/scripts/redux/slices/pageTitleSlice";
-import {
-    setAccountProfitabilitiesData,
-    setAccountStatsData
-} from "src/scripts/redux/slices/accountsSlice";
+import { setPageTitle, setPageType } from "src/scripts/redux/slices/pageTitleSlice";
+import { setAccountProfitabilitiesData, setAccountStatsData } from "src/scripts/redux/slices/accountsSlice";
 
 // Components
 import { AccountsSinglePage } from "src/components/pages";
@@ -53,15 +47,13 @@ export async function getServerSideProps(context) {
 
     let dexType = "";
     let dexId = "";
-    if (statsData.type) {
+    if (statsData?.type) {
         if (statsData?.type?.indexOf("|")) {
             dexType = statsData?.type.split("|")[0];
             dexId = statsData?.type.split("|")[1];
         }
 
-        const currentRedirect = redirectAccount(dexId || id)?.[
-            dexType || statsData.type
-        ];
+        const currentRedirect = redirectAccount(dexId || id)?.[dexType || statsData.type];
         if (currentRedirect)
             return {
                 redirect: currentRedirect
