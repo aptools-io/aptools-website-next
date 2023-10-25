@@ -23,7 +23,6 @@ const Accounts = (data: IApiProps) => {
         dispatch(setHeaders(data.headers) || null);
         dispatch(setPageTitle(coinName ? `${coinName}: TOP 200 accounts by a balance` : "TOP 200 accounts by a balance in tokens"));
         dispatch(setAccountsWalletsData(data.accounts_wallets));
-        console.log(data);
     }, [data, dispatch]);
 
     return <AccountsCoinsSinglePage />;
