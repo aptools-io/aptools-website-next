@@ -21,8 +21,8 @@ const menu = (t: Translate): INavBarMenuItem[] => {
                 {
                     title: "TOP 200 NFT holders by value",
                     link: "/accounts/nft-value"
-                },
-                {
+                }
+                /* {
                     title: "TOP 200 NFT holders by amount",
                     link: "/accounts/nft-amount"
                 },
@@ -33,7 +33,7 @@ const menu = (t: Translate): INavBarMenuItem[] => {
                 {
                     title: "Whale List",
                     link: "/accounts/whale-list"
-                }
+                } */
             ]
         },
         {
