@@ -4,7 +4,9 @@ interface INavBarMenuItemProps extends IComponent {
     search: boolean;
 }
 interface INavBarMenuItem {
-    title?, link: string;
+    title?;
+    link: string;
     target?: string;
-    svg: JSX.Element;
+    svg?: JSX.Element;
+    after?: INavBarMenuItem[];
 }

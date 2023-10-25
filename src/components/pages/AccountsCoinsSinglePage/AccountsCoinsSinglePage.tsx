@@ -5,18 +5,18 @@ import { Grid, GridWrapper, Topper } from "src/components/general";
 import { AccountsList, TransactionsList } from "src/components/lists";
 import { Plate } from "src/components/ui";
 
-const AccountsPage: React.FC = () => {
+const AccountsCoinsSinglePage: React.FC = () => {
     return (
         <>
-            <Topper backlink={"/"} />
+            <Topper noLink={["coin"]} backlink={"/"} />
             <StatsAccounts />
             <Grid columns={3}>
                 <GridWrapper gridWidth={3}>
-                    <Accounts />
+                    <AccountsList staticCount={200} />
                 </GridWrapper>
             </Grid>
         </>
     );
 };
 
-export default AccountsPage;
+export default AccountsCoinsSinglePage;

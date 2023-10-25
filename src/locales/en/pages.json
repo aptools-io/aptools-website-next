@@ -2,6 +2,7 @@
     "home": "Main",
     "transactions": "Transactions",
     "accounts": "Accounts",
+    "coin": "Coin",
     "blocks": "Blocks",
     "nft": "NFT",
     "validators": "Validators",

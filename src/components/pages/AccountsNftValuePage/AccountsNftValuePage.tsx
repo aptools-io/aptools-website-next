@@ -1,22 +1,22 @@
 // React
 import React from "react";
-import { Accounts, StatsAccounts } from "src/components/containers";
+import { StatsAccounts } from "src/components/containers";
 import { Grid, GridWrapper, Topper } from "src/components/general";
-import { AccountsList, TransactionsList } from "src/components/lists";
+import { AccountsTopNftHoldersList } from "src/components/lists";
 import { Plate } from "src/components/ui";
 
-const AccountsPage: React.FC = () => {
+const AccountsNftValuePage: React.FC = () => {
     return (
         <>
             <Topper backlink={"/"} />
             <StatsAccounts />
             <Grid columns={3}>
                 <GridWrapper gridWidth={3}>
-                    <Accounts />
+                    <AccountsTopNftHoldersList />
                 </GridWrapper>
             </Grid>
         </>
     );
 };
 
-export default AccountsPage;
+export default AccountsNftValuePage;

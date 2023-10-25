@@ -11,28 +11,17 @@ import classNames from "classnames";
 // Components
 import { Breadcrumbs, Button } from "src/components/ui";
 import { useRouter } from "next/router";
-import {
-    TypeDex,
-    TypeNftCreator,
-    TypeNftMarketplace,
-    TypeSmartContract,
-    TypeValidator,
-    TypeWallet
-} from "src/components/svg";
+import { TypeDex, TypeNftCreator, TypeNftMarketplace, TypeSmartContract, TypeValidator, TypeWallet } from "src/components/svg";
 import styles from "./Topper.module.scss";
 
 const Topper: React.FC<
     {
         backlink?: string;
         customTitle?: string | string[];
+        noLink?: string[];
         additiveTitle?: string;
     } & IComponent
-> = ({
-    backlink = null,
-    customTitle = null,
-    additiveTitle = "",
-    className
-}) => {
+> = ({ backlink = null, customTitle = null, additiveTitle = "", noLink = [], className }) => {
     const { title, type } = useSelector((state: IRootState) => state.pageTitle);
 
     const classes = classNames([styles.topper, className]);
@@ -73,19 +62,12 @@ const Topper: React.FC<
                         __html: `${title}${additiveTitle}`
                     }}></strong>
                 {type && (
-                    <div
-                        className={classNames([
-                            styles["topper__type"],
-                            styles[types?.[type]?.class]
-                        ])}>
+                    <div className={classNames([styles["topper__type"], styles[types?.[type]?.class]])}>
                         {types?.[type]?.svg} {type}
                     </div>
                 )}
             </div>
-            <Breadcrumbs
-                key={title}
-                customTitle={(customTitle as string) || title}
-            />
+            <Breadcrumbs key={title} noLink={noLink} customTitle={(customTitle as string) || title} />
             <Button {...(backlink ? { href: backlink } : {})} before={"back"}>
                 Back
             </Button>

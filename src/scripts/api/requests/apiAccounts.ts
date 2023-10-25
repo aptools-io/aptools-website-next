@@ -5,6 +5,11 @@ const getAccountsData = async (limit = 10, offset = 0) => {
     return api.get("/rich_list", {}, { limit, offset });
 };
 
+const getAccountsByTokenData = async (limit = 10, offset = 0, coin = null) => {
+    const api = new Api(true);
+    return api.get("/rich_list", {}, { coin, limit, offset });
+};
+
 const getAccountsNftData = async (limit = 10, offset = 0) => {
     const api = new Api(true);
     return api.get("/rich_nft_list", {}, { limit, offset });
@@ -72,6 +77,7 @@ const getAccountConfigPoolData = async (address = null) => {
 
 const accounts = {
     getAccountsData,
+    getAccountsByTokenData,
     getAccountsNftData,
     getAccountsStatsData,
     getAccountStatsData,

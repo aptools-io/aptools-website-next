@@ -12,13 +12,14 @@
     height: 100%;
     position: fixed;
     padding: var(--nav-bar-h-padding) 0;
-    overflow: hidden;
     transition: width var(--nav-bar-transition-speed-1) ease, height var(--nav-bar-transition-speed-1) ease;
     z-index: 20;
 
     $self: &;
 
     @include mediaWMax('TABLET') {
+        overflow: hidden;
+
         --nav-bar-h-padding: 0;
         --nav-bar-v-padding: 13px;
 

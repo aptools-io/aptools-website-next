@@ -8,7 +8,11 @@ const columnNames = [
         value: "Balance, USD",
         defaultSort: true,
         defaultSortType: "asc",
-        formatter: (v, row) => `${concatString(formatNumber(v), "", "$")} – ${concatString(formatNumber(row?.max), "", "$")}`,
+        formatter: (v, row) => {
+            const min = v < 0 ? "∞" : concatString(formatNumber(v), "", "$");
+            const max = row?.max < 0 ? "∞" : concatString(formatNumber(row?.max), "", "$");
+            return `${min} – ${max}`;
+        },
         center: true
     },
     {

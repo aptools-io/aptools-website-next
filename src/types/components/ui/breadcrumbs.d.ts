@@ -6,4 +6,5 @@ interface IBreadcrumbsItem {
 interface IBreadcrumbsProps extends IComponent {
     customTitle?: string;
     customLink?: Array<string>;
+    noLink?: string[];
 }

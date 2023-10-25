@@ -29,7 +29,6 @@ const AccountTokenStats: React.FC<IComponent> = ({ className }) => {
 
     const { width } = useWindowSize();
     const m = media(width) || {};
-    console.log(token_stats);
 
     if (loading) return <Skeleton />;
     if (!accountStats || !token_stats || !token_stats?.length || !width)
