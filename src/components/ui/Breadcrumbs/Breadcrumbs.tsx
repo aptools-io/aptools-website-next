@@ -25,7 +25,7 @@ const Breadcrumbs: React.FC<IBreadcrumbsProps> = ({ customTitle, customLink, noL
             if (customLink && customLink[index]) url = customLink[index];
             // url = customLinks ? String() : url;
             const title = element || "home";
-            dataArray.push({ title: title, url: !noLink.includes(title) ? url || "/" : null });
+            dataArray.push({ title, url: !noLink.includes(title) ? url || "/" : null });
         });
 
         if (customTitle) dataArray[dataArray.length - 1].title = customTitle;
