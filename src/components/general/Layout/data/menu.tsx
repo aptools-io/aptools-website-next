@@ -19,6 +19,10 @@ const menu = (t: Translate): INavBarMenuItem[] => {
             svg: <Accounts />,
             after: [
                 {
+                    title: "Top 200 wallets by balance",
+                    link: "/accounts"
+                },
+                {
                     title: "TOP 200 NFT holders by value",
                     link: "/accounts/nft-value"
                 }
