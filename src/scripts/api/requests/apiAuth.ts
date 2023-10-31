@@ -14,8 +14,22 @@ const registerEmail = async (email = null, agreeWithTerms = false, subscribeToNe
     );
 };
 
+const registerPassword = async (token = null, passowrd = null) => {
+    const api = new Api(false, process.env.BASE_API_ACCOUNT_URL, "");
+    return api.post(
+        "/api/auth/register/password",
+        {},
+        {},
+        {
+            token,
+            passowrd
+        }
+    );
+};
+
 const auth = {
-    registerEmail
+    registerEmail,
+    registerPassword
 };
 
 export default auth;

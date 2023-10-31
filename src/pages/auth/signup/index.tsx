@@ -1,9 +1,9 @@
 // React
 import React, { useEffect, useRef } from "react";
-import { AuthSignUp } from "src/components/pages";
+import { AuthSignUpPage } from "src/components/pages";
 
 const SignUp = () => {
-    return <AuthSignUp />;
+    return <AuthSignUpPage />;
 };
 export default SignUp;
 
