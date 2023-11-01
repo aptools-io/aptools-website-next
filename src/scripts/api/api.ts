@@ -1,5 +1,7 @@
 /* import { logger } from "./requests"; */
 
+import returnResponse from "./responses";
+
 const loggerPost = async (type: string, title: string, info: string = null, avoidErrorRecursion: boolean = false) => {
     const api = new Api(false, process.env.BASE_API_LOGGER, null, avoidErrorRecursion);
     return api.post(
@@ -31,11 +33,14 @@ export class Api {
 
     avoidRecursion = false;
 
-    constructor(isToken: boolean = true, custom: string = null, customVersion: string = null, avoidErrorRecursion: boolean = false) {
+    getRefreshToken = false;
+
+    constructor(isToken: boolean = true, custom: string = null, customVersion: string = null, avoidErrorRecursion: boolean = false, getRefreshToken: boolean = false) {
         if (isToken) this.isToken = true;
         if (custom !== null) this.base = custom;
         if (customVersion !== null) this.version = customVersion;
         this.avoidRecursion = avoidErrorRecursion;
+        this.getRefreshToken = getRefreshToken;
     }
 
     fetch = async (type: string, url: string, headers: HeadersInit, params: Record<string, any> = {}, body: Record<string, any> | string = null) => {
@@ -58,26 +63,18 @@ export class Api {
         };
         const paramsString = new URLSearchParams(paramsObject);
         const endpoint = `${this.base}${this.version}${url}${Object.keys(params)?.length > 0 ? `?${paramsString}` : ""}`;
-        console.log(endpoint);
-
         try {
             const result: Response = await fetch(endpoint, init);
             return result;
         } catch (error) {
-            const page = window?.location?.href ? `Page: ${window.location.href}` : "";
-            if (!this.avoidRecursion) {
-                loggerPost("error", `${page}. Message: ${error.message}`, `Endpoint: ${endpoint}\n${error.stack}`, true);
-            }
+            loggerPost("error", `${""}. Message: ${error.message}`, `Endpoint: ${endpoint}\n${error.stack}`, true);
+
             return error;
         }
     };
 
-    handleResponse = (response) => {
-        // eslint-disable-line class-methods-use-this
-        if (response.status >= 500) throw new Error(`Error status code ${response.status} while fetching, url ${response.url}`);
-        if (response.status !== 201 && response.status !== 200 && response.status !== 204) return null;
-
-        return response.json();
+    handleResponse = async (response) => {
+        return returnResponse(response, this.getRefreshToken);
     };
 
     post = async (url: string, headers: HeadersInit, params: Record<string, any> = {}, body: Record<string, any> | string = null): Promise<Response> => {

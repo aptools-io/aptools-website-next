@@ -14,13 +14,32 @@ const Checkbox: React.FC<
         value?: string;
         onChange?: (e: any) => void;
         label?: string;
+        field?: any;
+        error?: string;
     } & IComponent
-> = ({ checked = false, id = null, value = null, onChange, label }) => {
+> = ({ checked = false, id = null, value = null, onChange, label, field = null, error = "" }) => {
     return (
-        <div className={styles["checkbox"]}>
-            <input checked={checked} id={id} type='checkbox' {...(value && { value })} onChange={onChange} />
-            {label && <label htmlFor={id}>{label}</label>}
-        </div>
+        <>
+            <div className={styles["checkbox"]}>
+                <input
+                    {...(field === null
+                        ? {
+                              id,
+                              type: "checkbox",
+                              value,
+                              checked,
+                              onChange
+                          }
+                        : {
+                              ...field,
+                              id,
+                              type: "checkbox"
+                          })}
+                />
+                {label && <label htmlFor={id}>{label}</label>}
+            </div>
+            {error && <span className={styles["checkbox__error"]}>{error}</span>}
+        </>
     );
 };
 

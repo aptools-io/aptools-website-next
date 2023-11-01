@@ -19,10 +19,14 @@ const menu = (t: Translate): INavBarMenuItem[] => {
             svg: <Accounts />,
             after: [
                 {
-                    title: "TOP 200 NFT holders by value",
-                    link: "/accounts/nft-value"
+                    title: "Top 200 wallets by balance",
+                    link: "/accounts"
                 },
                 {
+                    title: "TOP 200 NFT holders by value",
+                    link: "/accounts/nft-value"
+                }
+                /* {
                     title: "TOP 200 NFT holders by amount",
                     link: "/accounts/nft-amount"
                 },
@@ -33,7 +37,7 @@ const menu = (t: Translate): INavBarMenuItem[] => {
                 {
                     title: "Whale List",
                     link: "/accounts/whale-list"
-                }
+                } */
             ]
         },
         {

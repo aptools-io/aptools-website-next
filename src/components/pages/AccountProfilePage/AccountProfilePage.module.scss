@@ -1,0 +1,81 @@
+.account {
+    &__socials {
+        &--item {
+            display: grid;
+            padding: 9px 0;
+            column-gap: 10px;
+            grid-template-columns: 30% 70%;
+
+            .social {
+                &-title {
+                    display: flex;
+                    align-items: center;
+                    column-gap: 10px;
+
+                    .title {
+                        font-size: 14px;
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: 130%;
+                    }
+
+                    .icon {
+                        display: flex;
+                        align-items: center;
+                    }
+                }
+
+                display: flex;
+                column-gap: 10px;
+                align-items: center;
+
+                span {
+                    color: var(--aptools-color-emphasis-c1);
+                    font-size: 14px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 130%;
+                }
+
+                .edit {
+                    display: flex;
+                    align-items: center;
+                }
+            }
+        }
+    }
+
+    &__auth {
+        &-stats {
+            &--item {
+                display: flex;
+                padding: 8px 11px;
+                column-gap: 10px;
+
+                .icon {
+                    padding: 10px;
+                    background-color: var(--aptools-color-emphasis-c1);
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    border-radius: 2px;
+                }
+
+                .title {
+                    display: flex;
+                    align-items: center;
+                    font-size: 20px;
+                    font-style: normal;
+                    font-weight: 500;
+                    line-height: normal;
+                    letter-spacing: -1px;
+                }
+
+                .edit {
+                    display: flex;
+                    align-items: center;
+                }
+            }
+        }
+    }
+}
