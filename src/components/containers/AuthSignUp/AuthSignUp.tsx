@@ -13,33 +13,33 @@ import styles from "./AuthSignUp.module.scss";
 // Other
 
 const AuthSignUp: React.FC<IComponent> = () => {
-    const classes = classNames([styles["auth-sign-up"]]);
+    const classes = classNames(["form__wrapper"]);
 
     return (
         <div className={classes}>
-            <div className={styles["auth-sign-up__background"]}>
+            <div className={"form__wrapper--background"}>
                 <img src={AptLogoBig.src} alt={"logo"} />
             </div>
-            <div className={styles["auth-sign-up__foreground"]}>
+            <div className={"form__wrapper--foreground"}>
                 <SignUpForm />
-                <div className={styles["auth-sign-up__foreground-item"]}>
-                    Already have an account?{" "}
-                    <span className={styles["link"]}>
+                <div className={"form__wrapper--foreground-item"}>
+                    Already have an account?
+                    <span className={"link"}>
                         <ActiveLink href={"/auth/signin"}>
                             <a>Sign in</a>
                         </ActiveLink>
                     </span>
                 </div>
 
-                <div className={styles["auth-sign-up__foreground-divide"]}>
+                <div className={"form__wrapper--foreground-divide"}>
                     <span>OR</span>
                 </div>
-                <div className={styles["auth-sign-up__foreground-item-button"]}>
-                    <Button before={"wallet"} className={styles["button"]} href={"/not-found"}>
+                <div className={"form__wrapper--foreground-item-button"}>
+                    <Button before={"wallet"} className={"button"} href={"/not-found"}>
                         Sign up with Wallet
                     </Button>
                 </div>
-                <div className={styles["auth-sign-up__foreground-item"]}>
+                <div className={"form__wrapper--foreground-item"}>
                     <ul>
                         <li>
                             <ActiveLink href={"/"}>

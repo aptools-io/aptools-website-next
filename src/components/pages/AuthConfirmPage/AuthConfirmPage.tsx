@@ -8,10 +8,10 @@ import { useSelector } from "react-redux";
 // Public
 import { AuthRegisterPassword } from "src/components/containers";
 
-const AuthConfirmPage: React.FC = () => {
+const AuthConfirmPage: React.FC<{ forgot?: boolean }> = ({ forgot = false }) => {
     return (
         <>
-            <AuthRegisterPassword />
+            <AuthRegisterPassword forgot={forgot} />
         </>
     );
 };

@@ -12,16 +12,16 @@ import styles from "./AuthRegisterPassword.module.scss";
 
 // Other
 
-const AuthRegisterPassword: React.FC<IComponent> = () => {
-    const classes = classNames([styles["auth-register-password"]]);
+const AuthRegisterPassword: React.FC<{ forgot?: boolean }> = ({ forgot = false }) => {
+    const classes = classNames(["form__wrapper"]);
 
     return (
         <div className={classes}>
-            <div className={styles["auth-register-password__background"]}>
+            <div className={"form__wrapper--background"}>
                 <img src={AptLogoBig.src} alt={"logo"} />
             </div>
-            <div className={styles["auth-register-password__foreground"]}>
-                <SetPasswordForm />
+            <div className={"form__wrapper--foreground"}>
+                <SetPasswordForm forgot={forgot} />
             </div>
         </div>
     );

@@ -10,6 +10,8 @@ import { setPageTitle } from "src/scripts/redux/slices/pageTitleSlice";
 
 // Components
 import { AccountProfilePage } from "src/components/pages";
+import { checkLogined } from "src/scripts/common/user";
+import { auth } from "src/scripts/api/requests";
 
 const Account = (data: IApiProps) => {
     const dispatch = useDispatch();
@@ -24,6 +26,14 @@ export default Account;
 
 export async function getServerSideProps(context) {
     const { req } = context;
+
+    if (!(await checkLogined(context, auth)))
+        return {
+            redirect: {
+                destination: "/auth/signin",
+                permanent: false
+            }
+        };
 
     return {
         props: {

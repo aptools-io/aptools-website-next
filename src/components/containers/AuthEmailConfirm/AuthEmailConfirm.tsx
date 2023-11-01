@@ -19,7 +19,7 @@ import EmailConfirm from "public/static/images/svg/email_confirm.svg";
 import { auth } from "src/scripts/api/requests";
 import styles from "./AuthEmailConfirm.module.scss";
 
-const AuthEmailConfirm: React.FC = () => {
+const AuthEmailConfirm: React.FC<{ forgot?: boolean }> = ({ forgot = false }) => {
     const { email, agreement, subscribe } = useSelector((state: IRootState) => state.authConfirm);
     const classes = classNames([styles["auth-email-confirm"]]);
     const resendInterval = useRef(null);
@@ -51,6 +51,25 @@ const AuthEmailConfirm: React.FC = () => {
 
     const handleResendEmail = () => {
         setLoading(true);
+
+        if (forgot) {
+            auth.forgotPassword(email).then((e: unknown) => {
+                const response = e as {
+                    status: string;
+                };
+
+                if (response?.status === "ok") {
+                    setIntervalTime(30);
+                    setResendInterval();
+                    setLoading(false);
+                    return;
+                }
+                setLoading(false);
+                console.log("Something went wrong");
+            });
+            return;
+        }
+
         auth.registerEmail(email, agreement, subscribe).then((e: unknown) => {
             const response = e as {
                 status: string;
@@ -71,16 +90,16 @@ const AuthEmailConfirm: React.FC = () => {
         <>
             <div className={classes}>
                 <div className={styles["auth-email-confirm__wrapper"]}>
-                    <strong className={styles["title"]}>Confirm your Email</strong>
+                    <strong className={styles["title"]}>{forgot ? "Check your Email" : "Confirm your Email"}</strong>
                     <img src={EmailConfirm.src} alt={"Email confirm"} />
                     <span className={styles["description"]}>
-                        Please check your inbox for a confirmation email.
+                        {forgot ? "Please check your inbox." : "Please check your inbox for a confirmation email."}
                         <br />
-                        Click the link in the email to confirm your email address.
+                        {forgot ? "Click the link in the email to reset your password." : "Click the link in the email to confirm your email address."}
                     </span>
                     <div className={styles["auth-email-confirm__buttons"]}>
                         <Button className={styles["button"]} invert onClick={handleResendEmail} disabled={(intervalTime !== null && intervalTime > 0) || loading}>
-                            {intervalTime > 0 ? `Wait cooldown ${intervalTime}` : "Re-send confirmation email"}
+                            {intervalTime > 0 ? `Wait cooldown ${intervalTime}` : <>{forgot ? "Re-send reset password email" : "Re-send confirmation email"}</>}
                         </Button>
                         <Button className={styles["button"]} href={"/"}>
                             Back to main page

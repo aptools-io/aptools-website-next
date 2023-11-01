@@ -10,7 +10,6 @@ import { AuthEmailConfirm, AuthSignUp } from "src/components/containers";
 
 const AuthSignUpPage: React.FC = () => {
     const { email, agreement } = useSelector((state: IRootState) => state.authConfirm);
-    console.log(email, agreement);
     return <>{email?.length > 0 && agreement ? <AuthEmailConfirm /> : <AuthSignUp />}</>;
 };
 

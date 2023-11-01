@@ -1,18 +1,2 @@
 .sign-up-form {
-    max-width: 467px;
-    display: flex;
-    flex-direction: column;
-    z-index: 1;
-    row-gap: 16px;
-
-    .button {
-        flex: 1;
-        min-height: 42px;
-        justify-content: center;
-        width: 100%;
-
-        svg {
-            margin-right: 4px;
-        }
-    }
 }

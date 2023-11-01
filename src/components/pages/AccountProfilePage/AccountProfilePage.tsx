@@ -3,12 +3,16 @@ import React from "react";
 import { Accounts, StatsAccounts } from "src/components/containers";
 import { Grid, GridWrapper, Topper } from "src/components/general";
 import { AccountsList, TransactionsList } from "src/components/lists";
-import { CategoryTitle, Plate } from "src/components/ui";
+import { Button, CategoryTitle, Plate } from "src/components/ui";
 
 import { AccountDiscord, AccountEmail, AccountSlack, AccountTelegram, AccountWhatsapp, Edit, Letter, Unlock, WalletBig } from "src/components/svg";
+import { authMiddleware } from "src/scripts/api/middleware";
+import { useRouter } from "next/router";
+import { logout } from "src/scripts/common/user";
 import styles from "./AccountProfilePage.module.scss";
 
 const AccountProfilePage: React.FC = () => {
+    const router = useRouter();
     const accountStats = [
         {
             icon: <Letter />,
@@ -108,6 +112,10 @@ const AccountProfilePage: React.FC = () => {
         );
     };
 
+    const handleTest = async () => {
+        logout(router, authMiddleware);
+    };
+
     return (
         <>
             <Topper backlink={"/"} noLink={["account"]} />
@@ -124,6 +132,7 @@ const AccountProfilePage: React.FC = () => {
                 </GridWrapper>
                 <GridWrapper gridWidth={4}>
                     <CategoryTitle title='Notifications' />
+                    <Button onClick={handleTest}>Logout</Button>
                 </GridWrapper>
             </Grid>
         </>

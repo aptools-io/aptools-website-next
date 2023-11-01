@@ -1,3 +1,4 @@
+import { IUserResponse, checkRefreshToken } from "src/scripts/common/user";
 import { Api } from "../api";
 
 const registerEmail = async (email = null, agreeWithTerms = false, subscribeToNewsletter = false) => {
@@ -14,22 +15,103 @@ const registerEmail = async (email = null, agreeWithTerms = false, subscribeToNe
     );
 };
 
-const registerPassword = async (token = null, passowrd = null) => {
+const forgotPassword = async (email = null) => {
     const api = new Api(false, process.env.BASE_API_ACCOUNT_URL, "");
     return api.post(
+        "/api/auth/forgot/password",
+        {},
+        {},
+        {
+            email
+        }
+    );
+};
+
+const setNewPassword = async (token = null, password = null) => {
+    const api = new Api(false, process.env.BASE_API_ACCOUNT_URL, "");
+    return api.post(
+        "/api/auth/forgot/password/confirm",
+        {},
+        {},
+        {
+            token,
+            password
+        }
+    );
+};
+
+const registerPassword = async (token = null, password = null, setRefreshToken: (refreshToken: string) => void = null) => {
+    const api = new Api(false, process.env.BASE_API_ACCOUNT_URL, "", false, true);
+    const data = api.post(
         "/api/auth/register/password",
         {},
         {},
         {
             token,
-            passowrd
+            password
         }
-    );
+    ) as unknown;
+
+    const { refreshToken } = (await data) as { response: IUserResponse; refreshToken: string };
+    setRefreshToken(refreshToken);
+    return data;
+};
+
+const login = async (email = null, password = null, setRefreshToken: (refreshToken: string) => void = null) => {
+    const api = new Api(false, process.env.BASE_API_ACCOUNT_URL, "", false, true);
+    const data = api.post(
+        "/api/auth/login",
+        {},
+        {},
+        {
+            email,
+            password
+        }
+    ) as unknown;
+    const { refreshToken } = ((await data) as { response: IUserResponse; refreshToken: string }) || {};
+    setRefreshToken(refreshToken);
+    return data;
+};
+
+const getUser = async (token: string, context) => {
+    const api = new Api(false, process.env.BASE_API_ACCOUNT_URL, "");
+    const userData = api.get(
+        "/api/users/me",
+        {
+            Authorization: `Bearer ${token}`
+        },
+        {},
+        null
+    ) as unknown;
+
+    const accessToken = await checkRefreshToken(await userData, context, auth);
+    if (accessToken) {
+        return getUser(accessToken, null);
+    }
+    return userData;
+};
+
+const refreshToken = async (refreshToken) => {
+    const api = new Api(false, process.env.BASE_API_ACCOUNT_URL, "", false, true);
+    const userData = api.post(
+        "/api/auth/refresh",
+        {
+            Cookie: `refreshToken=${refreshToken}`
+        },
+        {},
+        null
+    ) as unknown;
+    return userData;
 };
 
 const auth = {
     registerEmail,
-    registerPassword
+    registerPassword,
+    login,
+    getUser,
+    refreshToken,
+    forgotPassword,
+    setNewPassword
 };
 
 export default auth;

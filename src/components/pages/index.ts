@@ -23,5 +23,7 @@ export { default as EventsPage } from "./EventsPage/EventsPage";
 export { default as EventsSinglePage } from "./EventsSinglePage/EventsSinglePage";
 
 export { default as AuthSignUpPage } from "./AuthSignUpPage/AuthSignUpPage";
+export { default as AuthSignInPage } from "./AuthSignInPage/AuthSignInPage";
+export { default as AuthRecoveryPage } from "./AuthRecoveryPage/AuthRecoveryPage";
 export { default as AuthConfirmPage } from "./AuthConfirmPage/AuthConfirmPage";
 export { default as AccountProfilePage } from "./AccountProfilePage/AccountProfilePage";

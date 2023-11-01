@@ -1,9 +1,13 @@
 import * as Yup from "yup";
+import { authMiddleware } from "src/scripts/api/middleware";
 import { auth } from "src/scripts/api/requests";
 import { setCookie } from "cookies-next";
+import { IUserResponse, loginUser } from "src/scripts/common/user";
+import { showNotification } from "src/scripts/redux/slices/notificationSlice";
+import { notify } from "src/scripts/common/notification";
 import schema from "./schema";
 
-const values = (setLoading, id) => {
+const values = (forgot, router, dispatch, setLoading, id, setError, onSuccess) => {
     return {
         initialValues: {
             password: "",
@@ -14,24 +18,27 @@ const values = (setLoading, id) => {
             setLoading(true);
             const { password } = values;
 
-            auth.registerPassword(id, password).then((e: unknown) => {
-                const response = e as {
-                    status: string;
-                    data: IApiUser;
-                };
+            const fetch = forgot ? auth.setNewPassword : authMiddleware.registerPasswordMiddleware;
+
+            fetch(id, password).then((e: unknown) => {
+                const response = e as IUserResponse;
 
                 if (response?.status === "ok") {
-                    //dispatch(setConfirmData({ email, agreement, subscribe }));'
-                    const { data } = response;
-                    setCookie("user", JSON.stringify(data));
-                    setLoading(false);
-                    return;
+                    if (forgot) {
+                        notify(dispatch, "Successfully changed!", "test");
+
+                        router.push("/auth/signin");
+                        return;
+                    }
+                    loginUser(response, onSuccess);
+                } else {
+                    if (response.reason === "conflict") setError(forgot ? "Forgot password request by the given token is expired" : "Email is already taken or token is expired");
+                    if (response.reason === "not-found") setError(forgot ? "Forgot password request by the given token not found" : "Email confirmation request by the given token not found");
+                    if (response.reason === "bad-request") setError("Something went wrong");
                 }
                 console.log("Something went wrong");
                 setLoading(false);
             });
-            const { passowrd, confirmPassword } = values;
-            console.log(values);
         }
     };
 };
