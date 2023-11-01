@@ -65,8 +65,33 @@ export async function getServerSideProps(context) {
     const dexesStatisticsTime = timeSpent(start);
 
     const tokenStatistics = (await generalStats.getTokenStatisticsData()) || ({} as any);
+    const tokenStatisticsTime = timeSpent(start);
 
     const balanceRangeDistribution = (await generalStats.getBalanceRangeDistribution()) || [];
+    const balanceRangeDistributionDataTime = timeSpent(start);
+
+    const transactionsData = (await transactions.getData()) || [];
+    const transactionsDataTime = timeSpent(start);
+
+    const projectsData = filtrateProjects(projectsUnfiltered, categories) || [];
+
+    const dataConversionTime = timeSpent(start);
+
+    if (process.env.BASE_LOGGER_ENV === "production")
+        logger.postErrorToLogger(
+            "info",
+            "Timer on index page",
+            `
+        start: ${startTime}\n
+        projects: ${projectsTime}\n
+        blockchainStatisticsTime: ${blockchainStatisticsTime}\n
+        dexesStatistics: ${dexesStatisticsTime}\n
+        tokenStatistics: ${tokenStatisticsTime}\n
+        balanceRangeDistribution: ${balanceRangeDistributionDataTime}\n
+        transactionsData: ${transactionsDataTime}\n
+        data conversion: ${dataConversionTime}
+        `
+        );
 
     return {
         props: {
@@ -120,8 +145,8 @@ export async function getServerSideProps(context) {
                   })
                 : [],
             dexes_volumes: dexesStatistics.dexes_volumes || [],
-            projects: filtrateProjects(projectsUnfiltered, categories) || [],
-            transactions: (await transactions.getData()) || []
+            projects: projectsData,
+            transactions: transactionsData || []
         }
     };
 }
