@@ -47,3 +47,8 @@ export { default as NftInventory } from "./NftInventory/NftInventory";
 export { default as OtherProjects } from "./OtherProjects/OtherProjects";
 export { default as EventsFilter } from "./EventsFilter/EventsFilter";
 export { default as EventsList } from "./EventsList/EventsList";
+export { default as AuthSignUp } from "./AuthSignUp/AuthSignUp";
+export { default as AuthSignIn } from "./AuthSignIn/AuthSignIn";
+export { default as AuthRecovery } from "./AuthRecovery/AuthRecovery";
+export { default as AuthEmailConfirm } from "./AuthEmailConfirm/AuthEmailConfirm";
+export { default as AuthRegisterPassword } from "./AuthRegisterPassword/AuthRegisterPassword";

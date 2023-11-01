@@ -7,7 +7,7 @@ import { ArrowForward, ArrowLeft, Plus, WalletSignUp } from "src/components/svg"
 import styles from "./Button.module.scss";
 import ActiveLink from "../ActiveLink/ActiveLink";
 
-const Button: React.FC<IButtonProps> = ({ href = null, after = null, before = null, invert = false, fill = false, disabled = false, onClick = null, children, className, style }) => {
+const Button: React.FC<IButtonProps> = ({ type = "button", href = null, after = null, before = null, invert = false, fill = false, disabled = false, onClick = null, children, className, style }) => {
     const classes = classNames([styles.button, { [styles.invert]: invert }, { [styles.fill]: fill }, { [styles.disabled]: disabled }, { [styles[after]]: after }, { [styles[before]]: before }, className]);
 
     const additive = {
@@ -37,8 +37,9 @@ const Button: React.FC<IButtonProps> = ({ href = null, after = null, before = nu
         <button
             style={style}
             className={classes}
+            type={type}
             onClick={() => {
-                if (disabled) return;
+                if (disabled || !onClick) return;
                 onClick();
             }}>
             {ChildrenWrapper}

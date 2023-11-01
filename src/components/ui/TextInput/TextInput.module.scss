@@ -6,6 +6,17 @@
 
     transition: filter .3s ease;
 
+    &__error {
+        color: var(--aptools-color-emphasis-c4);
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 120%;
+        display: block;
+        margin-top: 2px;
+        padding: 0 10px;
+    }
+
     label {
         padding: 0 10px;
         font-size: 14px;
@@ -20,8 +31,14 @@
         input {
             border-color: var(--aptools-color-emphasis-c1);
         }
-        #{$self}__icon svg path {
+        #{$self}__icon:not(.right) svg path {
             fill: var(--aptools-color-emphasis-c1);
+        }
+    }
+
+    &.error {
+        input {
+            border-color: var(--aptools-color-emphasis-c4);
         }
     }
 
@@ -32,6 +49,15 @@
     }
 
     &__icon {
+        &.right {
+            left: unset;
+            right: 0;
+        }
+
+        &.pass {
+            pointer-events: all;
+        }
+
         position: absolute;
         top: 50%;
         left: 0px;

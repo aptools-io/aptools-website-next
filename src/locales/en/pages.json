@@ -8,5 +8,6 @@
     "validators": "Validators",
     "projects": "Projects",
     "dex": "Dex",
-    "events": "Events"
+    "events": "Events",
+    "account": "Account"
 }

@@ -22,5 +22,8 @@ export { default as BlocksSinglePage } from "./BlocksSinglePage/BlocksSinglePage
 export { default as EventsPage } from "./EventsPage/EventsPage";
 export { default as EventsSinglePage } from "./EventsSinglePage/EventsSinglePage";
 
-export { default as AuthSignUp } from "./AuthSignUp/AuthSignUp";
-export { default as AuthEmailConfirm } from "./AuthEmailConfirm/AuthEmailConfirm";
+export { default as AuthSignUpPage } from "./AuthSignUpPage/AuthSignUpPage";
+export { default as AuthSignInPage } from "./AuthSignInPage/AuthSignInPage";
+export { default as AuthRecoveryPage } from "./AuthRecoveryPage/AuthRecoveryPage";
+export { default as AuthConfirmPage } from "./AuthConfirmPage/AuthConfirmPage";
+export { default as AccountProfilePage } from "./AccountProfilePage/AccountProfilePage";
