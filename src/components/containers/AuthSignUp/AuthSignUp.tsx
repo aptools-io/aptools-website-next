@@ -8,15 +8,28 @@ import { SignUpForm, SignWalletForm } from "src/components/forms";
 // Styles
 import classNames from "classnames";
 import AptLogoBig from "public/static/images/svg/apt_logo_big.svg";
-import { AptosWalletAdapterProvider, useWallet } from "@aptos-labs/wallet-adapter-react";
+import { AptosWalletAdapterProvider, NetworkName } from "@aptos-labs/wallet-adapter-react";
 
 // Other
 import { PetraWallet } from "petra-plugin-wallet-adapter";
 import { PontemWallet } from "@pontem/wallet-adapter-plugin";
 import { MartianWallet } from "@martianwallet/aptos-wallet-adapter";
+import { BloctoWallet } from "@blocto/aptos-wallet-adapter-plugin";
+import { FewchaWallet } from "fewcha-plugin-wallet-adapter";
+import { NightlyWallet } from "@nightlylabs/aptos-wallet-adapter-plugin";
 import styles from "./AuthSignUp.module.scss";
 
-const mainWallets = [new PetraWallet(), new PontemWallet(), new MartianWallet()];
+const mainWallets = [
+    new PetraWallet(),
+    new PontemWallet(),
+    new MartianWallet(),
+    new FewchaWallet(),
+    new NightlyWallet(),
+    new BloctoWallet({
+        network: NetworkName.Testnet,
+        bloctoAppId: "6d85f56e-5f2e-46cd-b5f2-5cf9695b4d46"
+    })
+];
 
 const AuthSignUp: React.FC<IComponent> = () => {
     const [wallet, setWallet] = useState(false);

@@ -15,6 +15,10 @@
                 cursor: pointer;
             }
 
+            .installed {
+                color: var(--aptools-color-emphasis-c2);
+            }
+
             & + .form__input.wallet {
                 border-top: 1px solid var(--aptools-color-grey-c4);
             }
