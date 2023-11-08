@@ -45,7 +45,6 @@ const AuthEmailConfirm: React.FC<{ forgot?: boolean }> = ({ forgot = false }) =>
 
         clearInterval(resendInterval.current);
         resendInterval.current = null;
-        console.log("interval", resendInterval);
         setIntervalTime(0);
     }, [intervalTime]);
 

@@ -22,7 +22,6 @@ const values = (setLoading, setError, onSuccess) => {
                 if (response?.status === "ok") {
                     loginUser(response, onSuccess);
                 } else {
-                    console.log(response);
                     if (response.reason === "conflict") setError("User is not registered yet");
                     if (response.reason === "unauthorized") setError("Invalid email or password");
                     setLoading(false);

@@ -1,4 +1,51 @@
 .form {
+    &.popup {
+        background-color: var(--aptools-color-main-primary);
+        padding: 32px;
+        box-shadow: 0px 15px 15px -20px rgb(0 0 0 / 10%);
+        border-radius: 2px;
+        border: 1px solid var(--aptools-color-grey-c3);
+        max-width: 525px;
+        width: 100%;
+    }
+
+    &__input {
+        &.wallet {
+            .pointer {
+                cursor: pointer;
+            }
+
+            & + .form__input.wallet {
+                border-top: 1px solid var(--aptools-color-grey-c4);
+            }
+
+            &.disabled {
+                filter: grayscale(1);
+                pointer-events: none;
+            }
+
+            justify-content: space-between;
+            display: flex;
+            align-items: center;
+            padding: 12px 10px;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 130%;
+
+            span {
+                display: flex;
+                align-items: center;
+            }
+
+            img {
+                width: 32px;
+                height: 32px;
+                margin-right: 8px;
+            }
+        }
+    }
+
     &__wrapper {
         width: 100%;
         height: 100%;
@@ -25,6 +72,20 @@
             flex-direction: column;
             z-index: 1;
             row-gap: 16px;
+
+            &.wide {
+                max-width: 525px;
+            }
+
+            position: relative;
+
+            .close {
+                position: absolute;
+                left: calc(100% + 4px);
+                top: 0;
+                width: 24px;
+                height: 24px;
+            }
 
             &-divide {
                 font-size: 14px;
@@ -155,6 +216,17 @@
         flex-direction: column;
         z-index: 1;
         row-gap: 16px;
+
+        &--wrapper {
+            &:not(.form__inner--active) {
+                cursor: not-allowed;
+                filter: grayscale(1);
+
+                * {
+                    pointer-events: none;
+                }
+            }
+        }
 
         &--error {
             color: var(--aptools-color-emphasis-c4);

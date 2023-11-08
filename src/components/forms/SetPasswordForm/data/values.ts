@@ -26,7 +26,6 @@ const values = (forgot, router, dispatch, setLoading, id, setError, onSuccess) =
                 if (response?.status === "ok") {
                     if (forgot) {
                         notify(dispatch, "Successfully changed!", "test");
-
                         router.push("/auth/signin");
                         return;
                     }

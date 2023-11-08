@@ -20,9 +20,10 @@ const TextInput: React.FC<
         field?: any;
         error?: string;
         password?: boolean;
+        require?: boolean;
         sideComponent?: (focused?: boolean) => JSX.Element;
     } & IComponent
-> = ({ id = null, name = null, label = null, onChange = null, value = "", searchButton = false, searchIcon = false, placeholder = "", sideComponent = null, className, field = null, error = "", password = false }) => {
+> = ({ id = null, name = null, label = null, onChange = null, value = "", searchButton = false, searchIcon = false, placeholder = "", sideComponent = null, className, field = null, error = "", password = false, require = false }) => {
     const router = useRouter();
     const [focus, setFocus] = useState(false);
     const [type, setType] = useState(password ? "password" : "text");
@@ -40,7 +41,11 @@ const TextInput: React.FC<
 
     return (
         <div className={classes} onBlur={handleBlur} onFocus={handleFocus}>
-            {label && <label {...(id && { htmlFor: id })}>{label}</label>}
+            {label && (
+                <label {...(require && { "data-require": true })} {...(id && { htmlFor: id })}>
+                    {label}
+                </label>
+            )}
             <div className={styles["text-input__wrapper"]}>
                 {searchIcon && (
                     <div className={styles["text-input__icon"]}>

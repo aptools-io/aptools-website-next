@@ -3,7 +3,7 @@ import React from "react";
 
 // Styles
 import classNames from "classnames";
-import { ArrowForward, ArrowLeft, Plus, WalletSignUp } from "src/components/svg";
+import { ArrowForward, ArrowLeft, Logout, Plus, WalletSignUp } from "src/components/svg";
 import styles from "./Button.module.scss";
 import ActiveLink from "../ActiveLink/ActiveLink";
 
@@ -14,7 +14,8 @@ const Button: React.FC<IButtonProps> = ({ type = "button", href = null, after = 
         back: <ArrowLeft />,
         forward: <ArrowForward />,
         plus: <Plus />,
-        wallet: <WalletSignUp />
+        wallet: <WalletSignUp />,
+        logout: <Logout />
     };
 
     const ChildrenWrapper = (

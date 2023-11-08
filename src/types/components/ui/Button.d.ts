@@ -1,8 +1,8 @@
 interface IButtonProps extends IComponent {
     type?: "button" | "submit" | "reset";
     href?: string;
-    after?;
-    before?: "back" | "up" | "down" | "forward" | "plus" | "wallet";
+    after?: "back" | "up" | "down" | "forward" | "plus" | "wallet" | "logout";
+    before?: "back" | "up" | "down" | "forward" | "plus" | "wallet" | "logout";
     invert?: boolean;
     fill?: boolean;
     disabled?: boolean;

@@ -57,6 +57,46 @@ const registerPassword = async (token = null, password = null, setRefreshToken: 
     return data;
 };
 
+const registerWallet = async (nonce = null, message = null, signature = null, pubKey = null, setRefreshToken: (refreshToken: string) => void = null) => {
+    const api = new Api(false, process.env.BASE_API_ACCOUNT_URL, "", false, true);
+    const data = api.post(
+        "/api/auth/register/wallet",
+        {},
+        {},
+        {
+            nonce,
+            pubKey,
+            message,
+            signature,
+            agreeWithTerms: true
+        }
+    ) as unknown;
+
+    const { refreshToken } = (await data) as { response: IUserResponse; refreshToken: string };
+    setRefreshToken(refreshToken);
+    return data;
+};
+
+const loginWallet = async (nonce = null, message = null, signature = null, pubKey = null, setRefreshToken: (refreshToken: string) => void = null) => {
+    const api = new Api(false, process.env.BASE_API_ACCOUNT_URL, "", false, true);
+    const data = api.post(
+        "/api/auth/login/wallet",
+        {},
+        {},
+        {
+            nonce,
+            pubKey,
+            message,
+            signature,
+            agreeWithTerms: true
+        }
+    ) as unknown;
+
+    const { refreshToken } = (await data) as { response: IUserResponse; refreshToken: string };
+    setRefreshToken(refreshToken);
+    return data;
+};
+
 const login = async (email = null, password = null, setRefreshToken: (refreshToken: string) => void = null) => {
     const api = new Api(false, process.env.BASE_API_ACCOUNT_URL, "", false, true);
     const data = api.post(
@@ -91,6 +131,26 @@ const getUser = async (token: string, context) => {
     return userData;
 };
 
+const setQuestions = async (token: string, context, data) => {
+    const api = new Api(false, process.env.BASE_API_ACCOUNT_URL, "");
+    const userData = api.patch(
+        "/api/users/me/questionnaire",
+        {
+            Authorization: `Bearer ${token}`
+        },
+        {},
+        {
+            ...data
+        }
+    ) as unknown;
+
+    const accessToken = await checkRefreshToken(await userData, context, auth);
+    if (accessToken) {
+        return getUser(accessToken, null);
+    }
+    return userData;
+};
+
 const refreshToken = async (refreshToken) => {
     const api = new Api(false, process.env.BASE_API_ACCOUNT_URL, "", false, true);
     const userData = api.post(
@@ -104,14 +164,24 @@ const refreshToken = async (refreshToken) => {
     return userData;
 };
 
+const walletApproval = async () => {
+    const api = new Api(false, process.env.BASE_API_ACCOUNT_URL, "", false, true);
+    const data = api.post("/api/auth/wallet/approval", {}, {}, null) as unknown;
+    return data;
+};
+
 const auth = {
     registerEmail,
     registerPassword,
+    registerWallet,
+    setQuestions,
+    loginWallet,
     login,
     getUser,
     refreshToken,
     forgotPassword,
-    setNewPassword
+    setNewPassword,
+    walletApproval
 };
 
 export default auth;

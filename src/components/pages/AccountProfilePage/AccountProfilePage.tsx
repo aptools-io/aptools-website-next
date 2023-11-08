@@ -1,6 +1,6 @@
 // React
 import React from "react";
-import { Accounts, StatsAccounts } from "src/components/containers";
+import { AccountQuestions, Accounts, StatsAccounts } from "src/components/containers";
 import { Grid, GridWrapper, Topper } from "src/components/general";
 import { AccountsList, TransactionsList } from "src/components/lists";
 import { Button, CategoryTitle, Plate } from "src/components/ui";
@@ -10,72 +10,10 @@ import { authMiddleware } from "src/scripts/api/middleware";
 import { useRouter } from "next/router";
 import { logout } from "src/scripts/common/user";
 import styles from "./AccountProfilePage.module.scss";
+import { accountSocials, accountStats } from "./data/data";
 
 const AccountProfilePage: React.FC = () => {
     const router = useRouter();
-    const accountStats = [
-        {
-            icon: <Letter />,
-            title: "email@email.com",
-            onEdit: () => {
-                console.log("test");
-            }
-        },
-        {
-            icon: <WalletBig />,
-            title: "Connect wallet"
-        },
-        {
-            icon: <Unlock />,
-            title: "**************",
-            onEdit: () => {
-                console.log("test");
-            }
-        }
-    ];
-
-    const accountSocials = [
-        {
-            icon: <AccountTelegram />,
-            login: "@username1244",
-            title: "Telegram",
-            onEdit: () => {
-                console.log("test");
-            }
-        },
-        {
-            icon: <AccountWhatsapp />,
-            login: "email@email.com",
-            title: "WhatsApp",
-            onEdit: () => {
-                console.log("test");
-            }
-        },
-        {
-            icon: <AccountDiscord />,
-            login: "@username1244",
-            title: "Discord",
-            onEdit: () => {
-                console.log("test");
-            }
-        },
-        {
-            icon: <AccountSlack />,
-            login: "@username1244",
-            title: "Slack",
-            onEdit: () => {
-                console.log("test");
-            }
-        },
-        {
-            icon: <AccountEmail />,
-            login: "email@email.com",
-            title: "Email",
-            onEdit: () => {
-                console.log("test");
-            }
-        }
-    ];
 
     const renderAccountStat = (item, index) => {
         const { icon, title, onEdit } = item || {};
@@ -135,6 +73,7 @@ const AccountProfilePage: React.FC = () => {
                     <Button onClick={handleTest}>Logout</Button>
                 </GridWrapper>
             </Grid>
+            <AccountQuestions />
         </>
     );
 };

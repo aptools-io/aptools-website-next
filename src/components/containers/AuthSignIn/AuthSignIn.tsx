@@ -1,19 +1,47 @@
 // React
-import React from "react";
+import React, { useState } from "react";
 
 // Components
 import { ActiveLink, Button, Tabs } from "src/components/ui";
-import { SignInForm } from "src/components/forms";
+import { SignInForm, SignWalletForm } from "src/components/forms";
 
 // Styles
 import classNames from "classnames";
 import AptLogoBig from "public/static/images/svg/apt_logo_big.svg";
-import styles from "./AuthSignIn.module.scss";
 
 // Other
+import { AptosWalletAdapterProvider } from "@aptos-labs/wallet-adapter-react";
+import { PetraWallet } from "petra-plugin-wallet-adapter";
+import { PontemWallet } from "@pontem/wallet-adapter-plugin";
+import { MartianWallet } from "@martianwallet/aptos-wallet-adapter";
+import styles from "./AuthSignIn.module.scss";
+
+const mainWallets = [new PetraWallet(), new PontemWallet(), new MartianWallet()];
 
 const AuthSignIn: React.FC<IComponent> = () => {
+    const [wallet, setWallet] = useState(false);
+    const [errorWallet, setErrorWallet] = useState(null);
     const classes = classNames(["form__wrapper"]);
+    const handleWalletSignUp = () => {
+        setWallet(true);
+    };
+    if (wallet)
+        return (
+            <div className={classes}>
+                <div className={"form__wrapper--background"}>
+                    <img src={AptLogoBig.src} alt={"logo"} />
+                </div>
+                <div className={"form__wrapper--foreground wide"}>
+                    <AptosWalletAdapterProvider
+                        plugins={mainWallets}
+                        onError={(error) => {
+                            setErrorWallet(error);
+                        }}>
+                        <SignWalletForm setClose={setWallet} errorWallet={errorWallet} setErrorWallet={setErrorWallet} login />
+                    </AptosWalletAdapterProvider>
+                </div>
+            </div>
+        );
 
     return (
         <div className={classes}>
@@ -42,8 +70,8 @@ const AuthSignIn: React.FC<IComponent> = () => {
                     <span>OR</span>
                 </div>
                 <div className={"form__wrapper--foreground-item-button"}>
-                    <Button before={"wallet"} className={"button"} href={"/not-found"}>
-                        Sign up with Wallet
+                    <Button before={"wallet"} className={"button"} onClick={handleWalletSignUp}>
+                        Sign in with Wallet
                     </Button>
                 </div>
                 <div className={"form__wrapper--foreground-item"}>
