@@ -49,8 +49,9 @@ const SignWalletForm: React.FC<{
                     router.push("/account/profile");
                 });
             } else {
-                if (response.reason === "conflict") setError("Wallet is already taken or token is expired");
-                if (response.reason === "not-found") setError("Wallet confirmation request by the given token not found");
+                if (response.reason === "conflict") setError(login ? "Wallet approval request by the given nonce is expired" : "Wallet is already taken or token is expired");
+                if (response.reason === "not-found") setError(login ? "Wallet approval by the given nonce not found" : "Wallet confirmation request by the given token not found");
+                if (response.reason === "unauthorized") setError(login ? "Wallet not registered or invalid request" : "Wallet confirmation request by the given token not found");
                 if (response.reason === "bad-request") setError("Something went wrong");
             }
             console.log("Something went wrong");
@@ -61,25 +62,31 @@ const SignWalletForm: React.FC<{
         });
     };
 
-    function dec2hex(dec) {
-        return dec.toString(16).padStart(2, "0");
-    }
-
-    // generateId :: Integer -> String
-    function generateId(len) {
-        const arr = new Uint8Array((len || 40) / 2);
-        window.crypto.getRandomValues(arr);
-        return Array.from(arr, dec2hex).join("");
-    }
-
     const checkSignature = (signature: string) => {
+        // Blocto
+        if (Array.isArray(signature)) {
+            return `0x${signature[0]}`;
+        }
+
+        // Pontem
         if (typeof signature !== "string") {
-            console.log(signature);
             const buffSign = signature as ArrayBuffer;
-            const str = Buffer.from(buffSign).toString("base64");
+            if (!buffSign) return null;
+            const str = Buffer.from(buffSign).toString("hex");
             const newSign = `0x${str}`;
             return newSign;
         }
+
+        // Pontem Nightly
+        if (typeof signature === "string" && signature?.split(",")?.length > 4) {
+            const buffSign = new Uint16Array(signature.split(",").map((x) => Number(x)));
+            if (!buffSign) return null;
+            const str = Buffer.from(buffSign).toString("hex");
+            const newSign = `0x${str}`;
+            return newSign;
+        }
+
+        // Petra Nightly
         if (signature.indexOf("0x") === -1) return `0x${signature}`;
         return signature;
     };
@@ -98,17 +105,18 @@ const SignWalletForm: React.FC<{
 
         let fullMessage = null;
         let signature = null;
-
+        // Blocto condition
+        const pubKey = Array.isArray(account.publicKey) ? `0x${account.publicKey[0]}` : account.publicKey;
         if (response?.result) {
             fullMessage = response?.result?.fullMessage || null;
             signature = response?.result?.signature || null;
-            register(nonce, fullMessage, checkSignature(signature), account.publicKey);
+            register(nonce, fullMessage, checkSignature(signature), pubKey);
             return;
         }
         fullMessage = response?.fullMessage || null;
         signature = response?.signature || null;
 
-        register(nonce, fullMessage, checkSignature(signature), account.publicKey);
+        register(nonce, fullMessage, checkSignature(signature), pubKey);
     };
 
     useEffect(() => {
@@ -122,7 +130,7 @@ const SignWalletForm: React.FC<{
     const onConnect = async (walletName) => {
         setErrorWallet(null);
         setError(null);
-        await connect(walletName);
+        const result = await connect(walletName);
         setSelectedWallet(walletName);
     };
 
@@ -133,15 +141,30 @@ const SignWalletForm: React.FC<{
     }, [selectedWallet, account]);
 
     const renderWallet = (item, index) => {
+        const { icon, name, url, readyState } = item;
+        const installed = readyState !== "NotDetected";
         return (
-            <div key={index} className={classNames(["form__inner--item", "form__input", "wallet", { disabled: selectedWallet !== item.name && selectedWallet !== null }])} onClick={() => onConnect(item.name)}>
+            <div
+                key={index}
+                className={classNames(["form__inner--item", "form__input", "wallet", { disabled: selectedWallet !== item.name && selectedWallet !== null }])}
+                onClick={() => {
+                    if (!installed) {
+                        if (window) window.open(url, "_blank").focus();
+                        return;
+                    }
+                    onConnect(item.name);
+                }}>
                 <span className='pointer'>
-                    <img src={item?.icon} alt={"petra"} />
-                    {item?.name} wallet
+                    <img src={icon} alt={name} />
+                    {name} wallet
                 </span>
-                <ActiveLink href={item?.url}>
-                    <a>Install</a>
-                </ActiveLink>
+                {!installed ? (
+                    <ActiveLink href={url}>
+                        <a>Install</a>
+                    </ActiveLink>
+                ) : (
+                    <span className='installed'>Installed</span>
+                )}
             </div>
         );
     };
@@ -152,7 +175,7 @@ const SignWalletForm: React.FC<{
                 <Close />
             </button>
             <Form className={classes}>
-                <strong className={"title"}>Sign up by connecting a wallet</strong>
+                <strong className={"title"}>Sign {login ? "in" : "up"} by connecting a wallet</strong>
                 <div className={classNames(["form__inner--item", "form__input", { error: formik.errors.agreement }])}>
                     <Field name={"agreement"} type='checkbox'>
                         {({ field, form, meta }) => <Checkbox id={"id-agreement"} label={"I agree to the Terms & Conditions and Privacy Policy"} error={meta.touched && meta.error} field={field} />}
