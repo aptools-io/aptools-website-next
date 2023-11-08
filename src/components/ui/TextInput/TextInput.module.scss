@@ -23,6 +23,13 @@
         font-style: normal;
         font-weight: 400;
         line-height: 130%;
+
+        &[data-require] {
+            &:after {
+                content: '*';
+                color: var(--aptools-color-emphasis-c4);
+            }
+        }
     }
 
     &.focus {

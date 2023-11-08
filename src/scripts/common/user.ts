@@ -8,7 +8,7 @@ export interface IUserResponse {
     response?: Promise<IUserResponse>;
 }
 
-const loginUser = (response: IUserResponse, onSuccess: (success: () => void) => void) => {
+const loginUser = (response: IUserResponse, onSuccess: (success: (firstTime?: boolean) => void) => void) => {
     const { data } = response || {};
     const { accessToken, user } = data || {};
     if (!accessToken || !user) {
@@ -16,7 +16,8 @@ const loginUser = (response: IUserResponse, onSuccess: (success: () => void) => 
     }
 
     if (onSuccess)
-        onSuccess(async () => {
+        onSuccess(async (firstTime = false) => {
+            if (firstTime) window.localStorage.setItem("firstTime", "true");
             window.localStorage.setItem("user", JSON.stringify(user));
         });
 };
@@ -32,7 +33,6 @@ const checkLogined = async (context, auth) => {
     const accessToken = (await getCookie("accessToken", { req, res })) as string;
     const refreshToken = (await getCookie("refreshToken", { req, res })) as string;
     const user = (await auth.getUser(accessToken, context)) as IUserResponse;
-    //console.log(!!accessToken, !!refreshToken, user?.status)
     return !!accessToken && !!refreshToken && user?.status === "ok";
 };
 

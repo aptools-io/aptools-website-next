@@ -31,7 +31,6 @@ export async function getServerSideProps(context) {
     const { req, query } = context;
     const { id } = query || {};
 
-    console.log(id);
     const dex = await dexSingle.getData(id.replaceAll(" ", "-"));
 
     if (!dex)

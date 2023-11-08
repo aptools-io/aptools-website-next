@@ -52,3 +52,5 @@ export { default as AuthSignIn } from "./AuthSignIn/AuthSignIn";
 export { default as AuthRecovery } from "./AuthRecovery/AuthRecovery";
 export { default as AuthEmailConfirm } from "./AuthEmailConfirm/AuthEmailConfirm";
 export { default as AuthRegisterPassword } from "./AuthRegisterPassword/AuthRegisterPassword";
+export { default as AccountQuestions } from "./AccountQuestions/AccountQuestions";
+export { default as UserInfoWrapper } from "./UserInfoWrapper/UserInfoWrapper";

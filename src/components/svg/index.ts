@@ -36,6 +36,7 @@ export { default as Logo } from "./Logo";
 export { default as LogoFull } from "./LogoFull";
 export { default as LogoFullBig } from "./LogoFullBig";
 export { default as LogoSmall } from "./LogoSmall";
+export { default as Logout } from "./Logout";
 export { default as Magnifier } from "./Magnifier";
 export { default as Maximize } from "./Maximize";
 export { default as Minimize } from "./Minimize";
