@@ -26,7 +26,7 @@ const SetPasswordForm: React.FC<{ forgot?: boolean }> = ({ forgot = false }) => 
 
     const formik = useFormik(
         values(forgot, router, dispatch, setLoading, id, setError, async (saveUserInStorage) => {
-            await saveUserInStorage();
+            await saveUserInStorage(true);
             await router.push("/account/profile");
         })
     );

@@ -1,8 +1,8 @@
 import { setCookies } from "cookies-next";
 
-const returnResponse = (response, getRefreshToken) => {
+const returnResponse = async (response, getRefreshToken) => {
     // eslint-disable-line class-methods-use-this
-    if (response.status >= 500) throw new Error(`Error status code ${response.status} while fetching, url ${response.url}`);
+    if (response.status >= 500) throw new Error(`Error status code ${response.status} while fetching, url ${response.url} ${response?.status} ${response?.statusText}`);
     if (response.status === 429)
         return {
             status: "error",
@@ -46,7 +46,6 @@ const returnResponse = (response, getRefreshToken) => {
             return prev;
         }, {});
         refreshToken = obj?.["refreshToken"] || "";
-        //console.log(getRefreshToken)
         return {
             response: response.json(),
             refreshToken

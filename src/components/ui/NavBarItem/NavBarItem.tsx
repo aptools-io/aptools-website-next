@@ -33,7 +33,7 @@ const NavBarItem: React.FC<INavBarMenuItemProps> = ({ data, expanded, search, cl
 
     return (
         <li className={classes}>
-            <ActiveLink href={link}>
+            <ActiveLink href={link} additiveClassName={styles["link"]}>
                 <a target={target} className={styles["nav-bar-item__inner"]}>
                     {svg && <span className={styles["nav-bar-item__icon"]}>{svg}</span>}
                     {title && <span className={styles["nav-bar-item__title"]}>{title}</span>}

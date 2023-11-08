@@ -18,6 +18,10 @@
                 fill: var(--aptools-color-main-primary);
             }
         }
+
+        .link {
+            pointer-events: all;
+        }
     }
 
     &:hover {
@@ -145,6 +149,14 @@
             opacity: 1;
             clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
         }
+
+        .link {
+            pointer-events: all;
+        }
+    }
+
+    .link {
+        pointer-events: none;
     }
 
     &__icon {

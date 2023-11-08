@@ -14,6 +14,23 @@ const registerPasswordMiddleware = async (token = null, password = null) => {
     return res;
 };
 
+const walletMiddleware = async (nonce = null, message = null, signature = null, pubKey = null, login = false) => {
+    const apiLogin = new Api(false, process.env.SITE_URL, "");
+    const res = apiLogin.post(
+        "/api/wallet",
+        {},
+        {},
+        {
+            nonce,
+            message,
+            signature,
+            pubKey,
+            login
+        }
+    ) as unknown;
+    return res;
+};
+
 const loginMiddleware = async (email = null, password = null) => {
     const apiLogin = new Api(false, process.env.SITE_URL, "");
     const res = apiLogin.post(
@@ -36,6 +53,20 @@ const getUserMiddleware = async () => {
     return res;
 };
 
+const setQuestionsMiddleware = async (data) => {
+    const apiLogin = new Api(false, process.env.SITE_URL, "");
+    const res = apiLogin.post(
+        "/api/questions",
+        {},
+        {},
+        {
+            ...data
+        }
+    ) as unknown;
+
+    return res;
+};
+
 const logoutMiddleware = async () => {
     const apiLogin = new Api(false, process.env.SITE_URL, "");
     const res = apiLogin.post("/api/logout", {}, {}, {}) as unknown;
@@ -45,6 +76,8 @@ const logoutMiddleware = async () => {
 
 const auth = {
     registerPasswordMiddleware,
+    setQuestionsMiddleware,
+    walletMiddleware,
     loginMiddleware,
     getUserMiddleware,
     logoutMiddleware

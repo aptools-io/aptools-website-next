@@ -84,4 +84,8 @@ export class Api {
     get = async (url: string, headers: HeadersInit = {}, params: Record<string, any> = {}, body: Record<string, any> | string = null): Promise<Response> => {
         return this.fetch("GET", url, headers, params, body).then((response) => this.handleResponse(response));
     };
+
+    patch = async (url: string, headers: HeadersInit = {}, params: Record<string, any> = {}, body: Record<string, any> | string = null): Promise<Response> => {
+        return this.fetch("PATCH", url, headers, params, body).then((response) => this.handleResponse(response));
+    };
 }

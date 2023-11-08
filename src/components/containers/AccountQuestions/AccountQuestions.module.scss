@@ -1,0 +1,184 @@
+.account-questions {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--aptools-color-main-primary);
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+    transition: opacity .3s ease, visibility .3s ease;
+    padding: var(--layout-indent) var(--layout-v-padding) calc(var(--layout-bottom-indent) + 79px) calc(var(--nav-bar-width) + var(--layout-v-padding));
+
+    &.active {
+        opacity: 1;
+        pointer-events: all;
+        visibility: visible;
+    }
+
+    &__wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+    }
+
+    &__item {
+        position: absolute;
+        padding: 10px;
+        max-width: 545px;
+        width: 100%;
+        pointer-events: none;
+
+        &.active {
+            pointer-events: all;
+
+            .account-questions__item {
+                &--inner,
+                &--logo {
+                    opacity: 1;
+                    visibility: visible;
+                }
+            }
+        }
+
+        &--logo {
+            height: 125px;
+            visibility: hidden;
+            transition: opacity .3s ease, visibility .3s ease;
+            opacity: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            row-gap: 7px;
+            margin-bottom: 32px;
+
+            .dots {
+                height: 6px;
+                display: flex;
+                column-gap: 4px;
+
+                li {
+                    width: 6px;
+                    height: 6px;
+                    background-color: var(--aptools-color-grey-c3);
+                    border-radius: 3px;
+
+                    &.dot-prev,
+                    &.dot-active {
+                        background-color: var(--aptools-color-emphasis-c1);
+                    }
+
+                    &.dot-active {
+                        width: 16px;
+                    }
+                }
+            }
+        }
+
+        &--inner {
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity .3s ease, visibility .3s ease;
+            display: flex;
+            flex-direction: column;
+            row-gap: 16px;
+
+            .title {
+                font-size: 18px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 24px; /*133.333%*/
+                letter-spacing: -1px;
+                text-align: left;
+            }
+
+            .description {
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 130%;
+            }
+
+            .button {
+                justify-content: center;
+                width: 100%;
+                height: 42px;
+
+                &s {
+                    display: flex;
+                    padding: 0 16px;
+                    column-gap: 16px;
+                }
+            }
+
+            .optional {
+                color: var(--aptools-color-emphasis-c4);
+            }
+
+            .input {
+                &s {
+                    display: flex;
+                    flex-direction: column;
+                    row-gap: 16px;
+                }
+            }
+
+            .radio {
+                border-top: 1px solid var(--aptools-color-grey-c4);
+
+                &:last-child {
+                    border-bottom: 1px solid var(--aptools-color-grey-c4);
+                }
+
+                input {
+                    display: none;
+
+                    &:checked + label {
+                        cursor: default;
+
+                        &:after {
+                            content: '';
+                            position: absolute;
+                            top: 50%;
+                            left: 12px;
+                            transform: translateY(-50%);
+                            border-radius: 100%;
+                            width: 8px;
+                            height: 8px;
+                            background-color: var(--aptools-color-grey-c1);
+                        }
+                    }
+                }
+
+                label {
+                    padding: 12px 10px;
+                    display: flex;
+                    column-gap: 8px;
+                    align-items: center;
+                    cursor: pointer;
+                    position: relative;
+
+                    &:before {
+                        content: '';
+                        position: relative;
+                        width: 12px;
+                        height: 12px;
+                        display: inline-block;
+                        border-radius: 100%;
+                        border: 1px solid var(--aptools-color-grey-c1);
+                        background-color: var(--aptools-color-grey-c5);
+                    }
+                }
+
+                &s {
+                    display: flex;
+                    flex-direction: column;
+                }
+            }
+        }
+    }
+}
