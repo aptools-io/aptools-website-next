@@ -6,3 +6,13 @@ interface IApiUser {
         email: string;
     };
 }
+
+interface IUser {
+    status: string;
+    data: {
+        id: string;
+        email: string;
+        createdAt: string;
+        wallet: string;
+    };
+}

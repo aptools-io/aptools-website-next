@@ -10,11 +10,9 @@ import { accounts, validators } from "src/scripts/api/requests";
 
 // Redux
 import { setPageTitle } from "src/scripts/redux/slices/pageTitleSlice";
-import {
-    setValidators,
-    setValidatorsBlocks,
-    setValidatorsLocations
-} from "src/scripts/redux/slices/validatorsSlice";
+import { setValidators, setValidatorsBlocks, setValidatorsLocations } from "src/scripts/redux/slices/validatorsSlice";
+
+import getGeneralRequests from "src/scripts/api/generalRequests";
 
 const Validators = (data: IApiProps) => {
     const dispatch = useDispatch();
@@ -33,18 +31,14 @@ export default Validators;
 
 export async function getServerSideProps(context) {
     const { req } = context;
+
     return {
         props: {
+            general: await getGeneralRequests(context),
             headers: req.headers,
             validators_locations: await validators.getValidatorsLocationsData(),
-            validators_blocks: await accounts.getAccountResourceData(
-                "0x1",
-                "0x1::stake::ValidatorPerformance"
-            ),
-            validators: await accounts.getAccountResourceData(
-                "0x1",
-                "0x1::stake::ValidatorSet"
-            )
+            validators_blocks: await accounts.getAccountResourceData("0x1", "0x1::stake::ValidatorPerformance"),
+            validators: await accounts.getAccountResourceData("0x1", "0x1::stake::ValidatorSet")
         }
     };
 }

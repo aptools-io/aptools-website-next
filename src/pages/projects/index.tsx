@@ -16,10 +16,11 @@ import { projects } from "src/scripts/api/requests";
 // Scripts
 import filtrateProjects from "src/scripts/util/filtrateProjects";
 import categories from "src/scripts/consts/categories";
+import getGeneralRequests from "src/scripts/api/generalRequests";
 
 const Ecosystem = (data: IApiProps) => {
     const dispatch = useDispatch();
-    
+
     useEffect(() => {
         dispatch(setHeaders(data.headers) || null);
         dispatch(setProjectStatsData(data.projects || null));
@@ -27,15 +28,18 @@ const Ecosystem = (data: IApiProps) => {
     }, [data, dispatch]);
 
     return <ProjectsPage />;
-}; 
+};
 export default Ecosystem;
 
 export async function getServerSideProps(context) {
-    const projectsUnfiltered = await projects.getData() || []; 
+    const projectsUnfiltered = (await projects.getData()) || [];
 
     const { req } = context;
-    return { props: {
-        "headers": req.headers,
-        "projects": filtrateProjects(projectsUnfiltered, categories) || [],
-    } };
+    return {
+        props: {
+            general: await getGeneralRequests(context),
+            headers: req.headers,
+            projects: filtrateProjects(projectsUnfiltered, categories) || []
+        }
+    };
 }

@@ -16,10 +16,11 @@ import { projects } from "src/scripts/api/requests";
 // Scripts
 import filtrateProjects from "src/scripts/util/filtrateProjects";
 import categories from "src/scripts/consts/categories";
+import getGeneralRequests from "src/scripts/api/generalRequests";
 
 const EcosystemId = (data: IApiProps) => {
     const dispatch = useDispatch();
-    
+
     useEffect(() => {
         const { name } = data?.project || {};
         dispatch(setHeaders(data.headers) || null);
@@ -29,26 +30,28 @@ const EcosystemId = (data: IApiProps) => {
     }, [data, dispatch]);
 
     return <ProjectsSinglePage />;
-}; 
+};
 export default EcosystemId;
 
 export async function getServerSideProps(context) {
     const { req, query } = context;
     const { id } = query || {};
 
-    const projectsUnfiltered = await projects.getData() || []; 
-    const projectId = projectsUnfiltered.findIndex(x => x.name === id);
+    const projectsUnfiltered = (await projects.getData()) || [];
+    const projectId = projectsUnfiltered.findIndex((x) => x.name === id);
 
     const project = projectsUnfiltered[projectId];
-    const otherProjects = filtrateProjects(projectsUnfiltered, null, project.category, true) as [] || [];
+    const otherProjects = (filtrateProjects(projectsUnfiltered, null, project.category, true) as []) || [];
     const splicedProjects = [...otherProjects];
     splicedProjects.splice(projectId, 1);
 
-
-    return { props: {
-        "spaceBetween": true,
-        "headers": req.headers,
-        "project": project,
-        "other_projects": splicedProjects,
-    } };
+    return {
+        props: {
+            general: await getGeneralRequests(context),
+            spaceBetween: true,
+            headers: req.headers,
+            project,
+            other_projects: splicedProjects
+        }
+    };
 }

@@ -13,7 +13,7 @@ const Recovery = (data: IApiProps) => {
 export default Recovery;
 
 export async function getServerSideProps(context) {
-    if (await checkLogined(context, auth))
+    if ((await checkLogined(context, auth)).logined)
         return {
             redirect: {
                 destination: "/account/profile",

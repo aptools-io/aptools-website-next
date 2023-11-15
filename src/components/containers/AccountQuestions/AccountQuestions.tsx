@@ -77,7 +77,7 @@ const AccountQuestions: React.FC<IComponent> = () => {
     const renderQuestions = (item, index) => {
         const { title, description, logo, value, radios, inputs, optional } = item;
         return (
-            <div className={classNames([styles["account-questions__item"], { [styles["active"]]: index === questionId }])}>
+            <div key={index} className={classNames([styles["account-questions__item"], { [styles["active"]]: index === questionId }])}>
                 <div className={styles["account-questions__item--logo"]}>
                     <div className={styles["logo"]}>{logo}</div>
                     <ul className={styles["dots"]}>

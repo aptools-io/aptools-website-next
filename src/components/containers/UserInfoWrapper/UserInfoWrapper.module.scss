@@ -31,6 +31,12 @@
             display: grid;
             grid-template-columns: 50% 50%;
 
+            button {
+                text-decoration: underline;
+                color: var(--aptools-color-emphasis-c1);
+                text-align: left;
+            }
+
             span {
                 font-size: 14px;
                 font-style: normal;

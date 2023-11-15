@@ -14,7 +14,7 @@ export async function getServerSideProps(context) {
     const { query } = context;
     const { id } = query || {};
 
-    if (await checkLogined(context, auth))
+    if ((await checkLogined(context, auth)).logined)
         return {
             redirect: {
                 destination: "/account/profile",

@@ -13,6 +13,7 @@ import { accounts } from "src/scripts/api/requests";
 import { AccountsCoinsSinglePage } from "src/components/pages";
 import { setAccountsWalletsData } from "src/scripts/redux/slices/accountsSlice";
 import { useRouter } from "next/router";
+import getGeneralRequests from "src/scripts/api/generalRequests";
 
 const Accounts = (data: IApiProps) => {
     const dispatch = useDispatch();
@@ -41,6 +42,7 @@ export async function getServerSideProps(context) {
 
     return {
         props: {
+            general: await getGeneralRequests(context),
             headers: req.headers,
             accounts_wallets: accountsWallets || []
         }

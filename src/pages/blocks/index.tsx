@@ -13,6 +13,7 @@ import { setBlocks } from "src/scripts/redux/slices/blocksSlice";
 import { blockchain, blocks } from "src/scripts/api/requests";
 import { setBlockchain } from "src/scripts/redux/slices/blockchainSlice";
 import { blocksStats } from "src/scripts/websocket/connections";
+import getGeneralRequests from "src/scripts/api/generalRequests";
 
 const Blocks = (data: IApiProps) => {
     const ws = useRef<WebSocket>(null);
@@ -51,6 +52,7 @@ export async function getServerSideProps(context) {
 
     return {
         props: {
+            general: await getGeneralRequests(context),
             headers: req.headers,
             blockchain: blockchainData,
             blocks: blocksData

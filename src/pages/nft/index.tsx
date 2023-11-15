@@ -12,6 +12,7 @@ import { accounts, nfts } from "src/scripts/api/requests";
 
 // Components
 import { NftPage } from "src/components/pages";
+import getGeneralRequests from "src/scripts/api/generalRequests";
 
 const Nft = (data: IApiProps) => {
     const dispatch = useDispatch();
@@ -29,22 +30,24 @@ export default Nft;
 export async function getServerSideProps(context) {
     const { req } = context;
 
-    const nftsCollectionList = await nfts.getNftsCollectionListData() || {};
+    const nftsCollectionList = (await nfts.getNftsCollectionListData()) || {};
 
-    if(!nftsCollectionList) return {
-        notFound: true
-    };
+    if (!nftsCollectionList)
+        return {
+            notFound: true
+        };
 
-    const { list } = nftsCollectionList as IApiNftCollectionList || {};
+    const { list } = (nftsCollectionList as IApiNftCollectionList) || {};
 
-    const promises = list?.map(element => nfts.getNftsCollectionInventoryData(0, 1, element?.creator_address, element?.name)) || [];
-    const nftsCollectionInventories = await Promise.all(promises) || [];
+    const promises = list?.map((element) => nfts.getNftsCollectionInventoryData(0, 1, element?.creator_address, element?.name)) || [];
+    const nftsCollectionInventories = (await Promise.all(promises)) || [];
 
     return {
         props: {
+            general: await getGeneralRequests(context),
             headers: req.headers,
             nfts_collection_list: nftsCollectionList,
-            nfts_collection_inventories: nftsCollectionInventories,
-        },
+            nfts_collection_inventories: nftsCollectionInventories
+        }
     };
 }

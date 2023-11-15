@@ -14,7 +14,7 @@ const registerPasswordMiddleware = async (token = null, password = null) => {
     return res;
 };
 
-const walletMiddleware = async (nonce = null, message = null, signature = null, pubKey = null, login = false) => {
+const walletMiddleware = async (nonce = null, message = null, signature = null, pubKey = null, login = false, connectWallet = false) => {
     const apiLogin = new Api(false, process.env.SITE_URL, "");
     const res = apiLogin.post(
         "/api/wallet",
@@ -25,7 +25,8 @@ const walletMiddleware = async (nonce = null, message = null, signature = null, 
             message,
             signature,
             pubKey,
-            login
+            login,
+            connectWallet
         }
     ) as unknown;
     return res;
@@ -49,6 +50,13 @@ const loginMiddleware = async (email = null, password = null) => {
 const getUserMiddleware = async () => {
     const apiLogin = new Api(false, process.env.SITE_URL, "");
     const res = apiLogin.post("/api/user", {}, {}, {}) as unknown;
+
+    return res;
+};
+
+const walletAddApproval = async () => {
+    const apiLogin = new Api(false, process.env.SITE_URL, "");
+    const res = apiLogin.post("/api/wallet-approval", {}, {}, {}) as unknown;
 
     return res;
 };
@@ -80,7 +88,8 @@ const auth = {
     walletMiddleware,
     loginMiddleware,
     getUserMiddleware,
-    logoutMiddleware
+    logoutMiddleware,
+    walletAddApproval
 };
 
 export default auth;

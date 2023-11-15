@@ -14,17 +14,61 @@ import { Button } from "src/components/ui";
 import { logout } from "src/scripts/common/user";
 import { useRouter } from "next/router";
 import { authMiddleware } from "src/scripts/api/middleware";
+import { useSelector } from "react-redux";
+import { IRootState } from "src/scripts/redux/store";
+import moment from "moment";
+import { AptosWalletAdapterProvider, NetworkName } from "@aptos-labs/wallet-adapter-react";
+import { PetraWallet } from "petra-plugin-wallet-adapter";
+import { PontemWallet } from "@pontem/wallet-adapter-plugin";
+import { MartianWallet } from "@martianwallet/aptos-wallet-adapter";
+import { BloctoWallet } from "@blocto/aptos-wallet-adapter-plugin";
+import { FewchaWallet } from "fewcha-plugin-wallet-adapter";
+import { NightlyWallet } from "@nightlylabs/aptos-wallet-adapter-plugin";
+import { SignWalletForm } from "src/components/forms";
+import { shortenHashString } from "src/scripts/util/strings";
 import styles from "./UserInfoWrapper.module.scss";
+
+const mainWallets = [
+    new PetraWallet(),
+    new PontemWallet(),
+    new MartianWallet(),
+    new FewchaWallet(),
+    new NightlyWallet(),
+    new BloctoWallet({
+        network: NetworkName.Testnet,
+        bloctoAppId: "6d85f56e-5f2e-46cd-b5f2-5cf9695b4d46"
+    })
+];
 
 const UserInfoWrapper: React.FC<{
     close: () => void;
 }> = ({ close = null }) => {
     const router = useRouter();
+    const [wallet, setWallet] = useState(false);
+    const [errorWallet, setErrorWallet] = useState(null);
     const classes = classNames([styles["user-info-wrapper"], "form__inner", "form", "popup"]);
-
+    const { user } = useSelector((state: IRootState) => state.user);
+    const { data } = user || {};
+    const { createdAt, email, wallet: userWallet } = data || {};
     const handleLogout = async () => {
         logout(router, authMiddleware);
     };
+
+    const handleConnectWallet = () => {
+        setWallet(true);
+    };
+
+    if (wallet) {
+        return (
+            <AptosWalletAdapterProvider
+                plugins={mainWallets}
+                onError={(error) => {
+                    setErrorWallet(error);
+                }}>
+                <SignWalletForm setClose={setWallet} errorWallet={errorWallet} setErrorWallet={setErrorWallet} connectWallet />
+            </AptosWalletAdapterProvider>
+        );
+    }
 
     return (
         <>
@@ -41,26 +85,26 @@ const UserInfoWrapper: React.FC<{
                         </div>
                         <div className={styles["user-info-wrapper__points-item"]}>
                             <span>You joined on</span>
-                            <span>Aug 09, 2023, 12:14</span>
+                            <span>{moment(createdAt).format("YYYY-MM-DD")}</span>
                         </div>
-                        <div className={styles["user-info-wrapper__points-item"]}>
+                        {/* <div className={styles["user-info-wrapper__points-item"]}>
                             <span>To upgrade your plan</span>
                             <span>Click here</span>
-                        </div>
+                        </div> */}
                     </div>
                     <div className={styles["user-info-wrapper__points"]}>
                         <div className={styles["user-info-wrapper__points-item"]}>
                             <span>Your current email</span>
-                            <span>email@gmail.com</span>
+                            <span>{email || "-"}</span>
                         </div>
                         <div className={styles["user-info-wrapper__points-item"]}>
                             <span>Wallet</span>
-                            <span>Connect wallet</span>
+                            {userWallet ? <span>{shortenHashString(userWallet, [10, 10])}</span> : <button onClick={handleConnectWallet}>Connect wallet</button>}
                         </div>
-                        <div className={styles["user-info-wrapper__points-item"]}>
+                        {/* <div className={styles["user-info-wrapper__points-item"]}>
                             <span>To upgrade your plan</span>
                             <span>Click here</span>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
 

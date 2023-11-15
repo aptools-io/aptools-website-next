@@ -22,6 +22,8 @@
             padding: 8px 16px 16px;
             border-radius: 2px;
             transition: background-color .3s ease;
+            max-width: 305px;
+            width: 100%;
 
             @include mediaWMax('TABLET') {
                 padding: 8px 10px;
@@ -154,8 +156,10 @@
             }
 
             &s {
-                display: grid;
-                grid-template-columns: repeat(3, calc(100% / 3));
+                display: flex;
+                flex-wrap: wrap;
+
+                /*grid-template-columns: repeat(3, calc(100% / 3));
 
                 @include mediaWMax('LARGE') {
                     grid-template-columns: repeat(2, calc(100% / 2));
@@ -163,7 +167,7 @@
 
                 @include mediaWMax('LAPTOP') {
                     grid-template-columns: repeat(1, calc(100% / 1));
-                }
+                }*/
             }
         }
     }

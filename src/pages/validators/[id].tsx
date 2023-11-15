@@ -4,22 +4,17 @@ import React, { useEffect, useRef } from "react";
 // Redux
 import { useDispatch } from "react-redux";
 import { setHeaders } from "src/scripts/redux/slices/headersSlice";
-import {
-    setPageTitle,
-    setPageType
-} from "src/scripts/redux/slices/pageTitleSlice";
+import { setPageTitle, setPageType } from "src/scripts/redux/slices/pageTitleSlice";
 
 // Components
 import { ValidatorsSinglePage } from "src/components/pages";
 
 // Redux
-import {
-    setValidator,
-    setValidators
-} from "src/scripts/redux/slices/validatorsSlice";
+import { setValidator, setValidators } from "src/scripts/redux/slices/validatorsSlice";
 
 // API
 import { accounts } from "src/scripts/api/requests";
+import getGeneralRequests from "src/scripts/api/generalRequests";
 
 const ValidatorsId = (data: IApiProps) => {
     const dispatch = useDispatch();
@@ -49,12 +44,10 @@ export async function getServerSideProps(context) {
 
     return {
         props: {
+            general: await getGeneralRequests(context),
             headers: req.headers,
             validator,
-            validators: await accounts.getAccountResourceData(
-                "0x1",
-                "0x1::stake::ValidatorSet"
-            )
+            validators: await accounts.getAccountResourceData("0x1", "0x1::stake::ValidatorSet")
         }
     };
 }
