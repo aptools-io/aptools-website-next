@@ -12,6 +12,7 @@ import { AccountsSinglePage } from "src/components/pages";
 
 // API
 import { accounts } from "src/scripts/api/requests";
+import getGeneralRequests from "src/scripts/api/generalRequests";
 
 const AccountsId = (data: IApiProps) => {
     const dispatch = useDispatch();
@@ -69,6 +70,7 @@ export async function getServerSideProps(context) {
 
     return {
         props: {
+            general: await getGeneralRequests(context),
             headers: req.headers,
             account_stats: stats,
             account_profitabilities: profitabilities,

@@ -15,16 +15,19 @@ import { transactions } from "src/scripts/api/requests";
 
 // Websocket
 import { aptosStats } from "src/scripts/websocket/connections";
+import getGeneralRequests from "src/scripts/api/generalRequests";
 
 const Transactions = (data: IApiProps) => {
     const ws = useRef<WebSocket>(null);
     const dispatch = useDispatch();
-    
+
     useEffect(() => {
         aptosStats.openFullConnection(ws, dispatch, 25);
-        return () => { ws.current.close(); }; 
+        return () => {
+            ws.current.close();
+        };
     }, [dispatch]);
-    
+
     useEffect(() => {
         dispatch(setHeaders(data.headers) || null);
         dispatch(setCoinTransactions(data.transactions) || null);
@@ -32,13 +35,16 @@ const Transactions = (data: IApiProps) => {
     }, [data, dispatch]);
 
     return <TransactionsPage />;
-}; 
+};
 export default Transactions;
 
 export async function getServerSideProps(context) {
     const { req } = context;
-    return { props: {
-        "headers": req.headers,
-        "transactions": await transactions.getData(25) || [],
-    } };
+    return {
+        props: {
+            general: await getGeneralRequests(context),
+            headers: req.headers,
+            transactions: (await transactions.getData(25)) || []
+        }
+    };
 }

@@ -23,15 +23,17 @@ import filtrateProjects from "src/scripts/util/filtrateProjects";
 // Websocket
 import { aptosStats } from "src/scripts/websocket/connections";
 import { setPageTitle } from "src/scripts/redux/slices/pageTitleSlice";
-
+import getGeneralRequests from "src/scripts/api/generalRequests";
 
 const Home = (data: IApiProps) => {
     const ws = useRef<WebSocket>(null);
     const dispatch = useDispatch();
-    
+
     useEffect(() => {
         aptosStats.openConnection(ws, dispatch);
-        return () => { ws.current.close(); }; 
+        return () => {
+            ws.current.close();
+        };
     }, [dispatch]);
 
     useEffect(() => {
@@ -46,20 +48,23 @@ const Home = (data: IApiProps) => {
     }, [data, dispatch]);
 
     return <MainPage />;
-}; 
+};
 export default Home;
 
 export async function getServerSideProps(context) {
-    const projectsUnfiltered = await projects.getData() || []; 
+    const projectsUnfiltered = (await projects.getData()) || [];
     const { req } = context;
-    return { props: {
-        "overflow": true,
-        "headers": req.headers,
-        /* "general_stats": await generalStats.getData() || {},
+    return {
+        props: {
+            general: await getGeneralRequests(context),
+            overflow: true,
+            headers: req.headers
+            /* "general_stats": await generalStats.getData() || {},
         "contract_addresses": await contractAddresses.getData() || [],
         "contract_transactions": await contractTransactions.getData() || [],
         "dexes_volumes": await dexesVolumes.getData() || [],
         "projects": filtrateProjects(projectsUnfiltered, categories) || [],
         "transactions": await transactions.getData() || [], */
-    } };
+        }
+    };
 }

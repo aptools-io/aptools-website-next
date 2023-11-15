@@ -12,6 +12,7 @@ import { DexSinglePage } from "src/components/pages";
 
 // API
 import { dexSingle } from "src/scripts/api/requests";
+import getGeneralRequests from "src/scripts/api/generalRequests";
 
 const DexId = (data: IApiProps) => {
     const dispatch = useDispatch();
@@ -40,6 +41,7 @@ export async function getServerSideProps(context) {
 
     return {
         props: {
+            general: await getGeneralRequests(context),
             headers: req.headers,
             dex_single: dex
         }

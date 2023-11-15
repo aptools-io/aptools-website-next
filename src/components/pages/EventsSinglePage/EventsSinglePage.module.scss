@@ -8,6 +8,55 @@
 }
 
 .event-content {
+    .creator {
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-end;
+        margin-top: 26px;
+
+        svg {
+            margin-right: 4px;
+        }
+
+        strong {
+            color: var(--aptools-color-emphasis-c1);
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 130%; /*18.2px*/
+            margin-right: 4px;
+        }
+
+        span {
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 130%;
+        }
+
+        p {
+            margin-top: 4px;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 130%;
+            color: var(--aptools-color-grey-c1);
+        }
+    }
+
+    .buttons {
+        display: flex;
+        justify-content: flex-end;
+        column-gap: 16px;
+        margin-top: 32px;
+    }
+
+    &__outer {
+        max-width: 1440px;
+    }
+
     &__image {
         width: 100%;
         background-color: var(--aptools-color-grey-c3);
@@ -22,17 +71,90 @@
             max-height: 290px;
         }
 
+        @include mediaWMax('TABLET') {
+            min-height: unset;
+            max-height: 290px;
+        }
+
         overflow: hidden;
 
         img {
             width: 100%;
             height: 100%;
+            min-height: 100%;
             object-fit: cover;
         }
     }
 
     &__text {
-        margin-top: var(--layout-indent);
+        margin-top: 16px;
+
+        &-plates {
+            display: flex;
+            column-gap: 16px;
+            margin-top: 16px;
+
+            @include mediaWMax('LAPTOP') {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                row-gap: 16px;
+            }
+
+            @include mediaWMax('TABLET') {
+                grid-template-columns: 1fr;
+            }
+
+            .plate {
+                min-height: 78px;
+                padding: 10px 16px;
+                border-radius: 4px;
+                border: 1px solid var(--aptools-color-grey-c4);
+                flex-basis: 100%;
+                display: flex;
+                justify-content: space-between;
+                column-gap: 24px;
+
+                &.full {
+                    min-width: 320px;
+
+                    @include mediaWMax('LAPTOP') {
+                        min-width: 100%;
+                        flex-basis: unset;
+                    }
+                }
+
+                span {
+                    display: flex;
+                    align-items: center;
+
+                    svg {
+                        margin-right: 4px;
+                    }
+
+                    font-size: 14px;
+                    font-style: normal;
+                    font-weight: 500;
+                    line-height: 130%; /*18.2px*/
+                    color: var(--aptools-color-emphasis-c1);
+                }
+
+                p {
+                    margin-top: 4px;
+                    font-size: 14px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 130%;
+
+                    &[data-blue] {
+                        font-size: 14px;
+                        font-style: normal;
+                        font-weight: 500;
+                        line-height: 130%;
+                        color: var(--aptools-color-emphasis-c1);
+                    }
+                }
+            }
+        }
 
         &-info {
             display: flex;
@@ -52,7 +174,7 @@
             }
 
             .categories {
-                margin-left: 16px;
+                margin-left: 0px;
 
                 --default-plate-color: var(--aptools-color-lights-primary);
 
@@ -88,6 +210,9 @@
                 font-weight: 500;
                 line-height: 110%; /*44px*/
                 letter-spacing: -1px;
+                max-width: 862px;
+                display: block;
+                margin-bottom: 10px;
 
                 @include mediaWMax('LAPTOP') {
                     font-size: 22px;
@@ -133,9 +258,20 @@
                         min-height: 300px;
                         max-height: 360px;
 
+                        img {
+                            max-height: 360px;
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                        }
+
                         @include mediaWMax('LAPTOP') {
                             min-height: 200px;
                             max-height: 290px;
+
+                            img {
+                                max-height: 290px;
+                            }
                         }
 
                         background-color: var(--aptools-color-grey-c3);
@@ -143,18 +279,203 @@
                         display: flex;
                         justify-content: center;
                         align-items: center;
-
-                        img {
-                            width: 100%;
-                            height: 100%;
-                            object-fit: cover;
-                        }
                     }
                 }
 
                 .content + .content {
                     margin-top: var(--layout-indent);
                 }
+            }
+        }
+    }
+}
+
+.events-list {
+    width: 100%;
+    display: flex;
+
+    &__nav {
+        &--disabled {
+            svg path {
+                fill: var(--aptools-color-grey-c3);
+            }
+
+            cursor: default;
+        }
+
+        &--lock {
+            display: none !important;
+        }
+
+        &--button {
+            width: 32px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+
+            &:last-of-type {
+                transform: scaleX(-1);
+            }
+        }
+    }
+
+    &__inner {
+        overflow: hidden;
+        position: relative;
+        width: 100%;
+
+        & > div {
+            display: flex !important;
+        }
+    }
+
+    &__category {
+        &-item {
+            padding: 8px 16px 16px;
+            border-radius: 2px;
+            transition: background-color .3s ease;
+            max-width: 305px;
+            width: 100%;
+
+            @include mediaWMax('TABLET') {
+                padding: 8px 10px;
+            }
+
+            &:hover {
+                background-color: var(--aptools-color-grey-c4);
+            }
+
+            &-inner {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                height: 100%;
+
+                .top {
+                    display: flex;
+                    flex-direction: column;
+                }
+            }
+
+            .date,
+            .image,
+            .title {
+                margin-bottom: 4px;
+            }
+
+            .date {
+                font-size: 10px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 130%;
+                display: flex;
+                align-items: center;
+
+                svg {
+                    margin-right: 8px;
+                }
+            }
+
+            .image {
+                min-height: 200px;
+                max-height: 200px;
+                background: linear-gradient(119deg, rgb(235 238 245 / 15%) 2.25%, rgb(59 89 152 / 15%) 77.9%);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                overflow: hidden;
+                position: relative;
+
+                @include mediaWMax('TABLET') {
+                    order: 1;
+                    display: block;
+                    max-height: unset;
+                    min-height: unset;
+                    background: unset;
+                }
+
+                .categories {
+                    --default-plate-color: var(--aptools-color-lights-primary);
+
+                    @include mediaWMax('TABLET') {
+                        position: relative;
+                        padding: unset;
+                        margin-top: 26px;
+                    }
+
+                    position: absolute;
+                    padding: 6px 12px;
+                    top: 0;
+                    left: 0;
+                    display: flex;
+                    column-gap: 10px;
+
+                    li {
+                        padding: 2px 6px;
+                        border-radius: 4px;
+                        background-color: var(--default-plate-color);
+                        font-size: 10px;
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: 15px;
+                    }
+                }
+            }
+
+            .title {
+                font-size: 20px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: normal;
+                letter-spacing: -1px;
+            }
+
+            .description {
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 130%;
+                margin-bottom: 8px;
+            }
+
+            .bottom {
+                display: flex;
+                justify-content: space-between;
+
+                & > span {
+                    height: 100%;
+                    display: flex;
+                    align-items: center;
+                }
+
+                .social {
+                    display: flex;
+                    align-items: center;
+                    font-size: 10px;
+                    font-style: normal;
+                    font-weight: 500;
+                    line-height: 15px;
+                    color: var(--aptools-color-emphasis-c1);
+
+                    svg {
+                        margin-right: 8px;
+                    }
+                }
+            }
+
+            &s {
+                display: flex;
+                flex-wrap: wrap;
+
+                /*grid-template-columns: repeat(3, calc(100% / 3));
+
+                @include mediaWMax('LARGE') {
+                    grid-template-columns: repeat(2, calc(100% / 2));
+                }
+
+                @include mediaWMax('LAPTOP') {
+                    grid-template-columns: repeat(1, calc(100% / 1));
+                }*/
             }
         }
     }

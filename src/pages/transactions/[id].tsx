@@ -13,11 +13,11 @@ import { TransactionsSinglePage } from "src/components/pages";
 // API
 import { transactions } from "src/scripts/api/requests";
 import { setTransaction } from "src/scripts/redux/slices/statsTransactionsSlice";
-
+import getGeneralRequests from "src/scripts/api/generalRequests";
 
 const TransactionsId = (data: IApiProps) => {
     const dispatch = useDispatch();
- 
+
     useEffect(() => {
         dispatch(setHeaders(data.headers) || null);
         dispatch(setTransaction(data.transaction_single) || null);
@@ -25,7 +25,7 @@ const TransactionsId = (data: IApiProps) => {
     }, [data, dispatch]);
 
     return <TransactionsSinglePage />;
-}; 
+};
 export default TransactionsId;
 
 export async function getServerSideProps(context) {
@@ -41,16 +41,18 @@ export async function getServerSideProps(context) {
  */
     const isVersion = !(id.indexOf("0x") > -1);
 
-    const transaction = isVersion ? 
-        await transactions.getSingleTransactionDataByVersion(id) : 
-        await transactions.getSingleTransactionData(id);
+    const transaction = isVersion ? await transactions.getSingleTransactionDataByVersion(id) : await transactions.getSingleTransactionData(id);
 
-    if(!transaction) return {
-        notFound: true
+    if (!transaction)
+        return {
+            notFound: true
+        };
+
+    return {
+        props: {
+            general: await getGeneralRequests(context),
+            headers: req.headers,
+            transaction_single: transaction
+        }
     };
-
-    return { props: {
-        "headers": req.headers,
-        "transaction_single": transaction
-    } };
 }

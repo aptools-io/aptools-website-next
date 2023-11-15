@@ -10,7 +10,7 @@ import { setPageTitle } from "src/scripts/redux/slices/pageTitleSlice";
 import { NftSinglePage } from "src/components/pages";
 import { nfts } from "src/scripts/api/requests";
 import { setNftsCollectionGeneralInfo, setNftsCollectionInventory, setNftsCollectionTransfers } from "src/scripts/redux/slices/nftsSlice";
-
+import getGeneralRequests from "src/scripts/api/generalRequests";
 
 const NftId = (data: IApiProps) => {
     const dispatch = useDispatch();
@@ -32,20 +32,22 @@ export async function getServerSideProps(context) {
 
     const { id, name } = query || {};
 
-    const generalInfo = await nfts.getNftsCollectionGeneralInfoData(id, name) || null;
-    const transfers = await nfts.getNftsCollectionTransfersData(1, 10, id, name) || null;
-    const inventory = await nfts.getNftsCollectionInventoryData(1, 1, id, name) || null;
+    const generalInfo = (await nfts.getNftsCollectionGeneralInfoData(id, name)) || null;
+    const transfers = (await nfts.getNftsCollectionTransfersData(1, 10, id, name)) || null;
+    const inventory = (await nfts.getNftsCollectionInventoryData(1, 1, id, name)) || null;
 
-    if(!generalInfo || !transfers || !inventory) return {
-        notFound: true
-    };
+    if (!generalInfo || !transfers || !inventory)
+        return {
+            notFound: true
+        };
 
     return {
         props: {
+            general: await getGeneralRequests(context),
             headers: req.headers,
             nfts_collection_general_info: generalInfo,
             nfts_collection_transfers: transfers,
             nfts_collection_inventory: inventory
-        },
+        }
     };
 }

@@ -1,4 +1,7 @@
 interface IApiProps {
+    general: {
+        user: IUser;
+    };
     headers: IncomingHttpHeaders;
     general_stats?: IApiGeneralStats;
     page_type?: string;
