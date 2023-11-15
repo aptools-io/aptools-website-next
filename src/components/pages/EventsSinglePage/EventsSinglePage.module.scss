@@ -64,7 +64,6 @@
         justify-content: center;
         align-items: center;
         min-height: 300px;
-        max-height: 360px;
 
         @include mediaWMax('LAPTOP') {
             min-height: 240px;
