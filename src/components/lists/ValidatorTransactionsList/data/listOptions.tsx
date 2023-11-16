@@ -38,11 +38,9 @@ const columnNames = (validatorIndex) => [
     },
     {
         key: "timestamp",
-        formatter: (v) => (
-            <Tooltip text={timeAgo(v / 1000)}>
-                {timeAgo(v / 1000, true)}
-            </Tooltip>
-        ),
+        formatter: (v) => {
+            return <Tooltip text={timeAgo(v / 1000 / 1000)}>{timeAgo(v / 1000 / 1000, true)}</Tooltip>;
+        },
         value: "Age"
     },
     {
@@ -69,9 +67,7 @@ const columnNames = (validatorIndex) => [
         formatter: (events) => {
             const index = Number(validatorIndex) + 1;
             const amount = events?.[index]?.data?.rewards_amount;
-            return amount
-                ? concatString(formatNumber(amount / 100000000, 2), "", " APT")
-                : "-";
+            return amount ? concatString(formatNumber(amount / 100000000, 2), "", " APT") : "-";
         }
     }
 ];
