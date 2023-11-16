@@ -30,16 +30,7 @@ const columnNamesDesktop = [
         key: "type",
         value: "Type",
         formatterComponent: (v) => {
-            return (
-                <span
-                    className={classNames([
-                        styles["account-transactions-list__type"],
-                        { [styles.success]: v === "Deposit" },
-                        { [styles.error]: v === "Withdraw" }
-                    ])}>
-                    {v}
-                </span>
-            );
+            return <span className={classNames([styles["account-transactions-list__type"], { [styles.success]: v === "Deposit" }, { [styles.error]: v === "Withdraw" }])}>{v}</span>;
         },
 
         cantSort: true,
@@ -75,10 +66,8 @@ const columnNamesDesktop = [
         key: "value",
         value: "Value",
         description: "value_usd",
-        formatter: (v, row) =>
-            `${concatString(formatNumber(v, 2), "", ` ${row?.coin_symbol}`)}`,
-        descriptionFormatter: (v) =>
-            `${concatString(formatNumber(v, 2), "", " $")}`,
+        formatter: (v, row) => `${concatString(formatNumber(v, 2), "", ` ${row?.coin_symbol}`)}`,
+        descriptionFormatter: (v) => `${concatString(formatNumber(v, 2), "", " $")}`,
         cantSort: true,
         headHideMobile: true
     },
@@ -86,12 +75,7 @@ const columnNamesDesktop = [
         key: "fee",
         value: "Txn fee",
         formatter: (v) => {
-            if (v.toString().indexOf("e") !== -1)
-                return `${concatString(
-                    formatNumber(0.00001, 4, true),
-                    "",
-                    " APT"
-                )}`;
+            if (v.toString().indexOf("e") !== -1) return `${concatString(formatNumber(0.00001, 4, true), "", " APT")}`;
             return `${concatString(formatNumber(v, 4), "", " APT")}`;
         },
         cantSort: true,
@@ -107,26 +91,13 @@ const columnNamesDesktop = [
     {
         key: "timestamp",
         value: "Timestamp",
-        formatter: (v) => (
-            <Tooltip text={timeAgo(v)}>{timeAgo(v, true)}</Tooltip>
-        ),
+        formatter: (v) => <Tooltip text={timeAgo(v / 1000)}>{timeAgo(v / 1000, true)}</Tooltip>,
         cantSort: true,
         headHideMobile: true
     }
 ];
 
 // Columns
-const columnsDesktop = [
-    "7.25%",
-    "7.25%",
-    "7%",
-    "10%",
-    "14%",
-    "14%",
-    "10%",
-    "10%",
-    "10%",
-    "10%"
-];
+const columnsDesktop = ["7.25%", "7.25%", "7%", "10%", "14%", "14%", "10%", "10%", "10%", "10%"];
 
 export { columnNamesDesktop, columnsDesktop };
