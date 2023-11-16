@@ -214,7 +214,7 @@ const EventsSinglePage: React.FC = () => {
                                             )}
                                         </div>
 
-                                        {contentList?.length > 0 || description ? renderContentInner() : <Plug noData />}
+                                        {(contentList?.length > 0 || description) && renderContentInner()}
                                     </div>
                                 </div>
                             </GridWrapper>
