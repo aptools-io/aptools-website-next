@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { headersSlice, loadingSlice, statsAptosSlice, statsGeneralSlice, statsTransactions, statsProjectsSlice, statsDexesVolumesSlice, statsAddressesTransactionsSlice, singleDexSlice, pageTitleSlice, newsSlice, accountsSlice, validatorsSlice, notificationSlice, blocksSlice, blockchainSlice, nftsSlice, eventsSlice, pageSlice, authConfirmSlice } from "../slices/index";
+import userSlice from "../slices/userSlice";
 
 const store = configureStore({
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: false }),
@@ -23,7 +24,8 @@ const store = configureStore({
         nfts: nftsSlice,
         events: eventsSlice,
         page: pageSlice,
-        authConfirm: authConfirmSlice
+        authConfirm: authConfirmSlice,
+        user: userSlice
     }
 });
 export default store;

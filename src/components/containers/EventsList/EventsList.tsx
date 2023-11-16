@@ -62,7 +62,7 @@ const EventsList: React.FC<
                         </div>
 
                         <strong className={styles["title"]}>{title}</strong>
-                        <p className={styles["description"]}>{description.length > 80 ? `${description.slice(0, 80)}...` : description}</p>
+                        <p className={styles["description"]}>{description?.length > 80 ? `${description.slice(0, 80)}...` : description}</p>
                     </div>
 
                     <div className={styles["bottom"]}>
@@ -70,7 +70,7 @@ const EventsList: React.FC<
                             <ActiveLink href={socialMediaLink}>
                                 <a className={styles["social"]}>
                                     <Monitor />
-                                    {socialMediaLink}
+                                    {socialMediaLink?.length > 25 ? `${socialMediaLink.slice(0, 25)}...` : socialMediaLink}
                                 </a>
                             </ActiveLink>
                         ) : (

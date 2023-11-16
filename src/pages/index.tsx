@@ -24,6 +24,7 @@ import filtrateProjects from "src/scripts/util/filtrateProjects";
 import { aptosStats } from "src/scripts/websocket/connections";
 import { setPageTitle } from "src/scripts/redux/slices/pageTitleSlice";
 import { timeSpent } from "src/scripts/util/time";
+import getGeneralRequests from "src/scripts/api/generalRequests";
 
 const Home = (data: IApiProps) => {
     const ws = useRef<WebSocket>(null);
@@ -36,6 +37,7 @@ const Home = (data: IApiProps) => {
     }, [dispatch]);
 
     useEffect(() => {
+        console.log(data.general.user);
         dispatch(setHeaders(data.headers) || null);
         dispatch(setGeneralStatsData(data.general_stats || null));
         dispatch(setProjectStatsData(data.projects || null));
@@ -53,10 +55,11 @@ export default Home;
 export async function getServerSideProps(context) {
     const start = Date.now();
     const startTime = timeSpent(start);
-    const projectsUnfiltered = (await projects.getData()) || [];
-    const projectsTime = timeSpent(start);
 
     const { req } = context;
+
+    const projectsUnfiltered = (await projects.getData()) || [];
+    const projectsTime = timeSpent(start);
 
     const blockchainStatistics = (await generalStats.getBlockchainStatisticsData()) || ({} as any);
     const blockchainStatisticsTime = timeSpent(start);
@@ -95,6 +98,7 @@ export async function getServerSideProps(context) {
 
     return {
         props: {
+            general: await getGeneralRequests(context),
             overflow: true,
             headers: req.headers,
             general_stats:

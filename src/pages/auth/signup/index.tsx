@@ -11,7 +11,7 @@ const SignUp = () => {
 export default SignUp;
 
 export async function getServerSideProps(context) {
-    if (await checkLogined(context, auth))
+    if ((await checkLogined(context, auth)).logined)
         return {
             redirect: {
                 destination: "/account/profile",

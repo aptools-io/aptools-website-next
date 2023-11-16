@@ -27,7 +27,8 @@ const SignWalletForm: React.FC<{
     setErrorWallet?: React.Dispatch<React.SetStateAction<string>>;
     setClose: React.Dispatch<React.SetStateAction<boolean>>;
     login?: boolean;
-}> = ({ errorWallet = null, setErrorWallet = null, setClose = null, login = false }) => {
+    connectWallet?: boolean;
+}> = ({ errorWallet = null, setErrorWallet = null, setClose = null, login = false, connectWallet = false }) => {
     const [loading, setLoading] = useState(false);
     const [selectedWallet, setSelectedWallet] = useState(null);
     const router = useRouter();
@@ -40,12 +41,13 @@ const SignWalletForm: React.FC<{
     const { connect, wallets, signMessage, disconnect, account } = useWallet();
 
     const register = (nonce, message, signature, pubKey) => {
-        authMiddleware.walletMiddleware(nonce, message, signature, pubKey, login).then((e: unknown) => {
+        authMiddleware.walletMiddleware(nonce, message, signature, pubKey, login, connectWallet).then((e: unknown) => {
             const response = e as IUserResponse;
 
             if (response?.status === "ok") {
                 loginUser(response, (saveUserInStorage) => {
                     saveUserInStorage(!login);
+                    if (connectWallet) window.localStorage.removeItem("firstTime");
                     router.push("/account/profile");
                 });
             } else {
@@ -92,12 +94,18 @@ const SignWalletForm: React.FC<{
     };
 
     const onSignMessage = async () => {
-        const responseData = await auth.walletApproval();
+        const approval = connectWallet ? authMiddleware.walletAddApproval : auth.walletApproval;
+        const responseData = await approval();
         const { data } = responseData || ({} as any);
         const { nonce } = data || ({} as any);
 
+        let message = "";
+        if (login) message = "Do you want to login?";
+        else if (connectWallet) message = "Do you want to connect wallet?";
+        else message = "Do you want to register?";
+
         const payload = {
-            message: login ? "Do you want to login?" : "Do you want to register?",
+            message,
             nonce
         };
 
@@ -175,7 +183,7 @@ const SignWalletForm: React.FC<{
                 <Close />
             </button>
             <Form className={classes}>
-                <strong className={"title"}>Sign {login ? "in" : "up"} by connecting a wallet</strong>
+                {!connectWallet ? <strong className={"title"}>Sign {login ? "in" : "up"} by connecting a wallet</strong> : <strong className={"title"}>Connect your wallet</strong>}
                 <div className={classNames(["form__inner--item", "form__input", { error: formik.errors.agreement }])}>
                     <Field name={"agreement"} type='checkbox'>
                         {({ field, form, meta }) => <Checkbox id={"id-agreement"} label={"I agree to the Terms & Conditions and Privacy Policy"} error={meta.touched && meta.error} field={field} />}

@@ -29,9 +29,9 @@ const MainBanner: React.FC<IMainBannerProps> = ({ title = null, description = nu
             <div className={styles["main-banner__logo"]}>
                 <AptLogoBanner className={styles["main-banner__logo-inner"]} />
             </div>
-            <div className={styles["main-banner__theme-switcher"]}>
+            {/* <div className={styles["main-banner__theme-switcher"]}>
                 <ThemeSwitcher />
-            </div>
+            </div> */}
         </div>
     );
 };

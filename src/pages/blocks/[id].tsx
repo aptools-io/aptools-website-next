@@ -6,14 +6,12 @@ import { useDispatch } from "react-redux";
 
 // Components
 import { BlocksSinglePage } from "src/components/pages";
+import getGeneralRequests from "src/scripts/api/generalRequests";
 
 // API
 import { blocks } from "src/scripts/api/requests";
 import { setBlock } from "src/scripts/redux/slices/blocksSlice";
-import {
-    setPageTitle,
-    setPageType
-} from "src/scripts/redux/slices/pageTitleSlice";
+import { setPageTitle, setPageType } from "src/scripts/redux/slices/pageTitleSlice";
 
 const BlocksId = (data: IApiProps) => {
     const dispatch = useDispatch();
@@ -32,9 +30,7 @@ export async function getServerSideProps(context) {
 
     const isHeight = !(id.indexOf("v-") > -1);
 
-    const block = isHeight
-        ? await blocks.getBlockByHeightData(id, true)
-        : await blocks.getBlockByVersionData(id.slice(2), true);
+    const block = isHeight ? await blocks.getBlockByHeightData(id, true) : await blocks.getBlockByVersionData(id.slice(2), true);
 
     if (!block)
         return {
@@ -43,6 +39,7 @@ export async function getServerSideProps(context) {
 
     return {
         props: {
+            general: await getGeneralRequests(context),
             headers: req.headers,
             block
         }

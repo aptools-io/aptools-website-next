@@ -4,6 +4,11 @@ interface IApiEvent {
     description: string;
     imageLink: string;
     socialMediaLink: string;
+    eventStatus: string;
+    mainLink: string;
+    location: { id: number; location: string };
+    paidOrFree: { id: number; title: string };
+    eventCost: number;
     typeOfEntry: {
         id: number;
         entryTypeTitle: string;
@@ -11,6 +16,7 @@ interface IApiEvent {
     categoryList: {
         id: number;
         categoryTitle: string;
+        color: string;
         visible: boolean;
     }[];
     eventDateRange: {
@@ -65,6 +71,8 @@ interface IApiEventCategory {
 interface IApiEventSingle extends IApiEvent {
     contentList: IApiEventSingleContent[];
     url?: string;
+    id?: number;
+    eventList?: IApiEvent[];
 }
 
 interface IApiEventSingleContent {

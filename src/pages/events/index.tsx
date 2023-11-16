@@ -12,6 +12,7 @@ import { EventsPage } from "src/components/pages";
 // API
 import { events } from "src/scripts/api/requests";
 import { setEventsCategoriesData, setEventsData, setEventsSlidesData } from "src/scripts/redux/slices/eventsSlice";
+import getGeneralRequests from "src/scripts/api/generalRequests";
 
 // dummy
 
@@ -34,6 +35,7 @@ export async function getServerSideProps(context) {
     const { req } = context;
     return {
         props: {
+            general: await getGeneralRequests(context),
             headers: req.headers,
             events: (await events.getData("", "desc", null, null, 0, 20, null, null)) || [],
             eventsCategories: (await events.getCategoriesData()) || [],

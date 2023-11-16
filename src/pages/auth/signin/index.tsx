@@ -13,7 +13,7 @@ const SignIn = (data: IApiProps) => {
 export default SignIn;
 
 export async function getServerSideProps(context) {
-    if (await checkLogined(context, auth))
+    if ((await checkLogined(context, auth)).logined)
         return {
             redirect: {
                 destination: "/account/profile",
