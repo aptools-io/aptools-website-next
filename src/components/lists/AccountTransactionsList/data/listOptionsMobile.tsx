@@ -23,16 +23,7 @@ const columnNamesMobile = [
             {
                 key: "type",
                 formatterComponent: (v) => {
-                    return (
-                        <span
-                            className={classNames([
-                                styles["account-transactions-list__type"],
-                                { [styles.success]: v === "Deposit" },
-                                { [styles.error]: v === "Withdraw" }
-                            ])}>
-                            {v}
-                        </span>
-                    );
+                    return <span className={classNames([styles["account-transactions-list__type"], { [styles.success]: v === "Deposit" }, { [styles.error]: v === "Withdraw" }])}>{v}</span>;
                 }
             },
             {
@@ -44,14 +35,8 @@ const columnNamesMobile = [
             {
                 key: "value",
                 description: "value_usd",
-                formatter: (v, row) =>
-                    `${concatString(
-                        formatNumber(v, 2),
-                        "",
-                        ` ${row?.coin_symbol}`
-                    )}`,
-                descriptionFormatter: (v) =>
-                    `${concatString(formatNumber(v, 2), "", " $")}`,
+                formatter: (v, row) => `${concatString(formatNumber(v, 2), "", ` ${row?.coin_symbol}`)}`,
+                descriptionFormatter: (v) => `${concatString(formatNumber(v, 2), "", " $")}`,
                 right: true
             }
         ],
@@ -74,23 +59,13 @@ const columnNamesMobile = [
         headRemove: true,
         formatterComponent: (v, row) => {
             const feeFormatter = (v) => {
-                if (v.toString().indexOf("e") !== -1)
-                    return `${concatString(
-                        formatNumber(0.00001, 4, true),
-                        "",
-                        " APT"
-                    )}`;
+                if (v.toString().indexOf("e") !== -1) return `${concatString(formatNumber(0.00001, 4, true), "", " APT")}`;
                 return `${concatString(formatNumber(v, 4), "", " APT")}`;
             };
             return (
-                <span
-                    className={
-                        styles["account-transactions-list__mobile-inner"]
-                    }>
+                <span className={styles["account-transactions-list__mobile-inner"]}>
                     <div className={styles["time"]}>
-                        <Tooltip text={timeAgo(row?.timestamp)}>
-                            {timeAgo(row?.timestamp, true)}
-                        </Tooltip>
+                        <Tooltip text={timeAgo(Number(row?.timestamp) / 1000)}>{timeAgo(Number(row?.timestamp) / 1000, true)}</Tooltip>
                     </div>
                     <div className={styles["wrapper"]}>
                         <div>Txn fee</div>
