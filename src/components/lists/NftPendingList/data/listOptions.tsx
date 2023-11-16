@@ -19,9 +19,10 @@ const columnNames = [
     {
         key: "age",
         value: "Age",
-        formatter: (v) => (
-            <Tooltip text={timeAgo(v)}>{timeAgo(v, true)}</Tooltip>
-        )
+        formatter: (v) => {
+            console.log(v);
+            return <>{timeFull(v)}</>;
+        }
     },
     {
         key: "from",
