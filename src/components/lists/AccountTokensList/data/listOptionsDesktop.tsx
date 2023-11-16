@@ -20,10 +20,8 @@ const columnNamesDesktop = [
         key: "balance",
         value: "Balance",
         description: "balanceUSD",
-        formatter: (v, row) =>
-            `${concatString(formatNumber(v, 4), "", ` ${row.coin}`)}`,
-        descriptionFormatter: (v) =>
-            `${concatString(formatNumber(v), "$", "")}`,
+        formatter: (v, row) => `${concatString(formatNumber(v, 4), "", ` ${row.coin}`)}`,
+        descriptionFormatter: (v) => `${concatString(formatNumber(v), "$", "")}`,
         headHideMobile: true
     },
     {
@@ -37,18 +35,13 @@ const columnNamesDesktop = [
         value: "Profit",
         description: "profit_percentage",
         formatter: (v) => `${concatString(formatNumber(v), "", "$")}`,
-        descriptionFormatter: (v) =>
-            `${concatString(setSign(formatNumber(v)), "", "%")}`,
+        descriptionFormatter: (v) => `${concatString(setSign(formatNumber(v)), "", "%")}`,
         headHideMobile: true
     },
     {
         key: "timestamp",
         value: "Last transaction",
-        formatter: (v) => (
-            <Tooltip text={timeAgo(v * 1000)}>
-                {timeAgo(v * 1000, true)}
-            </Tooltip>
-        ),
+        formatter: (v) => <Tooltip text={timeAgo(v)}>{timeAgo(v, true)}</Tooltip>,
         headHideMobile: true
     }
 ];

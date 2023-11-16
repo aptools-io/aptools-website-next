@@ -29,10 +29,8 @@ const columnNamesMobile = [
                 key: "balance",
                 value: "Balance",
                 description: "balanceUSD",
-                formatter: (v, row) =>
-                    `${concatString(formatNumber(v, 4), "", ` ${row.coin}`)}`,
-                descriptionFormatter: (v) =>
-                    `${concatString(formatNumber(v), "", "$")}`,
+                formatter: (v, row) => `${concatString(formatNumber(v, 4), "", ` ${row.coin}`)}`,
+                descriptionFormatter: (v) => `${concatString(formatNumber(v), "", "$")}`,
                 right: true
             }
         ]
@@ -57,18 +55,7 @@ const columnNamesMobile = [
             return (
                 <div className={styles["account-tokens-list__percent"]}>
                     {concatString(formatNumber(v), "", "$")}
-                    <div
-                        className={percentClass(
-                            row?.profit_percentage,
-                            true,
-                            true
-                        )}>
-                        {concatString(
-                            setSign(formatNumber(row?.profit_percentage)),
-                            "",
-                            "%"
-                        )}
-                    </div>
+                    <div className={percentClass(row?.profit_percentage, true, true)}>{concatString(setSign(formatNumber(row?.profit_percentage)), "", "%")}</div>
                 </div>
             );
         },
@@ -77,11 +64,7 @@ const columnNamesMobile = [
     {
         key: "timestamp",
         value: "Last transaction",
-        formatter: (v) => (
-            <Tooltip text={timeAgo(v * 1000)}>
-                {timeAgo(v * 1000, true)}
-            </Tooltip>
-        ),
+        formatter: (v) => <Tooltip text={timeAgo(v)}>{timeAgo(v, true)}</Tooltip>,
         headHideMobile: true
     }
 ];
