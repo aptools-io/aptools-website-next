@@ -20,8 +20,9 @@ const Topper: React.FC<
         customTitle?: string | string[];
         noLink?: string[];
         additiveTitle?: string;
+        afterComponent?: () => React.ReactNode;
     } & IComponent
-> = ({ backlink = null, customTitle = null, additiveTitle = "", noLink = [], className }) => {
+> = ({ backlink = null, customTitle = null, additiveTitle = "", noLink = [], afterComponent = null, className }) => {
     const { title, type } = useSelector((state: IRootState) => state.pageTitle);
 
     const classes = classNames([styles.topper, className]);
@@ -68,9 +69,12 @@ const Topper: React.FC<
                 )}
             </div>
             <Breadcrumbs key={title} noLink={noLink} customTitle={(customTitle as string) || title} />
-            <Button {...(backlink ? { href: backlink } : {})} before={"back"}>
-                Back
-            </Button>
+            <div className={styles["topper__buttons"]}>
+                <Button {...(backlink ? { href: backlink } : {})} before={"back"}>
+                    Back
+                </Button>
+                {afterComponent && afterComponent()}
+            </div>
         </div>
     );
 };

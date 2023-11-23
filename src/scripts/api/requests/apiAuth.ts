@@ -174,6 +174,46 @@ const setQuestions = async (token: string, context, data) => {
     return questions;
 };
 
+const setChangeEmail = async (token: string, context, email) => {
+    const api = new Api(false, process.env.BASE_API_ACCOUNT_URL, "");
+    const result = api.post(
+        "/api/auth/change/email",
+        {
+            Authorization: `Bearer ${token}`
+        },
+        {},
+        {
+            email
+        }
+    ) as unknown;
+
+    const accessToken = await checkRefreshToken(await result, context, auth);
+    if (accessToken) {
+        return setChangeEmail(accessToken, null, email);
+    }
+    return result;
+};
+
+const setChangeConfirmEmail = async (token: string, context, emailToken) => {
+    const api = new Api(false, process.env.BASE_API_ACCOUNT_URL, "");
+    const result = api.post(
+        "/api/auth/change/email/confirm",
+        {
+            Authorization: `Bearer ${token}`
+        },
+        {},
+        {
+            token: emailToken
+        }
+    ) as unknown;
+
+    const accessToken = await checkRefreshToken(await result, context, auth);
+    if (accessToken) {
+        return setChangeConfirmEmail(accessToken, null, emailToken);
+    }
+    return result;
+};
+
 const refreshToken = async (refreshToken) => {
     const api = new Api(false, process.env.BASE_API_ACCOUNT_URL, "", false, true);
     const userData = api.post(
@@ -224,6 +264,8 @@ const auth = {
     forgotPassword,
     setNewPassword,
     walletApproval,
+    setChangeEmail,
+    setChangeConfirmEmail,
     walletAddApproval
 };
 
