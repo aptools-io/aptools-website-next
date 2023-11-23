@@ -100,6 +100,7 @@
         display: flex;
         flex-direction: column;
         width: 100%;
+        min-height: 382px;
 
         @include mediaWMax('LARGE') {
             padding: 47px 40px;
@@ -132,6 +133,16 @@
             right: 79px;
             transform: translate(0%, -50%);
             transition: top 1s ease;
+        }
+
+        .back-image {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: calc(100% - 619px);
+            object-fit: contain;
+            object-position: right;
+            height: 100%;
         }
 
         .title {

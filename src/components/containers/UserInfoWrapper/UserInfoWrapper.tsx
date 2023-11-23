@@ -9,7 +9,7 @@ import React, { useEffect, useState } from "react";
 import classNames from "classnames";
 
 // Components
-import { Close } from "src/components/svg";
+import { Close, Edit } from "src/components/svg";
 import { Button } from "src/components/ui";
 import { logout } from "src/scripts/common/user";
 import { useRouter } from "next/router";
@@ -41,10 +41,11 @@ const mainWallets = [
 ];
 
 const UserInfoWrapper: React.FC<{
+    walletChange?: boolean;
     close: () => void;
-}> = ({ close = null }) => {
+}> = ({ close = null, walletChange = false }) => {
     const router = useRouter();
-    const [wallet, setWallet] = useState(false);
+    const [wallet, setWallet] = useState(walletChange);
     const [errorWallet, setErrorWallet] = useState(null);
     const classes = classNames([styles["user-info-wrapper"], "form__inner", "form", "popup"]);
     const { user } = useSelector((state: IRootState) => state.user);
@@ -54,6 +55,9 @@ const UserInfoWrapper: React.FC<{
         logout(router, authMiddleware);
     };
 
+    useEffect(() => {
+        setWallet(walletChange);
+    }, [walletChange]);
     const handleConnectWallet = () => {
         setWallet(true);
     };
@@ -99,7 +103,16 @@ const UserInfoWrapper: React.FC<{
                         </div>
                         <div className={styles["user-info-wrapper__points-item"]}>
                             <span>Wallet</span>
-                            {userWallet ? <span>{shortenHashString(userWallet, [10, 10])}</span> : <button onClick={handleConnectWallet}>Connect wallet</button>}
+                            {userWallet ? (
+                                <span>
+                                    {shortenHashString(userWallet, [10, 10])}
+                                    <button onClick={handleConnectWallet}>
+                                        <Edit />
+                                    </button>
+                                </span>
+                            ) : (
+                                <button onClick={handleConnectWallet}>Connect wallet</button>
+                            )}
                         </div>
                         {/* <div className={styles["user-info-wrapper__points-item"]}>
                             <span>To upgrade your plan</span>

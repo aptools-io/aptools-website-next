@@ -48,7 +48,7 @@ const NewsBanner: React.FC<{ data?: IApiEventsSlide[]; hideBackground?: boolean 
                         )}
                     </div>
                     {!hideBackground && <img className={styles.logo} src={NewsBannerLogo.src} alt={"news banner logo"} />}
-                    <Img src={`${process.env.BASE_URL}${imageLink}`} alt={title} hide />
+                    {imageLink && <Img className={styles["back-image"]} src={`${process.env.BASE_URL}${imageLink}`} alt={title} hide />}
                 </div>
             </SwiperSlide>
         );
