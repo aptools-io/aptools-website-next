@@ -1,26 +1,5 @@
 import { AccountDiscord, AccountEmail, AccountSlack, AccountTelegram, AccountWhatsapp, Edit, Letter, Unlock, WalletBig } from "src/components/svg";
 
-const accountStats = [
-    {
-        icon: <Letter />,
-        title: "email@email.com",
-        onEdit: () => {
-            console.log("test");
-        }
-    },
-    {
-        icon: <WalletBig />,
-        title: "Connect wallet"
-    },
-    {
-        icon: <Unlock />,
-        title: "**************",
-        onEdit: () => {
-            console.log("test");
-        }
-    }
-];
-
 const accountSocials = [
     {
         icon: <AccountTelegram />,
@@ -64,4 +43,4 @@ const accountSocials = [
     }
 ];
 
-export { accountStats, accountSocials };
+export { accountSocials };

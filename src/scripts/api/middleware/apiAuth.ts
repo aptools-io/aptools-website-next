@@ -75,6 +75,34 @@ const setQuestionsMiddleware = async (data) => {
     return res;
 };
 
+const emailChangeMiddleware = async (email = null) => {
+    const apiLogin = new Api(false, process.env.SITE_URL, "");
+    const res = apiLogin.post(
+        "/api/email-change",
+        {},
+        {},
+        {
+            email
+        }
+    ) as unknown;
+
+    return res;
+};
+
+const emailChangeConfirmMiddleware = async (token = null) => {
+    const apiLogin = new Api(false, process.env.SITE_URL, "");
+    const res = apiLogin.post(
+        "/api/email-change-confirm",
+        {},
+        {},
+        {
+            token
+        }
+    ) as unknown;
+
+    return res;
+};
+
 const logoutMiddleware = async () => {
     const apiLogin = new Api(false, process.env.SITE_URL, "");
     const res = apiLogin.post("/api/logout", {}, {}, {}) as unknown;
@@ -89,6 +117,8 @@ const auth = {
     loginMiddleware,
     getUserMiddleware,
     logoutMiddleware,
+    emailChangeMiddleware,
+    emailChangeConfirmMiddleware,
     walletAddApproval
 };
 

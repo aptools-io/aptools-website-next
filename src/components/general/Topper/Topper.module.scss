@@ -1,4 +1,9 @@
 .topper {
+    &__buttons {
+        display: flex;
+        column-gap: 16px;
+    }
+
     &__title {
         font-size: 22px;
         font-weight: 700;

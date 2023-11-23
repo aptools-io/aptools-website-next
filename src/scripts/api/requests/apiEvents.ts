@@ -37,7 +37,7 @@ const getCategoriesData = async (): Promise<any> => {
 
 const getSlidesData = async (): Promise<any> => {
     const api = new Api(false, process.env.BASE_API3_URL, "");
-    return api.get("/slider/find/all?limit=10&page=0", {}, {}, null) as unknown as any;
+    return api.get("/slider/find", {}, {}, null) as unknown as any;
 };
 
 const events = {
