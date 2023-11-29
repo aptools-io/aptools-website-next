@@ -8,6 +8,14 @@ interface IApiUser {
 }
 
 interface IUser {
+    socials: {
+        data: {
+            email: string;
+            discord: string;
+            slack: string;
+        };
+        status: string;
+    };
     status: string;
     data: {
         id: string;

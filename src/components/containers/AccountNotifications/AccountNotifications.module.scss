@@ -1,0 +1,190 @@
+@import '/src/styles/static/general/animations';
+@import '/src/styles/static/general/variables.static';
+@import '/src/styles/static/general/mixins';
+
+.account-notifications {
+    display: grid;
+    grid-template-columns: repeat(2, calc(100% / 2));
+
+    @include mediaWMax('LAPTOP') {
+        grid-template-columns: 100%;
+    }
+
+    &__list {
+        --columns: 20% 30% 30% 20%;
+
+        .list {
+            &__wrapper {
+                padding: 24px 10px;
+                border: 1px solid var(--aptools-color-grey-c5);
+                border-radius: 2px;
+            }
+
+            &__header,
+            &__item {
+                display: grid;
+                grid-template-columns: var(--columns);
+            }
+
+            &__header {
+                color: var(--aptools-color-grey-c1);
+
+                div {
+                    padding: 0 8px;
+                }
+            }
+
+            &__item {
+                &:not(:first-child) {
+                    border-top: 1px solid var(--aptools-color-grey-c5);
+                }
+
+                min-height: 42px;
+                align-items: center;
+
+                div {
+                    padding: 0 8px;
+                }
+
+                .socials {
+                    display: flex;
+                    justify-content: flex-end;
+
+                    svg + svg {
+                        margin-left: 4px;
+                    }
+
+                    svg path {
+                        fill: var(--aptools-color-emphasis-c1);
+                    }
+                }
+
+                .status {
+                    font-size: 14px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 130%; /*18.2px*/
+                }
+
+                .name {
+                    font-size: 14px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 130%; /*18.2px*/
+                }
+
+                .type {
+                    padding: 2px 6px;
+                    border-radius: 4px;
+                    font-size: 10px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 15px;
+                    width: fit-content;
+
+                    --main-color: var(--aptools-color-grey-c2);
+
+                    &[data-value='RECEIVE_TRANSACTION'] {
+                        --main-color: var(--aptools-color-lights-indicator-green-1);
+                    }
+
+                    &[data-value='EXECUTE_TRANSACTION'] {
+                        --main-color: var(--aptools-color-lights-indicator-green-2);
+                    }
+
+                    &[data-value='APT_USD_INCREASES'] {
+                        --main-color: var(--aptools-color-lights-indicator-violet-2);
+                    }
+
+                    &[data-value='APT_USD_DECREASES'] {
+                        --main-color: var(--aptools-color-lights-indicator-blue-2);
+                    }
+
+                    &[data-value='WALLET_AMOUNT_INCREASES'] {
+                        --main-color: var(--aptools-color-lights-indicator-blue-3);
+                    }
+
+                    &[data-value='WALLET_AMOUNT_DECREASES'] {
+                        --main-color: var(--aptools-color-emphasis-c2);
+                    }
+
+                    &[data-value='WALLET_AMOUNT_PERCENTAGE_INCREASES'] {
+                        --main-color: var(--aptools-color-emphasis-c3);
+                    }
+
+                    &[data-value='WALLET_AMOUNT_PERCENTAGE_DECREASES'] {
+                        --main-color: var(--aptools-color-emphasis-c4);
+                    }
+
+                    background-color: var(--main-color);
+                }
+
+                &s {
+                    padding: 6px 0px;
+                }
+            }
+        }
+    }
+
+    &__edit {
+        display: flex;
+        flex-direction: column;
+        row-gap: 20px;
+        animation: fade-in .5s normal forwards ease;
+
+        @include mediaWMax('LAPTOP') {
+            margin-top: 10px;
+        }
+
+        .buttons {
+            display: flex;
+            column-gap: 16px;
+        }
+
+        .plate {
+            display: flex;
+            flex-direction: column;
+            row-gap: 20px;
+            padding: 20px 48px;
+
+            @include mediaWMax('TABLET') {
+                padding: 16px 10px;
+            }
+        }
+
+        strong.title {
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 24px; /*133.333%*/
+            letter-spacing: -1px;
+        }
+
+        .edit-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            @include mediaWMax('TABLET') {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .title {
+                padding-left: 10px;
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: 130%;
+            }
+
+            .select {
+                min-width: 338px;
+
+                @include mediaWMax('TABLET') {
+                    min-width: 100%;
+                }
+            }
+        }
+    }
+}

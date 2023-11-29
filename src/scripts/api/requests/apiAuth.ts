@@ -1,4 +1,5 @@
 import { IUserResponse, checkRefreshToken } from "src/scripts/common/user";
+import { getCookie } from "cookies-next";
 import { Api } from "../api";
 
 const registerEmail = async (email = null, agreeWithTerms = false, subscribeToNewsletter = false) => {
@@ -151,7 +152,20 @@ const getUser = async (token: string, context) => {
     if (accessToken) {
         return getUser(accessToken, null);
     }
-    return userData;
+
+    const socialsData = api.get(
+        "/api/notification-socials",
+        {
+            Authorization: `Bearer ${token}`
+        },
+        {},
+        null
+    ) as unknown;
+
+    return {
+        ...((await userData) as any),
+        socials: await socialsData
+    };
 };
 
 const setQuestions = async (token: string, context, data) => {
@@ -172,6 +186,26 @@ const setQuestions = async (token: string, context, data) => {
         return setQuestions(accessToken, null, data);
     }
     return questions;
+};
+
+const setSocials = async (token: string, context, data) => {
+    const api = new Api(false, process.env.BASE_API_ACCOUNT_URL, "");
+    const socials = api.patch(
+        "/api/notification-socials",
+        {
+            Authorization: `Bearer ${token}`
+        },
+        {},
+        {
+            ...data
+        }
+    ) as unknown;
+
+    const accessToken = await checkRefreshToken(await socials, context, auth);
+    if (accessToken) {
+        return setSocials(accessToken, null, data);
+    }
+    return socials;
 };
 
 const setChangeEmail = async (token: string, context, email) => {
@@ -251,12 +285,97 @@ const walletAddApproval = async (token: string, context) => {
     return data;
 };
 
+const createNotification = async (token: string, context, data) => {
+    const api = new Api(false, process.env.BASE_API_ACCOUNT_URL, "");
+    const create = api.post(
+        "/api/notifications",
+        {
+            Authorization: `Bearer ${token}`
+        },
+        {},
+        {
+            ...data
+        }
+    ) as unknown;
+
+    const accessToken = await checkRefreshToken(await create, context, auth);
+    if (accessToken) {
+        return createNotification(accessToken, null, data);
+    }
+    return create;
+};
+const updateNotification = async (token: string, context, data, id) => {
+    const api = new Api(false, process.env.BASE_API_ACCOUNT_URL, "");
+    const patch = api.patch(
+        `/api/notifications/${id}`,
+        {
+            Authorization: `Bearer ${token}`
+        },
+        {},
+        {
+            ...data
+        }
+    ) as unknown;
+
+    const accessToken = await checkRefreshToken(await patch, context, auth);
+    if (accessToken) {
+        return updateNotification(accessToken, null, data, id);
+    }
+    return patch;
+};
+
+const getNotification = async (token: string, context, data) => {
+    const api = new Api(false, process.env.BASE_API_ACCOUNT_URL, "");
+    const get = api.get(
+        `/api/notifications/${data}`,
+        {
+            Authorization: `Bearer ${token}`
+        },
+        {},
+        null
+    ) as unknown;
+
+    const accessToken = await checkRefreshToken(await get, context, auth);
+    if (accessToken) {
+        return getNotification(accessToken, null, data);
+    }
+    return get;
+};
+
+const getNotificationsWithTokens = async (context) => {
+    const { req, res } = context || {};
+    const accessToken = (await getCookie("accessToken", { req, res })) as string;
+    const notifications = (await getNotifications(accessToken, context)) as IUserResponse;
+    return {
+        ...notifications
+    };
+};
+
+const getNotifications = async (token: string, context) => {
+    const api = new Api(false, process.env.BASE_API_ACCOUNT_URL, "");
+    const get = api.get(
+        "/api/notifications",
+        {
+            Authorization: `Bearer ${token}`
+        },
+        {},
+        null
+    ) as unknown;
+
+    const accessToken = await checkRefreshToken(await get, context, auth);
+    if (accessToken) {
+        return getNotifications(accessToken, null);
+    }
+    return get;
+};
+
 const auth = {
     registerEmail,
     registerPassword,
     registerWallet,
     addWallet,
     setQuestions,
+    setSocials,
     loginWallet,
     login,
     getUser,
@@ -266,7 +385,12 @@ const auth = {
     walletApproval,
     setChangeEmail,
     setChangeConfirmEmail,
-    walletAddApproval
+    walletAddApproval,
+    createNotification,
+    updateNotification,
+    getNotifications,
+    getNotificationsWithTokens,
+    getNotification
 };
 
 export default auth;
