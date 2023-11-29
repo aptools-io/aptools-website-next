@@ -37,7 +37,7 @@ const TransactionRealTime: React.FC<{
     const { transactions, websocket } = useSelector((state: IRootState) => state.statsAptos);
 
     const { transactions: trans } = aptosStats || {};
-    const fullTransactions = !full ? trans : transactions;
+    const fullTransactions = transactions;
 
     const { columnNames = null, columns = null } = media(width) || {};
 

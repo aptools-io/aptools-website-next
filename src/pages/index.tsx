@@ -28,11 +28,14 @@ import getGeneralRequests from "src/scripts/api/generalRequests";
 
 const Home = (data: IApiProps) => {
     const ws = useRef<WebSocket>(null);
+    const ws2 = useRef<WebSocket>(null);
     const dispatch = useDispatch();
     useEffect(() => {
-        aptosStats.openConnection(ws, dispatch);
+        aptosStats.openConnection(ws2, dispatch);
+        aptosStats.openFullConnection(ws, dispatch, 10);
         return () => {
             ws.current.close();
+            ws2.current.close();
         };
     }, [dispatch]);
 

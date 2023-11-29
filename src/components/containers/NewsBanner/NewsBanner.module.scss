@@ -139,9 +139,9 @@
             position: absolute;
             top: 0;
             right: 0;
-            width: calc(100% - 619px);
-            object-fit: contain;
-            object-position: right;
+            width: 100%;
+            object-fit: cover;
+            object-position: right center;
             height: 100%;
         }
 
