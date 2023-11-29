@@ -5,7 +5,7 @@ import { Grid, GridWrapper, Topper } from "src/components/general";
 import { AccountsList, TransactionsList } from "src/components/lists";
 import { Button, CategoryTitle, Plate, TextInput } from "src/components/ui";
 
-import { AccountDiscord, AccountEmail, AccountSlack, AccountTelegram, AccountWhatsapp, Edit, Letter, Unlock, WalletBig } from "src/components/svg";
+import { Close, Edit, Letter, Unlock, WalletBig } from "src/components/svg";
 import { authMiddleware } from "src/scripts/api/middleware";
 import { useRouter } from "next/router";
 import { logout } from "src/scripts/common/user";
@@ -16,8 +16,10 @@ import { notify } from "src/scripts/common/notification";
 import classNames from "classnames";
 import { shortenHashString } from "src/scripts/util/strings";
 import { auth } from "src/scripts/api/requests";
+import useWindowSize from "src/scripts/hooks/useWindowSize";
 import { accountSocials } from "./data/data";
 import styles from "./AccountProfilePage.module.scss";
+import media from "./data/adaptive";
 
 const AccountProfilePage: React.FC = () => {
     const router = useRouter();
@@ -26,6 +28,7 @@ const AccountProfilePage: React.FC = () => {
     const [editEmail, setEditEmail] = useState(false);
     const [editPass, setEditPass] = useState(false);
 
+    const [socialEditable, setSocialEditable] = useState(null);
     const [emailValue, setEmailValue] = useState("");
     const [passValue, setPassValue] = useState("");
     const [secondPassValue, setSecondPassValue] = useState("");
@@ -33,7 +36,9 @@ const AccountProfilePage: React.FC = () => {
     const [infoPopup, setInfoPopup] = useState(false);
     const [walletChange, setWalletChange] = useState(false);
 
-    console.log(user);
+    const socials = user?.socials?.data;
+
+    const [currentSocials, setCurrentSocials] = useState({});
 
     const dispatch = useDispatch();
 
@@ -43,6 +48,7 @@ const AccountProfilePage: React.FC = () => {
 
     useEffect(() => {
         if (!user?.data) return;
+        setCurrentSocials(socials);
         setEmailValue(user?.data?.email);
     }, [user]);
 
@@ -58,6 +64,9 @@ const AccountProfilePage: React.FC = () => {
             title: user?.data?.email || "-",
             onEdit: () => {
                 setEditEmail(true);
+            },
+            onClose: () => {
+                setEditEmail(false);
             },
             state: emailValue,
             dispatcher: setEmailValue,
@@ -82,6 +91,9 @@ const AccountProfilePage: React.FC = () => {
             title: "**************",
             onEdit: () => {
                 setEditPass(true);
+            },
+            onClose: () => {
+                setEditPass(false);
             },
             state: passValue,
             dispatcher: setPassValue,
@@ -108,7 +120,7 @@ const AccountProfilePage: React.FC = () => {
     ];
 
     const renderAccountStat = (item, index) => {
-        const { icon, title, onEdit, type, dispatcher, state, dispatcher2, state2, submit, double, pass, error } = item || {};
+        const { icon, title, onEdit, onClose, type, dispatcher, state, dispatcher2, state2, submit, double, pass, error } = item || {};
 
         return (
             <div key={index} className={styles["account__auth-stats--item"]}>
@@ -128,9 +140,14 @@ const AccountProfilePage: React.FC = () => {
                             <TextInput value={state} error={error} onChange={(e) => dispatcher(e.target.value)} password={pass} placeholder='password' />
                             {double && <TextInput value={state2} error={error} onChange={(e) => dispatcher2(e.target.value)} password={pass} placeholder='confirm password' label='Password again' />}
                         </div>
-                        <Button disabled={error} onClick={() => submit()}>
-                            Submit
-                        </Button>
+                        <div className={styles["account__auth-stats--item-info"]}>
+                            <Button disabled={error} onClick={() => submit()}>
+                                Submit
+                            </Button>
+                            <button className={styles["close"]} onClick={onClose}>
+                                <Close />
+                            </button>
+                        </div>
                     </>
                 )}
             </div>
@@ -138,7 +155,30 @@ const AccountProfilePage: React.FC = () => {
     };
 
     const renderAccountSocial = (item, index) => {
-        const { icon, title, login, onEdit } = item || {};
+        const { icon, title, login, type } = item || {};
+
+        const onSubmit = () => {
+            authMiddleware.setSocialsMiddleware({
+                [type]: currentSocials[type]
+            });
+            setSocialEditable(null);
+        };
+        const handleEdit = () => {
+            if (socialEditable === title) {
+                setCurrentSocials((data) => ({
+                    ...data,
+                    [type]: socials[type]
+                }));
+            }
+            setSocialEditable((e) => (e === title ? null : title));
+        };
+        const handleChange = (e) => {
+            const data = {
+                ...currentSocials,
+                [type]: e.target.value
+            };
+            setCurrentSocials(data);
+        };
         return (
             <div key={index} className={styles["account__socials--item"]}>
                 <div className={styles["social-title"]}>
@@ -146,11 +186,21 @@ const AccountProfilePage: React.FC = () => {
                     <span className={styles["title"]}>{title}</span>
                 </div>
                 <div className={styles["social"]}>
-                    <span>{login}</span>
-                    {onEdit && (
-                        <button className={styles["edit"]} onClick={onEdit}>
-                            <Edit />
-                        </button>
+                    {socialEditable !== title ? (
+                        <>
+                            <span>{currentSocials?.[type] || "-"}</span>
+                            <button className={styles["edit"]} onClick={handleEdit}>
+                                <Edit />
+                            </button>
+                        </>
+                    ) : (
+                        <>
+                            <TextInput value={currentSocials?.[type]} onChange={handleChange} placeholder={title} />
+                            <Button onClick={onSubmit}>Submit</Button>
+                            <button className={styles["close"]} onClick={handleEdit}>
+                                <Close />
+                            </button>
+                        </>
                     )}
                 </div>
             </div>
@@ -166,6 +216,9 @@ const AccountProfilePage: React.FC = () => {
         setWalletChange(false);
     };
 
+    const { width } = useWindowSize();
+    const mediaData = media(width);
+
     return (
         <>
             <Topper
@@ -179,14 +232,14 @@ const AccountProfilePage: React.FC = () => {
                 )}
             />
             <Grid columns={4}>
-                <GridWrapper gridWidth={2}>
+                <GridWrapper gridWidth={mediaData.topInfo}>
                     <Plate bordered compressed className={styles["account__auth-stats"]}>
                         {accountStats.map(renderAccountStat)}
                     </Plate>
                 </GridWrapper>
-                <GridWrapper gridWidth={2}>
+                <GridWrapper gridWidth={mediaData.topInfo}>
                     <Plate compressed className={styles["account__socials"]}>
-                        {accountSocials.map(renderAccountSocial)}
+                        <div>{accountSocials.map(renderAccountSocial)}</div>
                     </Plate>
                 </GridWrapper>
                 <GridWrapper gridWidth={4}>

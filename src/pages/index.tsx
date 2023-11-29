@@ -37,7 +37,6 @@ const Home = (data: IApiProps) => {
     }, [dispatch]);
 
     useEffect(() => {
-        console.log(data.general.user);
         dispatch(setHeaders(data.headers) || null);
         dispatch(setGeneralStatsData(data.general_stats || null));
         dispatch(setProjectStatsData(data.projects || null));

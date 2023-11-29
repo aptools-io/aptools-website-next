@@ -2,6 +2,7 @@ interface IApiProps {
     general: {
         user: IUser;
     };
+    notifications: IApiUserNotifications;
     headers: IncomingHttpHeaders;
     general_stats?: IApiGeneralStats;
     page_type?: string;

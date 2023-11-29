@@ -14,6 +14,8 @@ import { checkLogined } from "src/scripts/common/user";
 import { auth } from "src/scripts/api/requests";
 import getGeneralRequests from "src/scripts/api/generalRequests";
 import { setUser } from "src/scripts/redux/slices/userSlice";
+import { authMiddleware } from "src/scripts/api/middleware";
+import { setNotifications } from "src/scripts/redux/slices/userNotificationsSlice";
 
 const Account = (data: IApiProps) => {
     const dispatch = useDispatch();
@@ -21,6 +23,7 @@ const Account = (data: IApiProps) => {
         dispatch(setHeaders(data.headers) || null);
         dispatch(setPageTitle("My Account"));
         dispatch(setUser(data.general?.user));
+        dispatch(setNotifications(data.notifications));
     }, [data, dispatch]);
 
     return <AccountProfilePage />;
@@ -30,6 +33,7 @@ export default Account;
 export async function getServerSideProps(context) {
     const { req } = context;
 
+    const notifications = (await auth.getNotificationsWithTokens(context)) || {};
     if (!(await checkLogined(context, auth)).logined)
         return {
             redirect: {
@@ -41,6 +45,7 @@ export async function getServerSideProps(context) {
     return {
         props: {
             general: await getGeneralRequests(context),
+            notifications,
             headers: req.headers
         }
     };

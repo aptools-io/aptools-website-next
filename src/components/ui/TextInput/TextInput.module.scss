@@ -8,6 +8,14 @@
 
     &__error {
         color: var(--aptools-color-emphasis-c4);
+    }
+
+    &__info {
+        color: var(--aptools-color-emphasis-c1);
+    }
+
+    &__error,
+    &__info {
         font-size: 12px;
         font-style: normal;
         font-weight: 400;

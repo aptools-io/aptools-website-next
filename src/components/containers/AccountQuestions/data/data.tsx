@@ -128,13 +128,13 @@ const questions = [
                 optional: true,
                 placeholder: "Your Discord username (optional)",
                 name: "discordId"
-            },
-            {
+            }
+            /* {
                 title: "WhatsApp",
                 optional: true,
                 placeholder: "WhatsApp chat ID (optional)",
                 name: "whatsUpChatId"
-            }
+            } */
         ],
         optional: true
     }

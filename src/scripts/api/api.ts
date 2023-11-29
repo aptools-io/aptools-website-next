@@ -74,6 +74,7 @@ export class Api {
     };
 
     handleResponse = async (response) => {
+        console.log(await response);
         return returnResponse(response, this.getRefreshToken);
     };
 
