@@ -334,7 +334,6 @@ const getNotification = async (token: string, context, data) => {
         {},
         null
     ) as unknown;
-    console.log(await get, data);
 
     const accessToken = await checkRefreshToken(await get, context, auth);
     if (accessToken) {
