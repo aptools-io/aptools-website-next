@@ -18,3 +18,4 @@ export { default as nftsSlice } from "./nftsSlice";
 export { default as eventsSlice } from "./eventsSlice";
 export { default as pageSlice } from "./pageSlice";
 export { default as authConfirmSlice } from "./authConfirmSlice";
+export { default as userNotificationsSlice } from "./userNotificationsSlice";

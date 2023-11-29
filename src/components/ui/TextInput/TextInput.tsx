@@ -19,11 +19,12 @@ const TextInput: React.FC<
         placeholder?: string;
         field?: any;
         error?: string;
+        info?: string;
         password?: boolean;
         require?: boolean;
         sideComponent?: (focused?: boolean) => JSX.Element;
     } & IComponent
-> = ({ id = null, name = null, label = null, onChange = null, value = "", searchButton = false, searchIcon = false, placeholder = "", sideComponent = null, className, field = null, error = "", password = false, require = false }) => {
+> = ({ id = null, name = null, label = null, onChange = null, value = "", searchButton = false, searchIcon = false, placeholder = "", sideComponent = null, className, field = null, error = "", info = "", password = false, require = false }) => {
     const router = useRouter();
     const [focus, setFocus] = useState(false);
     const [type, setType] = useState(password ? "password" : "text");
@@ -86,6 +87,7 @@ const TextInput: React.FC<
             </div>
             {sideComponent && sideComponent(focus)}
             {error && <span className={styles["text-input__error"]}>{error}</span>}
+            {info && <span className={styles["text-input__info"]}>{info}</span>}
         </div>
     );
 };

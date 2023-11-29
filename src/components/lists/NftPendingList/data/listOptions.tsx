@@ -20,7 +20,6 @@ const columnNames = [
         key: "age",
         value: "Age",
         formatter: (v) => {
-            console.log(v);
             return <>{timeFull(v)}</>;
         }
     },

@@ -75,6 +75,20 @@ const setQuestionsMiddleware = async (data) => {
     return res;
 };
 
+const setSocialsMiddleware = async (data) => {
+    const apiLogin = new Api(false, process.env.SITE_URL, "");
+    const res = apiLogin.post(
+        "/api/socials",
+        {},
+        {},
+        {
+            ...data
+        }
+    ) as unknown;
+
+    return res;
+};
+
 const emailChangeMiddleware = async (email = null) => {
     const apiLogin = new Api(false, process.env.SITE_URL, "");
     const res = apiLogin.post(
@@ -110,16 +124,71 @@ const logoutMiddleware = async () => {
     return res;
 };
 
+const createNotificationMiddleware = async (data) => {
+    const apiLogin = new Api(false, process.env.SITE_URL, "");
+    const res = apiLogin.post(
+        "/api/create-notification",
+        {},
+        {},
+        {
+            ...data
+        }
+    ) as unknown;
+
+    return res;
+};
+
+const updateNotificationMiddleware = async (data, id) => {
+    const apiLogin = new Api(false, process.env.SITE_URL, "");
+    const res = apiLogin.post(
+        "/api/update-notification",
+        {},
+        {},
+        {
+            ...data,
+            id
+        }
+    ) as unknown;
+
+    return res;
+};
+
+const getNotificationMiddleware = async (id) => {
+    const apiLogin = new Api(false, process.env.SITE_URL, "");
+    const res = apiLogin.post(
+        "/api/get-notification",
+        {},
+        {},
+        {
+            id
+        }
+    ) as unknown;
+
+    return res;
+};
+
+const getNotificationsMiddleware = async () => {
+    const apiLogin = new Api(false, process.env.SITE_URL, "");
+    const res = apiLogin.post("/api/get-notifications", {}, {}, {}) as unknown;
+
+    return res;
+};
+
 const auth = {
     registerPasswordMiddleware,
     setQuestionsMiddleware,
+    setSocialsMiddleware,
     walletMiddleware,
     loginMiddleware,
     getUserMiddleware,
     logoutMiddleware,
     emailChangeMiddleware,
     emailChangeConfirmMiddleware,
-    walletAddApproval
+    walletAddApproval,
+    createNotificationMiddleware,
+    updateNotificationMiddleware,
+    getNotificationMiddleware,
+    getNotificationsMiddleware
 };
 
 export default auth;

@@ -1,4 +1,4 @@
-import { getCookie, removeCookies, setCookie } from "cookies-next";
+import { getCookie, deleteCookie, setCookie } from "cookies-next";
 import { authMiddleware } from "../api/middleware";
 
 export interface IUserResponse {
@@ -49,13 +49,13 @@ const checkRefreshToken = async (data, context, auth) => {
         const { refreshToken, response } = refreshedData as any;
 
         if (refreshToken) await setCookie("refreshToken", refreshToken, { req, res, httpOnly: true });
-        else removeCookies("refreshToken", { req, res });
+        else deleteCookie("refreshToken", { req, res });
         const promisedResponse = await response;
 
         const { data: responseData } = promisedResponse || {};
         const { accessToken } = responseData || {};
         if (accessToken) await setCookie("accessToken", accessToken, { req, res, httpOnly: true });
-        else removeCookies("accessToken", { req, res });
+        else deleteCookie("accessToken", { req, res });
         return accessToken;
     }
     return null;
