@@ -227,6 +227,9 @@ const AccountProfilePage: React.FC = () => {
                 afterComponent={() => (
                     <>
                         <Button onClick={() => setInfoPopup(true)}>Show account info</Button>
+                        <Button href={"/account/api"} className={styles["button-api"]}>
+                            Account API
+                        </Button>
                         <Button onClick={handleLogout}>Logout</Button>
                     </>
                 )}

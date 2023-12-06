@@ -54,4 +54,5 @@ export { default as AuthEmailConfirm } from "./AuthEmailConfirm/AuthEmailConfirm
 export { default as AuthRegisterPassword } from "./AuthRegisterPassword/AuthRegisterPassword";
 export { default as AccountQuestions } from "./AccountQuestions/AccountQuestions";
 export { default as UserInfoWrapper } from "./UserInfoWrapper/UserInfoWrapper";
+export { default as UserApiKeyWrapper } from "./UserApiKeyWrapper/UserApiKeyWrapper";
 export { default as AccountNotifications } from "./AccountNotifications/AccountNotifications";

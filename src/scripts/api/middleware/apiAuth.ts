@@ -47,6 +47,39 @@ const loginMiddleware = async (email = null, password = null) => {
     return res;
 };
 
+const createApiMiddleware = async (active = false, validateIp = false, allowedIps = []) => {
+    const apiKeys = new Api(false, process.env.SITE_URL, "");
+    const res = apiKeys.post(
+        "/api/create-api-key",
+        {},
+        {},
+        {
+            active,
+            validateIp,
+            allowedIps
+        }
+    ) as unknown;
+
+    return res;
+};
+
+const updateApiMiddleware = async (id = null, active = false, validateIp = false, allowedIps = []) => {
+    const apiKeys = new Api(false, process.env.SITE_URL, "");
+    const res = apiKeys.post(
+        "/api/update-api-key",
+        {},
+        {},
+        {
+            id,
+            active,
+            validateIp,
+            allowedIps
+        }
+    ) as unknown;
+
+    return res;
+};
+
 const getUserMiddleware = async () => {
     const apiLogin = new Api(false, process.env.SITE_URL, "");
     const res = apiLogin.post("/api/user", {}, {}, {}) as unknown;
@@ -153,6 +186,20 @@ const updateNotificationMiddleware = async (data, id) => {
     return res;
 };
 
+const deleteNotificationMiddleware = async (id) => {
+    const apiLogin = new Api(false, process.env.SITE_URL, "");
+    const res = apiLogin.post(
+        "/api/delete-notification",
+        {},
+        {},
+        {
+            id
+        }
+    ) as unknown;
+
+    return res;
+};
+
 const getNotificationMiddleware = async (id) => {
     const apiLogin = new Api(false, process.env.SITE_URL, "");
     const res = apiLogin.post(
@@ -174,6 +221,27 @@ const getNotificationsMiddleware = async () => {
     return res;
 };
 
+const getApiKeysMiddleware = async () => {
+    const apiLogin = new Api(false, process.env.SITE_URL, "");
+    const res = apiLogin.post("/api/get-api-keys", {}, {}, {}) as unknown;
+
+    return res;
+};
+
+const deleteApiMiddleware = async (id) => {
+    const apiLogin = new Api(false, process.env.SITE_URL, "");
+    const res = apiLogin.post(
+        "/api/delete-api-key",
+        {},
+        {},
+        {
+            id
+        }
+    ) as unknown;
+
+    return res;
+};
+
 const auth = {
     registerPasswordMiddleware,
     setQuestionsMiddleware,
@@ -187,8 +255,13 @@ const auth = {
     walletAddApproval,
     createNotificationMiddleware,
     updateNotificationMiddleware,
+    deleteNotificationMiddleware,
     getNotificationMiddleware,
-    getNotificationsMiddleware
+    getNotificationsMiddleware,
+    createApiMiddleware,
+    getApiKeysMiddleware,
+    updateApiMiddleware,
+    deleteApiMiddleware
 };
 
 export default auth;

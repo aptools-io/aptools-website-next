@@ -3,6 +3,7 @@ interface IApiProps {
         user: IUser;
     };
     notifications: IApiUserNotifications;
+    apiKeys: IApiUserApiKeys;
     headers: IncomingHttpHeaders;
     general_stats?: IApiGeneralStats;
     page_type?: string;

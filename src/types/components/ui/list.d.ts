@@ -10,6 +10,7 @@ interface IListProps extends IListHeaderProps {
     adoptMobile?: boolean | number;
     row?: combined;
     rowIndex?: number;
+    count?: number;
     column?: IColumnName;
     loadingCount?: number;
     columnIndex?: number;
@@ -19,6 +20,7 @@ interface IListProps extends IListHeaderProps {
     slice?: [start: number, end: number];
     valueGridReplace?: JSX.Element[];
     loadingComponent?: JSX.Element;
+    higherIndex?: boolean;
     inner?: boolean;
     handleCollapse?: (collapsed?: boolean) => void;
 }

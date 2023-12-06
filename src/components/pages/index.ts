@@ -27,3 +27,4 @@ export { default as AuthSignInPage } from "./AuthSignInPage/AuthSignInPage";
 export { default as AuthRecoveryPage } from "./AuthRecoveryPage/AuthRecoveryPage";
 export { default as AuthConfirmPage } from "./AuthConfirmPage/AuthConfirmPage";
 export { default as AccountProfilePage } from "./AccountProfilePage/AccountProfilePage";
+export { default as AccountApiPage } from "./AccountApiPage/AccountApiPage";

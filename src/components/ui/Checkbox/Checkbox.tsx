@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 
 // styles
 import NoImageLogo from "public/static/images/svg/no_image_logo.svg";
+import classNames from "classnames";
 import styles from "./Checkbox.module.scss";
 
 // static
@@ -13,14 +14,16 @@ const Checkbox: React.FC<
         id?: string;
         value?: string;
         onChange?: (e: any) => void;
+        onClick?: (e: any) => void;
         label?: string;
         field?: any;
         error?: string;
+        switcher?: boolean;
     } & IComponent
-> = ({ checked = false, id = null, value = null, onChange, label, field = null, error = "" }) => {
+> = ({ checked = false, id = null, value = null, onChange, onClick, label, field = null, error = "", switcher = false }) => {
     return (
         <>
-            <div className={styles["checkbox"]}>
+            <div className={classNames([styles["checkbox"], { [styles["switcher"]]: switcher }])}>
                 <input
                     {...(field === null
                         ? {
@@ -28,7 +31,8 @@ const Checkbox: React.FC<
                               type: "checkbox",
                               value,
                               checked,
-                              onChange
+                              onChange,
+                              onClick
                           }
                         : {
                               ...field,
