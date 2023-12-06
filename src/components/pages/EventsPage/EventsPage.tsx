@@ -32,6 +32,7 @@ const EventsPage: React.FC = () => {
     const dispatch = useDispatch();
 
     const { eventsData, searchEventsData = null, eventsSlidesData = [] } = useSelector((state: IRootState) => state.events);
+    console.log(eventsData);
 
     const { width } = useWindowSize();
     const mediaData = media(width);
@@ -55,6 +56,7 @@ const EventsPage: React.FC = () => {
                 sorted[existsId].elements = [...existedElements, item];
             }
         });
+        console.log(sorted);
         return sorted;
     };
 

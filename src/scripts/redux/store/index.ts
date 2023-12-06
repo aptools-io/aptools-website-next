@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { headersSlice, loadingSlice, statsAptosSlice, statsGeneralSlice, statsTransactions, statsProjectsSlice, statsDexesVolumesSlice, statsAddressesTransactionsSlice, singleDexSlice, pageTitleSlice, newsSlice, accountsSlice, validatorsSlice, notificationSlice, blocksSlice, blockchainSlice, nftsSlice, eventsSlice, pageSlice, authConfirmSlice, userNotificationsSlice } from "../slices/index";
+import { headersSlice, loadingSlice, statsAptosSlice, statsGeneralSlice, statsTransactions, statsProjectsSlice, statsDexesVolumesSlice, statsAddressesTransactionsSlice, singleDexSlice, pageTitleSlice, newsSlice, accountsSlice, validatorsSlice, notificationSlice, blocksSlice, blockchainSlice, nftsSlice, eventsSlice, pageSlice, authConfirmSlice, userNotificationsSlice, userApiKeysSlice } from "../slices/index";
 import userSlice from "../slices/userSlice";
 
 const store = configureStore({
@@ -26,7 +26,8 @@ const store = configureStore({
         page: pageSlice,
         authConfirm: authConfirmSlice,
         user: userSlice,
-        userNotifications: userNotificationsSlice
+        userNotifications: userNotificationsSlice,
+        userApiKeys: userApiKeysSlice
     }
 });
 export default store;

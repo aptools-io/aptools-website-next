@@ -12,7 +12,7 @@ import { authMiddleware } from "src/scripts/api/middleware";
 import { notify } from "src/scripts/common/notification";
 import { useDispatch, useSelector } from "react-redux";
 import { IRootState } from "src/scripts/redux/store";
-import { AccountDiscord, AccountEmail, SocialDiscord } from "src/components/svg";
+import { AccountDiscord, AccountEmail, Edit, Message, SocialDiscord, TransactionCheckpoint } from "src/components/svg";
 import { setNotifications } from "src/scripts/redux/slices/userNotificationsSlice";
 import { categories, ruleType } from "./data/data";
 import styles from "./AccountNotifications.module.scss";
@@ -46,36 +46,64 @@ const AccountNotifications: React.FC<IComponent> = () => {
         });
     };
 
-    const handleCreate = () => setEditType("CREATE");
-    const handleCancel = () => setEditType(null);
+    const handleCreate = () => {
+        setValues(ruleType[0]);
+        setEditId(null);
+        setEditType("CREATE");
+    };
+    const handleCancel = () => {
+        setEditType(null);
+        setEditId(null);
+    };
     const handleSave = async () => {
+        const { name, wallet } = inputs || {};
+        const notificationName = name || `Notification - ${moment().format("DD-MM-YYYY")}`;
+        if (wallet || wallet === "") {
+            const validateWallet = wallet.length === 66 && wallet.indexOf("0x") > -1;
+            if (!validateWallet) {
+                notify(dispatch, "Error in wallet", "test");
+                return;
+            }
+        }
         switch (editType) {
             case "CREATE":
                 await authMiddleware.createNotificationMiddleware({
                     ruleType: values.value,
-                    ...values.inputs
+                    ...values.inputs,
+                    name: notificationName
                 });
                 notify(dispatch, "Success!", "test");
                 setEditType(null);
                 dispatch(setNotifications((await authMiddleware.getNotificationsMiddleware()) as IApiUserNotifications));
+                setEditId(null);
                 break;
             case "EDIT":
                 await authMiddleware.updateNotificationMiddleware(
                     {
                         ruleType: values.value,
-                        ...values.inputs
+                        ...values.inputs,
+                        name: notificationName
                     },
                     editId
                 );
                 notify(dispatch, "Success!", "test");
                 setEditType(null);
                 dispatch(setNotifications((await authMiddleware.getNotificationsMiddleware()) as IApiUserNotifications));
+                setEditId(null);
                 break;
             default:
                 notify(dispatch, "Error", "test");
                 setEditType(null);
+                setEditId(null);
                 break;
         }
+    };
+
+    const handleDelete = async () => {
+        await authMiddleware.deleteNotificationMiddleware(editId);
+        notify(dispatch, "Success!", "test");
+        setEditType(null);
+        dispatch(setNotifications((await authMiddleware.getNotificationsMiddleware()) as IApiUserNotifications));
     };
 
     const { notifications: notificationsList } = notifications?.data || {};
@@ -90,6 +118,7 @@ const AccountNotifications: React.FC<IComponent> = () => {
         const expired = expDay.diff(today) < 0;
 
         const handleUpdate = async () => {
+            if (editId === id) return;
             const data = (await authMiddleware.getNotificationMiddleware(id)) as any;
 
             const { data: item } = data || {};
@@ -106,12 +135,12 @@ const AccountNotifications: React.FC<IComponent> = () => {
         return (
             <li key={index} className={styles["list__item"]} onClick={handleUpdate}>
                 <div>
-                    <span className={styles["type"]} data-value={currentType?.value}>
+                    <span className={classNames([styles["type"], { [styles["expired"]]: expired }])} data-value={currentType?.value}>
                         {currentType?.title}
                     </span>
                 </div>
                 <div>
-                    <span className={styles["name"]}>{name}</span>
+                    <span className={classNames([styles["name"], { [styles["expired"]]: expired }])}>{name}</span>
                 </div>
                 <div>
                     <span className={styles["socials"]}>
@@ -119,18 +148,51 @@ const AccountNotifications: React.FC<IComponent> = () => {
                         {notifyByEmail && <AccountEmail />}
                     </span>
                 </div>
-                <div>
-                    <span className={styles["status"]}>{expired ? "Ended" : <>{enabled ? "Active" : "Deactive"}</>}</span>
+                <div className={styles["right"]}>
+                    <span className={classNames([styles["status"], { [styles["expired"]]: expired }, { [styles["active"]]: enabled }])}>
+                        {expired ? (
+                            "Ended"
+                        ) : (
+                            <>
+                                {enabled ? "Active" : "Deactive"}
+                                <Checkbox switcher label={" "} checked={enabled} onChange={() => null} value=' ' />
+                            </>
+                        )}
+                    </span>
                 </div>
             </li>
         );
+    };
+
+    const filtrateNotExpired = (item: IApiUserNotification) => {
+        const { expirationDate } = item || {};
+        const today = moment();
+        const expDay = moment(expirationDate);
+
+        const expired = expDay.diff(today) < 0;
+
+        return !expired;
     };
 
     return (
         <>
             <div className={classes}>
                 <div className={styles["account-notifications__list"]}>
-                    Active Notifications
+                    <div className={styles["title"]}>
+                        <div className={"stats__top"}>
+                            <div className='stats__top-wrapper'>
+                                <div className='stats__top-icon light'>
+                                    <Message />
+                                </div>
+                                <strong className='stats__top-title blue bold'>Active Notifications</strong>
+                            </div>
+                            <div className={"stats__top-stats"}>
+                                <span className={"title"}>
+                                    {notificationsList?.filter(filtrateNotExpired)?.length} / {notificationsList?.length}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
                     {!!notificationsList?.length && (
                         <div className={styles["list__wrapper"]}>
                             <div className={styles["list__header"]}>
@@ -143,7 +205,7 @@ const AccountNotifications: React.FC<IComponent> = () => {
                                 <div>
                                     <span></span>
                                 </div>
-                                <div>
+                                <div className={styles["right"]}>
                                     <span>Status</span>
                                 </div>
                             </div>
@@ -156,7 +218,28 @@ const AccountNotifications: React.FC<IComponent> = () => {
                 </div>
                 {editType && (
                     <div key={`${editType}${editId}`} className={styles["account-notifications__edit"]}>
-                        <div className={styles["edit-type"]}>{editType === "CREATE" && <strong>Create smart alert</strong>}</div>
+                        <div className={styles["edit-type"]}>
+                            {editType === "CREATE" && (
+                                <div className='stats__top-wrapper'>
+                                    <div className='stats__top-icon green'>
+                                        <span className={styles["svg-green"]}>
+                                            <TransactionCheckpoint />
+                                        </span>
+                                    </div>
+                                    <strong className='stats__top-title bold'>Create smart alert</strong>
+                                </div>
+                            )}
+                            {editType === "EDIT" && (
+                                <div className='stats__top-wrapper'>
+                                    <div className='stats__top-icon green'>
+                                        <span className={styles["svg-green"]}>
+                                            <Edit />
+                                        </span>
+                                    </div>
+                                    <strong className='stats__top-title bold'>Edit Notification - {inputs?.name}</strong>
+                                </div>
+                            )}
+                        </div>
                         <Plate noMin dark className={styles["plate"]}>
                             <Tabs tabsName={"newsTabs"} dataArray={categories} defaultEntry={categories[1]} itemsCount={false}>
                                 <>
@@ -213,17 +296,17 @@ const AccountNotifications: React.FC<IComponent> = () => {
                                 <strong className={styles["title"]}>How do you want to be notificated?</strong>
                                 {inputs?.notifyByTelegram !== undefined && (
                                     <div className={styles["edit-item"]}>
-                                        <Checkbox id={"telegram"} label={"Telegram"} />
+                                        <Checkbox id={"telegram"} label={"Telegram"} checked={false} onChange={() => null} value=' ' />
                                     </div>
                                 )}
                                 {inputs?.notifyByDiscord !== undefined && (
                                     <div className={styles["edit-item"]}>
-                                        <Checkbox id={"discord"} label={"Discord"} checked={inputs.notifyByDiscord} onChange={() => handleChangeInput("notifyByDiscord", !inputs.notifyByDiscord)} />
+                                        <Checkbox id={"discord"} label={"Discord"} checked={inputs.notifyByDiscord} onChange={() => handleChangeInput("notifyByDiscord", !inputs.notifyByDiscord)} value=' ' />
                                     </div>
                                 )}
                                 {inputs?.notifyByEmail !== undefined && (
                                     <div className={styles["edit-item"]}>
-                                        <Checkbox id={"email"} label={"Email"} checked={inputs.notifyByEmail} onChange={() => handleChangeInput("notifyByEmail", !inputs.notifyByEmail)} />
+                                        <Checkbox id={"email"} label={"Email"} checked={inputs.notifyByEmail} onChange={() => handleChangeInput("notifyByEmail", !inputs.notifyByEmail)} value=' ' />
                                     </div>
                                 )}
                             </>
@@ -234,7 +317,7 @@ const AccountNotifications: React.FC<IComponent> = () => {
                                 {inputs?.enabled !== undefined && (
                                     <div className={styles["edit-item"]}>
                                         <span className={styles["title"]}>Enable alert</span>
-                                        <Checkbox id={"enabled"} label={" "} checked={inputs.enabled} onChange={() => handleChangeInput("enabled", !inputs.enabled)} />
+                                        <Checkbox switcher id={"enabled"} label={" "} checked={inputs.enabled} onChange={() => handleChangeInput("enabled", !inputs.enabled)} value=' ' />
                                     </div>
                                 )}
                             </>
@@ -244,6 +327,7 @@ const AccountNotifications: React.FC<IComponent> = () => {
                                 Save
                             </Button>
                             <Button onClick={handleCancel}>Cancel</Button>
+                            {editType === "EDIT" && <Button onClick={handleDelete}>Delete notification</Button>}
                         </div>
                     </div>
                 )}

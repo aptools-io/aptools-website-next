@@ -1,0 +1,35 @@
+.account-api {
+    &__type {
+        display: flex;
+        column-gap: 4px;
+        align-items: center;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 20px;
+        color: var(--aptools-color-emphasis-c5);
+
+        &.active {
+            color: var(--aptools-color-emphasis-c1);
+        }
+    }
+
+    &__key {
+        display: flex;
+        align-items: center;
+    }
+
+    &__new {
+        padding: 2px 6px;
+        background-color: var(--aptools-color-lights-success);
+        border-radius: 4px;
+        font-size: 10px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 15px; /*150%*/
+    }
+
+    &__remove {
+        cursor: pointer;
+    }
+}

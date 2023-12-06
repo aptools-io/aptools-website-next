@@ -232,6 +232,14 @@
             justify-content: center;
             align-items: center;
             margin-right: 9px;
+
+            &.light {
+                background-color: var(--aptools-color-grey-c3);
+            }
+
+            &.green {
+                background-color: var(--aptools-color-lights-success);
+            }
         }
 
         &-image + &-title {

@@ -11,7 +11,17 @@
     }
 
     &__list {
+        padding-right: calc(58px / 2);
+
+        @include mediaWMax('LAPTOP') {
+            padding-right: unset;
+        }
+
         --columns: 20% 30% 30% 20%;
+
+        .title {
+            margin-bottom: 24px;
+        }
 
         .list {
             &__wrapper {
@@ -31,10 +41,16 @@
 
                 div {
                     padding: 0 8px;
+
+                    &.right {
+                        text-align: right;
+                    }
                 }
             }
 
             &__item {
+                cursor: pointer;
+
                 &:not(:first-child) {
                     border-top: 1px solid var(--aptools-color-grey-c5);
                 }
@@ -44,6 +60,10 @@
 
                 div {
                     padding: 0 8px;
+
+                    &.right {
+                        text-align: right;
+                    }
                 }
 
                 .socials {
@@ -64,6 +84,18 @@
                     font-style: normal;
                     font-weight: 400;
                     line-height: 130%; /*18.2px*/
+                    color: var(--aptools-color-emphasis-c5);
+                    display: flex;
+                    justify-content: flex-end;
+                    align-items: center;
+
+                    &.expired {
+                        color: var(--aptools-color-grey-c1);
+                    }
+
+                    &:not(.expired).active {
+                        color: var(--aptools-color-emphasis-c1);
+                    }
                 }
 
                 .name {
@@ -71,6 +103,10 @@
                     font-style: normal;
                     font-weight: 400;
                     line-height: 130%; /*18.2px*/
+
+                    &.expired {
+                        color: var(--aptools-color-grey-c1);
+                    }
                 }
 
                 .type {
@@ -116,6 +152,11 @@
                         --main-color: var(--aptools-color-emphasis-c4);
                     }
 
+                    &.expired {
+                        background-color: transparent;
+                        border: 1px solid var(--main-color);
+                    }
+
                     background-color: var(--main-color);
                 }
 
@@ -127,10 +168,24 @@
     }
 
     &__edit {
+        padding-left: calc(58px / 2);
+
+        @include mediaWMax('LAPTOP') {
+            padding-left: unset;
+        }
+
         display: flex;
         flex-direction: column;
         row-gap: 20px;
         animation: fade-in .5s normal forwards ease;
+
+        .edit-type {
+            .svg-green {
+                svg path {
+                    fill: var(--aptools-color-emphasis-c2);
+                }
+            }
+        }
 
         @include mediaWMax('LAPTOP') {
             margin-top: 10px;

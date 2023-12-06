@@ -324,6 +324,86 @@ const updateNotification = async (token: string, context, data, id) => {
     return patch;
 };
 
+const deleteNotification = async (token: string, context, id) => {
+    const api = new Api(false, process.env.BASE_API_ACCOUNT_URL, "");
+    const deleteNotif = api.delete(
+        `/api/notifications/${id}`,
+        {
+            Authorization: `Bearer ${token}`
+        },
+        {},
+        null
+    ) as unknown;
+
+    const accessToken = await checkRefreshToken(await deleteNotif, context, auth);
+    if (accessToken) {
+        return deleteNotification(accessToken, null, id);
+    }
+    return deleteNotif;
+};
+
+const createApiKey = async (token: string, context, active, validateIp, allowedIps) => {
+    const api = new Api(false, process.env.BASE_API_ACCOUNT_URL, "");
+    const createApiKeys = api.post(
+        "/api/api-keys",
+        {
+            Authorization: `Bearer ${token}`
+        },
+        {},
+        {
+            active,
+            validateIp,
+            allowedIps
+        }
+    ) as unknown;
+
+    const accessToken = await checkRefreshToken(await createApiKeys, context, auth);
+    if (accessToken) {
+        return createApiKey(accessToken, null, active, validateIp, allowedIps);
+    }
+    return createApiKeys;
+};
+
+const updateApiKey = async (token: string, context, id, active, validateIp, allowedIps) => {
+    const api = new Api(false, process.env.BASE_API_ACCOUNT_URL, "");
+    const updateApiKeys = api.patch(
+        `/api/api-keys/${id}`,
+        {
+            Authorization: `Bearer ${token}`
+        },
+        {},
+        {
+            active,
+            validateIp,
+            allowedIps
+        }
+    ) as unknown;
+
+    const accessToken = await checkRefreshToken(await updateApiKeys, context, auth);
+    if (accessToken) {
+        return updateApiKey(accessToken, null, id, active, validateIp, allowedIps);
+    }
+    return updateApiKeys;
+};
+
+const deleteApiKey = async (token: string, context, id) => {
+    const api = new Api(false, process.env.BASE_API_ACCOUNT_URL, "");
+    const updateApiKeys = api.delete(
+        `/api/api-keys/${id}`,
+        {
+            Authorization: `Bearer ${token}`
+        },
+        {},
+        null
+    ) as unknown;
+
+    const accessToken = await checkRefreshToken(await updateApiKeys, context, auth);
+    if (accessToken) {
+        return deleteApiKey(accessToken, null, id);
+    }
+    return updateApiKeys;
+};
+
 const getNotification = async (token: string, context, data) => {
     const api = new Api(false, process.env.BASE_API_ACCOUNT_URL, "");
     const get = api.get(
@@ -369,6 +449,33 @@ const getNotifications = async (token: string, context) => {
     return get;
 };
 
+const getApiKeysWithTokens = async (context) => {
+    const { req, res } = context || {};
+    const accessToken = (await getCookie("accessToken", { req, res })) as string;
+    const apiKeys = (await getApiKeys(accessToken, context)) as IUserResponse;
+    return {
+        ...apiKeys
+    };
+};
+
+const getApiKeys = async (token: string, context) => {
+    const api = new Api(false, process.env.BASE_API_ACCOUNT_URL, "");
+    const get = api.get(
+        "/api/api-keys",
+        {
+            Authorization: `Bearer ${token}`
+        },
+        {},
+        null
+    ) as unknown;
+
+    const accessToken = await checkRefreshToken(await get, context, auth);
+    if (accessToken) {
+        return getNotifications(accessToken, null);
+    }
+    return get;
+};
+
 const auth = {
     registerEmail,
     registerPassword,
@@ -388,9 +495,15 @@ const auth = {
     walletAddApproval,
     createNotification,
     updateNotification,
+    deleteNotification,
     getNotifications,
     getNotificationsWithTokens,
-    getNotification
+    getNotification,
+    createApiKey,
+    getApiKeysWithTokens,
+    getApiKeys,
+    updateApiKey,
+    deleteApiKey
 };
 
 export default auth;

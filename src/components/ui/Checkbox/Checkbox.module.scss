@@ -1,6 +1,44 @@
 .checkbox {
     display: flex;
 
+    &.switcher {
+        input {
+            margin-left: unset;
+        }
+
+        input:checked + label:before {
+            background-color: var(--aptools-color-main-primary);
+        }
+
+        input:not(:checked) + label:before {
+            background-color: var(--aptools-color-emphasis-c5);
+            left: calc(100% - 2px - 10px);
+            border: unset;
+        }
+
+        input:not(:checked) + label {
+            background-color: var(--aptools-color-grey-c4);
+        }
+
+        label {
+            width: 24px;
+            background-color: var(--aptools-color-emphasis-c1);
+            border-radius: 14px;
+            height: 14px;
+            position: relative;
+
+            &:before {
+                background-image: unset;
+                border-radius: 100%;
+                position: absolute;
+                top: 50%;
+                left: 2px;
+                transform: translateY(-50%);
+                transition: left .3s ease, background-color .3s ease;
+            }
+        }
+    }
+
     &__error {
         color: var(--aptools-color-emphasis-c4);
         font-size: 12px;

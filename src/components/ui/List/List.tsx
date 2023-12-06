@@ -9,42 +9,18 @@ import styles from "./List.module.scss";
 import ListRow from "../ListRow/ListRow";
 import Skeleton from "../Skeleton/Skeleton";
 
-const List: React.FC<IListProps> = ({
-    columnNames = [],
-    data = [],
-    slice = null,
-    adoptMobile = false,
-    loadingCount = null,
-    loadingComponent = null,
-    hardPageId = null,
-    hardPerPage = null,
-    className 
-}) => {
-    const classes = classNames([
-        styles.list,
-        { [styles.adopt]: adoptMobile },
-        className
-    ]);
+const List: React.FC<IListProps> = ({ columnNames = [], data = [], slice = null, adoptMobile = false, loadingCount = null, loadingComponent = null, hardPageId = null, hardPerPage = null, higherIndex = false, className }) => {
+    const classes = classNames([styles.list, { [styles.adopt]: adoptMobile }, className]);
 
-    if(loadingCount) return <ul className={classes}>{new Array(loadingCount).fill(null).map((_, index) => 
-        loadingComponent ? 
-            <React.Fragment key={index}>{loadingComponent}</React.Fragment> : 
-            <Skeleton key={index} style={{ height: "24px", minHeight: "24px" }} />)}</ul>;
-    
+    if (loadingCount) return <ul className={classes}>{new Array(loadingCount).fill(null).map((_, index) => (loadingComponent ? <React.Fragment key={index}>{loadingComponent}</React.Fragment> : <Skeleton key={index} style={{ height: "24px", minHeight: "24px" }} />))}</ul>;
+
     const processedData = slice ? data.slice(slice[0], slice[1]) : data;
 
     return (
         <ul className={classes}>
-            {processedData.map((item, index) => 
-                <ListRow 
-                    key={index} 
-                    row={item} 
-                    rowIndex={index} 
-                    columnNames={columnNames} 
-                    adoptMobile={adoptMobile} 
-                    hardPageId={hardPageId}
-                    hardPerPage={hardPerPage}
-                />)}
+            {processedData.map((item, index) => (
+                <ListRow key={index} row={item} rowIndex={index} count={processedData?.length} columnNames={columnNames} adoptMobile={adoptMobile} hardPageId={hardPageId} hardPerPage={hardPerPage} higherIndex={higherIndex} />
+            ))}
         </ul>
     );
 };

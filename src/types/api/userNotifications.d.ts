@@ -23,3 +23,16 @@ interface IApiUserNotifications {
         notifications: IApiUserNotification[];
     };
 }
+
+interface IApiUserApiKey {
+    active: boolean;
+    allowedIps: string[];
+    createdAt: string;
+    id: string;
+    key: string;
+    validateIp: boolean;
+}
+interface IApiUserApiKeys {
+    status: string;
+    data: IApiUserApiKey[];
+}
