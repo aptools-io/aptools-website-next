@@ -16,7 +16,7 @@ export async function getServerSideProps(context) {
     if ((await checkLogined(context, auth)).logined)
         return {
             redirect: {
-                destination: "/account/profile",
+                destination: "/account/api",
                 permanent: false
             }
         };

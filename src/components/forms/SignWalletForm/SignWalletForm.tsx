@@ -48,7 +48,7 @@ const SignWalletForm: React.FC<{
                 loginUser(response, (saveUserInStorage) => {
                     saveUserInStorage(!login);
                     if (connectWallet) window.localStorage.removeItem("firstTime");
-                    router.push("/account/profile");
+                    router.push("/account/api");
                 });
             } else {
                 if (response.reason === "conflict") setError(login ? "Wallet approval request by the given nonce is expired" : "Wallet is already taken or token is expired");

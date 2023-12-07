@@ -34,7 +34,7 @@ const columnNames = (onChangeStatus, onChangeIpValidation, onDelete) => [
             );
         }
     },
-    {
+    /* {
         key: "validateIp",
         value: "Validation by IP",
         center: true,
@@ -46,8 +46,8 @@ const columnNames = (onChangeStatus, onChangeIpValidation, onDelete) => [
                 </span>
             );
         }
-    },
-    {
+    }, */
+    /* {
         key: "allowedIps",
         value: "List of IP addresses",
         formatterComponent: (v, row) => {
@@ -58,7 +58,7 @@ const columnNames = (onChangeStatus, onChangeIpValidation, onDelete) => [
                 </span>
             );
         }
-    },
+    }, */
     {
         key: "",
         value: "Action",
@@ -72,7 +72,7 @@ const columnNames = (onChangeStatus, onChangeIpValidation, onDelete) => [
 ];
 
 // Columns
-const columns = ["60%", "12.5%", "12.5%", "10%", "5%"];
-
+/* const columns = ["60%", "12.5%", "12.5%", "10%", "5%"]; */
+const columns = ["75%", "20%", "5%"];
 export { columns, columnNames };
 /* eslint-enable */
