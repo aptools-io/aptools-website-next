@@ -23,7 +23,7 @@ const SignUpForm: React.FC = () => {
     const formik = useFormik(
         values(setLoading, setError, async (saveUserInStorage) => {
             await saveUserInStorage();
-            await router.push("/account/profile");
+            await router.push("/account/api");
         })
     );
 

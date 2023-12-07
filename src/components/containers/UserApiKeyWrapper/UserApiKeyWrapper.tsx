@@ -21,8 +21,8 @@ const UserInfoWrapper: React.FC<{
     close: () => void;
 }> = ({ close = null }) => {
     const classes = classNames([styles["user-api-key-wrapper"], "form__inner", "form", "popup"]);
-    const [active, setActive] = useState(false);
-    const [validateIp, setValidateIp] = useState(false);
+    const [active, setActive] = useState(true);
+    const [validateIp, setValidateIp] = useState(true);
     const [ip, setIp] = useState("127.0.0.1");
     const dispatch = useDispatch();
 
@@ -64,7 +64,7 @@ const UserInfoWrapper: React.FC<{
                     </div>
                 </div>
 
-                <div className={classNames(["form__inner--item", "form__input"])}>
+                {/* <div className={classNames(["form__inner--item", "form__input"])}>
                     <div className={styles["user-api-key-wrapper__checkbox"]}>
                         <p>Validate IP</p>
                         <Checkbox switcher checked={validateIp} id={"is-validate"} value=' ' label=' ' onChange={() => setValidateIp((e) => !e)} />
@@ -78,7 +78,7 @@ const UserInfoWrapper: React.FC<{
                     <div className={styles["user-api-key-wrapper__checkbox"]}>
                         <TextInput value={ip} onChange={onIpChange} />
                     </div>
-                </div>
+                </div> */}
 
                 <div className={classNames(["form__inner--item-button", "form__input"])}>
                     <Button onClick={handleAddKey} className={styles["logout-button"]}>
