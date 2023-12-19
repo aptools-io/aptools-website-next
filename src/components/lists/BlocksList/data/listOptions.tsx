@@ -19,7 +19,7 @@ const columnNames = [
         key: "block_timestamp",
         value: "Age",
         formatter: (v) => {
-            return <Tooltip text={timeAgo(v * 1000)}>{timeAgo(v, true)}</Tooltip>;
+            return <Tooltip text={timeAgo(v)}>{timeAgo(v, true)}</Tooltip>;
         }
     },
     {
