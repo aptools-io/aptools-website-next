@@ -66,9 +66,9 @@ export class Api {
         try {
             const result: Response = await fetch(endpoint, init);
             console.log(result);
-            
+
             if(!result.ok) {
-                loggerPost("error", `Message: ${result.statusText} ${result.status}`, `Endpoint: ${endpoint}\nType:\n${type}\nHeaders:\n${JSON.stringify(headers)}\nParams: ${paramsString}\n${JSON.stringify(result.headers)}`, true);
+                loggerPost("error", `Message:  ${result.statusText} ${result.status}`, `Endpoint: ${endpoint}\nType:\n${type}\nHeaders:\n${JSON.stringify(headers)}\nParams: ${paramsString}\n${JSON.stringify(result.headers)}`, true);
             }
             return result;
         } catch (error) {
