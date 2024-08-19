@@ -31,9 +31,9 @@ const values = (forgot, router, dispatch, setLoading, id, setError, onSuccess) =
                     }
                     loginUser(response, onSuccess);
                 } else {
-                    if (response.reason === "conflict") setError(forgot ? "Forgot password request by the given token is expired" : "Email is already taken or token is expired");
-                    if (response.reason === "not-found") setError(forgot ? "Forgot password request by the given token not found" : "Email confirmation request by the given token not found");
-                    if (response.reason === "bad-request") setError("Something went wrong");
+                    if (response?.reason === "conflict") setError(forgot ? "Forgot password request by the given token is expired" : "Email is already taken or token is expired");
+                    if (response?.reason === "not-found") setError(forgot ? "Forgot password request by the given token not found" : "Email confirmation request by the given token not found");
+                    if (response?.reason === "bad-request") setError("Something went wrong");
                 }
                 console.log("Something went wrong");
                 setLoading(false);

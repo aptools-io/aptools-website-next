@@ -100,6 +100,8 @@ const loginWallet = async (nonce = null, message = null, signature = null, pubKe
 
 const addWallet = async (nonce = null, message = null, signature = null, pubKey = null, setRefreshToken: (refreshToken: string) => void = null, token: string = null) => {
     const api = new Api(false, process.env.BASE_API_ACCOUNT_URL, "", false, true);
+    if(!token) return;
+
     const data = api.post(
         "/api/auth/add/wallet/confirm",
         {
@@ -138,6 +140,7 @@ const login = async (email = null, password = null, setRefreshToken: (refreshTok
 
 const getUser = async (token: string, context) => {
     const api = new Api(false, process.env.BASE_API_ACCOUNT_URL, "");
+   if(!token) return;
 
     const userData = api.get(
         "/api/users/me",
@@ -152,6 +155,7 @@ const getUser = async (token: string, context) => {
     if (accessToken) {
         return getUser(accessToken, null);
     }
+    if(!token) return;
 
     const socialsData = api.get(
         "/api/notification-socials",
@@ -170,6 +174,8 @@ const getUser = async (token: string, context) => {
 
 const setQuestions = async (token: string, context, data) => {
     const api = new Api(false, process.env.BASE_API_ACCOUNT_URL, "");
+    if(!token) return;
+
     const questions = api.patch(
         "/api/users/me/questionnaire",
         {
@@ -190,6 +196,8 @@ const setQuestions = async (token: string, context, data) => {
 
 const setSocials = async (token: string, context, data) => {
     const api = new Api(false, process.env.BASE_API_ACCOUNT_URL, "");
+    if(!token) return;
+
     const socials = api.patch(
         "/api/notification-socials",
         {
@@ -210,6 +218,8 @@ const setSocials = async (token: string, context, data) => {
 
 const setChangeEmail = async (token: string, context, email) => {
     const api = new Api(false, process.env.BASE_API_ACCOUNT_URL, "");
+    if(!token) return;
+
     const result = api.post(
         "/api/auth/change/email",
         {
@@ -230,6 +240,8 @@ const setChangeEmail = async (token: string, context, email) => {
 
 const setChangeConfirmEmail = async (token: string, context, emailToken) => {
     const api = new Api(false, process.env.BASE_API_ACCOUNT_URL, "");
+    if(!token) return;
+
     const result = api.post(
         "/api/auth/change/email/confirm",
         {
@@ -269,6 +281,8 @@ const walletApproval = async () => {
 
 const walletAddApproval = async (token: string, context) => {
     const api = new Api(false, process.env.BASE_API_ACCOUNT_URL, "", false, true);
+    if(!token) return;
+
     const data = api.post(
         "/api/auth/add/wallet",
         {
@@ -287,6 +301,8 @@ const walletAddApproval = async (token: string, context) => {
 
 const createNotification = async (token: string, context, data) => {
     const api = new Api(false, process.env.BASE_API_ACCOUNT_URL, "");
+    if(!token) return;
+
     const create = api.post(
         "/api/notifications",
         {
@@ -306,6 +322,8 @@ const createNotification = async (token: string, context, data) => {
 };
 const updateNotification = async (token: string, context, data, id) => {
     const api = new Api(false, process.env.BASE_API_ACCOUNT_URL, "");
+    if(!token) return;
+
     const patch = api.patch(
         `/api/notifications/${id}`,
         {
@@ -326,6 +344,8 @@ const updateNotification = async (token: string, context, data, id) => {
 
 const deleteNotification = async (token: string, context, id) => {
     const api = new Api(false, process.env.BASE_API_ACCOUNT_URL, "");
+    if(!token) return;
+    
     const deleteNotif = api.delete(
         `/api/notifications/${id}`,
         {
@@ -344,6 +364,8 @@ const deleteNotification = async (token: string, context, id) => {
 
 const createApiKey = async (token: string, context, active, validateIp, allowedIps) => {
     const api = new Api(false, process.env.BASE_API_ACCOUNT_URL, "");
+    if(!token) return;
+
     const createApiKeys = api.post(
         "/api/api-keys",
         {
@@ -366,6 +388,8 @@ const createApiKey = async (token: string, context, active, validateIp, allowedI
 
 const updateApiKey = async (token: string, context, id, active, validateIp, allowedIps) => {
     const api = new Api(false, process.env.BASE_API_ACCOUNT_URL, "");
+    if(!token) return;
+
     const updateApiKeys = api.patch(
         `/api/api-keys/${id}`,
         {
@@ -388,6 +412,8 @@ const updateApiKey = async (token: string, context, id, active, validateIp, allo
 
 const deleteApiKey = async (token: string, context, id) => {
     const api = new Api(false, process.env.BASE_API_ACCOUNT_URL, "");
+    if(!token) return;
+
     const updateApiKeys = api.delete(
         `/api/api-keys/${id}`,
         {
@@ -406,6 +432,8 @@ const deleteApiKey = async (token: string, context, id) => {
 
 const getNotification = async (token: string, context, data) => {
     const api = new Api(false, process.env.BASE_API_ACCOUNT_URL, "");
+    if(!token) return;
+
     const get = api.get(
         `/api/notifications/${data}`,
         {
@@ -433,6 +461,9 @@ const getNotificationsWithTokens = async (context) => {
 
 const getNotifications = async (token: string, context) => {
     const api = new Api(false, process.env.BASE_API_ACCOUNT_URL, "");
+    if(!token) return;
+
+
     const get = api.get(
         "/api/notifications",
         {
@@ -460,6 +491,8 @@ const getApiKeysWithTokens = async (context) => {
 
 const getApiKeys = async (token: string, context) => {
     const api = new Api(false, process.env.BASE_API_ACCOUNT_URL, "");
+    if(!token) return;
+    
     const get = api.get(
         "/api/api-keys",
         {

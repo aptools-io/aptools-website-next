@@ -51,10 +51,10 @@ const SignWalletForm: React.FC<{
                     router.push("/account/api");
                 });
             } else {
-                if (response.reason === "conflict") setError(login ? "Wallet approval request by the given nonce is expired" : "Wallet is already taken or token is expired");
-                if (response.reason === "not-found") setError(login ? "Wallet approval by the given nonce not found" : "Wallet confirmation request by the given token not found");
-                if (response.reason === "unauthorized") setError(login ? "Wallet not registered or invalid request" : "Wallet confirmation request by the given token not found");
-                if (response.reason === "bad-request") setError("Something went wrong");
+                if (response?.reason === "conflict") setError(login ? "Wallet approval request by the given nonce is expired" : "Wallet is already taken or token is expired");
+                if (response?.reason === "not-found") setError(login ? "Wallet approval by the given nonce not found" : "Wallet confirmation request by the given token not found");
+                if (response?.reason === "unauthorized") setError(login ? "Wallet not registered or invalid request" : "Wallet confirmation request by the given token not found");
+                if (response?.reason === "bad-request") setError("Something went wrong");
             }
             console.log("Something went wrong");
             setSelectedWallet(null);

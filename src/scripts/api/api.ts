@@ -65,9 +65,15 @@ export class Api {
         const endpoint = `${this.base}${this.version}${url}${Object.keys(params)?.length > 0 ? `?${paramsString}` : ""}`;
         try {
             const result: Response = await fetch(endpoint, init);
+            console.log(result);
+            
+            if(!result.ok) {
+                loggerPost("error", `Message: ${result.statusText} ${result.status}`, `Endpoint: ${endpoint}\nType:\n${type}\nHeaders:\n${JSON.stringify(headers)}\nParams: ${paramsString}\n${JSON.stringify(result.headers)}`, true);
+            }
             return result;
         } catch (error) {
-            loggerPost("error", `${""}. Message: ${error.message}`, `Endpoint: ${endpoint}\n${error.stack}`, true);
+            console.log(error);
+            loggerPost("error", `Message: ${error.message}`, `Endpoint: ${endpoint}\n${error.stack}`, true);
 
             return error;
         }

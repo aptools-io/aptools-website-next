@@ -26,8 +26,8 @@ const values = (setLoading, dispatch, setError) => {
                     setLoading(false);
                     return;
                 }
-                if (response.reason === "conflict") setError("Email is already taken");
-                if (response.reason === "bad-request") setError("Something went wrong");
+                if (response?.reason === "conflict") setError("Email is already taken");
+                if (response?.reason === "bad-request") setError("Something went wrong");
 
                 setLoading(false);
             });

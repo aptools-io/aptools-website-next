@@ -21,9 +21,9 @@ const values = (setLoading, setError, dispatch) => {
                 if (response?.status === "ok") {
                     dispatch(setConfirmData({ email }));
                 } else {
-                    if (response.reason === "limit") setError("You have reached the limit of forgot password requests");
-                    if (response.reason === "conflict") setError("User is not registered yet");
-                    if (response.reason === "unauthorized") setError("Invalid email or password");
+                    if (response?.reason === "limit") setError("You have reached the limit of forgot password requests");
+                    if (response?.reason === "conflict") setError("User is not registered yet");
+                    if (response?.reason === "unauthorized") setError("Invalid email or password");
                     setLoading(false);
                 }
             });
