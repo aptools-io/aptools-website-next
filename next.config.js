@@ -24,6 +24,7 @@ const nextConfig = nextTranslate({
         BASE_NEXT_START_ENV: process.env.BASE_NEXT_START_ENV,
         BASE_ENV_FULL: process.env.BASE_ENV_FULL,
         SITE_URL: process.env.SITE_URL,
+        HAS_NO_INTERNAL_SERVER_ERROR: process.env.HAS_NO_INTERNAL_SERVER_ERROR,
 
         BASE_TOKEN: process.env.BASE_TOKEN,
         BASE_URL: process.env.BASE_URL,
