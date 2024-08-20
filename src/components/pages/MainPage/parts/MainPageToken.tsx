@@ -43,9 +43,9 @@ const MainPageToken: React.FC = () => {
                     <ActiveUniqueAddresses />
                 </Plate>
             </GridWrapper>
-            <GridWrapper gridWidth={mediaData.tokenTransactions}>
+            {/* <GridWrapper gridWidth={mediaData.tokenTransactions}>
                 <TransactionsList />
-            </GridWrapper>
+            </GridWrapper> */}
         </Grid>
     );
 };

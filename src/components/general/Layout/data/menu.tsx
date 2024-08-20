@@ -8,11 +8,11 @@ const menu = (t: Translate): INavBarMenuItem[] => {
             link: "/",
             svg: <Compass />
         },
-        {
+        /* {
             title: t("transactions"),
             link: "/transactions",
             svg: <Transactions />
-        },
+        }, */
         {
             title: t("accounts"),
             link: "/accounts",
@@ -40,21 +40,21 @@ const menu = (t: Translate): INavBarMenuItem[] => {
                 } */
             ]
         },
-        {
+        /* {
             title: t("blocks"),
             link: "/blocks",
             svg: <Block />
-        },
+        }, */
         {
             title: t("nft"),
             link: "/nft",
             svg: <Picture />
         },
-        {
+        /* {
             title: t("validators"),
             link: "/validators",
             svg: <Sphere />
-        },
+        }, */
         {
             title: t("ecosystem"),
             link: "/projects",

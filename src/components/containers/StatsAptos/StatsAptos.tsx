@@ -52,7 +52,7 @@ const StatsAptos: React.FC<IComponent> = ({ className }) => {
     );
 
     const { blockchain_info, token_statistics } = generalData || {};
-    const { market_cap, vol_24h = 0, launched = 0 } = blockchain_info || {};
+    const { /* market_cap, */ vol_24h = 0, launched = 0 } = blockchain_info || {};
     const [currentTimestamp, setCurrentTimestamp] = useState(
         new Date().getTime()
     );
@@ -88,24 +88,24 @@ const StatsAptos: React.FC<IComponent> = ({ className }) => {
             </div>
             <div className={classes}>
                 <div className={"stats__item"}>
-                    <div className={"stats__item-wrapper"}>
+                    {/* <div className={"stats__item-wrapper"}>
                         <span className={"title"}>Market Cap</span>
                         <span className={"info"}>
                             ${formatNumber(market_cap / 1000000000)}B
                         </span>
-                    </div>
+                    </div> */}
                     <div className={"stats__item-wrapper"}>
                         <span className={"title"}>Volume 24h</span>
                         <span className={"info"}>
                             ${formatNumber(vol_24h / 1000000)}M
                         </span>
                     </div>
-                    <div className={"stats__item-wrapper"}>
+                    {/* <div className={"stats__item-wrapper"}>
                         <span className={"title"}>Total Holders</span>
                         <span className={"info"}>
                             {formatNumber(totalHolders)}
                         </span>
-                    </div>
+                    </div> */}
                 </div>
                 <div className={"stats__item"}>
                     <div className={"stats__item-wrapper emphasis"}>

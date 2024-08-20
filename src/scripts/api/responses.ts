@@ -34,8 +34,9 @@ const returnResponse = async (response, getRefreshToken) => {
             message: response?.message || ""
         };
     if (response.status !== 201 && response.status !== 200 && response.status !== 204) return null;
+    const data = response.headers.get("content-type") === "application/json; charset=utf-8" ? response.json() : {};
 
-    if (!getRefreshToken) return response.json();
+    if (!getRefreshToken) return data;
 
     const cookies = response.headers.getSetCookie()?.[0];
     let refreshToken = "";
@@ -47,11 +48,11 @@ const returnResponse = async (response, getRefreshToken) => {
         }, {});
         refreshToken = obj?.["refreshToken"] || "";
         return {
-            response: response.json(),
+            response: data,
             refreshToken
         };
     }
-    return response.json();
+    return data;
 };
 
 export default returnResponse;

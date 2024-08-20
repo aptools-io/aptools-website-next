@@ -23,7 +23,7 @@ const MainPageBlockchainStats: React.FC = () => {
             <GridWrapper>
                 <CategoryTitle title={"Blockchain Stats"} />
                 <Grid columns={3}>
-                    <GridWrapper gridWidth={3}>
+                    {/* <GridWrapper gridWidth={3}>
                         <Plate dark min>
                             <Grid fullHeight columns={mediaData.totalInfo}>
                                 <GridWrapper gridWidth={1}>
@@ -38,7 +38,7 @@ const MainPageBlockchainStats: React.FC = () => {
                             </Grid>
                             <span/>
                         </Plate>
-                    </GridWrapper>
+                    </GridWrapper> */}
                     <GridWrapper gridWidth={mediaData.totalInfoPrice}>
                         <Plate >
                             <Price />

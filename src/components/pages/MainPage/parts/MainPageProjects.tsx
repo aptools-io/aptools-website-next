@@ -20,9 +20,9 @@ const MainPageProjects: React.FC = () => {
             <GridWrapper>
                 <CategoryTitle title={"PROJECTS ON THE APTOS BLOCKCHAIN"} />
                 <Projects />
-                <Grid>
+                {/* <Grid>
                     {mediaData.projectsAdditiveComponents()}
-                </Grid>
+                </Grid> */}
             </GridWrapper>
         </Grid>
     );
