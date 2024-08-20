@@ -31,11 +31,11 @@ const MainPageBannerBottom: React.FC = () => {
                     <StatsAptos />
                 </Plate>
             </GridWrapper>
-            <GridWrapper gridWidth={1}>
+            {/* <GridWrapper gridWidth={1}>
                 <Plate title={t("blockchain activity stats")}>
                     <StatsBlockchainActivity />
                 </Plate>
-            </GridWrapper>
+            </GridWrapper> */}
             <GridWrapper gridWidth={mediaData.statsTransactions}>
                 <Plate title={t("transactions per second")}>
                     <StatsTransactions />

@@ -21,7 +21,7 @@ const media = (width: number) => {
 
         statsAdditiveComponents: () => a({ 
             [EBreakpoints.TABLET]: <></>, 
-            [EBreakpoints.MIN]: <MainPageAptosInfo gridWidth={1} />}, 
+            [EBreakpoints.MIN]: <>{/* <MainPageAptosInfo gridWidth={1} /> */}</>}, 
         width) as React.ReactNode,
 
         projectsAdditiveComponents: () => a({ 
