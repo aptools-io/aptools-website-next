@@ -129,7 +129,7 @@ const Transaction: React.FC<{
 };
 
 const TransactionsList: React.FC<{ title?: string; full?: boolean } & IComponent> = ({ title = "Last transactions", full = false, className }) => {
-    const [currentPage, setCurrrentPage] = useState(1);
+    const [currentPage, setCurrrentPage] = useState(2);
     const [loading, setLoading] = useState(false);
     const [perPage, setPerPage] = useState(full ? 25 : 10);
     const { width } = useWindowSize();

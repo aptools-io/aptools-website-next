@@ -10,7 +10,7 @@ import { setPageTitle } from "src/scripts/redux/slices/pageTitleSlice";
 import { setBlocks } from "src/scripts/redux/slices/blocksSlice";
 
 // API
-import { blockchain, blocks } from "src/scripts/api/requests";
+import { blockchain, blocks, transactions } from "src/scripts/api/requests";
 import { setBlockchain } from "src/scripts/redux/slices/blockchainSlice";
 import { blocksStats } from "src/scripts/websocket/connections";
 import getGeneralRequests from "src/scripts/api/generalRequests";
@@ -40,6 +40,8 @@ export async function getServerSideProps(context) {
     const { req } = context;
     const blockchainData = (await blockchain.getMainData()) || {};
 
+    console.log(blockchainData);
+
     if (!blockchainData)
         return {
             notFound: true
@@ -55,7 +57,8 @@ export async function getServerSideProps(context) {
             general: await getGeneralRequests(context),
             headers: req.headers,
             blockchain: blockchainData,
-            blocks: blocksData
+            blocks: (await blocks.getBlocks(25)) || []
+            /*blocks: blocksData*/
         }
     };
 }

@@ -28,17 +28,22 @@ const BlocksList: React.FC<IComponent> = ({ className }) => {
     const [perPage, setPerPage] = useState(25);
     const [loading, setLoading] = useState(0);
 
+    console.log(blocksData);
+
     const dispatch = useDispatch();
 
     const { block_height } = blockchainData || {};
 
     const classes = classNames([styles["blocks-list"], "list", className]);
 
-    if (!blocksData || !block_height) return <Plug noData />;
+    /*if (!blocksData || !block_height) return <Plug noData />;*/
+
+    if (!blocksData) return <Plug noData />;
 
     const handleData = (page: number, perPage: number) => {
         const topHeight = blocksData?.[0].block_height || 0;
         blocks.getBlocks(perPage, Number(topHeight) - 1 - perPage * page).then((e: unknown) => {
+            console.log(e);
             const data = e as IApiBlock[];
             dispatch(setBlocks(data || []));
             setLoading(0);

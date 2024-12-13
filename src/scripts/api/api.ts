@@ -3,7 +3,9 @@
 import returnResponse from "./responses";
 
 const loggerPost = async (type: string, title: string, info: string = null, avoidErrorRecursion: boolean = false) => {
-    const api = new Api(false, process.env.BASE_API_LOGGER, null, avoidErrorRecursion);
+    return null;
+    /*const api = new Api(false, process.env.BASE_API_LOGGER, null, avoidErrorRecursion);
+
     return api.post(
         "/errors/new",
         {
@@ -19,7 +21,7 @@ const loggerPost = async (type: string, title: string, info: string = null, avoi
             error: info,
             customData: "{}"
         }
-    );
+    );*/
 };
 
 export class Api {
@@ -65,15 +67,12 @@ export class Api {
         const endpoint = `${this.base}${this.version}${url}${Object.keys(params)?.length > 0 ? `?${paramsString}` : ""}`;
         try {
             const result: Response = await fetch(endpoint, init);
-            if(!result.ok) {
+            if (!result.ok) {
                 const resultError: Response = await fetch(endpoint, init);
                 const title = `Message:  ${resultError.statusText} ${result.status}`;
                 const info = `Endpoint: ${endpoint}\n${JSON.stringify(init)}\nType:\n${type}\nHeaders:\n${JSON.stringify(headers)}\nParams: ${paramsString}\n\n\nBody:\n${JSON.stringify(await resultError.json())}`;
 
-                loggerPost("error", 
-                    title, 
-                    info, 
-                true);
+                loggerPost("error", title, info, true);
                 return result;
             }
             return result;

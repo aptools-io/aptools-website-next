@@ -1,7 +1,9 @@
 import { Api } from "../api";
 
 const postErrorToLogger = async (type: string, title: string, info: string = null, avoidErrorRecursion: boolean = false) => {
-    const api = new Api(false, process.env.BASE_API_LOGGER, null, avoidErrorRecursion);
+    return null;
+    /*const api = new Api(false, process.env.BASE_API_LOGGER, null, avoidErrorRecursion);
+
     return api.post(
         "/errors/new",
         {
@@ -17,7 +19,7 @@ const postErrorToLogger = async (type: string, title: string, info: string = nul
             error: info,
             customData: "{}"
         }
-    );
+    );*/
 };
 
 const logger = {
