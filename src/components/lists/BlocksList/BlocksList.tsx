@@ -25,10 +25,8 @@ const BlocksList: React.FC<IComponent> = ({ className }) => {
     const { blockchain: blockchainData } = useSelector((state: IRootState) => state.blockchain);
     const { blocks: blocksData } = useSelector((state: IRootState) => state.blocks);
     const [currentPage, setCurrentPage] = useState(1);
-    const [perPage, setPerPage] = useState(25);
+    const [perPage, setPerPage] = useState(20);
     const [loading, setLoading] = useState(0);
-
-    console.log(blocksData);
 
     const dispatch = useDispatch();
 
@@ -42,8 +40,7 @@ const BlocksList: React.FC<IComponent> = ({ className }) => {
 
     const handleData = (page: number, perPage: number) => {
         const topHeight = blocksData?.[0].block_height || 0;
-        blocks.getBlocks(perPage, Number(topHeight) - 1 - perPage * page).then((e: unknown) => {
-            console.log(e);
+        blocks.getBlocks(0, perPage).then((e: unknown) => {
             const data = e as IApiBlock[];
             dispatch(setBlocks(data || []));
             setLoading(0);
@@ -70,7 +67,7 @@ const BlocksList: React.FC<IComponent> = ({ className }) => {
 
     return (
         <div className={classes}>
-            <Paginator changePerPage paginatorName={"blocksList"} page={currentPage} perPage={perPage} setPerPage={setPerPage} total={Number(block_height)} onChangePage={handleChangePage} onChangePerPage={handleChangePerPage}>
+            <Paginator paginatorName={"blocksList"} page={currentPage} perPage={perPage} setPerPage={setPerPage} total={Number(block_height)} onChangePage={handleChangePage} onChangePerPage={handleChangePerPage}>
                 <ListHeader columnNames={columnNames} columns={columns} data={blocksData} key={blocksData?.[0]?.block_height}>
                     <List adoptMobile={1023} loadingCount={loading * perPage} />
                 </ListHeader>

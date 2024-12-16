@@ -40,8 +40,6 @@ export async function getServerSideProps(context) {
     const { req } = context;
     const blockchainData = (await blockchain.getMainData()) || {};
 
-    console.log(blockchainData);
-
     if (!blockchainData)
         return {
             notFound: true
@@ -52,12 +50,14 @@ export async function getServerSideProps(context) {
     const promises = Array.from({ length: 25 }, (_, i) => Number(block_height) - i)?.map((element) => blocks.getBlockByHeightData(element)) || [];
     const blocksData = await Promise.all(promises);
 
+    const blocksList = (await blocks.getBlocks()) || [];
+
     return {
         props: {
             general: await getGeneralRequests(context),
             headers: req.headers,
             blockchain: blockchainData,
-            blocks: (await blocks.getBlocks(25)) || []
+            blocks: blocksList
             /*blocks: blocksData*/
         }
     };

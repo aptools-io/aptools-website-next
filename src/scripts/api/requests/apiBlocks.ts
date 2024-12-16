@@ -10,9 +10,9 @@ const getBlockByHeightData = async (height: number, withTransactions: boolean = 
     return api.get(`/blocks/by_height/${height}`, {}, { with_transactions: withTransactions });
 };
 
-const getBlocks = async (limit: number = 25, start: number = 0) => {
+const getBlocks = async (page: number = 0, limit: number = 20) => {
     const api = new Api(false);
-    return api.get("/blocks", {}, { limit, start });
+    return api.post("/blocks", {}, {}, { page, limit }).then((response: any) => response.blocks);
 };
 
 const blocks = {
