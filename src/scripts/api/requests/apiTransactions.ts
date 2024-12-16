@@ -1,8 +1,8 @@
 import { Api } from "../api";
 
-const getData = async (start: number = 0, limit: number = 10) => {
+const getData = async (page: number = 0, limit: number = 10) => {
     const api = new Api(false);
-    return api.post("/transactions", {}, {}, { start, limit });
+    return api.post("/transactions", {}, {}, { page, limit }).then((response: any) => response.transactions);
 };
 
 const getSingleTransactionData = async (hash: string) => {

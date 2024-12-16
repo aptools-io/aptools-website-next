@@ -44,7 +44,7 @@ export async function getServerSideProps(context) {
         props: {
             general: await getGeneralRequests(context),
             headers: req.headers,
-            transactions: (await transactions.getData(25)) || []
+            transactions: (await transactions.getData()) || []
         }
     };
 }

@@ -24,7 +24,7 @@ const columnNamesMobile = [
                 fontSize: 10
             },
             {
-                key: "hash",
+                key: "sender",
                 formatter: (v) => `${shortenHashString(v)}`,
                 ownLink: "/transactions",
                 ownLinkValueFormatter: (v, row) => {
@@ -56,7 +56,10 @@ const columnNamesMobile = [
         valueGridReplace: [
             {
                 key: "timestamp",
-                formatter: (v) => `${time(v)}`,
+                formatter: (v) => {
+                    const value = v / 1000;
+                    return `${time(value)}`;
+                },
                 fontSize: 10
             },
             {

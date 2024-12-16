@@ -87,7 +87,7 @@ const Transaction: React.FC<{
             setCurrentInnerPage(1);
             return;
         }
-        if (currentPage !== 1) {
+        if (currentPage >= 1) {
             transactions.getData().then((response) => {
                 if (!response) {
                     setLoading(false);
@@ -97,7 +97,7 @@ const Transaction: React.FC<{
                 const lastTransaction = response[0]?.version;
                 setTotal(lastTransaction);
 
-                transactions.getData(lastTransaction - perPage * (currentInnerPage - 1), perPage).then((response) => {
+                transactions.getData(currentPage - 1, perPage).then((response) => {
                     const resp = response as unknown as IApiTransaction[];
                     dispatch(setCoinTransactions(resp));
                     setCurrentPage(currentInnerPage);
@@ -105,14 +105,13 @@ const Transaction: React.FC<{
                 });
             });
         }
-    }, [currentInnerPage, perPage, dispatch, setCurrentPage]);
+    }, [currentInnerPage, perPage, dispatch, setCurrentPage, currentPage, setLoading]);
 
     if (!transactionsData || !width || !columns || !columnNames) return <></>;
 
     return (
         <Paginator
             paginatorName={"transactions"}
-            changePerPage={full}
             page={currentPage}
             perPage={perPage}
             setPerPage={setPerPage}
@@ -129,9 +128,9 @@ const Transaction: React.FC<{
 };
 
 const TransactionsList: React.FC<{ title?: string; full?: boolean } & IComponent> = ({ title = "Last transactions", full = false, className }) => {
-    const [currentPage, setCurrrentPage] = useState(2);
+    const [currentPage, setCurrrentPage] = useState(1);
     const [loading, setLoading] = useState(false);
-    const [perPage, setPerPage] = useState(full ? 25 : 10);
+    const [perPage, setPerPage] = useState(10);
     const { width } = useWindowSize();
     const { websocket } = useSelector((state: IRootState) => state.statsAptos);
 
@@ -148,7 +147,7 @@ const TransactionsList: React.FC<{ title?: string; full?: boolean } & IComponent
                     <span>Last transactions</span>
                 </strong>
             )}
-            {currentPage === 1 ? <TransactionRealTime perPage={perPage} setPerPage={setPerPage} handlePerPage={handlePerPage} full={full} loading={loading} setLoading={setLoading} currentPage={currentPage} width={width} setCurrentPage={setCurrrentPage} /> : <Transaction perPage={perPage} setPerPage={setPerPage} full={full} loading={loading} setLoading={setLoading} currentPage={currentPage} width={width} setCurrentPage={setCurrrentPage} />}
+            {currentPage === -33 ? <TransactionRealTime perPage={perPage} setPerPage={setPerPage} handlePerPage={handlePerPage} full={full} loading={loading} setLoading={setLoading} currentPage={currentPage} width={width} setCurrentPage={setCurrrentPage} /> : <Transaction perPage={perPage} setPerPage={setPerPage} full={full} loading={loading} setLoading={setLoading} currentPage={currentPage} width={width} setCurrentPage={setCurrrentPage} />}
         </div>
     );
 };

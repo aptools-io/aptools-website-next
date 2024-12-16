@@ -104,7 +104,7 @@ const addZero = (number: number) => {
     return number;
 };
 
-const time = (timestamp: string) => {
+const time = (timestamp: string | number) => {
     const time = new Date(timestamp);
     return `${addZero(time.getHours())}:${addZero(time.getMinutes())}:${addZero(time.getSeconds())}`;
 };

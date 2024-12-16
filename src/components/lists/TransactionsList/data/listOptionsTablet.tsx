@@ -13,17 +13,9 @@ const columnNamesTablet = [
     {
         key: "timestamp",
         value: "##",
-        formatter: (v) => `${timeFull(v)}`,
+        formatter: (v) => `${timeFull(v / 1000)}`,
         descriptionFormatter: (v, row) => {
-            return (
-                <span
-                    className={classNames([
-                        styles.transaction__success,
-                        { [styles.error]: !row.success }
-                    ])}>
-                    {row.success ? "Success" : "Cancel"}
-                </span>
-            );
+            return <span className={classNames([styles.transaction__success, { [styles.error]: !row.success }])}>{row.success ? "Success" : "Cancel"}</span>;
         }
     },
     {
@@ -36,20 +28,12 @@ const columnNamesTablet = [
         value: "State",
         formatterComponent: (v) => {
             const type = getTransactionType(v);
-            return (
-                <span
-                    className={classNames([
-                        styles.transaction__type,
-                        styles[type.color]
-                    ])}>
-                    {type.name}
-                </span>
-            );
+            return <span className={classNames([styles.transaction__type, styles[type.color]])}>{type.name}</span>;
         }
     },
     {
-        key: "hash",
-        value: "Transaction",
+        key: "sender",
+        value: "Sender",
         formatter: (v) => `${shortenHashString(v)}`,
         link: "/transactions",
         mainMobile: true,
