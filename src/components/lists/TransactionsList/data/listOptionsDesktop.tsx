@@ -37,6 +37,22 @@ const columnNamesDesktop = [
         underline: true
     },
     {
+        key: "receiver",
+        value: "Sent to",
+        formatter: (v) => `${shortenHashString(v)}`,
+        link: "/transactions",
+        mainMobile: true,
+        underline: true
+    },
+    {
+        key: "function",
+        value: "Function",
+        formatter: (v) => `${shortenHashString(v)}`,
+        link: "/transactions",
+        mainMobile: true,
+        underline: true
+    },
+    {
         key: "success",
         value: "Status",
         formatterComponent: (v) => {
@@ -44,19 +60,15 @@ const columnNamesDesktop = [
         }
     },
     {
-        key: "gas_used",
-        value: "Gas",
-        right: true,
-        formatter: (v) => `${concatString(v, "", " APT")}`
-    },
-    {
         key: "amount",
-        value: "Amount",
+        value: "Amount/Gas",
+        description: "gas_used",
+        descriptionFormatter: (v) => `${concatString(v, "", " APT")}`,
         right: true,
         formatter: (v) => `${concatString(formatNumber(v), "", " APT")}`
     }
 ];
 // Columns
-const columnsDesktop = ["15%", "10%", "15%", "15%", "10%", "25%", "10%"];
+const columnsDesktop = ["10%", "10%", "15%", "15%", "15%", "15%", "10%", "10%"];
 
 export { columnNamesDesktop, columnsDesktop };
