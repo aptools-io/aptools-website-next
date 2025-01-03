@@ -62,7 +62,7 @@ const columnNamesDesktop = [
     {
         key: "amount",
         value: "Amount/Gas",
-        description: "gas_used",
+        description: "gas_fee",
         descriptionFormatter: (v) => `${concatString(v, "", " APT")}`,
         right: true,
         formatter: (v) => `${concatString(formatNumber(v), "", " APT")}`

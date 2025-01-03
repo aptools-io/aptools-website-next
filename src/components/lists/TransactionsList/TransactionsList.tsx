@@ -1,5 +1,5 @@
 // React
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
 
 // Redux
 import { useDispatch, useSelector } from "react-redux";
@@ -9,7 +9,7 @@ import { IRootState } from "src/scripts/redux/store";
 import classNames from "classnames";
 
 // Components
-import { List, ListHeader, Loader, Paginator } from "src/components/ui";
+import { List, ListHeader, Loader, Paginator, Tabs } from "src/components/ui";
 
 // Options
 import { setCoinTransactions } from "src/scripts/redux/slices/statsTransactionsSlice";
@@ -21,6 +21,9 @@ import { transactions } from "src/scripts/api/requests";
 import useWindowSize from "src/scripts/hooks/useWindowSize";
 import styles from "./TransactionsList.module.scss";
 import media from "./data/adaptive";
+import ProjectsList from "../../containers/ProjectsList/ProjectsList";
+import { categories } from "../../containers/AccountNotifications/data/data";
+import useLocalStorage from "../../../scripts/hooks/useLocalStorage";
 
 const TransactionRealTime: React.FC<{
     currentPage: number;
@@ -63,7 +66,8 @@ const Transaction: React.FC<{
     setPerPage: React.Dispatch<React.SetStateAction<number>>;
     perPage: number;
     loading: boolean;
-}> = ({ currentPage, setCurrentPage, width, setLoading, loading, full, setPerPage, perPage }) => {
+    tabId: number;
+}> = ({ currentPage, setCurrentPage, width, setLoading, loading, full, setPerPage, perPage, tabId }) => {
     const { data: transactionsData } = useSelector((state: IRootState) => state.statsTransactions);
     const [total, setTotal] = useState(transactionsData?.[0]?.version || 0);
     const [currentInnerPage, setCurrentInnerPage] = useState(currentPage);
@@ -71,11 +75,16 @@ const Transaction: React.FC<{
 
     const { columnNames = null, columns = null } = media(width) || {};
 
+    /* const getData = useCallback(() => (tabId ? transactions.getData : transactions.getUserTransactions), [tabId]); */
+
+    const getData = useMemo(() => (tabId ? transactions.getUserTransactions : transactions.getData), [tabId]);
+
     useEffect(() => {
         setLoading(true);
         if (currentInnerPage === -1) {
-            transactions.getData(1).then((response) => {
-                const resp = response as unknown as IApiTransaction[];
+            getData(1).then((response: any) => {
+                const { transactions } = response;
+                const resp = transactions as unknown as IApiTransaction[];
                 dispatch(setCoinTransactions(resp));
                 setCurrentPage(-1);
                 setLoading(false);
@@ -88,24 +97,23 @@ const Transaction: React.FC<{
             return;
         }
         if (currentPage >= 1) {
-            transactions.getData().then((response) => {
+            getData(currentPage - 1, perPage).then((response: any) => {
                 if (!response) {
                     setLoading(false);
                     setCurrentPage(1);
                     return;
                 }
-                const lastTransaction = response[0]?.version;
-                setTotal(lastTransaction);
 
-                transactions.getData(currentPage - 1, perPage).then((response) => {
-                    const resp = response as unknown as IApiTransaction[];
-                    dispatch(setCoinTransactions(resp));
-                    setCurrentPage(currentInnerPage);
-                    setLoading(false);
-                });
+                const { total, transactions } = response;
+                setTotal(total);
+
+                const resp = transactions as unknown as IApiTransaction[];
+                dispatch(setCoinTransactions(resp));
+                setCurrentPage(currentInnerPage);
+                setLoading(false);
             });
         }
-    }, [currentInnerPage, perPage, dispatch, setCurrentPage, currentPage, setLoading]);
+    }, [currentInnerPage, perPage, dispatch, setCurrentPage, currentPage, setLoading, getData]);
 
     if (!transactionsData || !width || !columns || !columnNames) return <></>;
 
@@ -128,17 +136,24 @@ const Transaction: React.FC<{
 };
 
 const TransactionsList: React.FC<{ title?: string; full?: boolean } & IComponent> = ({ title = "Last transactions", full = false, className }) => {
-    const [currentPage, setCurrrentPage] = useState(1);
+    const [currentPage, setCurrentPage] = useState(1);
     const [loading, setLoading] = useState(false);
     const [perPage, setPerPage] = useState(10);
     const { width } = useWindowSize();
     const { websocket } = useSelector((state: IRootState) => state.statsAptos);
+    const [tabsStates, setTabsStates] = useLocalStorage("tabsStates", { transactionsTabs: 0 });
+    const [currentTab, setCurrentTab] = useState(tabsStates?.transactionsTabs || 0);
 
     const handlePerPage = (perPage) => {
         if (websocket?.ws) websocket?.ws?.send(websocket?.wsRef, perPage);
     };
 
     const classes = classNames([styles.transactions, "list", className]);
+
+    const changeTab = useCallback((tabId: number) => {
+        /*  setCurrentPage(1); */
+        setCurrentTab(tabId);
+    }, []);
 
     return (
         <div className={classes}>
@@ -147,7 +162,19 @@ const TransactionsList: React.FC<{ title?: string; full?: boolean } & IComponent
                     <span>Last transactions</span>
                 </strong>
             )}
-            {currentPage === -33 ? <TransactionRealTime perPage={perPage} setPerPage={setPerPage} handlePerPage={handlePerPage} full={full} loading={loading} setLoading={setLoading} currentPage={currentPage} width={width} setCurrentPage={setCurrrentPage} /> : <Transaction perPage={perPage} setPerPage={setPerPage} full={full} loading={loading} setLoading={setLoading} currentPage={currentPage} width={width} setCurrentPage={setCurrrentPage} />}
+            <Tabs
+                tabsName={"transactionsTabs"}
+                itemsCount={false}
+                queryTab={false}
+                dataArray={[
+                    { title: "All transactions", id: 0 },
+                    { title: "User transactions", id: 1 }
+                ]}
+                onChangeTab={changeTab}>
+                <></>
+            </Tabs>
+            <Transaction tabId={currentTab} perPage={perPage} setPerPage={setPerPage} full={full} loading={loading} setLoading={setLoading} currentPage={currentPage} width={width} setCurrentPage={setCurrentPage} />
+            {/* {currentPage === -33 ? <TransactionRealTime perPage={perPage} setPerPage={setPerPage} handlePerPage={handlePerPage} full={full} loading={loading} setLoading={setLoading} currentPage={currentPage} width={width} setCurrentPage={setCurrrentPage} /> : <Transaction perPage={perPage} setPerPage={setPerPage} full={full} loading={loading} setLoading={setLoading} currentPage={currentPage} width={width} setCurrentPage={setCurrrentPage} />} */}
         </div>
     );
 };

@@ -2,7 +2,12 @@ import { Api } from "../api";
 
 const getData = async (page: number = 0, limit: number = 10) => {
     const api = new Api(false);
-    return api.post("/transactions", {}, {}, { page, limit }).then((response: any) => response.transactions);
+    return api.post("/transactions", {}, {}, { page, limit });
+};
+
+const getUserTransactions = async (page: number = 0, limit: number = 10) => {
+    const api = new Api(false);
+    return api.post("/user_transactions", {}, {}, { page, limit });
 };
 
 const getSingleTransactionData = async (hash: string) => {
@@ -16,6 +21,7 @@ const getSingleTransactionDataByVersion = async (version: string) => {
 
 const transactions = {
     getData,
+    getUserTransactions,
     getSingleTransactionData,
     getSingleTransactionDataByVersion
 };

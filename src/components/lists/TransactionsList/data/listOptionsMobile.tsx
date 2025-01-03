@@ -71,7 +71,7 @@ const columnNamesMobile = [
                 elementRemove: true
             },
             {
-                key: "gas_used",
+                key: "gas_fee",
                 formatter: (v) => `${concatString(v, "Gas ", " APT")}`,
                 fontSize: 10,
                 right: true,
