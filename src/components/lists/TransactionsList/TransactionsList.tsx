@@ -70,7 +70,6 @@ const Transaction: React.FC<{
 }> = ({ currentPage, setCurrentPage, width, setLoading, loading, full, setPerPage, perPage, tabId }) => {
     const { data: transactionsData } = useSelector((state: IRootState) => state.statsTransactions);
     const [total, setTotal] = useState(transactionsData?.[0]?.version || 0);
-    const [currentInnerPage, setCurrentInnerPage] = useState(currentPage);
     const dispatch = useDispatch();
 
     const { columnNames = null, columns = null } = media(width) || {};
@@ -81,21 +80,6 @@ const Transaction: React.FC<{
 
     useEffect(() => {
         setLoading(true);
-        if (currentInnerPage === -1) {
-            getData(1).then((response: any) => {
-                const { transactions } = response;
-                const resp = transactions as unknown as IApiTransaction[];
-                dispatch(setCoinTransactions(resp));
-                setCurrentPage(-1);
-                setLoading(false);
-            });
-            return;
-        }
-        if (currentInnerPage === -2) {
-            setCurrentPage(1);
-            setCurrentInnerPage(1);
-            return;
-        }
         if (currentPage >= 1) {
             getData(currentPage - 1, perPage).then((response: any) => {
                 if (!response) {
@@ -109,11 +93,10 @@ const Transaction: React.FC<{
 
                 const resp = transactions as unknown as IApiTransaction[];
                 dispatch(setCoinTransactions(resp));
-                setCurrentPage(currentInnerPage);
                 setLoading(false);
             });
         }
-    }, [currentInnerPage, perPage, dispatch, setCurrentPage, currentPage, setLoading, getData]);
+    }, [perPage, dispatch, setCurrentPage, currentPage, setLoading, getData]);
 
     if (!transactionsData || !width || !columns || !columnNames) return <></>;
 
@@ -125,7 +108,7 @@ const Transaction: React.FC<{
             setPerPage={setPerPage}
             total={total}
             onChangePage={(page) => {
-                setCurrentInnerPage(page);
+                setCurrentPage(page);
             }}
             onChangePerPage={(perPage) => setPerPage(perPage)}>
             <ListHeader key={transactionsData[0]?.version} columnNames={columnNames as any} columns={columns} data={transactionsData}>
@@ -151,7 +134,7 @@ const TransactionsList: React.FC<{ title?: string; full?: boolean } & IComponent
     const classes = classNames([styles.transactions, "list", className]);
 
     const changeTab = useCallback((tabId: number) => {
-        /*  setCurrentPage(1); */
+        setCurrentPage(1);
         setCurrentTab(tabId);
     }, []);
 
