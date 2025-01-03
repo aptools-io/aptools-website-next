@@ -74,8 +74,6 @@ const Transaction: React.FC<{
 
     const { columnNames = null, columns = null } = media(width) || {};
 
-    /* const getData = useCallback(() => (tabId ? transactions.getData : transactions.getUserTransactions), [tabId]); */
-
     const getData = useMemo(() => (tabId ? transactions.getUserTransactions : transactions.getData), [tabId]);
 
     useEffect(() => {
