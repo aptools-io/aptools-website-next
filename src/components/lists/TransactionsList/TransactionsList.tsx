@@ -86,8 +86,8 @@ const Transaction: React.FC<{
                     return;
                 }
 
-                const { total, transactions } = response;
-                setTotal(total);
+                const { total_records, transactions } = response;
+                setTotal(total_records);
 
                 const resp = transactions as unknown as IApiTransaction[];
                 dispatch(setCoinTransactions(resp));
