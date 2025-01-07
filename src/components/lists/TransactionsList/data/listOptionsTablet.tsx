@@ -21,7 +21,8 @@ const columnNamesTablet = [
     {
         key: "version",
         value: "Version",
-        defaultSort: true
+        defaultSort: true,
+        link: "/transactions"
     },
     {
         key: "type",
@@ -35,7 +36,6 @@ const columnNamesTablet = [
         key: "sender",
         value: "Sender",
         formatter: (v) => `${shortenHashString(v)}`,
-        link: "/transactions",
         mainMobile: true,
         underline: true
     },

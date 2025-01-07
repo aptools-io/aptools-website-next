@@ -18,7 +18,8 @@ const columnNamesDesktop = [
     {
         key: "version",
         value: "Version",
-        defaultSort: true
+        defaultSort: true,
+        link: "/transactions"
     },
     {
         key: "type",
@@ -32,7 +33,6 @@ const columnNamesDesktop = [
         key: "sender",
         value: "Sender",
         formatter: (v) => `${shortenHashString(v)}`,
-        link: "/transactions",
         mainMobile: true,
         underline: true
     },
@@ -40,7 +40,6 @@ const columnNamesDesktop = [
         key: "receiver",
         value: "Sent to",
         formatter: (v) => `${shortenHashString(v)}`,
-        link: "/transactions",
         mainMobile: true,
         underline: true
     },
@@ -48,7 +47,6 @@ const columnNamesDesktop = [
         key: "function",
         value: "Function",
         formatter: (v) => `${shortenHashString(v)}`,
-        link: "/transactions",
         mainMobile: true,
         underline: true
     },

@@ -52,6 +52,7 @@ const columnNamesMobile = [
         headRemove: true,
         value: "Version",
         defaultSort: true,
+        link: "/transactions",
 
         valueGridReplace: [
             {
