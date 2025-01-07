@@ -25,9 +25,7 @@ const ListRow: React.FC<IListProps> = ({ columnNames = [], hardPerPage = null, h
         className
     ]);
 
-    const style = {
-        zIndex: count - rowIndex
-    } as React.CSSProperties;
+    const style = {} as React.CSSProperties;
 
     const renderUnder = (column: IColumnName, columnIndex: number, props): JSX.Element => <ListColumn key={columnIndex} {...{ ...props, column }} hardPageId={hardPageId} hardPerPage={hardPerPage} />;
     const renderReplace = (column: IColumnName, columnIndex, props): JSX.Element => <ListColumn key={columnIndex} {...{ ...props, inner: true, column }} hardPageId={hardPageId} hardPerPage={hardPerPage} />;
