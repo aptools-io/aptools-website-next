@@ -43,7 +43,8 @@ export async function getServerSideProps(context) {
     const { req, query } = context;
     const { id } = query || {};
 
-    const stats = (await accounts.getAccountStatsData(id)) as unknown;
+    /* const stats = (await accounts.getAccountStatsData(id)) as unknown; */
+    const stats = {};
     const statsData = stats as IApiAccountStats;
 
     let dexType = "";
@@ -61,7 +62,8 @@ export async function getServerSideProps(context) {
             };
     }
 
-    const profitabilities = await accounts.getAccountProfitabilitiesData(id);
+    /* const profitabilities = await accounts.getAccountProfitabilitiesData(id); */
+    const profitabilities = {};
 
     if (!stats || !profitabilities)
         return {
@@ -74,7 +76,7 @@ export async function getServerSideProps(context) {
             headers: req.headers,
             account_stats: stats,
             account_profitabilities: profitabilities,
-            page_type: dexType || statsData.type
+            page_type: dexType || statsData.type || ""
         }
     };
 }

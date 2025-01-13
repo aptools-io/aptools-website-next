@@ -19,30 +19,28 @@ import useWindowSize from "src/scripts/hooks/useWindowSize";
 import styles from "./AccountInfo.module.scss";
 import media from "./data/adaptive";
 
-const AccountInfo: React.FC<IComponent> = ({
-    className 
-}) => {
+const AccountInfo: React.FC<IComponent> = ({ className }) => {
     const { accountInfo, accountsLoading: loading = false } = useSelector((state: IRootState) => state.accounts);
-    const { sequence_number = 0, auth_key = "" } = accountInfo || {};
+    const { sequence_number = 0, authentication_key = "" } = accountInfo || {};
 
     const { width } = useWindowSize();
     const mediaData = media(width);
 
-    const classes = classNames([
-        styles["account-info"],
-        className
-    ]);
+    const classes = classNames([styles["account-info"], className]);
 
-    if(loading) return <Skeleton style={{ height: 200 }} />;
+    if (loading) return <Skeleton style={{ height: 200 }} />;
 
-    if(!accountInfo || !width) return <Plug noData />;
+    if (!accountInfo || !width) return <Plug noData />;
 
     return (
         <div className={classes}>
             <div className={styles["account-info__title"]}>Sequence Number:</div>
             <div className={styles["account-info__value"]}>{sequence_number}</div>
             <div className={styles["account-info__title"]}>Authentication Key:</div>
-            <div className={styles["account-info__value"]}>{mediaData.key(auth_key)}<CopyText text={auth_key} /></div>
+            <div className={styles["account-info__value"]}>
+                {mediaData.key(authentication_key)}
+                <CopyText text={authentication_key} />
+            </div>
         </div>
     );
 };

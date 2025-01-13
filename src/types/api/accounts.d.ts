@@ -180,6 +180,6 @@ interface IApiAccountResourceDetails {
 }
 
 interface IApiAccountInfo {
-    auth_key: string;
+    authentication_key: string;
     sequence_number: number;
 }

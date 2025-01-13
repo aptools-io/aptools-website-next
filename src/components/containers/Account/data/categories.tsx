@@ -38,11 +38,10 @@ const categories = (dispatch) => {
                 setLoading(false);
                 dispatch(setAccountsLoading(true));
                 await accounts.getAccountTransactionsData(queryId, 10, 0).then((e: unknown) => {
-                    const result = e as IApiAccountTransactions;
+                    const result = { transactions: e, total: 10 } as IApiAccountTransactions;
                     dispatch(setAccountTransactionsData(result));
                     dispatch(setAccountsLoading(false));
                 });
-               
             }
         },
         {
@@ -76,7 +75,7 @@ const categories = (dispatch) => {
         {
             id: 5,
             title: "Resources",
-            component: () => <AccountResourcesList key={5}/>,
+            component: () => <AccountResourcesList key={5} />,
             action: async (setCustomEntry, setLoading, id, queryId) => {
                 setLoading(false);
                 dispatch(setAccountsLoading(true));
@@ -113,13 +112,16 @@ const categories = (dispatch) => {
                     dispatch(setAccountInfoData(result));
                     dispatch(setAccountsLoading(false));
                 });
-                
             }
         },
         {
             id: 7,
             title: "Notifications",
-            component: () => <div className={styles.account__inner}><Plug /></div>,
+            component: () => (
+                <div className={styles.account__inner}>
+                    <Plug />
+                </div>
+            ),
             action: (setCustomEntry, setLoading, id) => {
                 setLoading(false);
             }

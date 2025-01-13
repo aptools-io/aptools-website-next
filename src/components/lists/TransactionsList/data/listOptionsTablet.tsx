@@ -22,7 +22,8 @@ const columnNamesTablet = [
         key: "version",
         value: "Version",
         defaultSort: true,
-        link: "/transactions"
+        link: "/transactions",
+        underline: true
     },
     {
         key: "type",
