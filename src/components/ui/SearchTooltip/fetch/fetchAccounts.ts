@@ -12,7 +12,7 @@ const fetchAccounts = (terms, account, setAccount) => {
         return;
     }
     setAccount({ ...account, loading: true });
-    accounts.getAccountProfitabilitiesData(terms).then((response) => {
+    accounts.getAccountInfoData(terms).then((response) => {
         if (ready)
             setAccount({
                 name: terms,

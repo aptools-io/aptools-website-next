@@ -14,7 +14,7 @@ import { useRouter } from "next/router";
 import { Close } from "src/components/svg";
 import styles from "./Search.module.scss";
 
-const checkboxData = ["All categories", "Accounts", "Block by version", "Block by height", "Transaction by hash", "Transaction by version", "Projects"];
+const checkboxData = ["All categories", "Accounts", "Block by version", "Block by height", "Transaction by hash", "Transaction by version"];
 
 const Search: React.ForwardRefRenderFunction<
     any,
